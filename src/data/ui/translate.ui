@@ -10,13 +10,14 @@
       <object class="AdwToolbarView">
         <property name="content">
           <object class="GtkBox">
+            <property name="margin-bottom">8</property>
+            <property name="margin-end">8</property>
+            <property name="margin-start">8</property>
+            <property name="margin-top">8</property>
             <property name="orientation">vertical</property>
-            <property name="spacing">8</property>
+            <property name="spacing">5</property>
             <child>
               <object class="GtkScrolledWindow">
-                <property name="margin-end">8</property>
-                <property name="margin-start">8</property>
-                <property name="margin-top">8</property>
                 <property name="vexpand">True</property>
                 <child>
                   <object class="GtkTextView" id="tv_from">
@@ -29,8 +30,6 @@
             </child>
             <child>
               <object class="GtkBox">
-                <property name="margin-end">8</property>
-                <property name="margin-start">8</property>
                 <property name="spacing">8</property>
                 <child>
                   <object class="GtkComboBoxText" id="dd_server">
@@ -74,9 +73,6 @@
             </child>
             <child>
               <object class="GtkScrolledWindow">
-                <property name="margin-bottom">8</property>
-                <property name="margin-end">8</property>
-                <property name="margin-start">8</property>
                 <property name="vexpand">True</property>
                 <child>
                   <object class="GtkTextView" id="tv_to">

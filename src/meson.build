@@ -28,6 +28,8 @@ conf.set('PKGDATA_DIR', PKGDATA_DIR)
 conf.set('PYTHON', python.find_installation('python3').path())
 conf.set('PYTHON_DIR', PYTHON_DIR)
 conf.set('PYTHON_LOCAL_DIR', PYTHON_LOCAL_DIR)
+conf.set('PACKAGE_URL', PACKAGE_URL)
+conf.set('PACKAGE_URL_BUG', PACKAGE_URL_BUG)
 
 
 configure_file(
