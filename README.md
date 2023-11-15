@@ -1,31 +1,18 @@
 # 兰译
 
-开发中……，暂时无法使用
+优势：
+
+- [x] 复制，自动翻译并弹窗
+- [x] `gnome` 原生，简洁、美观！
+- [ ] 打包方式 `pip`，直接pip安装更方便，预计会推出 `archlinux` 和 `deb` 包
+- [ ] 多引擎、多语言支持，目前 `百度`，未来预计很多
 
 
-## 开发测试
+> 我英语不好，所以开发此项目。软件默认英文，有中文翻译，但是文档字太多，我只写中文……，其他人可以翻译文档
 
-仅在 `archlinux最新版 gnome桌面环境` 开发测试
+- [贡献说明](doc/CONTRIBUTE.md)
 
-### 依赖
+- [翻译说明](doc/TRANSLATE.md)
 
-- 编译工具：meson `sudo pacman -S meson`
-- 其他：`sudo pacman -S python-gobject`
+- [更新说明](doc/CONTRIBUTE.md)
 
-### 测试
-
-安装在 `~/.local/` 所以请把 `export PATH="$HOME/.local/bin:$PATH"` 添加到环境变量
-
-```bash
-make install && lt 
-```
-
-### 翻译
-
-```bash
-# 首次创建某个语言翻译 `zh_TW`
-make TO_LANG=zh_TW po-init
-
-# 更新翻译文件
-make update-pot && make TO_LANG=zh_TW update-po
-```
