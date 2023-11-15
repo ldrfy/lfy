@@ -24,7 +24,7 @@
 - 安装
 
     ```bash
-    make install && lt 
+    make install && lfy
     ```
 
 - 卸载
