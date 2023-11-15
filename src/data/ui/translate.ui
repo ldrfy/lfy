@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.16.0 -->
+<interface>
+  <!-- interface-name lt.ui -->
+  <requires lib="gio" version="2.0"/>
+  <requires lib="gtk" version="4.12"/>
+  <requires lib="libadwaita" version="1.4"/>
+  <template class="TranslateWindow" parent="AdwApplicationWindow">
+    <property name="content">
+      <object class="AdwToolbarView">
+        <property name="content">
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <property name="spacing">8</property>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="margin-end">8</property>
+                <property name="margin-start">8</property>
+                <property name="margin-top">8</property>
+                <property name="vexpand">True</property>
+                <child>
+                  <object class="GtkTextView" id="tv_from">
+                    <property name="wrap-mode">char</property>
+                    <signal name="copy-clipboard" handler="_set_tv_copy"/>
+                    <signal name="cut-clipboard" handler="_set_tv_copy"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="margin-end">8</property>
+                <property name="margin-start">8</property>
+                <property name="spacing">8</property>
+                <child>
+                  <object class="GtkComboBoxText" id="dd_server">
+                    <signal name="changed" handler="_on_server_changed"/>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="dd_lang">
+                    <signal name="changed" handler="_on_lang_changed"/>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkSeparator">
+                    <property name="hexpand">True</property>
+                    <property name="opacity">0.0</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkSpinner" id="sp_translate">
+                    <property name="spinning">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="cbtn_del_wrapping">
+                    <property name="active">True</property>
+                    <property name="tooltip-text" translatable="yes">Remove symbols such as line breaks</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="cbtn_add_old">
+                    <property name="tooltip-text" translatable="yes">Splice the next copied text with the previous text</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="btn_translate">
+                    <property name="label" translatable="yes">translate</property>
+                    <signal name="clicked" handler="_on_translate_clicked"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="margin-bottom">8</property>
+                <property name="margin-end">8</property>
+                <property name="margin-start">8</property>
+                <property name="vexpand">True</property>
+                <child>
+                  <object class="GtkTextView" id="tv_to">
+                    <property name="right-margin">8</property>
+                    <property name="wrap-mode">char</property>
+                    <signal name="copy-clipboard" handler="_set_tv_copy"/>
+                    <signal name="cut-clipboard" handler="_set_tv_copy"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </property>
+        <child type="top">
+          <object class="AdwHeaderBar" id="header_bar">
+            <child type="start">
+              <object class="GtkMenuButton">
+                <property name="icon-name">open-menu-symbolic</property>
+                <property name="menu-model">primary_menu</property>
+                <property name="primary">True</property>
+                <property name="tooltip-text" translatable="yes">Menu</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </property>
+    <property name="default-height">400</property>
+    <property name="default-width">500</property>
+    <property name="icon-name">scanner</property>
+    <property name="show-menubar">True</property>
+    <property name="title">lfy</property>
+  </template>
+  <menu id="primary_menu">
+    <section>
+      <item>
+        <attribute name="action">app.preferences</attribute>
+        <attribute name="label" translatable="yes">_Preferences</attribute>
+      </item>
+      <item>
+        <attribute name="action">win.show-help-overlay</attribute>
+        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.about</attribute>
+        <attribute name="label" translatable="yes">_About Lt</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>
