@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=lfy
-Exec=@APP_NAME@
+Exec=env GDK_BACKEND=x11 @APP_NAME@
 Icon=@APP_ID@
 Terminal=false
 Type=Application
