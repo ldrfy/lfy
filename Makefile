@@ -1,11 +1,12 @@
 TO_LANG = zh_CN
 VERSION = 0.0.1
+INSTALL_DIR=${HOME}/.local
 
 
 install:
 	rm -rf _build
 	rm -rf test
-	meson lt _build --prefix=${HOME}/.local
+	meson src _build --prefix=${INSTALL_DIR}
 	meson compile -C _build
 	meson install -C _build
 
@@ -21,22 +22,21 @@ other:
 
 # Generate .pot file
 update-pot:
-	xgettext -d "lt" \
-			--output=./lt/po/lt.pot \
-			--no-wrap \
+	xgettext -d "lfy" \
+			--output=./src/po/lfy.pot \
 			--copyright-holder="yuhldr" \
-			--package-name="cool.ldr.lt" \
+			--package-name="cool.ldr.lfy" \
 			--msgid-bugs-address="yuhldr@gmail.com" \
 			--add-comments=TRANSLATORS \
-			--files-from=./lt/po/POTFILES
+			--files-from=./src/po/POTFILES
 
 
 po-init:
-	msginit -i ./lt/po/lt.pot -o ./lt/po/${TO_LANG}.po
+	msginit -i ./src/po/lfy.pot -o ./src/po/${TO_LANG}.po
 
 
 update-po:
-	msgmerge -U ./lt/po/${TO_LANG}.po ./lt/po/lt.pot
+	msgmerge -U ./src/po/${TO_LANG}.po ./src/po/lfy.pot
 
 
 .PHONY: build other update-pot update-po po-init

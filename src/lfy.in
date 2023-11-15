@@ -1,0 +1,78 @@
+#! /usr/bin/env python
+
+# lt
+
+import gettext
+import locale
+import os
+import signal
+import sys
+
+import gi
+
+# gi.require_version("Adw", "1.4")
+gi.require_version("Adw", "1")
+gi.require_version('Gio', '2.0')
+# gi.require_version('Gtk', '4.12')
+gi.require_version('Gtk', '4.0')
+gi.require_version('Gst', '1.0')
+from gi.repository import Adw, Gio, Gst, Gtk
+
+Gst.init(None)
+Adw.init()
+
+from lfy import APP_ID, LOCALE_DIR, PKGDATA_DIR, VERSION
+
+print(LOCALE_DIR)
+
+def set_exception_hook():
+    """Configures sys.excepthook to enforce Gtk application exiting."""
+
+    def new_hook(etype, evalue, etb):
+        old_hook(etype, evalue, etb)
+        while Gtk.main_level():
+            Gtk.main_quit()
+        sys.exit()
+
+    old_hook = sys.excepthook
+    sys.excepthook = new_hook
+
+def set_internationalization():
+    """Sets application internationalization."""
+    try:
+        locale.bindtextdomain(APP_ID, LOCALE_DIR)
+        locale.textdomain(APP_ID)
+    except AttributeError as e:
+        # Python built without gettext support does not have
+        # bindtextdomain() and textdomain().
+        print(f"Could not bind the gettext translation domain. Some translations will not work. Error:\n{e}")
+
+    gettext.bindtextdomain(APP_ID, LOCALE_DIR)
+    gettext.textdomain(APP_ID)
+
+
+def set_resources():
+    """Sets application ressource file."""
+    resource = Gio.resource_load(os.path.join(PKGDATA_DIR, f'{APP_ID}.gresource'))
+    Gio.Resource._register(resource)  # nopep8
+
+
+def run_application():
+    """Runs GNOME Music application and returns its exit code."""
+    from lfy.main import LtApplication
+
+    app = LtApplication(APP_ID, VERSION)
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+    return app.run(sys.argv)
+
+
+def main():
+    """Sets environment and runs GNOME Music."""
+    # set_exception_hook()
+    set_internationalization()
+    set_resources()
+    return run_application()
+
+
+if __name__ == '__main__':
+    sys.exit(main())

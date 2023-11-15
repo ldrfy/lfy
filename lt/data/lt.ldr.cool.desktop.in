@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=lt
-Exec=lt
-Icon=lt.ldr.cool
-Terminal=false
-Type=Application
-Categories=GTK;
-StartupNotify=true
