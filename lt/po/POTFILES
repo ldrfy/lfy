@@ -1,0 +1,8 @@
+lt/data/lt.ldr.cool.desktop.in
+lt/data/lt.ldr.cool.metainfo.xml.in
+lt/data/lt.ldr.cool.gschema.xml
+lt/lt_gtk/main.py
+lt/lt_gtk/preference.py
+lt/lt_gtk/translate.py
+lt/lt_gtk/api/server_config.py
+lt/data/ui/translate.ui
