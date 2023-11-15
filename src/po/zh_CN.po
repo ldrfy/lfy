@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2023-11-16 02:54+0800\n"
+"POT-Creation-Date: 2023-11-16 03:52+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -17,14 +17,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/data/cool.ldr.lfy.desktop.in.in:3 src/lfy/main.py:42
-#: src/data/ui/translate.ui:111
+#: src/data/cool.ldr.lfy.desktop.in.in:3 src/lfy/main.py:43
+#: src/data/ui/translate.ui:107
 msgid "lfy"
 msgstr "兰译"
 
 #: src/data/cool.ldr.lfy.metainfo.xml.in:7
 msgid "No description"
 msgstr "没有介绍"
+
+#: src/lfy/main.py:49
+#, fuzzy
+msgid "translator_credits"
+msgstr ""
+"yuh <yuhldr@qq.com>, 2023-2023"
+
+#: src/lfy/main.py:50
+msgid "A translation app for GNOME."
+msgstr "一个翻译软件，为gnome桌面设计"
 
 #: src/lfy/api/server/__init__.py:25
 msgid "Automatic"
@@ -78,30 +88,30 @@ msgstr "有道"
 msgid "please set baidu app_id and secret_key like this:"
 msgstr "请按照如下教程设置百度的 app_id 和 secret_key"
 
-#: src/data/ui/translate.ui:59
+#: src/data/ui/translate.ui:58
 msgid "Remove symbols such as line breaks"
 msgstr "移除换行符"
 
-#: src/data/ui/translate.ui:64
+#: src/data/ui/translate.ui:63
 msgid "Splice the next copied text with the previous text"
 msgstr "将下一个复制的文本与上一个文本拼接"
 
-#: src/data/ui/translate.ui:69
+#: src/data/ui/translate.ui:68
 msgid "translate"
 msgstr "翻译"
 
-#: src/data/ui/translate.ui:100
+#: src/data/ui/translate.ui:96
 msgid "Menu"
 msgstr "菜单"
 
-#: src/data/ui/translate.ui:117
+#: src/data/ui/translate.ui:113
 msgid "_Preferences"
 msgstr "_设置"
 
-#: src/data/ui/translate.ui:121
+#: src/data/ui/translate.ui:117
 msgid "_Keyboard Shortcuts"
 msgstr "_快捷键"
 
-#: src/data/ui/translate.ui:125
+#: src/data/ui/translate.ui:121
 msgid "_About lfy"
 msgstr "_关于 兰译"

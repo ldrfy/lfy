@@ -3,8 +3,9 @@ from gettext import gettext as _
 
 from gi.repository import Adw, Gdk, Gio
 
-from .preference import PreferenceWindow
-from .translate import TranslateWindow
+from lfy import PACKAGE_URL, PACKAGE_URL_BUG
+from lfy.preference import PreferenceWindow
+from lfy.translate import TranslateWindow
 
 
 class LfyApplication(Adw.Application):
@@ -41,9 +42,14 @@ class LfyApplication(Adw.Application):
         about = Adw.AboutWindow(transient_for=self.props.active_window,
                                 application_name=_('lfy'),
                                 application_icon=self._application_id,
-                                developer_name='yuh',
                                 version=self._version,
                                 developers=['yuh'],
+                                designers=['yuh'],
+                                documenters=['yuh'],
+                                translator_credits=_('translator_credits'),
+                                comments=_("A translation app for GNOME."),
+                                website=PACKAGE_URL,
+                                issue_url=PACKAGE_URL_BUG,
                                 copyright='© 2023 yuh')
         about.present()
 
