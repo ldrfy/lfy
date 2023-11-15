@@ -6,13 +6,6 @@ from gi.repository import Adw, Gio, GObject, Gtk
 from lt_gtk.api.server_config import get_lang_names, get_server_names
 
 
-class Item(GObject.GObject):
-
-    text = GObject.property(type=str)
-
-    def __init__(self):
-        GObject.GObject.__init__(self)
-
 @Gtk.Template(resource_path='/lt/ldr/cool/ui/translate.ui')
 class TranslateWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'TranslateWindow'
@@ -63,6 +56,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         # drop_down.set_model(sl)
         # drop_down.set_selected(i)
         drop_down.remove_all()
+        print(drop_down)
         for d in data:
             drop_down.append_text(d)
         drop_down.set_active(i)
