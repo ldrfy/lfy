@@ -13,40 +13,6 @@
             <property name="orientation">vertical</property>
             <property name="spacing">8</property>
             <child>
-              <object class="AdwHeaderBar" id="header_bar">
-                <child>
-                  <object class="GtkMenuButton">
-                    <property name="icon-name">open-menu-symbolic</property>
-                    <property name="menu-model">primary_menu</property>
-                    <property name="primary">True</property>
-                    <property name="tooltip-text" translatable="yes">Menu</property>
-                  </object>
-                </child>
-                <child>
-                  <menu id="primary_menu">
-                    <section>
-                      <item>
-                        <attribute name="action">win.show-help-overlay</attribute>
-                        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
-                      </item>
-                    </section>
-                    <section>
-                      <item>
-                        <attribute name="action">app.preferences</attribute>
-                        <attribute name="label" translatable="yes">_Preferences</attribute>
-                      </item>
-                    </section>
-                    <section>
-                      <item>
-                        <attribute name="action">app.about</attribute>
-                        <attribute name="label" translatable="yes">_About Lt</attribute>
-                      </item>
-                    </section>
-                  </menu>
-                </child>
-              </object>
-            </child>
-            <child>
               <object class="GtkScrolledWindow">
                 <property name="margin-end">8</property>
                 <property name="margin-start">8</property>
@@ -114,6 +80,18 @@
             </child>
           </object>
         </property>
+        <child type="top">
+          <object class="AdwHeaderBar" id="header_bar">
+            <child type="start">
+              <object class="GtkMenuButton">
+                <property name="icon-name">open-menu-symbolic</property>
+                <property name="menu-model">primary_menu</property>
+                <property name="primary">True</property>
+                <property name="tooltip-text" translatable="yes">Menu</property>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </property>
     <property name="default-height">400</property>
@@ -122,4 +100,20 @@
     <property name="show-menubar">True</property>
     <property name="title" translatable="yes">lt</property>
   </template>
+  <menu id="primary_menu">
+    <section>
+      <item>
+        <attribute name="action">app.preferences</attribute>
+        <attribute name="label" translatable="yes">_Preferences</attribute>
+      </item>
+      <item>
+        <attribute name="action">win.show-help-overlay</attribute>
+        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.about</attribute>
+        <attribute name="label" translatable="yes">_About Lt</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>
