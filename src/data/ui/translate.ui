@@ -108,7 +108,7 @@
     <property name="default-width">500</property>
     <property name="icon-name">scanner</property>
     <property name="show-menubar">True</property>
-    <property name="title">lfy</property>
+    <property name="title" translatable="yes">lfy</property>
   </template>
   <menu id="primary_menu">
     <section>
@@ -122,7 +122,7 @@
       </item>
       <item>
         <attribute name="action">app.about</attribute>
-        <attribute name="label" translatable="yes">_About Lt</attribute>
+        <attribute name="label" translatable="yes">_About lfy</attribute>
       </item>
     </section>
   </menu>

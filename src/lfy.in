@@ -59,9 +59,9 @@ def set_resources():
 
 def run_application():
     """Runs GNOME Music application and returns its exit code."""
-    from lfy.main import LtApplication
+    from lfy.main import LfyApplication
 
-    app = LtApplication(APP_ID, VERSION)
+    app = LfyApplication(APP_ID, VERSION)
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     return app.run(sys.argv)
 

@@ -7,7 +7,7 @@ from .preference import PreferenceWindow
 from .translate import TranslateWindow
 
 
-class LtApplication(Adw.Application):
+class LfyApplication(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self, app_id, version):
