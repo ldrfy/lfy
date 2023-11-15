@@ -1,7 +1,7 @@
 # main.py
 from gettext import gettext as _
 
-from gi.repository import Adw, Gio
+from gi.repository import Adw, Gdk, Gio
 
 from .preference import PreferenceWindow
 from .translate import TranslateWindow
@@ -18,11 +18,12 @@ class LtApplication(Adw.Application):
         self._application_id = application_id
 
         self.create_action('preferences', self.on_preferences_action)
-        # TODO: 快捷键有问题
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
 
-    def do_activate(self):
+        self.copy()
+
+    def do_activate(self, text=""):
         """Called when the application is activated.
 
         We raise the application's main window, creating it if
@@ -32,6 +33,8 @@ class LtApplication(Adw.Application):
         if not win:
             win = TranslateWindow(application=self)
         win.present()
+        win.update(text)
+
 
     def on_about_action(self, widget, w):
         """Callback for the app.about action."""
@@ -63,3 +66,17 @@ class LtApplication(Adw.Application):
         self.add_action(action)
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
+
+
+    def copy(self):
+        """复制监听
+        """
+        def on_active_copy(cb, res):
+            text = cb.read_text_finish(res)
+            self.do_activate(text)
+
+        def on_active_copy2(cb):
+            cb.read_text_async(None, on_active_copy)
+
+        clip_copy = Gdk.Display().get_default().get_clipboard()
+        clip_copy.connect("changed", on_active_copy2)

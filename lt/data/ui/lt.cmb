@@ -59,13 +59,14 @@
 	(1,65,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(1,65,"GtkWidget","opacity","0.0",None,None,None,None,None,None,None,None,None),
 	(1,66,"GtkSpinner","spinning","True",None,None,None,None,None,None,None,None,None),
-	(1,67,"GtkWidget","tooltip-text","add",None,None,None,None,None,None,None,None,None),
+	(1,67,"GtkWidget","tooltip-text","Splice the next copied text with the previous text",1,None,None,None,None,None,None,None,None),
 	(1,68,"GtkButton","label","translate","yes",None,None,None,None,None,None,None,None),
 	(1,69,"GtkWidget","margin-bottom","8",None,None,None,None,None,None,None,None,None),
 	(1,69,"GtkWidget","margin-end","8",None,None,None,None,None,None,None,None,None),
 	(1,69,"GtkWidget","margin-start","8",None,None,None,None,None,None,None,None,None),
 	(1,69,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
 	(1,70,"GtkTextView","right-margin","8",None,None,None,None,None,None,None,None,None),
+	(1,70,"GtkTextView","wrap-mode","char",None,None,None,None,None,None,None,None,None),
 	(1,89,"(item)","action","win.show-help-overlay",None,None,None,None,None,None,None,None,None),
 	(1,89,"(item)","label","_Keyboard Shortcuts","yes",None,None,None,None,None,None,None,None),
 	(1,90,"(item)","action","app.preferences",None,None,None,None,None,None,None,None,None),
@@ -94,9 +95,11 @@
 	(12,3,1,"GtkDropDown","activate","_on_test",None,None,"yes",None,None),
 	(13,3,1,"GtkWidget","move-focus","_on_test",None,None,"yes",None,None),
 	(14,3,2,"GtkDropDown","activate","_on_lang_changed",None,None,None,None,None),
-	(15,1,82,"GtkComboBox","activate","_on_test",None,None,None,None,None),
 	(16,1,82,"GtkComboBox","changed","_on_lang_changed",None,None,None,None,None),
 	(17,1,81,"GtkComboBox","changed","_on_server_changed",None,None,None,None,None),
-	(18,1,81,"GtkComboBox","activate","_on_test",None,None,None,None,None)
+	(19,1,61,"GtkTextView","copy-clipboard","_set_tv_copy",None,None,None,None,None),
+	(20,1,61,"GtkTextView","cut-clipboard","_set_tv_copy",None,None,None,None,None),
+	(21,1,70,"GtkTextView","copy-clipboard","_set_tv_copy",None,None,None,None,None),
+	(22,1,70,"GtkTextView","cut-clipboard","_set_tv_copy",None,None,None,None,None)
   </object_signal>
 </cambalache-project>

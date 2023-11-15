@@ -4,5 +4,8 @@ lt/data/lt.ldr.cool.gschema.xml
 lt/lt_gtk/main.py
 lt/lt_gtk/preference.py
 lt/lt_gtk/translate.py
-lt/lt_gtk/api/server_config.py
+lt/lt_gtk/api/__init__.py
+lt/lt_gtk/api/config.py
+lt/lt_gtk/api/server/__init__.py
+lt/lt_gtk/api/server/baidu.py
 lt/data/ui/translate.ui
