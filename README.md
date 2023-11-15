@@ -27,5 +27,5 @@ make install && lt
 make TO_LANG=zh_TW po-init
 
 # 更新翻译文件
-make TO_LANG=zh_TW update-po
+make update-pot && make TO_LANG=zh_TW update-po
 ```
