@@ -1,0 +1,95 @@
+# Chinese translations for com.ldr.lt package
+# com.ldr.lt 软件包的简体中文翻译.
+# Copyright (C) 2023 yuhldr
+# This file is distributed under the same license as the com.ldr.lt package.
+#  <yuhldr@gmail.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: com.ldr.lt\n"
+"Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
+"POT-Creation-Date: 2023-11-15 10:14+0800\n"
+"PO-Revision-Date: 2023-11-12 21:02+0800\n"
+"Last-Translator:  <yuhldr@gmail.com>\n"
+"Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: lt/data/lt.ldr.cool.desktop.in:3 lt/lt_gtk/main.py:39
+#: lt/data/ui/translate.ui:123
+msgid "lt"
+msgstr "兰译"
+
+#: lt/data/lt.ldr.cool.metainfo.xml.in:7
+msgid "No description"
+msgstr ""
+
+#: lt/lt_gtk/api/server_config.py:24
+msgid "Automatic"
+msgstr "自动"
+
+#: lt/lt_gtk/api/server_config.py:26
+msgid "Chinese"
+msgstr "中文"
+
+#: lt/lt_gtk/api/server_config.py:28
+msgid "Classical Chinese"
+msgstr "文言文"
+
+#: lt/lt_gtk/api/server_config.py:30
+msgid "English"
+msgstr "英文"
+
+#: lt/lt_gtk/api/server_config.py:32
+msgid "Japanese"
+msgstr "日文"
+
+#: lt/lt_gtk/api/server_config.py:34
+msgid "Korean"
+msgstr "韩文"
+
+#: lt/lt_gtk/api/server_config.py:36
+msgid "German"
+msgstr "德语"
+
+#: lt/lt_gtk/api/server_config.py:38
+msgid "French"
+msgstr "法语"
+
+#: lt/lt_gtk/api/server_config.py:43
+msgid "baidu"
+msgstr "百度"
+
+#: lt/lt_gtk/api/server_config.py:45
+msgid "tencent"
+msgstr "腾讯"
+
+#: lt/lt_gtk/api/server_config.py:47
+msgid "google"
+msgstr "谷歌"
+
+#: lt/lt_gtk/api/server_config.py:49
+msgid "youdao"
+msgstr "有道"
+
+#: lt/data/ui/translate.ui:22
+msgid "Menu"
+msgstr "菜单"
+
+#: lt/data/ui/translate.ui:30
+msgid "_Keyboard Shortcuts"
+msgstr "_快捷键"
+
+#: lt/data/ui/translate.ui:36
+msgid "_Preferences"
+msgstr "_设置"
+
+#: lt/data/ui/translate.ui:42
+msgid "_About Lt"
+msgstr "_关于"
+
+#: lt/data/ui/translate.ui:96
+msgid "translate"
+msgstr "翻译"
