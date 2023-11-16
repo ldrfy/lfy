@@ -1,8 +1,13 @@
+import os
+
 APP_NAME = '@APP_NAME@'
 APP_ID = '@APP_ID@'
 VERSION = '@VERSION@'
-PKGDATA_DIR = '@PKGDATA_DIR@'
-LOCALE_DIR = '@LOCALE_DIR@'
-PYTHON_LOCAL_DIR = '@PYTHON_LOCAL_DIR@'
 PACKAGE_URL_BUG = '@PACKAGE_URL_BUG@'
 PACKAGE_URL = '@PACKAGE_URL@'
+
+
+THIS_DIR, THIS_FILENAME = os.path.split(__file__)
+PYTHON_LOCAL_DIR = os.path.join(THIS_DIR, '../')
+LOCALE_DIR = os.path.join(THIS_DIR, '../../../../share/locale/')
+PKGDATA_DIR = os.path.join(THIS_DIR, f'../../../../share/{APP_NAME}/')

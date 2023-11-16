@@ -25,6 +25,9 @@ whl:
 	pip uninstall lfy --break-system-packages
 	pip install ./test/dist/*.whl --break-system-packages
 
+	rm -rf _build
+	rm -rf test
+
 
 # Generate .pot file
 update-pot:
