@@ -114,7 +114,7 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         text_translated = translate_by_server(text, sk, lk)
 
-        span = 0.25 - (time.time() - start_)
+        span = 0.1 - (time.time() - start_)
         if span > 0:
             time.sleep(span)
         GLib.idle_add(self.update_ui, text_translated)

@@ -3,7 +3,7 @@
 <cambalache-project version="0.13.1" target_tk="gtk-4.0">
   <ui>
 	(1,55,"lt.ui","translate.ui",None,None,None,None,None,None,None),
-	(2,2,None,"preference.ui",None,None,None,None,None,None,None),
+	(2,None,None,"preference.ui",None,None,None,None,None,None,None),
 	(3,None,None,"test.ui",None,None,None,None,None,None,None),
 	(4,None,None,"appindicator.ui",None,None,None,None,None,None,None),
 	(6,None,"help-overlay.ui","help-overlay.ui",None,None,None,None,None,None,None)
@@ -32,7 +32,6 @@
 	(1,95,"GtkMenuButton",None,94,None,"start",None,None,None),
 	(1,96,"GtkCheckButton","cbtn_del_wrapping",62,None,None,None,4,None),
 	(2,2,"AdwPreferencesWindow","PreferencesWindow",None,None,None,None,-1,None),
-	(2,3,"GtkEntry",None,2,None,None,None,-1,None),
 	(3,1,"GtkDropDown","dd_server",None,None,None,None,None,None),
 	(3,2,"GtkDropDown","dd_lang",None,None,None,None,None,None),
 	(6,1,"GtkShortcutsWindow","help_overlay",None,None,None,None,None,None),
