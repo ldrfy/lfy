@@ -22,8 +22,8 @@ whl:
 	cp -r ./lib/*/site-packages/lfy ./ && \
 	python setup.py sdist bdist_wheel
 
-	pip uninstall lfy --break-system-packages
-	pip install ./test/dist/lfy-0.1.0-py3-none-any.whl --break-system-packages
+# pip uninstall lfy --break-system-packages
+# pip install ./test/dist/lfy-0.1.0-py3-none-any.whl --break-system-packages
 
 
 # Generate .pot file
