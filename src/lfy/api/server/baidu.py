@@ -13,8 +13,6 @@ HOW_GET_URL_OCR = "https://cloud.baidu.com/doc/OCR/s/dk3iqnq51"
 
 URL_TRANSLATE = "https://api.fanyi.baidu.com/api/trans/vip/translate"
 
-SERVER_KEY = "baidu"
-
 
 def translate_text(s, lang_to="auto", lang_from="auto"):
     """翻译
