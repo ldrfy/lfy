@@ -68,24 +68,19 @@ def translate(s, app_id, secret_key, lang_to="auto", lang_from="auto"):
         _type_: _description_
     """
 
-    ok = True
-
     salt = random.randint(32768, 65536)
     sign = app_id + s + str(salt) + secret_key
     sign = hashlib.md5(sign.encode()).hexdigest()
     url = f"{URL_TRANSLATE}?appid=%s&q=%s&from=%s&to=%s&salt=%s&sign=%s"
     url = url % (app_id, urllib.parse.quote(s), lang_from, lang_to, salt, sign)
-    s1 = ""
 
     request = requests.get(url, timeout=TIME_OUT)
     result = request.json()
-
-    s1 = ""
+    error_msg = _("something error, try other translate engine?")
     if "error_code" in result:
-        ok = False
-        s1 = f'{result["error_code"]}: {result["error_msg"]}'
+        return False, f'{error_msg}\n\n{result["error_code"]}: {result["error_msg"]}'
     else:
+        s1 = ""
         for trans_result in result["trans_result"]:
             s1 += f'{trans_result["dst"]}\n'
-
-    return s1, ok
+        return True, s1

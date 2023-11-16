@@ -9,13 +9,15 @@ from gettext import gettext as _
 
 import requests
 
+from lfy.api.server import TIME_OUT
+
 try:
     from cryptography.hazmat.backends import openssl
     from cryptography.hazmat.primitives import padding
     from cryptography.hazmat.primitives.ciphers import (Cipher, algorithms,
                                                         modes)
-except ModuleNotFoundError as e:
-    print(_("error.lib.no_cryptography"))
+except ModuleNotFoundError as e0:
+    print(_("python no lib: cryptography, please try: \n\n pip install cryptography"))
 
 session = requests.Session()
 session.headers.update({
@@ -27,17 +29,146 @@ FIXED_VALUE = None
 INTERFACE_SELECT = 1
 
 
+def translate_text(text, lang_to="", lang_from="auto"):
+    """_summary_
+
+    Args:
+        text (_type_): _description_
+        lang_to (str, optional): _description_. Defaults to "".
+        lang_from (str, optional): _description_. Defaults to "auto".
+
+    Returns:
+        _type_: _description_
+    """
+    global INTERFACE_SELECT
+    if INTERFACE_SELECT == 1:
+        res = translate_interface_1(text, lang_from, lang_to)
+        if res is None:
+            INTERFACE_SELECT += 1
+            return _("youdao interface is error, auto change interface. please try again")
+    elif INTERFACE_SELECT == 2:
+        res = translate_interface_2(text, lang_from, lang_to)
+    return res
+
+
+def translate_interface_2(text, from_lang="auto", to_lang=""):
+    """_summary_
+
+    Args:
+        text (_type_): _description_
+        from_lang (str, optional): _description_. Defaults to "auto".
+        to_lang (str, optional): _description_. Defaults to "".
+
+    Returns:
+        _type_: _description_
+    """
+    url = "http://fanyi.youdao.com/translate?&doctype=json&type=%s&i=%s"
+    url = url % (from_lang + "2" + to_lang, urllib.parse.quote(text))
+    error_msg = _("something error, try other translate engine?")
+
+    request = requests.get(url, timeout=TIME_OUT)
+    if request.status_code == 200:
+        result = request.json()
+        if "errorCode" in result and result["errorCode"] != 0:
+            return f"{error_msg}\n\n{result}"
+        else:
+            s1 = ""
+            for line in result["translateResult"]:
+                for sentence in line:
+                    s1 += sentence["tgt"]
+                s1 += '\n'
+            return s1
+    else:
+        return f"{error_msg}\n\n{request.content}"
+
+
+def translate_interface_1(text, from_lang="auto", to_lang=""):
+    """_summary_
+
+    Args:
+        text (_type_): _description_
+        from_lang (str, optional): _description_. Defaults to "auto".
+        to_lang (str, optional): _description_. Defaults to "".
+
+    Returns:
+        _type_: _description_
+    """
+    url = "https://dict.youdao.com/webtranslate"
+    sk = get_translate_secret_key()
+    if sk is None:
+        return _("can not get secret key\n\ntry other translate engine?")
+    _time = int(time.time() * 1000)
+    res = session.post(url, data={
+        "i": text,
+        "from": from_lang,
+        "to": to_lang,
+        "domain": "0",
+        "dictResult": True,
+        "keyid": "webfanyi",
+        "sign": sign(sk, _time),
+        "client": "fanyideskweb",
+        "product": "webfanyi",
+        "appVersion": "1.0.0",
+        "vendor": "web",
+        "pointParam": "client,mysticTime,product",
+        "mysticTime": _time,
+        "keyfrom": "fanyi.web"
+    }).text
+    try:
+        res = decode_translate(res)
+    except Exception as e:
+        error_s = _("decrypt translation message failed")
+        return f"{error_s}\n\n{e}"
+    print(res)
+    tmp = ""
+    if res['code'] != 0:
+        return ""
+    trans_res = res.get('translateResult', None)
+    if trans_res is not None:
+        for line in trans_res:
+            # 有道接口数据已提供段落换行符号
+            for sentence in line:
+                tmp += sentence['tgt']
+        tmp += '\n'
+    dict_res = res.get('dictResult', None)
+    if dict_res is not None and dict_res.get("ec", None) is not None:
+        word = dict_res['ec']['word']
+        phones = map(lambda x: f"{x[:x.find('p')]}: /{word[x]}/",
+                     filter(lambda x: "phone" in x, word.keys()))
+        tmp += "  ".join(phones) + '\n'
+        for description in word['trs']:
+            tmp += description.get("pos", "") + ' ' + \
+                description.get('tran', "") + '\n'
+        wfs = word.get("wfs", None)
+        if wfs is not None:
+            for wf in wfs:
+                tmp += wf['wf']['name'] + ':' + wf['wf']['value'] + '\n'
+    return tmp
+
+
 def sign(key, _time=None):
+    """_summary_
+
+    Args:
+        key (_type_): _description_
+        _time (_type_, optional): _description_. Defaults to None.
+
+    Returns:
+        _type_: _description_
+    """
     _time = _time if _time is not None else int(time.time() * 1000)
-    print(_time)
     hash_md5 = hashlib.md5()
-    input_string = "client=fanyideskweb&mysticTime={}&product=webfanyi&key={}".format(
-        _time, key)
+    input_string = f"client=fanyideskweb&mysticTime={_time}&product=webfanyi&key={key}"
     hash_md5.update(input_string.encode('utf-8'))
     return hash_md5.hexdigest()
 
 
 def get_fixed_value():
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
     index_url = "https://fanyi.youdao.com/index.html"
     res = session.get(index_url).text
     js = re.findall(r'src="(js/app\..+?\.js)"', res)
@@ -76,6 +207,11 @@ def get_fixed_value():
 
 
 def get_translate_secret_key():
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
     url = "https://dict.youdao.com/webtranslate/key"
     global FIXED_VALUE
     if FIXED_VALUE is None:
@@ -103,96 +239,6 @@ def get_translate_secret_key():
     else:
         print("get translate secret key failed", params)
         return None
-
-
-def translate_interface_2(s, from_lang="auto", to_lang=""):
-    url = "http://fanyi.youdao.com/translate?&doctype=json&type=%s&i=%s"
-    url = url % (from_lang + "2" + to_lang, urllib.parse.quote(s))
-
-    s1 = ""
-    request = requests.get(url, timeout=config.time_out)
-    if request.status_code == 200:
-        result = request.json()
-
-        if "errorCode" in result and result["errorCode"] != 0:
-            ok = False
-            s1 = "翻译错误,试试其他引擎?"
-        else:
-            print(result["translateResult"])
-            for line in result["translateResult"]:
-                for sentence in line:
-                    s1 += sentence["tgt"]
-                s1 += '\n'
-    else:
-        s1 = "请求错误：" + request.content
-
-    return s1
-
-
-def translate_interface_1(s, from_lang="auto", to_lang=""):
-    url = "https://dict.youdao.com/webtranslate"
-    sk = get_translate_secret_key()
-    if sk is None:
-        return None
-    _time = int(time.time() * 1000)
-    res = session.post(url, data={
-        "i": s,
-        "from": from_lang,
-        "to": to_lang,
-        "domain": "0",
-        "dictResult": True,
-        "keyid": "webfanyi",
-        "sign": sign(sk, _time),
-        "client": "fanyideskweb",
-        "product": "webfanyi",
-        "appVersion": "1.0.0",
-        "vendor": "web",
-        "pointParam": "client,mysticTime,product",
-        "mysticTime": _time,
-        "keyfrom": "fanyi.web"
-    }).text
-    try:
-        res = decode_translate(res)
-    except Exception as e:
-        print('decrypt translation message failed', e)
-        return None
-    print(res)
-    tmp = ""
-    if res['code'] != 0:
-        return ""
-    trans_res = res.get('translateResult', None)
-    if trans_res is not None:
-        for line in trans_res:
-            # 有道接口数据已提供段落换行符号
-            for sentence in line:
-                tmp += sentence['tgt']
-        tmp += '\n'
-    dict_res = res.get('dictResult', None)
-    if dict_res is not None and dict_res.get("ec", None) is not None:
-        word = dict_res['ec']['word']
-        phones = map(lambda x: "{}: /{}/".format(
-            x[:x.find('p')], word[x]), filter(lambda x: "phone" in x, word.keys()))
-        tmp += "  ".join(phones) + '\n'
-        for description in word['trs']:
-            tmp += description.get("pos", "") + ' ' + \
-                description.get('tran', "") + '\n'
-        wfs = word.get("wfs", None)
-        if wfs is not None:
-            for wf in wfs:
-                tmp += wf['wf']['name'] + ':' + wf['wf']['value'] + '\n'
-    return tmp
-
-
-def translate_text(text, lang_to="", lang_from="auto"):
-    global INTERFACE_SELECT
-    if INTERFACE_SELECT == 1:
-        res = translate_interface_1(text, lang_from, lang_to)
-        if res is None:
-            INTERFACE_SELECT += 1
-            return "接口错误，已自动切换接口"
-    elif INTERFACE_SELECT == 2:
-        res = translate_interface_2(text, lang_from, lang_to)
-    return res
 
 
 def decode_translate(text):

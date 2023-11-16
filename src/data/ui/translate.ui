@@ -103,7 +103,7 @@
     <property name="default-height">400</property>
     <property name="default-width">500</property>
     <property name="show-menubar">True</property>
-    <property name="title" translatable="yes">lfy</property>
+    <property name="title" translatable="yes">lfy(Right-click and select Window Top)</property>
   </template>
   <menu id="primary_menu">
     <section>

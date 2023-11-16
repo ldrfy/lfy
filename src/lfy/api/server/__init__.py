@@ -52,8 +52,8 @@ TE_YOUDAO = TranslateEngine("youdao", _("youdao"), ["auto"], [0])
 
 
 tes = [
-    TE_GOOGLE,
     TE_YOUDAO,
+    TE_GOOGLE,
     TE_BAIDU,
     TE_TENCENT,
 ]
