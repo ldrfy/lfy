@@ -5,9 +5,9 @@
 import threading
 import time
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, GLib, Gtk
 
-from lfy.api import translate_by_server
+from lfy.api import process_text, translate_by_server
 from lfy.api.server import (get_lang, get_lang_names, get_server_key,
                             get_server_names)
 
@@ -30,6 +30,7 @@ class TranslateWindow(Adw.ApplicationWindow):
     dd_server: Gtk.ComboBoxText = Gtk.Template.Child()
     dd_lang: Gtk.ComboBoxText = Gtk.Template.Child()
     cbtn_add_old: Gtk.CheckButton = Gtk.Template.Child()
+    cbtn_del_wrapping: Gtk.CheckButton = Gtk.Template.Child()
     sp_translate: Gtk.Spinner = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
@@ -48,16 +49,12 @@ class TranslateWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def _on_server_changed(self, drop_down):
-        print(drop_down)
-        i = drop_down.get_active()
-        print(i)
-        self._set_model(self.dd_lang, get_lang_names(i))
+        self._set_model(self.dd_lang, get_lang_names(drop_down.get_active()))
 
     @Gtk.Template.Callback()
     def _on_lang_changed(self, drop_down):
-        i = drop_down.get_active()
         self.update(self.last_text, True)
-        return i
+        return drop_down.get_active()
 
     @Gtk.Template.Callback()
     def _set_tv_copy(self, a):
@@ -72,11 +69,9 @@ class TranslateWindow(Adw.ApplicationWindow):
             i (int, optional): _description_. Defaults to 0.
         """
         drop_down.remove_all()
-        print(drop_down)
         for d in data:
             drop_down.append_text(d)
         drop_down.set_active(i)
-        print(i, data)
 
     def update(self, text, reload=False):
         """翻译
@@ -85,43 +80,56 @@ class TranslateWindow(Adw.ApplicationWindow):
             text (_type_): _description_
             reload (bool, optional): _description_. Defaults to False.
         """
-        buffer = self.tv_from.get_buffer()
+        buffer_from = self.tv_from.get_buffer()
         if not reload:
-            if (self.last_text_one == text) or self.is_tv_copy:
-                print(f"重复，不复制：\n{text}")
+            if self.last_text_one == text or self.is_tv_copy:
                 return
             self.last_text_one = text
             if self.cbtn_add_old.get_active():
                 text = f"{self.last_text} {text}"
+            if self.cbtn_del_wrapping.get_active():
+                text = process_text(text)
             self.last_text = text
-            buffer.set_text(text)
+            buffer_from.set_text(text)
 
-        start_iter, end_iter = buffer.get_bounds()
-        text = buffer.get_text(start_iter, end_iter, False)
+        start_iter, end_iter = buffer_from.get_bounds()
+        text = buffer_from.get_text(start_iter, end_iter, False)
 
-        buffer_to = self.tv_to.get_buffer()
-        buffer_to.set_text("翻译中……")
-        self.translate_by_s(text)
+        threading.Thread(target=self.request_text, daemon=True, args=(
+            text, self.dd_server.get_active(), self.dd_lang.get_active(),)).start()
 
-    def translate_by_s(self, text):
-        """异步
+    def request_text(self, text, i, j):
+        """子线程翻译
 
         Args:
-            text (_type_): _description_
+            text (str): _description_
+            i (server_key_i): _description_
+            j (lang_key_j): _description_
         """
-        def request_text(text):
-            start_ = time.time()
-            i = self.dd_server.get_active()
-            j = self.dd_lang.get_active()
+        GLib.idle_add(self.update_ui, "")
 
-            text_translated = translate_by_server(
-                text, get_server_key(i), get_lang(i, j))
-            span = 0.5 - (time.time() - start_)
-            if span > 0:
-                time.sleep(span)
-            self.tv_to.get_buffer().set_text(text_translated)
+        start_ = time.time()
+        sk = get_server_key(i)
+        lk = get_lang(i, j)
+
+        text_translated = translate_by_server(text, sk, lk)
+
+        span = 0.25 - (time.time() - start_)
+        if span > 0:
+            time.sleep(span)
+        GLib.idle_add(self.update_ui, text_translated)
+
+    def update_ui(self, s=True):
+        """更新界面
+
+        Args:
+            s (bool, optional): 翻译以后的文本. Defaults to True.
+        """
+        if len(s) == 0:
+            # 开始翻译
+            self.sp_translate.start()
+            self.tv_to.get_buffer().set_text("翻译中……")
+        else:
+            # 翻译完成
+            self.tv_to.get_buffer().set_text(s)
             self.sp_translate.stop()
-
-        self.sp_translate.start()
-        tt = threading.Thread(target=request_text, args=(text,))
-        tt.start()
