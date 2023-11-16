@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2023-11-16 17:09+0800\n"
+"POT-Creation-Date: 2023-11-17 01:17+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -18,7 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/data/cool.ldr.lfy.desktop.in.in:3 src/lfy/main.py:43
-#: src/data/ui/translate.ui:106
 msgid "lfy"
 msgstr "兰译"
 
@@ -35,10 +34,19 @@ msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
 
-#: src/lfy/api/__init__.py:21
+#: src/lfy/api/__init__.py:25
 msgid ""
 "Copy automatic translation, it is recommended to pin this window to the top"
 msgstr "复制自动翻译，建议将此窗口置顶"
+
+#: src/lfy/api/__init__.py:37
+msgid "The connection timed out. Maybe there is a network problem"
+msgstr "连接超时，网络可能有问题（比如需要代理）"
+
+#: src/lfy/api/__init__.py:40 src/lfy/api/server/baidu.py:79
+#: src/lfy/api/server/youdao.py:67
+msgid "something error, try other translate engine?"
+msgstr "出现了一些错误，试试其他翻译引擎？"
 
 #: src/lfy/api/server/__init__.py:25
 msgid "Automatic"
@@ -92,6 +100,35 @@ msgstr "有道"
 msgid "please set baidu app_id and secret_key like this:"
 msgstr "请按照如下教程设置百度的 app_id 和 secret_key"
 
+#: src/lfy/api/server/youdao.py:20
+msgid ""
+"python no lib: cryptography, please try: \n"
+"\n"
+" pip install cryptography"
+msgstr ""
+"未找到python库: cryptography, 请尝试安装: \n"
+"\n"
+" pip install cryptography"
+
+#: src/lfy/api/server/youdao.py:48
+msgid "youdao interface is error, auto change interface. please try again"
+msgstr "有道默认翻译接口错误，已经自动修正，再点翻译试一下？"
+
+#: src/lfy/api/server/youdao.py:99
+#, fuzzy
+msgid ""
+"can not get secret key\n"
+"\n"
+"try other translate engine?"
+msgstr ""
+"不能找到 secret key\n"
+"\n"
+"试试其他翻译引擎？"
+
+#: src/lfy/api/server/youdao.py:120
+msgid "decrypt translation message failed"
+msgstr "解密翻译信息错误"
+
 #: src/data/ui/translate.ui:58
 msgid "Remove symbols such as line breaks"
 msgstr "移除换行符"
@@ -108,6 +145,10 @@ msgstr "翻译"
 msgid "Menu"
 msgstr "菜单"
 
+#: src/data/ui/translate.ui:106
+msgid "lfy(Right-click and select Window Top)"
+msgstr "兰译（右键、选择窗口置顶）"
+
 #: src/data/ui/translate.ui:112
 msgid "_Preferences"
 msgstr "_设置"
@@ -119,3 +160,6 @@ msgstr "_快捷键"
 #: src/data/ui/translate.ui:120
 msgid "_About lfy"
 msgstr "_关于 兰译"
+
+#~ msgid "Unknown translation error"
+#~ msgstr "未知翻译错误"

@@ -1,10 +1,15 @@
 src/data/cool.ldr.lfy.desktop.in.in
 src/data/cool.ldr.lfy.metainfo.xml.in
 src/data/cool.ldr.lfy.gschema.xml.in
+
 src/lfy/main.py
 src/lfy/preference.py
 src/lfy/translate.py
+
 src/lfy/api/__init__.py
 src/lfy/api/server/__init__.py
 src/lfy/api/server/baidu.py
+src/lfy/api/server/google.py
+src/lfy/api/server/youdao.py
+
 src/data/ui/translate.ui
