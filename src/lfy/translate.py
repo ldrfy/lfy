@@ -56,6 +56,7 @@ class TranslateWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def _on_lang_changed(self, drop_down):
         i = drop_down.get_active()
+        self.update(self.last_text, True)
         return i
 
     @Gtk.Template.Callback()
