@@ -46,7 +46,6 @@
 	(1,55,"GtkApplicationWindow","show-menubar","True",None,None,None,None,None,None,None,None,None),
 	(1,55,"GtkWindow","default-height","400",None,None,None,None,None,None,None,None,None),
 	(1,55,"GtkWindow","default-width","500",None,None,None,None,None,None,None,None,None),
-	(1,55,"GtkWindow","icon-name","scanner",None,None,None,None,None,None,None,None,None),
 	(1,55,"GtkWindow","title","lfy",1,None,None,None,None,None,None,None,None),
 	(1,56,"AdwToolbarView","content",None,None,None,None,None,57,None,None,None,None),
 	(1,57,"GtkBox","spacing","5",None,None,None,None,None,None,None,None,None),
