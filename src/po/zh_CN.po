@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2023-11-16 03:52+0800\n"
+"POT-Creation-Date: 2023-11-16 17:09+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/data/cool.ldr.lfy.desktop.in.in:3 src/lfy/main.py:43
-#: src/data/ui/translate.ui:107
+#: src/data/ui/translate.ui:106
 msgid "lfy"
 msgstr "兰译"
 
@@ -29,12 +29,16 @@ msgstr "没有介绍"
 #: src/lfy/main.py:49
 #, fuzzy
 msgid "translator_credits"
-msgstr ""
-"yuh <yuhldr@qq.com>, 2023-2023"
+msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 
 #: src/lfy/main.py:50
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
+
+#: src/lfy/api/__init__.py:21
+msgid ""
+"Copy automatic translation, it is recommended to pin this window to the top"
+msgstr "复制自动翻译，建议将此窗口置顶"
 
 #: src/lfy/api/server/__init__.py:25
 msgid "Automatic"
@@ -68,11 +72,11 @@ msgstr "德语"
 msgid "French"
 msgstr "法语"
 
-#: src/lfy/api/server/__init__.py:44
+#: src/lfy/api/server/__init__.py:42
 msgid "baidu"
 msgstr "百度"
 
-#: src/lfy/api/server/__init__.py:46
+#: src/lfy/api/server/__init__.py:45
 msgid "tencent"
 msgstr "腾讯"
 
@@ -80,11 +84,11 @@ msgstr "腾讯"
 msgid "google"
 msgstr "谷歌"
 
-#: src/lfy/api/server/__init__.py:50
+#: src/lfy/api/server/__init__.py:51
 msgid "youdao"
 msgstr "有道"
 
-#: src/lfy/api/server/baidu.py:36
+#: src/lfy/api/server/baidu.py:34
 msgid "please set baidu app_id and secret_key like this:"
 msgstr "请按照如下教程设置百度的 app_id 和 secret_key"
 
@@ -104,14 +108,14 @@ msgstr "翻译"
 msgid "Menu"
 msgstr "菜单"
 
-#: src/data/ui/translate.ui:113
+#: src/data/ui/translate.ui:112
 msgid "_Preferences"
 msgstr "_设置"
 
-#: src/data/ui/translate.ui:117
+#: src/data/ui/translate.ui:116
 msgid "_Keyboard Shortcuts"
 msgstr "_快捷键"
 
-#: src/data/ui/translate.ui:121
+#: src/data/ui/translate.ui:120
 msgid "_About lfy"
 msgstr "_关于 兰译"

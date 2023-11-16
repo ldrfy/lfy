@@ -1,7 +1,22 @@
 '''pip打包，需要meson编译以后才能使用'''
+import os
+
 import setuptools
 
 BASE_DIR = "./"
+
+
+def get_all_files(directory):
+    data_files = []
+
+    # 遍历目录及其子目录
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if not file.endswith(".cache"):
+                file_path = os.path.join(root, file)
+                data_files.append((root, [file_path]),)
+
+    return data_files
 
 
 with open("../README.md", "r", encoding="utf-8") as fh:
@@ -10,17 +25,8 @@ with open("../README.md", "r", encoding="utf-8") as fh:
 scripts = [
     f"{BASE_DIR}/bin/@APP_NAME@",
 ]
-data_files = [
-    ('./',
-     [
-         f"{BASE_DIR}/share/applications/@APP_ID@.desktop",
-         f"{BASE_DIR}/share/glib-2.0/schemas/@APP_ID@.gschema.xml",
-         f"{BASE_DIR}/share/icons/hicolor/scalable/apps/@APP_ID@.svg",
-         f"{BASE_DIR}/share/icons/hicolor/symbolic/apps/@APP_ID@-symbolic.svg",
-         f"{BASE_DIR}/share/locale/zh_CN/LC_MESSAGES/@APP_ID@.mo",
-         f"{BASE_DIR}/share/metainfo/@APP_ID@.appdata.xml",
-     ])
-]
+data_files = get_all_files("./share")
+print(data_files)
 
 setuptools.setup(name='@APP_NAME@',
                  version='@VERSION@',
