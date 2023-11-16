@@ -1,23 +1,26 @@
 TO_LANG = zh_CN
-VERSION = 0.0.1
 INSTALL_DIR=${HOME}/.local
 
 
 install:
 	rm -rf _build
-	rm -rf test
 	meson src _build --prefix=${INSTALL_DIR}
-	meson compile -C _build
+	meson test -C _build
 	meson install -C _build
 
-# DESTDIR="../test" meson install -C build
+test:
+	rm -rf test
+	make INSTALL_DIR="${PWD}/test" install
 
 rm:
 	cd _build && ninja uninstall
 
-other:
-	python -m compileall -d ${HOME}/.local/lib "test/.local/lib"
-	python -O -m compileall -d ${HOME}/.local/lib "test/.local/lib"
+whl:
+	make test
+	cp _build/pkg/setup.py ./test && \
+	cd ./test && \
+	cp -r ./lib/*/site-packages/lfy ./ && \
+	python setup.py sdist bdist_wheel
 
 
 # Generate .pot file
@@ -39,6 +42,6 @@ update-po:
 	msgmerge -U ./src/po/${TO_LANG}.po ./src/po/lfy.pot
 
 
-.PHONY: build other update-pot update-po po-init
+.PHONY: build other update-pot update-po po-init test whl
 
 

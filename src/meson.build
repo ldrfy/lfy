@@ -8,8 +8,7 @@ i18n = import('i18n')
 gnome = import('gnome')
 python = import('python')
 
-APP_NAME = 'lfy'
-APP_ID = 'cool.ldr.' + APP_NAME
+APP_ID = 'cool.ldr.' + meson.project_name()
 PKGDATA_DIR = get_option('prefix') / get_option('datadir') / meson.project_name()
 PACKAGE_URL = 'https://github.com/yuhldr/lfy'
 PACKAGE_URL_BUG = 'https://github.com/yuhldr/lfy/issues'
@@ -21,7 +20,7 @@ PYTHON_LOCAL_DIR = py_installation.get_install_dir()
 
 conf = configuration_data()
 conf.set('APP_ID', APP_ID)
-conf.set('APP_NAME', APP_NAME)
+conf.set('APP_NAME', meson.project_name())
 conf.set('VERSION', meson.project_version())
 conf.set('LOCALE_DIR', get_option('prefix') / get_option('localedir'))
 conf.set('PKGDATA_DIR', PKGDATA_DIR)
@@ -61,6 +60,7 @@ dependency('pygobject-3.0', version: '>= 3.36.1')
 
 subdir('data')
 subdir('po')
+subdir('pkg')
 
 
 install_subdir(

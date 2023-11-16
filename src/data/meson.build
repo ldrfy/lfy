@@ -32,7 +32,9 @@ endif
 # Merging the translations with the desktop file
 desktop_conf = configuration_data()
 desktop_conf.set('APP_ID', APP_ID)
-desktop_conf.set('APP_NAME', APP_NAME)
+desktop_conf.set('APP_NAME', meson.project_name())
+desktop_conf.set('BIN_DIR', join_paths(get_option('prefix'), get_option('bindir')))
+
 i18n.merge_file(
   type: 'desktop',
   input: configure_file(

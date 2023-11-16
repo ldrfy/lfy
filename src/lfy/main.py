@@ -53,7 +53,7 @@ class LfyApplication(Adw.Application):
                                 copyright='© 2023 yuh')
         about.present()
 
-    def on_preferences_action(self, widget, _):
+    def on_preferences_action(self, widget, w):
         """Callback for the app.preferences action."""
         win = PreferenceWindow(application=self)
         win.present()

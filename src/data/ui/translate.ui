@@ -102,7 +102,6 @@
     </property>
     <property name="default-height">400</property>
     <property name="default-width">500</property>
-    <property name="icon-name">scanner</property>
     <property name="show-menubar">True</property>
     <property name="title" translatable="yes">lfy</property>
   </template>
