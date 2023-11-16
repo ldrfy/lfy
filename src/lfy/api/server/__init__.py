@@ -39,15 +39,23 @@ lgs = [
     _("French")
 ]
 
+TE_BAIDU = TranslateEngine("baidu", _("baidu"), [
+                    "auto", "zh", "wyw", "en", "jp", "kor", "de", "fra"], range(8))
+
+TE_TENCENT = TranslateEngine("tencent", _("tencent"), [
+                    "zh", "en", "jp", "kr", "de", "fr"], [1, 3, 4, 5, 6, 7])
+
+TE_GOOGLE = TranslateEngine("google", _("google"), [
+                    "zh", "en", "ja", "ko", "de", "fr"], [1, 3, 4, 5, 6, 7])
+
+TE_YOUDAO = TranslateEngine("youdao", _("youdao"), ["auto"], [0])
+
 
 tes = [
-    TranslateEngine("baidu", _("baidu"), [
-                    "auto", "zh", "wyw", "en", "jp", "kor", "de", "fra"], range(8)),
-    TranslateEngine("tencent", _("tencent"), [
-                    "zh", "en", "jp", "kr", "de", "fr"], [1, 3, 4, 5, 6, 7]),
-    TranslateEngine("google", _("google"), [
-                    "zh", "en", "ja", "ko", "de", "fr"], [1, 3, 4, 5, 6, 7]),
-    TranslateEngine("youdao", _("youdao"), ["auto"], [0]),
+    TE_GOOGLE,
+    TE_YOUDAO,
+    TE_BAIDU,
+    TE_TENCENT,
 ]
 
 
