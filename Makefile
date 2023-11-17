@@ -10,20 +10,24 @@ install:
 
 test:
 	rm -rf test
-	make INSTALL_DIR="${PWD}/test" install
+	rm -rf _build
+	meson src _build --prefix=${INSTALL_DIR}
+	DESTDIR="${PWD}/test" meson install -C _build
 
 rm:
 	cd _build && ninja uninstall
 
 whl:
 	make test
-	cp _build/pkg/setup.py ./test && \
-	cd ./test && \
+
+	cp README.md ./test/${INSTALL_DIR} && \
+	cp _build/pkg/setup.py ./test/${INSTALL_DIR} && \
+	cd ./test/${INSTALL_DIR} && \
 	cp -r ./lib/*/site-packages/lfy ./ && \
 	python setup.py sdist bdist_wheel
 
 	pip uninstall lfy --break-system-packages
-	pip install ./test/dist/*.whl --break-system-packages
+	pip install ./test/${INSTALL_DIR}/dist/*.whl --break-system-packages
 
 	rm -rf _build
 	rm -rf test
