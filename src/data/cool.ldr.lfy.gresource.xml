@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/cool/ldr/lfy">
+    <file alias="cool.ldr.lfy.svg">icons/hicolor/scalable/apps/cool.ldr.lfy.svg</file>
     <file alias="gtk/help-overlay.ui" preprocess="xml-stripblanks">ui/help-overlay.ui</file>
     <file preprocess="xml-stripblanks">ui/translate.ui</file>
     <file preprocess="xml-stripblanks">ui/preference.ui</file>

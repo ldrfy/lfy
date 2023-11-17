@@ -3,28 +3,32 @@ import os
 
 import setuptools
 
-BASE_DIR = "./"
-
 
 def get_all_files(directory):
-    data_files = []
+    """获取其他文件
+
+    Args:
+        directory (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    data_files_ = []
 
     # 遍历目录及其子目录
     for root, dirs, files in os.walk(directory):
         for file in files:
-            if not file.endswith(".cache"):
+            if not file.endswith(".cache") and not file.endswith(".desktop"):
                 file_path = os.path.join(root, file)
-                data_files.append((root, [file_path]),)
+                data_files_.append((root, [file_path]),)
 
-    return data_files
+    return data_files_
 
 
-with open("../README.md", "r", encoding="utf-8") as fh:
+with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-scripts = [
-    f"{BASE_DIR}/bin/@APP_NAME@",
-]
+
 data_files = get_all_files("./share")
 print(data_files)
 
@@ -35,7 +39,7 @@ setuptools.setup(name='@APP_NAME@',
                  long_description=long_description,
                  long_description_content_type="text/markdown",
                  py_modules=["@APP_NAME@"],
-                 scripts=scripts,
+                 scripts=["./bin/@APP_NAME@"],
                  data_files=data_files,
                  install_requires=["PyGObject", "requests", "cryptography"],
                  include_package_data=True,
