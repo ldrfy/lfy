@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schemalist gettext-domain="lt">
-	<schema id="@APP_ID@" path="/lt/ldr/cool/">
+<schemalist gettext-domain="lfy">
+	<schema id="@APP_ID@" path="/cool/ldr/lfy/">
+	    <key type="s" name="lang-selected-key">
+        <default>"baidu"</default>
+    </key>
 	</schema>
 </schemalist>

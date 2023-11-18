@@ -34,7 +34,7 @@ def translate_text(s, lang_to="auto", lang_from="auto"):
         no_sk = _("please set baidu app_id and secret_key like this:")
         return f'{no_sk}\n\n{HOW_GET_URL_TRANSLATE}'
 
-    s1, ok = translate(s, app_id, secret_key, lang_to)
+    ok, s1 = translate(s, app_id, secret_key, lang_to)
     print(ok, s, lang_from, lang_to)
     return s1
 
@@ -49,7 +49,7 @@ def check_translate(app_id, secret_key):
     Returns:
         _type_: _description_
     """
-    text, ok = translate("test", app_id, secret_key)
+    ok, text = translate("test", app_id, secret_key)
     print(text)
     return ok
 

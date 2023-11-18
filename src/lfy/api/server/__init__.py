@@ -11,8 +11,8 @@ class TranslateEngine:
     """
 
     def __init__(self, key: str, name: str, langs: list, lang_ids: list):
-        self.key = _(key)
-        self.name = name
+        self.key = key
+        self.name = _(name)
 
         self.langs = langs
         self.lang_names = []
@@ -77,8 +77,20 @@ def get_server_key(i: int):
     Returns:
         _type_: _description_
     """
+    if i >= len(tes):
+        i = 0
     return tes[i].key
 
+
+def get_server_name(i: int):
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
+    if i >= len(tes):
+        i = 0
+    return tes[i].name
 
 def get_lang(i: int, j: int):
     """_summary_
@@ -86,6 +98,8 @@ def get_lang(i: int, j: int):
     Returns:
         _type_: _description_
     """
+    if i >= len(tes):
+        i = 0
     return tes[i].langs[j]
 
 
@@ -95,4 +109,18 @@ def get_lang_names(i=0):
     Returns:
         _type_: _description_
     """
+    if i >= len(tes):
+        i = 0
     return tes[i].lang_names
+
+
+def server_key2i(key: str):
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
+    for i, te in enumerate(tes):
+        if te.key == key:
+            return i
+    return 0
