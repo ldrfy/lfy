@@ -6,8 +6,9 @@ import time
 from gi.repository import Adw, GLib, Gtk
 
 from lfy.api import process_text, translate_by_server
-from lfy.api.server import (get_lang, get_lang_names, get_server_key,
-                            get_server_names)
+from lfy.api.server import (get_lang, get_lang_names, get_server_name,
+                            get_server_names, server_key2i)
+from lfy.settings import Settings
 
 
 @Gtk.Template(resource_path='/cool/ldr/lfy/translate.ui')
@@ -39,7 +40,8 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.last_text_one = ""
         # 是不是软件内复制的，这种可能是想粘贴到其他地方，不响应即可
         self.is_tv_copy = False
-        self._set_model(self.dd_server, get_server_names())
+        i = server_key2i(Settings.get().lang_selected_key)
+        self._set_model(self.dd_server, get_server_names(), i)
 
     @Gtk.Template.Callback()
     def _on_translate_clicked(self, btn):
@@ -112,7 +114,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         GLib.idle_add(self.update_ui, "")
 
         start_ = time.time()
-        sk = get_server_key(i)
+        sk = get_server_name(i)
         lk = get_lang(i, j)
 
         text_translated = translate_by_server(text, sk, lk)
@@ -122,7 +124,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             time.sleep(span)
         GLib.idle_add(self.update_ui, text_translated)
 
-    def update_ui(self, s=True):
+    def update_ui(self, s=""):
         """更新界面
 
         Args:

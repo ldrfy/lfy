@@ -4,8 +4,7 @@
 
 from gi.repository import Adw, Gtk
 
-from lfy.api.server import (get_lang, get_lang_names, get_server_key,
-                            get_server_names)
+from lfy.api.server import get_lang, get_lang_names, get_server_names
 from lfy.server_preferences import ServerPreferences
 
 
