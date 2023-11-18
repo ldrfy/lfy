@@ -5,6 +5,7 @@ APP_ID = '@APP_ID@'
 VERSION = '@VERSION@'
 PACKAGE_URL_BUG = '@PACKAGE_URL_BUG@'
 PACKAGE_URL = '@PACKAGE_URL@'
+RES_PATH = '/cool/ldr/lfy'
 
 
 THIS_DIR, THIS_FILENAME = os.path.split(__file__)

@@ -1,6 +1,4 @@
-# window.py
-#
-# Copyright 2023 Unknown
+'''翻译主窗口'''
 
 import threading
 import time
@@ -12,7 +10,7 @@ from lfy.api.server import (get_lang, get_lang_names, get_server_key,
                             get_server_names)
 
 
-@Gtk.Template(resource_path='/cool/ldr/lfy/ui/translate.ui')
+@Gtk.Template(resource_path='/cool/ldr/lfy/translate.ui')
 class TranslateWindow(Adw.ApplicationWindow):
     """翻译窗口
 
@@ -27,8 +25,8 @@ class TranslateWindow(Adw.ApplicationWindow):
     # btn_translate: Gtk.Button = Gtk.Template.Child()
     tv_from: Gtk.TextView = Gtk.Template.Child()
     tv_to: Gtk.TextView = Gtk.Template.Child()
-    dd_server: Gtk.ComboBoxText = Gtk.Template.Child()
-    dd_lang: Gtk.ComboBoxText = Gtk.Template.Child()
+    dd_server: Gtk.DropDown = Gtk.Template.Child()
+    dd_lang: Gtk.DropDown = Gtk.Template.Child()
     cbtn_add_old: Gtk.CheckButton = Gtk.Template.Child()
     cbtn_del_wrapping: Gtk.CheckButton = Gtk.Template.Child()
     sp_translate: Gtk.Spinner = Gtk.Template.Child()
@@ -48,13 +46,15 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.update(self.last_text, True)
 
     @Gtk.Template.Callback()
-    def _on_server_changed(self, drop_down):
-        self._set_model(self.dd_lang, get_lang_names(drop_down.get_active()))
+    def _on_server_changed(self, drop_down, a):
+        print(drop_down, a)
+        self._set_model(self.dd_lang, get_lang_names(drop_down.get_selected()))
 
     @Gtk.Template.Callback()
-    def _on_lang_changed(self, drop_down):
+    def _on_lang_changed(self, drop_down, a):
+        print(drop_down, a)
         self.update(self.last_text, True)
-        return drop_down.get_active()
+        return drop_down.get_selected()
 
     @Gtk.Template.Callback()
     def _set_tv_copy(self, a):
@@ -68,10 +68,12 @@ class TranslateWindow(Adw.ApplicationWindow):
             data (_type_): _description_
             i (int, optional): _description_. Defaults to 0.
         """
-        drop_down.remove_all()
+        print(drop_down, data, i)
+        sl = Gtk.StringList()
         for d in data:
-            drop_down.append_text(d)
-        drop_down.set_active(i)
+            sl.append(d)
+        drop_down.set_model(sl)
+        drop_down.set_selected(i)
 
     def update(self, text, reload=False):
         """翻译
@@ -80,6 +82,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             text (_type_): _description_
             reload (bool, optional): _description_. Defaults to False.
         """
+        print(text)
         buffer_from = self.tv_from.get_buffer()
         if not reload:
             if self.last_text_one == text or self.is_tv_copy:
@@ -96,7 +99,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         text = buffer_from.get_text(start_iter, end_iter, False)
 
         threading.Thread(target=self.request_text, daemon=True, args=(
-            text, self.dd_server.get_active(), self.dd_lang.get_active(),)).start()
+            text, self.dd_server.get_selected(), self.dd_lang.get_selected(),)).start()
 
     def request_text(self, text, i, j):
         """子线程翻译

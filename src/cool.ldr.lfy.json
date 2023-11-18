@@ -1,17 +1,18 @@
 {
-    "app-id" : "cool.ldr.lfy",
-    "runtime" : "org.gnome.Platform",
-    "runtime-version" : "master",
-    "sdk" : "org.gnome.Sdk",
-    "command" : "lfy",
-    "finish-args" : [
+    "app-id": "cool.ldr.lfy",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "master",
+    "sdk": "org.gnome.Sdk",
+    "command": "lfy",
+    "finish-args": [
         "--share=network",
         "--share=ipc",
         "--socket=fallback-x11",
         "--device=dri",
         "--socket=wayland"
     ],
-    "cleanup" : [
+    "cleanup": [
+        "*blueprint*",
         "/include",
         "/lib/pkgconfig",
         "/man",
@@ -22,15 +23,27 @@
         "*.la",
         "*.a"
     ],
-    "modules" : [
+    "modules": [
         {
-            "name" : "lfy",
-            "builddir" : true,
-            "buildsystem" : "meson",
-            "sources" : [
+            "name": "blueprint",
+            "buildsystem": "meson",
+            "sources": [
                 {
-                    "type" : "git",
-                    "url" : "file:///home/yuh/code/my/gitProjects"
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler",
+                    "tag": "v0.10.0",
+                    "commit": "2a39a16391122af2f3d812e478c1c1398c98b972"
+                }
+            ]
+        },
+        {
+            "name": "lfy",
+            "builddir": true,
+            "buildsystem": "meson",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "file:///home/yuh/code/my/gitProjects"
                 }
             ]
         }
