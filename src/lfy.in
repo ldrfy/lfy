@@ -2,6 +2,7 @@
 
 # lt
 import os
+# 防止复制以后必需手动点击窗口
 os.environ['GDK_BACKEND'] = 'x11'
 
 import gettext

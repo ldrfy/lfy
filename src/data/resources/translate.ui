@@ -32,13 +32,15 @@
               <object class="GtkBox">
                 <property name="spacing">8</property>
                 <child>
-                  <object class="GtkComboBoxText" id="dd_server">
-                    <signal name="changed" handler="_on_server_changed"/>
+                  <object class="GtkDropDown" id="dd_server">
+                    <property name="enable-search">True</property>
+                    <signal name="notify::selected" handler="_on_server_changed"/>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkComboBoxText" id="dd_lang">
-                    <signal name="changed" handler="_on_lang_changed"/>
+                  <object class="GtkDropDown" id="dd_lang">
+                    <property name="enable-search">True</property>
+                    <signal name="notify::selected" handler="_on_lang_changed"/>
                   </object>
                 </child>
                 <child>
