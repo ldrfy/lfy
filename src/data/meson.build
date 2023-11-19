@@ -4,7 +4,7 @@ subdir('resources')
 gschema_conf = configuration_data()
 gschema_conf.set('APP_ID', APP_ID)
 configure_file(
-  input: APP_ID + '.gschema.xml.in',
+  input: APP_ID + '.in.gschema.xml',
   output: APP_ID + '.gschema.xml',
   configuration: gschema_conf,
   install: true,
@@ -28,8 +28,8 @@ desktop_conf.set('BIN_DIR', join_paths(get_option('prefix'), get_option('bindir'
 i18n.merge_file(
   type: 'desktop',
   input: configure_file(
-    input: APP_ID + '.desktop.in.in',
-    output: APP_ID + '.desktop.in',
+    input: APP_ID + '.in.in.desktop',
+    output: APP_ID + '.in.desktop',
     configuration: desktop_conf),
   output: APP_ID + '.desktop',
   po_dir: join_paths(meson.project_source_root(), 'po'),
@@ -54,8 +54,8 @@ appdata_conf.set('package_url', PACKAGE_URL)
 appdata_conf.set('package_url_bug', PACKAGE_URL_BUG)
 i18n.merge_file(
   input: configure_file(
-    output: APP_ID + '.appdata.xml.in',
-    input: APP_ID + '.appdata.xml.in',
+    output: APP_ID + '.in.appdata.xml',
+    input: APP_ID + '.in.appdata.xml',
     configuration: appdata_conf
   ),
   output: APP_ID + '.appdata.xml',

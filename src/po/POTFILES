@@ -1,6 +1,6 @@
-src/data/cool.ldr.lfy.desktop.in.in
-src/data/cool.ldr.lfy.metainfo.xml.in
-src/data/cool.ldr.lfy.gschema.xml.in
+src/data/cool.ldr.lfy.in.in.desktop
+src/data/cool.ldr.lfy.in.metainfo.xml
+src/data/cool.ldr.lfy.in.gschema.xml
 
 src/lfy/main.py
 src/lfy/preference.py
