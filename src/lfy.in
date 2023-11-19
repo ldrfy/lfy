@@ -4,6 +4,9 @@
 import gettext
 import locale
 import os
+# 防止复制以后必需手动点击窗口
+os.environ['GDK_BACKEND'] = 'x11'
+
 import signal
 import sys
 
@@ -11,9 +14,6 @@ import gi
 from gi.repository import Adw, Gio, Gtk
 
 from lfy import APP_ID, LOCALE_DIR, PKGDATA_DIR, VERSION
-
-# 防止复制以后必需手动点击窗口
-os.environ['GDK_BACKEND'] = 'x11'
 
 
 # gi.require_version("Adw", "1.4")
