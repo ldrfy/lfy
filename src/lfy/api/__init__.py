@@ -1,10 +1,15 @@
+"""翻译接口
+
+Returns:
+    _type_: _description_
+"""
 import re
 from gettext import gettext as _
 
 from requests.exceptions import ConnectTimeout
 
-from lfy.api.server import (TE_BAIDU, TE_GOOGLE, TE_YOUDAO, baidu, google,
-                            youdao)
+from lfy.api.server import (SERVER_BAIDU, SERVER_GOOGLE, SERVER_YOUDAO, baidu,
+                            google, youdao)
 
 
 def translate_by_server(text, server_key, lang_to, lang_from="auto"):
@@ -20,18 +25,18 @@ def translate_by_server(text, server_key, lang_to, lang_from="auto"):
         _type_: _description_
     """
     try:
-        print(server_key)
+        print(server_key, lang_to)
         if len(text.strip()) == 0:
             return _("Copy automatic translation, it is recommended to pin this window to the top")
 
-        if server_key == TE_YOUDAO.key:
+        if server_key == SERVER_YOUDAO.key:
             return youdao.translate_text(text, lang_to, lang_from)
-        elif server_key == TE_GOOGLE.key:
+        elif server_key == SERVER_GOOGLE.key:
             return google.translate_text(text, lang_to, lang_from)
-        elif server_key == TE_BAIDU.key:
+        elif server_key == SERVER_BAIDU.key:
             return baidu.translate_text(text, lang_to, lang_from)
         else:
-            return "暂不支持"
+            return f"暂不支持：{server_key}"
 
     except ConnectTimeout as e:
         s = _("The connection timed out. Maybe there is a network problem")
@@ -39,6 +44,7 @@ def translate_by_server(text, server_key, lang_to, lang_from="auto"):
     except Exception as e:
         s = _("something error, try other translate engine?")
         return f"{s}：\n\n {e}"
+
 
 def process_text(text):
     """文本预处理
