@@ -1,11 +1,12 @@
 '''翻译主窗口'''
 
+import re
 import threading
 import time
 
 from gi.repository import Adw, GLib, Gtk
 
-from lfy.api import process_text, translate_by_server
+from lfy.api import translate_by_server
 from lfy.api.server import (get_lang, get_lang_names, get_server,
                             get_server_names, lang_n2j, server_key2i)
 from lfy.settings import Settings
@@ -95,7 +96,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             if self.cbtn_add_old.get_active():
                 text = f"{self.last_text} {text}"
             if self.cbtn_del_wrapping.get_active():
-                text = process_text(text)
+                text = self.process_text(text)
             self.last_text = text
             buffer_from.set_text(text)
 
@@ -142,3 +143,22 @@ class TranslateWindow(Adw.ApplicationWindow):
             # 翻译完成
             self.tv_to.get_buffer().set_text(s)
             self.sp_translate.stop()
+
+
+    def process_text(self, text):
+        """文本预处理
+
+        Args:
+            text (str): _description_
+
+        Returns:
+            str: _description_
+        """
+        # 删除空行
+        s_from = re.sub(r'\n\s*\n', '\n', text)
+        # 删除多余空格
+        s_from = re.sub(r' +', ' ', s_from)
+        # 删除所有换行，除了句号后面的换行
+        s_from = re.sub(r"-[\n|\r]+", "", s_from)
+        s_from = re.sub(r"(?<!\.|-|。)[\n|\r]+", " ", s_from)
+        return s_from

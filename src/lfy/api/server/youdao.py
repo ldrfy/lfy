@@ -9,7 +9,7 @@ from gettext import gettext as _
 
 import requests
 
-from lfy.api.server import TIME_OUT
+from lfy.api.base import TIME_OUT, Server
 
 try:
     from cryptography.hazmat.backends import openssl
@@ -18,6 +18,14 @@ try:
                                                         modes)
 except ModuleNotFoundError as e0:
     print(_("python no lib: cryptography, please try: \n\n pip install cryptography"))
+
+
+lang_key_ns = {
+    "auto": 0
+}
+
+SERVER = Server("youdao", _("youdao"), lang_key_ns, False, "")
+
 
 session = requests.Session()
 session.headers.update({
@@ -30,7 +38,7 @@ INTERFACE_SELECT = 1
 
 
 def translate_text(text, lang_to="", lang_from="auto"):
-    """_summary_
+    """翻译接口
 
     Args:
         text (_type_): _description_

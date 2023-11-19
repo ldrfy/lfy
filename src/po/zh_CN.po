@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2023-11-20 01:14+0800\n"
+"POT-Creation-Date: 2023-11-20 02:24+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -34,78 +34,78 @@ msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
 
-#: src/lfy/api/__init__.py:30
+#: src/lfy/api/__init__.py:29
 msgid ""
 "Copy automatic translation, it is recommended to pin this window to the top"
 msgstr "复制自动翻译，建议将此窗口置顶"
 
-#: src/lfy/api/__init__.py:42
+#: src/lfy/api/__init__.py:43
 msgid "The connection timed out. Maybe there is a network problem"
 msgstr "连接超时，网络可能有问题（比如需要代理）"
 
-#: src/lfy/api/__init__.py:45 src/lfy/api/server/youdao.py:67
+#: src/lfy/api/__init__.py:46 src/lfy/api/server/youdao.py:75
 msgid "something error, try other translate engine?"
 msgstr "出现了一些错误，试试其他翻译引擎？"
 
-#: src/lfy/api/server/__init__.py:11
+#: src/lfy/api/__init__.py:62 src/lfy/api/__init__.py:86
+msgid "Not supported This Server!"
+msgstr ""
+
+#: src/lfy/api/__init__.py:69
+msgid "save success!"
+msgstr ""
+
+#: src/lfy/api/base.py:8
 msgid "Automatic"
 msgstr "自动"
 
-#: src/lfy/api/server/__init__.py:13
+#: src/lfy/api/base.py:10
 msgid "Chinese"
 msgstr "中文"
 
-#: src/lfy/api/server/__init__.py:15
+#: src/lfy/api/base.py:12
 msgid "Classical Chinese"
 msgstr "文言文"
 
-#: src/lfy/api/server/__init__.py:17
+#: src/lfy/api/base.py:14
 msgid "English"
 msgstr "英文"
 
-#: src/lfy/api/server/__init__.py:19
+#: src/lfy/api/base.py:16
 msgid "Japanese"
 msgstr "日文"
 
-#: src/lfy/api/server/__init__.py:21
+#: src/lfy/api/base.py:18
 msgid "Korean"
 msgstr "韩文"
 
-#: src/lfy/api/server/__init__.py:23
+#: src/lfy/api/base.py:20
 msgid "German"
 msgstr "德语"
 
-#: src/lfy/api/server/__init__.py:25
+#: src/lfy/api/base.py:22
 msgid "French"
 msgstr "法语"
 
-#: src/lfy/api/server/__init__.py:65
+#: src/lfy/api/server/baidu.py:21
 msgid "baidu"
 msgstr "百度"
 
-#: src/lfy/api/server/__init__.py:68
-msgid "tencent"
-msgstr "腾讯"
-
-#: src/lfy/api/server/__init__.py:71
-msgid "google"
-msgstr "谷歌"
-
-#: src/lfy/api/server/__init__.py:74
-msgid "youdao"
-msgstr "有道"
-
-#: src/lfy/api/server/baidu.py:48
-msgid "please set baidu app_id and secret_key like this:"
-msgstr "请按照如下教程设置百度的 app_id 和 secret_key"
-
-#: src/lfy/api/server/baidu.py:66
+#: src/lfy/api/server/baidu.py:44
 msgid "please input app_id and secret_key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
-#: src/lfy/api/server/baidu.py:98
+#: src/lfy/api/server/baidu.py:65 src/lfy/api/server/tencent.py:70
+msgid "please input API Key in preference"
+msgstr "请在设置中填写 API Key"
+
+#: src/lfy/api/server/baidu.py:107 src/lfy/api/server/tencent.py:126
 msgid "something error:"
 msgstr "一些错误发生："
+
+#: src/lfy/api/server/google.py:16
+msgid "google"
+msgstr "谷歌"
 
 #: src/lfy/api/server/youdao.py:20
 msgid ""
@@ -117,11 +117,15 @@ msgstr ""
 "\n"
 " pip install cryptography"
 
-#: src/lfy/api/server/youdao.py:48
+#: src/lfy/api/server/youdao.py:27
+msgid "youdao"
+msgstr "有道"
+
+#: src/lfy/api/server/youdao.py:56
 msgid "youdao interface is error, auto change interface. please try again"
 msgstr "有道默认翻译接口错误，已经自动修正，再点翻译试一下？"
 
-#: src/lfy/api/server/youdao.py:99
+#: src/lfy/api/server/youdao.py:107
 #, fuzzy
 msgid ""
 "can not get secret key\n"
@@ -132,9 +136,18 @@ msgstr ""
 "\n"
 "试试其他翻译引擎？"
 
-#: src/lfy/api/server/youdao.py:120
+#: src/lfy/api/server/youdao.py:128
 msgid "decrypt translation message failed"
 msgstr "解密翻译信息错误"
+
+#: src/lfy/api/server/tencent.py:20
+msgid "tencent"
+msgstr "腾讯"
+
+#: src/lfy/api/server/tencent.py:48
+#, fuzzy
+msgid "please input secret_id and secret_key like:"
+msgstr "请输入 app_id 和 secret_key，类似："
 
 #: src/data/resources/translate.ui:60
 msgid "Remove symbols such as line breaks"
@@ -188,6 +201,9 @@ msgstr "输入该服务的密钥"
 #: src/data/resources/preference.ui:14
 msgid "setup API Key, click on the right to the details"
 msgstr "设置密钥，点右侧查看细节"
+
+#~ msgid "please set baidu app_id and secret_key like this:"
+#~ msgstr "请按照如下教程设置百度的 app_id 和 secret_key"
 
 #, fuzzy
 #~ msgid "Translate Server Preferences"

@@ -62,7 +62,7 @@
 	(10,20,"GtkStack","api_key_stack",19,None,None,None,None,None),
 	(10,21,"GtkStackPage",None,20,None,None,None,None,None),
 	(10,22,"GtkSpinner","api_key_spinner",21,None,None,None,None,None),
-	(10,23,"GtkLinkButton",None,18,None,None,None,-1,None),
+	(10,23,"GtkLinkButton","api_key_link",18,None,None,None,-1,None),
 	(12,1,"GtkBox","ThemeSwitcher",None,None,None,None,None,None),
 	(12,2,"GtkBox","box",1,None,None,None,None,None),
 	(12,3,"GtkCheckButton","system",2,None,None,None,None,None),

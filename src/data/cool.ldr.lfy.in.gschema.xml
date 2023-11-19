@@ -11,7 +11,7 @@
 			<default>"app_id  |  secret_key"</default>
 		</key>
 		<key type="s" name="server-sk-tencent">
-			<default>"|"</default>
+			<default>"secret_id | secret_key"</default>
 		</key>
 	</schema>
 </schemalist>
