@@ -1,0 +1,29 @@
+# Maintainer: yuhldr <yuhldr@gmail.com>
+pkgname=@APP_NAME@
+pkgver=@VERSION@
+pkgrel=1
+pkgdesc="A translation app for GNOME."
+arch=('any')
+url="@PACKAGE_URL@"
+license=('GPL3')
+depends=('libadwaita' 'python-gobject')
+makedepends=('git' 'gobject-introspection' 'meson')
+checkdepends=('appstream-glib')
+source=('@PACKAGE_URL@/archive/refs/tags/v@VERSION@.zip')
+sha256sums=("2c2e91232120bac15b7808056d73b3a0e54003943b144ccdfbd3500cf3d90ac9")
+
+
+build() {
+  cd @APP_NAME@-@VERSION@
+  meson src _build --prefix="/usr"
+}
+
+check() {
+  cd @APP_NAME@-@VERSION@
+  meson test -C _build --print-errorlogs
+}
+
+package() {
+  cd @APP_NAME@-@VERSION@
+  meson install -C _build --destdir "$pkgdir"
+}
