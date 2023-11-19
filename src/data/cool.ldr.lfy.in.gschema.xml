@@ -7,5 +7,11 @@
 		<key type="i" name="lang-selected-n">
 			<default>0</default>
 		</key>
+		<key type="s" name="server-sk-baidu">
+			<default>"app_id  |  secret_key"</default>
+		</key>
+		<key type="s" name="server-sk-tencent">
+			<default>"|"</default>
+		</key>
 	</schema>
 </schemalist>

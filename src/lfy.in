@@ -1,16 +1,20 @@
 #!@PYTHON@
 
 # lt
-import os
-# 防止复制以后必需手动点击窗口
-os.environ['GDK_BACKEND'] = 'x11'
-
 import gettext
 import locale
+import os
 import signal
 import sys
 
 import gi
+from gi.repository import Adw, Gio, Gtk
+
+from lfy import APP_ID, LOCALE_DIR, PKGDATA_DIR, VERSION
+
+# 防止复制以后必需手动点击窗口
+os.environ['GDK_BACKEND'] = 'x11'
+
 
 # gi.require_version("Adw", "1.4")
 gi.require_version("Adw", "1")
@@ -18,11 +22,8 @@ gi.require_version('Gio', '2.0')
 # gi.require_version('Gtk', '4.12')
 gi.require_version('Gtk', '4.0')
 gi.require_version('Gst', '1.0')
-from gi.repository import Adw, Gio, Gst, Gtk
 
 Adw.init()
-
-from lfy import APP_ID, LOCALE_DIR, PKGDATA_DIR, VERSION
 
 
 def set_exception_hook():
@@ -37,6 +38,7 @@ def set_exception_hook():
     old_hook = sys.excepthook
     sys.excepthook = new_hook
 
+
 def set_internationalization():
     """Sets application internationalization."""
     try:
@@ -45,7 +47,8 @@ def set_internationalization():
     except AttributeError as e:
         # Python built without gettext support does not have
         # bindtextdomain() and textdomain().
-        print(f"Could not bind the gettext translation domain. Some translations will not work. Error:\n{e}")
+        print(
+            f"Could not bind the gettext translation domain. Some translations will not work. Error:\n{e}")
 
     gettext.bindtextdomain(APP_ID, LOCALE_DIR)
     gettext.textdomain(APP_ID)
@@ -53,7 +56,8 @@ def set_internationalization():
 
 def set_resources():
     """Sets application ressource file."""
-    resource = Gio.resource_load(os.path.join(PKGDATA_DIR, f'{APP_ID}.gresource'))
+    resource = Gio.resource_load(os.path.join(
+        PKGDATA_DIR, f'{APP_ID}.gresource'))
     Gio.Resource._register(resource)  # nopep8
 
 

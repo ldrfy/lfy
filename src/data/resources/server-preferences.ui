@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.16.0 -->
+<interface>
+  <requires lib="gtk" version="4.12"/>
+  <requires lib="libadwaita" version="1.4"/>
+  <template class="ServerPreferences" parent="AdwBin">
+    <child>
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar">
+            <property name="title-widget">
+              <object class="AdwWindowTitle" id="title">
+                <property name="title" translatable="yes">Translate Server</property>
+              </object>
+            </property>
+            <child>
+              <object class="GtkButton">
+                <property name="icon-name">go-previous-symbolic</property>
+                <signal name="clicked" handler="_on_back"/>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesPage" id="page">
+            <child>
+              <object class="AdwPreferencesGroup" id="instance_group">
+                <child>
+                  <object class="GtkLinkButton">
+                    <property name="label" translatable="yes">how to get API Key</property>
+                    <property name="uri">https://github.com/yuhldr/lfy</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwEntryRow" id="api_key_entry">
+                    <property name="show-apply-button">true</property>
+                    <property name="title" translatable="yes">API Key</property>
+                    <property name="tooltip-text" translatable="yes">Enter an API Key for the Server.</property>
+                    <signal name="apply" handler="_on_api_key_apply"/>
+                    <child>
+                      <object class="GtkStack" id="api_key_stack">
+                        <child>
+                          <object class="GtkStackPage">
+                            <property name="child">
+                              <object class="GtkSpinner" id="api_key_spinner">
+                                <property name="valign">3</property>
+                              </object>
+                            </property>
+                            <property name="name">spinner</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
