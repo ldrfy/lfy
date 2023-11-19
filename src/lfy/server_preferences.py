@@ -10,7 +10,7 @@ from gettext import gettext as _
 from gi.repository import Adw, GLib, Gtk
 
 from lfy.api import check_translate, get_api_key_s
-from lfy.api.server import Server
+from lfy.api.base import Server
 
 
 @Gtk.Template(resource_path='/cool/ldr/lfy/server-preferences.ui')
@@ -28,6 +28,7 @@ class ServerPreferences(Adw.Bin):
     api_key_entry = Gtk.Template.Child()
     api_key_stack = Gtk.Template.Child()
     api_key_spinner = Gtk.Template.Child()
+    api_key_link = Gtk.Template.Child()
 
     def __init__(self, server:Server, **kwargs):
         super().__init__(**kwargs)
@@ -35,6 +36,7 @@ class ServerPreferences(Adw.Bin):
         self.title.props.subtitle = server.name
         # Load saved values
         self.api_key_entry.props.text = get_api_key_s(server.key)
+        self.api_key_link.set_uri(server.doc_url)
 
 
     @Gtk.Template.Callback()

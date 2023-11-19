@@ -6,17 +6,67 @@ from gettext import gettext as _
 
 import requests
 
-from lfy.api.server import TIME_OUT
+from lfy.api.base import TIME_OUT, Server
 from lfy.settings import Settings
 
-HOW_GET_URL_TRANSLATE = "https://doc.tern.1c7.me/zh/folder/setting/#%E7%99%BE%E5%BA%A6"
-HOW_GET_URL_OCR = "https://cloud.baidu.com/doc/OCR/s/dk3iqnq51"
+URL_HOW_GET_TRANSLATE = "https://doc.tern.1c7.me/zh/folder/setting/#%E7%99%BE%E5%BA%A6"
 
 URL_TRANSLATE = "https://api.fanyi.baidu.com/api/trans/vip/translate"
 
 
+lang_key_ns = {
+    "auto": 0, "zh": 1, "wyw": 2, "en": 3, "jp": 4, "kor": 5, "de": 6, "fra": 7
+}
+
+SERVER = Server("baidu", _("baidu"), lang_key_ns,
+                True, URL_HOW_GET_TRANSLATE)
+
+
 def get_api_key_s():
+    """设置自动加载保存的api
+
+    Returns:
+        _type_: _description_
+    """
     return Settings.get().server_sk_baidu
+
+
+def check_translate(api_key):
+    """保存时核对api
+
+    Args:
+        api_key (str): 保存api_key
+
+    Returns:
+        bool: _description_
+    """
+    if "|" not in api_key:
+        return False, _("please input app_id and secret_key like:") + " 121343 | fdsdsdg"
+    app_id, secret_key = get_api_key(api_key)
+    ok, text = translate("success", app_id, secret_key)
+    if ok:
+        Settings.get().server_sk_baidu = api_key
+    return ok, text
+
+
+def translate_text(s, lang_to="auto", lang_from="auto"):
+    """翻译接口
+
+    Args:
+        text (_type_): _description_
+        lang_from (str, optional): _description_. Defaults to "auto".
+        lang_to (str, optional): _description_. Defaults to "auto".
+
+    Returns:
+        _type_: _description_
+    """
+    app_id, secret_key = get_api_key(get_api_key_s())
+    if len(app_id) == 0 or len(secret_key) == 0:
+        return _("please input API Key in preference")
+
+    ok, text = translate(s, app_id, secret_key, lang_to)
+    print(ok, s, lang_from, lang_to)
+    return text
 
 
 def get_api_key(api_key):
@@ -32,46 +82,6 @@ def get_api_key(api_key):
     return app_id.strip(), secret_key.strip()
 
 
-def translate_text(s, lang_to="auto", lang_from="auto"):
-    """翻译
-
-    Args:
-        text (_type_): _description_
-        lang_from (str, optional): _description_. Defaults to "auto".
-        lang_to (str, optional): _description_. Defaults to "auto".
-
-    Returns:
-        _type_: _description_
-    """
-    app_id, secret_key = get_api_key(get_api_key_s())
-    if len(app_id) == 0 or len(secret_key) == 0:
-        no_sk = _("please set baidu app_id and secret_key like this:")
-        return f'{no_sk}\n\n{HOW_GET_URL_TRANSLATE}'
-
-    ok, s1 = translate(s, app_id, secret_key, lang_to)
-    print(ok, s, lang_from, lang_to)
-    return s1
-
-
-def check_translate(api_key):
-    """_summary_
-
-    Args:
-        api_key (str): 保存api_key
-
-    Returns:
-        bool: _description_
-    """
-    if "|" not in api_key:
-        return False, _("please input app_id and secret_key like:") + " 121343 | fdsdsdg"
-    app_id, secret_key = get_api_key(api_key)
-    ok, text = translate("success", app_id, secret_key)
-    print(text)
-    if ok:
-        Settings.get().server_sk_baidu = api_key
-    return ok, text
-
-
 def translate(s, app_id, secret_key, lang_to="auto", lang_from="auto"):
     """翻译
 
@@ -85,7 +95,6 @@ def translate(s, app_id, secret_key, lang_to="auto", lang_from="auto"):
     Returns:
         _type_: _description_
     """
-    print("baidu", s, app_id, secret_key)
 
     salt = random.randint(32768, 65536)
     sign = app_id + s + str(salt) + secret_key

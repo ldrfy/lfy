@@ -3,9 +3,18 @@
 Returns:
     _type_: _description_
 """
+from gettext import gettext as _
+
 import requests
 
-from lfy.api.server import TIME_OUT
+from lfy.api.base import TIME_OUT, Server
+
+lang_key_ns = {
+    "zh": 1, "en": 3, "ja": 4, "ko": 5, "de": 6, "fr": 7
+}
+
+SERVER = Server("google", _("google"),
+                lang_key_ns, False, "")
 
 
 def translate_text(text, to_lang_code="zh-cn", from_lang="auto"):

@@ -4,8 +4,8 @@
 
 from gi.repository import Adw, Gtk
 
-from lfy.api.server import (Server, get_server_names_api_key,
-                            get_servers_api_key)
+from lfy.api.base import Server
+from lfy.api.server import get_server_names_api_key, get_servers_api_key
 from lfy.server_preferences import ServerPreferences
 
 
