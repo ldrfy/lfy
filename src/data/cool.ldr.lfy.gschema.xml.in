@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="lfy">
 	<schema id="@APP_ID@" path="/cool/ldr/lfy/">
-	    <key type="s" name="lang-selected-key">
-        <default>"baidu"</default>
-    </key>
+		<key type="s" name="server-selected-key">
+			<default>"baidu"</default>
+		</key>
+		<key type="i" name="lang-selected-n">
+			<default>0</default>
+		</key>
 	</schema>
 </schemalist>

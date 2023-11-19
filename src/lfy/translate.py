@@ -6,8 +6,8 @@ import time
 from gi.repository import Adw, GLib, Gtk
 
 from lfy.api import process_text, translate_by_server
-from lfy.api.server import (get_lang, get_lang_names, get_server_name,
-                            get_server_names, server_key2i)
+from lfy.api.server import (get_lang, get_lang_names, get_server,
+                            get_server_names, lang_n2j, server_key2i)
 from lfy.settings import Settings
 
 
@@ -34,14 +34,18 @@ class TranslateWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.setting = Settings.get()
         # 可能包含上次的追加内容
         self.last_text = ""
         # 这次复制的
         self.last_text_one = ""
         # 是不是软件内复制的，这种可能是想粘贴到其他地方，不响应即可
         self.is_tv_copy = False
-        i = server_key2i(Settings.get().lang_selected_key)
-        self._set_model(self.dd_server, get_server_names(), i)
+        self.is_init = True
+
+        self.dd_server.set_model(Gtk.StringList.new(get_server_names()))
+        self.dd_server.set_selected(
+            server_key2i(self.setting.server_selected_key))
 
     @Gtk.Template.Callback()
     def _on_translate_clicked(self, btn):
@@ -49,33 +53,31 @@ class TranslateWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def _on_server_changed(self, drop_down, a):
-        print(drop_down, a)
-        self._set_model(self.dd_lang, get_lang_names(drop_down.get_selected()))
+
+        if self.is_init:
+            # 第一次是初始化时，自动选择0的
+            self.is_init = False
+        else:
+            # 第二次是设置的上一次的
+            i = drop_down.get_selected()
+            self.setting.server_selected_key = get_server(i).key
+            n = self.setting.lang_selected_n
+
+            self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
+            self.dd_lang.set_selected(lang_n2j(i, n))
 
     @Gtk.Template.Callback()
     def _on_lang_changed(self, drop_down, a):
-        print(drop_down, a)
+        if not self.is_init:
+            i = self.dd_server.get_selected()
+            j = drop_down.get_selected()
+            self.setting.lang_selected_n = get_lang(i, j).n
+
         self.update(self.last_text, True)
-        return drop_down.get_selected()
 
     @Gtk.Template.Callback()
     def _set_tv_copy(self, a):
         self.is_tv_copy = True
-
-    def _set_model(self, drop_down, data, i=0):
-        """设置选项
-
-        Args:
-            drop_down (_type_): _description_
-            data (_type_): _description_
-            i (int, optional): _description_. Defaults to 0.
-        """
-        print(drop_down, data, i)
-        sl = Gtk.StringList()
-        for d in data:
-            sl.append(d)
-        drop_down.set_model(sl)
-        drop_down.set_selected(i)
 
     def update(self, text, reload=False):
         """翻译
@@ -100,10 +102,14 @@ class TranslateWindow(Adw.ApplicationWindow):
         start_iter, end_iter = buffer_from.get_bounds()
         text = buffer_from.get_text(start_iter, end_iter, False)
 
-        threading.Thread(target=self.request_text, daemon=True, args=(
-            text, self.dd_server.get_selected(), self.dd_lang.get_selected(),)).start()
+        i = self.dd_server.get_selected()
+        sk = get_server(i).key
+        lk = get_lang(i, self.dd_lang.get_selected()).key
 
-    def request_text(self, text, i, j):
+        threading.Thread(target=self.request_text, daemon=True,
+                         args=(text, sk, lk,)).start()
+
+    def request_text(self, text, sk, lk):
         """子线程翻译
 
         Args:
@@ -114,8 +120,6 @@ class TranslateWindow(Adw.ApplicationWindow):
         GLib.idle_add(self.update_ui, "")
 
         start_ = time.time()
-        sk = get_server_name(i)
-        lk = get_lang(i, j)
 
         text_translated = translate_by_server(text, sk, lk)
 

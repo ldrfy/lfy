@@ -4,7 +4,7 @@ INSTALL_DIR=${HOME}/.local
 
 install:
 	rm -rf _build
-	meson src _build --prefix=${INSTALL_DIR}
+	meson src _build
 	meson test -C _build
 	meson install -C _build
 
