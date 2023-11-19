@@ -4,12 +4,18 @@
 
 from gi.repository import Adw, Gtk
 
-from lfy.api.server import get_lang, get_lang_names, get_server_names
+from lfy.api.server import (Server, get_server_names_api_key,
+                            get_servers_api_key)
 from lfy.server_preferences import ServerPreferences
 
 
 @Gtk.Template(resource_path='/cool/ldr/lfy/preference.ui')
 class PreferenceWindow(Adw.PreferencesWindow):
+    """设置
+
+    Args:
+        Adw (_type_): _description_
+    """
     __gtype_name__ = 'PreferencesWindow'
 
     acr_server: Adw.ComboRow = Gtk.Template.Child()
@@ -17,23 +23,17 @@ class PreferenceWindow(Adw.PreferencesWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        sl = Gtk.StringList()
-        for sn in get_server_names():
-            sl.append(sn)
-        self.acr_server.set_model(sl)
+        self.server: Server
+        self.acr_server.set_model(Gtk.StringList.new(get_server_names_api_key()))
 
 
     @Gtk.Template.Callback()
-    def _open_server(self, a):
-        print("_open_server", a)
-        page = ServerPreferences("test", a)
+    def _open_server(self, btn):
+        page = ServerPreferences(self.server)
         self.present_subpage(page)
 
     @Gtk.Template.Callback()
     def _config_select_server(self, arc, _value):
         """Called on self.translator::notify::selected signal"""
-        s = arc.get_selected_item().get_string()
-        print(s)
-        s1 = arc.get_selected()
-        print(s1)
-
+        self.server = get_servers_api_key()[arc.get_selected()]
+        print(self.server.name)

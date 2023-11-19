@@ -2,7 +2,7 @@
 # Copyright 2021-2022 Rafael Mardojai CM
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Gio, GLib, GObject
+from gi.repository import Gio
 
 from lfy import APP_ID
 
@@ -54,5 +54,30 @@ class Settings(Gio.Settings):
 
     @lang_selected_n.setter
     def lang_selected_n(self, n):
-        print("lang_selected_n", n)
         self.set_int('lang-selected-n', n)
+
+    @property
+    def server_sk_baidu(self):
+        """选择翻译的服务密钥，只是一个字符串，自己解析和保存用 | 分割
+
+        Returns:
+            str: 如：baidu
+        """
+        return self.get_string('server-sk-baidu')
+
+    @server_sk_baidu.setter
+    def server_sk_baidu(self, key):
+        self.set_string('server-sk-baidu', key)
+
+    @property
+    def server_sk_tencent(self):
+        """选择翻译的服务密钥，只是一个字符串，自己解析和保存用 | 分割
+
+        Returns:
+            str: 如：tencent
+        """
+        return self.get_string('server-sk-tencent')
+
+    @server_sk_tencent.setter
+    def server_sk_tencent(self, key):
+        self.set_string('server-sk-tencent', key)

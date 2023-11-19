@@ -47,25 +47,31 @@ class Server:
     """翻译信息
     """
 
-    def __init__(self, key: str, name: str, lang_keys: list, lang_ns: list):
+    def __init__(self, key: str, name: str, is_api_key=False, doc_url="", lang_keys=None, lang_ns=None):
         self.key = key
+        self.doc_url = doc_url
+        self.is_api_key = is_api_key
         self.name = _(name)
+        if lang_keys is None:
+            lang_keys = [""]
+        if lang_ns is None:
+            lang_keys = [0]
 
         self.langs: list[Lang] = []
         for i, n in enumerate(lang_ns):
             self.langs.append(Lang(lang_keys[i], n))
 
 
-SERVER_BAIDU = Server("baidu", _("baidu"), [
+SERVER_BAIDU = Server("baidu", _("baidu"), True, "", [
     "auto", "zh", "wyw", "en", "jp", "kor", "de", "fra"], range(8))
 
-SERVER_TENCENT = Server("tencent", _("tencent"), [
+SERVER_TENCENT = Server("tencent", _("tencent"), True, "", [
     "zh", "en", "jp", "kr", "de", "fr"], [1, 3, 4, 5, 6, 7])
 
-SERVER_GOOGLE = Server("google", _("google"), [
+SERVER_GOOGLE = Server("google", _("google"), False, "", [
     "zh", "en", "ja", "ko", "de", "fr"], [1, 3, 4, 5, 6, 7])
 
-SERVER_YOUDAO = Server("youdao", _("youdao"), ["auto"], [0])
+SERVER_YOUDAO = Server("youdao", _("youdao"), False, "", ["auto"], [0])
 
 
 servers = [
@@ -88,6 +94,25 @@ def get_server_names():
     return sns
 
 
+def get_servers_api_key():
+    """哪些需要填写api
+
+    Returns:
+        list: ["百度", "腾讯", ...]
+    """
+
+    return [server for server in servers if server.is_api_key]
+
+
+def get_server_names_api_key():
+    """哪些需要填写api
+
+    Returns:
+        list: ["百度", "腾讯", ...]
+    """
+    return [server.name for server in get_servers_api_key()]
+
+
 def get_server(i: int):
     """_summary_
 
@@ -97,11 +122,8 @@ def get_server(i: int):
     Returns:
         _type_: _description_
     """
-    print("get_server1", i)
     if i >= len(servers):
-        print("get_server", 0)
         return servers[0]
-    print("get_server2", i)
     return servers[i]
 
 
@@ -113,10 +135,8 @@ def get_lang_names(i=0):
     """
     lang_names = []
     server = get_server(i)
-    print("get_lang_names", i, server.name, len(server.langs))
     for lang in server.langs:
         lang_names.append(lang.name)
-    print(lang_names)
     return lang_names
 
 
@@ -150,9 +170,7 @@ def lang_n2j(i: int, n: int):
     Returns:
         int: 在当前server中是第一个lang
     """
-    print("开始:", n, LANGUAGE_NAMES[n], i)
     for j, lang in enumerate(get_server(i).langs):
         if lang.n == n:
-            print("最后", j, n, lang.name, get_lang_names(i)[j])
             return j
     return 0

@@ -7,11 +7,29 @@ from gettext import gettext as _
 import requests
 
 from lfy.api.server import TIME_OUT
+from lfy.settings import Settings
 
 HOW_GET_URL_TRANSLATE = "https://doc.tern.1c7.me/zh/folder/setting/#%E7%99%BE%E5%BA%A6"
 HOW_GET_URL_OCR = "https://cloud.baidu.com/doc/OCR/s/dk3iqnq51"
 
 URL_TRANSLATE = "https://api.fanyi.baidu.com/api/trans/vip/translate"
+
+
+def get_api_key_s():
+    return Settings.get().server_sk_baidu
+
+
+def get_api_key(api_key):
+    """_summary_
+
+    Args:
+        api_key (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    [app_id, secret_key] = api_key.split("|")
+    return app_id.strip(), secret_key.strip()
 
 
 def translate_text(s, lang_to="auto", lang_from="auto"):
@@ -25,11 +43,7 @@ def translate_text(s, lang_to="auto", lang_from="auto"):
     Returns:
         _type_: _description_
     """
-    sk = "|"
-
-    app_id = sk.split("|")[0]
-    secret_key = sk.split("|")[1]
-
+    app_id, secret_key = get_api_key(get_api_key_s())
     if len(app_id) == 0 or len(secret_key) == 0:
         no_sk = _("please set baidu app_id and secret_key like this:")
         return f'{no_sk}\n\n{HOW_GET_URL_TRANSLATE}'
@@ -39,19 +53,23 @@ def translate_text(s, lang_to="auto", lang_from="auto"):
     return s1
 
 
-def check_translate(app_id, secret_key):
+def check_translate(api_key):
     """_summary_
 
     Args:
-        app_id (_type_): _description_
-        secret_key (_type_): _description_
+        api_key (str): 保存api_key
 
     Returns:
-        _type_: _description_
+        bool: _description_
     """
-    ok, text = translate("test", app_id, secret_key)
+    if "|" not in api_key:
+        return False, _("please input app_id and secret_key like:") + " 121343 | fdsdsdg"
+    app_id, secret_key = get_api_key(api_key)
+    ok, text = translate("success", app_id, secret_key)
     print(text)
-    return ok
+    if ok:
+        Settings.get().server_sk_baidu = api_key
+    return ok, text
 
 
 def translate(s, app_id, secret_key, lang_to="auto", lang_from="auto"):
@@ -67,6 +85,7 @@ def translate(s, app_id, secret_key, lang_to="auto", lang_from="auto"):
     Returns:
         _type_: _description_
     """
+    print("baidu", s, app_id, secret_key)
 
     salt = random.randint(32768, 65536)
     sign = app_id + s + str(salt) + secret_key
@@ -76,7 +95,7 @@ def translate(s, app_id, secret_key, lang_to="auto", lang_from="auto"):
 
     request = requests.get(url, timeout=TIME_OUT)
     result = request.json()
-    error_msg = _("something error, try other translate engine?")
+    error_msg = _("something error:")
     if "error_code" in result:
         return False, f'{error_msg}\n\n{result["error_code"]}: {result["error_msg"]}'
     else:

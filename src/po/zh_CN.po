@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2023-11-17 01:17+0800\n"
+"POT-Creation-Date: 2023-11-20 01:14+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/data/cool.ldr.lfy.desktop.in.in:3 src/lfy/main.py:43
+#: src/data/cool.ldr.lfy.in.in.desktop:3 src/lfy/main.py:43
 msgid "lfy"
 msgstr "兰译"
 
-#: src/data/cool.ldr.lfy.metainfo.xml.in:7
+#: src/data/cool.ldr.lfy.in.metainfo.xml:7
 msgid "No description"
 msgstr "没有介绍"
 
@@ -34,71 +34,78 @@ msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
 
-#: src/lfy/api/__init__.py:25
+#: src/lfy/api/__init__.py:30
 msgid ""
 "Copy automatic translation, it is recommended to pin this window to the top"
 msgstr "复制自动翻译，建议将此窗口置顶"
 
-#: src/lfy/api/__init__.py:37
+#: src/lfy/api/__init__.py:42
 msgid "The connection timed out. Maybe there is a network problem"
 msgstr "连接超时，网络可能有问题（比如需要代理）"
 
-#: src/lfy/api/__init__.py:40 src/lfy/api/server/baidu.py:79
-#: src/lfy/api/server/youdao.py:67
+#: src/lfy/api/__init__.py:45 src/lfy/api/server/youdao.py:67
 msgid "something error, try other translate engine?"
 msgstr "出现了一些错误，试试其他翻译引擎？"
 
-#: src/lfy/api/server/__init__.py:25
+#: src/lfy/api/server/__init__.py:11
 msgid "Automatic"
 msgstr "自动"
 
-#: src/lfy/api/server/__init__.py:27
+#: src/lfy/api/server/__init__.py:13
 msgid "Chinese"
 msgstr "中文"
 
-#: src/lfy/api/server/__init__.py:29
+#: src/lfy/api/server/__init__.py:15
 msgid "Classical Chinese"
 msgstr "文言文"
 
-#: src/lfy/api/server/__init__.py:31
+#: src/lfy/api/server/__init__.py:17
 msgid "English"
 msgstr "英文"
 
-#: src/lfy/api/server/__init__.py:33
+#: src/lfy/api/server/__init__.py:19
 msgid "Japanese"
 msgstr "日文"
 
-#: src/lfy/api/server/__init__.py:35
+#: src/lfy/api/server/__init__.py:21
 msgid "Korean"
 msgstr "韩文"
 
-#: src/lfy/api/server/__init__.py:37
+#: src/lfy/api/server/__init__.py:23
 msgid "German"
 msgstr "德语"
 
-#: src/lfy/api/server/__init__.py:39
+#: src/lfy/api/server/__init__.py:25
 msgid "French"
 msgstr "法语"
 
-#: src/lfy/api/server/__init__.py:42
+#: src/lfy/api/server/__init__.py:65
 msgid "baidu"
 msgstr "百度"
 
-#: src/lfy/api/server/__init__.py:45
+#: src/lfy/api/server/__init__.py:68
 msgid "tencent"
 msgstr "腾讯"
 
-#: src/lfy/api/server/__init__.py:48
+#: src/lfy/api/server/__init__.py:71
 msgid "google"
 msgstr "谷歌"
 
-#: src/lfy/api/server/__init__.py:51
+#: src/lfy/api/server/__init__.py:74
 msgid "youdao"
 msgstr "有道"
 
-#: src/lfy/api/server/baidu.py:34
+#: src/lfy/api/server/baidu.py:48
 msgid "please set baidu app_id and secret_key like this:"
 msgstr "请按照如下教程设置百度的 app_id 和 secret_key"
+
+#: src/lfy/api/server/baidu.py:66
+msgid "please input app_id and secret_key like:"
+msgstr "请输入 app_id 和 secret_key，类似："
+
+#: src/lfy/api/server/baidu.py:98
+msgid "something error:"
+msgstr "一些错误发生："
 
 #: src/lfy/api/server/youdao.py:20
 msgid ""
@@ -129,37 +136,63 @@ msgstr ""
 msgid "decrypt translation message failed"
 msgstr "解密翻译信息错误"
 
-#: src/data/ui/translate.ui:58
+#: src/data/resources/translate.ui:60
 msgid "Remove symbols such as line breaks"
 msgstr "移除换行符"
 
-#: src/data/ui/translate.ui:63
+#: src/data/resources/translate.ui:65
 msgid "Splice the next copied text with the previous text"
 msgstr "将下一个复制的文本与上一个文本拼接"
 
-#: src/data/ui/translate.ui:68
+#: src/data/resources/translate.ui:70
 msgid "translate"
 msgstr "翻译"
 
-#: src/data/ui/translate.ui:96
+#: src/data/resources/translate.ui:98
 msgid "Menu"
 msgstr "菜单"
 
-#: src/data/ui/translate.ui:106
+#: src/data/resources/translate.ui:109
 msgid "lfy(Right-click and select Window Top)"
 msgstr "兰译（右键、选择窗口置顶）"
 
-#: src/data/ui/translate.ui:112
+#: src/data/resources/translate.ui:115
 msgid "_Preferences"
 msgstr "_设置"
 
-#: src/data/ui/translate.ui:116
+#: src/data/resources/translate.ui:119
 msgid "_Keyboard Shortcuts"
 msgstr "_快捷键"
 
-#: src/data/ui/translate.ui:120
+#: src/data/resources/translate.ui:123
 msgid "_About lfy"
 msgstr "_关于 兰译"
 
-#~ msgid "Unknown translation error"
-#~ msgstr "未知翻译错误"
+#: src/data/resources/server-preferences.ui:13
+#: src/data/resources/preference.ui:16
+msgid "Translate Server"
+msgstr "翻译服务"
+
+#: src/data/resources/server-preferences.ui:30
+msgid "how to get API Key"
+msgstr "怎么获取密钥"
+
+#: src/data/resources/server-preferences.ui:37
+msgid "API Key"
+msgstr "密钥"
+
+#: src/data/resources/server-preferences.ui:38
+msgid "Enter an API Key for the Server."
+msgstr "输入该服务的密钥"
+
+#: src/data/resources/preference.ui:14
+msgid "setup API Key, click on the right to the details"
+msgstr "设置密钥，点右侧查看细节"
+
+#, fuzzy
+#~ msgid "Translate Server Preferences"
+#~ msgstr "翻译服务"
+
+#, fuzzy
+#~ msgid "Provider Preferences"
+#~ msgstr "_设置"

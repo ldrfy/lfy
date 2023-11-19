@@ -12,4 +12,6 @@ src/lfy/api/server/baidu.py
 src/lfy/api/server/google.py
 src/lfy/api/server/youdao.py
 
-src/data/ui/translate.ui
+src/data/resources/translate.ui
+src/data/resources/server-preferences.ui
+src/data/resources/preference.ui

@@ -55,8 +55,8 @@ class LfyApplication(Adw.Application):
 
     def on_preferences_action(self, widget, w):
         """Callback for the app.preferences action."""
-        win = PreferenceWindow(application=self)
-        win.present()
+        prf = PreferenceWindow(transient_for=self.props.active_window)
+        prf.present()
 
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.

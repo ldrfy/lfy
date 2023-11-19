@@ -8,8 +8,8 @@ from gettext import gettext as _
 
 from requests.exceptions import ConnectTimeout
 
-from lfy.api.server import (SERVER_BAIDU, SERVER_GOOGLE, SERVER_YOUDAO, baidu,
-                            google, youdao)
+from lfy.api.server import (SERVER_BAIDU, SERVER_GOOGLE, SERVER_TENCENT,
+                            SERVER_YOUDAO, baidu, google, youdao)
 
 
 def translate_by_server(text, server_key, lang_to, lang_from="auto"):
@@ -44,6 +44,21 @@ def translate_by_server(text, server_key, lang_to, lang_from="auto"):
     except Exception as e:
         s = _("something error, try other translate engine?")
         return f"{s}：\n\n {e}"
+
+
+def check_translate(server_key, api_key):
+    print("check_translate", server_key, api_key)
+    if server_key == SERVER_BAIDU.key:
+        return baidu.check_translate(api_key)
+    else:
+        return False, f"暂不支持：{server_key}"
+
+
+def get_api_key_s(server_key):
+    if server_key == SERVER_BAIDU.key:
+        return baidu.get_api_key_s()
+    else:
+        return f"暂不支持：{server_key}"
 
 
 def process_text(text):
