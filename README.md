@@ -2,9 +2,9 @@
 
 
 <center class="half">
-<img src="doc/images/main.png" width=300/>
-<img src="doc/images/preference.png" width=300/>
-<img src="doc/images/server-preference.png" width=300/>
+<img src="doc/images/main.png" width=250/>
+<img src="doc/images/preference.png" width=250/>
+<img src="doc/images/server-preference.png" width=250/>
 </center>
 
 
