@@ -16,6 +16,7 @@ sha256sums=("SKIP")
 build() {
   cd @APP_NAME@-@VERSION@
   meson src _build --prefix="/usr"
+	meson compile -C _build
 }
 
 check() {
