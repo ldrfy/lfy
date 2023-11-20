@@ -2,9 +2,9 @@
 
 <center>
 <div style="display: flex;">
-    <img src="doc/images/main.png" alt="首页" style="width: 30%;">
-    <img src="doc/images/preference.png" alt="设置1" style="width: 30%;">
-    <img src="doc/images/server-preference.png" alt="设置2" style="width: 30%;">
+    <img src="doc/images/main.png" alt="首页" style="width: 40%;">
+    <img src="doc/images/preference.png" alt="设置1" style="width: 25%;">
+    <img src="doc/images/server-preference.png" alt="设置2" style="width: 25%;">
 </div>
 </center>
 

@@ -39,7 +39,7 @@
         </child>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title">Other</property>
+            <property name="title" translatable="yes">Other</property>
             <child>
               <object class="AdwEntryRow" id="entry_vpn_addr">
                 <property name="input-purpose">url</property>
