@@ -51,7 +51,7 @@ class ServerPreferences(Adw.Bin):
         """ Called on self.api_key_entry::apply signal """
 
         api_key = self.api_key_entry.get_text()
-        api_key = re.sub(r'\s*\|\s*', "  |  ", api_key)
+        api_key = re.sub(r'\s*\|\s*', "  |  ", api_key.strip())
         self.api_key_entry.props.text = api_key
         self.api_key_entry.props.sensitive = False
         self.api_key_stack.props.visible_child_name = 'spinner'
