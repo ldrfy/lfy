@@ -47,7 +47,7 @@ def check_translate(api_key):
     if "|" not in api_key:
         return False, _("please input secret_id and secret_key like:") + " a121343 | fdsdsdg"
     secret_id, secret_key = get_api_key(api_key)
-    ok, text = translate("success", secret_id, secret_key, "auto", "en")
+    ok, text = translate("success", secret_id, secret_key, "en")
     if ok:
         Settings.get().server_sk_tencent = api_key
     return ok, text
