@@ -1,15 +1,17 @@
 # 兰译 lfy <img src="src/data/resources/icons/hicolor/scalable/apps/cool.ldr.lfy.svg" width = "36" height = "36" alt="兰译" align=center />
 
-
-<center class="half">
-<img src="doc/images/main.png" width=250/>
-<img src="doc/images/preference.png" width=250/>
-<img src="doc/images/server-preference.png" width=250/>
+<center>
+<div style="display: flex;">
+    <img src="doc/images/main.png" alt="首页" style="width: 33%;">
+    <img src="doc/images/preference.png" alt="设置1" style="width: 33%;">
+    <img src="doc/images/server-preference.png" alt="设置2" style="width: 33%;">
+</div>
 </center>
 
 
 优势：
 
+- [x] 占用极小，不到 `0.2M`
 - [x] 复制，自动翻译并弹窗
 - [x] 支持 `gnome` 原生 `libadwaita`，简洁、美观！
 - [x] 提供多种打包格式，预计推出 `archlinux` `deb` 等
