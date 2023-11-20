@@ -1,6 +1,6 @@
 TO_LANG = zh_CN
 INSTALL_DIR=${HOME}/.local
-
+PKG_DIR="${PWD}/_build/pkg"
 
 install:
 	rm -rf _build
@@ -9,19 +9,20 @@ install:
 	meson install -C _build
 
 test:
-	rm -rf disk
-	rm -rf test
 	rm -rf _build
-	mkdir disk
 	meson src _build --prefix=${INSTALL_DIR}
-	DESTDIR="${PWD}/test" meson install -C _build
+	meson install -C _build
+
 
 rm:
 	cd _build && ninja uninstall
 
 
 arch:
-	make test
+	mkdir -p disk
+	rm -rf _build
+	meson src _build
+
 	cd _build/pkg && \
 	mkdir lfy-0.2.0 && \
 	cp -r ../../src lfy-0.2.0 && \
@@ -29,21 +30,31 @@ arch:
 	makepkg -sf && \
 	cp *.pkg.tar.zst ../../disk/
 
+	rm -rf _build
+
 
 whl:
-	make test
+	mkdir -p disk
+	rm -rf _build
 
-	cp README.md ./test/${INSTALL_DIR} && \
-	cp _build/pkg/setup.py ./test/${INSTALL_DIR} && \
-	cd ./test/${INSTALL_DIR} && \
-	cp -r ./lib/*/site-packages/lfy ./ && \
-	python setup.py sdist bdist_wheel
+	meson src _build --prefix=${INSTALL_DIR}
+	DESTDIR=${PKG_DIR} meson install -C _build
 
-	pip uninstall lfy --break-system-packages
-	pip install ./test/${INSTALL_DIR}/dist/*.whl --break-system-packages
+	cp README.md ${PKG_DIR}
+
+	cd ${PKG_DIR} && \
+	cp -r ./${INSTALL_DIR}/lib/*/site-packages/lfy ./ && \
+	cp -r ./${INSTALL_DIR}/bin ./ && \
+	cp -r ./${INSTALL_DIR}/share ./ && \
+	rm -rf ./home && \
+	python setup.py sdist bdist_wheel && \
+	cp ./dist/*.whl ../../disk/
 
 	rm -rf _build
-	rm -rf test
+	pip uninstall lfy --break-system-packages
+
+	pip install ./disk/*.whl --break-system-packages
+
 
 
 # Generate .pot file
