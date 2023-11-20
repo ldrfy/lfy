@@ -87,10 +87,13 @@ class TranslateWindow(Adw.ApplicationWindow):
             text (_type_): _description_
             reload (bool, optional): _description_. Defaults to False.
         """
-        print(text)
+        if len(text) == 0:
+            return
+
         buffer_from = self.tv_from.get_buffer()
         if not reload:
             if self.last_text_one == text or self.is_tv_copy:
+                self.is_tv_copy = False
                 return
             self.last_text_one = text
             if self.cbtn_add_old.get_active():
