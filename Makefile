@@ -3,6 +3,7 @@ TO_LANG = zh_CN
 install:
 	rm -rf _build
 	meson src _build
+	meson compile -C _build
 	meson test -C _build
 	meson install -C _build
 
@@ -24,6 +25,7 @@ arch:
 
 	rm -rf _build
 
+	sudo pacman -U disk/*.pkg.tar.zst
 
 
 # Generate .pot file
