@@ -115,7 +115,7 @@
 	(2,16,"GtkWidget","margin-top","12",None,None,None,None,None,None,None,None,None),
 	(2,17,"GtkButton","icon-name","applications-other",None,None,None,None,None,None,None,None,None),
 	(2,17,"GtkWidget","valign","center",None,None,None,None,None,None,None,None,None),
-	(2,18,"AdwPreferencesGroup","title","Other",None,None,None,None,None,None,None,None,None),
+	(2,18,"AdwPreferencesGroup","title","Other",1,None,None,None,None,None,None,None,None),
 	(2,20,"AdwEntryRow","input-purpose","url",None,None,None,None,None,None,None,None,None),
 	(2,20,"AdwEntryRow","show-apply-button","True",None,None,None,None,None,None,None,None,None),
 	(2,20,"AdwPreferencesRow","title","vpn addr and port, like http://127.0.0.1:7890",1,None,None,None,None,None,None,None,None),

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2023-11-20 11:37+0800\n"
+"POT-Creation-Date: 2023-11-20 20:56+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -33,24 +33,24 @@ msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
 
-#: src/lfy/api/__init__.py:29
+#: src/lfy/api/__init__.py:36
 msgid ""
 "Copy automatic translation, it is recommended to pin this window to the top"
 msgstr "复制自动翻译，建议将此窗口置顶"
 
-#: src/lfy/api/__init__.py:43
+#: src/lfy/api/__init__.py:50
 msgid "The connection timed out. Maybe there is a network problem"
 msgstr "连接超时，网络可能有问题（比如需要代理）"
 
-#: src/lfy/api/__init__.py:46 src/lfy/api/server/youdao.py:75
+#: src/lfy/api/__init__.py:53 src/lfy/api/server/youdao.py:75
 msgid "something error, try other translate engine?"
 msgstr "出现了一些错误，试试其他翻译引擎？"
 
-#: src/lfy/api/__init__.py:62 src/lfy/api/__init__.py:86
+#: src/lfy/api/__init__.py:69 src/lfy/api/__init__.py:93
 msgid "Not supported This Server!"
 msgstr "暂不支持该服务"
 
-#: src/lfy/api/__init__.py:69
+#: src/lfy/api/__init__.py:76
 msgid "save success!"
 msgstr "保存成功"
 
@@ -199,3 +199,10 @@ msgstr "输入该服务的密钥"
 msgid "setup API Key, click on the right to the details"
 msgstr "设置密钥，点右侧查看细节"
 
+#: src/data/resources/preference.ui:42
+msgid "Other"
+msgstr "其他"
+
+#: src/data/resources/preference.ui:47
+msgid "vpn addr and port, like http://127.0.0.1:7890"
+msgstr "代理地址和端口，比如：http://127.0.0.1:7890"
