@@ -1,11 +1,10 @@
 # 兰译 lfy <img src="src/data/resources/icons/hicolor/scalable/apps/cool.ldr.lfy.svg" width = "36" height = "36" alt="兰译" align=center />
 
 
-![主窗口](doc/images/main.png)
-
 <center class="half">
-<img src="doc/images/preference.png" width=200/>
-<img src="doc/images/server-preference.png" width=200/>
+<img src="doc/images/main.png" width=300/>
+<img src="doc/images/preference.png" width=300/>
+<img src="doc/images/server-preference.png" width=300/>
 </center>
 
 
