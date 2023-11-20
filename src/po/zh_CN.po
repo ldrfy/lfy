@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2023-11-20 02:24+0800\n"
+"POT-Creation-Date: 2023-11-20 11:37+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -26,7 +26,6 @@ msgid "No description"
 msgstr "没有介绍"
 
 #: src/lfy/main.py:49
-#, fuzzy
 msgid "translator_credits"
 msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 
@@ -91,15 +90,15 @@ msgstr "法语"
 msgid "baidu"
 msgstr "百度"
 
-#: src/lfy/api/server/baidu.py:44
+#: src/lfy/api/server/baidu.py:43
 msgid "please input app_id and secret_key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
-#: src/lfy/api/server/baidu.py:65 src/lfy/api/server/tencent.py:70
+#: src/lfy/api/server/baidu.py:66 src/lfy/api/server/tencent.py:71
 msgid "please input API Key in preference"
 msgstr "请在设置中填写 API Key"
 
-#: src/lfy/api/server/baidu.py:107 src/lfy/api/server/tencent.py:126
+#: src/lfy/api/server/baidu.py:108 src/lfy/api/server/tencent.py:127
 msgid "something error:"
 msgstr "一些错误发生："
 
@@ -126,7 +125,6 @@ msgid "youdao interface is error, auto change interface. please try again"
 msgstr "有道默认翻译接口错误，已经自动修正，再点翻译试一下？"
 
 #: src/lfy/api/server/youdao.py:107
-#, fuzzy
 msgid ""
 "can not get secret key\n"
 "\n"
@@ -144,8 +142,7 @@ msgstr "解密翻译信息错误"
 msgid "tencent"
 msgstr "腾讯"
 
-#: src/lfy/api/server/tencent.py:48
-#, fuzzy
+#: src/lfy/api/server/tencent.py:47
 msgid "please input secret_id and secret_key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
@@ -191,8 +188,8 @@ msgid "how to get API Key"
 msgstr "怎么获取密钥"
 
 #: src/data/resources/server-preferences.ui:37
-msgid "API Key"
-msgstr "密钥"
+msgid "API Key,Pay attention to whether there are dividing lines |"
+msgstr "密钥，注意是否有分割线 |"
 
 #: src/data/resources/server-preferences.ui:38
 msgid "Enter an API Key for the Server."
@@ -202,13 +199,3 @@ msgstr "输入该服务的密钥"
 msgid "setup API Key, click on the right to the details"
 msgstr "设置密钥，点右侧查看细节"
 
-#~ msgid "please set baidu app_id and secret_key like this:"
-#~ msgstr "请按照如下教程设置百度的 app_id 和 secret_key"
-
-#, fuzzy
-#~ msgid "Translate Server Preferences"
-#~ msgstr "翻译服务"
-
-#, fuzzy
-#~ msgid "Provider Preferences"
-#~ msgstr "_设置"

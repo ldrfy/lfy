@@ -34,7 +34,7 @@
                 <child>
                   <object class="AdwEntryRow" id="api_key_entry">
                     <property name="show-apply-button">true</property>
-                    <property name="title" translatable="yes">API Key</property>
+                    <property name="title" translatable="yes">API Key,Pay attention to whether there are dividing lines |</property>
                     <property name="tooltip-text" translatable="yes">Enter an API Key for the Server.</property>
                     <signal name="apply" handler="_on_api_key_apply"/>
                     <child>

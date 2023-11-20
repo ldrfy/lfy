@@ -127,7 +127,7 @@
 	(10,15,"AdwWindowTitle","title","Translate Server","yes",None,None,None,None,None,None,None,None),
 	(10,16,"GtkButton","icon-name","go-previous-symbolic",None,None,None,None,None,None,None,None,None),
 	(10,19,"AdwEntryRow","show-apply-button","true",None,None,None,None,None,None,None,None,None),
-	(10,19,"AdwPreferencesRow","title","API Key","yes",None,None,None,None,None,None,None,None),
+	(10,19,"AdwPreferencesRow","title","API Key,Pay attention to whether there are dividing lines |","yes",None,None,None,None,None,None,None,None),
 	(10,19,"GtkWidget","tooltip-text","Enter an API Key for the Server.","yes",None,None,None,None,None,None,None,None),
 	(10,21,"GtkStackPage","child",None,None,None,None,None,22,None,None,None,None),
 	(10,21,"GtkStackPage","name","spinner",None,None,None,None,None,None,None,None,None),
