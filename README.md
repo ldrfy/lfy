@@ -1,14 +1,24 @@
-# 兰译 lfy
+# 兰译 lfy <img src="src/data/resources/icons/hicolor/scalable/apps/cool.ldr.lfy.svg" width = "36" height = "36" alt="兰译" align=center />
+
+
+![主窗口](doc/images/main.png)
+
+<center class="half">
+<img src="doc/images/preference.png" width=200/>
+<img src="doc/images/server-preference.png" width=200/>
+</center>
+
 
 优势：
 
 - [x] 复制，自动翻译并弹窗
-- [x] `gnome` 原生，简洁、美观！
-- [x] 打包方式 `pip`，直接pip安装更方便，预计会推出 `archlinux` 和 `deb` 包
-- [x] 多引擎、多语言支持，目前 `百度、腾讯、谷歌、有道`，未来预计很多
+- [x] 支持 `gnome` 原生 `libadwaita`，简洁、美观！
+- [x] 提供多种打包格式，预计推出 `archlinux` `deb` 等
+- [x] 多引擎支持，目前 `百度、腾讯、谷歌、有道`，未来预计更多
+- [x] 界面支持多国语言，使用 `gettext`
 
 
-> 我英语不好，所以开发此项目。软件默认英文，有中文翻译，但是文档字太多，我只写中文……，其他人可以翻译文档
+> 我英语不好，所以开发此项目。软件界面默认英文，有中文翻译，但是文档字太多，我只写中文……，其他人可以翻译文档，包括代码中的注释，也可以翻译
 
 - [贡献说明](doc/CONTRIBUTE.md)
 

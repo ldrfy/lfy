@@ -5,8 +5,9 @@
 
 ## 待完成
 
-- [] 设置项，使用Adw.PreferencesWindow
-- [] 更多引擎，腾讯不需要，我这边即将接入
+- 目前复制就翻译，后续可选快捷键翻译，即将支持。！！无需贡献！！
+- 更多引擎，目前支持百度、谷歌、有道、腾讯，欢迎贡献
+- 我英语不好，所以开发此项目。软件界面默认英文，有中文翻译，但是文档字太多，我只写中文……，其他人可以翻译文档，包括代码中的注释，也可以翻译
 
 
 ## 依赖
@@ -25,35 +26,35 @@
 
 ## 测试
 
-安装在 `~/.local/` 所以请把 `export PATH="$HOME/.local/bin:$PATH"` 添加到环境变量
+安装在 `/usr/local`
 
 ### 安装
 
-    ```bash
-    make install && lfy
-    ```
+```bash
+make install && lfy
+```
 
 ### 卸载
 
-    ```bash
-    make rm
-    ```
+```bash
+make uninstall
+```
 
 ## 打包
 
-### pip
+### pacman
 
 ```bash
 make whl
 ```
 
-文件生成在 `./test/dist/*.whl`
-
-可以如此卸载或者安装whl文件
+文件生成在 `./disk/*.pkg.tar.zst`
 
 ```bash
 # 卸载
-pip uninstall lfy --break-system-packages
-# 安装（版本不变时不会安装，一定要先卸载）
-pip install ./test/dist/lfy-0.1.0-py3-none-any.whl --break-system-packages
+sudo pacman -U ./disk/*.pkg.tar.zst
 ```
+
+### deb
+
+
