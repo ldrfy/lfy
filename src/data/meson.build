@@ -49,9 +49,10 @@ endif
 
 # Merging the translations with the appdata file
 appdata_conf = configuration_data()
-appdata_conf.set('appid', APP_ID)
-appdata_conf.set('package_url', PACKAGE_URL)
-appdata_conf.set('package_url_bug', PACKAGE_URL_BUG)
+appdata_conf.set('APP_ID', APP_ID)
+appdata_conf.set('APP_NAME', meson.project_name())
+appdata_conf.set('PACKAGE_URL', PACKAGE_URL)
+appdata_conf.set('PACKAGE_URL_BUG', PACKAGE_URL_BUG)
 i18n.merge_file(
   input: configure_file(
     output: APP_ID + '.in.appdata.xml',

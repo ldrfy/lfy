@@ -9,13 +9,26 @@ install:
 	meson install -C _build
 
 test:
+	rm -rf disk
 	rm -rf test
 	rm -rf _build
+	mkdir disk
 	meson src _build --prefix=${INSTALL_DIR}
 	DESTDIR="${PWD}/test" meson install -C _build
 
 rm:
 	cd _build && ninja uninstall
+
+
+arch:
+	make test
+	cd _build/pkg && \
+	mkdir lfy-0.2.0 && \
+	cp -r ../../src lfy-0.2.0 && \
+	zip -r v0.2.0.zip lfy-0.2.0 && \
+	makepkg -sf && \
+	cp *.pkg.tar.zst ../../disk/
+
 
 whl:
 	make test
