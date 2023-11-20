@@ -3,13 +3,20 @@
 Returns:
     _type_: _description_
 """
-import re
+import os
 from gettext import gettext as _
 
 from requests.exceptions import ConnectTimeout
 
 from lfy.api.server import baidu, google, tencent, youdao
+from lfy.settings import Settings
 
+# 设置代理地址和端口号
+PROXY_ADDRESS = Settings.get().vpn_addr_port
+if len(PROXY_ADDRESS) > 0:
+    # 设置环境变量
+    os.environ['http_proxy'] = PROXY_ADDRESS
+    os.environ['https_proxy'] = PROXY_ADDRESS
 
 def translate_by_server(text, server_key, lang_to, lang_from="auto"):
     """翻译

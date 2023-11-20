@@ -13,5 +13,8 @@
 		<key type="s" name="server-sk-tencent">
 			<default>"secret_id | secret_key"</default>
 		</key>
+		<key type="s" name="vpn-addr-port">
+			<default>""</default>
+		</key>
 	</schema>
 </schemalist>

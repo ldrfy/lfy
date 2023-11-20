@@ -39,6 +39,8 @@
 	(2,15,"AdwComboRow","acr_server",14,None,None,None,None,None),
 	(2,16,"GtkSeparator",None,15,None,None,None,None,None),
 	(2,17,"GtkButton","btn_config_server",15,None,None,None,1,None),
+	(2,18,"AdwPreferencesGroup",None,5,None,None,None,-1,None),
+	(2,20,"AdwEntryRow","entry_vpn_addr",18,None,None,None,-1,None),
 	(3,1,"GtkDropDown","dd_server",None,None,None,None,None,None),
 	(3,2,"GtkDropDown","dd_lang",None,None,None,None,None,None),
 	(6,1,"GtkShortcutsWindow","help_overlay",None,None,None,None,None,None),
@@ -113,6 +115,10 @@
 	(2,16,"GtkWidget","margin-top","12",None,None,None,None,None,None,None,None,None),
 	(2,17,"GtkButton","icon-name","applications-other",None,None,None,None,None,None,None,None,None),
 	(2,17,"GtkWidget","valign","center",None,None,None,None,None,None,None,None,None),
+	(2,18,"AdwPreferencesGroup","title","Other",None,None,None,None,None,None,None,None,None),
+	(2,20,"AdwEntryRow","input-purpose","url",None,None,None,None,None,None,None,None,None),
+	(2,20,"AdwEntryRow","show-apply-button","True",None,None,None,None,None,None,None,None,None),
+	(2,20,"AdwPreferencesRow","title","vpn addr and port, like http://127.0.0.1:7890",1,None,None,None,None,None,None,None,None),
 	(3,1,"GtkDropDown","enable-search","True",None,None,None,None,None,None,None,None,None),
 	(3,2,"GtkDropDown","enable-search","True",None,None,None,None,None,None,None,None,None),
 	(6,1,"GtkWindow","modal","True",None,None,None,None,None,None,None,None,None),
@@ -173,7 +179,8 @@
 	(76,12,4,"GObject","notify","_on_color_scheme_changed","active",None,None,None,None),
 	(77,12,5,"GObject","notify","_on_color_scheme_changed","active",None,None,None,None),
 	(78,10,16,"GtkButton","clicked","_on_back",None,None,None,None,None),
-	(79,10,19,"AdwEntryRow","apply","_on_api_key_apply",None,None,None,None,None)
+	(79,10,19,"AdwEntryRow","apply","_on_api_key_apply",None,None,None,None,None),
+	(84,2,20,"AdwEntryRow","apply","_on_vpn_apply",None,None,None,None,None)
   </object_signal>
   <object_data>
 	(2,17,"GtkWidget",1,1,None,None,None,None,None,None),
