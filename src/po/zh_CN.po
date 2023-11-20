@@ -49,11 +49,11 @@ msgstr "出现了一些错误，试试其他翻译引擎？"
 
 #: src/lfy/api/__init__.py:62 src/lfy/api/__init__.py:86
 msgid "Not supported This Server!"
-msgstr ""
+msgstr "暂不支持该服务"
 
 #: src/lfy/api/__init__.py:69
 msgid "save success!"
-msgstr ""
+msgstr "保存成功"
 
 #: src/lfy/api/base.py:8
 msgid "Automatic"
