@@ -40,8 +40,9 @@ def check_translate(api_key):
     Returns:
         bool: _description_
     """
+    error_msg = _("please input app_id and secret_key like:")
     if "|" not in api_key:
-        return False, _("please input app_id and secret_key like:") + " 121343 | fdsdsdg"
+        return False, error_msg + " 121343 | fdsdsdg"
     app_id, secret_key = get_api_key(api_key)
     ok, text = translate("success", app_id, secret_key)
     if ok:
@@ -61,7 +62,7 @@ def translate_text(s, lang_to="auto", lang_from="auto"):
         _type_: _description_
     """
     app_id, secret_key = get_api_key(get_api_key_s())
-    if len(app_id) == 0 or len(secret_key) == 0:
+    if app_id == "app_id" or secret_key == "secret_key":
         return _("please input API Key in preference")
 
     ok, text = translate(s, app_id, secret_key, lang_to)
