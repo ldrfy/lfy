@@ -81,3 +81,16 @@ class Settings(Gio.Settings):
     @server_sk_tencent.setter
     def server_sk_tencent(self, key):
         self.set_string('server-sk-tencent', key)
+
+    @property
+    def vpn_addr_port(self):
+        """代理地址
+
+        Returns:
+            str: 如：127.0.0.1:7890
+        """
+        return self.get_string('vpn-addr-port')
+
+    @vpn_addr_port.setter
+    def vpn_addr_port(self, key):
+        self.set_string('vpn-addr-port', key)

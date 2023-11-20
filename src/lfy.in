@@ -11,10 +11,6 @@ import signal
 import sys
 
 import gi
-from gi.repository import Adw, Gio, Gtk
-
-from lfy import APP_ID, LOCALE_DIR, PKGDATA_DIR, VERSION
-
 
 # gi.require_version("Adw", "1.4")
 gi.require_version("Adw", "1")
@@ -22,6 +18,11 @@ gi.require_version('Gio', '2.0')
 # gi.require_version('Gtk', '4.12')
 gi.require_version('Gtk', '4.0')
 gi.require_version('Gst', '1.0')
+
+from gi.repository import Adw, Gio, Gtk
+
+from lfy import APP_ID, LOCALE_DIR, PKGDATA_DIR, VERSION
+
 
 Adw.init()
 
@@ -56,8 +57,7 @@ def set_internationalization():
 
 def set_resources():
     """Sets application ressource file."""
-    resource = Gio.resource_load(os.path.join(
-        PKGDATA_DIR, f'{APP_ID}.gresource'))
+    resource = Gio.resource_load(os.path.join(PKGDATA_DIR, f'{APP_ID}.gresource'))
     Gio.Resource._register(resource)  # nopep8
 
 

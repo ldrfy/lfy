@@ -37,6 +37,19 @@
             </child>
           </object>
         </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title">Other</property>
+            <child>
+              <object class="AdwEntryRow" id="entry_vpn_addr">
+                <property name="input-purpose">url</property>
+                <property name="show-apply-button">True</property>
+                <property name="title" translatable="yes">vpn addr and port, like http://127.0.0.1:7890</property>
+                <signal name="apply" handler="_on_vpn_apply"/>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
   </template>
