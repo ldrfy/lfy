@@ -8,25 +8,35 @@ i18n = import('i18n')
 gnome = import('gnome')
 python = import('python')
 
+# get_option('datadir')
+# share/
+# get_option('localedir')
+# locale/
+
 APP_ID = 'cool.ldr.' + meson.project_name()
 PKGDATA_DIR = get_option('prefix') / get_option('datadir') / meson.project_name()
+LOCALE_DIR = get_option('prefix') / get_option('localedir')
 PACKAGE_URL = 'https://github.com/yuhldr/lfy'
 PACKAGE_URL_BUG = 'https://github.com/yuhldr/lfy/issues'
 
 py_installation = python.find_installation('python3')
+# /usr/lib/python3.11/site-packages
 PYTHON_DIR = py_installation.get_path('purelib')
-PYTHON_LOCAL_DIR = py_installation.get_install_dir()
+# 也是上面的，但是有些系统 /usr/local
+# /usr/local/lib/python3.11/site-packages
+# PYTHON_LOCAL_DIR = py_installation.get_install_dir()
+# message(PYTHON_DIR)
+# message(PKGDATA_DIR)
+# error(PKGDATA_DIR)
 
 
 conf = configuration_data()
 conf.set('APP_ID', APP_ID)
 conf.set('APP_NAME', meson.project_name())
 conf.set('VERSION', meson.project_version())
-conf.set('LOCALE_DIR', get_option('prefix') / get_option('localedir'))
+conf.set('LOCALE_DIR', LOCALE_DIR)
 conf.set('PKGDATA_DIR', PKGDATA_DIR)
 conf.set('PYTHON', py_installation.path())
-conf.set('PYTHON_DIR', PYTHON_DIR)
-conf.set('PYTHON_LOCAL_DIR', PYTHON_LOCAL_DIR)
 conf.set('PACKAGE_URL', PACKAGE_URL)
 conf.set('PACKAGE_URL_BUG', PACKAGE_URL_BUG)
 
@@ -36,7 +46,7 @@ configure_file(
   output: '__init__.py',
   configuration: conf,
   install: true,
-  install_dir: join_paths(PYTHON_LOCAL_DIR, meson.project_name())
+  install_dir: join_paths(PYTHON_DIR, meson.project_name())
 )
 
 
@@ -65,7 +75,7 @@ subdir('pkg')
 
 install_subdir(
     meson.project_name(),
-    install_dir: PYTHON_LOCAL_DIR
+    install_dir: PYTHON_DIR
 )
 
 gnome.post_install(

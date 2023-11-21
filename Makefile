@@ -1,5 +1,12 @@
 TO_LANG = zh_CN
 
+test:
+	rm -rf _build
+	meson src _build --prefix="/usr"
+	meson compile -C _build
+	meson test -C _build
+	meson install -C _build --destdir "test"
+
 install:
 	rm -rf _build
 	meson src _build
