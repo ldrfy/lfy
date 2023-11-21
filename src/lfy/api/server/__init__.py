@@ -68,7 +68,7 @@ def get_lang(i=0, j=0):
         list: 如 ["auto"]
     """
     te = get_server(i)
-    if i >= len(te.langs):
+    if j >= len(te.langs):
         return te.langs[0]
     return te.langs[j]
 
