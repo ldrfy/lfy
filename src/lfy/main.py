@@ -39,24 +39,22 @@ class LfyApplication(Adw.Application):
 
     def on_about_action(self, widget, w):
         """Callback for the app.about action."""
-        about = Adw.AboutWindow(transient_for=self.props.active_window,
-                                application_name=_('lfy'),
-                                application_icon=self._application_id,
-                                version=self._version,
-                                developers=['yuh'],
-                                designers=['yuh'],
-                                documenters=['yuh'],
-                                translator_credits=_('translator_credits'),
-                                comments=_("A translation app for GNOME."),
-                                website=PACKAGE_URL,
-                                issue_url=PACKAGE_URL_BUG,
-                                copyright='© 2023 yuh')
-        about.present()
+        Adw.AboutWindow(transient_for=self.props.active_window,
+                        application_name=_('lfy'),
+                        application_icon=self._application_id,
+                        version=self._version,
+                        developers=['yuh'],
+                        designers=['yuh'],
+                        documenters=['yuh'],
+                        translator_credits=_('translator_credits'),
+                        comments=_("A translation app for GNOME."),
+                        website=PACKAGE_URL,
+                        issue_url=PACKAGE_URL_BUG,
+                        copyright='© 2023 yuh').present()
 
     def on_preferences_action(self, widget, w):
         """Callback for the app.preferences action."""
-        prf = PreferenceWindow(transient_for=self.props.active_window)
-        prf.present()
+        PreferenceWindow(transient_for=self.props.active_window).present()
 
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.
