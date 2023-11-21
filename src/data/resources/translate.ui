@@ -50,9 +50,7 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkSpinner" id="sp_translate">
-                    <property name="spinning">True</property>
-                  </object>
+                  <object class="GtkSpinner" id="sp_translate"/>
                 </child>
                 <child>
                   <object class="GtkCheckButton" id="cbtn_del_wrapping">
@@ -106,7 +104,7 @@
     <property name="default-width">500</property>
     <property name="icon-name">cool.ldr.lfy</property>
     <property name="show-menubar">True</property>
-    <property name="title" translatable="yes">lfy(Right-click and select Window Top)</property>
+    <property name="title" translatable="yes">lfy</property>
   </template>
   <menu id="primary_menu">
     <section>

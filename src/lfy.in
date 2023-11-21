@@ -4,8 +4,6 @@
 import gettext
 import locale
 import os
-# 防止复制以后必需手动点击窗口
-os.environ['GDK_BACKEND'] = 'x11'
 
 import signal
 import sys
@@ -24,22 +22,6 @@ from gi.repository import Adw, Gio, Gtk
 from lfy import APP_ID, LOCALE_DIR, PKGDATA_DIR, VERSION
 
 
-Adw.init()
-
-
-def set_exception_hook():
-    """Configures sys.excepthook to enforce Gtk application exiting."""
-
-    def new_hook(etype, evalue, etb):
-        old_hook(etype, evalue, etb)
-        while Gtk.main_level():
-            Gtk.main_quit()
-        sys.exit()
-
-    old_hook = sys.excepthook
-    sys.excepthook = new_hook
-
-
 def set_internationalization():
     """Sets application internationalization."""
     try:
@@ -48,8 +30,7 @@ def set_internationalization():
     except AttributeError as e:
         # Python built without gettext support does not have
         # bindtextdomain() and textdomain().
-        print(
-            f"Could not bind the gettext translation domain. Some translations will not work. Error:\n{e}")
+        print(f"Some gettext translations will not work. Error:\n{e}")
 
     gettext.bindtextdomain(APP_ID, LOCALE_DIR)
     gettext.textdomain(APP_ID)
@@ -57,22 +38,17 @@ def set_internationalization():
 
 def set_resources():
     """Sets application ressource file."""
-    resource = Gio.resource_load(os.path.join(PKGDATA_DIR, f'{APP_ID}.gresource'))
-    Gio.Resource._register(resource)  # nopep8
+    Gio.Resource._register(Gio.resource_load(os.path.join(PKGDATA_DIR, f'{APP_ID}.gresource')))
 
 
 def run_application():
-    """Runs GNOME Music application and returns its exit code."""
+    """Runs application and returns its exit code."""
     from lfy.main import LfyApplication
-
-    app = LfyApplication(APP_ID, VERSION)
-    signal.signal(signal.SIGINT, signal.SIG_DFL)
-    return app.run(sys.argv)
+    return LfyApplication(APP_ID, VERSION).run(sys.argv)
 
 
 def main():
     """Sets environment and runs GNOME Music."""
-    # set_exception_hook()
     set_internationalization()
     set_resources()
     return run_application()
