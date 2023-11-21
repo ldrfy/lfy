@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2023-11-20 20:56+0800\n"
+"POT-Creation-Date: 2023-11-22 00:26+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -179,7 +179,6 @@ msgid "_About lfy"
 msgstr "_关于 兰译"
 
 #: src/data/resources/server-preferences.ui:13
-#: src/data/resources/preference.ui:16
 msgid "Translate Server"
 msgstr "翻译服务"
 
@@ -196,13 +195,17 @@ msgid "Enter an API Key for the Server."
 msgstr "输入该服务的密钥"
 
 #: src/data/resources/preference.ui:14
-msgid "setup API Key, click on the right to the details"
-msgstr "设置密钥，点右侧查看细节"
+msgid "setup API Key for translation Server, click on the right to the details"
+msgstr "为翻译服务设置密钥，点右侧查看细节"
 
-#: src/data/resources/preference.ui:42
+#: src/data/resources/preference.ui:16
+msgid "API Key"
+msgstr "密钥"
+
+#: src/data/resources/preference.ui:43
 msgid "Other"
 msgstr "其他"
 
-#: src/data/resources/preference.ui:47
+#: src/data/resources/preference.ui:48
 msgid "vpn addr and port, like http://127.0.0.1:7890"
 msgstr "代理地址和端口，比如：http://127.0.0.1:7890"

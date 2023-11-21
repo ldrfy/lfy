@@ -11,9 +11,9 @@
             <child>
               <object class="AdwComboRow" id="acr_server">
                 <property name="enable-search">True</property>
-                <property name="subtitle" translatable="yes">setup API Key, click on the right to the details</property>
+                <property name="subtitle" translatable="yes">setup API Key for translation Server, click on the right to the details</property>
                 <property name="subtitle-lines">3</property>
-                <property name="title" translatable="yes">Translate Server</property>
+                <property name="title" translatable="yes">API Key</property>
                 <property name="title-lines">1</property>
                 <signal name="notify::selected" handler="_config_select_server"/>
                 <child>
