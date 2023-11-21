@@ -25,7 +25,8 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="btn_config_server">
-                    <property name="icon-name">applications-other</property>
+                    <property name="icon-name">open-menu-symbolic</property>
+                    <property name="margin-start">8</property>
                     <property name="valign">center</property>
                     <signal name="clicked" handler="_open_server"/>
                     <style>
