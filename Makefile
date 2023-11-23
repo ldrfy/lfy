@@ -3,10 +3,11 @@ TO_LANG = zh_CN
 test:
 	rm -rf _build
 	rm -rf ./test
-	meson src _build --prefix="/home/yuh/code/my/gitProjects/gnome-lfy/test/lfy"
+	meson src _build --prefix="${HOME}/.local"
 	meson compile -C _build
 	meson test -C _build
 	meson install -C _build
+	# DESTDIR="${PWD}/test" meson install -C _build
 
 install:
 	rm -rf _build
@@ -29,11 +30,23 @@ arch:
 	cp -r ../../../src lfy-0.2.0 && \
 	zip -r v0.2.0.zip lfy-0.2.0 && \
 	makepkg -sf && \
-	cp *.pkg.tar.zst ../../../disk/
+	mv *.pkg.tar.zst ../../../disk/
 
 	rm -rf _build
 
-	sudo pacman -U disk/*.pkg.tar.zst
+
+deb:
+	mkdir -p disk
+	rm -rf _build
+
+	meson src _build --prefix="/usr"
+	meson compile -C _build
+	meson test -C _build
+	DESTDIR="${PWD}/_build/pkg/deb" meson install -C _build
+
+	cd "${PWD}/_build/pkg/" \
+	&& dpkg -b deb ../../disk/lfy.deb
+	rm -rf _build
 
 
 # Generate .pot file

@@ -5,6 +5,6 @@ conf_pkg.set('PACKAGE_URL', PACKAGE_URL)
 conf_pkg.set('VERSION', meson.project_version())
 
 # subdir('pip')
-# subdir('deb')
+subdir('deb/DEBIAN')
 subdir('aur')
 
