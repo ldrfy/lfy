@@ -13,7 +13,6 @@
             <property name="margin-bottom">8</property>
             <property name="margin-end">8</property>
             <property name="margin-start">8</property>
-            <property name="margin-top">8</property>
             <property name="orientation">vertical</property>
             <property name="spacing">5</property>
             <child>

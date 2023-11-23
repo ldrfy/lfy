@@ -77,7 +77,6 @@
 	(1,57,"GtkWidget","margin-bottom","8",None,None,None,None,None,None,None,None,None),
 	(1,57,"GtkWidget","margin-end","8",None,None,None,None,None,None,None,None,None),
 	(1,57,"GtkWidget","margin-start","8",None,None,None,None,None,None,None,None,None),
-	(1,57,"GtkWidget","margin-top","8",None,None,None,None,None,None,None,None,None),
 	(1,60,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
 	(1,61,"GtkTextView","wrap-mode","char",None,None,None,None,None,None,None,None,None),
 	(1,62,"GtkBox","spacing","8",None,None,None,None,None,None,None,None,None),

@@ -4,10 +4,10 @@
 from lfy.api.server import baidu, google, tencent, youdao
 
 servers = [
-    youdao.SERVER,
-    google.SERVER,
     baidu.SERVER,
     tencent.SERVER,
+    google.SERVER,
+    youdao.SERVER,
 ]
 
 
