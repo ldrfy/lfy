@@ -42,11 +42,15 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.last_text_one = ""
         # 是不是软件内复制的，这种可能是想粘贴到其他地方，不响应即可
         self.is_tv_copy = False
-        self.is_init = True
+        # 放置初始化时，不断调用误以为选择
+        self.creat_time = time.time()
+        n = self.setting.lang_selected_n
+        i = server_key2i(self.setting.server_selected_key)
 
         self.dd_server.set_model(Gtk.StringList.new(get_server_names()))
-        self.dd_server.set_selected(
-            server_key2i(self.setting.server_selected_key))
+        self.dd_server.set_selected(i)
+        self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
+        self.dd_lang.set_selected(lang_n2j(i, n))
 
     @Gtk.Template.Callback()
     def _on_translate_clicked(self, btn):
@@ -54,22 +58,18 @@ class TranslateWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def _on_server_changed(self, drop_down, a):
-
-        if self.is_init:
-            # 第一次是初始化时，自动选择0的
-            self.is_init = False
-        else:
-            # 第二次是设置的上一次的
+        # 初始化，会不断调用这个
+        if time.time() - self.creat_time > 1:
             i = drop_down.get_selected()
             self.setting.server_selected_key = get_server(i).key
             n = self.setting.lang_selected_n
-
             self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
             self.dd_lang.set_selected(lang_n2j(i, n))
 
     @Gtk.Template.Callback()
     def _on_lang_changed(self, drop_down, a):
-        if not self.is_init:
+        # 初始化，会不断调用这个
+        if time.time() - self.creat_time > 1:
             i = self.dd_server.get_selected()
             j = drop_down.get_selected()
             self.setting.lang_selected_n = get_lang(i, j).n
@@ -139,7 +139,6 @@ class TranslateWindow(Adw.ApplicationWindow):
             # 翻译完成
             self.tv_to.get_buffer().set_text(s)
             self.sp_translate.stop()
-
 
     def process_text(self, text):
         """文本预处理
