@@ -9,6 +9,3 @@ RES_PATH = '/cool/ldr/lfy'
 
 
 THIS_DIR, THIS_FILENAME = os.path.split(__file__)
-PYTHON_DIR = os.path.join(THIS_DIR, '../')
-LOCALE_DIR = os.path.join(THIS_DIR, '../../../../share/locale/')
-PKGDATA_DIR = os.path.join(THIS_DIR, f'../../../../share/{APP_NAME}/')
