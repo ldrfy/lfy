@@ -43,7 +43,7 @@ if desktop_file_validate.found()
   test (
     'Validate desktop file',
     desktop_file_validate,
-    args: join_paths(meson.current_build_dir (), APP_ID + '.desktop')
+    args: join_paths(meson.current_build_dir(), APP_ID + '.desktop')
   )
 endif
 

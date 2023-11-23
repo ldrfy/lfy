@@ -2,10 +2,11 @@ TO_LANG = zh_CN
 
 test:
 	rm -rf _build
-	meson src _build --prefix="/usr"
+	rm -rf ./test
+	meson src _build --prefix="/home/yuh/code/my/gitProjects/gnome-lfy/test/lfy"
 	meson compile -C _build
 	meson test -C _build
-	meson install -C _build --destdir "test"
+	meson install -C _build
 
 install:
 	rm -rf _build
@@ -23,12 +24,12 @@ arch:
 	rm -rf _build
 	meson src _build
 
-	cd _build/pkg && \
+	cd _build/pkg/aur && \
 	mkdir lfy-0.2.0 && \
-	cp -r ../../src lfy-0.2.0 && \
+	cp -r ../../../src lfy-0.2.0 && \
 	zip -r v0.2.0.zip lfy-0.2.0 && \
 	makepkg -sf && \
-	cp *.pkg.tar.zst ../../disk/
+	cp *.pkg.tar.zst ../../../disk/
 
 	rm -rf _build
 
