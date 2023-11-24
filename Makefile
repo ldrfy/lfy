@@ -1,5 +1,6 @@
 TO_LANG = zh_CN
 VERSION = 0.0.2
+DISK = ../../../../disk/
 
 clear:
 	rm -rf _build test
@@ -7,31 +8,33 @@ clear:
 
 
 flatpak:clear
-	meson src _build
-	cd _build/pkg/flatpak && \
+	meson _build
+	cd _build/src/pkg/flatpak && \
 	flatpak-builder --repo=repo-dir _build cool.ldr.lfy.json --user &&\
 	flatpak build-bundle repo-dir lfy-${VERSION}.flatpak cool.ldr.lfy && \
-	mv *.flatpak ../../../disk/
+	mv *.flatpak ${DISK}
 	# flatpak-builder --install _build cool.ldr.lfy.json --user
 
 
 
 aur: clear
-	meson src _build
+	meson _build
 
-	cd _build/pkg/aur && \
+	cd _build/src/pkg/aur && \
 	makepkg -sf && \
-	mv *.pkg.tar.zst ../../../disk/
+	mv *.pkg.tar.zst ${DISK}
 
 
 deb: clear
-	meson src _build --prefix="/usr"
+	meson _build --prefix="/usr"
 	meson compile -C _build
 	meson test -C _build
-	DESTDIR="${PWD}/_build/pkg/deb" meson install -C _build
+	DESTDIR="${PWD}/_build/src/pkg/deb" meson install -C _build
 
-	cd "${PWD}/_build/pkg/" \
-	&& dpkg -b deb ../../disk/lfy-${VERSION}.deb
+	cd "${PWD}/_build/src/pkg/" \
+	&& dpkg -b deb ./deb/lfy-${VERSION}.deb && \
+	cd deb && \
+	mv *.deb ${DISK}
 
 
 # Generate .pot file
@@ -58,22 +61,22 @@ update-po:
 
 
 test-flatpak:clear
-	meson src _build
-	cd _build/pkg/flatpak && \
+	meson _build
+	cd _build/src/pkg/flatpak && \
 	flatpak-builder --install _build cool.ldr.lfy.json --user
 
 
 test-aur: clear
-	meson src _build
-	cd _build/pkg/aur && \
+	meson _build
+	cd _build/src/pkg/aur && \
 	mkdir lfy-${VERSION} && \
 	cp -r ../../../src lfy-${VERSION} && \
 	zip -r v${VERSION}.zip lfy-${VERSION} && \
 	makepkg -sf && \
-	mv *.pkg.tar.zst ../../../disk/
+	mv *.pkg.tar.zst ${DISK}
 
 test:clear
-	meson src _build --prefix="${HOME}/.local"
+	meson _build --prefix="${HOME}/.local"
 	meson compile -C _build
 	meson test -C _build
 	meson install -C _build
