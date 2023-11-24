@@ -1,5 +1,9 @@
 # 兰译 lfy <img src="src/data/resources/icons/hicolor/scalable/apps/cool.ldr.lfy.svg" width = "36" height = "36" alt="兰译" align=center />
 
+[ldr-translate](https://github.com/yuhldr/ldr-translate) 重构版
+
+> [ldr-translate](https://github.com/yuhldr/ldr-translate) 还能用，但是不再更新，旧系统可以使用它
+
 <center>
 <div style="display: flex;">
     <img src="doc/images/main.png" alt="首页" style="width: 40%;">

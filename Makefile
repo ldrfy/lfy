@@ -20,7 +20,7 @@ uninstall:
 	cd _build && ninja uninstall
 
 
-arch:
+aur:
 	mkdir -p disk
 	rm -rf _build
 	meson src _build
