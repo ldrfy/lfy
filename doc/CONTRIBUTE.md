@@ -12,27 +12,28 @@
 
 
 ## 依赖
+下方仅对 archlinux 而言，ubuntu自己参考这里和 src/pkg/deb
 
 ### 编译工具 meson
 
-    ```bash
-    sudo pacman -S meson
-    ```
+```bash
+sudo pacman -S meson
+```
 
 ### 其他：
 
-    ```bash
-    sudo pacman -S python-gobject
-    ```
+```bash
+sudo pacman -S python-gobject python-requests
+```
 
 ## 测试
 
-安装在 `/usr/local`
+安装在 `~/.local`
 
 ### 安装
 
 ```bash
-make install && lfy
+make test && lfy
 ```
 
 ### 卸载
@@ -46,16 +47,25 @@ make uninstall
 ### pacman
 
 ```bash
-make whl
+make aur
 ```
 
 文件生成在 `./disk/*.pkg.tar.zst`
 
 ```bash
-# 卸载
+# 安装
 sudo pacman -U ./disk/*.pkg.tar.zst
 ```
 
 ### deb
 
+```bash
+make deb
+```
 
+文件生成在 `./disk/*.deb`
+
+```bash
+# 安装
+sudo dpkg -i ./disk/*.deb
+```
