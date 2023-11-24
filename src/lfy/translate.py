@@ -3,6 +3,7 @@
 import re
 import threading
 import time
+from gettext import gettext as _
 
 from gi.repository import Adw, GLib, Gtk
 
@@ -34,6 +35,7 @@ class TranslateWindow(Adw.ApplicationWindow):
     cbtn_del_wrapping: Gtk.CheckButton = Gtk.Template.Child()
     sp_translate: Gtk.Spinner = Gtk.Template.Child()
     menu_btn: Gtk.MenuButton = Gtk.Template.Child()
+    ato_translate = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -75,7 +77,7 @@ class TranslateWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def _on_translate_clicked(self, btn):
-        self.update(self.last_text, True)
+        self.update("reload", True)
 
     @Gtk.Template.Callback()
     def _on_server_changed(self, drop_down, a):
@@ -175,6 +177,10 @@ class TranslateWindow(Adw.ApplicationWindow):
     def set_splice_text(self):
         """拼接
         """
-        print("111")
-        print(self.cbtn_add_old.get_active())
-        self.cbtn_add_old.set_active(not self.cbtn_add_old.get_active())
+        if time.time() - self.creat_time > 1:
+            is_splice_text = self.cbtn_add_old.get_active()
+            text = _("Splice text")
+            if is_splice_text:
+                text = _("Not splice text")
+            self.ato_translate.add_toast(Adw.Toast.new(text))
+            self.cbtn_add_old.set_active(not is_splice_text)
