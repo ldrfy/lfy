@@ -14,14 +14,21 @@
             <property name="title" translatable="yes" context="shortcut window">General</property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="action-name">win.show-help-overlay</property>
-                <property name="title" translatable="yes" context="shortcut window">Show Shortcuts</property>
+                <property name="action-name">app.add_old</property>
+                <property name="title" translatable="yes">Splice Text</property>
+                <property name="tooltip-text" translatable="yes">Splice the next copied text with the previous text</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="action-name">app.quit</property>
                 <property name="title" translatable="yes" context="shortcut window">Quit</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="action-name">win.show-help-overlay</property>
+                <property name="title" translatable="yes" context="shortcut window">Show Shortcuts</property>
               </object>
             </child>
           </object>

@@ -171,3 +171,10 @@ class TranslateWindow(Adw.ApplicationWindow):
         s_from = re.sub(r"-[\n|\r]+", "", s_from)
         s_from = re.sub(r"(?<!\.|-|。)[\n|\r]+", " ", s_from)
         return s_from
+
+    def set_splice_text(self):
+        """拼接
+        """
+        print("111")
+        print(self.cbtn_add_old.get_active())
+        self.cbtn_add_old.set_active(not self.cbtn_add_old.get_active())
