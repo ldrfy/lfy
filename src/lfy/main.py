@@ -22,6 +22,8 @@ class LfyApplication(Adw.Application):
         self.create_action('preferences', self.on_preferences_action)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
+        self.create_action(
+            'splice_text', lambda *_: self.set_splice_text_action(), ['<primary>o'])
 
         self.copy()
 
@@ -32,7 +34,9 @@ class LfyApplication(Adw.Application):
         necessary.
         """
         win = self.props.active_window
+        print(win)
         if not win:
+            print("111")
             width, height = Settings.get().window_size
             win = TranslateWindow(application=self,
                                   default_height=height,
@@ -76,12 +80,28 @@ class LfyApplication(Adw.Application):
             self.set_accels_for_action(f"app.{name}", shortcuts)
 
 
+    def set_splice_text_action(self):
+        """拼接文本
+
+        Args:
+            f (_type_): _description_
+        """
+        print("set_splice_text_action")
+        win = self.props.active_window
+        if win is not None:
+            win.set_splice_text()
+
+
     def copy(self):
         """复制监听
         """
         def on_active_copy(cb, res):
             text = cb.read_text_finish(res)
-            self.do_activate(text)
+            # self.do_activate(text)
+            win = self.props.active_window
+            if win is not None:
+                win.update(text)
+                win.present()
 
         def on_active_copy2(cb):
             cb.read_text_async(None, on_active_copy)
