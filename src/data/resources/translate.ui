@@ -61,13 +61,14 @@
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="cbtn_add_old">
+                        <property name="action-name">app.splice_text</property>
                         <property name="tooltip-text" translatable="yes">Splice the next copied text with the previous text</property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkButton" id="btn_translate">
+                        <property name="action-name">app.translate</property>
                         <property name="label" translatable="yes">translate</property>
-                        <signal name="clicked" handler="_on_translate_clicked"/>
                       </object>
                     </child>
                   </object>
