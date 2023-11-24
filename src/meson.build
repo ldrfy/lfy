@@ -1,5 +1,5 @@
 project('lfy',
-          version: '0.2.0',
+          version: '0.0.2',
     meson_version: '>= 0.62.0',
   default_options: [ 'warning_level=2', 'werror=false', ],
 )
@@ -72,7 +72,6 @@ configure_file(
 
 # Dependencies
 dependency('glib-2.0', version: '>= 2.67.1')
-dependency('goa-1.0', version: '>= 3.35.90')
 dependency('gobject-introspection-1.0', version: '>= 1.35.0')
 dependency('gtk4', version: '>= 4.5.0')
 dependency('libadwaita-1', version: '>= 1.2.alpha')

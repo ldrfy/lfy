@@ -1,9 +1,9 @@
 {
-    "app-id": "cool.ldr.lfy",
+    "app-id": "@APP_ID@",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "master",
+    "runtime-version": "45",
     "sdk": "org.gnome.Sdk",
-    "command": "lfy",
+    "command": "@APP_NAME@",
     "finish-args": [
         "--share=network",
         "--share=ipc",
@@ -12,7 +12,6 @@
         "--socket=wayland"
     ],
     "cleanup": [
-        "*blueprint*",
         "/include",
         "/lib/pkgconfig",
         "/man",
@@ -25,14 +24,15 @@
         "*.pyc"
     ],
     "modules": [
+        "pypi-dependencies.json",
         {
-            "name": "lfy",
+            "name": "@APP_NAME@",
             "builddir": true,
             "buildsystem": "meson",
             "sources": [
                 {
-                    "type": "git",
-                    "url": "file:///home/yuh/code/my/gitProjects"
+                    "type": "dir",
+                    "path": "../../../src"
                 }
             ]
         }

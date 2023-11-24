@@ -71,7 +71,6 @@ def translate_text(s, lang_to="auto", lang_from="auto"):
         return _("please input API Key in preference")
 
     ok, text = translate(s, secret_id, secret_key, lang_to, lang_from)
-    print(ok, s, lang_from, lang_to)
     return text
 
 

@@ -176,7 +176,6 @@ class TranslateWindow(Adw.ApplicationWindow):
         """拼接
         """
         if time.time() - self.creat_time > 1:
-            print(self.toast.get_timeout())
             self.toast.dismiss()
 
             self.cbtn_add_old.set_active(not self.cbtn_add_old.get_active())

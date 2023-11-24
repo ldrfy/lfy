@@ -15,7 +15,9 @@ PKGDATA_DIR = '@PKGDATA_DIR@'
 
 sys.path.append('@PYTHON_DIR@')
 os.environ["XDG_DATA_DIRS"] = '@SCHEMAS_DIR@:/usr/share'
-os.environ["GDK_BACKEND"] = "x11"
+
+# 这个在archlinux测试可以后台响应剪贴板，但是在flatpak会直接报错，暂时删除
+# os.environ["GDK_BACKEND"] = "x11"
 
 import gi
 

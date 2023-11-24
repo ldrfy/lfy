@@ -39,7 +39,6 @@ class PreferenceWindow(Adw.PreferencesWindow):
     def _config_select_server(self, arc, _value):
         """Called on self.translator::notify::selected signal"""
         self.server = get_servers_api_key()[arc.get_selected()]
-        print(self.server.name)
 
     @Gtk.Template.Callback()
     def _on_vpn_apply(self, _row):
@@ -47,7 +46,6 @@ class PreferenceWindow(Adw.PreferencesWindow):
 
         vpn_addr = self.entry_vpn_addr.get_text().strip()
         self.entry_vpn_addr.props.text = vpn_addr
-        print(vpn_addr)
         Settings.get().vpn_addr_port = vpn_addr
         self.entry_vpn_addr.props.sensitive = True
 
