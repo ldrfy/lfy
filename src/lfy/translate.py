@@ -10,6 +10,7 @@ from lfy.api import translate_by_server
 from lfy.api.server import (get_lang, get_lang_names, get_server,
                             get_server_names, lang_n2j, server_key2i)
 from lfy.settings import Settings
+from lfy.widgets.theme_switcher import ThemeSwitcher
 
 
 @Gtk.Template(resource_path='/cool/ldr/lfy/translate.ui')
@@ -32,6 +33,7 @@ class TranslateWindow(Adw.ApplicationWindow):
     cbtn_add_old: Gtk.CheckButton = Gtk.Template.Child()
     cbtn_del_wrapping: Gtk.CheckButton = Gtk.Template.Child()
     sp_translate: Gtk.Spinner = Gtk.Template.Child()
+    menu_btn: Gtk.MenuButton = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -52,6 +54,25 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
         self.dd_lang.set_selected(lang_n2j(i, n))
 
+        # Theme Switcher
+        theme_switcher = ThemeSwitcher()
+        self.menu_btn.props.popover.add_child(theme_switcher, 'theme')
+
+        # Save settings on close
+        self.connect('unrealize', self.save_settings)
+
+
+    def save_settings(self, *args, **kwargs):
+        if not self.is_maximized():
+            size = self.get_default_size()
+            Settings.get().window_size = (size.width, size.height)
+
+        i = self.dd_server.get_selected()
+        j = self.dd_lang.get_selected()
+        self.setting.server_selected_key = get_server(i).key
+        self.setting.lang_selected_n = get_lang(i, j).n
+
+
     @Gtk.Template.Callback()
     def _on_translate_clicked(self, btn):
         self.update(self.last_text, True)
@@ -61,19 +82,12 @@ class TranslateWindow(Adw.ApplicationWindow):
         # 初始化，会不断调用这个
         if time.time() - self.creat_time > 1:
             i = drop_down.get_selected()
-            self.setting.server_selected_key = get_server(i).key
             n = self.setting.lang_selected_n
             self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
             self.dd_lang.set_selected(lang_n2j(i, n))
 
     @Gtk.Template.Callback()
     def _on_lang_changed(self, drop_down, a):
-        # 初始化，会不断调用这个
-        if time.time() - self.creat_time > 1:
-            i = self.dd_server.get_selected()
-            j = drop_down.get_selected()
-            self.setting.lang_selected_n = get_lang(i, j).n
-
         self.update(self.last_text, True)
 
     @Gtk.Template.Callback()

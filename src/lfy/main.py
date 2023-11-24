@@ -5,6 +5,7 @@ from gi.repository import Adw, Gdk, Gio
 
 from lfy import PACKAGE_URL, PACKAGE_URL_BUG
 from lfy.preference import PreferenceWindow
+from lfy.settings import Settings
 from lfy.translate import TranslateWindow
 
 
@@ -32,7 +33,10 @@ class LfyApplication(Adw.Application):
         """
         win = self.props.active_window
         if not win:
-            win = TranslateWindow(application=self)
+            width, height = Settings.get().window_size
+            win = TranslateWindow(application=self,
+                                  default_height=height,
+                                  default_width=width,)
         win.present()
         win.update(text)
 

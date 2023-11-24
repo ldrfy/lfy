@@ -88,7 +88,7 @@
         <child type="top">
           <object class="AdwHeaderBar" id="header_bar">
             <child type="start">
-              <object class="GtkMenuButton">
+              <object class="GtkMenuButton" id="menu_btn">
                 <property name="icon-name">open-menu-symbolic</property>
                 <property name="menu-model">primary_menu</property>
                 <property name="primary">True</property>
@@ -106,6 +106,11 @@
     <property name="title" translatable="yes">lfy</property>
   </template>
   <menu id="primary_menu">
+    <section>
+      <item>
+        <attribute name="custom">theme</attribute>
+      </item>
+    </section>
     <section>
       <item>
         <attribute name="action">app.preferences</attribute>
