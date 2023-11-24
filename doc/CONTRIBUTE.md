@@ -1,50 +1,55 @@
 # 贡献说明
 
-
 我目前仅在 `archlinux最新版 gnome桌面环境(45)` 开发测试，使用gtk4，不支持旧版
+
+> ！！！尽可能少的依赖第三方库，或者这个库在各个发行版都很普遍也行，尽量不适应过时技术
 
 ## 待完成
 
-- GTK4 如何优雅的完成全局快捷键（尽量不适应过时的库，比如gtk3的）
-- GTK4 如何优雅的完成状态栏图标（尽量不使用过时的库，比如gtk3的）
+- GTK4相关
+    - 如何窗口置顶
+    - 响应剪贴时如何弹出窗口到最上面，而不是显示“已就绪”
+    - 如何优雅的完成全局快捷键（尽量不使用过时的库，比如gtk3的，也不要使用root）
+    - 如何优雅的显示状态栏图标（尽量不使用过时的库，比如gtk3的）
+
 - 更多引擎，目前支持百度、谷歌、有道、腾讯，欢迎贡献
 - 我英语不好，所以开发此项目。软件界面默认英文，有中文翻译，但是文档字太多，我只写中文……，其他人可以翻译文档，包括代码中的注释，也可以翻译
 
 
-## 依赖
+## 开发说明
+
 下方仅对 archlinux 而言，ubuntu自己参考这里和 src/pkg/deb
 
 ### 编译工具 meson
 
 ```bash
-sudo pacman -S meson
+sudo pacman -S meson appstream-glib
 ```
 
-### 其他：
+### 依赖：
 
 ```bash
-sudo pacman -S python-gobject python-requests
+sudo pacman -S libadwaita python-gobject python-requests python-cryptography
 ```
 
-## 测试
+
+### 安装测试
 
 安装在 `~/.local`
-
-### 安装
 
 ```bash
 make test && lfy
 ```
 
-### 卸载
+卸载
 
 ```bash
 make uninstall
 ```
 
-## 打包
+### 打包
 
-### pacman
+#### pacman
 
 ```bash
 make aur
@@ -57,7 +62,7 @@ make aur
 sudo pacman -U ./disk/*.pkg.tar.zst
 ```
 
-### deb
+#### deb
 
 ```bash
 make deb

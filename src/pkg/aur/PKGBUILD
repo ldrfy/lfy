@@ -8,6 +8,7 @@ url="@PACKAGE_URL@"
 license=('GPL3')
 depends=('libadwaita' 'python-gobject')
 makedepends=('git' 'gobject-introspection' 'meson')
+optdepends=('python-cryptography')
 checkdepends=('appstream-glib')
 source=('@PACKAGE_URL@/archive/refs/tags/v@VERSION@.zip')
 sha256sums=("SKIP")
