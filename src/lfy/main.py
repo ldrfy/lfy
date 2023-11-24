@@ -23,9 +23,13 @@ class LfyApplication(Adw.Application):
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
         self.create_action(
-            'splice_text', lambda *_: self.set_splice_text_action(), ['<primary>o'])
+            'splice_text', lambda *_: self.set_splice_text_action(), ['<alt>c'])
+        self.create_action(
+            'translate', lambda *_: self.set_translate_action(), ['<primary>t'])
 
+        self.cb = Gdk.Display().get_default().get_clipboard()
         self.copy()
+
 
     def do_activate(self, text=""):
         """Called when the application is activated.
@@ -91,20 +95,25 @@ class LfyApplication(Adw.Application):
         if win is not None:
             win.set_splice_text()
 
+    def set_translate_action(self):
+        """快捷键翻译
+
+        Args:
+            f (_type_): _description_
+        """
+        win = self.props.active_window
+        if win is not None:
+            win.update("reload", True)
+
+
+    def on_active_copy2(self, cb):
+        def on_active_copy(cb, res):
+            self.do_activate(cb.read_text_finish(res))
+        cb.read_text_async(None, on_active_copy)
+
 
     def copy(self):
         """复制监听
         """
-        def on_active_copy(cb, res):
-            text = cb.read_text_finish(res)
-            # self.do_activate(text)
-            win = self.props.active_window
-            if win is not None:
-                win.update(text)
-                win.present()
 
-        def on_active_copy2(cb):
-            cb.read_text_async(None, on_active_copy)
-
-        clip_copy = Gdk.Display().get_default().get_clipboard()
-        clip_copy.connect("changed", on_active_copy2)
+        self.cb.connect("changed", self.on_active_copy2)
