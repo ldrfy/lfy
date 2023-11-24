@@ -62,6 +62,8 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         # Save settings on close
         self.connect('unrealize', self.save_settings)
+        self.toast = Adw.Toast.new("")
+        self.toast.set_timeout(2)
 
 
     def save_settings(self, *args, **kwargs):
@@ -74,10 +76,6 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.setting.server_selected_key = get_server(i).key
         self.setting.lang_selected_n = get_lang(i, j).n
 
-
-    @Gtk.Template.Callback()
-    def _on_translate_clicked(self, btn):
-        self.update("reload", True)
 
     @Gtk.Template.Callback()
     def _on_server_changed(self, drop_down, a):
@@ -178,9 +176,13 @@ class TranslateWindow(Adw.ApplicationWindow):
         """拼接
         """
         if time.time() - self.creat_time > 1:
-            is_splice_text = self.cbtn_add_old.get_active()
-            text = _("Splice text")
-            if is_splice_text:
-                text = _("Not splice text")
-            self.ato_translate.add_toast(Adw.Toast.new(text))
-            self.cbtn_add_old.set_active(not is_splice_text)
+            print(self.toast.get_timeout())
+            self.toast.dismiss()
+
+            self.cbtn_add_old.set_active(not self.cbtn_add_old.get_active())
+
+            text = _("Next translation splicing text")
+            if not self.cbtn_add_old.get_active():
+                text = _("Next translation without splicing text")
+            self.toast.set_title(text)
+            self.ato_translate.add_toast(self.toast)

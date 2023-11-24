@@ -28,7 +28,7 @@ class LfyApplication(Adw.Application):
             'translate', lambda *_: self.set_translate_action(), ['<primary>t'])
 
         self.cb = Gdk.Display().get_default().get_clipboard()
-        self.copy()
+        self.cb.connect("changed", self.copy)
 
 
     def do_activate(self, text=""):
@@ -106,14 +106,12 @@ class LfyApplication(Adw.Application):
             win.update("reload", True)
 
 
-    def on_active_copy2(self, cb):
+    def copy(self, cb):
+        """翻译
+
+        Args:
+            cb (function): _description_
+        """
         def on_active_copy(cb, res):
             self.do_activate(cb.read_text_finish(res))
         cb.read_text_async(None, on_active_copy)
-
-
-    def copy(self):
-        """复制监听
-        """
-
-        self.cb.connect("changed", self.on_active_copy2)

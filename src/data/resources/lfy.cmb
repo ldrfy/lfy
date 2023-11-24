@@ -98,7 +98,9 @@
 	(1,140,"GtkWidget","opacity","0.0",None,None,None,None,None,None,None,None,None),
 	(1,142,"GtkCheckButton","active","True",None,None,None,None,None,None,None,None,None),
 	(1,142,"GtkWidget","tooltip-text","Remove symbols such as line breaks","yes",None,None,None,None,None,None,None,None),
+	(1,143,"GtkActionable","action-name","app.splice_text",None,None,None,None,None,None,None,None,None),
 	(1,143,"GtkWidget","tooltip-text","Splice the next copied text with the previous text","yes",None,None,None,None,None,None,None,None),
+	(1,144,"GtkActionable","action-name","app.translate",None,None,None,None,None,None,None,None,None),
 	(1,144,"GtkButton","label","translate","yes",None,None,None,None,None,None,None,None),
 	(1,145,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
 	(1,146,"GtkTextView","right-margin","8",None,None,None,None,None,None,None,None,None),
@@ -179,7 +181,6 @@
 	(93,1,136,"GtkTextView","cut-clipboard","_set_tv_copy",None,None,None,None,None),
 	(94,1,138,"GObject","notify","_on_server_changed","selected",None,None,None,None),
 	(95,1,139,"GObject","notify","_on_lang_changed","selected",None,None,None,None),
-	(96,1,144,"GtkButton","clicked","_on_translate_clicked",None,None,None,None,None),
 	(97,1,146,"GtkTextView","copy-clipboard","_set_tv_copy",None,None,None,None,None),
 	(98,1,146,"GtkTextView","cut-clipboard","_set_tv_copy",None,None,None,None,None)
   </object_signal>
