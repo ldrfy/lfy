@@ -1,52 +1,37 @@
 TO_LANG = zh_CN
+VERSION = 0.0.2
 
-test:
-	rm -rf _build
-	rm -rf ./test
-	meson src _build --prefix="${HOME}/.local"
-	meson compile -C _build
-	meson test -C _build
-	meson install -C _build
-	# DESTDIR="${PWD}/test" meson install -C _build
-
-install:
-	rm -rf _build
-	meson src _build
-	meson compile -C _build
-	meson test -C _build
-	meson install -C _build
-
-uninstall:
-	cd _build && ninja uninstall
-
-
-aur:
+clear:
+	rm -rf _build test
 	mkdir -p disk
-	rm -rf _build
+
+
+flatpak:clear
+	meson src _build
+	cd _build/pkg/flatpak && \
+	flatpak-builder --repo=repo-dir _build cool.ldr.lfy.json --user &&\
+	flatpak build-bundle repo-dir lfy-${VERSION}.flatpak cool.ldr.lfy && \
+	mv *.flatpak ../../../disk/
+	# flatpak-builder --install _build cool.ldr.lfy.json --user
+
+
+
+aur: clear
 	meson src _build
 
 	cd _build/pkg/aur && \
-	mkdir lfy-0.2.0 && \
-	cp -r ../../../src lfy-0.2.0 && \
-	zip -r v0.2.0.zip lfy-0.2.0 && \
 	makepkg -sf && \
 	mv *.pkg.tar.zst ../../../disk/
 
-	rm -rf _build
 
-
-deb:
-	mkdir -p disk
-	rm -rf _build
-
+deb: clear
 	meson src _build --prefix="/usr"
 	meson compile -C _build
 	meson test -C _build
 	DESTDIR="${PWD}/_build/pkg/deb" meson install -C _build
 
 	cd "${PWD}/_build/pkg/" \
-	&& dpkg -b deb ../../disk/lfy.deb
-	rm -rf _build
+	&& dpkg -b deb ../../disk/lfy-${VERSION}.deb
 
 
 # Generate .pot file
@@ -70,4 +55,30 @@ update-po:
 
 .PHONY: build other update-pot update-po po-init test whl
 
+
+
+test-flatpak:clear
+	meson src _build
+	cd _build/pkg/flatpak && \
+	flatpak-builder --install _build cool.ldr.lfy.json --user
+
+
+test-aur: clear
+	meson src _build
+	cd _build/pkg/aur && \
+	mkdir lfy-${VERSION} && \
+	cp -r ../../../src lfy-${VERSION} && \
+	zip -r v${VERSION}.zip lfy-${VERSION} && \
+	makepkg -sf && \
+	mv *.pkg.tar.zst ../../../disk/
+
+test:clear
+	meson src _build --prefix="${HOME}/.local"
+	meson compile -C _build
+	meson test -C _build
+	meson install -C _build
+	# DESTDIR="${PWD}/test" meson install -C _build
+
+uninstall:
+	cd _build && ninja uninstall
 

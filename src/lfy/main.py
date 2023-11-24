@@ -31,6 +31,7 @@ class LfyApplication(Adw.Application):
         self.cb.connect("changed", self.copy)
 
 
+
     def do_activate(self, text=""):
         """Called when the application is activated.
 
@@ -38,9 +39,7 @@ class LfyApplication(Adw.Application):
         necessary.
         """
         win = self.props.active_window
-        print(win)
         if not win:
-            print("111")
             width, height = Settings.get().window_size
             win = TranslateWindow(application=self,
                                   default_height=height,
@@ -90,7 +89,6 @@ class LfyApplication(Adw.Application):
         Args:
             f (_type_): _description_
         """
-        print("set_splice_text_action")
         win = self.props.active_window
         if win is not None:
             win.set_splice_text()

@@ -127,7 +127,6 @@ def translate_interface_1(text, from_lang="auto", to_lang=""):
     except Exception as e:
         error_s = _("decrypt translation message failed")
         return f"{error_s}\n\n{e}"
-    print(res)
     tmp = ""
     if res['code'] != 0:
         return ""

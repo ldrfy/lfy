@@ -30,7 +30,6 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 
 data_files = get_all_files("./share")
-print(data_files)
 
 setuptools.setup(name='@APP_NAME@',
                  version='@VERSION@',
