@@ -2,7 +2,7 @@
 <!-- Created with Cambalache 0.16.0 -->
 <interface>
   <requires lib="gtk" version="4.12"/>
-  <object class="GtkBox" id="ThemeSwitcher">
+  <template class="ThemeSwitcher" parent="GtkBox">
     <property name="hexpand">true</property>
     <child>
       <object class="GtkBox" id="box">
@@ -56,5 +56,5 @@
     <style>
       <class name="themeswitcher"/>
     </style>
-  </object>
+  </template>
 </interface>

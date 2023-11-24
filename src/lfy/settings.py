@@ -2,7 +2,7 @@
 # Copyright 2021-2022 Rafael Mardojai CM
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Gio
+from gi.repository import Gio, GLib
 
 from lfy import APP_ID
 
@@ -94,3 +94,31 @@ class Settings(Gio.Settings):
     @vpn_addr_port.setter
     def vpn_addr_port(self, key):
         self.set_string('vpn-addr-port', key)
+
+    @property
+    def window_size(self):
+        """窗口大小
+
+        Returns:
+            _type_: _description_
+        """
+        value = self.get_value('window-size')
+        return (value[0], value[1])
+
+    @window_size.setter
+    def window_size(self, size):
+        width, height = size
+        self.set_value('window-size', GLib.Variant('ai', [width, height]))
+
+    @property
+    def color_scheme(self):
+        """主题
+
+        Returns:
+            _type_: _description_
+        """
+        return self.get_string('color-scheme')
+
+    @color_scheme.setter
+    def color_scheme(self, scheme):
+        self.set_string('color-scheme', scheme)

@@ -6,8 +6,8 @@ from gi.repository import Adw, Gtk
 
 from lfy.api.base import Server
 from lfy.api.server import get_server_names_api_key, get_servers_api_key
-from lfy.server_preferences import ServerPreferences
 from lfy.settings import Settings
+from lfy.widgets.server_preferences import ServerPreferences
 
 
 @Gtk.Template(resource_path='/cool/ldr/lfy/preference.ui')
