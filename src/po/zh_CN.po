@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2023-11-22 01:27+0800\n"
+"POT-Creation-Date: 2023-11-24 13:25+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/data/cool.ldr.lfy.in.in.desktop:3 src/lfy/main.py:43
-#: src/data/resources/translate.ui:109
+#: src/data/cool.ldr.lfy.in.in.desktop:3 src/lfy/main.py:55
+#: src/data/resources/translate.ui:110
 msgid "lfy"
 msgstr "兰译"
 
@@ -26,13 +26,21 @@ msgstr "兰译"
 msgid "No description"
 msgstr "没有介绍"
 
-#: src/lfy/main.py:49
+#: src/lfy/main.py:61
 msgid "translator_credits"
 msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 
-#: src/lfy/main.py:50
+#: src/lfy/main.py:62
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
+
+#: src/lfy/translate.py:182
+msgid "Splice text"
+msgstr "拼接文本"
+
+#: src/lfy/translate.py:184
+msgid "Not splice text"
+msgstr "不拼接文本"
 
 #: src/lfy/api/__init__.py:36
 msgid ""
@@ -147,31 +155,31 @@ msgstr "腾讯"
 msgid "please input secret_id and secret_key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
-#: src/data/resources/translate.ui:60
+#: src/data/resources/translate.ui:59
 msgid "Remove symbols such as line breaks"
 msgstr "移除换行符"
 
-#: src/data/resources/translate.ui:65
+#: src/data/resources/translate.ui:64 src/data/resources/help-overlay.ui:25
 msgid "Splice the next copied text with the previous text"
 msgstr "将下一个复制的文本与上一个文本拼接"
 
-#: src/data/resources/translate.ui:70
+#: src/data/resources/translate.ui:69
 msgid "translate"
 msgstr "翻译"
 
-#: src/data/resources/translate.ui:98
+#: src/data/resources/translate.ui:97
 msgid "Menu"
 msgstr "菜单"
 
-#: src/data/resources/translate.ui:115
+#: src/data/resources/translate.ui:121
 msgid "_Preferences"
 msgstr "_设置"
 
-#: src/data/resources/translate.ui:119
+#: src/data/resources/translate.ui:125
 msgid "_Keyboard Shortcuts"
 msgstr "_快捷键"
 
-#: src/data/resources/translate.ui:123
+#: src/data/resources/translate.ui:129
 msgid "_About lfy"
 msgstr "_关于 兰译"
 
@@ -206,3 +214,26 @@ msgstr "其他"
 #: src/data/resources/preference.ui:48
 msgid "vpn addr and port, like http://127.0.0.1:7890"
 msgstr "代理地址和端口，比如：http://127.0.0.1:7890"
+
+#: src/data/resources/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "General"
+msgstr "通用"
+
+#: src/data/resources/help-overlay.ui:18
+msgid "Translate"
+msgstr "翻译"
+
+#: src/data/resources/help-overlay.ui:24
+msgid "Splice Text"
+msgstr "拼接文本"
+
+#: src/data/resources/help-overlay.ui:31
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "退出"
+
+#: src/data/resources/help-overlay.ui:37
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "显示快捷键"

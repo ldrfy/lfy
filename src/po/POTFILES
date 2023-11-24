@@ -17,3 +17,4 @@ src/lfy/api/server/tencent.py
 src/data/resources/translate.ui
 src/data/resources/server-preferences.ui
 src/data/resources/preference.ui
+src/data/resources/help-overlay.ui
