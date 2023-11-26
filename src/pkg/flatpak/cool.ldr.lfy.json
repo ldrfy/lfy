@@ -24,7 +24,7 @@
         "*.pyc"
     ],
     "modules": [
-        "pypi-dependencies.json",
+        "python3-requests.json",
         {
             "name": "@APP_NAME@",
             "builddir": true,

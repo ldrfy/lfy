@@ -127,4 +127,4 @@ class LfyApplication(Adw.Application):
     def update_app(self, update_msg):
         win = self.props.active_window
         if win is not None:
-            win.update(update_msg, del_wrapping=False)
+            win.tv_from.get_buffer().set_text(update_msg)
