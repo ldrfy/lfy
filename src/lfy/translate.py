@@ -94,7 +94,7 @@ class TranslateWindow(Adw.ApplicationWindow):
     def _set_tv_copy(self, a):
         self.is_tv_copy = True
 
-    def update(self, text, reload=False):
+    def update(self, text, reload=False, del_wrapping=True):
         """翻译
 
         Args:
@@ -112,7 +112,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             self.last_text_one = text
             if self.cbtn_add_old.get_active():
                 text = f"{self.last_text} {text}"
-            if self.cbtn_del_wrapping.get_active():
+            if self.cbtn_del_wrapping.get_active() and del_wrapping:
                 text = self.process_text(text)
             self.last_text = text
             buffer_from.set_text(text)

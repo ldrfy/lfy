@@ -2,7 +2,7 @@
 #
 # Copyright 2023 Unknown
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, Gio, Gtk
 
 from lfy.api.base import Server
 from lfy.api.server import get_server_names_api_key, get_servers_api_key
@@ -21,13 +21,15 @@ class PreferenceWindow(Adw.PreferencesWindow):
 
     acr_server: Adw.ComboRow = Gtk.Template.Child()
     entry_vpn_addr: Adw.EntryRow = Gtk.Template.Child()
-
+    auto_check_update: Gtk.Switch = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.server: Server
         self.acr_server.set_model(Gtk.StringList.new(get_server_names_api_key()))
         self.entry_vpn_addr.props.text = Settings.get().vpn_addr_port
+
+        Settings.get().bind('auto-check-update', self.auto_check_update, 'active', Gio.SettingsBindFlags.DEFAULT)
 
 
     @Gtk.Template.Callback()

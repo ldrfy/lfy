@@ -111,6 +111,15 @@ class Settings(Gio.Settings):
         self.set_value('window-size', GLib.Variant('ai', [width, height]))
 
     @property
+    def auto_check_update(self):
+        """自动核对更新
+
+        Returns:
+            _type_: _description_
+        """
+        return self.get_boolean('auto-check-update')
+
+    @property
     def color_scheme(self):
         """主题
 

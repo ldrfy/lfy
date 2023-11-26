@@ -4,6 +4,9 @@
 		<key type="ai" name="window-size">
 			<default>[800, 300]</default>
 		</key>
+		<key type="b" name="auto-check-update">
+			<default>true</default>
+		</key>
 		<key type="s" name="color-scheme">
 			<choices>
 				<choice value="auto" />

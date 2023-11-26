@@ -8,6 +8,7 @@ src/lfy/translate.py
 
 src/lfy/api/__init__.py
 src/lfy/api/base.py
+src/lfy/api/check_update.py
 src/lfy/api/server/__init__.py
 src/lfy/api/server/baidu.py
 src/lfy/api/server/google.py
