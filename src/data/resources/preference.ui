@@ -40,7 +40,27 @@
         </child>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title" translatable="yes">Other</property>
+            <child>
+              <object class="GtkBox">
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label" translatable="yes">auto check update</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkSpinner"/>
+                </child>
+                <child>
+                  <object class="GtkSwitch" id="auto_check_update">
+                    <property name="tooltip-text" translatable="yes">Automatically check for updates when opening software</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
             <child>
               <object class="AdwEntryRow" id="entry_vpn_addr">
                 <property name="input-purpose">url</property>

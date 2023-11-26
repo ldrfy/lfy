@@ -1,9 +1,11 @@
 # main.py
+import threading
 from gettext import gettext as _
 
-from gi.repository import Adw, Gdk, Gio
+from gi.repository import Adw, Gdk, Gio, GLib
 
 from lfy import PACKAGE_URL, PACKAGE_URL_BUG
+from lfy.api.check_update import main as check_update
 from lfy.preference import PreferenceWindow
 from lfy.settings import Settings
 from lfy.translate import TranslateWindow
@@ -30,6 +32,8 @@ class LfyApplication(Adw.Application):
         self.cb = Gdk.Display().get_default().get_clipboard()
         self.cb.connect("changed", self.copy)
 
+        if Settings.get().auto_check_update:
+            threading.Thread(target=self.find_update, daemon=True).start()
 
 
     def do_activate(self, text=""):
@@ -113,3 +117,14 @@ class LfyApplication(Adw.Application):
         def on_active_copy(cb, res):
             self.do_activate(cb.read_text_finish(res))
         cb.read_text_async(None, on_active_copy)
+
+    def find_update(self):
+        update_msg = check_update()
+        print(update_msg)
+        if update_msg is not None:
+            GLib.idle_add(self.update_app, update_msg)
+
+    def update_app(self, update_msg):
+        win = self.props.active_window
+        if win is not None:
+            win.update(update_msg, del_wrapping=False)

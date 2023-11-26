@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2023-11-26 16:46+0800\n"
+"POT-Creation-Date: 2023-11-26 20:54+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/data/cool.ldr.lfy.in.in.desktop:3 src/lfy/main.py:54
+#: src/data/cool.ldr.lfy.in.in.desktop:3 src/lfy/main.py:58
 #: src/data/resources/translate.ui:111
 msgid "lfy"
 msgstr "兰译"
@@ -26,11 +26,11 @@ msgstr "兰译"
 msgid "No description"
 msgstr "没有介绍"
 
-#: src/lfy/main.py:60
+#: src/lfy/main.py:64
 msgid "translator_credits"
 msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 
-#: src/lfy/main.py:61
+#: src/lfy/main.py:65
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
 
@@ -179,11 +179,15 @@ msgstr "为翻译服务设置密钥，点右侧查看细节"
 msgid "API Key"
 msgstr "密钥"
 
-#: src/data/resources/preference.ui:43
-msgid "Other"
-msgstr "其他"
+#: src/data/resources/preference.ui:47
+msgid "auto check update"
+msgstr "自动检查更新"
 
-#: src/data/resources/preference.ui:48
+#: src/data/resources/preference.ui:55
+msgid "Automatically check for updates when opening software"
+msgstr "软件打开时，自动检查更新"
+
+#: src/data/resources/preference.ui:68
 msgid "vpn addr and port, like http://127.0.0.1:7890"
 msgstr "代理地址和端口，比如：http://127.0.0.1:7890"
 
