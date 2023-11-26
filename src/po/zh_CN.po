@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2023-11-24 17:16+0800\n"
+"POT-Creation-Date: 2023-11-26 16:46+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/data/cool.ldr.lfy.in.in.desktop:3 src/lfy/main.py:55
+#: src/data/cool.ldr.lfy.in.in.desktop:3 src/lfy/main.py:54
 #: src/data/resources/translate.ui:111
 msgid "lfy"
 msgstr "兰译"
@@ -26,19 +26,19 @@ msgstr "兰译"
 msgid "No description"
 msgstr "没有介绍"
 
-#: src/lfy/main.py:61
+#: src/lfy/main.py:60
 msgid "translator_credits"
 msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 
-#: src/lfy/main.py:62
+#: src/lfy/main.py:61
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
 
-#: src/lfy/translate.py:184
+#: src/lfy/translate.py:183
 msgid "Next translation splicing text"
 msgstr "下次翻译拼接文本"
 
-#: src/lfy/translate.py:186
+#: src/lfy/translate.py:185
 msgid "Next translation without splicing text"
 msgstr "下次翻译不拼接文本"
 
@@ -51,7 +51,7 @@ msgstr "复制自动翻译，建议将此窗口置顶"
 msgid "The connection timed out. Maybe there is a network problem"
 msgstr "连接超时，网络可能有问题（比如需要代理）"
 
-#: src/lfy/api/__init__.py:53 src/lfy/api/server/youdao.py:75
+#: src/lfy/api/__init__.py:53 src/lfy/api/server/youdao.py:34
 msgid "something error, try other translate engine?"
 msgstr "出现了一些错误，试试其他翻译引擎？"
 
@@ -107,7 +107,7 @@ msgstr "请输入 app_id 和 secret_key，类似："
 msgid "please input API Key in preference"
 msgstr "请在设置中填写 API Key"
 
-#: src/lfy/api/server/baidu.py:108 src/lfy/api/server/tencent.py:127
+#: src/lfy/api/server/baidu.py:107 src/lfy/api/server/tencent.py:126
 msgid "something error:"
 msgstr "一些错误发生："
 
@@ -115,37 +115,9 @@ msgstr "一些错误发生："
 msgid "google"
 msgstr "谷歌"
 
-#: src/lfy/api/server/youdao.py:20
-msgid ""
-"python no lib: cryptography, please try: \n"
-"\n"
-" pip install cryptography"
-msgstr ""
-"未找到python库: cryptography, 请尝试安装: \n"
-"\n"
-" pip install cryptography"
-
-#: src/lfy/api/server/youdao.py:27
+#: src/lfy/api/server/youdao.py:17
 msgid "youdao"
 msgstr "有道"
-
-#: src/lfy/api/server/youdao.py:56
-msgid "youdao interface is error, auto change interface. please try again"
-msgstr "有道默认翻译接口错误，已经自动修正，再点翻译试一下？"
-
-#: src/lfy/api/server/youdao.py:107
-msgid ""
-"can not get secret key\n"
-"\n"
-"try other translate engine?"
-msgstr ""
-"不能找到 secret key\n"
-"\n"
-"试试其他翻译引擎？"
-
-#: src/lfy/api/server/youdao.py:128
-msgid "decrypt translation message failed"
-msgstr "解密翻译信息错误"
 
 #: src/lfy/api/server/tencent.py:20
 msgid "tencent"
@@ -237,4 +209,3 @@ msgstr "退出"
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "显示快捷键"
-
