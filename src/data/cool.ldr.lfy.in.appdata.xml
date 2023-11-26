@@ -2,7 +2,7 @@
 <component type="desktop-application">
   <id>@APP_ID@</id>
   <name>@APP_NAME@</name>
-  <summary>Translation software specially made for reading scientific research documents</summary>
+  <summary>Translation software for gnome</summary>
   <description>
     <p>
       An easy and pleasant way to translate.
@@ -17,9 +17,20 @@
       <image type="source">
         https://raw.githubusercontent.com/yuhldr/lfy/master/doc/images/preference.png</image>
     </screenshot>
+    <screenshot>
+      <image type="source">
+        https://raw.githubusercontent.com/yuhldr/lfy/master/doc/images/server-preference.png</image>
+    </screenshot>
+    <screenshot>
+      <image type="source">
+        https://raw.githubusercontent.com/yuhldr/lfy/master/doc/images/shortcuts.png</image>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://raw.githubusercontent.com/yuhldr/lfy/master/doc/images/about.png</image>
+    </screenshot>
   </screenshots>
   <releases>
-    <release version="45.0" date="2023-11-20">
+    <release version="0.0.3" date="2023-11-20">
       <description>
         <p>Basic functions completed</p>
       </description>
