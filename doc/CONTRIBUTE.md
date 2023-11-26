@@ -33,7 +33,7 @@ sudo pacman -S meson appstream-glib
 ### 依赖：
 
 ```bash
-sudo pacman -S libadwaita python-gobject python-requests python-cryptography
+sudo pacman -S libadwaita python-gobject python-requests
 ```
 
 

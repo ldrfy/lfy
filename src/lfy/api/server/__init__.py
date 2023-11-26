@@ -8,14 +8,9 @@ from lfy.api.server import baidu, google, tencent, youdao
 servers = [
     baidu.SERVER,
     tencent.SERVER,
-    google.SERVER
+    google.SERVER,
+    youdao.SERVER
 ]
-
-try:
-    import cryptography
-    servers.append(youdao.SERVER)
-except ModuleNotFoundError as e0:
-    print(_("python no lib: cryptography, please try: \n\n pip install cryptography"))
 
 
 def get_server_names():

@@ -10,7 +10,6 @@ python = import('python')
 APP_ID = 'cool.ldr.' + meson.project_name()
 PKGDATA_DIR = join_paths(get_option('prefix'), get_option('datadir'), APP_ID)
 # PKGLIB_DIR = join_paths(get_option('prefix'), get_option('libdir'), APPLICATION_ID)
-SCHEMAS_DIR = join_paths(get_option('prefix'), get_option('datadir'))
 LOCALE_DIR = join_paths(get_option('prefix'), get_option('datadir'), 'locale')
 
 PACKAGE_URL = 'https://github.com/yuhldr/lfy'
@@ -38,7 +37,6 @@ conf.set('PYTHON', py_installation.path())
 
 conf.set('LOCALE_DIR', LOCALE_DIR)
 conf.set('PKGDATA_DIR', PKGDATA_DIR)
-conf.set('SCHEMAS_DIR', SCHEMAS_DIR)
 conf.set('PYTHON_DIR', PYTHON_DIR)
 
 conf.set('PACKAGE_URL', PACKAGE_URL)

@@ -70,8 +70,10 @@ test-aur: clear
 	meson _build
 	cd _build/src/pkg/aur && \
 	mkdir lfy-${VERSION} && \
-	cp -r ../../../src lfy-${VERSION} && \
+	cp -r ../../../../src lfy-${VERSION}/ && \
+	cp -r ../../../../meson.build lfy-${VERSION}/ && \
 	zip -r v${VERSION}.zip lfy-${VERSION} && \
+	rm -r lfy-${VERSION} && \
 	makepkg -sf && \
 	mv *.pkg.tar.zst ${DISK}
 
