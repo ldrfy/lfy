@@ -87,7 +87,7 @@ def main():
         else:
             v = data["version"]
             if compare_versions(v, VERSION):
-                return f'New version: {v}\n\nplease upgrade it: {data["url"]}\n\n{data["msg"]}'
+                return f'New version: {v}\n\nplease upgrade it:\n{data["url"]}\n\n{data["msg"]}'
             else:
                 return None
     # pylint: disable=W0718

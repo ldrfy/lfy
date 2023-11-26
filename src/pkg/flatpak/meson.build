@@ -5,8 +5,8 @@ configure_file(
   install: false,
 )
 configure_file(
-  input: 'pypi-dependencies.json',
-  output: 'pypi-dependencies.json',
+  input: 'python3-requests.json',
+  output: 'python3-requests.json',
   configuration: conf_pkg,
   install: false,
 )
