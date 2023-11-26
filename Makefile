@@ -1,5 +1,5 @@
 TO_LANG = zh_CN
-VERSION = 0.0.2
+VERSION = 0.0.3
 DISK = ../../../../disk/
 
 clear:
@@ -63,7 +63,9 @@ update-po:
 test-flatpak:clear
 	meson _build
 	cd _build/src/pkg/flatpak && \
-	flatpak-builder --install _build cool.ldr.lfy.json --user
+	flatpak-builder --user --repo=repo-dir build cool.ldr.lfy.json  && \
+	flatpak build-bundle repo-dir ${DISK}/lfy-${VERSION}.flatpak cool.ldr.lfy
+	# flatpak-builder --install build cool.ldr.lfy.json --user  && \
 
 
 test-aur: clear
