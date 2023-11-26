@@ -8,7 +8,7 @@ from gettext import gettext as _
 
 from requests.exceptions import ConnectTimeout
 
-from lfy.api.server import baidu, google, tencent, youdao
+from lfy.api.server import baidu, google, tencent
 from lfy.settings import Settings
 
 # 设置代理地址和端口号
@@ -35,9 +35,7 @@ def translate_by_server(text, server_key, lang_to, lang_from="auto"):
         if len(text.strip()) == 0:
             return _("Copy automatic translation, it is recommended to pin this window to the top")
 
-        if server_key == youdao.SERVER.key:
-            return youdao.translate_text(text, lang_to, lang_from)
-        elif server_key == google.SERVER.key:
+        if server_key == google.SERVER.key:
             return google.translate_text(text, lang_to, lang_from)
         elif server_key == baidu.SERVER.key:
             return baidu.translate_text(text, lang_to, lang_from)

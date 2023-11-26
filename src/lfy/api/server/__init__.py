@@ -3,13 +3,12 @@
 """
 from gettext import gettext as _
 
-from lfy.api.server import baidu, google, tencent, youdao
+from lfy.api.server import baidu, google, tencent
 
 servers = [
     baidu.SERVER,
     tencent.SERVER,
     google.SERVER,
-    youdao.SERVER
 ]
 
 

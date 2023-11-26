@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2023-11-26 20:54+0800\n"
+"POT-Creation-Date: 2023-11-26 21:28+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -47,19 +47,19 @@ msgid ""
 "Copy automatic translation, it is recommended to pin this window to the top"
 msgstr "复制自动翻译，建议将此窗口置顶"
 
-#: src/lfy/api/__init__.py:50
+#: src/lfy/api/__init__.py:48
 msgid "The connection timed out. Maybe there is a network problem"
 msgstr "连接超时，网络可能有问题（比如需要代理）"
 
-#: src/lfy/api/__init__.py:53 src/lfy/api/server/youdao.py:34
+#: src/lfy/api/__init__.py:51
 msgid "something error, try other translate engine?"
 msgstr "出现了一些错误，试试其他翻译引擎？"
 
-#: src/lfy/api/__init__.py:69 src/lfy/api/__init__.py:93
+#: src/lfy/api/__init__.py:67 src/lfy/api/__init__.py:91
 msgid "Not supported This Server!"
 msgstr "暂不支持该服务"
 
-#: src/lfy/api/__init__.py:76
+#: src/lfy/api/__init__.py:74
 msgid "save success!"
 msgstr "保存成功"
 
@@ -114,10 +114,6 @@ msgstr "一些错误发生："
 #: src/lfy/api/server/google.py:16
 msgid "google"
 msgstr "谷歌"
-
-#: src/lfy/api/server/youdao.py:17
-msgid "youdao"
-msgstr "有道"
 
 #: src/lfy/api/server/tencent.py:20
 msgid "tencent"

@@ -12,7 +12,6 @@ src/lfy/api/check_update.py
 src/lfy/api/server/__init__.py
 src/lfy/api/server/baidu.py
 src/lfy/api/server/google.py
-src/lfy/api/server/youdao.py
 src/lfy/api/server/tencent.py
 
 src/data/resources/translate.ui
