@@ -8,9 +8,10 @@ python = import('python')
 # locale/
 
 APP_ID = 'cool.ldr.' + meson.project_name()
-PKGDATA_DIR = join_paths(get_option('prefix'), get_option('datadir'), APP_ID)
 # PKGLIB_DIR = join_paths(get_option('prefix'), get_option('libdir'), APPLICATION_ID)
-LOCALE_DIR = join_paths(get_option('prefix'), get_option('datadir'), 'locale')
+SCHEMAS_DIR = join_paths(get_option('prefix'), get_option('datadir'))
+PKGDATA_DIR = join_paths(SCHEMAS_DIR, APP_ID)
+LOCALE_DIR = join_paths(SCHEMAS_DIR, 'locale')
 
 PACKAGE_URL = 'https://github.com/yuhldr/lfy'
 PACKAGE_URL_BUG = 'https://github.com/yuhldr/lfy/issues'
@@ -35,6 +36,7 @@ conf.set('APP_NAME', meson.project_name())
 conf.set('VERSION', meson.project_version())
 conf.set('PYTHON', py_installation.path())
 
+conf.set('SCHEMAS_DIR', SCHEMAS_DIR)
 conf.set('LOCALE_DIR', LOCALE_DIR)
 conf.set('PKGDATA_DIR', PKGDATA_DIR)
 conf.set('PYTHON_DIR', PYTHON_DIR)

@@ -1,22 +1,43 @@
 #!@PYTHON@
 
 # lt
-import gettext
-import locale
 import os
-
+import subprocess
 import sys
-
 
 APP_ID = '@APP_ID@'
 VERSION = '@VERSION@'
+
+SCHEMAS_DIR = '@SCHEMAS_DIR@'
+PYTHON_DIR = '@PYTHON_DIR@'
+
 LOCALE_DIR = '@LOCALE_DIR@'
 PKGDATA_DIR = '@PKGDATA_DIR@'
 
-sys.path.append('@PYTHON_DIR@')
+print(SCHEMAS_DIR)
+if not os.path.exists(PKGDATA_DIR):
+    # 说明是pip这一类的
+    print(f"路径修正：{SCHEMAS_DIR}")
+    THIS_DIR, THIS_FILENAME = os.path.split(__file__)
+    PYTHON_DIR = os.path.abspath(f"{THIS_DIR}/../lib/")
+    SCHEMAS_DIR = os.path.abspath(f"{THIS_DIR}/../share/")
+    PKGDATA_DIR = os.path.abspath(f"{SCHEMAS_DIR}/{APP_ID}/")
+    LOCALE_DIR = os.path.abspath(f"{SCHEMAS_DIR}/locale/")
+    subprocess.run(["glib-compile-schemas", f"{SCHEMAS_DIR}/glib-2.0/schemas"], check=True)
+
+    os.environ["XDG_DATA_DIRS"] = f'{SCHEMAS_DIR}:' + \
+        os.environ.get("XDG_DATA_DIRS", "")
+    print(SCHEMAS_DIR)
+
+print(os.environ.get("XDG_DATA_DIRS", ""))
+# python lib
+sys.path.append(PYTHON_DIR)
 
 # 这个在archlinux测试可以后台响应剪贴板，但是在flatpak会直接报错，暂时删除
 # os.environ["GDK_BACKEND"] = "x11"
+
+import gettext
+import locale
 
 import gi
 
@@ -27,7 +48,7 @@ gi.require_version('Gio', '2.0')
 gi.require_version('Gtk', '4.0')
 gi.require_version('Gst', '1.0')
 
-from gi.repository import Adw, Gio, Gtk
+from gi.repository import Gio  # pylint: disable=c0413
 
 
 def set_internationalization():
@@ -46,17 +67,26 @@ def set_internationalization():
 
 def set_resources():
     """Sets application ressource file."""
+    # pylint: disable=w0212
     Gio.Resource._register(Gio.resource_load(os.path.join(PKGDATA_DIR, f'{APP_ID}.gresource')))
 
 
 def run_application():
-    """Runs application and returns its exit code."""
-    from lfy.main import LfyApplication
+    """运行
+
+    Returns:
+        _type_: _description_
+    """
+    from lfy.main import LfyApplication  # pylint: disable=c0415
     return LfyApplication(APP_ID, VERSION).run(sys.argv)
 
 
 def main():
-    """Sets environment and runs GNOME Music."""
+    """主入口
+
+    Returns:
+        _type_: _description_
+    """
     set_internationalization()
     set_resources()
     return run_application()
