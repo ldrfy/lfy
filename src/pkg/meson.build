@@ -4,7 +4,7 @@ conf_pkg.set('APP_NAME', meson.project_name())
 conf_pkg.set('PACKAGE_URL', PACKAGE_URL)
 conf_pkg.set('VERSION', meson.project_version())
 
-# subdir('pip')
+subdir('pip')
 subdir('deb/DEBIAN')
 subdir('aur')
 subdir('flatpak')

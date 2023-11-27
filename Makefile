@@ -1,11 +1,34 @@
 TO_LANG = zh_CN
 VERSION = 0.0.3
 DISK = ../../../../disk/
+DESTDIR = "/"
+PREFIX = "${HOME}/.local/"
+
 
 clear:
 	rm -rf _build test
 	mkdir -p disk
 
+test:clear
+	rm -rf {HOME}/.local/share/glib-2.0/schemas/gschemas.compiled
+	rm -rf {HOME}/.local/lib/lfy
+
+	meson _build --prefix=${PREFIX}
+	meson compile -C _build
+	meson test -C _build
+	DESTDIR=${DESTDIR} meson install -C _build
+
+whl:
+	make PREFIX="/usr" DESTDIR="${PWD}/_build/src/pkg/pip" test
+
+	cd _build/src/pkg/pip && \
+	cp ${DISK}/../README.md ./usr/ && \
+	mv setup.py ./usr/ && \
+	cd ./usr/ && \
+	mv lib/lfy ./ && \
+	python setup.py sdist bdist_wheel && \
+	cd ../ && \
+	cp ./usr/dist/*.whl ${DISK}
 
 flatpak:clear
 	meson _build
@@ -63,9 +86,7 @@ update-po:
 test-flatpak:clear
 	meson _build
 	cd _build/src/pkg/flatpak && \
-	flatpak-builder --user --repo=repo-dir build cool.ldr.lfy.json  && \
-	flatpak build-bundle repo-dir ${DISK}/lfy-${VERSION}.flatpak cool.ldr.lfy
-	# flatpak-builder --install build cool.ldr.lfy.json --user  && \
+	flatpak-builder --install build cool.ldr.lfy.json --user
 
 
 test-aur: clear
@@ -79,12 +100,6 @@ test-aur: clear
 	makepkg -sf && \
 	mv *.pkg.tar.zst ${DISK}
 
-test:clear
-	meson _build --prefix="${HOME}/.local"
-	meson compile -C _build
-	meson test -C _build
-	meson install -C _build
-	# DESTDIR="${PWD}/test" meson install -C _build
 
 uninstall:
 	cd _build && ninja uninstall
