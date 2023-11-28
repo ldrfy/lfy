@@ -2,7 +2,7 @@ package: @APP_NAME@
 Section: net
 version: @VERSION@
 Depends: python3,python3-gi,python3-requests
-architecture: amd64
+architecture: any
 Maintainer: yuhldr <yuhldr@qq.com>
 Homepage: https://github.com/ldrfy/@APP_NAME@
 description: 一个非常好用的翻译软件，看文献的好帮手
