@@ -19,8 +19,8 @@ SCHEMAS_DIR = join_paths(get_option('prefix'), get_option('datadir'))
 PKGDATA_DIR = join_paths(SCHEMAS_DIR, APP_ID)
 LOCALE_DIR = join_paths(SCHEMAS_DIR, 'locale')
 
-PACKAGE_URL = 'https://github.com/yuhldr/lfy'
-PACKAGE_URL_BUG = 'https://github.com/yuhldr/lfy/issues'
+PACKAGE_URL = 'https://github.com/ldrfy/lfy'
+PACKAGE_URL_BUG = 'https://github.com/ldrfy/lfy/issues'
 
 py_installation = python.find_installation('python3')
 # /usr/lib/python3.11/site-packages

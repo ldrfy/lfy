@@ -32,7 +32,7 @@ def get_by_github():
     Returns:
         _type_: _description_
     """
-    url = "https://raw.githubusercontent.com/yuhldr/lfy/main/src/data/version.json"
+    url = "https://raw.githubusercontent.com/ldrfy/lfy/main/data/version.json"
 
     try:
         request = requests.get(url, timeout=TIME_OUT)

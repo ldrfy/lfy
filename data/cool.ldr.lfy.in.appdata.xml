@@ -11,22 +11,22 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://raw.githubusercontent.com/yuhldr/lfy/master/doc/images/main.png</image>
+      <image type="source">https://raw.githubusercontent.com/ldrfy/docs/main/images/main.png</image>
     </screenshot>
     <screenshot>
       <image type="source">
-        https://raw.githubusercontent.com/yuhldr/lfy/master/doc/images/preference.png</image>
+        https://raw.githubusercontent.com/ldrfy/docs/main/images/preference.png</image>
     </screenshot>
     <screenshot>
       <image type="source">
-        https://raw.githubusercontent.com/yuhldr/lfy/master/doc/images/server-preference.png</image>
+        https://raw.githubusercontent.com/ldrfy/docs/main/images/server-preference.png</image>
     </screenshot>
     <screenshot>
       <image type="source">
-        https://raw.githubusercontent.com/yuhldr/lfy/master/doc/images/shortcuts.png</image>
+        https://raw.githubusercontent.com/ldrfy/docs/main/images/shortcuts.png</image>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/yuhldr/lfy/master/doc/images/about.png</image>
+      <image type="source">https://raw.githubusercontent.com/ldrfy/docs/main/images/about.png</image>
     </screenshot>
   </screenshots>
   <releases>
