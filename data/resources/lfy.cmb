@@ -152,7 +152,7 @@
 	(10,21,"GtkStackPage","name","spinner",None,None,None,None,None,None,None,None,None),
 	(10,22,"GtkWidget","valign","3",None,None,None,None,None,None,None,None,None),
 	(10,23,"GtkButton","label","how to get API Key",1,None,None,None,None,None,None,None,None),
-	(10,23,"GtkLinkButton","uri","https://github.com/yuhldr/lfy",None,None,None,None,None,None,None,None,None),
+	(10,23,"GtkLinkButton","uri","https://github.com/ldrfy/lfy",None,None,None,None,None,None,None,None,None),
 	(12,1,"GtkWidget","hexpand","true",None,None,None,None,None,None,None,None,None),
 	(12,2,"GtkBox","spacing","12",None,None,None,None,None,None,None,None,None),
 	(12,2,"GtkOrientable","orientation","0",None,None,None,None,None,None,None,None,None),
