@@ -1,27 +1,29 @@
 TO_LANG = zh_CN
 VERSION = 0.0.3
-DISK = ../../../../disk/
+DISK = ../../../dist/
+BUILD_PKG=build/pkg
 DESTDIR = "/"
 PREFIX = "${HOME}/.local/"
 
 
 clear:
-	rm -rf _build test
-	mkdir -p disk
+	rm -rf build test
+	mkdir -p dist
 
 test:clear
 	rm -rf {HOME}/.local/share/glib-2.0/schemas/gschemas.compiled
 	rm -rf {HOME}/.local/lib/lfy
 
-	meson _build --prefix=${PREFIX}
-	meson compile -C _build
-	meson test -C _build
-	DESTDIR=${DESTDIR} meson install -C _build
+	meson build --prefix=${PREFIX}
+	meson compile -C build
+	meson test -C build
+	meson dist -C build --allow-dirty
+	DESTDIR=${DESTDIR} meson install -C build
 
 whl:
-	make PREFIX="/usr" DESTDIR="${PWD}/_build/src/pkg/pip" test
+	make PREFIX="/usr" DESTDIR="${PWD}/${BUILD_PKG}/pip" test
 
-	cd _build/src/pkg/pip && \
+	cd ${BUILD_PKG}/pip && \
 	cp ${DISK}/../README.md ./usr/ && \
 	mv setup.py ./usr/ && \
 	cd ./usr/ && \
@@ -31,30 +33,30 @@ whl:
 	cp ./usr/dist/*.whl ${DISK}
 
 flatpak:clear
-	meson _build
-	cd _build/src/pkg/flatpak && \
-	flatpak-builder --repo=repo-dir _build cool.ldr.lfy.json --user &&\
+	meson build
+	cd ${BUILD_PKG}/flatpak && \
+	flatpak-builder --repo=repo-dir build cool.ldr.lfy.json --user &&\
 	flatpak build-bundle repo-dir lfy-${VERSION}.flatpak cool.ldr.lfy && \
 	mv *.flatpak ${DISK}
-	# flatpak-builder --install _build cool.ldr.lfy.json --user
+	# flatpak-builder --install build cool.ldr.lfy.json --user
 
 
 
 aur: clear
-	meson _build
+	meson build
 
-	cd _build/src/pkg/aur && \
+	cd ${BUILD_PKG}/aur && \
 	makepkg -sf && \
 	mv *.pkg.tar.zst ${DISK}
 
 
 deb: clear
-	meson _build --prefix="/usr"
-	meson compile -C _build
-	meson test -C _build
-	DESTDIR="${PWD}/_build/src/pkg/deb" meson install -C _build
+	meson build --prefix="/usr"
+	meson compile -C build
+	meson test -C build
+	DESTDIR="${PWD}/${BUILD_PKG}/deb" meson install -C build
 
-	cd "${PWD}/_build/src/pkg/" \
+	cd "${PWD}/${BUILD_PKG}/pkg/" \
 	&& dpkg -b deb ./deb/lfy-${VERSION}.deb && \
 	cd deb && \
 	mv *.deb ${DISK}
@@ -63,37 +65,39 @@ deb: clear
 # Generate .pot file
 update-pot:
 	xgettext -d "lfy" \
-			--output=./src/po/lfy.pot \
+			--output=./po/lfy.pot \
 			--copyright-holder="yuhldr" \
 			--package-name="cool.ldr.lfy" \
 			--msgid-bugs-address="yuhldr@gmail.com" \
 			--add-comments=TRANSLATORS \
-			--files-from=./src/po/POTFILES
+			--files-from=./po/POTFILES
 
 
 po-init:
-	msginit -i ./src/po/lfy.pot -o ./src/po/${TO_LANG}.po
+	msginit -i ./po/lfy.pot -o ./po/${TO_LANG}.po
 
 
 update-po:
-	msgmerge -U ./src/po/${TO_LANG}.po ./src/po/lfy.pot
+	msgmerge -U ./po/${TO_LANG}.po ./po/lfy.pot
 
 
 .PHONY: build other update-pot update-po po-init test whl
 
 
+dev-data:
+	mkdir test
 
 test-flatpak:clear
-	meson _build
-	cd _build/src/pkg/flatpak && \
+	meson build
+	cd ${BUILD_PKG}/flatpak && \
 	flatpak-builder --install build cool.ldr.lfy.json --user
 
 
 test-aur: clear
-	meson _build
-	cd _build/src/pkg/aur && \
+	meson build
+	cd ${BUILD_PKG}/aur && \
 	mkdir lfy-${VERSION} && \
-	cp -r ../../../../src lfy-${VERSION}/ && \
+	cp -r ../../../../ lfy-${VERSION}/ && \
 	cp -r ../../../../meson.build lfy-${VERSION}/ && \
 	zip -r v${VERSION}.zip lfy-${VERSION} && \
 	rm -r lfy-${VERSION} && \
@@ -102,5 +106,5 @@ test-aur: clear
 
 
 uninstall:
-	cd _build && ninja uninstall
+	cd build && ninja uninstall
 
