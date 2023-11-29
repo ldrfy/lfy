@@ -1,0 +1,6 @@
+#!/bin/sh
+HERE="$(dirname "$(readlink -f "${0}")")"
+APPDIR="$HERE"
+# export LD_LIBRARY_PATH="${APPDIR}/usr/lib:${LD_LIBRARY_PATH}"
+
+exec "${APPDIR}/usr/bin/lfy" "$@"
