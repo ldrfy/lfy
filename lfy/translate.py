@@ -183,5 +183,13 @@ class TranslateWindow(Adw.ApplicationWindow):
             text = _("Next translation splicing text")
             if not self.cbtn_add_old.get_active():
                 text = _("Next translation without splicing text")
-            self.toast.set_title(text)
-            self.ato_translate.add_toast(self.toast)
+            self.toast(text)
+
+    def toast_msg(self, toast_msg):
+        """_summary_
+
+        Args:
+            text (_type_): _description_
+        """
+        self.toast.set_title(toast_msg)
+        self.ato_translate.add_toast(self.toast)

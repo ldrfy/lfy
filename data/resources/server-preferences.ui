@@ -28,7 +28,7 @@
                 <child>
                   <object class="GtkLinkButton" id="api_key_link">
                     <property name="label" translatable="yes">how to get API Key</property>
-                    <property name="uri">https://github.com/yuhldr/lfy</property>
+                    <property name="uri">https://github.com/ldrfy/lfy</property>
                   </object>
                 </child>
                 <child>
