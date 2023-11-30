@@ -14,6 +14,12 @@
             <property name="title" translatable="yes" context="shortcut window">General</property>
             <child>
               <object class="GtkShortcutsShortcut">
+                <property name="action-name">app.translate</property>
+                <property name="title" translatable="yes">Translate</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
                 <property name="action-name">app.copy2translate</property>
                 <property name="title" translatable="yes">Copy to translate</property>
                 <property name="tooltip-text" translatable="yes">Copy detected, translate immediately</property>
@@ -21,14 +27,15 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="action-name">app.translate</property>
-                <property name="title" translatable="yes">Translate</property>
+                <property name="action-name">app.splice_text</property>
+                <property name="title" translatable="yes">Splice Text</property>
+                <property name="tooltip-text" translatable="yes">Splice the next copied text with the previous text</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="action-name">app.splice_text</property>
-                <property name="title" translatable="yes">Splice Text</property>
+                <property name="action-name">app.del_wrapping</property>
+                <property name="title" translatable="yes">Remove line breaks</property>
                 <property name="tooltip-text" translatable="yes">Splice the next copied text with the previous text</property>
               </object>
             </child>

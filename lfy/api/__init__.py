@@ -75,7 +75,7 @@ def check_translate(server_key, api_key):
     return ok, text
 
 def get_api_key_s(server_key):
-    """_summary_
+    """通过设置获取api相关的字符串
 
     Args:
         server_key (_type_): _description_
@@ -87,5 +87,5 @@ def get_api_key_s(server_key):
         return baidu.get_api_key_s()
     if server_key == tencent.SERVER.key:
         return tencent.get_api_key_s()
-    else:
-        return _("Not supported This Server!")
+
+    return _("Not supported This Server!")

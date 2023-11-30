@@ -2,7 +2,7 @@
 import threading
 from gettext import gettext as _
 
-from gi.repository import Adw, Gdk, Gio, GLib
+from gi.repository import Adw, Gdk, Gio, GLib, Gtk
 
 from lfy import PACKAGE_URL, PACKAGE_URL_BUG
 from lfy.api.check_update import main as check_update
@@ -22,19 +22,24 @@ class LfyApplication(Adw.Application):
         self._application_id = app_id
         self.translate_now = GLib.Variant.new_boolean(True)
 
-        action_trans_now = Gio.SimpleAction.new_stateful('copy2translate', None, self.translate_now)
+        action_trans_now = Gio.SimpleAction.new_stateful(
+            'copy2translate', None, self.translate_now)
         action_trans_now.connect('change-state', self.on_action_trans_now)
         self.add_action(action_trans_now)
         self.set_accels_for_action("app.copy2translate", ['<alt>t'])
 
-
         self.create_action('preferences', self.on_preferences_action)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
-        self.create_action(
-            'splice_text', lambda *_: self.set_splice_text_action(), ['<alt>c'])
-        self.create_action(
-            'translate', lambda *_: self.set_translate_action(), ['<primary>t'])
+        self.create_action('del_wrapping',
+                           lambda *_: self.on_del_wrapping_action(),
+                           ['<alt>d'])
+        self.create_action('splice_text',
+                           lambda *_: self.on_splice_text_action(),
+                           ['<alt>c'])
+        self.create_action('translate',
+                           lambda *_: self.set_translate_action(),
+                           ['<primary>t'])
 
         self.cb = Gdk.Display().get_default().get_clipboard()
         self.copy_change_id = self.cb.connect("changed", self.copy)
@@ -42,61 +47,77 @@ class LfyApplication(Adw.Application):
         if Settings.get().auto_check_update:
             threading.Thread(target=self.find_update, daemon=True).start()
 
-
     def do_activate(self, text=""):
-        """Called when the application is activated.
+        """_summary_
 
-        We raise the application's main window, creating it if
-        necessary.
+        Args:
+            text (str, optional): _description_. Defaults to "".
         """
+
         win = self.props.active_window
         if not win:
             width, height = Settings.get().window_size
-            win = TranslateWindow(application=self,
-                                  default_height=height,
-                                  default_width=width,)
+            win = TranslateWindow(
+                application=self, default_height=height, default_width=width,)
         win.present()
         win.update(text)
 
+    def on_about_action(self, _widget, _w):
+        """_summary_
 
-    def on_about_action(self, widget, w):
-        """Callback for the app.about action."""
+        Args:
+            widget (_type_): _description_
+            w (_type_): _description_
+        """
+        # pylint: disable=E1101
         Adw.AboutWindow(transient_for=self.props.active_window,
                         application_name=_('lfy'),
                         application_icon=self._application_id,
                         version=self._version,
-                        developers=['yuh'],
-                        designers=['yuh'],
-                        documenters=['yuh'],
+                        developers=['yuh <yuhldr@qq.com>, 2023-2023'],
+                        designers=['yuh <yuhldr@qq.com>, 2023-2023'],
+                        documenters=['yuh <yuhldr@qq.com>, 2023-2023'],
                         translator_credits=_('translator_credits'),
                         comments=_("A translation app for GNOME."),
                         website=PACKAGE_URL,
                         issue_url=PACKAGE_URL_BUG,
+                        license_type=Gtk.License.GPL_3_0,
                         copyright='© 2023 yuh').present()
 
-    def on_preferences_action(self, widget, w):
-        """Callback for the app.preferences action."""
+    def on_preferences_action(self, _widget, _w):
+        """打开设置
+
+        Args:
+            widget (_type_): _description_
+            w (_type_): _description_
+        """
+        # pylint: disable=E1101
         PreferenceWindow(transient_for=self.props.active_window).present()
 
     def on_action_trans_now(self, action, value):
-        action.props.state = value
-        win = self.props.active_window
-        if value:
-            win.toast_msg(_("Copy detected, translate immediately"))
-            self.copy_change_id = self.cb.connect("changed", self.copy)
-        else:
-            win.toast_msg(_("Copy detected, not automatically translated"))
-            self.cb.disconnect(self.copy_change_id)
-
-
-    def create_action(self, name, callback, shortcuts=None):
-        """Add an application action.
+        """临时设置不相应复制行为
 
         Args:
-            name: the name of the action
-            callback: the function to be called when the action is
-              activated
-            shortcuts: an optional list of accelerators
+            action (_type_): _description_
+            value (_type_): _description_
+        """
+        action.props.state = value
+        if value:
+            self.props.active_window.toast_msg(
+                _("Copy detected, translate immediately"))
+            self.copy_change_id = self.cb.connect("changed", self.copy)
+        else:
+            self.props.active_window.toast_msg(
+                _("Copy detected, not automatically translated"))
+            self.cb.disconnect(self.copy_change_id)
+
+    def create_action(self, name, callback, shortcuts=None):
+        """创建菜单
+
+        Args:
+            name (_type_): _description_
+            callback (function): _description_
+            shortcuts (_type_, optional): _description_. Defaults to None.
         """
         action = Gio.SimpleAction.new(name, None)
         action.connect("activate", callback)
@@ -104,14 +125,22 @@ class LfyApplication(Adw.Application):
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
 
+    def on_del_wrapping_action(self):
+        """删除换行
+        """
+        self.props.active_window.notice_action(self.props.active_window.cbtn_del_wrapping,
+                                               _("Next translation not remove line breaks"),
+                                               _("Next translation remove line breaks"))
 
-    def set_splice_text_action(self):
+    def on_splice_text_action(self):
         """拼接文本
 
         Args:
             f (_type_): _description_
         """
-        self.props.active_window.set_splice_text()
+        self.props.active_window.notice_action(self.props.active_window.cbtn_add_old,
+                                               _("Next translation without splicing text"),
+                                               _("Next translation splicing text"))
 
     def set_translate_action(self):
         """快捷键翻译
@@ -120,7 +149,6 @@ class LfyApplication(Adw.Application):
             f (_type_): _description_
         """
         self.props.active_window.update("reload", True)
-
 
     def copy(self, cb):
         """翻译
@@ -133,10 +161,12 @@ class LfyApplication(Adw.Application):
         cb.read_text_async(None, on_active_copy)
 
     def find_update(self):
-        update_msg = check_update()
-        print(update_msg)
-        if update_msg is not None:
-            GLib.idle_add(self.update_app, update_msg)
+        """查找更新
+        """
 
-    def update_app(self, update_msg):
-        self.props.active_window.tv_from.get_buffer().set_text(update_msg)
+        def update_app(self, update_msg):
+            self.props.active_window.tv_from.get_buffer().set_text(update_msg)
+
+        update_msg = check_update()
+        if update_msg is not None:
+            GLib.idle_add(update_app, update_msg)

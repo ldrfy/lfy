@@ -55,6 +55,7 @@
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="cbtn_del_wrapping">
+                        <property name="action-name">app.del_wrapping</property>
                         <property name="active">True</property>
                         <property name="tooltip-text" translatable="yes">Remove symbols such as line breaks</property>
                       </object>

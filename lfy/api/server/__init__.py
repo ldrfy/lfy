@@ -3,6 +3,8 @@
 """
 from gettext import gettext as _
 
+from gi.repository import Gtk
+
 from lfy.api.server import baidu, google, tencent
 
 servers = [
@@ -18,7 +20,7 @@ def get_server_names():
     Returns:
         list: ["百度", "腾讯", ...]
     """
-    return [server.name for server in servers]
+    return Gtk.StringList.new([server.name for server in servers])
 
 def get_servers_api_key():
     """哪些需要填写api
@@ -59,7 +61,7 @@ def get_lang_names(i=0):
     Returns:
         list: 如 ["auto"]
     """
-    return [lang.name for lang in get_server(i).langs]
+    return Gtk.StringList.new(get_server(i).get_lang_names())
 
 
 def get_lang(i=0, j=0):
@@ -68,10 +70,7 @@ def get_lang(i=0, j=0):
     Returns:
         list: 如 ["auto"]
     """
-    te = get_server(i)
-    if j >= len(te.langs):
-        return te.langs[0]
-    return te.langs[j]
+    return get_server(i).get_lang(j)
 
 
 def server_key2i(key: str):

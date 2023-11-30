@@ -44,7 +44,7 @@ class Server:
     """翻译信息
     """
 
-    def __init__(self, key: str, name: str, lang_key_ns:dict, is_api_key=False, doc_url=""):
+    def __init__(self, key: str, name: str, lang_key_ns: dict, is_api_key=False, doc_url=""):
         self.key = key
         self.doc_url = doc_url
         self.is_api_key = is_api_key
@@ -54,3 +54,24 @@ class Server:
 
         for k, v in lang_key_ns.items():
             self.langs.append(Lang(k, v))
+
+    def get_lang_names(self):
+        """获取某个翻译服务的所有翻译语言的名字
+
+        Returns:
+            list: 如 ["auto"]
+        """
+        return [lang.name for lang in self.langs]
+
+    def get_lang(self, j=0):
+        """获取某个翻译服务的某个语言 Lang
+
+        Args:
+            j (int, optional): _description_. Defaults to 0.
+
+        Returns:
+            _type_: _description_
+        """
+        if j >= len(self.langs):
+            return self.langs[0]
+        return self.langs[j]

@@ -13,6 +13,7 @@ from lfy.api import check_translate, get_api_key_s
 from lfy.api.base import Server
 
 
+# pylint: disable=E1101
 @Gtk.Template(resource_path='/cool/ldr/lfy/server-preferences.ui')
 class ServerPreferences(Adw.Bin):
     """设置api
@@ -61,6 +62,11 @@ class ServerPreferences(Adw.Bin):
                          args=(self.server.key, api_key)).start()
 
     def update_ui(self, valid):
+        """更新
+
+        Args:
+            valid (_type_): _description_
+        """
         ok, text = valid
         if ok:
             self.api_key_entry.remove_css_class('error')
@@ -73,10 +79,16 @@ class ServerPreferences(Adw.Bin):
         self.api_key_spinner.stop()
 
     def request_text(self, server, api_key):
+        """验证服务api是否靠谱
+
+        Args:
+            server (_type_): _description_
+            api_key (_type_): _description_
+        """
         valid = False
         try:
             valid = check_translate(server, api_key)
-        except Exception as exc:
+        except Exception as exc:  # pylint: disable=W0718
             logging.error(exc)
 
         GLib.idle_add(self.update_ui, valid)

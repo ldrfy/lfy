@@ -14,6 +14,7 @@ from lfy.settings import Settings
 from lfy.widgets.theme_switcher import ThemeSwitcher
 
 
+# pylint: disable=E1101
 @Gtk.Template(resource_path='/cool/ldr/lfy/translate.ui')
 class TranslateWindow(Adw.ApplicationWindow):
     """翻译窗口
@@ -26,7 +27,6 @@ class TranslateWindow(Adw.ApplicationWindow):
     """
     __gtype_name__ = 'TranslateWindow'
 
-    # btn_translate: Gtk.Button = Gtk.Template.Child()
     tv_from: Gtk.TextView = Gtk.Template.Child()
     tv_to: Gtk.TextView = Gtk.Template.Child()
     dd_server: Gtk.DropDown = Gtk.Template.Child()
@@ -35,7 +35,7 @@ class TranslateWindow(Adw.ApplicationWindow):
     cbtn_del_wrapping: Gtk.CheckButton = Gtk.Template.Child()
     sp_translate: Gtk.Spinner = Gtk.Template.Child()
     menu_btn: Gtk.MenuButton = Gtk.Template.Child()
-    ato_translate = Gtk.Template.Child()
+    ato_translate: Adw.ToastOverlay = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -48,25 +48,28 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.is_tv_copy = False
         # 放置初始化时，不断调用误以为选择
         self.creat_time = time.time()
-        n = self.setting.lang_selected_n
-        i = server_key2i(self.setting.server_selected_key)
-
-        self.dd_server.set_model(Gtk.StringList.new(get_server_names()))
-        self.dd_server.set_selected(i)
-        self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
-        self.dd_lang.set_selected(lang_n2j(i, n))
-
-        # Theme Switcher
-        theme_switcher = ThemeSwitcher()
-        self.menu_btn.props.popover.add_child(theme_switcher, 'theme')
-
-        # Save settings on close
-        self.connect('unrealize', self.save_settings)
         self.toast = Adw.Toast.new("")
         self.toast.set_timeout(2)
 
+        i = server_key2i(self.setting.server_selected_key)
 
-    def save_settings(self, *args, **kwargs):
+        self.dd_server.set_model(get_server_names())
+        self.dd_server.set_selected(i)
+
+        self.dd_lang.set_model(get_lang_names(i))
+        self.dd_lang.set_selected(lang_n2j(i, self.setting.lang_selected_n))
+
+        self.menu_btn.props.popover.add_child(ThemeSwitcher(), 'theme')
+
+        self.connect('unrealize', self.save_settings)
+
+
+    def save_settings(self, _a):
+        """_summary_
+
+        Args:
+            a (TranslateWindow): _description_
+        """
         if not self.is_maximized():
             size = self.get_default_size()
             Settings.get().window_size = (size.width, size.height)
@@ -78,20 +81,20 @@ class TranslateWindow(Adw.ApplicationWindow):
 
 
     @Gtk.Template.Callback()
-    def _on_server_changed(self, drop_down, a):
+    def _on_server_changed(self, drop_down, _a):
         # 初始化，会不断调用这个
         if time.time() - self.creat_time > 1:
             i = drop_down.get_selected()
             n = self.setting.lang_selected_n
-            self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
+            self.dd_lang.set_model(get_lang_names(i))
             self.dd_lang.set_selected(lang_n2j(i, n))
 
     @Gtk.Template.Callback()
-    def _on_lang_changed(self, drop_down, a):
+    def _on_lang_changed(self, _drop_down, _a):
         self.update(self.last_text, True)
 
     @Gtk.Template.Callback()
-    def _set_tv_copy(self, a):
+    def _set_tv_copy(self, _a):
         self.is_tv_copy = True
 
     def update(self, text, reload=False, del_wrapping=True):
@@ -172,24 +175,29 @@ class TranslateWindow(Adw.ApplicationWindow):
         s_from = re.sub(r"(?<!\.|-|。)[\n|\r]+", " ", s_from)
         return s_from
 
-    def set_splice_text(self):
-        """拼接
+
+    def notice_action(self, cbtn: Gtk.CheckButton, text_ok, text_no):
+        """_summary_
+
+        Args:
+            ok (_type_): _description_
+            text_ok (_type_): _description_
+            text_no (_type_): _description_
         """
         if time.time() - self.creat_time > 1:
-            self.toast.dismiss()
+            cbtn.set_active(not cbtn.get_active())
+            if not cbtn.get_active():
+                self.toast_msg(text_ok)
+            else:
+                self.toast_msg(text_no)
 
-            self.cbtn_add_old.set_active(not self.cbtn_add_old.get_active())
-
-            text = _("Next translation splicing text")
-            if not self.cbtn_add_old.get_active():
-                text = _("Next translation without splicing text")
-            self.toast(text)
 
     def toast_msg(self, toast_msg):
         """_summary_
 
         Args:
-            text (_type_): _description_
+            text (str): _description_
         """
+        self.toast.dismiss()
         self.toast.set_title(toast_msg)
         self.ato_translate.add_toast(self.toast)

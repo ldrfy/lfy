@@ -1,6 +1,7 @@
 """更新
 """
 
+import logging
 from gettext import gettext as _
 
 import requests
@@ -20,9 +21,13 @@ def get_by_gitee():
     try:
         request = requests.get(url, timeout=TIME_OUT)
         if request.status_code == 200:
+            logging.info("gitee update msg ok")
             return request.json()
+    except requests.exceptions.ConnectTimeout as e:
+        logging.error(e)
+        return {}
     except Exception as e:  # pylint: disable=W0718
-        print(e)
+        logging.error(e)
     return None
 
 
@@ -37,9 +42,13 @@ def get_by_github():
     try:
         request = requests.get(url, timeout=TIME_OUT)
         if request.status_code == 200:
+            logging.info("github update msg ok")
             return request.json()
+    except requests.exceptions.ConnectTimeout as e:
+        logging.error(e)
+        return {}
     except Exception as e:  # pylint: disable=W0718
-        print(e)
+        logging.error(e)
     return None
 
 
@@ -60,12 +69,12 @@ def compare_versions(v_new, v_old):
     for a, b in zip(v1, v2):
         if a < b:
             return False
-        elif a > b:
+        if a > b:
             return True
 
     if len(v1) < len(v2):
         return False
-    elif len(v1) > len(v2):
+    if len(v1) > len(v2):
         return True
 
     return False
@@ -80,17 +89,16 @@ def main():
     error_config = f"Please update. There is a problem with the current version configuration.\n\n{PACKAGE_URL}"  # pylint: disable=C0301
     try:
         data = get_by_github()
-        if data is None:
+        if data is None or "version" not in data:
             data = get_by_gitee()
-        if data is None:
+        if data is None or "version" not in data:
             return error_config
-        else:
-            v = data["version"]
-            if compare_versions(v, VERSION):
-                return f'New version: {v}\n\nplease upgrade it:\n{data["url"]}\n\n{data["msg"]}'
-            else:
-                return None
+
+        v = data["version"]
+        if compare_versions(v, VERSION):
+            return f'New version: {v}\n\nplease upgrade it:\n{data["url"]}\n\n{data["msg"]}'
+        return None
     # pylint: disable=W0718
     except Exception as e:
-        print(e)
+        logging.error(e)
         return error_config

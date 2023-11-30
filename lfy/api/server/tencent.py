@@ -1,3 +1,5 @@
+"""腾讯翻译接口
+"""
 import base64
 import hashlib
 import hmac
