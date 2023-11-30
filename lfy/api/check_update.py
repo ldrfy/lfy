@@ -15,7 +15,7 @@ def get_by_gitee():
     Returns:
         _type_: _description_
     """
-    url = "https://gitee.com/yuhldr/lfy/main/src/data/version.json"
+    url = "https://gitee.com/yuhldr/lfy/raw/main/data/version.json"
 
     try:
         request = requests.get(url, timeout=TIME_OUT)
