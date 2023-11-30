@@ -1,7 +1,4 @@
-"""谷歌翻译
-
-Returns:
-    _type_: _description_
+"""谷歌翻译接口
 """
 from gettext import gettext as _
 

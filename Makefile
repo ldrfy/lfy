@@ -46,8 +46,12 @@ update-po:
 test-deb: clear
 	make PREFIX="/usr" DESTDIR="${PWD}/${BUILD_PKG}/deb" test
 
-	cd "${PWD}/${BUILD_PKG}/" \
-	&& dpkg -b deb ./deb/lfy-${VERSION}.deb && \
+	cd "${PWD}/${BUILD_PKG}/" && \
+	mv deb/DEBIAN/control ./ && \
+	sed 's/any/arm64/g' ./control > ./deb/DEBIAN/control && \
+	dpkg -b deb ./deb/lfy-${VERSION}-aarch64.deb && \
+	sed 's/any/amd64/g' ./control > ./deb/DEBIAN/control && \
+	dpkg -b deb ./deb/lfy-${VERSION}-x86_64.deb && \
 	cd deb && \
 	mv *.deb ${DISK}
 

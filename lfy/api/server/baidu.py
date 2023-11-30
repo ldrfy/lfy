@@ -1,4 +1,5 @@
-import base64
+"""百度翻译接口
+"""
 import hashlib
 import random
 import urllib
@@ -65,7 +66,7 @@ def translate_text(s, lang_to="auto", lang_from="auto"):
     if app_id == "app_id" or secret_key == "secret_key":
         return _("please input API Key in preference")
 
-    ok, text = translate(s, app_id, secret_key, lang_to)
+    ok, text = translate(s, app_id, secret_key, lang_to, lang_from)
     return text
 
 

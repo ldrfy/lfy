@@ -26,14 +26,17 @@ class PreferenceWindow(Adw.PreferencesWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.server: Server
+        # pylint: disable=E1101
         self.acr_server.set_model(Gtk.StringList.new(get_server_names_api_key()))
         self.entry_vpn_addr.props.text = Settings.get().vpn_addr_port
 
-        Settings.get().bind('auto-check-update', self.auto_check_update, 'active', Gio.SettingsBindFlags.DEFAULT)
+        Settings.get().bind('auto-check-update',
+                            self.auto_check_update, 'active',
+                            Gio.SettingsBindFlags.DEFAULT)
 
 
     @Gtk.Template.Callback()
-    def _open_server(self, btn):
+    def _open_server(self, _btn):
         page = ServerPreferences(self.server)
         self.present_subpage(page)
 
@@ -44,6 +47,7 @@ class PreferenceWindow(Adw.PreferencesWindow):
 
     @Gtk.Template.Callback()
     def _on_vpn_apply(self, _row):
+        # pylint: disable=E1101
         self.entry_vpn_addr.props.sensitive = False
 
         vpn_addr = self.entry_vpn_addr.get_text().strip()
