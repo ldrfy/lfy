@@ -20,6 +20,13 @@ class LfyApplication(Adw.Application):
 
         self._version = version
         self._application_id = app_id
+        self.translate_now = GLib.Variant.new_boolean(True)
+
+        action_trans_now = Gio.SimpleAction.new_stateful('copy2translate', None, self.translate_now)
+        action_trans_now.connect('change-state', self.on_action_trans_now)
+        self.add_action(action_trans_now)
+        self.set_accels_for_action("app.copy2translate", ['<alt>t'])
+
 
         self.create_action('preferences', self.on_preferences_action)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
@@ -30,7 +37,7 @@ class LfyApplication(Adw.Application):
             'translate', lambda *_: self.set_translate_action(), ['<primary>t'])
 
         self.cb = Gdk.Display().get_default().get_clipboard()
-        self.cb.connect("changed", self.copy)
+        self.copy_change_id = self.cb.connect("changed", self.copy)
 
         if Settings.get().auto_check_update:
             threading.Thread(target=self.find_update, daemon=True).start()
@@ -71,6 +78,17 @@ class LfyApplication(Adw.Application):
         """Callback for the app.preferences action."""
         PreferenceWindow(transient_for=self.props.active_window).present()
 
+    def on_action_trans_now(self, action, value):
+        action.props.state = value
+        win = self.props.active_window
+        if value:
+            win.toast_msg(_("Copy detected, translate immediately"))
+            self.copy_change_id = self.cb.connect("changed", self.copy)
+        else:
+            win.toast_msg(_("Copy detected, not automatically translated"))
+            self.cb.disconnect(self.copy_change_id)
+
+
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.
 
@@ -93,9 +111,7 @@ class LfyApplication(Adw.Application):
         Args:
             f (_type_): _description_
         """
-        win = self.props.active_window
-        if win is not None:
-            win.set_splice_text()
+        self.props.active_window.set_splice_text()
 
     def set_translate_action(self):
         """快捷键翻译
@@ -103,9 +119,7 @@ class LfyApplication(Adw.Application):
         Args:
             f (_type_): _description_
         """
-        win = self.props.active_window
-        if win is not None:
-            win.update("reload", True)
+        self.props.active_window.update("reload", True)
 
 
     def copy(self, cb):
@@ -125,6 +139,4 @@ class LfyApplication(Adw.Application):
             GLib.idle_add(self.update_app, update_msg)
 
     def update_app(self, update_msg):
-        win = self.props.active_window
-        if win is not None:
-            win.tv_from.get_buffer().set_text(update_msg)
+        self.props.active_window.tv_from.get_buffer().set_text(update_msg)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2023-11-26 21:28+0800\n"
+"POT-Creation-Date: 2023-11-30 19:24+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -17,195 +17,207 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/data/cool.ldr.lfy.in.in.desktop:3 src/lfy/main.py:58
-#: src/data/resources/translate.ui:111
+#: data/cool.ldr.lfy.in.in.desktop:3 lfy/main.py:65
+#: data/resources/translate.ui:111
 msgid "lfy"
 msgstr "兰译"
 
-#: src/data/cool.ldr.lfy.in.metainfo.xml:7
+#: data/cool.ldr.lfy.in.metainfo.xml:7
 msgid "No description"
 msgstr "没有介绍"
 
-#: src/lfy/main.py:64
+#: lfy/main.py:71
 msgid "translator_credits"
 msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 
-#: src/lfy/main.py:65
+#: lfy/main.py:72
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
 
-#: src/lfy/translate.py:183
+#: lfy/main.py:85 data/resources/help-overlay.ui:19
+msgid "Copy detected, translate immediately"
+msgstr "检测到复制，立刻翻译"
+
+#: lfy/main.py:88
+msgid "Copy detected, not automatically translated"
+msgstr "检测到复制，不自动翻译"
+
+#: lfy/translate.py:183
 msgid "Next translation splicing text"
 msgstr "下次翻译拼接文本"
 
-#: src/lfy/translate.py:185
+#: lfy/translate.py:185
 msgid "Next translation without splicing text"
 msgstr "下次翻译不拼接文本"
 
-#: src/lfy/api/__init__.py:36
+#: lfy/api/__init__.py:36
 msgid ""
 "Copy automatic translation, it is recommended to pin this window to the top"
 msgstr "复制自动翻译，建议将此窗口置顶"
 
-#: src/lfy/api/__init__.py:48
+#: lfy/api/__init__.py:48
 msgid "The connection timed out. Maybe there is a network problem"
 msgstr "连接超时，网络可能有问题（比如需要代理）"
 
-#: src/lfy/api/__init__.py:51
+#: lfy/api/__init__.py:51
 msgid "something error, try other translate engine?"
 msgstr "出现了一些错误，试试其他翻译引擎？"
 
-#: src/lfy/api/__init__.py:67 src/lfy/api/__init__.py:91
+#: lfy/api/__init__.py:67 lfy/api/__init__.py:91
 msgid "Not supported This Server!"
 msgstr "暂不支持该服务"
 
-#: src/lfy/api/__init__.py:74
+#: lfy/api/__init__.py:74
 msgid "save success!"
 msgstr "保存成功"
 
-#: src/lfy/api/base.py:8
+#: lfy/api/base.py:8
 msgid "Automatic"
 msgstr "自动"
 
-#: src/lfy/api/base.py:10
+#: lfy/api/base.py:10
 msgid "Chinese"
 msgstr "中文"
 
-#: src/lfy/api/base.py:12
+#: lfy/api/base.py:12
 msgid "Classical Chinese"
 msgstr "文言文"
 
-#: src/lfy/api/base.py:14
+#: lfy/api/base.py:14
 msgid "English"
 msgstr "英文"
 
-#: src/lfy/api/base.py:16
+#: lfy/api/base.py:16
 msgid "Japanese"
 msgstr "日文"
 
-#: src/lfy/api/base.py:18
+#: lfy/api/base.py:18
 msgid "Korean"
 msgstr "韩文"
 
-#: src/lfy/api/base.py:20
+#: lfy/api/base.py:20
 msgid "German"
 msgstr "德语"
 
-#: src/lfy/api/base.py:22
+#: lfy/api/base.py:22
 msgid "French"
 msgstr "法语"
 
-#: src/lfy/api/server/baidu.py:21
+#: lfy/api/server/baidu.py:21
 msgid "baidu"
 msgstr "百度"
 
-#: src/lfy/api/server/baidu.py:43
+#: lfy/api/server/baidu.py:43
 msgid "please input app_id and secret_key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
-#: src/lfy/api/server/baidu.py:66 src/lfy/api/server/tencent.py:71
+#: lfy/api/server/baidu.py:66 lfy/api/server/tencent.py:71
 msgid "please input API Key in preference"
 msgstr "请在设置中填写 API Key"
 
-#: src/lfy/api/server/baidu.py:107 src/lfy/api/server/tencent.py:126
+#: lfy/api/server/baidu.py:107 lfy/api/server/tencent.py:126
 msgid "something error:"
 msgstr "一些错误发生："
 
-#: src/lfy/api/server/google.py:16
+#: lfy/api/server/google.py:16
 msgid "google"
 msgstr "谷歌"
 
-#: src/lfy/api/server/tencent.py:20
+#: lfy/api/server/tencent.py:20
 msgid "tencent"
 msgstr "腾讯"
 
-#: src/lfy/api/server/tencent.py:47
+#: lfy/api/server/tencent.py:47
 msgid "please input secret_id and secret_key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
-#: src/data/resources/translate.ui:59
+#: data/resources/translate.ui:59
 msgid "Remove symbols such as line breaks"
 msgstr "移除换行符"
 
-#: src/data/resources/translate.ui:65 src/data/resources/help-overlay.ui:25
+#: data/resources/translate.ui:65 data/resources/help-overlay.ui:32
 msgid "Splice the next copied text with the previous text"
 msgstr "将下一个复制的文本与上一个文本拼接"
 
-#: src/data/resources/translate.ui:71
+#: data/resources/translate.ui:71
 msgid "translate"
 msgstr "翻译"
 
-#: src/data/resources/translate.ui:98
+#: data/resources/translate.ui:98
 msgid "Menu"
 msgstr "菜单"
 
-#: src/data/resources/translate.ui:122
+#: data/resources/translate.ui:122 data/resources/help-overlay.ui:18
+msgid "Copy to translate"
+msgstr "复制即翻译"
+
+#: data/resources/translate.ui:128
 msgid "_Preferences"
 msgstr "_设置"
 
-#: src/data/resources/translate.ui:126
+#: data/resources/translate.ui:132
 msgid "_Keyboard Shortcuts"
 msgstr "_快捷键"
 
-#: src/data/resources/translate.ui:130
+#: data/resources/translate.ui:136
 msgid "_About lfy"
 msgstr "_关于 兰译"
 
-#: src/data/resources/server-preferences.ui:13
+#: data/resources/server-preferences.ui:13
 msgid "Translate Server"
 msgstr "翻译服务"
 
-#: src/data/resources/server-preferences.ui:30
+#: data/resources/server-preferences.ui:30
 msgid "how to get API Key"
 msgstr "怎么获取密钥"
 
-#: src/data/resources/server-preferences.ui:37
+#: data/resources/server-preferences.ui:37
 msgid "API Key,Pay attention to whether there are dividing lines |"
 msgstr "密钥，注意是否有分割线 |"
 
-#: src/data/resources/server-preferences.ui:38
+#: data/resources/server-preferences.ui:38
 msgid "Enter an API Key for the Server."
 msgstr "输入该服务的密钥"
 
-#: src/data/resources/preference.ui:14
+#: data/resources/preference.ui:14
 msgid "setup API Key for translation Server, click on the right to the details"
 msgstr "为翻译服务设置密钥，点右侧查看细节"
 
-#: src/data/resources/preference.ui:16
+#: data/resources/preference.ui:16
 msgid "API Key"
 msgstr "密钥"
 
-#: src/data/resources/preference.ui:47
+#: data/resources/preference.ui:47
 msgid "auto check update"
 msgstr "自动检查更新"
 
-#: src/data/resources/preference.ui:55
+#: data/resources/preference.ui:55
 msgid "Automatically check for updates when opening software"
 msgstr "软件打开时，自动检查更新"
 
-#: src/data/resources/preference.ui:68
+#: data/resources/preference.ui:68
 msgid "vpn addr and port, like http://127.0.0.1:7890"
 msgstr "代理地址和端口，比如：http://127.0.0.1:7890"
 
-#: src/data/resources/help-overlay.ui:14
+#: data/resources/help-overlay.ui:14
 msgctxt "shortcut window"
 msgid "General"
 msgstr "通用"
 
-#: src/data/resources/help-overlay.ui:18
+#: data/resources/help-overlay.ui:25
 msgid "Translate"
 msgstr "翻译"
 
-#: src/data/resources/help-overlay.ui:24
+#: data/resources/help-overlay.ui:31
 msgid "Splice Text"
 msgstr "拼接文本"
 
-#: src/data/resources/help-overlay.ui:31
+#: data/resources/help-overlay.ui:38
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "退出"
 
-#: src/data/resources/help-overlay.ui:37
+#: data/resources/help-overlay.ui:44
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "显示快捷键"

@@ -118,6 +118,12 @@
     </section>
     <section>
       <item>
+        <attribute name="action">app.copy2translate</attribute>
+        <attribute name="label" translatable="yes">Copy to translate</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
         <attribute name="action">app.preferences</attribute>
         <attribute name="label" translatable="yes">_Preferences</attribute>
       </item>

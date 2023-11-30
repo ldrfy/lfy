@@ -1,20 +1,20 @@
-src/data/cool.ldr.lfy.in.in.desktop
-src/data/cool.ldr.lfy.in.metainfo.xml
-src/data/cool.ldr.lfy.in.gschema.xml
+data/cool.ldr.lfy.in.in.desktop
+data/cool.ldr.lfy.in.metainfo.xml
+data/cool.ldr.lfy.in.gschema.xml
 
-src/lfy/main.py
-src/lfy/preference.py
-src/lfy/translate.py
+lfy/main.py
+lfy/preference.py
+lfy/translate.py
 
-src/lfy/api/__init__.py
-src/lfy/api/base.py
-src/lfy/api/check_update.py
-src/lfy/api/server/__init__.py
-src/lfy/api/server/baidu.py
-src/lfy/api/server/google.py
-src/lfy/api/server/tencent.py
+lfy/api/__init__.py
+lfy/api/base.py
+lfy/api/check_update.py
+lfy/api/server/__init__.py
+lfy/api/server/baidu.py
+lfy/api/server/google.py
+lfy/api/server/tencent.py
 
-src/data/resources/translate.ui
-src/data/resources/server-preferences.ui
-src/data/resources/preference.ui
-src/data/resources/help-overlay.ui
+data/resources/translate.ui
+data/resources/server-preferences.ui
+data/resources/preference.ui
+data/resources/help-overlay.ui
