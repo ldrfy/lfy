@@ -50,10 +50,10 @@ test-deb: clear
 	mv deb/DEBIAN/control ./ && \
 	sed 's/any/arm64/g' ./control > ./deb/DEBIAN/control && \
 	dpkg -b deb ./deb/lfy-${VERSION}-aarch64.deb && \
+	cd deb && mv ./lfy-${VERSION}-aarch64.deb ${DISK} && cd - && \
 	sed 's/any/amd64/g' ./control > ./deb/DEBIAN/control && \
 	dpkg -b deb ./deb/lfy-${VERSION}-x86_64.deb && \
-	cd deb && \
-	mv *.deb ${DISK}
+	cd deb && mv ./lfy-${VERSION}-x86_64.deb ${DISK}
 
 
 test-whl:
