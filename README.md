@@ -11,7 +11,7 @@
 - 自己编译安装仅支持 `archlinux最新版`、`ubuntu23.10或更新`
 - 使用flatpak可以支持全平台
 
-    <a href='https://flathub.org/apps/details/cool.ldr.lfy'><img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+    <a href='https://flathub.org/apps/details/cool.ldr.lfy'><img width='120' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
 
 [软件文档](https://github.com/ldrfy/docs)
