@@ -1,0 +1,54 @@
+name: nightly
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+
+env:
+  TAG_NAME: "0.0.4"
+  SOFTWARE_NAME: "lfy"
+
+
+jobs:
+  build-ldr-linux:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v3
+
+    # - name: Prepare
+    #   run: |
+    #     rm -rf dist
+
+    - name: Build deb package
+      run: make test-deb
+
+    # - name: Build rpm package
+    #   run: |
+    #     sudo apt update -y
+    #     sudo apt-get install -y rpm
+    #     make rpm-gtk && make rpm-qt
+
+    - name: Build archlinux package
+      uses: vufa/arch-makepkg-action@master
+      with:
+        packages: >
+          make
+          python
+          python-requests
+          python-gobject
+          libadwaita
+          meson
+          appstream-glib
+        scripts: make test-aur
+
+    - name: Create Release and Upload Release Asset
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ env.TAG_NAME }}
+        prerelease: true
+        draft: false
+        files: |
+          dist/*
