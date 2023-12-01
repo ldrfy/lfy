@@ -53,8 +53,7 @@ class LfyApplication(Adw.Application):
         Args:
             text (str, optional): _description_. Defaults to "".
         """
-
-        win = self.props.active_window
+        win = self.props.active_window  # pylint: disable=E1101
         if not win:
             width, height = Settings.get().window_size
             win = TranslateWindow(
@@ -103,14 +102,13 @@ class LfyApplication(Adw.Application):
         """
         action.props.state = value
         if value:
-            self.props.active_window.toast_msg(
-                _("Copy detected, translate immediately"))
+            text = _("Copy detected, translate immediately")
             self.copy_change_id = self.cb.connect("changed", self.copy)
         else:
-            self.props.active_window.toast_msg(
-                _("Copy detected, not automatically translated"))
+            text = _("Copy detected, not automatically translated")
             self.cb.disconnect(self.copy_change_id)
-
+        # pylint: disable=E1101
+        self.props.active_window.toast_msg(text)
     def create_action(self, name, callback, shortcuts=None):
         """创建菜单
 
@@ -128,6 +126,7 @@ class LfyApplication(Adw.Application):
     def on_del_wrapping_action(self):
         """删除换行
         """
+        # pylint: disable=E1101
         self.props.active_window.notice_action(self.props.active_window.cbtn_del_wrapping,
                                                _("Next translation not remove line breaks"),
                                                _("Next translation remove line breaks"))
@@ -138,6 +137,7 @@ class LfyApplication(Adw.Application):
         Args:
             f (_type_): _description_
         """
+        # pylint: disable=E1101
         self.props.active_window.notice_action(self.props.active_window.cbtn_add_old,
                                                _("Next translation without splicing text"),
                                                _("Next translation splicing text"))
@@ -148,6 +148,7 @@ class LfyApplication(Adw.Application):
         Args:
             f (_type_): _description_
         """
+        # pylint: disable=E1101
         self.props.active_window.update("reload", True)
 
     def copy(self, cb):
@@ -158,12 +159,15 @@ class LfyApplication(Adw.Application):
         """
         def on_active_copy(cb, res):
             self.do_activate(cb.read_text_finish(res))
-        cb.read_text_async(None, on_active_copy)
+        # print(cb.get_formats().to_string())
+        if cb.get_formats().contain_mime_type("text/plain"):
+            cb.read_text_async(None, on_active_copy)
+        else:
+            print(_("Image translation is currently not supported"))
 
     def find_update(self):
         """查找更新
         """
-
         def update_app(self, update_msg):
             self.props.active_window.tv_from.get_buffer().set_text(update_msg)
 

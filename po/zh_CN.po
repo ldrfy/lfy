@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2023-12-01 01:28+0800\n"
+"POT-Creation-Date: 2023-12-01 09:35+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/cool.ldr.lfy.in.in.desktop:3 lfy/main.py:74
+#: data/cool.ldr.lfy.in.in.desktop:3 lfy/main.py:73
 #: data/resources/translate.ui:112
 msgid "lfy"
 msgstr "兰译"
@@ -26,27 +26,27 @@ msgstr "兰译"
 msgid "No description"
 msgstr "没有介绍"
 
-#: lfy/main.py:80
+#: lfy/main.py:79
 msgid "translator_credits"
 msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 
-#: lfy/main.py:81
+#: lfy/main.py:80
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
 
-#: lfy/main.py:107 data/resources/help-overlay.ui:25
+#: lfy/main.py:105 data/resources/help-overlay.ui:25
 msgid "Copy detected, translate immediately"
 msgstr "检测到复制，立刻翻译"
 
-#: lfy/main.py:111
+#: lfy/main.py:108
 msgid "Copy detected, not automatically translated"
 msgstr "检测到复制，不自动翻译"
 
-#: lfy/main.py:132
+#: lfy/main.py:131
 msgid "Next translation not remove line breaks"
 msgstr "下次翻译不移除换行"
 
-#: lfy/main.py:133
+#: lfy/main.py:132
 msgid "Next translation remove line breaks"
 msgstr "下次翻译移除换行"
 
@@ -57,6 +57,10 @@ msgstr "下次翻译不拼接文本"
 #: lfy/main.py:143
 msgid "Next translation splicing text"
 msgstr "下次翻译拼接文本"
+
+#: lfy/main.py:166
+msgid "Image translation is currently not supported"
+msgstr "暂不支持图片翻译"
 
 #: lfy/api/__init__.py:36
 msgid ""
