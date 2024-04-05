@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2023-11-26 21:28+0800\n"
+"POT-Creation-Date: 2024-04-05 20:57+0800\n"
 "PO-Revision-Date: 2024-04-05 13:55+0100\n"
 "Last-Translator:  <albanobattistella@gmail.com>\n"
 "Language-Team: Italian <>\n"
@@ -17,195 +17,259 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/data/cool.ldr.lfy.in.in.desktop:3 src/lfy/main.py:58
-#: src/data/resources/translate.ui:111
+#: data/cool.ldr.lfy.in.in.desktop:3 data/cool.ldr.lfy.in.appdata.xml:4
+#: lfy/main.py:73 data/resources/translate.ui:112
 msgid "lfy"
 msgstr "lfy"
 
-#: src/data/cool.ldr.lfy.in.metainfo.xml:7
-msgid "No description"
-msgstr "Nessuna descrizione"
+#: data/cool.ldr.lfy.in.metainfo.xml:6 data/cool.ldr.lfy.in.appdata.xml:5
+msgid "Translation software for gnome"
+msgstr ""
 
-#: src/lfy/main.py:64
+#: data/cool.ldr.lfy.in.metainfo.xml:8 data/cool.ldr.lfy.in.appdata.xml:7
+msgid ""
+"An easy and pleasant way to translate. Support many translation services. "
+"Especially suitable for document translation."
+msgstr ""
+
+#: data/cool.ldr.lfy.in.appdata.xml:36
+#, fuzzy
+msgid "add shortcut"
+msgstr "_Scorciatoie da tastiera"
+
+#: data/cool.ldr.lfy.in.appdata.xml:37
+#, fuzzy
+msgid "Automatically check for updates"
+msgstr "Controlla automaticamente gli aggiornamenti all'apertura del software"
+
+#: data/cool.ldr.lfy.in.appdata.xml:43
+msgid "Basic functions completed"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.appdata.xml:48
+msgid "yuh"
+msgstr ""
+
+#: lfy/main.py:79
 msgid "translator_credits"
 msgstr "Albano Battistella <albanobattistella@gmail.com>, 2024"
 
-#: src/lfy/main.py:65
+#: lfy/main.py:80
 msgid "A translation app for GNOME."
 msgstr "Un'app di traduzione per GNOME."
 
-#: src/lfy/translate.py:183
-msgid "Next translation splicing text"
+#: lfy/main.py:105 data/resources/help-overlay.ui:25
+msgid "Copy detected, translate immediately"
+msgstr ""
+
+#: lfy/main.py:108
+msgid "Copy detected, not automatically translated"
+msgstr ""
+
+#: lfy/main.py:131
+#, fuzzy
+msgid "Next translation not remove line breaks"
+msgstr "Prossima traduzione senza giuntare il testo"
+
+#: lfy/main.py:132
+#, fuzzy
+msgid "Next translation remove line breaks"
 msgstr "Prossima traduzione del testo di giunzione"
 
-#: src/lfy/translate.py:185
+#: lfy/main.py:142
 msgid "Next translation without splicing text"
 msgstr "Prossima traduzione senza giuntare il testo"
 
-#: src/lfy/api/__init__.py:36
+#: lfy/main.py:143
+msgid "Next translation splicing text"
+msgstr "Prossima traduzione del testo di giunzione"
+
+#: lfy/main.py:166
+msgid "Image translation is currently not supported"
+msgstr ""
+
+#: lfy/api/__init__.py:36
 msgid ""
 "Copy automatic translation, it is recommended to pin this window to the top"
-msgstr "Copia la traduzione automatica, si consiglia di fissare questa finestra in alto"
+msgstr ""
+"Copia la traduzione automatica, si consiglia di fissare questa finestra in "
+"alto"
 
-#: src/lfy/api/__init__.py:48
+#: lfy/api/__init__.py:48
 msgid "The connection timed out. Maybe there is a network problem"
 msgstr "La connessione è scaduta. Forse c'è un problema di rete"
 
-#: src/lfy/api/__init__.py:51
+#: lfy/api/__init__.py:51
 msgid "something error, try other translate engine?"
 msgstr "si è verificato un errore, provare un altro motore di traduzione?"
 
-#: src/lfy/api/__init__.py:67 src/lfy/api/__init__.py:91
+#: lfy/api/__init__.py:67 lfy/api/__init__.py:91
 msgid "Not supported This Server!"
 msgstr "Questo server non è supportato!"
 
-#: src/lfy/api/__init__.py:74
+#: lfy/api/__init__.py:74
 msgid "save success!"
 msgstr "salvataggio avvenuto con successo!"
 
-#: src/lfy/api/base.py:8
+#: lfy/api/base.py:8
 msgid "Automatic"
 msgstr "Automatico"
 
-#: src/lfy/api/base.py:10
+#: lfy/api/base.py:10
 msgid "Chinese"
 msgstr "Cinese"
 
-#: src/lfy/api/base.py:12
+#: lfy/api/base.py:12
 msgid "Classical Chinese"
 msgstr "Cinese Classico"
 
-#: src/lfy/api/base.py:14
+#: lfy/api/base.py:14
 msgid "English"
 msgstr "Inglese"
 
-#: src/lfy/api/base.py:16
+#: lfy/api/base.py:16
 msgid "Japanese"
 msgstr "Giapponese"
 
-#: src/lfy/api/base.py:18
+#: lfy/api/base.py:18
 msgid "Korean"
 msgstr "Coreano"
 
-#: src/lfy/api/base.py:20
+#: lfy/api/base.py:20
 msgid "German"
 msgstr "Tedesco"
 
-#: src/lfy/api/base.py:22
+#: lfy/api/base.py:22
 msgid "French"
 msgstr "Francese"
 
-#: src/lfy/api/server/baidu.py:21
+#: lfy/api/server/baidu.py:22
 msgid "baidu"
 msgstr "baidu"
 
-#: src/lfy/api/server/baidu.py:43
+#: lfy/api/server/baidu.py:44
 msgid "please input app_id and secret_key like:"
 msgstr "per favore inserisci app_id e secret_key come:"
 
-#: src/lfy/api/server/baidu.py:66 src/lfy/api/server/tencent.py:71
+#: lfy/api/server/baidu.py:67 lfy/api/server/tencent.py:73
 msgid "please input API Key in preference"
 msgstr "si prega di inserire la chiave API come preferenza"
 
-#: src/lfy/api/server/baidu.py:107 src/lfy/api/server/tencent.py:126
+#: lfy/api/server/baidu.py:108 lfy/api/server/tencent.py:128
 msgid "something error:"
 msgstr "qualche errore:"
 
-#: src/lfy/api/server/google.py:16
+#: lfy/api/server/google.py:13
 msgid "google"
 msgstr "google"
 
-#: src/lfy/api/server/tencent.py:20
+#: lfy/api/server/tencent.py:22
 msgid "tencent"
 msgstr "tencent"
 
-#: src/lfy/api/server/tencent.py:47
+#: lfy/api/server/tencent.py:49
 msgid "please input secret_id and secret_key like:"
 msgstr "per favore inserisci secret_id e secret_key come:"
 
-#: src/data/resources/translate.ui:59
+#: data/resources/translate.ui:60
 msgid "Remove symbols such as line breaks"
 msgstr "Rimuovi simboli come interruzioni di riga"
 
-#: src/data/resources/translate.ui:65 src/data/resources/help-overlay.ui:25
+#: data/resources/translate.ui:66 data/resources/help-overlay.ui:32
+#: data/resources/help-overlay.ui:39
 msgid "Splice the next copied text with the previous text"
 msgstr "Unisci il successivo testo copiato con il testo precedente"
 
-#: src/data/resources/translate.ui:71
+#: data/resources/translate.ui:72
 msgid "translate"
 msgstr "Traduzione"
 
-#: src/data/resources/translate.ui:98
+#: data/resources/translate.ui:99
 msgid "Menu"
 msgstr "Menù"
 
-#: src/data/resources/translate.ui:122
+#: data/resources/translate.ui:123 data/resources/help-overlay.ui:24
+#, fuzzy
+msgid "Copy to translate"
+msgstr "Traduzione"
+
+#: data/resources/translate.ui:129
 msgid "_Preferences"
 msgstr "_Preferenze"
 
-#: src/data/resources/translate.ui:126
+#: data/resources/translate.ui:133
 msgid "_Keyboard Shortcuts"
 msgstr "_Scorciatoie da tastiera"
 
-#: src/data/resources/translate.ui:130
+#: data/resources/translate.ui:137
 msgid "_About lfy"
 msgstr "_Informazoni su lfy"
 
-#: src/data/resources/server-preferences.ui:13
+#: data/resources/server-preferences.ui:13
 msgid "Translate Server"
 msgstr "Traduci Server"
 
-#: src/data/resources/server-preferences.ui:30
+#: data/resources/server-preferences.ui:30
 msgid "how to get API Key"
 msgstr "come ottenere la chiave API"
 
-#: src/data/resources/server-preferences.ui:37
+#: data/resources/server-preferences.ui:37
 msgid "API Key,Pay attention to whether there are dividing lines |"
 msgstr "Chiave API,Prestare attenzione se ci sono linee di demarcazione |"
 
-#: src/data/resources/server-preferences.ui:38
+#: data/resources/server-preferences.ui:38
 msgid "Enter an API Key for the Server."
 msgstr "Inserisci una chiave API per il server."
 
-#: src/data/resources/preference.ui:14
+#: data/resources/preference.ui:14
 msgid "setup API Key for translation Server, click on the right to the details"
-msgstr "imposta la chiave API per il server di traduzione, fai clic a destra per i dettagli"
+msgstr ""
+"imposta la chiave API per il server di traduzione, fai clic a destra per i "
+"dettagli"
 
-#: src/data/resources/preference.ui:16
+#: data/resources/preference.ui:16
 msgid "API Key"
 msgstr "Chiave API"
 
-#: src/data/resources/preference.ui:47
+#: data/resources/preference.ui:47
 msgid "auto check update"
 msgstr "aggiornamento del controllo automatico"
 
-#: src/data/resources/preference.ui:55
+#: data/resources/preference.ui:55
 msgid "Automatically check for updates when opening software"
 msgstr "Controlla automaticamente gli aggiornamenti all'apertura del software"
 
-#: src/data/resources/preference.ui:68
+#: data/resources/preference.ui:68
 msgid "vpn addr and port, like http://127.0.0.1:7890"
 msgstr "indirizzo e porta VPN, come http://127.0.0.1:7890"
 
-#: src/data/resources/help-overlay.ui:14
+#: data/resources/help-overlay.ui:14
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Generale"
 
-#: src/data/resources/help-overlay.ui:18
+#: data/resources/help-overlay.ui:18
 msgid "Translate"
 msgstr "Tradurre"
 
-#: src/data/resources/help-overlay.ui:24
+#: data/resources/help-overlay.ui:31
 msgid "Splice Text"
 msgstr "Testo di giunzione"
 
-#: src/data/resources/help-overlay.ui:31
+#: data/resources/help-overlay.ui:38
+#, fuzzy
+msgid "Remove line breaks"
+msgstr "Rimuovi simboli come interruzioni di riga"
+
+#: data/resources/help-overlay.ui:45
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Uscita"
 
-#: src/data/resources/help-overlay.ui:37
+#: data/resources/help-overlay.ui:51
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "Mostra scorciatoie"
+
+#~ msgid "No description"
+#~ msgstr "Nessuna descrizione"
