@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-04-05 20:57+0800\n"
+"POT-Creation-Date: 2024-04-05 21:18+0800\n"
 "PO-Revision-Date: 2024-04-05 13:55+0100\n"
 "Last-Translator:  <albanobattistella@gmail.com>\n"
 "Language-Team: Italian <>\n"
@@ -111,51 +111,55 @@ msgstr "Questo server non è supportato!"
 msgid "save success!"
 msgstr "salvataggio avvenuto con successo!"
 
-#: lfy/api/base.py:8
+#: lfy/api/base.py:10
 msgid "Automatic"
 msgstr "Automatico"
 
-#: lfy/api/base.py:10
+#: lfy/api/base.py:12
 msgid "Chinese"
 msgstr "Cinese"
 
-#: lfy/api/base.py:12
+#: lfy/api/base.py:14
 msgid "Classical Chinese"
 msgstr "Cinese Classico"
 
-#: lfy/api/base.py:14
+#: lfy/api/base.py:16
 msgid "English"
 msgstr "Inglese"
 
-#: lfy/api/base.py:16
+#: lfy/api/base.py:18
 msgid "Japanese"
 msgstr "Giapponese"
 
-#: lfy/api/base.py:18
+#: lfy/api/base.py:20
 msgid "Korean"
 msgstr "Coreano"
 
-#: lfy/api/base.py:20
+#: lfy/api/base.py:22
 msgid "German"
 msgstr "Tedesco"
 
-#: lfy/api/base.py:22
+#: lfy/api/base.py:24
 msgid "French"
 msgstr "Francese"
 
-#: lfy/api/server/baidu.py:22
+#: lfy/api/base.py:26
+msgid "Italian"
+msgstr ""
+
+#: lfy/api/server/baidu.py:32
 msgid "baidu"
 msgstr "baidu"
 
-#: lfy/api/server/baidu.py:44
+#: lfy/api/server/baidu.py:54
 msgid "please input app_id and secret_key like:"
 msgstr "per favore inserisci app_id e secret_key come:"
 
-#: lfy/api/server/baidu.py:67 lfy/api/server/tencent.py:73
+#: lfy/api/server/baidu.py:77 lfy/api/server/tencent.py:81
 msgid "please input API Key in preference"
 msgstr "si prega di inserire la chiave API come preferenza"
 
-#: lfy/api/server/baidu.py:108 lfy/api/server/tencent.py:128
+#: lfy/api/server/baidu.py:118 lfy/api/server/tencent.py:136
 msgid "something error:"
 msgstr "qualche errore:"
 
@@ -163,11 +167,11 @@ msgstr "qualche errore:"
 msgid "google"
 msgstr "google"
 
-#: lfy/api/server/tencent.py:22
+#: lfy/api/server/tencent.py:30
 msgid "tencent"
 msgstr "tencent"
 
-#: lfy/api/server/tencent.py:49
+#: lfy/api/server/tencent.py:57
 msgid "please input secret_id and secret_key like:"
 msgstr "per favore inserisci secret_id e secret_key come:"
 

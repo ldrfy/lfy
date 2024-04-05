@@ -6,8 +6,15 @@ import requests
 
 from lfy.api.base import TIME_OUT, Server
 
+# https://cloud.google.com/translate/docs/languages
 lang_key_ns = {
-    "zh": 1, "en": 3, "ja": 4, "ko": 5, "de": 6, "fr": 7
+    "zh": 1,
+    "en": 3,
+    "ja": 4,
+    "ko": 5,
+    "de": 6,
+    "fr": 7,
+    "it": 8,
 }
 
 SERVER = Server("google", _("google"),

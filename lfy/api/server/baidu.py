@@ -15,8 +15,18 @@ URL_HOW_GET_TRANSLATE = "https://doc.tern.1c7.me/zh/folder/setting/#%E7%99%BE%E5
 URL_TRANSLATE = "https://api.fanyi.baidu.com/api/trans/vip/translate"
 
 
+# Development documentation
+# https://fanyi-api.baidu.com/doc/21
 lang_key_ns = {
-    "auto": 0, "zh": 1, "wyw": 2, "en": 3, "jp": 4, "kor": 5, "de": 6, "fra": 7
+    "auto": 0,
+    "zh": 1,
+    "wyw": 2,
+    "en": 3,
+    "jp": 4,
+    "kor": 5,
+    "de": 6,
+    "fra": 7,
+    "it": 8
 }
 
 SERVER = Server("baidu", _("baidu"), lang_key_ns,
