@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2023-12-01 09:35+0800\n"
+"POT-Creation-Date: 2024-04-05 20:57+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -17,14 +17,36 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/cool.ldr.lfy.in.in.desktop:3 lfy/main.py:73
-#: data/resources/translate.ui:112
+#: data/cool.ldr.lfy.in.in.desktop:3 data/cool.ldr.lfy.in.appdata.xml:4
+#: lfy/main.py:73 data/resources/translate.ui:112
 msgid "lfy"
 msgstr "兰译"
 
-#: data/cool.ldr.lfy.in.metainfo.xml:7
-msgid "No description"
-msgstr "没有介绍"
+#: data/cool.ldr.lfy.in.metainfo.xml:6 data/cool.ldr.lfy.in.appdata.xml:5
+msgid "Translation software for gnome"
+msgstr "为gnome设计的翻译软件"
+
+#: data/cool.ldr.lfy.in.metainfo.xml:8 data/cool.ldr.lfy.in.appdata.xml:7
+msgid ""
+"An easy and pleasant way to translate. Support many translation services. "
+"Especially suitable for document translation."
+msgstr "一种简单愉快的翻译方式。支持多种翻译服务。特别适合文档翻译。"
+
+#: data/cool.ldr.lfy.in.appdata.xml:36
+msgid "add shortcut"
+msgstr "添加快捷键"
+
+#: data/cool.ldr.lfy.in.appdata.xml:37
+msgid "Automatically check for updates"
+msgstr "软件打开时，自动检查更新"
+
+#: data/cool.ldr.lfy.in.appdata.xml:43
+msgid "Basic functions completed"
+msgstr "基础功能完成"
+
+#: data/cool.ldr.lfy.in.appdata.xml:48
+msgid "yuh"
+msgstr "余航"
 
 #: lfy/main.py:79
 msgid "translator_credits"

@@ -1,56 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>@APP_ID@</id>
-  <name>@APP_NAME@</name>
-  <summary>Translation software for gnome</summary>
-  <description>
-    <p>
-      An easy and pleasant way to translate.
-      Support many translation services. Especially suitable for document translation.
-    </p>
-  </description>
-  <screenshots>
-    <screenshot type="default">
-      <image type="source">https://raw.githubusercontent.com/ldrfy/docs/main/images/main.png</image>
-    </screenshot>
-    <screenshot>
-      <image type="source">
-        https://raw.githubusercontent.com/ldrfy/docs/main/images/preference.png</image>
-    </screenshot>
-    <screenshot>
-      <image type="source">
-        https://raw.githubusercontent.com/ldrfy/docs/main/images/server-preference.png</image>
-    </screenshot>
-    <screenshot>
-      <image type="source">
-        https://raw.githubusercontent.com/ldrfy/docs/main/images/shortcuts.png</image>
-    </screenshot>
-    <screenshot>
-      <image type="source">https://raw.githubusercontent.com/ldrfy/docs/main/images/about.png</image>
-    </screenshot>
-  </screenshots>
-  <releases>
-    <release version="0.0.3" date="2023-11-20">
-      <description>
-        <p>Basic functions completed</p>
-      </description>
-    </release>
-  </releases>
-  <project_group>GNOME</project_group>
-  <developer_name>yuh</developer_name>
-  <launchable type="desktop-id">@APP_ID@.desktop</launchable>
-  <url type="homepage">@PACKAGE_URL@</url>
-  <url type="bugtracker">@PACKAGE_URL_BUG@</url>
-  <url type="donation">@PACKAGE_URL@</url>
-  <url type="help">@PACKAGE_URL@</url>
-  <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-3.0-or-later</project_license>
-  <kudos>
-    <kudo>HiDpiIcon</kudo>
-    <kudo>ModernToolkit</kudo>
-    <kudo>UserDocs</kudo>
-  </kudos>
-  <update_contact>yuhldr@qq.com</update_contact>
-  <translation type="gettext">@APP_ID@</translation>
-  <content_rating type="oars-1.1" />
+	<id>@APP_ID@</id>
+	<name>lfy</name>
+	<summary>Translation software for gnome</summary>
+	<description>
+		<p>
+			An easy and pleasant way to translate.
+			Support many translation services. Especially suitable for document translation.
+		</p>
+	</description>
+	<screenshots>
+		<screenshot type="default">
+			<image type="source">https://raw.githubusercontent.com/ldrfy/docs/main/images/main.png</image>
+		</screenshot>
+		<screenshot>
+			<image type="source">
+				https://raw.githubusercontent.com/ldrfy/docs/main/images/preference.png</image>
+		</screenshot>
+		<screenshot>
+			<image type="source">
+				https://raw.githubusercontent.com/ldrfy/docs/main/images/server-preference.png</image>
+		</screenshot>
+		<screenshot>
+			<image type="source">
+				https://raw.githubusercontent.com/ldrfy/docs/main/images/shortcuts.png</image>
+		</screenshot>
+		<screenshot>
+			<image type="source">https://raw.githubusercontent.com/ldrfy/docs/main/images/about.png</image>
+		</screenshot>
+	</screenshots>
+	<releases>
+		<release version="0.0.4" date="2023-12-04">
+			<description>
+				<ul>
+					<li>add shortcut</li>
+					<li>Automatically check for updates</li>
+				</ul>
+			</description>
+		</release>
+		<release version="0.0.3" date="2023-11-20">
+			<description>
+				<p>Basic functions completed</p>
+			</description>
+		</release>
+	</releases>
+	<project_group>GNOME</project_group>
+	<developer_name>yuh</developer_name>
+	<launchable type="desktop-id">@APP_ID@.desktop</launchable>
+	<url type="homepage">@PACKAGE_URL@</url>
+	<url type="bugtracker">@PACKAGE_URL_BUG@</url>
+	<url type="donation">@PACKAGE_URL@</url>
+	<url type="help">@PACKAGE_URL@</url>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>GPL-3.0-or-later</project_license>
+	<kudos>
+		<kudo>HiDpiIcon</kudo>
+		<kudo>ModernToolkit</kudo>
+		<kudo>UserDocs</kudo>
+	</kudos>
+	<update_contact>yuhldr@qq.com</update_contact>
+	<translation type="gettext">@APP_ID@</translation>
+	<content_rating type="oars-1.1" />
 </component>
