@@ -56,18 +56,6 @@ test-deb: clear
 	cd deb && mv ./lfy-${VERSION}-x86_64.deb ${DISK}
 
 
-test-whl:
-	make PREFIX="/usr" DESTDIR="${PWD}/${BUILD_PKG}/pip" test
-
-	cd ${BUILD_PKG}/pip && \
-	cp ${DISK}/../README.md ./usr/ && \
-	mv setup.py ./usr/ && \
-	cd ./usr/ && \
-	mv lib/lfy ./ && \
-	python setup.py sdist bdist_wheel && \
-	cd ../ && \
-	cp ./usr/dist/*.whl ${DISK}
-
 test-flatpak:clear
 	meson build
 	cd ${BUILD_PKG}/flatpak && \
