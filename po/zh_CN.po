@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-04-05 20:57+0800\n"
+"POT-Creation-Date: 2024-04-05 21:18+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -105,51 +105,55 @@ msgstr "暂不支持该服务"
 msgid "save success!"
 msgstr "保存成功"
 
-#: lfy/api/base.py:8
+#: lfy/api/base.py:10
 msgid "Automatic"
 msgstr "自动"
 
-#: lfy/api/base.py:10
+#: lfy/api/base.py:12
 msgid "Chinese"
 msgstr "中文"
 
-#: lfy/api/base.py:12
+#: lfy/api/base.py:14
 msgid "Classical Chinese"
 msgstr "文言文"
 
-#: lfy/api/base.py:14
+#: lfy/api/base.py:16
 msgid "English"
 msgstr "英文"
 
-#: lfy/api/base.py:16
+#: lfy/api/base.py:18
 msgid "Japanese"
 msgstr "日文"
 
-#: lfy/api/base.py:18
+#: lfy/api/base.py:20
 msgid "Korean"
 msgstr "韩文"
 
-#: lfy/api/base.py:20
+#: lfy/api/base.py:22
 msgid "German"
 msgstr "德语"
 
-#: lfy/api/base.py:22
+#: lfy/api/base.py:24
 msgid "French"
 msgstr "法语"
 
-#: lfy/api/server/baidu.py:22
+#: lfy/api/base.py:26
+msgid "Italian"
+msgstr "意大利语"
+
+#: lfy/api/server/baidu.py:32
 msgid "baidu"
 msgstr "百度"
 
-#: lfy/api/server/baidu.py:44
+#: lfy/api/server/baidu.py:54
 msgid "please input app_id and secret_key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
-#: lfy/api/server/baidu.py:67 lfy/api/server/tencent.py:73
+#: lfy/api/server/baidu.py:77 lfy/api/server/tencent.py:81
 msgid "please input API Key in preference"
 msgstr "请在设置中填写 API Key"
 
-#: lfy/api/server/baidu.py:108 lfy/api/server/tencent.py:128
+#: lfy/api/server/baidu.py:118 lfy/api/server/tencent.py:136
 msgid "something error:"
 msgstr "一些错误发生："
 
@@ -157,11 +161,11 @@ msgstr "一些错误发生："
 msgid "google"
 msgstr "谷歌"
 
-#: lfy/api/server/tencent.py:22
+#: lfy/api/server/tencent.py:30
 msgid "tencent"
 msgstr "腾讯"
 
-#: lfy/api/server/tencent.py:49
+#: lfy/api/server/tencent.py:57
 msgid "please input secret_id and secret_key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 

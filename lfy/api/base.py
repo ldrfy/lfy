@@ -3,6 +3,8 @@ from gettext import gettext as _
 
 TIME_OUT = 3
 
+
+# select language name
 LANGUAGE_NAMES = [
     # 0
     _("Automatic"),
@@ -19,7 +21,9 @@ LANGUAGE_NAMES = [
     # 6
     _("German"),
     # 7
-    _("French")
+    _("French"),
+    # 8
+    _("Italian"),
 ]
 
 

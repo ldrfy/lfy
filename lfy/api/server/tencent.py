@@ -15,8 +15,16 @@ from lfy.settings import Settings
 URL_HOW_GET_TRANSLATE = "https://doc.tern.1c7.me/zh/folder/setting/#%E8%85%BE%E8%AE%AF%E4%BA%91"
 
 
+# Development documentation
+# https://cloud.tencent.com/document/product/551/15619
 lang_key_ns = {
-    "zh": 1, "en": 3, "jp": 4, "kr": 5, "de": 6, "fr": 7
+    "zh": 1,
+    "en": 3,
+    "jp": 4,
+    "kr": 5,
+    "de": 6,
+    "fr": 7,
+    "it": 8,
 }
 
 SERVER = Server("tencent", _("tencent"), lang_key_ns,
