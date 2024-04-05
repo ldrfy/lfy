@@ -16,8 +16,8 @@
 
 [软件文档](https://github.com/ldrfy/docs)
 
-- [贡献说明](https://github.com/ldrfy/docs/CONTRIBUTE.md)
+- [贡献说明](https://github.com/ldrfy/docs/blob/main/CONTRIBUTE.md)
 
-- [翻译说明](https://github.com/ldrfy/docs/TRANSLATE.md)
+- [翻译说明](https://github.com/ldrfy/docs/blob/main/TRANSLATE.md)
 
-- [更新说明](https://github.com/ldrfy/docs/CHANGELOG.md)
+- [更新说明](https://github.com/ldrfy/docs/blob/main/CHANGELOG.md)
