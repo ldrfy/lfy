@@ -3,7 +3,11 @@
 	<id>cool.ldr.lfy.desktop</id>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
+	<summary>Translation software for gnome</summary>
 	<description>
-	  <p>No description</p>
+		<p>
+			An easy and pleasant way to translate.
+			Support many translation services. Especially suitable for document translation.
+		</p>
 	</description>
 </component>
