@@ -8,7 +8,7 @@
 
 from gi.repository import Adw, Gio, GObject, Gtk
 
-from lfy import RES_PATH
+from lfy import RES_PATH  # pylint: disable=E0611
 from lfy.settings import Settings
 
 

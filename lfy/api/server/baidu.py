@@ -76,7 +76,7 @@ def translate_text(s, lang_to="auto", lang_from="auto"):
     if app_id == "app_id" or secret_key == "secret_key":
         return _("please input API Key in preference")
 
-    ok, text = translate(s, app_id, secret_key, lang_to, lang_from)
+    _ok, text = translate(s, app_id, secret_key, lang_to, lang_from)
     return text
 
 
@@ -116,10 +116,10 @@ def translate(s, app_id, secret_key, lang_to="auto", lang_from="auto"):
     request = requests.get(url, timeout=TIME_OUT)
     result = request.json()
     error_msg = _("something error:")
-    if "error_code" in result:
-        return False, f'{error_msg}\n\n{result["error_code"]}: {result["error_msg"]}'
-    else:
+    if "error_code" not in result:
         s1 = ""
         for trans_result in result["trans_result"]:
             s1 += f'{trans_result["dst"]}\n'
         return True, s1
+
+    return False, f'{error_msg}\n\n{result["error_code"]}: {result["error_msg"]}'
