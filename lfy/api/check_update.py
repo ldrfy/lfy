@@ -6,7 +6,7 @@ from gettext import gettext as _
 
 import requests
 
-from lfy import PACKAGE_URL, VERSION
+from lfy import PACKAGE_URL, VERSION  # pylint: disable=E0611
 from lfy.api.base import TIME_OUT
 
 

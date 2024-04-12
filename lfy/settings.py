@@ -4,7 +4,7 @@
 
 from gi.repository import Gio, GLib
 
-from lfy import APP_ID
+from lfy import APP_ID  # pylint: disable=E0611
 
 
 class Settings(Gio.Settings):

@@ -80,7 +80,7 @@ def translate_text(s, lang_to="auto", lang_from="auto"):
     if secret_id == "secret_id" or secret_key == "secret_key":
         return _("please input API Key in preference")
 
-    ok, text = translate(s, secret_id, secret_key, lang_to, lang_from)
+    _ok, text = translate(s, secret_id, secret_key, lang_to, lang_from)
     return text
 
 
@@ -88,12 +88,7 @@ def translate(query_text,
               secret_id,
               secret_key,
               lang_to="zh",
-              lang_from="auto",
-              action="TextTranslate",
-              endpoint="tmt.tencentcloudapi.com",
-              query_method="GET",
-              region="ap-beijing",
-              version="2018-03-21"):
+              lang_from="auto"):
     """_summary_
 
     Args:
@@ -102,32 +97,28 @@ def translate(query_text,
         secret_key (_type_): _description_
         lang_from (str, optional): _description_. Defaults to "auto".
         lang_to (str, optional): _description_. Defaults to "zh".
-        action (str, optional): _description_. Defaults to "TextTranslate".
-        endpoint (str, optional): _description_. Defaults to "tmt.tencentcloudapi.com".
-        query_method (str, optional): _description_. Defaults to "GET".
-        region (str, optional): _description_. Defaults to "ap-beijing".
-        version (str, optional): _description_. Defaults to "2018-03-21".
 
     Returns:
         _type_: _description_
     """
 
     data = {
-        "Action": action,
-        "Region": region,
+        "Action": "TextTranslate",
+        "Region": "ap-beijing",
         "SecretId": secret_id,
         "Timestamp": int(time.time()),
         "Nonce": random.randint(1, 1e6),
-        "Version": version,
+        "Version": "2018-03-21",
         "ProjectId": 0,
         "Source": lang_from,
         "SourceText": query_text,
         "Target": lang_to
     }
-    s = get_string_to_sign(query_method, endpoint, data)
+    ENDPOINT = "tmt.tencentcloudapi.com"
+    s = get_string_to_sign("GET", ENDPOINT, data)
 
     data["Signature"] = sign_str(secret_key, s, hashlib.sha1)
-    request = requests.get("https://" + endpoint,
+    request = requests.get("https://" + ENDPOINT,
                            params=data,
                            timeout=TIME_OUT)
 
@@ -137,8 +128,7 @@ def translate(query_text,
         print(result)
         return False, f'{error_msg}\n\n{result["Error"]["Code"]}: {result["Error"]["Message"]}'
 
-    else:
-        return True, result["TargetText"]
+    return True, result["TargetText"]
 
 
 def get_string_to_sign(method, endpoint, params):

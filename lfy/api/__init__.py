@@ -37,17 +37,17 @@ def translate_by_server(text, server_key, lang_to, lang_from="auto"):
 
         if server_key == google.SERVER.key:
             return google.translate_text(text, lang_to, lang_from)
-        elif server_key == baidu.SERVER.key:
+        if server_key == baidu.SERVER.key:
             return baidu.translate_text(text, lang_to, lang_from)
-        elif server_key == tencent.SERVER.key:
+        if server_key == tencent.SERVER.key:
             return tencent.translate_text(text, lang_to, lang_from)
-        else:
-            return f"暂不支持：{server_key}"
+
+        return f"暂不支持：{server_key}"
 
     except ConnectTimeout as e:
         s = _("The connection timed out. Maybe there is a network problem")
         return f"{s}: \n\n {e}"
-    except Exception as e:
+    except Exception as e:  # pylint: disable=W0718
         s = _("something error, try other translate engine?")
         return f"{s}：\n\n {e}"
 
