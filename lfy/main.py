@@ -109,6 +109,7 @@ class LfyApplication(Adw.Application):
             self.cb.disconnect(self.copy_change_id)
         # pylint: disable=E1101
         self.props.active_window.toast_msg(text)
+
     def create_action(self, name, callback, shortcuts=None):
         """创建菜单
 
@@ -168,6 +169,7 @@ class LfyApplication(Adw.Application):
     def find_update(self):
         """查找更新
         """
+
         def update_app(self, update_msg):
             self.props.active_window.tv_from.get_buffer().set_text(update_msg)
 

@@ -1,11 +1,9 @@
-# window.py
-#
-# Copyright 2023 Unknown
+'设置'
 
 from gi.repository import Adw, Gio, Gtk
 
 from lfy.api.base import Server
-from lfy.api.server import get_server_names_api_key, get_servers_api_key
+from lfy.api.utils import get_server_names_api_key, get_servers_api_key
 from lfy.settings import Settings
 from lfy.widgets.server_preferences import ServerPreferences
 

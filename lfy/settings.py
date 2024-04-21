@@ -1,7 +1,4 @@
-# Copyright 2021-2022 Mufeed Ali
-# Copyright 2021-2022 Rafael Mardojai CM
-# SPDX-License-Identifier: GPL-3.0-or-later
-
+'设置保存'
 from gi.repository import Gio, GLib
 
 from lfy import APP_ID  # pylint: disable=E0611
