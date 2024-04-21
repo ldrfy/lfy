@@ -8,8 +8,8 @@ from gettext import gettext as _
 from gi.repository import Adw, GLib, Gtk
 
 from lfy.api import translate_by_server
-from lfy.api.server import (get_lang, get_lang_names, get_server,
-                            get_server_names, lang_n2j, server_key2i)
+from lfy.api.utils import (get_lang, get_lang_names, get_server,
+                           get_server_names, lang_n2j, server_key2i)
 from lfy.settings import Settings
 from lfy.widgets.theme_switcher import ThemeSwitcher
 
@@ -52,17 +52,19 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.toast.set_timeout(2)
 
         i = server_key2i(self.setting.server_selected_key)
+        self.jn = True
 
         self.dd_server.set_model(get_server_names())
         self.dd_server.set_selected(i)
 
         self.dd_lang.set_model(get_lang_names(i))
-        self.dd_lang.set_selected(lang_n2j(i, self.setting.lang_selected_n))
+        n = lang_n2j(i, self.setting.lang_selected_n)
+        print("初始化", i, n)
+        self.dd_lang.set_selected(n)
 
         self.menu_btn.props.popover.add_child(ThemeSwitcher(), 'theme')
 
         self.connect('unrealize', self.save_settings)
-
 
     def save_settings(self, _a):
         """_summary_
@@ -77,8 +79,9 @@ class TranslateWindow(Adw.ApplicationWindow):
         i = self.dd_server.get_selected()
         j = self.dd_lang.get_selected()
         self.setting.server_selected_key = get_server(i).key
-        self.setting.lang_selected_n = get_lang(i, j).n
-
+        n = get_lang(i, j).n
+        self.setting.lang_selected_n = n
+        print("保存", i, j, n)
 
     @Gtk.Template.Callback()
     def _on_server_changed(self, drop_down, _a):
@@ -86,12 +89,18 @@ class TranslateWindow(Adw.ApplicationWindow):
         if time.time() - self.creat_time > 1:
             i = drop_down.get_selected()
             n = self.setting.lang_selected_n
+            self.jn = False
             self.dd_lang.set_model(get_lang_names(i))
             self.dd_lang.set_selected(lang_n2j(i, n))
 
     @Gtk.Template.Callback()
     def _on_lang_changed(self, _drop_down, _a):
-        self.update(self.last_text, True)
+        if time.time() - self.creat_time > 1:
+            # 改变 _on_server_changed 时，这个函数会被调用两次
+            if self.jn:
+                self.save_settings("")
+                self.update(self.last_text, True)
+            self.jn = True
 
     @Gtk.Template.Callback()
     def _set_tv_copy(self, _a):
@@ -175,7 +184,6 @@ class TranslateWindow(Adw.ApplicationWindow):
         s_from = re.sub(r"(?<!\.|-|。)[\n|\r]+", " ", s_from)
         return s_from
 
-
     def notice_action(self, cbtn: Gtk.CheckButton, text_ok, text_no):
         """_summary_
 
@@ -190,7 +198,6 @@ class TranslateWindow(Adw.ApplicationWindow):
                 self.toast_msg(text_ok)
             else:
                 self.toast_msg(text_no)
-
 
     def toast_msg(self, toast_msg):
         """_summary_

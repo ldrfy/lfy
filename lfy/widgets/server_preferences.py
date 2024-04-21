@@ -31,21 +31,18 @@ class ServerPreferences(Adw.Bin):
     api_key_spinner = Gtk.Template.Child()
     api_key_link = Gtk.Template.Child()
 
-    def __init__(self, server:Server, **kwargs):
+    def __init__(self, server: Server, **kwargs):
         super().__init__(**kwargs)
         self.server = server
         self.title.props.subtitle = server.name
         # Load saved values
         self.api_key_entry.props.text = get_api_key_s(server.key)
-        self.api_key_link.set_uri(server.doc_url)
-
+        self.api_key_link.set_uri(server.get_doc_url())
 
     @Gtk.Template.Callback()
     def _on_back(self, _button):
         """ Called on self.back_btn::clicked signal """
         self.get_root().close_subpage()
-
-
 
     @Gtk.Template.Callback()
     def _on_api_key_apply(self, _row):

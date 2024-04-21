@@ -1,4 +1,4 @@
-
+'翻译服务的基础类'
 from gettext import gettext as _
 
 TIME_OUT = 3
@@ -41,23 +41,49 @@ class Lang():
         """
         self.key = key
         self.n = n
-        self.name = LANGUAGE_NAMES[n]
+
+    def get_name(self):
+        """_summary_
+
+        Args:
+            t (str): _description_
+        """
+        return LANGUAGE_NAMES[self.n]
+
+    def test(self, t):
+        """_summary_
+
+        Args:
+            t (_type_): _description_
+        """
+        print(t)
 
 
 class Server:
-    """翻译信息
+    """翻译基础类
     """
 
-    def __init__(self, key: str, name: str, lang_key_ns: dict, is_api_key=False, doc_url=""):
+    def __init__(self, key: str, name, lang_key_ns: dict):
+        """初始化
+
+        Args:
+            key (str): _description_
+            name (str, optional): 翻译服务名字，需要可以翻译_(). Defaults to "".
+            lang_key_ns (dict): 支持哪些翻译语言
+        """
         self.key = key
-        self.doc_url = doc_url
-        self.is_api_key = is_api_key
-        self.name = _(name)
-
+        self.name = name
         self.langs: list[Lang] = []
-
         for k, v in lang_key_ns.items():
             self.langs.append(Lang(k, v))
+
+    def get_doc_url(self):
+        """文档连接
+
+        Returns:
+            _type_: _description_
+        """
+        return f"https://github.com/ldrfy/docs/blob/main/servers/{self.key}.md"
 
     def get_lang_names(self):
         """获取某个翻译服务的所有翻译语言的名字
@@ -65,7 +91,7 @@ class Server:
         Returns:
             list: 如 ["auto"]
         """
-        return [lang.name for lang in self.langs]
+        return [lang.get_name() for lang in self.langs]
 
     def get_lang(self, j=0):
         """获取某个翻译服务的某个语言 Lang
@@ -74,8 +100,41 @@ class Server:
             j (int, optional): _description_. Defaults to 0.
 
         Returns:
-            _type_: _description_
+            Lang: _description_
         """
         if j >= len(self.langs):
             return self.langs[0]
         return self.langs[j]
+
+    def check_translate(self, api_key_s: str) -> bool:
+        """实现检查翻译的参数
+
+        Args:
+            text (str): _description_
+
+        Returns:
+            bool: _description_
+        """
+        print(api_key_s)
+        return True, "success"
+
+    def translate_text(self, text: str, lang_to: str, lang_from: str) -> str:
+        """实现文本翻译的逻辑
+
+        Args:
+            text (str): _description_
+            source_lang (str): _description_
+            target_lang (str): _description_
+
+        Returns:
+            str: _description_
+        """
+        return "test"
+
+    def get_api_key_s(self):
+        """字符串apikey
+
+        Returns:
+            _type_: _description_
+        """
+        return None
