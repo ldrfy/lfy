@@ -166,13 +166,19 @@ class LfyApplication(Adw.Application):
         else:
             print(_("Image translation is currently not supported"))
 
+    def update_app(self, update_msg):
+        """显示更新信息
+
+        Args:
+            update_msg (_type_): _description_
+        """
+        # pylint: disable=E1101
+        self.props.active_window.tv_from.get_buffer().set_text(update_msg)
+
     def find_update(self):
         """查找更新
         """
 
-        def update_app(self, update_msg):
-            self.props.active_window.tv_from.get_buffer().set_text(update_msg)
-
         update_msg = check_update()
         if update_msg is not None:
-            GLib.idle_add(update_app, update_msg)
+            GLib.idle_add(self.update_app, update_msg)
