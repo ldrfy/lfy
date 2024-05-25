@@ -21,7 +21,6 @@ class BingServer(Server):
         # https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support
         lang_key_ns = {
             "zh-Hans": 1,
-            "lzh": 2,
             "en": 3,
             "ja": 4,
             "ko": 5,
