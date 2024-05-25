@@ -29,19 +29,27 @@ class GoogleServer(Server):
             "fr": 7,
             "it": 8,
         }
-        r1 = random.randint(10, 100)
-        r2 = random.randint(111111111, 999999999)
-        r3 = random.randint(5, 11)
-        r4 = base64.b64encode(str(random.random())[2:].encode()).decode()
-        user_agent = (
-            f'GoogleTranslate/6.{r1}.0.06.{r2} (Linux; U; Android {r3}; {r4}) '
-        )
-
-        self.session = requests.Session()
-        self.session.headers = {
-            'User-Agent': user_agent
-        }
+        self.session = None
         super().__init__("google",  _("google"), lang_key_ns)
+
+    def get_session(self):
+        """初始化请求
+        """
+        if self.session is None:
+            r1 = random.randint(10, 100)
+            r2 = random.randint(111111111, 999999999)
+            r3 = random.randint(5, 11)
+            r4 = base64.b64encode(str(random.random())[2:].encode()).decode()
+            user_agent = (
+                f'GoogleTranslate/6.{r1}.0.06.{
+                    r2} (Linux; U; Android {r3}; {r4}) '
+            )
+
+            self.session = requests.Session()
+            self.session.headers = {
+                'User-Agent': user_agent
+            }
+        return self.session
 
     def translate_text(self, text, lang_to="zh-cn", lang_from="auto"):
         """翻译
@@ -61,8 +69,8 @@ class GoogleServer(Server):
                   'format': "html", 'v': "1.0"}
 
         for i in range(1, 4):
-            response = self.session.post(url, params=params,
-                                         data={'q': text}, timeout=TIME_OUT)
+            response = self.get_session().post(url, params=params,
+                                               data={'q': text}, timeout=TIME_OUT)
             if response.status_code == 429:
                 time.sleep(5 * i)
                 continue

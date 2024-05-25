@@ -8,7 +8,8 @@ from gettext import gettext as _
 from gi.repository import Adw, GLib, Gtk
 
 from lfy.api import translate_by_server
-from lfy.api.utils import (get_lang, get_lang_names, get_server,
+from lfy.api.base import Server
+from lfy.api.utils import (create_server, get_lang, get_lang_names, get_server,
                            get_server_names, lang_n2j, server_key2i)
 from lfy.settings import Settings
 from lfy.widgets.theme_switcher import ThemeSwitcher
@@ -52,6 +53,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.toast.set_timeout(2)
 
         i = server_key2i(self.setting.server_selected_key)
+        self.tran_server = create_server(self.setting.server_selected_key)
         self.jn = True
 
         self.dd_server.set_model(get_server_names())
@@ -133,13 +135,15 @@ class TranslateWindow(Adw.ApplicationWindow):
         text = buffer_from.get_text(start_iter, end_iter, False)
 
         i = self.dd_server.get_selected()
-        sk = get_server(i).key
+        server: Server = get_server(i)
+        if server.key != self.tran_server.key:
+            self.tran_server = server
         lk = get_lang(i, self.dd_lang.get_selected()).key
 
         threading.Thread(target=self.request_text, daemon=True,
-                         args=(text, sk, lk,)).start()
+                         args=(text, self.tran_server, lk,)).start()
 
-    def request_text(self, text, sk, lk):
+    def request_text(self, text, server, lk):
         """子线程翻译
 
         Args:
@@ -148,7 +152,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             j (lang_key_j): _description_
         """
         GLib.idle_add(self.update_ui, "")
-        text_translated = translate_by_server(text, sk, lk)
+        text_translated = translate_by_server(text, server, lk)
         GLib.idle_add(self.update_ui, text_translated)
 
     def update_ui(self, s=""):
