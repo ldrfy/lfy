@@ -33,6 +33,7 @@ class BaiduServer(Server):
             "fra": 7,
             "it": 8
         }
+        self.session = None
         super().__init__("baidu", _("baidu"), lang_key_ns)
 
     def check_translate(self, api_key_s):
@@ -47,7 +48,7 @@ class BaiduServer(Server):
         error_msg = _("please input app_id and secret_key like:")
         if "|" not in api_key_s:
             return False, error_msg + " 121343 | fdsdsdg"
-        ok, text = translate("success", api_key_s)
+        ok, text = self.translate("success", api_key_s)
         if ok:
             Settings.get().server_sk_baidu = api_key_s
         return ok, text
@@ -63,7 +64,8 @@ class BaiduServer(Server):
         Returns:
             _type_: _description_
         """
-        _ok, text = translate(text, self.get_api_key_s(), lang_to, lang_from)
+        _ok, text = self.translate(
+            text, self.get_api_key_s(), lang_to, lang_from)
         return text
 
     def get_api_key_s(self):
@@ -74,42 +76,49 @@ class BaiduServer(Server):
         """
         return Settings.get().server_sk_baidu
 
+    def get_session(self):
+        """初始化请求
+        """
+        if self.session is None:
+            self.session = requests.Session()
+        return self.session
 
-def translate(s, api_key_s, lang_to="auto", lang_from="auto"):
-    """翻译
+    def translate(self, s, api_key_s, lang_to="auto", lang_from="auto"):
+        """翻译
 
-    Args:
-        s (str): 待翻译字符串
-        api_key_s (str): 输入的原始字符串
-        lang_to (str, optional): 字符串翻译为xx语言. Defaults to "auto".
-        lang_from (str, optional): 待翻译字符串语言. Defaults to "auto".
+        Args:
+            s (str): 待翻译字符串
+            api_key_s (str): 输入的原始字符串
+            lang_to (str, optional): 字符串翻译为xx语言. Defaults to "auto".
+            lang_from (str, optional): 待翻译字符串语言. Defaults to "auto".
 
-    Returns:
-        _type_: _description_
-    """
-    # .strip()
-    [app_id, secret_key] = api_key_s.split("|")
-    app_id = app_id.strip()
-    secret_key = secret_key.strip()
+        Returns:
+            _type_: _description_
+        """
+        # .strip()
+        [app_id, secret_key] = api_key_s.split("|")
+        app_id = app_id.strip()
+        secret_key = secret_key.strip()
 
-    if app_id == "app_id" or secret_key == "secret_key":
-        return _("please input API Key in preference")
+        if app_id == "app_id" or secret_key == "secret_key":
+            return _("please input API Key in preference")
 
-    url = f"https://api.fanyi.baidu.com/api/trans/vip/translate?from={lang_from}&to={lang_to}"
-    url = f"{url}&appid={app_id}&q={urllib.parse.quote(s)}"
+        url = f"https://api.fanyi.baidu.com/api/trans/vip/translate?from={
+            lang_from}&to={lang_to}"
+        url = f"{url}&appid={app_id}&q={urllib.parse.quote(s)}"
 
-    salt = random.randint(32768, 65536)
-    sign = app_id + s + str(salt) + secret_key
-    sign = hashlib.md5(sign.encode()).hexdigest()
-    url = f"{url}&salt={salt}&sign={sign}"
+        salt = random.randint(32768, 65536)
+        sign = app_id + s + str(salt) + secret_key
+        sign = hashlib.md5(sign.encode()).hexdigest()
+        url = f"{url}&salt={salt}&sign={sign}"
 
-    result = requests.get(url, timeout=TIME_OUT).json()
+        result = self.get_session().get(url, timeout=TIME_OUT).json()
 
-    error_msg = _("something error:")
-    if "error_code" not in result:
-        s1 = ""
-        for trans_result in result["trans_result"]:
-            s1 += f'{trans_result["dst"]}\n'
-        return True, s1
+        error_msg = _("something error:")
+        if "error_code" not in result:
+            s1 = ""
+            for trans_result in result["trans_result"]:
+                s1 += f'{trans_result["dst"]}\n'
+            return True, s1
 
-    return False, f'{error_msg}\n\n{result["error_code"]}: {result["error_msg"]}'
+        return False, f'{error_msg}\n\n{result["error_code"]}: {result["error_msg"]}'

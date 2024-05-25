@@ -1,6 +1,7 @@
 '翻译服务的一些工具'
 from gi.repository import Gtk
 
+from lfy.api.base import Server
 from lfy.api.server import SERVERS
 
 
@@ -32,7 +33,7 @@ def get_server_names_api_key():
     return [server.name for server in get_servers_api_key()]
 
 
-def get_server(i: int):
+def get_server(i: int) -> Server:
     """_summary_
 
     Args:
@@ -46,7 +47,7 @@ def get_server(i: int):
     return SERVERS[i]
 
 
-def create_server(key):
+def create_server(key) -> Server:
     """引擎字典
 
     Returns:

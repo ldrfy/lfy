@@ -8,6 +8,7 @@ from gettext import gettext as _
 
 from requests.exceptions import ConnectTimeout
 
+from lfy.api.base import Server
 from lfy.api.utils import create_server
 from lfy.settings import Settings
 
@@ -19,7 +20,7 @@ if len(PROXY_ADDRESS) > 0:
     os.environ['https_proxy'] = PROXY_ADDRESS
 
 
-def translate_by_server(text, server_key, lang_to, lang_from="auto"):
+def translate_by_server(text, server: Server, lang_to, lang_from="auto"):
     """翻译
 
     Args:
@@ -35,8 +36,8 @@ def translate_by_server(text, server_key, lang_to, lang_from="auto"):
         if len(text.strip()) == 0:
             return _("Copy automatic translation, it is recommended to pin this window to the top")
 
-        print("翻译服务", server_key, lang_to)
-        return create_server(server_key).translate_text(text, lang_to, lang_from)
+        print("翻译服务", server.key, lang_to)
+        return server.translate_text(text, lang_to, lang_from)
 
     except ConnectTimeout as e:
         s = _("The connection timed out. Maybe there is a network problem")
