@@ -99,7 +99,7 @@ def translate(query_text, api_key_s, lang_to="zh", lang_from="auto"):
         "Region": "ap-beijing",
         "SecretId": secret_id,
         "Timestamp": int(time.time()),
-        "Nonce": random.randint(1, 1e6),
+        "Nonce": random.randint(1, int(1e6)),
         "Version": "2018-03-21",
         "ProjectId": 0,
         "Source": lang_from,
