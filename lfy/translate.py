@@ -60,9 +60,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.dd_server.set_selected(i)
 
         self.dd_lang.set_model(get_lang_names(i))
-        n = lang_n2j(i, self.setting.lang_selected_n)
-        print("初始化", i, n)
-        self.dd_lang.set_selected(n)
+        self.dd_lang.set_selected(lang_n2j(i, self.setting.lang_selected_n))
 
         self.menu_btn.props.popover.add_child(ThemeSwitcher(), 'theme')
 

@@ -80,6 +80,11 @@ test-aur: clear
 	mv *.pkg.tar.zst ${DISK}
 
 
+release: test-deb
+	cd ${BUILD_PKG}/aur && \
+	makepkg -sf && \
+	mv *.pkg.tar.zst ${DISK}
+
 uninstall:
 	cd build && ninja uninstall
 
