@@ -47,7 +47,7 @@ class TencentServer(Server):
         error = _("please input secret_id and secret_key like:")
         if "|" not in api_key_s:
             return False, error + " a121343 | fdsdsdg"
-        ok, text = self.translate("success", api_key_s, "en")
+        ok, text = self._translate("success", api_key_s, "en")
         if ok:
             Settings.get().server_sk_tencent = api_key_s
         return ok, text
@@ -63,7 +63,7 @@ class TencentServer(Server):
         Returns:
             _type_: _description_
         """
-        _ok, text = self.translate(
+        _ok, text = self._translate(
             text, self.get_api_key_s(), lang_to, lang_from)
         return text
 
@@ -75,14 +75,14 @@ class TencentServer(Server):
         """
         return Settings.get().server_sk_tencent
 
-    def get_session(self):
+    def _get_session(self):
         """初始化请求
         """
         if self.session is None:
             self.session = requests.Session()
         return self.session
 
-    def translate(self, query_text, api_key_s, lang_to="zh", lang_from="auto"):
+    def _translate(self, query_text, api_key_s, lang_to="zh", lang_from="auto"):
         """腾讯翻译接口
 
         Args:
@@ -113,10 +113,10 @@ class TencentServer(Server):
             "Target": lang_to
         }
         endpoint = "tmt.tencentcloudapi.com"
-        s = self.get_string_to_sign("GET", endpoint, data)
+        s = self._get_string_to_sign("GET", endpoint, data)
 
-        data["Signature"] = self.sign_str(secret_key, s, hashlib.sha1)
-        request = self.get_session().get(
+        data["Signature"] = self._sign_str(secret_key, s, hashlib.sha1)
+        request = self._get_session().get(
             f"https://{endpoint}", params=data, timeout=TIME_OUT)
 
         result = request.json()["Response"]
@@ -127,7 +127,7 @@ class TencentServer(Server):
 
         return True, result["TargetText"]
 
-    def get_string_to_sign(self, method, endpoint, params):
+    def _get_string_to_sign(self, method, endpoint, params):
         """_summary_
 
         Args:
@@ -141,7 +141,7 @@ class TencentServer(Server):
         query_str = "&".join(f"{k}={params[k]}" for k in sorted(params))
         return f"{method}{endpoint}/?{query_str}"
 
-    def sign_str(self, key, s, method):
+    def _sign_str(self, key, s, method):
         """_summary_
 
         Args:

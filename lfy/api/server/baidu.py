@@ -48,7 +48,7 @@ class BaiduServer(Server):
         error_msg = _("please input app_id and secret_key like:")
         if "|" not in api_key_s:
             return False, error_msg + " 121343 | fdsdsdg"
-        ok, text = self.translate("success", api_key_s)
+        ok, text = self._translate("success", api_key_s)
         if ok:
             Settings.get().server_sk_baidu = api_key_s
         return ok, text
@@ -64,7 +64,7 @@ class BaiduServer(Server):
         Returns:
             _type_: _description_
         """
-        _ok, text = self.translate(
+        _ok, text = self._translate(
             text, self.get_api_key_s(), lang_to, lang_from)
         return text
 
@@ -76,14 +76,14 @@ class BaiduServer(Server):
         """
         return Settings.get().server_sk_baidu
 
-    def get_session(self):
+    def _get_session(self):
         """初始化请求
         """
         if self.session is None:
             self.session = requests.Session()
         return self.session
 
-    def translate(self, s, api_key_s, lang_to="auto", lang_from="auto"):
+    def _translate(self, s, api_key_s, lang_to="auto", lang_from="auto"):
         """翻译
 
         Args:
@@ -112,7 +112,7 @@ class BaiduServer(Server):
         sign = hashlib.md5(sign.encode()).hexdigest()
         url = f"{url}&salt={salt}&sign={sign}"
 
-        result = self.get_session().get(url, timeout=TIME_OUT).json()
+        result = self._get_session().get(url, timeout=TIME_OUT).json()
 
         error_msg = _("something error:")
         if "error_code" not in result:
