@@ -1,5 +1,6 @@
 # main.py
 import threading
+import time
 from gettext import gettext as _
 
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk
@@ -181,5 +182,6 @@ class LfyApplication(Adw.Application):
 
         update_msg = check_update()
         if update_msg is not None:
+            time.sleep(2)
             print(update_msg)
             GLib.idle_add(self.update_app, update_msg)

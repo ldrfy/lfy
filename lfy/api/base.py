@@ -71,7 +71,7 @@ class Server:
             name (str, optional): 翻译服务名字，需要可以翻译_(). Defaults to "".
             lang_key_ns (dict): 支持哪些翻译语言
         """
-        print(f"初始化翻译服务：{key}")
+
         self.key = key
         self.name = name
         self.langs: list[Lang] = []
