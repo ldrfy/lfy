@@ -14,6 +14,7 @@ lfy/api/server/__init__.py
 lfy/api/server/baidu.py
 lfy/api/server/google.py
 lfy/api/server/tencent.py
+lfy/api/server/bing.py
 
 data/resources/translate.ui
 data/resources/server-preferences.ui
