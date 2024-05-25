@@ -181,4 +181,5 @@ class LfyApplication(Adw.Application):
 
         update_msg = check_update()
         if update_msg is not None:
+            print(update_msg)
             GLib.idle_add(self.update_app, update_msg)

@@ -90,10 +90,13 @@ class TranslateWindow(Adw.ApplicationWindow):
         # 初始化，会不断调用这个
         if time.time() - self.creat_time > 1:
             i = drop_down.get_selected()
-            n = self.setting.lang_selected_n
-            self.jn = False
+            lang_select_index = lang_n2j(i, self.setting.lang_selected_n)
+            # 等于0时_on_lang_changed不会相应多次
+            self.jn = lang_select_index == 0
+
             self.dd_lang.set_model(get_lang_names(i))
-            self.dd_lang.set_selected(lang_n2j(i, n))
+            # 如果不是0,这时候_on_lang_changed还会被调用
+            self.dd_lang.set_selected(lang_select_index)
 
     @Gtk.Template.Callback()
     def _on_lang_changed(self, _drop_down, _a):
@@ -137,6 +140,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         i = self.dd_server.get_selected()
         server: Server = get_server(i)
         if server.key != self.tran_server.key:
+            print(f"翻译服务器改变:{self.tran_server.key}->{server.key}")
             self.tran_server = server
         lk = get_lang(i, self.dd_lang.get_selected()).key
 
