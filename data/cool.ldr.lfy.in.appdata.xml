@@ -30,6 +30,16 @@
 		</screenshot>
 	</screenshots>
 	<releases>
+		<release version="0.0.5" date="2024-05-24">
+			<description>
+				<ul>
+					<li>Fix Google Translate</li>
+					<li>Improve translation performance</li>
+					<li>Add Italian language and support Italian translation</li>
+					<li>Optimize the structure of translation services and make it more convenient to create third-party translation services</li>
+				</ul>
+			</description>
+		</release>
 		<release version="0.0.4" date="2023-12-04">
 			<description>
 				<ul>
