@@ -64,8 +64,7 @@ class BaiduServer(Server):
         Returns:
             _type_: _description_
         """
-        _ok, text = self._translate(
-            text, self.get_api_key_s(), lang_to, lang_from)
+        _ok, text = self._translate(text, self.get_api_key_s(), lang_to, lang_from)
         return text
 
     def get_api_key_s(self):
@@ -101,10 +100,11 @@ class BaiduServer(Server):
         secret_key = secret_key.strip()
 
         if app_id == "app_id" or secret_key == "secret_key":
-            return _("please input API Key in preference")
+            return False, _("please input API Key in preference")
 
-        url = f"https://api.fanyi.baidu.com/api/trans/vip/translate?from={
-            lang_from}&to={lang_to}"
+        url = "https://api.fanyi.baidu.com/api/trans/vip/translate"
+
+        url = f"{url}?from={lang_from}&to={lang_to}"
         url = f"{url}&appid={app_id}&q={urllib.parse.quote(s)}"
 
         salt = random.randint(32768, 65536)

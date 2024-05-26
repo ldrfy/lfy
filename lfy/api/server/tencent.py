@@ -98,7 +98,7 @@ class TencentServer(Server):
         secret_id, secret_key = self.get_api_key(api_key_s)
 
         if secret_id == "secret_id" or secret_key == "secret_key":
-            return _("please input API Key in preference")
+            return False, _("please input API Key in preference")
 
         data = {
             "Action": "TextTranslate",
