@@ -1,5 +1,5 @@
 {
-    "version": "0.0.5",
+    "version": "0.0.6",
     "url": "https://github.com/ldrfy/lfy",
-    "msg": "Update notes:\n-Fix Google Translate\n-Improve translation performance\n-Add Italian and support Italian translation\n-Optimize the structure of the translation service to make it more convenient to create third-party translation services"
+    "msg": "Update notes:\n-Add Bing Translate for free\n-Fix Google Translate for free\n-Improve translation performance\n-Add Italian and support Italian translation\n-Optimize the structure of the translation service to make it more convenient to create third-party translation services"
 }

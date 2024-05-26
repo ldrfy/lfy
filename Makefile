@@ -1,5 +1,5 @@
 TO_LANG = zh_CN
-VERSION = 0.0.5
+VERSION = 0.0.6
 DISK = ../../../dist/
 BUILD_PKG=build/pkg
 DESTDIR = "/"
