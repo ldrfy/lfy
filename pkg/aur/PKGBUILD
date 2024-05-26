@@ -2,29 +2,29 @@
 pkgname=@APP_NAME@
 pkgver=@VERSION@
 pkgrel=1
-pkgdesc="A translation app for GNOME."
+pkgdesc="A translation app by gtk4 and adwaita."
 arch=('any')
 url="@PACKAGE_URL@"
 license=('GPL3')
-depends=('libadwaita' 'python-gobject')
+depends=('libadwaita' 'python-gobject' 'python-requests')
 makedepends=('git' 'gobject-introspection' 'meson')
 checkdepends=('appstream-glib')
-source=('@PACKAGE_URL@/archive/refs/tags/v@VERSION@.zip')
+source=(${url}/archive/refs/tags/v${pkgver}.zip)
 sha256sums=("SKIP")
 
 
 build() {
-  cd @APP_NAME@-@VERSION@
+  cd ${pkgname}-${pkgver}
   meson _build --prefix="/usr"
 	meson compile -C _build
 }
 
 check() {
-  cd @APP_NAME@-@VERSION@
+  cd ${pkgname}-${pkgver}
   meson test -C _build --print-errorlogs
 }
 
 package() {
-  cd @APP_NAME@-@VERSION@
+  cd ${pkgname}-${pkgver}
   meson install -C _build --destdir "$pkgdir"
 }
