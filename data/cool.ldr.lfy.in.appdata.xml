@@ -12,21 +12,26 @@
 	<screenshots>
 		<screenshot type="default">
 			<image type="source">https://raw.githubusercontent.com/ldrfy/docs/main/images/main.png</image>
+			<caption>Translation homepage</caption>
 		</screenshot>
 		<screenshot>
 			<image type="source">
 				https://raw.githubusercontent.com/ldrfy/docs/main/images/preference.png</image>
+			<caption>Preferences page</caption>
 		</screenshot>
 		<screenshot>
 			<image type="source">
 				https://raw.githubusercontent.com/ldrfy/docs/main/images/server-preference.png</image>
+			<caption>Set Api Key</caption>
 		</screenshot>
 		<screenshot>
 			<image type="source">
 				https://raw.githubusercontent.com/ldrfy/docs/main/images/shortcuts.png</image>
+			<caption>Shortcuts</caption>
 		</screenshot>
 		<screenshot>
 			<image type="source">https://raw.githubusercontent.com/ldrfy/docs/main/images/about.png</image>
+			<caption>About</caption>
 		</screenshot>
 	</screenshots>
 	<releases>
