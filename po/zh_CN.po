@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-05-25 18:12+0800\n"
+"POT-Creation-Date: 2024-05-27 01:01+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -32,38 +32,66 @@ msgid ""
 "Especially suitable for document translation."
 msgstr "一种简单愉快的翻译方式。支持多种翻译服务。特别适合文档翻译。"
 
-#: data/cool.ldr.lfy.in.appdata.xml:36
+#: data/cool.ldr.lfy.in.appdata.xml:15
+#, fuzzy
+msgid "Translation homepage"
+msgstr "为gnome设计的翻译软件"
+
+#: data/cool.ldr.lfy.in.appdata.xml:20
+#, fuzzy
+msgid "Preferences page"
+msgstr "_设置"
+
+#: data/cool.ldr.lfy.in.appdata.xml:25
+msgid "Set Api Key"
+msgstr "设置密钥"
+
+#: data/cool.ldr.lfy.in.appdata.xml:30
+#, fuzzy
+msgid "Shortcuts"
+msgstr "显示快捷键"
+
+#: data/cool.ldr.lfy.in.appdata.xml:34
+#, fuzzy
+msgid "About"
+msgstr "_关于 兰译"
+
+#: data/cool.ldr.lfy.in.appdata.xml:41
+msgid "Add Bing Translate for free"
+msgstr "添加必应翻译（无需密钥）"
+
+#: data/cool.ldr.lfy.in.appdata.xml:48
 #, fuzzy
 msgid "Fix Google Translate"
 msgstr "翻译"
 
-#: data/cool.ldr.lfy.in.appdata.xml:37
+#: data/cool.ldr.lfy.in.appdata.xml:49
 msgid "Improve translation performance"
 msgstr "提高翻译性能"
 
-#: data/cool.ldr.lfy.in.appdata.xml:38
+#: data/cool.ldr.lfy.in.appdata.xml:50
 msgid "Add Italian language and support Italian translation"
 msgstr "添加意大利语言，支持意大利语翻译"
 
-#: data/cool.ldr.lfy.in.appdata.xml:39
+#: data/cool.ldr.lfy.in.appdata.xml:51
 msgid ""
 "Optimize the structure of translation services and make it more convenient "
 "to create third-party translation services"
 msgstr "优化翻译服务结构，打造第三方翻译服务更便捷"
 
-#: data/cool.ldr.lfy.in.appdata.xml:46
+#: data/cool.ldr.lfy.in.appdata.xml:58
 msgid "add shortcut"
 msgstr "添加快捷键"
 
-#: data/cool.ldr.lfy.in.appdata.xml:47
+#: data/cool.ldr.lfy.in.appdata.xml:59
 msgid "Automatically check for updates"
 msgstr "软件打开时，自动检查更新"
 
-#: data/cool.ldr.lfy.in.appdata.xml:53
+#: data/cool.ldr.lfy.in.appdata.xml:65
 msgid "Basic functions completed"
 msgstr "基础功能完成"
 
-#: data/cool.ldr.lfy.in.appdata.xml:58
+#: data/cool.ldr.lfy.in.appdata.xml:70
 msgid "yuh"
 msgstr "余航"
 
@@ -160,7 +188,7 @@ msgstr "百度"
 msgid "please input app_id and secret_key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
-#: lfy/api/server/baidu.py:104 lfy/api/server/tencent.py:101
+#: lfy/api/server/baidu.py:103 lfy/api/server/tencent.py:101
 msgid "please input API Key in preference"
 msgstr "请在设置中填写 API Key"
 
@@ -180,9 +208,18 @@ msgstr "腾讯"
 msgid "please input secret_id and secret_key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
-#: lfy/api/server/bing.py:33
+#: lfy/api/server/bing.py:32
 msgid "bing"
 msgstr "必应"
+
+#: lfy/api/server/bing.py:82
+msgid "something error, try other translate engine?"
+msgstr "出现了一些错误，试试其他翻译引擎？"
+
+#: lfy/api/server/bing.py:90
+#, python-brace-format
+msgid "1000 characters limit! You send {len_text} characters."
+msgstr "被限制在1000个字符! 你发送了 {len_text} 个字符."
 
 #: data/resources/translate.ui:60
 msgid "Remove symbols such as line breaks"
@@ -279,6 +316,3 @@ msgstr "退出"
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "显示快捷键"
-
-#~ msgid "something error, try other translate engine?"
-#~ msgstr "出现了一些错误，试试其他翻译引擎？"
