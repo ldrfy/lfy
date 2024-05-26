@@ -30,6 +30,13 @@
 		</screenshot>
 	</screenshots>
 	<releases>
+		<release version="0.0.6" date="2024-05-26">
+			<description>
+				<ul>
+					<li>Add Bing Translate for free</li>
+				</ul>
+			</description>
+		</release>
 		<release version="0.0.5" date="2024-05-24">
 			<description>
 				<ul>
