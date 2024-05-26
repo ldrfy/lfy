@@ -62,7 +62,34 @@ class BingServer(Server):
         self.session = session
         return session
 
-    def translate_text(self, text, lang_to="zh-cn", lang_from="auto"):
+    def error_check(self, response, text, lang_to, lang_from, n):
+        """错误处理
+
+        Args:
+            response (_type_): _description_
+            text (_type_): _description_
+            lang_to (_type_): _description_
+            lang_from (_type_): _description_
+            n (_type_): _description_
+
+        Raises:
+            ValueError: _description_
+
+        Returns:
+            _type_: _description_
+        """
+        if n > 5:
+            raise ValueError(_("something error, try other translate engine?"))
+
+        if 'ShowCaptcha' in response.keys():
+            self.session = None
+            return self.translate_text(text, lang_to, lang_from, n+1)
+
+        if 'statusCode' in response.keys() and response['statusCode'] == 400:
+            response['errorMessage'] = _(
+                '1000 characters limit! You send {len_text} characters.').format(len_text=len(text))
+
+    def translate_text(self, text, lang_to="zh-cn", lang_from="auto", n=0):
         """翻译
 
         Args:
@@ -74,8 +101,9 @@ class BingServer(Server):
             str: _description_
         """
         hs = self._get_session().headers
-        url = f'https://www.bing.com/ttranslatev3?isVertical=1&&IG={
-            hs["IG"]}&IID=translator.{random.randint(5019, 5026)}.{random.randint(1, 3)}'
+        iid = f"translator.{random.randint(5019, 5026)}.{random.randint(1, 3)}"
+        url = "https://www.bing.com/ttranslatev3"
+        url = f'{url}?isVertical=1&&IG={hs["IG"]}&IID={iid}'
         data = {'': '', 'text': text, 'to': lang_to,
                 'token': hs['token'], 'key': hs['key'], "fromLang": lang_from}
         if "auto" == lang_from:
@@ -84,14 +112,7 @@ class BingServer(Server):
 
         response = self._get_session().post(url, data=data, timeout=TIME_OUT).json()
         if isinstance(response, dict):
-            if 'ShowCaptcha' in response.keys():
-                self.session = None
-                return self.translate_text(text, lang_to, lang_from)
-
-            if 'statusCode' in response.keys():
-                if response['statusCode'] == 400:
-                    response['errorMessage'] = f'1000 characters limit! You send {
-                        len(text)} characters.'
+            self.error_check(response, text, lang_to, lang_from, n)
         else:
             if "auto" != lang_from:
                 return response[0]

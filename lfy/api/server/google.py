@@ -40,14 +40,10 @@ class GoogleServer(Server):
             r2 = random.randint(111111111, 999999999)
             r3 = random.randint(5, 11)
             r4 = base64.b64encode(str(random.random())[2:].encode()).decode()
-            user_agent = (
-                f'GoogleTranslate/6.{r1}.0.06.{
-                    r2} (Linux; U; Android {r3}; {r4}) '
-            )
 
             self.session = requests.Session()
             self.session.headers = {
-                'User-Agent': user_agent
+                'User-Agent': f'GoogleTranslate/6.{r1}.0.06.{r2} (Linux; U; Android {r3}; {r4})'
             }
         return self.session
 
