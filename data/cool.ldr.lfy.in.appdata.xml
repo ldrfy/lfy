@@ -66,7 +66,7 @@
 			</description>
 		</release>
 	</releases>
-	<project_group>GNOME</project_group>
+	<project_group>ldr</project_group>
 	<developer_name>yuh</developer_name>
 	<launchable type="desktop-id">@APP_ID@.desktop</launchable>
 	<url type="homepage">@PACKAGE_URL@</url>
