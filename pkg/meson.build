@@ -5,7 +5,6 @@ conf_pkg.set('PACKAGE_URL', PACKAGE_URL)
 conf_pkg.set('VERSION', meson.project_version())
 
 subdir('deb/DEBIAN')
-# subdir('appimage')
 subdir('aur')
 subdir('flatpak')
 
