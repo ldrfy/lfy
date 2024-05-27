@@ -59,7 +59,7 @@ test-deb: clear
 test-flatpak:clear
 	meson build
 	cd ${BUILD_PKG}/flatpak && \
-	flatpak-builder --install build cool.ldr.lfy.json --user
+	flatpak-builder --install build cool.ldr.lfy.yaml --user
 
 
 test-aur: clear
