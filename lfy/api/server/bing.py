@@ -113,6 +113,8 @@ class BingServer(Server):
         response = self._get_session().post(url, data=data, timeout=TIME_OUT).json()
         if isinstance(response, dict):
             self.error_check(response, text, lang_to, lang_from, n)
+            if 'statusCode' in response.keys():
+                return response["errorMessage"]
         else:
             if "auto" != lang_from:
                 return response[0]
