@@ -3,9 +3,11 @@
 	<schema id="@APP_ID@" path="/cool/ldr/lfy/">
 		<key type="ai" name="window-size">
 			<default>[800, 300]</default>
+			<description>Window size</description>
 		</key>
 		<key type="b" name="auto-check-update">
 			<default>true</default>
+			<description>Automatically check the new version of the software upon startup</description>
 		</key>
 		<key type="s" name="color-scheme">
 			<choices>
@@ -14,21 +16,27 @@
 				<choice value="dark" />
 			</choices>
 			<default>"auto"</default>
+			<description>thema</description>
 		</key>
 		<key type="s" name="server-selected-key">
 			<default>"baidu"</default>
+			<description>The currently selected translation service</description>
 		</key>
 		<key type="i" name="lang-selected-n">
 			<default>0</default>
+			<description>The currently selected translation language</description>
 		</key>
 		<key type="s" name="server-sk-baidu">
 			<default>"app_id | secret_key"</default>
+			<description>Baidu app_id and secret_key, used in the middle | split</description>
 		</key>
 		<key type="s" name="server-sk-tencent">
 			<default>"secret_id | secret_key"</default>
+			<description>Tencent secret_id and secret_key, used in the middle | split</description>
 		</key>
 		<key type="s" name="vpn-addr-port">
 			<default>""</default>
+			<description>VPN address and port</description>
 		</key>
 	</schema>
 </schemalist>
