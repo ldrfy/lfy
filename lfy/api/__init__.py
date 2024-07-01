@@ -4,6 +4,7 @@ Returns:
     _type_: _description_
 """
 import os
+import traceback
 from gettext import gettext as _
 
 from requests.exceptions import ConnectTimeout
@@ -42,9 +43,10 @@ def translate_by_server(text, server: Server, lang_to, lang_from="auto"):
     except ConnectTimeout as e:
         s = _("The connection timed out. Maybe there is a network problem")
         return f"{s}: \n\n {e}"
-    # except Exception as e:  # pylint: disable=W0718
-    #     s = _("something error, try other translate engine?")
-    #     return f"{s}：\n\n {e}"
+    except Exception as e:  # pylint: disable=W0718
+        error_msg = _("something error:")
+        error_msg = f"{error_msg}\n\n{str(e)}\n\n{traceback.format_exc()}"
+        return error_msg
 
 
 def check_translate(server_key, api_key):
@@ -63,8 +65,9 @@ def check_translate(server_key, api_key):
         s = _("The connection timed out. Maybe there is a network problem")
         return f"{s}: \n\n {e}"
     except Exception as e:  # pylint: disable=W0718
-        s = _("something error, open it again and try again?")
-        return f"{s}：\n\n {e}"
+        error_msg = _("something error:")
+        error_msg = f"{error_msg}\n\n{str(e)}\n\n{traceback.format_exc()}"
+        return error_msg
 
 
 def get_api_key_s(server_key):

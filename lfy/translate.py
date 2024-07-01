@@ -3,6 +3,7 @@
 import re
 import threading
 import time
+import traceback
 from gettext import gettext as _
 
 from gi.repository import Adw, GLib, Gtk
@@ -166,10 +167,16 @@ class TranslateWindow(Adw.ApplicationWindow):
         if len(s) == 0:
             # 开始翻译
             self.sp_translate.start()
-            self.tv_to.get_buffer().set_text("翻译中……")
+            self.tv_to.get_buffer().set_text(_("Translating.."))
         else:
             # 翻译完成
-            self.tv_to.get_buffer().set_text(s)
+            try:
+                self.tv_to.get_buffer().set_text(s)
+            except TypeError as e:
+                error_msg = _("something error:")
+                error_msg = f"{error_msg}\n\n{str(e)}\n\n{traceback.format_exc()}"
+                self.tv_to.get_buffer().set_text(error_msg)
+
             self.sp_translate.stop()
 
     def process_text(self, text):
