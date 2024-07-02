@@ -14,7 +14,6 @@ PYTHON_DIR = '@PYTHON_DIR@'
 LOCALE_DIR = '@LOCALE_DIR@'
 PKGDATA_DIR = '@PKGDATA_DIR@'
 
-print(SCHEMAS_DIR)
 if not os.path.exists(PKGDATA_DIR):
     # 说明是pip这一类的
     print(f"路径修正：{SCHEMAS_DIR}")
@@ -29,12 +28,13 @@ if not os.path.exists(PKGDATA_DIR):
         os.environ.get("XDG_DATA_DIRS", "")
     print(SCHEMAS_DIR)
 
-print(os.environ.get("XDG_DATA_DIRS", ""))
 # python lib
 sys.path.append(PYTHON_DIR)
 
 # 这个在archlinux测试可以后台响应剪贴板，但是在flatpak会直接报错，暂时删除
-# os.environ["GDK_BACKEND"] = "x11"
+if "/app/share" not in SCHEMAS_DIR:
+    print("x11")
+    os.environ["GDK_BACKEND"] = "x11"
 
 import gettext
 import locale
