@@ -9,15 +9,44 @@ from gettext import gettext as _
 
 import requests
 
-from lfy.api.base import TIME_OUT, Server
+from lfy.api.server import Server, TIME_OUT
+from lfy.api.utils import s2ks
 from lfy.settings import Settings
 
 
-class TencentServer(Server):
-    """google翻译
+def _get_string_to_sign(method, endpoint, params):
+    """_summary_
 
     Args:
-        Server (_type_): _description_
+        method (_type_): _description_
+        endpoint (_type_): _description_
+        params (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    query_str = "&".join(f"{k}={params[k]}" for k in sorted(params))
+    return f"{method}{endpoint}/?{query_str}"
+
+
+def _sign_str(key, s, method):
+    """_summary_
+
+    Args:
+        key (_type_): _description_
+        s (_type_): _description_
+        method (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    hmac_str = hmac.new(key.encode("utf8"),
+                        s.encode("utf8"), method).digest()
+    return base64.b64encode(hmac_str)
+
+
+class TencentServer(Server):
+    """tencent翻译
     """
 
     def __init__(self):
@@ -56,16 +85,14 @@ class TencentServer(Server):
         """翻译接口
 
         Args:
-            s (_type_): _description_
+            text (str): _description_
             lang_to (str, optional): _description_. Defaults to "auto".
             lang_from (str, optional): _description_. Defaults to "auto".
 
         Returns:
             _type_: _description_
         """
-        _ok, text = self._translate(
-            text, self.get_api_key_s(), lang_to, lang_from)
-        return text
+        return self._translate(text, self.get_api_key_s(), lang_to, lang_from)
 
     def get_api_key_s(self):
         """设置自动加载保存的api
@@ -95,9 +122,8 @@ class TencentServer(Server):
             _type_: _description_
         """
 
-        secret_id, secret_key = self.get_api_key(api_key_s)
-
-        if secret_id == "secret_id" or secret_key == "secret_key":
+        secret_id, secret_key = s2ks(api_key_s)
+        if secret_id is None or secret_id == "secret_id":
             return False, _("please input API Key in preference")
 
         data = {
@@ -113,9 +139,9 @@ class TencentServer(Server):
             "Target": lang_to
         }
         endpoint = "tmt.tencentcloudapi.com"
-        s = self._get_string_to_sign("GET", endpoint, data)
+        s = _get_string_to_sign("GET", endpoint, data)
 
-        data["Signature"] = self._sign_str(secret_key, s, hashlib.sha1)
+        data["Signature"] = _sign_str(secret_key, s, hashlib.sha1)
         request = self._get_session().get(
             f"https://{endpoint}", params=data, timeout=TIME_OUT)
 
@@ -126,43 +152,3 @@ class TencentServer(Server):
 
         return True, result["TargetText"]
 
-    def _get_string_to_sign(self, method, endpoint, params):
-        """_summary_
-
-        Args:
-            method (_type_): _description_
-            endpoint (_type_): _description_
-            params (_type_): _description_
-
-        Returns:
-            _type_: _description_
-        """
-        query_str = "&".join(f"{k}={params[k]}" for k in sorted(params))
-        return f"{method}{endpoint}/?{query_str}"
-
-    def _sign_str(self, key, s, method):
-        """_summary_
-
-        Args:
-            key (_type_): _description_
-            s (_type_): _description_
-            method (_type_): _description_
-
-        Returns:
-            _type_: _description_
-        """
-        hmac_str = hmac.new(key.encode("utf8"),
-                            s.encode("utf8"), method).digest()
-        return base64.b64encode(hmac_str)
-
-    def get_api_key(self, api_key):
-        """_summary_
-
-        Args:
-            api_key (_type_): _description_
-
-        Returns:
-            _type_: _description_
-        """
-        [secret_id, secret_key] = api_key.split("|")
-        return secret_id.strip(), secret_key.strip()

@@ -4,15 +4,28 @@ import traceback
 from gettext import gettext as _
 from multiprocessing import Pool
 
-from lfy.api.base import Server
-from lfy.api.server import aliyun, baidu, bing, google, tencent
+from lfy.api.server import Server, aliyun, baidu, bing, google, tencent
+
+
+def _translate(args):
+    """翻译pool，不要让一个错误影响所有
+
+    Args:
+        args (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    server, text, lang_to, lang_from = args
+    try:
+        return server.translate_text(text, lang_to, lang_from)
+    except Exception as e:  # pylint: disable=W0718
+        error_msg = _("something error:")
+        return False, f"{error_msg}{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}"
 
 
 class AllServer(Server):
-    """bing翻译，无需apikey
-
-    Args:
-        Server (_type_): _description_
+    """翻译集合
     """
 
     def __init__(self):
@@ -34,15 +47,15 @@ class AllServer(Server):
         self.servers: list[Server] = [bing.BingServer(), google.GoogleServer(),
                                       aliyun.AliYunServer(), baidu.BaiduServer(),
                                       tencent.TencentServer()]
-        super().__init__("compare",  _("compare"), lang_key_ns)
+        super().__init__("compare", _("compare"), lang_key_ns)
 
     def translate_text(self, text, lang_to="1", lang_from="auto"):
         """翻译集成
 
         Args:
             text (str): 待翻译字符
-            to_lang_code (str, optional): 翻译成什么语言. Defaults to "zh-cn".
-            from_lang (str, optional): 文本是什么语言. Defaults to "auto".
+            lang_to (str, optional): 翻译成什么语言. Defaults to "zh-cn".
+            lang_from (str, optional): 文本是什么语言. Defaults to "auto".
 
         Returns:
             str: _description_
@@ -56,25 +69,13 @@ class AllServer(Server):
                     break
             args.append((server, text, lang_to_, lang_from))
         with Pool(len(args)) as p:
-            rs = p.map(self._translate, args)
+            rs = p.map(_translate, args)
             s_ok = ""
+            s_error = ""
             for i, tt in enumerate(rs):
-                s_ok += f"***** {self.servers[i].name} *****\n{tt}\n\n"
-            return s_ok
-
-    def _translate(self, args):
-        """翻译pool，不要让一个错误影响所有
-
-        Args:
-            args (_type_): _description_
-
-        Returns:
-            _type_: _description_
-        """
-        try:
-            server, text, lang_to, lang_from = args
-            server.translate_text(text, lang_to, lang_from)
-        except Exception as e:  # pylint: disable=W0718
-            error_msg = _("something error:")
-            error_msg = f"{error_msg}\n\n{str(e)}\n\n{traceback.format_exc()}"
-            return str(e)
+                ok, t = tt
+                if ok:
+                    s_ok += f"***** {self.servers[i].name} *****\n{t}\n\n"
+                else:
+                    s_error += f"***** {self.servers[i].name} *****\n{t}\n\n"
+            return True, s_ok + s_error

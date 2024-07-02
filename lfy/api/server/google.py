@@ -7,14 +7,11 @@ from gettext import gettext as _
 
 import requests
 
-from lfy.api.base import TIME_OUT, Server
+from lfy.api.server import Server, TIME_OUT
 
 
 class GoogleServer(Server):
     """google翻译
-
-    Args:
-        Server (_type_): _description_
     """
 
     def __init__(self):
@@ -52,8 +49,8 @@ class GoogleServer(Server):
 
         Args:
             text (str): 待翻译字符
-            to_lang_code (str, optional): 翻译成什么语言. Defaults to "zh-cn".
-            from_lang (str, optional): 文本是什么语言. Defaults to "auto".
+            lang_to (str, optional): 翻译成什么语言. Defaults to "zh-cn".
+            lang_from (str, optional): 文本是什么语言. Defaults to "auto".
 
         Returns:
             str: _description_
@@ -78,4 +75,4 @@ class GoogleServer(Server):
         for res in result:
             s += res[0]
 
-        return s
+        return True, s

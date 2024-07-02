@@ -2,12 +2,11 @@
 """
 
 import logging
-from gettext import gettext as _
 
 import requests
 
 from lfy import PACKAGE_URL, VERSION  # pylint: disable=E0611
-from lfy.api.base import TIME_OUT
+from lfy.api.server import TIME_OUT
 
 
 def get_by_gitee():
