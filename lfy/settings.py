@@ -67,6 +67,45 @@ class Settings(Gio.Settings):
         self.set_string('server-sk-baidu', key)
 
     @property
+    def server_sk_baidu_ocr(self):
+        """百度OCR的服务密钥，只是一个字符串，自己解析和保存用 | 分割
+
+        Returns:
+            str: 如：baidu|
+        """
+        return self.get_string('server-sk-baidu-ocr')
+
+    @server_sk_baidu_ocr.setter
+    def server_sk_baidu_ocr(self, key):
+        self.set_string('server-sk-baidu-ocr', key)
+
+    @property
+    def ocr_baidu_token(self):
+        """百度OCR的服务密钥再次请求得到的token，只是一个字符串
+
+        Returns:
+            str: 如：xxxx
+        """
+        return self.get_string('ocr-baidu-token')
+
+    @ocr_baidu_token.setter
+    def ocr_baidu_token(self, key):
+        self.set_string('ocr-baidu-token', key)
+
+    @property
+    def ocr_baidu_token_expires_date(self):
+        """百度OCR的服务token过期时间
+
+        Returns:
+            str: 如：17294943298
+        """
+        return self.get_int('ocr-baidu-token-expires-date')
+
+    @ocr_baidu_token_expires_date.setter
+    def ocr_baidu_token_expires_date(self, key):
+        self.set_int('ocr-baidu-token-expires-date', key)
+
+    @property
     def server_sk_aliyun(self):
         """选择翻译的服务密钥，只是一个字符串，自己解析和保存用 | 分割
 
@@ -78,7 +117,6 @@ class Settings(Gio.Settings):
     @server_sk_aliyun.setter
     def server_sk_aliyun(self, key):
         self.set_string('server-sk-aliyun', key)
-
 
     @property
     def server_sk_tencent(self):

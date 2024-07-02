@@ -41,6 +41,7 @@ class LfyApplication(Adw.Application):
         self.create_action('translate',
                            lambda *_: self.set_translate_action(),
                            ['<primary>t'])
+        self.last_clip = 0
 
         self.cb = Gdk.Display().get_default().get_clipboard()
         self.copy_change_id = self.cb.connect("changed", self.copy)
@@ -48,11 +49,11 @@ class LfyApplication(Adw.Application):
         if Settings.get().auto_check_update:
             threading.Thread(target=self.find_update, daemon=True).start()
 
-    def do_activate(self, text=""):
+    def do_activate(self, s="", ocr=False):
         """_summary_
 
         Args:
-            text (str, optional): _description_. Defaults to "".
+            s (str, optional): _description_. Defaults to "".
         """
         win = self.props.active_window  # pylint: disable=E1101
         if not win:
@@ -60,7 +61,10 @@ class LfyApplication(Adw.Application):
             win = TranslateWindow(
                 application=self, default_height=height, default_width=width,)
         win.present()
-        win.update(text)
+        if ocr:
+            win.update_ocr(s)
+        else:
+            win.update(s)
 
     def on_about_action(self, _widget, _w):
         """_summary_
@@ -159,13 +163,30 @@ class LfyApplication(Adw.Application):
         Args:
             cb (function): _description_
         """
-        def on_active_copy(cb, res):
-            self.do_activate(cb.read_text_finish(res))
-        # print(cb.get_formats().to_string())
-        if cb.get_formats().contain_mime_type("text/plain"):
+        def on_active_copy(cb2, res):
+            self.do_activate(cb2.read_text_finish(res))
+
+        def save_img(cb2, res):
+            texture = cb2.read_texture_finish(res)
+            pixbuf = Gdk.pixbuf_get_from_texture(texture)
+            path = "/tmp/lfy.png"
+            pixbuf.savev(path, "png", (), ())
+            self.do_activate(path, ocr=True)
+
+        span = time.time() - self.last_clip
+        cf = cb.get_formats()
+        # https://docs.gtk.org/gdk4/struct.ContentFormats.html
+        print(span, cb.get_formats().get_mime_types())
+        # 重复的不要，尤其是x11下，有些空白的，也不要
+        if span < 1 or len(cf.get_mime_types()) == 0:
+            return
+
+        if cf.contain_mime_type("text/plain"):
+            self.last_clip = time.time()
             cb.read_text_async(None, on_active_copy)
-        else:
-            print(_("Image translation is currently not supported"))
+        elif cf.contain_mime_type('image/png'):
+            self.last_clip = time.time()
+            cb.read_texture_async(None, save_img)
 
     def update_app(self, update_msg):
         """显示更新信息

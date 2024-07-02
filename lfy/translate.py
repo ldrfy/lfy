@@ -8,10 +8,11 @@ from gettext import gettext as _
 
 from gi.repository import Adw, GLib, Gtk
 
-from lfy.api import translate_by_server
+from lfy.api import ocr_by_server, translate_by_server
 from lfy.api.base import Server
-from lfy.api.utils import (create_server, get_lang, get_lang_names, get_server,
-                           get_server_names, lang_n2j, server_key2i)
+from lfy.api.utils import (create_server, create_server_ocr, get_lang,
+                           get_lang_names, get_server, get_server_names,
+                           lang_n2j, server_key2i)
 from lfy.settings import Settings
 from lfy.widgets.theme_switcher import ThemeSwitcher
 
@@ -55,6 +56,7 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         i = server_key2i(self.setting.server_selected_key)
         self.tran_server = create_server(self.setting.server_selected_key)
+        self.ocr_server = create_server_ocr(self.setting.server_selected_key)
         self.jn = True
 
         self.dd_server.set_model(get_server_names())
@@ -82,7 +84,6 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.setting.server_selected_key = get_server(i).key
         n = get_lang(i, j).n
         self.setting.lang_selected_n = n
-        print("保存", i, j, n)
 
     @Gtk.Template.Callback()
     def _on_server_changed(self, drop_down, _a):
@@ -109,6 +110,10 @@ class TranslateWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def _set_tv_copy(self, _a):
         self.is_tv_copy = True
+
+    def update_ocr(self, path):
+        threading.Thread(target=self.request_ocr, daemon=True,
+                         args=(path, self.ocr_server)).start()
 
     def update(self, text, reload=False, del_wrapping=True):
         """翻译
@@ -158,7 +163,21 @@ class TranslateWindow(Adw.ApplicationWindow):
         text_translated = translate_by_server(text, server, lk)
         GLib.idle_add(self.update_ui, text_translated)
 
-    def update_ui(self, s=""):
+    def request_ocr(self, path_img, server):
+        """子线程翻译
+
+        Args:
+            text (str): _description_
+            i (server_key_i): _description_
+            j (lang_key_j): _description_
+        """
+        GLib.idle_add(self.update_ui, "", True)
+        _, text_ocr = ocr_by_server(path_img, server)
+        if self.cbtn_del_wrapping.get_active():
+            text_ocr = self.process_text(text_ocr)
+        GLib.idle_add(self.update_ui, text_ocr, True)
+
+    def update_ui(self, s="", ocr=False):
         """更新界面
 
         Args:
@@ -167,14 +186,22 @@ class TranslateWindow(Adw.ApplicationWindow):
         if len(s) == 0:
             # 开始翻译
             self.sp_translate.start()
-            self.tv_to.get_buffer().set_text(_("Translating.."))
+            if ocr:
+                self.tv_from.get_buffer().set_text(_("OCRing.."))
+            else:
+                self.tv_to.get_buffer().set_text(_("Translating.."))
         else:
             # 翻译完成
             try:
-                self.tv_to.get_buffer().set_text(s)
+                if ocr:
+                    self.tv_from.get_buffer().set_text(s)
+                    self.update(s)
+                else:
+                    self.tv_to.get_buffer().set_text(s)
             except TypeError as e:
                 error_msg = _("something error:")
-                error_msg = f"{error_msg}\n\n{str(e)}\n\n{traceback.format_exc()}"
+                error_msg = f"{error_msg}\n\n{
+                    str(e)}\n\n{traceback.format_exc()}"
                 self.tv_to.get_buffer().set_text(error_msg)
 
             self.sp_translate.stop()
