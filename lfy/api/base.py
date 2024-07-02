@@ -141,7 +141,7 @@ class Server:
         """
         return None
 
-    def ocr_image(self, img_path: str) -> str:
+    def ocr_image(self, img_path: str):
         """图片识别
 
         Args:
@@ -153,6 +153,17 @@ class Server:
         ok = True
         text = ""
         return ok, text
+
+    def check_ocr(self, api_key_ocr_s):
+        """_summary_
+
+        Args:
+            api_key_ocr_s (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        return True, "success"
 
     def get_ocr_api_key_s(self):
         """图片识别的字符串apikey

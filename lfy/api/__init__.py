@@ -68,18 +68,6 @@ def check_translate(server_key, api_key):
         return error_msg
 
 
-def get_api_key_s(server_key):
-    """通过设置获取api相关的字符串
-
-    Args:
-        server_key (_type_): _description_
-
-    Returns:
-        _type_: _description_
-    """
-    return create_server(server_key).get_api_key_s()
-
-
 def ocr_by_server(path, server: Server):
     """翻译
 
