@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-05-27 01:01+0800\n"
+"POT-Creation-Date: 2024-07-02 10:30+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -31,6 +31,44 @@ msgid ""
 "An easy and pleasant way to translate. Support many translation services. "
 "Especially suitable for document translation."
 msgstr "一种简单愉快的翻译方式。支持多种翻译服务。特别适合文档翻译。"
+
+#: data/cool.ldr.lfy.in.gschema.xml:6
+msgid "Window size"
+msgstr "窗口大小"
+
+#: data/cool.ldr.lfy.in.gschema.xml:10
+#, fuzzy
+msgid "Automatically check the new version of the software upon startup"
+msgstr "软件打开时，自动检查更新"
+
+#: data/cool.ldr.lfy.in.gschema.xml:19
+msgid "theme"
+msgstr "主题"
+
+#: data/cool.ldr.lfy.in.gschema.xml:23
+msgid "The currently selected translation service"
+msgstr "当前选定的翻译服务"
+
+#: data/cool.ldr.lfy.in.gschema.xml:27
+msgid "The currently selected translation language"
+msgstr "当前选择的翻译语言"
+
+#: data/cool.ldr.lfy.in.gschema.xml:31
+msgid "Baidu app_id and secret_key, used in the middle | split"
+msgstr "百度app_id和secret_key，中间使用 | 分割"
+
+#: data/cool.ldr.lfy.in.gschema.xml:35
+msgid "aliyun AccessKey ID and AccessKey Secret, used in the middle | split"
+msgstr "阿里云 AccessKey ID 和 AccessKey Secret，中间使用 | 分割"
+
+#: data/cool.ldr.lfy.in.gschema.xml:39
+#, fuzzy
+msgid "Tencent secret_id and secret_key, used in the middle | split"
+msgstr "请输入 app_id 和 secret_key，类似："
+
+#: data/cool.ldr.lfy.in.gschema.xml:43
+msgid "VPN address and port"
+msgstr "VPN地址"
 
 #: data/cool.ldr.lfy.in.appdata.xml:15
 #, fuzzy
@@ -131,18 +169,25 @@ msgstr "下次翻译拼接文本"
 msgid "Image translation is currently not supported"
 msgstr "暂不支持图片翻译"
 
-#: lfy/api/__init__.py:37
+#: lfy/translate.py:170
+#, fuzzy
+msgid "Translating.."
+msgstr "翻译中"
+
+#: lfy/translate.py:176 lfy/api/__init__.py:47 lfy/api/__init__.py:68
+#: lfy/api/server/baidu.py:117 lfy/api/server/tencent.py:124
+#: lfy/api/server/aliyun.py:146
+msgid "something error:"
+msgstr "一些错误发生："
+
+#: lfy/api/__init__.py:38
 msgid ""
 "Copy automatic translation, it is recommended to pin this window to the top"
 msgstr "复制自动翻译，建议将此窗口置顶"
 
-#: lfy/api/__init__.py:43 lfy/api/__init__.py:63
+#: lfy/api/__init__.py:44 lfy/api/__init__.py:65
 msgid "The connection timed out. Maybe there is a network problem"
 msgstr "连接超时，网络可能有问题（比如需要代理）"
-
-#: lfy/api/__init__.py:66
-msgid "something error, open it again and try again?"
-msgstr "出现了一些错误，重新打开再试试？"
 
 #: lfy/api/base.py:10
 msgid "Automatic"
@@ -189,12 +234,9 @@ msgid "please input app_id and secret_key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
 #: lfy/api/server/baidu.py:103 lfy/api/server/tencent.py:101
+#: lfy/api/server/aliyun.py:111
 msgid "please input API Key in preference"
 msgstr "请在设置中填写 API Key"
-
-#: lfy/api/server/baidu.py:117 lfy/api/server/tencent.py:124
-msgid "something error:"
-msgstr "一些错误发生："
 
 #: lfy/api/server/google.py:33
 msgid "google"
@@ -220,6 +262,15 @@ msgstr "出现了一些错误，试试其他翻译引擎？"
 #, python-brace-format
 msgid "1000 characters limit! You send {len_text} characters."
 msgstr "被限制在1000个字符! 你发送了 {len_text} 个字符."
+
+#: lfy/api/server/aliyun.py:40
+msgid "aliyun"
+msgstr "阿里云"
+
+#: lfy/api/server/aliyun.py:53
+#, fuzzy
+msgid "please input {} and {} like:"
+msgstr "请输入 app_id 和 secret_key，类似："
 
 #: data/resources/translate.ui:60
 msgid "Remove symbols such as line breaks"
@@ -316,3 +367,6 @@ msgstr "退出"
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "显示快捷键"
+
+#~ msgid "something error, open it again and try again?"
+#~ msgstr "出现了一些错误，重新打开再试试？"

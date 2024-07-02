@@ -16,7 +16,7 @@
 				<choice value="dark" />
 			</choices>
 			<default>"auto"</default>
-			<description>thema</description>
+			<description>theme</description>
 		</key>
 		<key type="s" name="server-selected-key">
 			<default>"baidu"</default>
@@ -29,6 +29,10 @@
 		<key type="s" name="server-sk-baidu">
 			<default>"app_id | secret_key"</default>
 			<description>Baidu app_id and secret_key, used in the middle | split</description>
+		</key>
+		<key type="s" name="server-sk-aliyun">
+			<default>"AccessKey ID | AccessKey Secret"</default>
+			<description>aliyun AccessKey ID and AccessKey Secret, used in the middle | split</description>
 		</key>
 		<key type="s" name="server-sk-tencent">
 			<default>"secret_id | secret_key"</default>

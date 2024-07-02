@@ -1,14 +1,13 @@
-"""_summary_
+"""翻译服务集合
 
 """
-from gettext import gettext as _
-
 from lfy.api.base import Server
-from lfy.api.server import baidu, bing, google, tencent
+from lfy.api.server import aliyun, baidu, bing, google, tencent
 
 SERVERS: list[Server] = [
     google.GoogleServer(),
     bing.BingServer(),
     baidu.BaiduServer(),
     tencent.TencentServer(),
+    aliyun.AliYunServer(),
 ]
