@@ -151,4 +151,3 @@ class TencentServer(Server):
             return False, f'{error_msg}\n\n{result["Error"]["Code"]}: {result["Error"]["Message"]}'
 
         return True, result["TargetText"]
-

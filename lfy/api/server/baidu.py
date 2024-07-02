@@ -9,7 +9,7 @@ from gettext import gettext as _
 
 import requests
 
-from lfy.api.server import Server, TIME_OUT
+from lfy.api.server import TIME_OUT, Server
 from lfy.api.utils import s2ks
 from lfy.settings import Settings
 
@@ -101,10 +101,10 @@ def _get_token_by_url(api_key, secret_key):
     expires_in_date = -1
 
     # client_id 为官网获取的AK， client_secret 为官网获取的SK
-    host = f'https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id={
-    api_key}&client_secret={secret_key}'
+    url0 = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials"
+    url = f'{url0}&client_id={api_key}&client_secret={secret_key}'
 
-    request = requests.get(host, timeout=TIME_OUT)
+    request = requests.get(url, timeout=TIME_OUT)
 
     jsons = request.json()
     if "access_token" not in jsons:

@@ -20,7 +20,6 @@ if len(PROXY_ADDRESS) > 0:
     os.environ['https_proxy'] = PROXY_ADDRESS
 
 
-
 class LfyApplication(Adw.Application):
     """The main application singleton class."""
 
@@ -69,7 +68,7 @@ class LfyApplication(Adw.Application):
         if not win:
             width, height = Settings.get().window_size
             win = TranslateWindow(
-                application=self, default_height=height, default_width=width,)
+                application=self, default_height=height, default_width=width, )
         win.present()
         if ocr:
             win.update_ocr(s)
@@ -173,6 +172,7 @@ class LfyApplication(Adw.Application):
         Args:
             cb (function): _description_
         """
+
         def on_active_copy(cb2, res):
             self.do_activate(cb2.read_text_finish(res))
 
