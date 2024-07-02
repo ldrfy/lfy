@@ -1,92 +1,122 @@
-"""翻译接口
+"""翻译服务集合
 
-Returns:
-    _type_: _description_
 """
-import os
-import traceback
-from gettext import gettext as _
+from gi.repository import Gtk
 
-from requests.exceptions import ConnectTimeout
-
-from lfy.api.base import Server
-from lfy.api.utils import create_server
-from lfy.settings import Settings
-
-# 设置代理地址和端口号
-PROXY_ADDRESS = Settings.get().vpn_addr_port
-if len(PROXY_ADDRESS) > 0:
-    # 设置环境变量
-    os.environ['http_proxy'] = PROXY_ADDRESS
-    os.environ['https_proxy'] = PROXY_ADDRESS
+from lfy.api.constant import SERVERS
+from lfy.api.server import Lang, Server
 
 
-def translate_by_server(text, server: Server, lang_to, lang_from="auto"):
-    """翻译
-
-    Args:
-        text (str): _description_
-        server (str): _description_
-        lang_to (str): _description_
-        lang_from (str, optional): _description_. Defaults to "auto".
+def get_server_names():
+    """获取所有翻译服务的名字
 
     Returns:
-        _type_: _description_
+        list: ["百度", "腾讯", ...]
     """
-    try:
-        if len(text.strip()) == 0:
-            return _("Copy automatic translation, it is recommended to pin this window to the top")
-        return server.translate_text(text, lang_to, lang_from)
-
-    except ConnectTimeout as e:
-        s = _("The connection timed out. Maybe there is a network problem")
-        return f"{s}: \n\n {e}"
-    except Exception as e:  # pylint: disable=W0718
-        error_msg = _("something error:")
-        error_msg = f"{error_msg}{server.name}\n\n"
-        error_msg += f"{str(e)}\n\n{traceback.format_exc()}"
-        return error_msg
+    return Gtk.StringList.new([s.name for s in SERVERS])
 
 
-def check_translate(server_key, api_key):
+def get_servers_api_key():
+    """哪些需要填写api
+
+    Returns:
+        list: ["百度", "腾讯", ...]
+    """
+
+    return [s for s in SERVERS if s.get_api_key_s() is not None]
+
+
+def get_server_names_api_key():
+    """哪些需要填写api
+
+    Returns:
+        list: ["百度", "腾讯", ...]
+    """
+    return [s.name for s in get_servers_api_key()]
+
+
+def get_server(i: int) -> Server:
     """_summary_
 
     Args:
-        server_key (_type_): _description_
-        api_key (_type_): _description_
+        i (int): _description_
 
     Returns:
         _type_: _description_
     """
-    try:
-        return create_server(server_key).check_translate(api_key)
-    except ConnectTimeout as e:
-        s = _("The connection timed out. Maybe there is a network problem")
-        return f"{s}: \n\n {e}"
-    except Exception as e:  # pylint: disable=W0718
-        error_msg = _("something error:")
-        error_msg = f"{error_msg}\n\n{str(e)}\n\n{traceback.format_exc()}"
-        return error_msg
+    if i >= len(SERVERS):
+        return SERVERS[0]
+    return SERVERS[i]
 
 
-def ocr_by_server(path, server: Server):
-    """翻译
+def create_server(key) -> Server:
+    """引擎字典
+
+    Returns:
+        _type_: _description_
+    """
+    ss = {s.key: s for s in SERVERS}
+
+    if key not in ss.keys():
+        return ss["google"]
+    return ss[key]
+
+
+def create_server_ocr(key) -> Server:
+    """引擎字典
+
+    Returns:
+        _type_: _description_
+    """
+    ss = {s.key: s for s in SERVERS if s.get_ocr_api_key_s()
+          is not None}
+
+    if key not in ss.keys():
+        return ss["baidu"]
+    return ss[key]
+
+
+def get_lang_names(i=0):
+    """获取某个翻译服务的所有翻译语言的名字
+
+    Returns:
+        list: 如 ["auto"]
+    """
+    return Gtk.StringList.new(get_server(i).get_lang_names())
+
+
+def get_lang(i=0, j=0) -> Lang:
+    """获取某个翻译服务的所有翻译语言的名字
+
+    Returns:
+        list: 如 ["auto"]
+    """
+    return get_server(i).get_lang(j)
+
+
+def server_key2i(key: str):
+    """分辨是哪个服务的唯一标识符
+
+    Returns:
+        int: 在 servers 是第几个
+    """
+    for i, te in enumerate(SERVERS):
+        if te.key == key:
+            return i
+    return 0
+
+
+def lang_n2j(i: int, n: int):
+    """分辨是翻译成哪个语言的唯一标识符
 
     Args:
-        text (str): _description_
-        server (str): _description_
-        lang_to (str): _description_
-        lang_from (str, optional): _description_. Defaults to "auto".
+        i (int): _description_
+        n (int): _description_
 
     Returns:
-        _type_: _description_
+        int: 在当前server中是第一个lang
     """
-    try:
-        return server.ocr_image(path)
-    except ConnectTimeout as e:
-        s = _("The connection timed out. Maybe there is a network problem")
-        return False, f"{s}: \n\n {e}"
-    except Exception as e:  # pylint: disable=W0718
-        error_msg = _("something error:")
-        error_msg = f"{error_msg}\n\n{str(e)}\n\n{traceback.format_exc()}"
-        return False, error_msg
+    for j, lang in enumerate(get_server(i).langs):
+        if lang.n == n:
+            return j
+    return 0

@@ -8,11 +8,9 @@ from gettext import gettext as _
 
 from gi.repository import Adw, GLib, Gtk
 
-from lfy.api import ocr_by_server, translate_by_server
-from lfy.api.base import Server
-from lfy.api.utils import (create_server, create_server_ocr, get_lang,
-                           get_lang_names, get_server, get_server_names,
-                           lang_n2j, server_key2i)
+from lfy.api import get_server_names, get_server, create_server_ocr, get_lang_names, get_lang, server_key2i, \
+    lang_n2j, create_server
+from lfy.api.server import Server
 from lfy.settings import Settings
 from lfy.widgets.theme_switcher import ThemeSwitcher
 
@@ -112,8 +110,8 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.is_tv_copy = True
 
     def update_ocr(self, path):
-        threading.Thread(target=self.request_ocr, daemon=True,
-                         args=(path, self.ocr_server)).start()
+        threading.Thread(target=self.request_text, daemon=True,
+                         args=(path, self.ocr_server, None,)).start()
 
     def update(self, text, reload=False, del_wrapping=True):
         """翻译
@@ -144,44 +142,40 @@ class TranslateWindow(Adw.ApplicationWindow):
         i = self.dd_server.get_selected()
         server: Server = get_server(i)
         if server.key != self.tran_server.key:
-            print(f"翻译服务器改变:{self.tran_server.key}->{server.key}")
+            # print(f"翻译服务器改变:{self.tran_server.key}->{server.key}")
             self.tran_server = server
         lk = get_lang(i, self.dd_lang.get_selected()).key
 
         threading.Thread(target=self.request_text, daemon=True,
                          args=(text, self.tran_server, lk,)).start()
 
-    def request_text(self, text, server, lk):
+    def request_text(self, s, server, lk=None):
         """子线程翻译
 
         Args:
-            text (str): _description_
-            i (server_key_i): _description_
-            j (lang_key_j): _description_
+            s (str): _description_
+            server (Server): _description_
         """
-        GLib.idle_add(self.update_ui, "")
-        text_translated = translate_by_server(text, server, lk)
-        GLib.idle_add(self.update_ui, text_translated)
+        GLib.idle_add(self.update_ui, "", lk is None)
+        try:
+            if lk is None:
+                _, text = server.ocr_image(s)
+                if self.cbtn_del_wrapping.get_active():
+                    text = self.process_text(text)
+            else:
+                _ok, text = server.translate_text(s, lk)
 
-    def request_ocr(self, path_img, server):
-        """子线程翻译
-
-        Args:
-            text (str): _description_
-            i (server_key_i): _description_
-            j (lang_key_j): _description_
-        """
-        GLib.idle_add(self.update_ui, "", True)
-        _, text_ocr = ocr_by_server(path_img, server)
-        if self.cbtn_del_wrapping.get_active():
-            text_ocr = self.process_text(text_ocr)
-        GLib.idle_add(self.update_ui, text_ocr, True)
+        except Exception as e:  # pylint: disable=W0718
+            error_msg = _("something error:")
+            text = f"{error_msg}{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}"
+        GLib.idle_add(self.update_ui, text, lk is None)
 
     def update_ui(self, s="", ocr=False):
         """更新界面
 
         Args:
-            s (bool, optional): 翻译以后的文本. Defaults to True.
+            s (str, optional): 翻译以后的文本. Defaults to True.
+            ocr (bool, optional): OCR. Defaults to False.
         """
         if len(s) == 0:
             # 开始翻译
@@ -201,7 +195,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             except TypeError as e:
                 error_msg = _("something error:")
                 error_msg = f"{error_msg}\n\n{
-                    str(e)}\n\n{traceback.format_exc()}"
+                str(e)}\n\n{traceback.format_exc()}"
                 self.tv_to.get_buffer().set_text(error_msg)
 
             self.sp_translate.stop()

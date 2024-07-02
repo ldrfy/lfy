@@ -1,4 +1,5 @@
 # main.py
+import os
 import threading
 import time
 from gettext import gettext as _
@@ -6,10 +7,18 @@ from gettext import gettext as _
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk
 
 from lfy import PACKAGE_URL, PACKAGE_URL_BUG
-from lfy.api.check_update import main as check_update
+from lfy.api.utils.check_update import main as check_update
 from lfy.preference import PreferenceWindow
 from lfy.settings import Settings
 from lfy.translate import TranslateWindow
+
+# 设置代理地址和端口号
+PROXY_ADDRESS = Settings.get().vpn_addr_port
+if len(PROXY_ADDRESS) > 0:
+    # 设置环境变量
+    os.environ['http_proxy'] = PROXY_ADDRESS
+    os.environ['https_proxy'] = PROXY_ADDRESS
+
 
 
 class LfyApplication(Adw.Application):
@@ -54,6 +63,7 @@ class LfyApplication(Adw.Application):
 
         Args:
             s (str, optional): _description_. Defaults to "".
+            ocr (bool, optional): _description_. Defaults to False.
         """
         win = self.props.active_window  # pylint: disable=E1101
         if not win:
@@ -176,7 +186,7 @@ class LfyApplication(Adw.Application):
         span = time.time() - self.last_clip
         cf = cb.get_formats()
         # https://docs.gtk.org/gdk4/struct.ContentFormats.html
-        print(span, cb.get_formats().get_mime_types())
+        # print(span, cb.get_formats().get_mime_types())
         # 重复的不要，尤其是x11下，有些空白的，也不要
         if span < 1 or len(cf.get_mime_types()) == 0:
             return

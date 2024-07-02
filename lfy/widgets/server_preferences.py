@@ -5,12 +5,10 @@
 import logging
 import re
 import threading
-from gettext import gettext as _
 
 from gi.repository import Adw, GLib, Gtk
 
-from lfy.api import check_ocr, check_translate
-from lfy.api.base import Server
+from lfy.api.server import Server
 
 
 # pylint: disable=E1101
@@ -45,7 +43,7 @@ class ServerPreferences(Adw.Bin):
 
         ocr_enable = server.get_ocr_api_key_s() is not None
         if ocr_enable:
-            print(server.get_ocr_api_key_s())
+            # print(server.get_ocr_api_key_s())
             self.api_key_ocr_entry.set_text(server.get_ocr_api_key_s())
         self.api_key_ocr_entry.set_visible(ocr_enable)
 

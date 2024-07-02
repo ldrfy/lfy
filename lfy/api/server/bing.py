@@ -6,14 +6,11 @@ from gettext import gettext as _
 
 import requests
 
-from lfy.api.base import TIME_OUT, Server
+from lfy.api.server import Server, TIME_OUT
 
 
 class BingServer(Server):
     """bing翻译，无需apikey
-
-    Args:
-        Server (_type_): _description_
     """
 
     def __init__(self):
@@ -94,8 +91,8 @@ class BingServer(Server):
 
         Args:
             text (str): 待翻译字符
-            to_lang_code (str, optional): 翻译成什么语言. Defaults to "zh-cn".
-            from_lang (str, optional): 文本是什么语言. Defaults to "auto".
+            lang_to (str, optional): 翻译成什么语言. Defaults to "zh-cn".
+            lang_from (str, optional): 文本是什么语言. Defaults to "auto".
 
         Returns:
             str: _description_
@@ -114,11 +111,11 @@ class BingServer(Server):
         if isinstance(response, dict):
             self.error_check(response, text, lang_to, lang_from, n)
             if 'statusCode' in response.keys():
-                return response["errorMessage"]
+                return False, response["errorMessage"]
         else:
             if "auto" != lang_from:
-                return response[0]
+                return True, response[0]
 
-            return response[0]["translations"][0]["text"]
+            return True, response[0]["translations"][0]["text"]
 
-        return response
+        return False, response
