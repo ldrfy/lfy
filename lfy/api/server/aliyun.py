@@ -173,8 +173,3 @@ class AliYunServer(Server):
 
     def _encode_rfc3986_uri_component(self, s):
         return quote(s, safe='~')
-
-
-if __name__=='__main__':
-    ays = AliYunServer()
-    print(ays.translate_text("测试", "en"))

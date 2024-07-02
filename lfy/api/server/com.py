@@ -53,13 +53,12 @@ class AllServer(Server):
                 if lang.n == int(lang_to):
                     lang_to_ = lang.key
                     break
-            print(server.name, lang_to, lang_to_)
             args.append((server, text, lang_to_, lang_from))
         with Pool(len(args)) as p:
             rs = p.map(self._translate, args)
             s_ok = ""
             for i, tt in enumerate(rs):
-                s_ok += f"{self.servers[i].name}: {tt}\n\n*****\n"
+                s_ok += f"***** {self.servers[i].name} *****\n{tt}\n\n"
             return s_ok
 
     def _translate(self, args):
