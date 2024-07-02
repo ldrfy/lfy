@@ -9,7 +9,7 @@ from gettext import gettext as _
 
 from gi.repository import Adw, GLib, Gtk
 
-from lfy.api import check_translate
+from lfy.api import check_ocr, check_translate
 from lfy.api.base import Server
 
 

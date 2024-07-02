@@ -1,5 +1,6 @@
 """比较翻译接口
 """
+import traceback
 from gettext import gettext as _
 from multiprocessing import Pool
 
@@ -62,5 +63,18 @@ class AllServer(Server):
             return s_ok
 
     def _translate(self, args):
-        server, text, lang_to, lang_from = args
-        return server.translate_text(text, lang_to, lang_from)
+        """翻译pool，不要让一个错误影响所有
+
+        Args:
+            args (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        try:
+            server, text, lang_to, lang_from = args
+            server.translate_text(text, lang_to, lang_from)
+        except Exception as e:  # pylint: disable=W0718
+            error_msg = _("something error:")
+            error_msg = f"{error_msg}\n\n{str(e)}\n\n{traceback.format_exc()}"
+            return str(e)

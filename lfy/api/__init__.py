@@ -43,7 +43,8 @@ def translate_by_server(text, server: Server, lang_to, lang_from="auto"):
         return f"{s}: \n\n {e}"
     except Exception as e:  # pylint: disable=W0718
         error_msg = _("something error:")
-        error_msg = f"{error_msg}\n\n{str(e)}\n\n{traceback.format_exc()}"
+        error_msg = f"{error_msg}{server.name}\n\n"
+        error_msg += f"{str(e)}\n\n{traceback.format_exc()}"
         return error_msg
 
 
