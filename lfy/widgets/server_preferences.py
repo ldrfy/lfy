@@ -9,7 +9,7 @@ from gettext import gettext as _
 
 from gi.repository import Adw, GLib, Gtk
 
-from lfy.api import check_translate, get_api_key_s
+from lfy.api import check_translate
 from lfy.api.base import Server
 
 
@@ -29,6 +29,11 @@ class ServerPreferences(Adw.Bin):
     api_key_entry = Gtk.Template.Child()
     api_key_stack = Gtk.Template.Child()
     api_key_spinner = Gtk.Template.Child()
+
+    api_key_ocr_entry = Gtk.Template.Child()
+    api_key_ocr_stack = Gtk.Template.Child()
+    api_key_ocr_spinner = Gtk.Template.Child()
+
     api_key_link = Gtk.Template.Child()
 
     def __init__(self, server: Server, **kwargs):
@@ -36,7 +41,14 @@ class ServerPreferences(Adw.Bin):
         self.server = server
         self.title.props.subtitle = server.name
         # Load saved values
-        self.api_key_entry.props.text = get_api_key_s(server.key)
+        self.api_key_entry.props.text = server.get_api_key_s()
+
+        ocr_enable = server.get_ocr_api_key_s() is not None
+        if ocr_enable:
+            print(server.get_ocr_api_key_s())
+            self.api_key_ocr_entry.set_text(server.get_ocr_api_key_s())
+        self.api_key_ocr_entry.set_visible(ocr_enable)
+
         self.api_key_link.set_uri(server.get_doc_url())
 
     @Gtk.Template.Callback()
@@ -56,9 +68,27 @@ class ServerPreferences(Adw.Bin):
         self.api_key_spinner.start()
 
         threading.Thread(target=self.request_text, daemon=True,
-                         args=(self.server.key, api_key)).start()
+                         args=(self.server.check_translate, api_key,
+                               self.api_key_entry,
+                               self.api_key_spinner)).start()
 
-    def update_ui(self, valid):
+    @Gtk.Template.Callback()
+    def _on_api_key_ocr_apply(self, _row):
+        """ Called on self.api_key_entry::apply signal """
+
+        api_key = self.api_key_ocr_entry.get_text()
+        api_key = re.sub(r'\s*\|\s*', "  |  ", api_key.strip())
+        self.api_key_ocr_entry.set_text(api_key)
+        self.api_key_ocr_entry.set_sensitive(False)
+        self.api_key_ocr_stack.set_visible_child_name('spinner')
+        self.api_key_ocr_spinner.start()
+
+        threading.Thread(target=self.request_text, daemon=True,
+                         args=(self.server.check_ocr, api_key,
+                               self.api_key_ocr_entry,
+                               self.api_key_ocr_spinner)).start()
+
+    def update_ui(self, valid, entry, spinner):
         """更新
 
         Args:
@@ -66,16 +96,16 @@ class ServerPreferences(Adw.Bin):
         """
         ok, text = valid
         if ok:
-            self.api_key_entry.remove_css_class('error')
+            entry.remove_css_class('error')
         else:
-            self.api_key_entry.add_css_class('error')
-        self.api_key_entry.props.sensitive = True
+            entry.add_css_class('error')
+        entry.props.sensitive = True
 
         toast = Adw.Toast.new(text.replace("\n", ""))
         self.get_root().add_toast(toast)
-        self.api_key_spinner.stop()
+        spinner.stop()
 
-    def request_text(self, server, api_key):
+    def request_text(self, fun, api_key, entry, spinner):
         """验证服务api是否靠谱
 
         Args:
@@ -84,8 +114,8 @@ class ServerPreferences(Adw.Bin):
         """
         valid = False
         try:
-            valid = check_translate(server, api_key)
+            valid = fun(api_key)
         except Exception as exc:  # pylint: disable=W0718
             logging.error(exc)
 
-        GLib.idle_add(self.update_ui, valid)
+        GLib.idle_add(self.update_ui, valid, entry, spinner)

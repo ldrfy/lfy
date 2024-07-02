@@ -97,12 +97,9 @@ class BaiduServer(Server):
         Returns:
             _type_: _description_
         """
-        # .strip()
-        [app_id, secret_key] = api_key_s.split("|")
-        app_id = app_id.strip()
-        secret_key = secret_key.strip()
 
-        if app_id == "app_id" or secret_key == "secret_key":
+        app_id, secret_key = self.s2ks(api_key_s)
+        if app_id is None or app_id == "app_id":
             return False, _("please input API Key in preference")
 
         url = "https://api.fanyi.baidu.com/api/trans/vip/translate"
@@ -132,7 +129,24 @@ class BaiduServer(Server):
         Returns:
             _type_: _description_
         """
-        return Settings.get().server_sk_baidu_ocr.split("|")
+        return Settings.get().server_sk_baidu_ocr
+
+    def s2ks(self, s):
+        """_summary_
+
+        Args:
+            s (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        if "|" not in s:
+            return (None, None)
+
+        [app_id, secret_key] = s.split("|")
+        a = app_id.strip()
+        b = secret_key.strip()
+        return (a, b)
 
     def ocr_image(self, img_path):
         img_data = open(img_path, 'rb').read()
@@ -170,7 +184,7 @@ class BaiduServer(Server):
 
         return ok, s
 
-    def check_ocr(self, api_key, secret_key):
+    def check_ocr(self, api_key_ocr_s):
         """OCR测试
 
         Args:
@@ -180,8 +194,19 @@ class BaiduServer(Server):
         Returns:
             _type_: _description_
         """
-        ok, _, _ = self._get_token_by_url(api_key, secret_key)
-        return ok
+        api_key, secret_key = self.s2ks(api_key_ocr_s)
+        if api_key is None:
+            error_msg = _("please input API Key and  Secret Key like:")
+            return False, error_msg + " 121343 | fdsdsdg"
+
+        ok, access_token, expires_in_date = self._get_token_by_url(
+            api_key, secret_key)
+        if ok:
+            sg = Settings.get()
+            sg.server_sk_baidu_ocr = api_key_ocr_s
+            sg.ocr_baidu_token = access_token
+            sg.ocr_baidu_token_expires_date = expires_in_date
+        return ok, "success"
 
     def _get_token_by_url(self, api_key, secret_key):
         """获取token
@@ -231,11 +256,9 @@ class BaiduServer(Server):
             if len(access_token) != 0:
                 return True, access_token
 
-        [api_key, secret_key] = self.get_ocr_api_key_s().split("|")
-        api_key = api_key.strip()
-        secret_key = secret_key.strip()
+        api_key, secret_key = self.s2ks(self.get_ocr_api_key_s())
         # API Key | Secret Key
-        if api_key == "API Key" or secret_key == "Secret Key":
+        if api_key is None or api_key == "API Key":
             return False, _("please input API Key in preference") + ": OCR"
 
         ok, access_token, expires_in_date = self._get_token_by_url(
