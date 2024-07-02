@@ -26,8 +26,12 @@ class AllServer(Server):
             "7": 7,
             "8": 8,
         }
-        self.servers: list[Server] = [aliyun.AliYunServer(), baidu.BaiduServer(),
-                                      bing.BingServer(), google.GoogleServer(),
+        # 这里不能直接引用
+        # from lfy.api.server import SERVERS
+        # 会导致循环
+
+        self.servers: list[Server] = [bing.BingServer(), google.GoogleServer(),
+                                      aliyun.AliYunServer(), baidu.BaiduServer(),
                                       tencent.TencentServer()]
         super().__init__("compare",  _("compare"), lang_key_ns)
 
@@ -55,7 +59,7 @@ class AllServer(Server):
             rs = p.map(self._translate, args)
             s_ok = ""
             for i, tt in enumerate(rs):
-                s_ok += f"{self.servers[i].name}: {tt}\n\n*****\n\n"
+                s_ok += f"{self.servers[i].name}: {tt}\n\n*****\n"
             return s_ok
 
     def _translate(self, args):
