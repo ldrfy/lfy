@@ -8,8 +8,8 @@ lfy/preference.py
 lfy/translate.py
 
 lfy/api/__init__.py
-lfy/api/base.py
-lfy/api/check_update.py
+lfy/api/utils/__init__.py
+lfy/api/utils/check_update.py
 lfy/api/server/__init__.py
 lfy/api/server/baidu.py
 lfy/api/server/google.py

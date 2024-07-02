@@ -26,7 +26,7 @@ class BingServer(Server):
             "it": 8,
         }
         self.session = None
-        super().__init__("bing",  _("bing"), lang_key_ns)
+        super().__init__("bing", _("bing"), lang_key_ns)
 
     def _get_session(self):
         if self.session is not None:
@@ -80,7 +80,7 @@ class BingServer(Server):
 
         if 'ShowCaptcha' in response.keys():
             self.session = None
-            return self.translate_text(text, lang_to, lang_from, n+1)
+            return self.translate_text(text, lang_to, lang_from, n + 1)
 
         if 'statusCode' in response.keys() and response['statusCode'] == 400:
             response['errorMessage'] = _(

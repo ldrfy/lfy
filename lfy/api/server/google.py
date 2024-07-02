@@ -27,7 +27,7 @@ class GoogleServer(Server):
             "it": 8,
         }
         self.session = None
-        super().__init__("google",  _("google"), lang_key_ns)
+        super().__init__("google", _("google"), lang_key_ns)
 
     def get_session(self):
         """初始化请求

@@ -8,8 +8,9 @@ from gettext import gettext as _
 
 from gi.repository import Adw, GLib, Gtk
 
-from lfy.api import get_server_names, get_server, create_server_ocr, get_lang_names, get_lang, server_key2i, \
-    lang_n2j, create_server
+from lfy.api import (create_server, create_server_ocr, get_lang,
+                     get_lang_names, get_server, get_server_names, lang_n2j,
+                     server_key2i)
 from lfy.api.server import Server
 from lfy.settings import Settings
 from lfy.widgets.theme_switcher import ThemeSwitcher
@@ -167,7 +168,8 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         except Exception as e:  # pylint: disable=W0718
             error_msg = _("something error:")
-            text = f"{error_msg}{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}"
+            error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
+            text = f"{error_msg}{server.name}\n\n{error_msg2}"
         GLib.idle_add(self.update_ui, text, lk is None)
 
     def update_ui(self, s="", ocr=False):
@@ -194,9 +196,9 @@ class TranslateWindow(Adw.ApplicationWindow):
                     self.tv_to.get_buffer().set_text(s)
             except TypeError as e:
                 error_msg = _("something error:")
-                error_msg = f"{error_msg}\n\n{
-                str(e)}\n\n{traceback.format_exc()}"
-                self.tv_to.get_buffer().set_text(error_msg)
+                error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
+                em = f"{error_msg}\n\n{error_msg2}"
+                self.tv_to.get_buffer().set_text(em)
 
             self.sp_translate.stop()
 

@@ -2,7 +2,7 @@
 
 from gi.repository import Adw, Gio, Gtk
 
-from lfy.api import get_servers_api_key, get_server_names_api_key
+from lfy.api import get_server_names_api_key, get_servers_api_key
 from lfy.api.server import Server
 from lfy.settings import Settings
 from lfy.widgets.server_preferences import ServerPreferences
@@ -25,13 +25,13 @@ class PreferenceWindow(Adw.PreferencesWindow):
         super().__init__(**kwargs)
         self.server: Server
         # pylint: disable=E1101
-        self.acr_server.set_model(Gtk.StringList.new(get_server_names_api_key()))
+        self.acr_server.set_model(
+            Gtk.StringList.new(get_server_names_api_key()))
         self.entry_vpn_addr.props.text = Settings.get().vpn_addr_port
 
         Settings.get().bind('auto-check-update',
                             self.auto_check_update, 'active',
                             Gio.SettingsBindFlags.DEFAULT)
-
 
     @Gtk.Template.Callback()
     def _open_server(self, _btn):
