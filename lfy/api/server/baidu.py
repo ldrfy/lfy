@@ -1,7 +1,9 @@
 """百度翻译接口
 """
+import base64
 import hashlib
 import random
+import time
 import urllib
 from gettext import gettext as _
 
@@ -64,7 +66,8 @@ class BaiduServer(Server):
         Returns:
             _type_: _description_
         """
-        _ok, text = self._translate(text, self.get_api_key_s(), lang_to, lang_from)
+        _ok, text = self._translate(
+            text, self.get_api_key_s(), lang_to, lang_from)
         return text
 
     def get_api_key_s(self):
@@ -122,3 +125,124 @@ class BaiduServer(Server):
             return True, s1
 
         return False, f'{error_msg}\n\n{result["error_code"]}: {result["error_msg"]}'
+
+    def get_ocr_api_key_s(self):
+        """图片识别的字符串apikey
+
+        Returns:
+            _type_: _description_
+        """
+        return Settings.get().server_sk_baidu_ocr.split("|")
+
+    def ocr_image(self, img_path):
+        img_data = open(img_path, 'rb').read()
+        img = base64.b64encode(img_data)
+
+        # open('./images/lt.png', 'rb').read()
+        s = ""
+        request_url = "https://aip.baidubce.com/rest/2.0/ocr/v1/"
+
+        request_url += "general_basic"
+
+        ok, token = self._get_token()
+        if not ok:
+            return False, token
+        params = {"image": img}
+        request_url = request_url + "?access_token=" + token
+        headers = {'content-type': 'application/x-www-form-urlencoded'}
+        res = requests.post(request_url,
+                            data=params,
+                            headers=headers,
+                            timeout=TIME_OUT).json()
+
+        if "error_code" in res:
+            if 110 == res["error_code"]:
+                Settings.get().ocr_baidu_token = ""
+            error_msg = _("something error:")
+            return False, f'{error_msg}\n\n{res["error_code"]}: {res["error_msg"]}'
+
+        for word in res["words_result"]:
+            s += word["words"] + '\n'
+
+            s_ = word["words"]
+            if s_[len(s_) - 1:len(s_)] != "-":
+                s += " "
+
+        return ok, s
+
+    def check_ocr(self, api_key, secret_key):
+        """OCR测试
+
+        Args:
+            api_key (_type_): _description_
+            secret_key (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        ok, _, _ = self._get_token_by_url(api_key, secret_key)
+        return ok
+
+    def _get_token_by_url(self, api_key, secret_key):
+        """获取token
+
+        Args:
+            api_key (_type_): _description_
+            secret_key (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        ok = False
+        access_token = ""
+        expires_in_date = -1
+
+        # client_id 为官网获取的AK， client_secret 为官网获取的SK
+        host = f'https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id={
+            api_key}&client_secret={secret_key}'
+
+        request = requests.get(host, timeout=TIME_OUT)
+
+        jsons = request.json()
+        if "access_token" not in jsons:
+            access_token = "错误：" + jsons["error_description"]
+        else:
+            access_token = jsons["access_token"]
+            expires_in_date = time.time() + jsons["expires_in"]
+            ok = True
+
+        return ok, str(access_token), expires_in_date
+
+    def _get_token(self):
+        """https://ai.baidu.com/ai-doc/REFERENCE/Ck3dwjhhu
+
+        Returns:
+            _type_: _description_
+        """
+        ok = False
+        access_token = ""
+
+        sg = Settings.get()
+
+        expires_in_date = sg.ocr_baidu_token_expires_date
+
+        if expires_in_date - time.time() > 0:
+            access_token = sg.ocr_baidu_token
+            if len(access_token) != 0:
+                return True, access_token
+
+        [api_key, secret_key] = self.get_ocr_api_key_s().split("|")
+        api_key = api_key.strip()
+        secret_key = secret_key.strip()
+        # API Key | Secret Key
+        if api_key == "API Key" or secret_key == "Secret Key":
+            return False, _("please input API Key in preference") + ": OCR"
+
+        ok, access_token, expires_in_date = self._get_token_by_url(
+            api_key, secret_key)
+
+        if ok:
+            sg.ocr_baidu_token = access_token
+            sg.ocr_baidu_token_expires_date = expires_in_date
+
+        return ok, access_token

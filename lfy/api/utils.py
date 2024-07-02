@@ -60,6 +60,19 @@ def create_server(key) -> Server:
     return ss[key]
 
 
+def create_server_ocr(key) -> Server:
+    """引擎字典
+
+    Returns:
+        _type_: _description_
+    """
+    ss = {server.key: server for server in SERVERS if server.get_ocr_api_key_s()
+          is not None}
+
+    if key not in ss.keys():
+        return ss["baidu"]
+    return ss[key]
+
 def get_lang_names(i=0):
     """获取某个翻译服务的所有翻译语言的名字
 
