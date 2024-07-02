@@ -1,14 +1,14 @@
-# Chinese translations for com.ldr.lt package
-# com.ldr.lt 软件包的简体中文翻译.
+# Chinese translations for cool.ldr.lfy package
+# cool.ldr.lfy 软件包的简体中文翻译.
 # Copyright (C) 2023 yuhldr
-# This file is distributed under the same license as the com.ldr.lt package.
+# This file is distributed under the same license as the cool.ldr.lfy package.
 #  <yuhldr@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-07-02 10:30+0800\n"
+"POT-Creation-Date: 2024-07-02 15:04+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -170,13 +170,12 @@ msgid "Image translation is currently not supported"
 msgstr "暂不支持图片翻译"
 
 #: lfy/translate.py:170
-#, fuzzy
 msgid "Translating.."
-msgstr "翻译中"
+msgstr "翻译中……"
 
 #: lfy/translate.py:176 lfy/api/__init__.py:47 lfy/api/__init__.py:68
 #: lfy/api/server/baidu.py:117 lfy/api/server/tencent.py:124
-#: lfy/api/server/aliyun.py:146
+#: lfy/api/server/aliyun.py:143
 msgid "something error:"
 msgstr "一些错误发生："
 
@@ -234,7 +233,7 @@ msgid "please input app_id and secret_key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
 #: lfy/api/server/baidu.py:103 lfy/api/server/tencent.py:101
-#: lfy/api/server/aliyun.py:111
+#: lfy/api/server/aliyun.py:110
 msgid "please input API Key in preference"
 msgstr "请在设置中填写 API Key"
 
@@ -271,6 +270,10 @@ msgstr "阿里云"
 #, fuzzy
 msgid "please input {} and {} like:"
 msgstr "请输入 app_id 和 secret_key，类似："
+
+#: lfy/api/server/com.py:32
+msgid "compare"
+msgstr "对比"
 
 #: data/resources/translate.ui:60
 msgid "Remove symbols such as line breaks"

@@ -2,7 +2,7 @@
 
 """
 from lfy.api.base import Server
-from lfy.api.server import aliyun, baidu, bing, google, tencent
+from lfy.api.server import aliyun, baidu, bing, com, google, tencent
 
 SERVERS: list[Server] = [
     google.GoogleServer(),
@@ -10,4 +10,5 @@ SERVERS: list[Server] = [
     baidu.BaiduServer(),
     tencent.TencentServer(),
     aliyun.AliYunServer(),
+    com.AllServer(),
 ]
