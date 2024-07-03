@@ -3,8 +3,10 @@
 import random
 import re
 from gettext import gettext as _
+from urllib.parse import urlparse
 
 import requests
+from requests import RequestException
 
 from lfy.api.server import Server, TIME_OUT
 
@@ -18,15 +20,17 @@ def _init_session():
     }
     session.headers.update(headers)
     response = session.get(url, timeout=TIME_OUT)
+    session.headers.update({'my_host': urlparse(response.url).hostname})
+
     content = response.text
 
     params_pattern = re.compile(
-        r'params_AbusePreventionHelper\s*=\s*(\[.*?\]);', re.DOTALL)
+        r'params_AbusePreventionHelper\s*=\s*(\[.*?]);', re.DOTALL)
     match = params_pattern.search(content)
     if match:
         params = match.group(1)
-        key, token, _time = [p.strip('"').replace(
-            '[', '').replace(']', '') for p in params.split(',')]
+        key, token, _time = [p.strip('"').replace('[', '') \
+                                 .replace(']', '') for p in params.split(',')]
         session.headers.update({'key': key, 'token': token})
     match = re.search(r'IG:"(\w+)"', content)
 
@@ -67,31 +71,54 @@ class BingServer(Server):
         Returns:
             str: _description_
         """
+
+        if n > 5:
+            raise ValueError(_("something error, try other translate engine?"))
+
         hs = self.session.headers
         if "IG" not in hs:
-            self.session = _init_session()
-            hs = self.session.headers
+            try:
+                self.session = _init_session()
+                hs = self.session.headers
+                print(hs["my_host"])
+            except RequestException as e:
+                print("bing-session", n, type(e), e)
+                return self.translate_text(text, lang_to, lang_from, n + 1)
 
-        iid = f"translator.{random.randint(5019, 5026)}.{random.randint(1, 3)}"
-        url = "https://www.bing.com/ttranslatev3"
-        url = f'{url}?isVertical=1&&IG={hs["IG"]}&IID={iid}'
+        # 自动重定向的新url，注意辨别
+        host = hs["my_host"]
+        if "my_iid" not in hs:
+            iid = f"translator.{random.randint(5019, 5026)}.{random.randint(1, 3)}"
+            self.session.headers.update({'my_iid': iid})
+            hs = self.session.headers
+        url = f'https://{host}/ttranslatev3?isVertical=1&&IG={hs["IG"]}&IID={hs['my_iid']}'
+
         data = {'': '', 'text': text, 'to': lang_to,
                 'token': hs['token'], 'key': hs['key'], "fromLang": lang_from}
         if "auto" == lang_from:
             data['fromLang'] = "auto-detect"
             data['tryFetchingGenderDebiasedTranslations'] = True
 
-        res = self.session.post(url, data=data, timeout=TIME_OUT).json()
+        try:
+            response = self.session.post(url, data=data, timeout=TIME_OUT)
+        except RequestException as e:
+            print("bing-post", n, type(e), e)
+            return self.translate_text(text, lang_to, lang_from, n + 1)
+
+        # 没有代理时，中国区出现这个
+        if len(response.text.strip()) == 0:
+            return self.translate_text(text, lang_to, lang_from, n + 1)
+
+        res = response.json()
 
         if isinstance(res, list):
             return True, res[0]["translations"][0]["text"]
 
         if isinstance(res, dict):
-            if n > 5:
-                raise ValueError(_("something error, try other translate engine?"))
 
             if 'ShowCaptcha' in res.keys():
                 self.session = _init_session()
+                print("bing-ShowCaptcha", n)
                 return self.translate_text(text, lang_to, lang_from, n + 1)
 
             if 'statusCode' in res.keys():
