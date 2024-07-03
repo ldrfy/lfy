@@ -47,6 +47,7 @@ gi.require_version('Gio', '2.0')
 # gi.require_version('Gtk', '4.12')
 gi.require_version('Gtk', '4.0')
 gi.require_version('Gst', '1.0')
+gi.require_version('Notify', '0.7')
 
 from gi.repository import Gio  # pylint: disable=c0413
 

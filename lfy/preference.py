@@ -20,6 +20,7 @@ class PreferenceWindow(Adw.PreferencesWindow):
     acr_server: Adw.ComboRow = Gtk.Template.Child()
     entry_vpn_addr: Adw.EntryRow = Gtk.Template.Child()
     auto_check_update: Gtk.Switch = Gtk.Template.Child()
+    notify_translation_results: Gtk.Switch = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -29,9 +30,12 @@ class PreferenceWindow(Adw.PreferencesWindow):
             Gtk.StringList.new(get_server_names_api_key()))
         self.entry_vpn_addr.props.text = Settings.get().vpn_addr_port
 
-        Settings.get().bind('auto-check-update',
-                            self.auto_check_update, 'active',
-                            Gio.SettingsBindFlags.DEFAULT)
+        Settings.get().bind('auto-check-update', self.auto_check_update,
+                            'active', Gio.SettingsBindFlags.DEFAULT)
+
+        Settings.get().bind('notify-translation-results', self.notify_translation_results,
+                            'active', Gio.SettingsBindFlags.DEFAULT)
+
 
     @Gtk.Template.Callback()
     def _open_server(self, _btn):

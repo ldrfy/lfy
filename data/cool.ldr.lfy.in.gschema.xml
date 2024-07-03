@@ -9,6 +9,10 @@
 			<default>true</default>
 			<description>Automatically check the new version of the software upon startup</description>
 		</key>
+		<key type="b" name="notify-translation-results">
+			<default>true</default>
+			<description>After the translation is completed, a system notification is automatically sent</description>
+		</key>
 		<key type="s" name="color-scheme">
 			<choices>
 				<choice value="auto" />

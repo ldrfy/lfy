@@ -4,7 +4,7 @@ import threading
 import time
 from gettext import gettext as _
 
-from gi.repository import Adw, Gdk, Gio, GLib, Gtk
+from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Notify
 
 from lfy import PACKAGE_URL, PACKAGE_URL_BUG
 from lfy.api.utils.check_update import main as check_update
@@ -30,6 +30,7 @@ class LfyApplication(Adw.Application):
         self._version = version
         self._application_id = app_id
         self.translate_now = GLib.Variant.new_boolean(True)
+        Notify.init(_('lfy'))
 
         action_trans_now = Gio.SimpleAction.new_stateful(
             'copy2translate', None, self.translate_now)
