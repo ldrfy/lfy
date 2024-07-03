@@ -61,8 +61,14 @@ class TencentServer(Server):
             "fr": 7,
             "it": 8,
         }
-        self.session = None
         super().__init__("tencent", _("tencent"), lang_key_ns)
+
+    def _get_session(self):
+        """初始化请求
+        """
+        if self.session is None:
+            self.session = requests.Session()
+        return self.session
 
     def check_translate(self, api_key_s):
         """保存时核对api
@@ -101,13 +107,6 @@ class TencentServer(Server):
             _type_: _description_
         """
         return Settings.get().server_sk_tencent
-
-    def _get_session(self):
-        """初始化请求
-        """
-        if self.session is None:
-            self.session = requests.Session()
-        return self.session
 
     def _translate(self, query_text, api_key_s, lang_to="zh", lang_from="auto"):
         """腾讯翻译接口

@@ -161,7 +161,6 @@ class TranslateWindow(Adw.ApplicationWindow):
         i = self.dd_server.get_selected()
         server: Server = get_server(i)
         if server.key != self.tran_server.key:
-            # print(f"翻译服务器改变:{self.tran_server.key}->{server.key}")
             self.tran_server = server
         lk = get_lang(i, self.dd_lang.get_selected()).key
 
@@ -178,7 +177,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         GLib.idle_add(self.update_ui, "", lk is None)
         try:
             if lk is None:
-                _, text = server.ocr_image(s)
+                _ok, text = server.ocr_image(s)
                 if self.cbtn_del_wrapping.get_active():
                     text = process_text(text)
             else:

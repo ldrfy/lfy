@@ -9,8 +9,6 @@ from datetime import datetime, timezone
 from gettext import gettext as _
 from urllib.parse import quote, quote_plus
 
-import requests
-
 from lfy.api.server import Server, TIME_OUT
 from lfy.settings import Settings
 
@@ -49,7 +47,7 @@ def _get_iso_8061_date():
     return datetime.now(timezone.utc).isoformat()
 
 
-def _translate(s, api_key_s, lang_to="en", lang_from="auto"):
+def _translate(session, s, api_key_s, lang_to="en", lang_from="auto"):
     """翻译
 
     Args:
@@ -90,12 +88,9 @@ def _translate(s, api_key_s, lang_to="en", lang_from="auto"):
 
     encoded_body["Signature"] = signature
 
-    headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-    }
-
-    response = requests.post("https://mt.aliyuncs.com/",
-                             headers=headers, data=encoded_body, timeout=TIME_OUT)
+    response = session.post("https://mt.aliyuncs.com/",
+                            headers={"Content-Type": "application/x-www-form-urlencoded"},
+                            data=encoded_body, timeout=TIME_OUT)
     result = response.json()
     if result["Code"] == "200":
         return True, result["Data"]["Translated"]
@@ -106,9 +101,6 @@ def _translate(s, api_key_s, lang_to="en", lang_from="auto"):
 
 class AliYunServer(Server):
     """百度翻译
-
-    Args:
-        Server (_type_): _description_
     """
 
     def __init__(self):
@@ -125,7 +117,6 @@ class AliYunServer(Server):
             "fr": 7,
             "it": 8
         }
-        self.session = None
         super().__init__("aliyun", _("aliyun"), lang_key_ns)
 
     def check_translate(self, api_key_s):
@@ -143,7 +134,7 @@ class AliYunServer(Server):
         error_msg = error_msg_template.format(access_key_id, access_key_secret)
         if "|" not in api_key_s:
             return False, error_msg + " LTAI5tQiXnC6ffwfe | rWPiBuk1xdwwdfafwefwef"
-        ok, text = _translate("success", api_key_s)
+        ok, text = _translate(self.session, "success", api_key_s)
         if ok:
             Settings.get().server_sk_aliyun = api_key_s
         return ok, text
@@ -159,7 +150,7 @@ class AliYunServer(Server):
         Returns:
             _type_: _description_
         """
-        return _translate(text, self.get_api_key_s(), lang_to, lang_from)
+        return _translate(self.session, text, self.get_api_key_s(), lang_to, lang_from)
 
     def get_api_key_s(self):
         """设置自动加载保存的api

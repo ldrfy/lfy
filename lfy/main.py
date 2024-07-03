@@ -187,7 +187,6 @@ class LfyApplication(Adw.Application):
         span = time.time() - self.last_clip
         cf = cb.get_formats()
         # https://docs.gtk.org/gdk4/struct.ContentFormats.html
-        # print(span, cb.get_formats().get_mime_types())
         # 重复的不要，尤其是x11下，有些空白的，也不要
         if span < 1 or len(cf.get_mime_types()) == 0:
             return
