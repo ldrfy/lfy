@@ -1,5 +1,6 @@
 """比较翻译接口
 """
+import time
 import traceback
 from gettext import gettext as _
 from multiprocessing import Pool
@@ -19,8 +20,9 @@ def _translate(args):
     """
     server, text, lang_to, lang_from = args
     try:
+        st = time.time()
         a, b = server.translate_text(text, lang_to, lang_from)
-        return a, b, server
+        return a, b, server, time.time()-st
     except Exception as e:  # pylint: disable=W0718
         error_msg = _("something error:")
         return False, f"{error_msg}{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}", server
@@ -81,11 +83,13 @@ class AllServer(Server):
             s_ok = ""
             s_error = ""
             for i, tt in enumerate(p.map(_translate, args)):
-                ok, t, se = tt
+                ok, text_, se, user_time = tt
                 # 防止session每次刷新
                 self.servers[i] = se
                 if ok:
-                    s_ok += f"***** {self.servers[i].name} *****\n{t}\n\n"
+                    s_ok += f"***** {self.servers[i].name}"
+                    s_ok += f":{user_time:.2f}s *****\n{text_}\n\n"
                 else:
-                    s_error += f"***** {self.servers[i].name} *****\n{t}\n\n"
+                    s_error += f"***** {self.servers[i].name}"
+                    s_error += f":{user_time:.2f}s *****\n{text_}\n\n"
             return True, s_ok + s_error
