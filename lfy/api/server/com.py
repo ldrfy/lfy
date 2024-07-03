@@ -5,6 +5,7 @@ from gettext import gettext as _
 from multiprocessing import Pool
 
 from lfy.api.server import Server, aliyun, baidu, bing, google, tencent
+from lfy.settings import Settings
 
 
 def _translate(args):
@@ -45,9 +46,16 @@ class AllServer(Server):
         # from lfy.api.server import SERVERS
         # 会导致循环
 
-        self.servers: list[Server] = [bing.BingServer(), google.GoogleServer(),
-                                      aliyun.AliYunServer(), baidu.BaiduServer(),
-                                      tencent.TencentServer()]
+        # 只对比设置中修改的
+        all_servers = [bing.BingServer(), google.GoogleServer(),
+                       aliyun.AliYunServer(), baidu.BaiduServer(),
+                       tencent.TencentServer()]
+        keys = Settings.get().compare_servers
+        self.servers: list[Server] = []
+        for all_server in all_servers:
+            if all_server.key in keys:
+                self.servers.append(all_server)
+
         super().__init__("compare", _("compare"), lang_key_ns)
 
     def translate_text(self, text, lang_to="1", lang_from="auto"):
