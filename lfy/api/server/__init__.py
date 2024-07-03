@@ -1,6 +1,8 @@
 '翻译服务的基础类'
 from gettext import gettext as _
 
+import requests
+
 # select language name
 LANGUAGE_NAMES = [
     # 0
@@ -59,7 +61,7 @@ class Server:
     """翻译基础类
     """
 
-    def __init__(self, key: str, name, lang_key_ns: dict):
+    def __init__(self, key: str, name, lang_key_ns: dict, session: requests.Session = None):
         """初始化
 
         Args:
@@ -73,6 +75,10 @@ class Server:
         self.langs: list[Lang] = []
         for k, v in lang_key_ns.items():
             self.langs.append(Lang(k, v))
+
+        if session is None:
+            session = requests.Session()
+        self.session = session
 
     def get_doc_url(self):
         """文档连接
@@ -103,7 +109,7 @@ class Server:
             return self.langs[0]
         return self.langs[j]
 
-    def check_translate(self, api_key_s: str) -> (bool, str):
+    def check_translate(self, api_key_s: str) -> tuple[bool, str]:
         """实现检查翻译的参数
 
         Args:
@@ -115,7 +121,7 @@ class Server:
         print(api_key_s)
         return True, "success"
 
-    def translate_text(self, text: str, lang_to: str, lang_from: str) -> (bool, str):
+    def translate_text(self, text: str, lang_to: str, lang_from: str = "auto") -> tuple[bool, str]:
         """实现文本翻译的逻辑
 
         Args:
@@ -137,7 +143,7 @@ class Server:
         """
         return None
 
-    def ocr_image(self, img_path: str) -> (bool, str):
+    def ocr_image(self, img_path: str) -> tuple[bool, str]:
         """图片识别
 
         Args:
@@ -150,7 +156,7 @@ class Server:
         text = ""
         return ok, text
 
-    def check_ocr(self, api_key_ocr_s) -> (bool, str):
+    def check_ocr(self, api_key_ocr_s) -> tuple[bool, str]:
         """_summary_
 
         Args:

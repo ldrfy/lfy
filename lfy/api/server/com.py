@@ -18,10 +18,11 @@ def _translate(args):
     """
     server, text, lang_to, lang_from = args
     try:
-        return server.translate_text(text, lang_to, lang_from)
+        a, b = server.translate_text(text, lang_to, lang_from)
+        return a, b, server
     except Exception as e:  # pylint: disable=W0718
         error_msg = _("something error:")
-        return False, f"{error_msg}{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}"
+        return False, f"{error_msg}{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}", server
 
 
 class AllServer(Server):
@@ -69,11 +70,12 @@ class AllServer(Server):
                     break
             args.append((server, text, lang_to_, lang_from))
         with Pool(len(args)) as p:
-            rs = p.map(_translate, args)
             s_ok = ""
             s_error = ""
-            for i, tt in enumerate(rs):
-                ok, t = tt
+            for i, tt in enumerate(p.map(_translate, args)):
+                ok, t, se = tt
+                # 防止session每次刷新
+                self.servers[i] = se
                 if ok:
                     s_ok += f"***** {self.servers[i].name} *****\n{t}\n\n"
                 else:

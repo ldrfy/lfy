@@ -4,17 +4,15 @@ import base64
 import hashlib
 import random
 import time
-import urllib
 from gettext import gettext as _
-
-import requests
+from urllib.parse import quote
 
 from lfy.api.server import TIME_OUT, Server
 from lfy.api.utils import s2ks
 from lfy.settings import Settings
 
 
-def _translate(s, api_key_s, lang_to="auto", lang_from="auto"):
+def _translate(session, s, api_key_s, lang_to="auto", lang_from="auto"):
     """翻译
 
     Args:
@@ -32,16 +30,14 @@ def _translate(s, api_key_s, lang_to="auto", lang_from="auto"):
         return False, _("please input API Key in preference")
 
     url = "https://api.fanyi.baidu.com/api/trans/vip/translate"
-
-    url = f"{url}?from={lang_from}&to={lang_to}"
-    url = f"{url}&appid={app_id}&q={urllib.parse.quote(s)}"
+    url = f"{url}?from={lang_from}&to={lang_to}&appid={app_id}&q={quote(s)}"
 
     salt = random.randint(32768, 65536)
     sign = app_id + s + str(salt) + secret_key
     sign = hashlib.md5(sign.encode()).hexdigest()
     url = f"{url}&salt={salt}&sign={sign}"
 
-    result = requests.get(url, timeout=TIME_OUT).json()
+    result = session.get(url, timeout=TIME_OUT).json()
 
     error_msg = _("something error:")
     if "error_code" not in result:
@@ -53,15 +49,12 @@ def _translate(s, api_key_s, lang_to="auto", lang_from="auto"):
     return False, f'{error_msg}\n\n{result["error_code"]}: {result["error_msg"]}'
 
 
-def _get_token(ocr_api_key_s):
+def _get_token(session, ocr_api_key_s):
     """https://ai.baidu.com/ai-doc/REFERENCE/Ck3dwjhhu
 
     Returns:
         _type_: _description_
     """
-    ok = False
-    access_token = ""
-
     sg = Settings.get()
 
     expires_in_date = sg.ocr_baidu_token_expires_date
@@ -76,8 +69,8 @@ def _get_token(ocr_api_key_s):
     if api_key is None or api_key == "API Key":
         return False, _("please input API Key in preference") + ": OCR"
 
-    ok, access_token, expires_in_date = _get_token_by_url(
-        api_key, secret_key)
+    ok, access_token, expires_in_date = \
+        _get_token_by_url(session, api_key, secret_key)
 
     if ok:
         sg.ocr_baidu_token = access_token
@@ -86,7 +79,7 @@ def _get_token(ocr_api_key_s):
     return ok, access_token
 
 
-def _get_token_by_url(api_key, secret_key):
+def _get_token_by_url(session, api_key, secret_key):
     """获取token
 
     Args:
@@ -97,14 +90,13 @@ def _get_token_by_url(api_key, secret_key):
         _type_: _description_
     """
     ok = False
-    access_token = ""
     expires_in_date = -1
 
     # client_id 为官网获取的AK， client_secret 为官网获取的SK
     url0 = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials"
     url = f'{url0}&client_id={api_key}&client_secret={secret_key}'
 
-    request = requests.get(url, timeout=TIME_OUT)
+    request = session.get(url, timeout=TIME_OUT)
 
     jsons = request.json()
     if "access_token" not in jsons:
@@ -150,7 +142,7 @@ class BaiduServer(Server):
         error_msg = _("please input app_id and secret_key like:")
         if "|" not in api_key_s:
             return False, error_msg + " 121343 | fdsdsdg"
-        ok, text = _translate("success", api_key_s)
+        ok, text = _translate(self.session, "success", api_key_s)
         if ok:
             Settings.get().server_sk_baidu = api_key_s
         return ok, text
@@ -166,7 +158,7 @@ class BaiduServer(Server):
         Returns:
             _type_: _description_
         """
-        return _translate(text, self.get_api_key_s(), lang_to, lang_from)
+        return _translate(self.session, text, self.get_api_key_s(), lang_to, lang_from)
 
     def get_api_key_s(self):
         """设置自动加载保存的api
@@ -194,16 +186,16 @@ class BaiduServer(Server):
 
         request_url += "general_basic"
 
-        ok, token = _get_token(self.get_ocr_api_key_s())
+        ok, token = _get_token(self.session, self.get_ocr_api_key_s())
         if not ok:
             return False, token
         params = {"image": img}
         request_url = request_url + "?access_token=" + token
         headers = {'content-type': 'application/x-www-form-urlencoded'}
-        res = requests.post(request_url,
-                            data=params,
-                            headers=headers,
-                            timeout=TIME_OUT).json()
+        res = self.session.post(request_url,
+                                data=params,
+                                headers=headers,
+                                timeout=TIME_OUT).json()
 
         if "error_code" in res:
             if 110 == res["error_code"]:
@@ -234,8 +226,8 @@ class BaiduServer(Server):
             error_msg = _("please input API Key and  Secret Key like:")
             return False, error_msg + " 121343 | fdsdsdg"
 
-        ok, access_token, expires_in_date = _get_token_by_url(
-            api_key, secret_key)
+        ok, access_token, expires_in_date = \
+            _get_token_by_url(self.session, api_key, secret_key)
         if ok:
             sg = Settings.get()
             sg.server_sk_baidu_ocr = api_key_ocr_s
