@@ -2,10 +2,10 @@
 """
 import base64
 import random
-import time
 from gettext import gettext as _
 
 import requests
+from requests import RequestException, ConnectTimeout
 
 from lfy.api.server import Server, TIME_OUT
 
@@ -43,7 +43,7 @@ class GoogleServer(Server):
         }
         super().__init__("google", _("google"), lang_key_ns, session=_get_session())
 
-    def translate_text(self, text, lang_to="zh-cn", lang_from="auto"):
+    def translate_text(self, text, lang_to="zh-cn", lang_from="auto", n=0):
         """翻译
 
         Args:
@@ -54,24 +54,27 @@ class GoogleServer(Server):
         Returns:
             str: _description_
         """
+
+        if n > 5:
+            raise ValueError(_("something error, try other translate engine?"))
+
         text = text.replace("#", "")
         url = 'https://translate.google.com/translate_a/t'
         params = {'tl': lang_to, 'sl': lang_from, 'ie': 'UTF-8',
                   'oe': 'UTF-8', 'client': 'at', 'dj': '1',
                   'format': "html", 'v': "1.0"}
 
-        for i in range(1, 4):
-            response = self.session.post(url, params=params,
-                                         data={'q': text}, timeout=TIME_OUT)
-            if response.status_code == 429:
-                time.sleep(5 * i)
-                continue
-            break
-
-        result = response.json()
+        try:
+            response = self.session.post(url, params=params, data={'q': text}, timeout=TIME_OUT)
+        except ConnectTimeout as e0:
+            print("google0", n, type(e0), e0)
+            return False, _("The connection timed out. Maybe there is a network problem")
+        except RequestException as e:
+            print("google", n, type(e), e)
+            return self.translate_text(text, lang_to, lang_from, n + 1)
 
         s = ""
-        for res in result:
+        for res in response.json():
             s += res[0]
 
         return True, s
