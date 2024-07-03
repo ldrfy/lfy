@@ -58,5 +58,9 @@
 			<default>""</default>
 			<description>VPN address and port</description>
 		</key>
+        <key name="compare-servers" type="as">
+            <default>[]</default>
+            <description>Which services are available in compare model</description>
+        </key>
 	</schema>
 </schemalist>

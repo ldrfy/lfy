@@ -56,6 +56,10 @@
 	(2,53,"GtkLabel",None,52,None,None,None,None,None,None),
 	(2,54,"GtkSpinner",None,52,None,None,None,1,None,None),
 	(2,55,"GtkSwitch","notify_translation_results",52,None,None,None,2,None,None),
+	(2,56,"AdwPreferencesGroup",None,5,None,None,None,4,None,None),
+	(2,57,"GtkBox",None,56,None,None,None,None,None,None),
+	(2,63,"GtkButton","gbtn_compare",57,None,None,None,-1,None,None),
+	(2,64,"GtkLabel","gl_compare",57,None,None,None,1,None,None),
 	(6,1,"GtkShortcutsWindow","help_overlay",None,None,None,None,None,None,None),
 	(6,2,"GtkShortcutsSection",None,1,None,None,None,None,None,None),
 	(6,3,"GtkShortcutsGroup",None,2,None,None,None,None,None,None),
@@ -129,6 +133,7 @@
 	(1,148,"GtkWidget","tooltip-text","Menu",1,None,None,None,None,None,None,None,None),
 	(1,150,"(item)","action","app.copy2translate",None,None,None,None,None,None,None,None,None),
 	(1,150,"(item)","label","Copy to translate",1,None,None,None,None,None,None,None,None),
+	(2,5,"GtkWidget","valign","start",None,None,None,None,None,None,None,None,None),
 	(2,15,"AdwActionRow","subtitle","setup API Key for translation Server, click on the right to the details",1,None,None,None,None,None,None,None,None),
 	(2,15,"AdwActionRow","subtitle-lines","3",None,None,None,None,None,None,None,None,None),
 	(2,15,"AdwActionRow","title-lines","1",None,None,None,None,None,None,None,None,None),
@@ -152,6 +157,11 @@
 	(2,55,"GtkSwitch","active","True",None,None,None,None,None,None,None,None,None),
 	(2,55,"GtkSwitch","state","True",None,None,None,None,None,None,None,None,None),
 	(2,55,"GtkWidget","tooltip-text","Automatically check for updates when opening software",1,None,None,None,None,None,None,None,None),
+	(2,63,"GtkButton","label","compare",1,None,None,None,None,None,None,None,None),
+	(2,63,"GtkWidget","tooltip-text","Which services are available in compare model",1,None,None,None,None,None,None,None,None),
+	(2,64,"GtkLabel","label","all",None,None,None,None,None,None,None,None,None),
+	(2,64,"GtkWidget","margin-start","12",None,None,None,None,None,None,None,None,None),
+	(2,64,"GtkWidget","tooltip-text","Which services are available in compare model",1,None,None,None,None,None,None,None,None),
 	(6,1,"GtkWindow","modal","True",None,None,None,None,None,None,None,None,None),
 	(6,2,"GtkShortcutsSection","max-height","10",None,None,None,None,None,None,None,None,None),
 	(6,2,"GtkShortcutsSection","section-name","shortcuts",None,None,None,None,None,None,None,None,None),
@@ -223,7 +233,8 @@
 	(97,1,146,"GtkTextView","copy-clipboard","_set_tv_copy",None,None,None,None,None),
 	(98,1,146,"GtkTextView","cut-clipboard","_set_tv_copy",None,None,None,None,None),
 	(105,10,24,"AdwEntryRow","apply","_on_api_key_ocr_apply",None,None,None,None,None),
-	(106,2,45,"AdwEntryRow","apply","_on_vpn_apply",None,None,None,None,None)
+	(106,2,45,"AdwEntryRow","apply","_on_vpn_apply",None,None,None,None,None),
+	(107,2,63,"GtkButton","clicked","on_gbtn_compare_clicked",None,None,None,None,None)
   </object_signal>
   <object_data>
 	(2,17,"GtkWidget",1,1,None,None,None,None,None,None),

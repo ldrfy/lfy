@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-07-03 23:06+0800\n"
+"POT-Creation-Date: 2024-07-04 03:16+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -41,7 +41,7 @@ msgstr "窗口大小"
 msgid "Automatically check the new version of the software upon startup"
 msgstr "软件打开时，自动检查更新"
 
-#: data/cool.ldr.lfy.in.gschema.xml:14 data/resources/preference.ui:83
+#: data/cool.ldr.lfy.in.gschema.xml:14 data/resources/preference.ui:84
 msgid ""
 "After the translation is completed, a system notification is automatically "
 "sent"
@@ -88,6 +88,11 @@ msgstr "请输入 app_id 和 secret_key，类似："
 #: data/cool.ldr.lfy.in.gschema.xml:59
 msgid "VPN address and port"
 msgstr "VPN地址"
+
+#: data/cool.ldr.lfy.in.gschema.xml:63 data/resources/preference.ui:108
+#: data/resources/preference.ui:116
+msgid "Which services are available in compare model"
+msgstr "在比较模式下哪些服务被选中"
 
 #: data/cool.ldr.lfy.in.appdata.xml:15
 #, fuzzy
@@ -184,9 +189,13 @@ msgstr "下次翻译不拼接文本"
 msgid "Next translation splicing text"
 msgstr "下次翻译拼接文本"
 
+#: lfy/preference.py:96 lfy/preference.py:124
+msgid "It takes effect when you restart lfy"
+msgstr "重新打开lfy时生效"
+
 #: lfy/translate.py:187 lfy/translate.py:220 lfy/api/server/baidu.py:42
 #: lfy/api/server/baidu.py:203 lfy/api/server/tencent.py:149
-#: lfy/api/server/aliyun.py:98 lfy/api/server/com.py:24
+#: lfy/api/server/aliyun.py:98 lfy/api/server/com.py:25
 msgid "something error:"
 msgstr "一些错误发生："
 
@@ -260,7 +269,7 @@ msgstr "请输入 app_id 和 secret_key，类似："
 msgid "google"
 msgstr "谷歌"
 
-#: lfy/api/server/google.py:59 lfy/api/server/bing.py:73
+#: lfy/api/server/google.py:59 lfy/api/server/bing.py:76
 msgid "something error, try other translate engine?"
 msgstr "出现了一些错误，试试其他翻译引擎？"
 
@@ -276,11 +285,11 @@ msgstr "腾讯"
 msgid "please input secret_id and secret_key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
-#: lfy/api/server/bing.py:57
+#: lfy/api/server/bing.py:60
 msgid "bing"
 msgstr "必应"
 
-#: lfy/api/server/bing.py:114
+#: lfy/api/server/bing.py:127
 #, python-brace-format
 msgid "1000 characters limit! You send {len_text} characters."
 msgstr "被限制在1000个字符! 你发送了 {len_text} 个字符."
@@ -294,7 +303,7 @@ msgstr "阿里云"
 msgid "please input {} and {} like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
-#: lfy/api/server/com.py:51
+#: lfy/api/server/com.py:59 data/resources/preference.ui:107
 msgid "compare"
 msgstr "对比"
 
@@ -356,27 +365,27 @@ msgstr "输入该服务的OCR识别密钥"
 msgid "how to get API Key"
 msgstr "怎么获取密钥"
 
-#: data/resources/preference.ui:14
+#: data/resources/preference.ui:15
 msgid "setup API Key for translation Server, click on the right to the details"
 msgstr "为翻译服务设置密钥，点右侧查看细节"
 
-#: data/resources/preference.ui:16
+#: data/resources/preference.ui:17
 msgid "API Key"
 msgstr "密钥"
 
-#: data/resources/preference.ui:47
+#: data/resources/preference.ui:48
 msgid "vpn addr and port, like http://127.0.0.1:7890"
 msgstr "代理地址和端口，比如：http://127.0.0.1:7890"
 
-#: data/resources/preference.ui:59
+#: data/resources/preference.ui:60
 msgid "auto check update"
 msgstr "自动检查更新"
 
-#: data/resources/preference.ui:69 data/resources/preference.ui:93
+#: data/resources/preference.ui:70 data/resources/preference.ui:94
 msgid "Automatically check for updates when opening software"
 msgstr "软件打开时，自动检查更新"
 
-#: data/resources/preference.ui:82
+#: data/resources/preference.ui:83
 msgid "Notify translation results"
 msgstr "通知翻译结果"
 

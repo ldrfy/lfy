@@ -190,3 +190,17 @@ class Settings(Gio.Settings):
     @color_scheme.setter
     def color_scheme(self, scheme):
         self.set_string('color-scheme', scheme)
+
+    @property
+    def compare_servers(self):
+        """主题
+
+        Returns:
+            _type_: _description_
+        """
+        return self.get_strv('compare-servers')
+
+    @compare_servers.setter
+    def compare_servers(self, compare_servers):
+        print(compare_servers)
+        self.set_strv('compare-servers', compare_servers)

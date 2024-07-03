@@ -6,6 +6,7 @@
   <template class="PreferencesWindow" parent="AdwPreferencesWindow">
     <child>
       <object class="AdwPreferencesPage">
+          <property name="valign">start</property>
         <child>
           <object class="AdwPreferencesGroup">
             <child>
@@ -96,6 +97,32 @@
               </object>
             </child>
           </object>
+        </child>
+          <child>
+              <object class="AdwPreferencesGroup">
+                  <child>
+                      <object class="GtkBox">
+                          <child>
+                              <object class="GtkButton" id="gbtn_compare">
+                                  <property name="label" translatable="yes">compare</property>
+                                  <property name="tooltip-text" translatable="yes">Which services are available in
+                                      compare model
+                                  </property>
+                                  <signal name="clicked" handler="on_gbtn_compare_clicked"/>
+                              </object>
+                          </child>
+                          <child>
+                              <object class="GtkLabel" id="gl_compare">
+                                  <property name="label">all</property>
+                                  <property name="margin-start">12</property>
+                                  <property name="tooltip-text" translatable="yes">Which services are available in
+                                      compare model
+                                  </property>
+                              </object>
+                          </child>
+                      </object>
+                  </child>
+              </object>
         </child>
       </object>
     </child>
