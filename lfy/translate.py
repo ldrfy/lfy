@@ -6,7 +6,7 @@ import time
 import traceback
 from gettext import gettext as _
 
-from gi.repository import Adw, GLib, Gtk
+from gi.repository import Adw, GLib, Gtk, Notify
 
 from lfy.api import (create_server, create_server_ocr, get_lang,
                      get_lang_names, get_server, get_server_names, lang_n2j,
@@ -17,6 +17,25 @@ from lfy.widgets.theme_switcher import ThemeSwitcher
 
 
 # pylint: disable=E1101
+def process_text(text):
+    """文本预处理
+
+    Args:
+        text (str): _description_
+
+    Returns:
+        str: _description_
+    """
+    # 删除空行
+    s_from = re.sub(r'\n\s*\n', '\n', text)
+    # 删除多余空格
+    s_from = re.sub(r' +', ' ', s_from)
+    # 删除所有换行，除了句号后面的换行
+    s_from = re.sub(r"-[\n|\r]+", "", s_from)
+    s_from = re.sub(r"(?<!\.|-|。)[\n|\r]+", " ", s_from)
+    return s_from
+
+
 @Gtk.Template(resource_path='/cool/ldr/lfy/translate.ui')
 class TranslateWindow(Adw.ApplicationWindow):
     """翻译窗口
@@ -72,11 +91,10 @@ class TranslateWindow(Adw.ApplicationWindow):
         """_summary_
 
         Args:
-            a (TranslateWindow): _description_
+            _a (TranslateWindow): _description_
         """
         if not self.is_maximized():
-            size = self.get_default_size()
-            Settings.get().window_size = (size.width, size.height)
+            Settings.get().window_size = self.get_default_size()
 
         i = self.dd_server.get_selected()
         j = self.dd_lang.get_selected()
@@ -133,7 +151,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             if self.cbtn_add_old.get_active():
                 text = f"{self.last_text} {text}"
             if self.cbtn_del_wrapping.get_active() and del_wrapping:
-                text = self.process_text(text)
+                text = process_text(text)
             self.last_text = text
             buffer_from.set_text(text)
 
@@ -162,7 +180,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             if lk is None:
                 _, text = server.ocr_image(s)
                 if self.cbtn_del_wrapping.get_active():
-                    text = self.process_text(text)
+                    text = process_text(text)
             else:
                 _ok, text = server.translate_text(s, lk)
 
@@ -194,31 +212,17 @@ class TranslateWindow(Adw.ApplicationWindow):
                     self.update(s)
                 else:
                     self.tv_to.get_buffer().set_text(s)
+                    if Settings.get().notify_translation_results:
+                        if len(s) > 250:
+                            s = s[:250]
+                        nt_title = f"{self.tran_server.name} " + _("Translation completed")
+                        Notify.Notification.new(nt_title, s).show()
             except TypeError as e:
                 error_msg = _("something error:")
                 error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
                 em = f"{error_msg}\n\n{error_msg2}"
                 self.tv_to.get_buffer().set_text(em)
-
             self.sp_translate.stop()
-
-    def process_text(self, text):
-        """文本预处理
-
-        Args:
-            text (str): _description_
-
-        Returns:
-            str: _description_
-        """
-        # 删除空行
-        s_from = re.sub(r'\n\s*\n', '\n', text)
-        # 删除多余空格
-        s_from = re.sub(r' +', ' ', s_from)
-        # 删除所有换行，除了句号后面的换行
-        s_from = re.sub(r"-[\n|\r]+", "", s_from)
-        s_from = re.sub(r"(?<!\.|-|。)[\n|\r]+", " ", s_from)
-        return s_from
 
     def notice_action(self, cbtn: Gtk.CheckButton, text_ok, text_no):
         """_summary_
@@ -239,7 +243,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         """_summary_
 
         Args:
-            text (str): _description_
+            toast_msg (str): _description_
         """
         self.toast.dismiss()
         self.toast.set_title(toast_msg)

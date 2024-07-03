@@ -152,7 +152,7 @@ class Settings(Gio.Settings):
             _type_: _description_
         """
         value = self.get_value('window-size')
-        return (value[0], value[1])
+        return value[0], value[1]
 
     @window_size.setter
     def window_size(self, size):
@@ -167,6 +167,16 @@ class Settings(Gio.Settings):
             _type_: _description_
         """
         return self.get_boolean('auto-check-update')
+
+
+    @property
+    def notify_translation_results(self):
+        """翻译以后自动发送结果
+
+        Returns:
+            bool: _description_
+        """
+        return self.get_boolean('notify-translation-results')
 
     @property
     def color_scheme(self):
