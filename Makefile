@@ -13,7 +13,7 @@ clear:
 	rm -rf {HOME}/.local/lib/lfy
 
 test:clear
-	meson build --prefix=${PREFIX}
+	meson setup build --prefix=${PREFIX}
 	meson compile -C build
 	meson test -C build
 	meson dist -C build --allow-dirty
@@ -57,13 +57,13 @@ test-deb: clear
 
 
 test-flatpak:clear
-	meson build
+	meson setup build
 	cd ${BUILD_PKG}/flatpak && \
 	flatpak-builder --install build cool.ldr.lfy.yaml --user
 
 
 test-aur: clear
-	meson build
+	meson setup build
 
 	cd ${BUILD_PKG}/aur && \
 	mkdir lfy-${VERSION} && \
