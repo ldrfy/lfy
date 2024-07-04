@@ -15,8 +15,8 @@ sha256sums=("SKIP")
 
 build() {
   cd ${pkgname}-${pkgver}
-  meson _build --prefix="/usr"
-	meson compile -C _build
+  meson setup _build --prefix="/usr"
+  meson compile -C _build
 }
 
 check() {

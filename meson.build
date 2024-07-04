@@ -40,7 +40,7 @@ conf.set('LOCAL_BUILD', 'False')
 conf.set('APP_ID', APP_ID)
 conf.set('APP_NAME', meson.project_name())
 conf.set('VERSION', meson.project_version())
-conf.set('PYTHON', py_installation.path())
+conf.set('PYTHON', py_installation.full_path())
 
 conf.set('SCHEMAS_DIR', SCHEMAS_DIR)
 conf.set('LOCALE_DIR', LOCALE_DIR)
