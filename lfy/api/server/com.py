@@ -18,14 +18,16 @@ def _translate(args):
     Returns:
         _type_: _description_
     """
+    st = time.time()
     server, text, lang_to, lang_from = args
     try:
-        st = time.time()
         a, b = server.translate_text(text, lang_to, lang_from)
         return a, b, server, time.time()-st
     except Exception as e:  # pylint: disable=W0718
-        error_msg = _("something error:")
-        return False, f"{error_msg}{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}", server
+        em = _("something error:")
+        em = f"{em}{server.name}\n\n"
+        em = f"{em}{str(e)}\n\n{traceback.format_exc()}"
+        return False, em, server, time.time()-st
 
 
 class AllServer(Server):
