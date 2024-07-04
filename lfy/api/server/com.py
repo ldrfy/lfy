@@ -5,7 +5,8 @@ import traceback
 from gettext import gettext as _
 from multiprocessing import Pool
 
-from lfy.api.server import Server, aliyun, baidu, bing, google, tencent
+from lfy.api.server import (Server, aliyun, baidu, bing, google, huoshan,
+                            tencent)
 from lfy.settings import Settings
 
 
@@ -53,7 +54,7 @@ class AllServer(Server):
         # 只对比设置中修改的
         all_servers = [bing.BingServer(), google.GoogleServer(),
                        aliyun.AliYunServer(), baidu.BaiduServer(),
-                       tencent.TencentServer()]
+                       tencent.TencentServer(), huoshan.HuoShanServer()]
         keys = Settings.get().compare_servers
         self.servers: list[Server] = []
         for all_server in all_servers:

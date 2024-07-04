@@ -50,6 +50,10 @@
 			<default>"AccessKey ID | AccessKey Secret"</default>
 			<description>aliyun AccessKey ID and AccessKey Secret, used in the middle | split</description>
 		</key>
+		<key type="s" name="server-sk-huoshan">
+			<default>"Access Key ID | Secret Access Key"</default>
+			<description>huoshan Access Key ID and Secret Access Key, used in the middle | split</description>
+		</key>
 		<key type="s" name="server-sk-tencent">
 			<default>"secret_id | secret_key"</default>
 			<description>Tencent secret_id and secret_key, used in the middle | split</description>

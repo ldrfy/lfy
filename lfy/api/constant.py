@@ -1,4 +1,5 @@
-from lfy.api.server import aliyun, baidu, bing, com, google, tencent, Server
+from lfy.api.server import (Server, aliyun, baidu, bing, com, google, huoshan,
+                            tencent)
 
 SERVERS: list[Server] = [
     com.AllServer(),
@@ -7,4 +8,5 @@ SERVERS: list[Server] = [
     baidu.BaiduServer(),
     tencent.TencentServer(),
     aliyun.AliYunServer(),
+    huoshan.HuoShanServer(),
 ]

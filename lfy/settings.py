@@ -119,6 +119,19 @@ class Settings(Gio.Settings):
         self.set_string('server-sk-aliyun', key)
 
     @property
+    def server_sk_huoshan(self):
+        """选择翻译的服务密钥，只是一个字符串，自己解析和保存用 | 分割
+
+        Returns:
+            str: 如：aliyun
+        """
+        return self.get_string('server-sk-huoshan')
+
+    @server_sk_huoshan.setter
+    def server_sk_huoshan(self, key):
+        self.set_string('server-sk-huoshan', key)
+
+    @property
     def server_sk_tencent(self):
         """选择翻译的服务密钥，只是一个字符串，自己解析和保存用 | 分割
 
