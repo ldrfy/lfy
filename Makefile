@@ -59,7 +59,10 @@ test-deb: clear
 test-flatpak:clear
 	meson setup build
 	cd ${BUILD_PKG}/flatpak && \
-	flatpak-builder --install build cool.ldr.lfy.yaml --user
+	flatpak-builder --repo=repo build-dir cool.ldr.lfy.yaml && \
+	flatpak build-bundle repo cool.ldr.lfy-${VERSION}.flatpak cool.ldr.lfy && \
+	flatpak install -y --user cool.ldr.lfy-${VERSION}.flatpak && \
+	mv cool.ldr.lfy-${VERSION}.flatpak ${DISK}
 
 
 test-aur: clear
@@ -78,6 +81,15 @@ test-aur: clear
 	rm -r lfy-${VERSION} && \
 	makepkg -sf && \
 	mv *.pkg.tar.zst ${DISK}
+
+
+test-rpm: clear
+	make PREFIX="/usr" DESTDIR="${PWD}/${BUILD_PKG}/rpm/" test
+
+	cd "${PWD}/${BUILD_PKG}/rpm/SPECS/" &&\
+	rpmbuild -bb lfy.spec && \
+	cd ../ && \
+	mv ./RPMS/x86_64/*.rpm ${DISK}
 
 
 release: test-deb

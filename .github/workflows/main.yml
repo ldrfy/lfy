@@ -1,0 +1,64 @@
+name: AutoPkg
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+permissions:
+  contents: write  # 确保具有写权限
+
+env:
+  TAG_NAME: "auto"
+  SOFTWARE_NAME: "lfy"
+
+
+jobs:
+  build-lfy:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Prepare
+      run: |
+        sudo apt-get update
+        sudo apt-get install python-gi-dev cmake make meson gobject-introspection libadwaita-1-dev gettext desktop-file-utils libxml2-utils appstream-util flatpak-builder rpm
+
+    - name: Build deb package
+      run: make test-deb
+
+    - name: Build flatpak package
+      run: |
+        sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+        sudo flatpak install flathub org.gnome.Platform//46 org.gnome.Sdk//46 -y
+        make test-flatpak
+
+    - name: Build rpm package
+      run: |
+        make test-rpm
+
+    # - name: Build archlinux package
+    #   uses: rustdesk-org/arch-makepkg-action@master
+    #   with:
+    #     packages: >
+    #       make
+    #       python
+    #       python-requests
+    #       python-gobject
+    #       libadwaita
+    #       meson
+    #     scripts: |
+    #         make test-aur
+
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ env.TAG_NAME }}
+        prerelease: true
+        draft: false
+        files: |
+          dist/*
