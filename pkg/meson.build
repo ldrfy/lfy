@@ -7,4 +7,5 @@ conf_pkg.set('VERSION', meson.project_version())
 subdir('deb/DEBIAN')
 subdir('aur')
 subdir('flatpak')
+subdir('rpm/SPECS')
 

@@ -2,7 +2,7 @@
 <component type="desktop-application">
 	<id>@APP_ID@</id>
 	<name>lfy</name>
-	<summary>Translation software for gnome</summary>
+	<summary>Translation software for read paper</summary>
 	<description>
 		<p>
 			An easy and pleasant way to translate.
