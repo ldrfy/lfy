@@ -4,6 +4,7 @@ _build
 disk
 .flatpak-builder
 .vscode
+.idea
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
