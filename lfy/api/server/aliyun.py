@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 from gettext import gettext as _
 from urllib.parse import quote, quote_plus
 
-from lfy.api.server import Server, TIME_OUT
+from lfy.api.server import TIME_OUT, Server
 from lfy.settings import Settings
 
 
@@ -100,7 +100,7 @@ def _translate(session, s, api_key_s, lang_to="en", lang_from="auto"):
 
 
 class AliYunServer(Server):
-    """百度翻译
+    """阿里云翻译
     """
 
     def __init__(self):
@@ -128,12 +128,10 @@ class AliYunServer(Server):
         Returns:
             bool: _description_
         """
-        access_key_id = "AccessKey ID"
-        access_key_secret = "AccessKey Secret"
         error_msg_template = _("please input {} and {} like:")
-        error_msg = error_msg_template.format(access_key_id, access_key_secret)
+        error_msg = error_msg_template.format("AccessKey ID", "AccessKey Secret")
         if "|" not in api_key_s:
-            return False, error_msg + " LTAI5tQiXnC6ffwfe | rWPiBuk1xdwwdfafwefwef"
+            return False, error_msg + " XXXX | XXXX"
         ok, text = _translate(self.session, "success", api_key_s)
         if ok:
             Settings.get().server_sk_aliyun = api_key_s
