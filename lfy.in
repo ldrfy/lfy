@@ -32,9 +32,10 @@ if not os.path.exists(PKGDATA_DIR):
 sys.path.append(PYTHON_DIR)
 
 # 这个在archlinux测试可以后台响应剪贴板，但是在flatpak会直接报错，暂时删除
-if "/app/share" not in SCHEMAS_DIR:
-    print("x11")
-    os.environ["GDK_BACKEND"] = "x11"
+# gnome47黑屏
+# if "/app/share" not in SCHEMAS_DIR:
+#     print("x11")
+#     os.environ["GDK_BACKEND"] = "x11"
 
 import gettext
 import locale
