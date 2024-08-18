@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 import requests
 from requests import RequestException
 
-from lfy.api.server import Server, TIME_OUT
+from lfy.api.server import TIME_OUT, Server
 
 
 def _init_session():
@@ -91,7 +91,7 @@ class BingServer(Server):
             iid = f"translator.{random.randint(5019, 5026)}.{random.randint(1, 3)}"
             self.session.headers.update({'my_iid': iid})
             hs = self.session.headers
-        url = f'https://{host}/ttranslatev3?isVertical=1&&IG={hs["IG"]}&IID={hs['my_iid']}'
+        url = f'https://{host}/ttranslatev3?isVertical=1&&IG={hs["IG"]}&IID={hs["my_iid"]}'
 
         data = {'': '', 'text': text, 'to': lang_to,
                 'token': hs['token'], 'key': hs['key'], "fromLang": lang_from}
