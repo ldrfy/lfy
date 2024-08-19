@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
 "POT-Creation-Date: 2024-04-05 21:18+0800\n"
-"PO-Revision-Date: 2024-04-05 13:55+0100\n"
+"PO-Revision-Date: 2024-08-19 13:55+0100\n"
 "Last-Translator:  <albanobattistella@gmail.com>\n"
 "Language-Team: Italian <>\n"
 "Language: it_IT\n"
@@ -24,27 +24,27 @@ msgstr "lfy"
 
 #: data/cool.ldr.lfy.in.metainfo.xml:6 data/cool.ldr.lfy.in.appdata.xml:5
 msgid "Translation software for gnome"
-msgstr ""
+msgstr "Software di traduzione per gnome"
 
 #: data/cool.ldr.lfy.in.metainfo.xml:8 data/cool.ldr.lfy.in.appdata.xml:7
 msgid ""
 "An easy and pleasant way to translate. Support many translation services. "
 "Especially suitable for document translation."
 msgstr ""
+"Un modo semplice e piacevole per tradurre. Supporta molti servizi di traduzione."
+"Particolarmente adatto per la traduzione di documenti."
 
 #: data/cool.ldr.lfy.in.appdata.xml:36
-#, fuzzy
 msgid "add shortcut"
-msgstr "_Scorciatoie da tastiera"
+msgstr "aggiungi scorciatoia"
 
 #: data/cool.ldr.lfy.in.appdata.xml:37
-#, fuzzy
 msgid "Automatically check for updates"
-msgstr "Controlla automaticamente gli aggiornamenti all'apertura del software"
+msgstr "Controlla automaticamente gli aggiornamenti"
 
 #: data/cool.ldr.lfy.in.appdata.xml:43
 msgid "Basic functions completed"
-msgstr ""
+msgstr "Funzioni di base completate"
 
 #: data/cool.ldr.lfy.in.appdata.xml:48
 msgid "yuh"
@@ -60,21 +60,19 @@ msgstr "Un'app di traduzione per GNOME."
 
 #: lfy/main.py:105 data/resources/help-overlay.ui:25
 msgid "Copy detected, translate immediately"
-msgstr ""
+msgstr "Copia rilevata, traduci immediatamente"
 
 #: lfy/main.py:108
 msgid "Copy detected, not automatically translated"
-msgstr ""
+msgstr "Copia rilevata, non tradotta automaticamente"
 
 #: lfy/main.py:131
-#, fuzzy
 msgid "Next translation not remove line breaks"
-msgstr "Prossima traduzione senza giuntare il testo"
+msgstr "La prossima traduzione non rimuove le interruzioni di riga"
 
 #: lfy/main.py:132
-#, fuzzy
 msgid "Next translation remove line breaks"
-msgstr "Prossima traduzione del testo di giunzione"
+msgstr "La prossima traduzione rimuove le interruzioni di riga"
 
 #: lfy/main.py:142
 msgid "Next translation without splicing text"
@@ -86,7 +84,7 @@ msgstr "Prossima traduzione del testo di giunzione"
 
 #: lfy/main.py:166
 msgid "Image translation is currently not supported"
-msgstr ""
+msgstr "La traduzione delle immagini non è attualmente supportata"
 
 #: lfy/api/__init__.py:36
 msgid ""
@@ -145,7 +143,7 @@ msgstr "Francese"
 
 #: lfy/api/base.py:26
 msgid "Italian"
-msgstr ""
+msgstr "Italiano"
 
 #: lfy/api/server/baidu.py:32
 msgid "baidu"
@@ -193,9 +191,8 @@ msgid "Menu"
 msgstr "Menù"
 
 #: data/resources/translate.ui:123 data/resources/help-overlay.ui:24
-#, fuzzy
 msgid "Copy to translate"
-msgstr "Traduzione"
+msgstr "Copia per tradurre"
 
 #: data/resources/translate.ui:129
 msgid "_Preferences"
@@ -261,9 +258,8 @@ msgid "Splice Text"
 msgstr "Testo di giunzione"
 
 #: data/resources/help-overlay.ui:38
-#, fuzzy
 msgid "Remove line breaks"
-msgstr "Rimuovi simboli come interruzioni di riga"
+msgstr "Rimuovi interruzioni di riga"
 
 #: data/resources/help-overlay.ui:45
 msgctxt "shortcut window"
