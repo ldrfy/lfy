@@ -8,8 +8,8 @@
 </div>
 </center>
 
-- [自动编译，这里下载](https://github.com/ldrfy/lfy/releases/tag/auto)，包含`rpm`、`deb`、`flatpak`，暂无archlinux
-- `archlinux最新版`、`ubuntu23.10或更新`
+- [自动编译，这里下载](https://github.com/ldrfy/lfy/releases/tag/auto)，包含`rpm`、`deb`、`flatpak`，暂无archlinux，可使用aur
+- `archlinux最新版`、`ubuntu23.10或更新`、`openSUSE Tumbleweed`
 - 使用flatpak可以支持全平台
 
     <a href='https://flathub.org/apps/details/cool.ldr.lfy'><img width='120' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
