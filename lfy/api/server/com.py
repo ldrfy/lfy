@@ -58,7 +58,7 @@ class AllServer(Server):
         keys = Settings.get().compare_servers
         self.servers: list[Server] = []
         for all_server in all_servers:
-            if all_server.key in keys:
+            if all_server.key in keys or len(keys) == 0:
                 self.servers.append(all_server)
 
         super().__init__("compare", _("compare"), lang_key_ns)
