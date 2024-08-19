@@ -35,6 +35,15 @@
 		</screenshot>
 	</screenshots>
 	<releases>
+		<release version="0.0.7" date="2024-08-19">
+			<description>
+				<ul>
+					<li>Add aliyun/huoshan Translate for free</li>
+					<li>Support notification after translation</li>
+					<li>Supports comparing multiple translations at the same time</li>
+				</ul>
+			</description>
+		</release>
 		<release version="0.0.6" date="2024-05-26">
 			<description>
 				<ul>
