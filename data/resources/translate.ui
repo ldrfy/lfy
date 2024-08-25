@@ -19,6 +19,7 @@
                 <property name="vexpand">True</property>
                 <child>
                   <object class="GtkBox">
+                    <property name="margin-bottom">5</property>
                     <property name="orientation">vertical</property>
                     <property name="vexpand">True</property>
                     <child>
@@ -26,6 +27,7 @@
                         <property name="vexpand">True</property>
                         <child>
                           <object class="GtkTextView" id="tv_from">
+                            <property name="margin-bottom">5</property>
                             <property name="wrap-mode">char</property>
                             <signal name="copy-clipboard" handler="_set_tv_copy"/>
                             <signal name="cut-clipboard" handler="_set_tv_copy"/>
@@ -39,12 +41,14 @@
                         <child>
                           <object class="GtkDropDown" id="dd_server">
                             <property name="enable-search">True</property>
+                            <property name="valign">center</property>
                             <signal name="notify::selected" handler="_on_server_changed"/>
                           </object>
                         </child>
                         <child>
                           <object class="GtkDropDown" id="dd_lang">
                             <property name="enable-search">True</property>
+                            <property name="valign">center</property>
                             <signal name="notify::selected" handler="_on_lang_changed"/>
                           </object>
                         </child>
@@ -52,28 +56,34 @@
                           <object class="GtkSeparator">
                             <property name="hexpand">True</property>
                             <property name="opacity">0.0</property>
+                            <property name="valign">center</property>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkSpinner" id="sp_translate"/>
+                          <object class="GtkSpinner" id="sp_translate">
+                            <property name="valign">center</property>
+                          </object>
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="cbtn_del_wrapping">
                             <property name="action-name">app.del_wrapping</property>
                             <property name="active">True</property>
                             <property name="tooltip-text" translatable="yes">Remove symbols such as line breaks</property>
+                            <property name="valign">center</property>
                           </object>
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="cbtn_add_old">
                             <property name="action-name">app.splice_text</property>
                             <property name="tooltip-text" translatable="yes">Splice the next copied text with the previous text</property>
+                            <property name="valign">center</property>
                           </object>
                         </child>
                         <child>
                           <object class="GtkButton" id="btn_translate">
                             <property name="action-name">app.translate</property>
                             <property name="label" translatable="yes">translate</property>
+                            <property name="valign">center</property>
                           </object>
                         </child>
                       </object>
@@ -85,6 +95,7 @@
                     <property name="vexpand">True</property>
                     <child>
                       <object class="GtkTextView" id="tv_to">
+                        <property name="margin-top">5</property>
                         <property name="right-margin">8</property>
                         <property name="wrap-mode">char</property>
                         <signal name="copy-clipboard" handler="_set_tv_copy"/>
@@ -128,10 +139,6 @@
         <attribute name="action">app.copy2translate</attribute>
         <attribute name="label" translatable="yes">Copy to translate</attribute>
       </item>
-      <item>
-        <attribute name="action">app.reset_gp</attribute>
-        <attribute name="label" translatable="yes">Reset UI</attribute>
-      </item>
     </section>
     <section>
       <item>
@@ -145,6 +152,20 @@
       <item>
         <attribute name="action">app.about</attribute>
         <attribute name="label" translatable="yes">_About lfy</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="action">app.gp_reset_restore</attribute>
+        <attribute name="label" translatable="yes">Reset/Restore UI</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.gp_up</attribute>
+        <attribute name="label" translatable="yes">Hide the original text</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.gp_down</attribute>
+        <attribute name="label">Hide the translated text</attribute>
       </item>
     </section>
   </menu>

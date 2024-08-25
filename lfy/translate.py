@@ -57,9 +57,13 @@ class TranslateWindow(Adw.ApplicationWindow):
     sp_translate: Gtk.Spinner = Gtk.Template.Child()
     menu_btn: Gtk.MenuButton = Gtk.Template.Child()
     ato_translate: Adw.ToastOverlay = Gtk.Template.Child()
+    gp_translate: Gtk.Paned = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        self.paned_position = -1
+
         self.setting = Settings.get()
         # 可能包含上次的追加内容
         self.last_text = ""
@@ -86,6 +90,32 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.menu_btn.props.popover.add_child(ThemeSwitcher(), 'theme')
 
         self.connect('unrealize', self.save_settings)
+
+
+    def reset_paned_position(self):
+        """重置原文字和翻译的比例
+        """
+        height = self.get_allocated_height()
+        h_reset = height / 5 * 2
+        h_now = self.gp_translate.get_position()
+        if h_now != h_reset:
+            self.paned_position = h_now
+            self.gp_translate.set_position(h_reset)
+        else:
+            self.gp_translate.set_position(self.paned_position)
+
+    def up_paned_position(self):
+        """只看翻译
+        """
+        self.gp_translate.set_position(0)
+
+    def down_paned_position(self):
+        """只看原文字
+        """
+        height = self.get_allocated_height()
+        self.gp_translate.set_position(height)
+
+
 
     def save_settings(self, _a):
         """_summary_

@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- Created with Cambalache 0.16.0 -->
+<!-- Created with Cambalache 0.90.4 -->
 <interface>
   <!-- interface-name help-overlay.ui -->
-  <requires lib="gtk" version="4.6"/>
+  <requires lib="gtk" version="4.12"/>
   <object class="GtkShortcutsWindow" id="help_overlay">
     <property name="modal">True</property>
     <child>
@@ -10,43 +10,71 @@
         <property name="max-height">10</property>
         <property name="section-name">shortcuts</property>
         <child>
-          <object class="GtkShortcutsGroup">
+          <object class="GtkShortcutsGroup" id="ui_translate">
+            <property name="baseline-child">1</property>
+            <property name="title">UI</property>
+            <child>
+              <object class="GtkShortcutsShortcut" id="app_gp_reset_restore">
+                <property name="action-name">app.gp_reset_restore</property>
+                <property name="title">Reset/Restore UI</property>
+                <property name="tooltip-text" translatable="yes">Copy detected, translate immediately</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="app_gp_up">
+                <property name="action-name">app.gp_up</property>
+                <property name="title" translatable="yes">Hide the original text</property>
+                <property name="tooltip-text" translatable="yes">Copy detected, translate immediately</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="app_gp_down">
+                <property name="action-name">app.gp_down</property>
+                <property name="title" translatable="yes">Hide the translated text</property>
+                <property name="tooltip-text" translatable="yes">Copy detected, translate immediately</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkShortcutsGroup" id="general">
+            <property name="baseline-child">0</property>
             <property name="title" translatable="yes" context="shortcut window">General</property>
             <child>
-              <object class="GtkShortcutsShortcut">
+              <object class="GtkShortcutsShortcut" id="app_translate">
                 <property name="action-name">app.translate</property>
                 <property name="title" translatable="yes">Translate</property>
               </object>
             </child>
             <child>
-              <object class="GtkShortcutsShortcut">
+              <object class="GtkShortcutsShortcut" id="app_copy2translate">
                 <property name="action-name">app.copy2translate</property>
                 <property name="title" translatable="yes">Copy to translate</property>
                 <property name="tooltip-text" translatable="yes">Copy detected, translate immediately</property>
               </object>
             </child>
             <child>
-              <object class="GtkShortcutsShortcut">
+              <object class="GtkShortcutsShortcut" id="app_splice_text">
                 <property name="action-name">app.splice_text</property>
                 <property name="title" translatable="yes">Splice Text</property>
                 <property name="tooltip-text" translatable="yes">Splice the next copied text with the previous text</property>
               </object>
             </child>
             <child>
-              <object class="GtkShortcutsShortcut">
+              <object class="GtkShortcutsShortcut" id="app_del_wrapping">
                 <property name="action-name">app.del_wrapping</property>
                 <property name="title" translatable="yes">Remove line breaks</property>
                 <property name="tooltip-text" translatable="yes">Splice the next copied text with the previous text</property>
               </object>
             </child>
             <child>
-              <object class="GtkShortcutsShortcut">
+              <object class="GtkShortcutsShortcut" id="app_quit">
                 <property name="action-name">app.quit</property>
                 <property name="title" translatable="yes" context="shortcut window">Quit</property>
               </object>
             </child>
             <child>
-              <object class="GtkShortcutsShortcut">
+              <object class="GtkShortcutsShortcut" id="win_show-help-overlay">
                 <property name="action-name">win.show-help-overlay</property>
                 <property name="title" translatable="yes" context="shortcut window">Show Shortcuts</property>
               </object>
