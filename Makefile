@@ -92,7 +92,7 @@ test-rpm: clear
 	mv ./RPMS/x86_64/*.rpm ${DISK}
 
 
-release: test-deb
+release: test-deb test-rpm test-flatpak
 	cd ${BUILD_PKG}/aur && \
 	makepkg -sf && \
 	mv *.pkg.tar.zst ${DISK}
