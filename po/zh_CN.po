@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-07-04 14:50+0800\n"
+"POT-Creation-Date: 2024-08-25 17:52+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/cool.ldr.lfy.in.in.desktop:3 data/cool.ldr.lfy.in.appdata.xml:4
-#: lfy/main.py:33 lfy/main.py:88 data/resources/translate.ui:112
+#: lfy/main.py:33 lfy/main.py:99 data/resources/translate.ui:129
 msgid "lfy"
 msgstr "兰译"
 
-#: data/cool.ldr.lfy.in.metainfo.xml:6 data/cool.ldr.lfy.in.appdata.xml:5
+#: data/cool.ldr.lfy.in.metainfo.xml:6
 msgid "Translation software for gnome"
 msgstr "为gnome设计的翻译软件"
 
@@ -99,6 +99,11 @@ msgstr "VPN地址"
 msgid "Which services are available in compare model"
 msgstr "在比较模式下哪些服务被选中"
 
+#: data/cool.ldr.lfy.in.appdata.xml:5
+#, fuzzy
+msgid "Translation software for read paper"
+msgstr "为gnome设计的翻译软件"
+
 #: data/cool.ldr.lfy.in.appdata.xml:15
 #, fuzzy
 msgid "Translation homepage"
@@ -124,73 +129,88 @@ msgid "About"
 msgstr "_关于 兰译"
 
 #: data/cool.ldr.lfy.in.appdata.xml:41
+#, fuzzy
+msgid "Add aliyun/huoshan Translate for free"
+msgstr "添加阿里云/火山翻译（需密钥、但免费）"
+
+#: data/cool.ldr.lfy.in.appdata.xml:42
+msgid "Support notification after translation"
+msgstr "支持通知翻译内容"
+
+#: data/cool.ldr.lfy.in.appdata.xml:43
+msgid "Supports comparing multiple translations at the same time"
+msgstr "支持同时比较多个翻译"
+
+#: data/cool.ldr.lfy.in.appdata.xml:50
 msgid "Add Bing Translate for free"
 msgstr "添加必应翻译（无需密钥）"
 
-#: data/cool.ldr.lfy.in.appdata.xml:48
+#: data/cool.ldr.lfy.in.appdata.xml:57
 #, fuzzy
 msgid "Fix Google Translate"
 msgstr "翻译"
 
-#: data/cool.ldr.lfy.in.appdata.xml:49
+#: data/cool.ldr.lfy.in.appdata.xml:58
 msgid "Improve translation performance"
 msgstr "提高翻译性能"
 
-#: data/cool.ldr.lfy.in.appdata.xml:50
+#: data/cool.ldr.lfy.in.appdata.xml:59
 msgid "Add Italian language and support Italian translation"
 msgstr "添加意大利语言，支持意大利语翻译"
 
-#: data/cool.ldr.lfy.in.appdata.xml:51
+#: data/cool.ldr.lfy.in.appdata.xml:60
 msgid ""
 "Optimize the structure of translation services and make it more convenient "
 "to create third-party translation services"
 msgstr "优化翻译服务结构，打造第三方翻译服务更便捷"
 
-#: data/cool.ldr.lfy.in.appdata.xml:58
+#: data/cool.ldr.lfy.in.appdata.xml:67
 msgid "add shortcut"
 msgstr "添加快捷键"
 
-#: data/cool.ldr.lfy.in.appdata.xml:59
+#: data/cool.ldr.lfy.in.appdata.xml:68
 msgid "Automatically check for updates"
 msgstr "软件打开时，自动检查更新"
 
-#: data/cool.ldr.lfy.in.appdata.xml:65
+#: data/cool.ldr.lfy.in.appdata.xml:74
 msgid "Basic functions completed"
 msgstr "基础功能完成"
 
-#: data/cool.ldr.lfy.in.appdata.xml:70
+#: data/cool.ldr.lfy.in.appdata.xml:79
 msgid "yuh"
 msgstr "余航"
 
-#: lfy/main.py:94
+#: lfy/main.py:105
 msgid "translator_credits"
 msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 
-#: lfy/main.py:95
+#: lfy/main.py:106
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
 
-#: lfy/main.py:120 data/resources/help-overlay.ui:25
+#: lfy/main.py:131 data/resources/help-overlay.ui:20
+#: data/resources/help-overlay.ui:27 data/resources/help-overlay.ui:34
+#: data/resources/help-overlay.ui:53
 msgid "Copy detected, translate immediately"
 msgstr "检测到复制，立刻翻译"
 
-#: lfy/main.py:123
+#: lfy/main.py:134
 msgid "Copy detected, not automatically translated"
 msgstr "检测到复制，不自动翻译"
 
-#: lfy/main.py:147
+#: lfy/main.py:158
 msgid "Next translation not remove line breaks"
 msgstr "下次翻译不移除换行"
 
-#: lfy/main.py:148
+#: lfy/main.py:159
 msgid "Next translation remove line breaks"
 msgstr "下次翻译移除换行"
 
-#: lfy/main.py:158
+#: lfy/main.py:169
 msgid "Next translation without splicing text"
 msgstr "下次翻译不拼接文本"
 
-#: lfy/main.py:159
+#: lfy/main.py:170
 msgid "Next translation splicing text"
 msgstr "下次翻译拼接文本"
 
@@ -202,22 +222,22 @@ msgstr "对比"
 msgid "It takes effect when you restart lfy"
 msgstr "重新打开lfy时生效"
 
-#: lfy/translate.py:187 lfy/translate.py:220 lfy/api/server/baidu.py:42
+#: lfy/translate.py:217 lfy/translate.py:250 lfy/api/server/baidu.py:42
 #: lfy/api/server/baidu.py:203 lfy/api/server/tencent.py:149
 #: lfy/api/server/aliyun.py:98 lfy/api/server/com.py:28
 #: lfy/api/server/huoshan.py:136
 msgid "something error:"
 msgstr "一些错误发生："
 
-#: lfy/translate.py:203
+#: lfy/translate.py:233
 msgid "OCRing.."
 msgstr "OCR识别中.."
 
-#: lfy/translate.py:205
+#: lfy/translate.py:235
 msgid "Translating.."
 msgstr "翻译中……"
 
-#: lfy/translate.py:217
+#: lfy/translate.py:247
 msgid "Translation completed"
 msgstr "翻译完成"
 
@@ -318,38 +338,46 @@ msgstr "请输入 app_id 和 secret_key，类似："
 msgid "huoshan"
 msgstr "火山"
 
-#: data/resources/translate.ui:60
+#: data/resources/translate.ui:71
 msgid "Remove symbols such as line breaks"
 msgstr "移除换行符"
 
-#: data/resources/translate.ui:66 data/resources/help-overlay.ui:32
-#: data/resources/help-overlay.ui:39
+#: data/resources/translate.ui:78 data/resources/help-overlay.ui:60
+#: data/resources/help-overlay.ui:67
 msgid "Splice the next copied text with the previous text"
 msgstr "将下一个复制的文本与上一个文本拼接"
 
-#: data/resources/translate.ui:72
+#: data/resources/translate.ui:85
 msgid "translate"
 msgstr "翻译"
 
-#: data/resources/translate.ui:99
+#: data/resources/translate.ui:116
 msgid "Menu"
 msgstr "菜单"
 
-#: data/resources/translate.ui:123 data/resources/help-overlay.ui:24
+#: data/resources/translate.ui:140 data/resources/help-overlay.ui:52
 msgid "Copy to translate"
 msgstr "复制即翻译"
 
-#: data/resources/translate.ui:129
+#: data/resources/translate.ui:146
 msgid "_Preferences"
 msgstr "_设置"
 
-#: data/resources/translate.ui:133
+#: data/resources/translate.ui:150
 msgid "_Keyboard Shortcuts"
 msgstr "_快捷键"
 
-#: data/resources/translate.ui:137
+#: data/resources/translate.ui:154
 msgid "_About lfy"
 msgstr "_关于 兰译"
+
+#: data/resources/translate.ui:160
+msgid "Reset/Restore UI"
+msgstr "重置/恢复UI"
+
+#: data/resources/translate.ui:164 data/resources/help-overlay.ui:26
+msgid "Hide the original text"
+msgstr "隐藏源文本"
 
 #: data/resources/server-preferences.ui:13
 msgid "Translate Server"
@@ -400,29 +428,33 @@ msgstr "软件打开时，自动检查更新"
 msgid "Notify translation results"
 msgstr "通知翻译结果"
 
-#: data/resources/help-overlay.ui:14
+#: data/resources/help-overlay.ui:33
+msgid "Hide the translated text"
+msgstr "隐藏翻译文本"
+
+#: data/resources/help-overlay.ui:42
 msgctxt "shortcut window"
 msgid "General"
 msgstr "通用"
 
-#: data/resources/help-overlay.ui:18
+#: data/resources/help-overlay.ui:46
 msgid "Translate"
 msgstr "翻译"
 
-#: data/resources/help-overlay.ui:31
+#: data/resources/help-overlay.ui:59
 msgid "Splice Text"
 msgstr "拼接文本"
 
-#: data/resources/help-overlay.ui:38
+#: data/resources/help-overlay.ui:66
 msgid "Remove line breaks"
 msgstr "移除换行符"
 
-#: data/resources/help-overlay.ui:45
+#: data/resources/help-overlay.ui:73
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "退出"
 
-#: data/resources/help-overlay.ui:51
+#: data/resources/help-overlay.ui:79
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "显示快捷键"

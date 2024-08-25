@@ -54,6 +54,19 @@ class Settings(Gio.Settings):
         self.set_int('lang-selected-n', n)
 
     @property
+    def translate_paned_position(self):
+        """翻译页面分割位置
+
+        Returns:
+            int: 如 0
+        """
+        return self.get_int('translate-paned-position')
+
+    @translate_paned_position.setter
+    def translate_paned_position(self, n):
+        self.set_int('translate-paned-position', n)
+
+    @property
     def server_sk_baidu(self):
         """选择翻译的服务密钥，只是一个字符串，自己解析和保存用 | 分割
 
@@ -180,7 +193,6 @@ class Settings(Gio.Settings):
             _type_: _description_
         """
         return self.get_boolean('auto-check-update')
-
 
     @property
     def notify_translation_results(self):

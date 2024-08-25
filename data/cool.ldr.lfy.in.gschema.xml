@@ -30,6 +30,10 @@
 			<default>0</default>
 			<description>The currently selected translation language</description>
 		</key>
+		<key type="i" name="translate-paned-position">
+			<default>-1</default>
+			<description>Split position of translation page</description>
+		</key>
 		<key type="s" name="server-sk-baidu">
 			<default>"app_id | secret_key"</default>
 			<description>Baidu app_id and secret_key, used in the middle | split</description>
