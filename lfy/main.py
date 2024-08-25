@@ -50,6 +50,17 @@ class LfyApplication(Adw.Application):
         self.create_action('translate',
                            lambda *_: self.set_translate_action(),
                            ['<primary>t'])
+        self.create_action('gp_reset_restore',
+                           lambda *_: self.gp_reset_action(),
+                           ['<primary>r'])
+
+        self.create_action('gp_up',
+                           lambda *_: self.gp_up_action(),
+                           ['<primary>u'])
+
+        self.create_action('gp_down',
+                           lambda *_: self.gp_down_action(),
+                           ['<primary>d'])
         self.last_clip = 0
 
         self.cb = Gdk.Display().get_default().get_clipboard()
@@ -166,6 +177,33 @@ class LfyApplication(Adw.Application):
         """
         # pylint: disable=E1101
         self.props.active_window.update("reload", True)
+
+    def gp_reset_action(self):
+        """快捷键翻译
+
+        Args:
+            f (_type_): _description_
+        """
+        # pylint: disable=E1101
+        self.props.active_window.reset_paned_position()
+
+    def gp_up_action(self):
+        """快捷键翻译
+
+        Args:
+            f (_type_): _description_
+        """
+        # pylint: disable=E1101
+        self.props.active_window.up_paned_position()
+
+    def gp_down_action(self):
+        """快捷键翻译
+
+        Args:
+            f (_type_): _description_
+        """
+        # pylint: disable=E1101
+        self.props.active_window.down_paned_position()
 
     def copy(self, cb):
         """翻译
