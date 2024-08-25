@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- Created with Cambalache 0.16.0 -->
+<!-- Created with Cambalache 0.90.4 -->
 <interface>
   <!-- interface-name lt.ui -->
   <requires lib="gio" version="2.0"/>
@@ -11,65 +11,71 @@
         <child>
           <object class="AdwToolbarView">
             <property name="content">
-              <object class="GtkBox">
-                <property name="margin-bottom">8</property>
-                <property name="margin-end">8</property>
-                <property name="margin-start">8</property>
+              <object class="GtkPaned" id="gp_translate">
+                <property name="margin-bottom">5</property>
+                <property name="margin-end">5</property>
+                <property name="margin-start">5</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">5</property>
-                <child>
-                  <object class="GtkScrolledWindow">
-                    <property name="vexpand">True</property>
-                    <child>
-                      <object class="GtkTextView" id="tv_from">
-                        <property name="wrap-mode">char</property>
-                        <signal name="copy-clipboard" handler="_set_tv_copy"/>
-                        <signal name="cut-clipboard" handler="_set_tv_copy"/>
-                      </object>
-                    </child>
-                  </object>
-                </child>
+                <property name="vexpand">True</property>
                 <child>
                   <object class="GtkBox">
-                    <property name="spacing">8</property>
+                    <property name="orientation">vertical</property>
+                    <property name="vexpand">True</property>
                     <child>
-                      <object class="GtkDropDown" id="dd_server">
-                        <property name="enable-search">True</property>
-                        <signal name="notify::selected" handler="_on_server_changed"/>
+                      <object class="GtkScrolledWindow">
+                        <property name="vexpand">True</property>
+                        <child>
+                          <object class="GtkTextView" id="tv_from">
+                            <property name="wrap-mode">char</property>
+                            <signal name="copy-clipboard" handler="_set_tv_copy"/>
+                            <signal name="cut-clipboard" handler="_set_tv_copy"/>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkDropDown" id="dd_lang">
-                        <property name="enable-search">True</property>
-                        <signal name="notify::selected" handler="_on_lang_changed"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSeparator">
-                        <property name="hexpand">True</property>
-                        <property name="opacity">0.0</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSpinner" id="sp_translate"/>
-                    </child>
-                    <child>
-                      <object class="GtkCheckButton" id="cbtn_del_wrapping">
-                        <property name="action-name">app.del_wrapping</property>
-                        <property name="active">True</property>
-                        <property name="tooltip-text" translatable="yes">Remove symbols such as line breaks</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkCheckButton" id="cbtn_add_old">
-                        <property name="action-name">app.splice_text</property>
-                        <property name="tooltip-text" translatable="yes">Splice the next copied text with the previous text</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="btn_translate">
-                        <property name="action-name">app.translate</property>
-                        <property name="label" translatable="yes">translate</property>
+                      <object class="GtkBox">
+                        <property name="spacing">8</property>
+                        <child>
+                          <object class="GtkDropDown" id="dd_server">
+                            <property name="enable-search">True</property>
+                            <signal name="notify::selected" handler="_on_server_changed"/>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkDropDown" id="dd_lang">
+                            <property name="enable-search">True</property>
+                            <signal name="notify::selected" handler="_on_lang_changed"/>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparator">
+                            <property name="hexpand">True</property>
+                            <property name="opacity">0.0</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSpinner" id="sp_translate"/>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="cbtn_del_wrapping">
+                            <property name="action-name">app.del_wrapping</property>
+                            <property name="active">True</property>
+                            <property name="tooltip-text" translatable="yes">Remove symbols such as line breaks</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="cbtn_add_old">
+                            <property name="action-name">app.splice_text</property>
+                            <property name="tooltip-text" translatable="yes">Splice the next copied text with the previous text</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="btn_translate">
+                            <property name="action-name">app.translate</property>
+                            <property name="label" translatable="yes">translate</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
@@ -121,6 +127,10 @@
       <item>
         <attribute name="action">app.copy2translate</attribute>
         <attribute name="label" translatable="yes">Copy to translate</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.reset_gp</attribute>
+        <attribute name="label" translatable="yes">Reset UI</attribute>
       </item>
     </section>
     <section>
