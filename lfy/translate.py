@@ -62,9 +62,8 @@ class TranslateWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.paned_position = -1
-
         self.setting = Settings.get()
+
         # 可能包含上次的追加内容
         self.last_text = ""
         # 这次复制的
@@ -91,31 +90,39 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         self.connect('unrealize', self.save_settings)
 
+        self.paned_position = self.setting.translate_paned_position
+        if self.paned_position > 0:
+            self.gp_translate.set_position(self.paned_position)
+
+    def set_paned_position(self, p):
+        """设置或恢复，原文字和翻译的比例
+
+        Args:
+            p (_type_): 设置的位置
+        """
+        if self.paned_position < 0:
+            self.paned_position = self.gp_translate.get_position()
+        else:
+            p = self.paned_position
+            # 标记设置过了
+            self.paned_position = -1
+        self.gp_translate.set_position(p)
 
     def reset_paned_position(self):
         """重置原文字和翻译的比例
         """
-        height = self.get_allocated_height()
-        h_reset = height / 5 * 2
-        h_now = self.gp_translate.get_position()
-        if h_now != h_reset:
-            self.paned_position = h_now
-            self.gp_translate.set_position(h_reset)
-        else:
-            self.gp_translate.set_position(self.paned_position)
+        self.set_paned_position(self.get_allocated_height() / 5 * 2)
 
     def up_paned_position(self):
         """只看翻译
         """
-        self.gp_translate.set_position(0)
+        self.set_paned_position(0)
 
     def down_paned_position(self):
         """只看原文字
         """
         height = self.get_allocated_height()
-        self.gp_translate.set_position(height)
-
-
+        self.set_paned_position(height)
 
     def save_settings(self, _a):
         """_summary_
@@ -124,13 +131,15 @@ class TranslateWindow(Adw.ApplicationWindow):
             _a (TranslateWindow): _description_
         """
         if not self.is_maximized():
-            Settings.get().window_size = self.get_default_size()
+            self.setting.window_size = self.get_default_size()
 
         i = self.dd_server.get_selected()
         j = self.dd_lang.get_selected()
         self.setting.server_selected_key = get_server(i).key
         n = get_lang(i, j).n
         self.setting.lang_selected_n = n
+
+        self.setting.translate_paned_position = self.gp_translate.get_position()
 
     @Gtk.Template.Callback()
     def _on_server_changed(self, drop_down, _a):
@@ -244,7 +253,8 @@ class TranslateWindow(Adw.ApplicationWindow):
                     if Settings.get().notify_translation_results:
                         if len(s) > 250:
                             s = s[:250]
-                        nt_title = f"{self.tran_server.name} " + _("Translation completed")
+                        nt_title = f"{self.tran_server.name} " + \
+                            _("Translation completed")
                         Notify.Notification.new(nt_title, s).show()
             except TypeError as e:
                 error_msg = _("something error:")
