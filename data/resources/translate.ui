@@ -129,18 +129,18 @@
     <property name="title" translatable="yes">lfy</property>
   </template>
   <menu id="primary_menu">
-    <section>
+    <section id="st_theme">
       <item>
         <attribute name="custom">theme</attribute>
       </item>
     </section>
-    <section>
+    <section id="st_translate_now">
       <item>
         <attribute name="action">app.copy2translate</attribute>
         <attribute name="label" translatable="yes">Copy to translate</attribute>
       </item>
     </section>
-    <section>
+    <section id="st_pref">
       <item>
         <attribute name="action">app.preferences</attribute>
         <attribute name="label" translatable="yes">_Preferences</attribute>
@@ -154,7 +154,7 @@
         <attribute name="label" translatable="yes">_About lfy</attribute>
       </item>
     </section>
-    <section>
+    <section id="st_gp">
       <item>
         <attribute name="action">app.gp_reset_restore</attribute>
         <attribute name="label" translatable="yes">Reset/Restore UI</attribute>
@@ -165,7 +165,7 @@
       </item>
       <item>
         <attribute name="action">app.gp_down</attribute>
-        <attribute name="label">Hide the translated text</attribute>
+        <attribute name="label" translatable="yes">Hide the translated text</attribute>
       </item>
     </section>
   </menu>
