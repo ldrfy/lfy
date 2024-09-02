@@ -180,6 +180,9 @@ class TranslateWindow(Adw.ApplicationWindow):
         """
         if len(text) == 0:
             return
+        # 导出或者导入的配置包含密钥，不翻译
+        if "\"server-sk-" in text:
+            return
 
         buffer_from = self.tv_from.get_buffer()
         if not reload:
