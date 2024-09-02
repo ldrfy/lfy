@@ -2,11 +2,12 @@
 
 from gettext import gettext as _
 
-from gi.repository import Adw, Gio, Gtk
+from gi.repository import Adw, Gdk, Gio, Gtk
 
 from lfy.api import get_server_names_api_key, get_servers_api_key
 from lfy.api.constant import SERVERS
 from lfy.api.server import Server
+from lfy.api.utils.bak import backup_gsettings, restore_gsettings
 from lfy.settings import Settings
 from lfy.widgets.server_preferences import ServerPreferences
 
@@ -45,6 +46,7 @@ class PreferenceWindow(Adw.PreferencesWindow):
         sg.bind('notify-translation-results', self.notify_translation_results,
                 'active', Gio.SettingsBindFlags.DEFAULT)
         self._init_pop_compare()
+        self.cb = Gdk.Display.get_default().get_clipboard()
 
     def _init_pop_compare(self):
         """初始化compare弹出菜单
@@ -68,6 +70,26 @@ class PreferenceWindow(Adw.PreferencesWindow):
             self.glb_compare.append(Gtk.ListBoxRow(child=check_button))
 
         self.gl_compare.set_label(", ".join(names))
+
+    @Gtk.Template.Callback()
+    def _import_config(self, _b):
+
+        def on_active_copy(cb2, res):
+            s = restore_gsettings(cb2.read_text_finish(res))
+            if len(s) == 0:
+                s = _("It takes effect when you restart lfy")
+            self.get_root().add_toast(Adw.Toast.new(s))
+
+        if self.cb.get_formats().contain_mime_type("text/plain"):
+            self.cb.read_text_async(None, on_active_copy)
+
+    @Gtk.Template.Callback()
+    def _export_config(self, _b):
+        s = backup_gsettings()
+        print(f"\n\n{s}\n\n")
+        self.cb.set(s)
+        notice_s = _("Configuration data has been exported to the clipboard")
+        self.get_root().add_toast(Adw.Toast.new(notice_s))
 
     @Gtk.Template.Callback()
     def _on_popover_closed(self, _popover):

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-08-25 17:52+0800\n"
+"POT-Creation-Date: 2024-09-02 20:53+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -41,7 +41,7 @@ msgstr "窗口大小"
 msgid "Automatically check the new version of the software upon startup"
 msgstr "软件打开时，自动检查更新"
 
-#: data/cool.ldr.lfy.in.gschema.xml:14 data/resources/preference.ui:84
+#: data/cool.ldr.lfy.in.gschema.xml:14 data/resources/preference.ui:81
 msgid ""
 "After the translation is completed, a system notification is automatically "
 "sent"
@@ -60,42 +60,47 @@ msgid "The currently selected translation language"
 msgstr "当前选择的翻译语言"
 
 #: data/cool.ldr.lfy.in.gschema.xml:35
+#, fuzzy
+msgid "Split position of translation page"
+msgstr "支持通知翻译内容"
+
+#: data/cool.ldr.lfy.in.gschema.xml:39
 msgid "Baidu app_id and secret_key, used in the middle | split"
 msgstr "百度app_id和secret_key，中间使用 | 分割"
 
-#: data/cool.ldr.lfy.in.gschema.xml:39
+#: data/cool.ldr.lfy.in.gschema.xml:43
 #, fuzzy
 msgid "Baidu API Key and Secret Key for ocr, used in the middle | split"
 msgstr "百度app_id和secret_key，中间使用 | 分割"
 
-#: data/cool.ldr.lfy.in.gschema.xml:43
+#: data/cool.ldr.lfy.in.gschema.xml:47
 msgid "Baidu OCR access_token"
 msgstr "百度OCR access_token"
 
-#: data/cool.ldr.lfy.in.gschema.xml:47
+#: data/cool.ldr.lfy.in.gschema.xml:51
 msgid "Baidu OCR access_token expires date"
 msgstr "百度OCR access_token 过期时间"
 
-#: data/cool.ldr.lfy.in.gschema.xml:51
+#: data/cool.ldr.lfy.in.gschema.xml:55
 msgid "aliyun AccessKey ID and AccessKey Secret, used in the middle | split"
 msgstr "阿里云 AccessKey ID 和 AccessKey Secret，中间使用 | 分割"
 
-#: data/cool.ldr.lfy.in.gschema.xml:55
+#: data/cool.ldr.lfy.in.gschema.xml:59
 #, fuzzy
 msgid "huoshan Access Key ID and Secret Access Key, used in the middle | split"
 msgstr "火山 AccessKey Key ID 和 Secret Access Key，中间使用 | 分割"
 
-#: data/cool.ldr.lfy.in.gschema.xml:59
+#: data/cool.ldr.lfy.in.gschema.xml:63
 #, fuzzy
 msgid "Tencent secret_id and secret_key, used in the middle | split"
 msgstr "请输入 app_id 和 secret_key，类似："
 
-#: data/cool.ldr.lfy.in.gschema.xml:63
+#: data/cool.ldr.lfy.in.gschema.xml:67
 msgid "VPN address and port"
 msgstr "VPN地址"
 
-#: data/cool.ldr.lfy.in.gschema.xml:67 data/resources/preference.ui:118
-#: data/resources/preference.ui:125
+#: data/cool.ldr.lfy.in.gschema.xml:71 data/resources/preference.ui:112
+#: data/resources/preference.ui:119
 msgid "Which services are available in compare model"
 msgstr "在比较模式下哪些服务被选中"
 
@@ -214,32 +219,44 @@ msgstr "下次翻译不拼接文本"
 msgid "Next translation splicing text"
 msgstr "下次翻译拼接文本"
 
-#: lfy/preference.py:54 lfy/api/server/com.py:64
+#: lfy/preference.py:56 lfy/api/server/com.py:64
 msgid "compare"
 msgstr "对比"
 
-#: lfy/preference.py:91 lfy/preference.py:114
+#: lfy/preference.py:80 lfy/preference.py:113 lfy/preference.py:136
 msgid "It takes effect when you restart lfy"
 msgstr "重新打开lfy时生效"
 
-#: lfy/translate.py:217 lfy/translate.py:250 lfy/api/server/baidu.py:42
+#: lfy/preference.py:91
+msgid "Configuration data has been exported to the clipboard"
+msgstr "配置数据已导出到剪贴板"
+
+#: lfy/translate.py:226 lfy/translate.py:260 lfy/api/server/baidu.py:42
 #: lfy/api/server/baidu.py:203 lfy/api/server/tencent.py:149
 #: lfy/api/server/aliyun.py:98 lfy/api/server/com.py:28
 #: lfy/api/server/huoshan.py:136
 msgid "something error:"
 msgstr "一些错误发生："
 
-#: lfy/translate.py:233
+#: lfy/translate.py:242
 msgid "OCRing.."
 msgstr "OCR识别中.."
 
-#: lfy/translate.py:235
+#: lfy/translate.py:244
 msgid "Translating.."
 msgstr "翻译中……"
 
-#: lfy/translate.py:247
+#: lfy/translate.py:257
 msgid "Translation completed"
 msgstr "翻译完成"
+
+#: lfy/api/utils/bak.py:52
+msgid "error with keys: "
+msgstr "如下key错误: "
+
+#: lfy/api/utils/bak.py:61
+msgid "Please copy the configuration data in json format first"
+msgstr "请先复制json格式的配置数据"
 
 #: lfy/api/server/__init__.py:9
 msgid "Automatic"
@@ -379,6 +396,10 @@ msgstr "重置/恢复UI"
 msgid "Hide the original text"
 msgstr "隐藏源文本"
 
+#: data/resources/translate.ui:168 data/resources/help-overlay.ui:33
+msgid "Hide the translated text"
+msgstr "隐藏翻译文本"
+
 #: data/resources/server-preferences.ui:13
 msgid "Translate Server"
 msgstr "翻译服务"
@@ -420,17 +441,33 @@ msgstr "代理地址和端口，比如：http://127.0.0.1:7890"
 msgid "auto check update"
 msgstr "自动检查更新"
 
-#: data/resources/preference.ui:70 data/resources/preference.ui:94
+#: data/resources/preference.ui:69 data/resources/preference.ui:88
 msgid "Automatically check for updates when opening software"
 msgstr "软件打开时，自动检查更新"
 
-#: data/resources/preference.ui:83
+#: data/resources/preference.ui:79
 msgid "Notify translation results"
 msgstr "通知翻译结果"
 
-#: data/resources/help-overlay.ui:33
-msgid "Hide the translated text"
-msgstr "隐藏翻译文本"
+#: data/resources/preference.ui:134
+msgid "Export configuration"
+msgstr "导出配置"
+
+#: data/resources/preference.ui:136
+msgid ""
+"Export the configuration to the clipboard, then you can paste it into any "
+"file and edit it"
+msgstr "将配置导出到剪贴板，然后您可以将其粘贴到任何文件中并编辑"
+
+#: data/resources/preference.ui:143
+msgid "Import configuration"
+msgstr "导入配置"
+
+#: data/resources/preference.ui:145
+msgid ""
+"Read the JSON configuration of the clipboard, then import it, and some of "
+"the configurations will take effect after reopening the software"
+msgstr "读取剪贴板的json配置，然后导入，部分配置重新打开软件以后生效"
 
 #: data/resources/help-overlay.ui:42
 msgctxt "shortcut window"

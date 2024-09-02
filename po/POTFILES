@@ -9,6 +9,7 @@ lfy/translate.py
 
 lfy/api/__init__.py
 lfy/api/utils/__init__.py
+lfy/api/utils/bak.py
 lfy/api/utils/check_update.py
 lfy/api/server/__init__.py
 lfy/api/server/baidu.py

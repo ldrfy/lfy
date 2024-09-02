@@ -58,34 +58,28 @@
                 <child>
                   <object class="GtkLabel">
                     <property name="label" translatable="yes">auto check update</property>
+                    <property name="margin-end">5</property>
                   </object>
-                </child>
-                <child>
-                  <object class="GtkSpinner"/>
                 </child>
                 <child>
                   <object class="GtkSwitch" id="auto_check_update">
                     <property name="active">True</property>
+                    <property name="margin-end">16</property>
                     <property name="state">True</property>
                     <property name="tooltip-text" translatable="yes">Automatically check for updates when opening software</property>
                   </object>
                 </child>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="AdwPreferencesGroup">
-            <child>
-              <object class="GtkBox">
                 <child>
-                  <object class="GtkLabel">
-                    <property name="label" translatable="yes">Notify translation results</property>
-                    <property name="tooltip-text" translatable="yes">After the translation is completed, a system notification is automatically sent</property>
+                  <object class="GtkSpinner">
+                    <property name="hexpand">True</property>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkSpinner"/>
+                  <object class="GtkLabel">
+                    <property name="label" translatable="yes">Notify translation results</property>
+                    <property name="margin-end">5</property>
+                    <property name="tooltip-text" translatable="yes">After the translation is completed, a system notification is automatically sent</property>
+                  </object>
                 </child>
                 <child>
                   <object class="GtkSwitch" id="notify_translation_results">
@@ -123,6 +117,33 @@
                     <property name="label">all</property>
                     <property name="margin-start">12</property>
                     <property name="tooltip-text" translatable="yes">Which services are available in compare model</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <child>
+              <object class="GtkBox">
+                <property name="hexpand">True</property>
+                <child>
+                  <object class="GtkButton" id="gb_export">
+                    <property name="hexpand">True</property>
+                    <property name="label" translatable="yes">Export configuration</property>
+                    <property name="margin-end">5</property>
+                    <property name="tooltip-text" translatable="yes">Export the configuration to the clipboard, then you can paste it into any file and edit it</property>
+                    <signal name="clicked" handler="_export_config"/>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="gb_import">
+                    <property name="hexpand">True</property>
+                    <property name="label" translatable="yes">Import configuration</property>
+                    <property name="margin-start">5</property>
+                    <property name="tooltip-text" translatable="yes">Read the JSON configuration of the clipboard, then import it, and some of the configurations will take effect after reopening the software</property>
+                    <signal name="clicked" handler="_import_config"/>
                   </object>
                 </child>
               </object>
