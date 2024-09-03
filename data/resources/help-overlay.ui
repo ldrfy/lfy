@@ -16,7 +16,7 @@
             <child>
               <object class="GtkShortcutsShortcut" id="app_gp_reset_restore">
                 <property name="action-name">app.gp_reset_restore</property>
-                <property name="title">Reset/Restore UI</property>
+                <property name="title" translatable="yes">Reset/Restore UI</property>
                 <property name="tooltip-text" translatable="yes">Copy detected, translate immediately</property>
               </object>
             </child>

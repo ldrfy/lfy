@@ -23,11 +23,11 @@ class PreferenceWindow(Adw.PreferencesWindow):
 
     acr_server: Adw.ComboRow = Gtk.Template.Child()
     entry_vpn_addr: Adw.EntryRow = Gtk.Template.Child()
-    auto_check_update: Gtk.Switch = Gtk.Template.Child()
-    notify_translation_results: Gtk.Switch = Gtk.Template.Child()
+    auto_check_update: Adw.SwitchRow = Gtk.Template.Child()
+    notify_translation_results: Adw.SwitchRow = Gtk.Template.Child()
 
     gbtn_compare: Gtk.MenuButton = Gtk.Template.Child()
-    gl_compare: Gtk.Label = Gtk.Template.Child()
+    aar_compare: Adw.ActionRow = Gtk.Template.Child()
     gp_compare: Gtk.Popover = Gtk.Template.Child()
     glb_compare: Gtk.ListBox = Gtk.Template.Child()
 
@@ -69,7 +69,7 @@ class PreferenceWindow(Adw.PreferencesWindow):
             self.check_items.append(check_button)
             self.glb_compare.append(Gtk.ListBoxRow(child=check_button))
 
-        self.gl_compare.set_label(", ".join(names))
+        self.aar_compare.set_subtitle(", ".join(names))
 
     @Gtk.Template.Callback()
     def _import_config(self, _b):
@@ -108,7 +108,7 @@ class PreferenceWindow(Adw.PreferencesWindow):
 
         if Settings.get().compare_servers != keys:
             Settings.get().compare_servers = keys
-            self.gl_compare.set_label(", ".join(names))
+            self.aar_compare.set_subtitle(", ".join(names))
             self.get_root().add_toast(
                 Adw.Toast.new(_("It takes effect when you restart lfy")))
 

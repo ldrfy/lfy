@@ -223,7 +223,7 @@ class BaiduServer(Server):
         """
         api_key, secret_key = s2ks(api_key_ocr_s)
         if api_key is None or api_key == "API Key":
-            error_msg = _("please input API Key and  Secret Key like:")
+            error_msg = _("please input API Key and Secret Key like:")
             return False, error_msg + " 121343 | fdsdsdg"
 
         ok, access_token, expires_in_date = \

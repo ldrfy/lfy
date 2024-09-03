@@ -38,28 +38,24 @@ class LfyApplication(Adw.Application):
         self.add_action(action_trans_now)
         self.set_accels_for_action("app.copy2translate", ['<alt>t'])
 
-        self.create_action('preferences', self.on_preferences_action)
-        self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
+        self.create_action('preferences', self.on_preferences_action,
+                           ["<Ctrl>comma"])
+        self.create_action('quit', lambda *_: self.quit(),
+                           ['<primary>q'])
         self.create_action('about', self.on_about_action)
-        self.create_action('del_wrapping',
-                           lambda *_: self.on_del_wrapping_action(),
+
+        self.create_action('del_wrapping', self.on_del_wrapping_action,
                            ['<alt>d'])
-        self.create_action('splice_text',
-                           lambda *_: self.on_splice_text_action(),
+        self.create_action('splice_text', self.on_splice_text_action,
                            ['<alt>c'])
-        self.create_action('translate',
-                           lambda *_: self.set_translate_action(),
+        self.create_action('translate', self.set_translate_action,
                            ['<primary>t'])
-        self.create_action('gp_reset_restore',
-                           lambda *_: self.gp_reset_action(),
+
+        self.create_action('gp_reset_restore', self.gp_reset_action,
                            ['<primary>r'])
-
-        self.create_action('gp_up',
-                           lambda *_: self.gp_up_action(),
+        self.create_action('gp_up', self.gp_up_action,
                            ['<primary>u'])
-
-        self.create_action('gp_down',
-                           lambda *_: self.gp_down_action(),
+        self.create_action('gp_down', self.gp_down_action,
                            ['<primary>d'])
         self.last_clip = 0
 
@@ -150,7 +146,7 @@ class LfyApplication(Adw.Application):
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
 
-    def on_del_wrapping_action(self):
+    def on_del_wrapping_action(self, _widget, _w):
         """删除换行
         """
         # pylint: disable=E1101
@@ -158,7 +154,7 @@ class LfyApplication(Adw.Application):
                                                _("Next translation not remove line breaks"),
                                                _("Next translation remove line breaks"))
 
-    def on_splice_text_action(self):
+    def on_splice_text_action(self, _widget, _w):
         """拼接文本
 
         Args:
@@ -169,7 +165,7 @@ class LfyApplication(Adw.Application):
                                                _("Next translation without splicing text"),
                                                _("Next translation splicing text"))
 
-    def set_translate_action(self):
+    def set_translate_action(self, _widget, _w):
         """快捷键翻译
 
         Args:
@@ -178,7 +174,7 @@ class LfyApplication(Adw.Application):
         # pylint: disable=E1101
         self.props.active_window.update("reload", True)
 
-    def gp_reset_action(self):
+    def gp_reset_action(self, _widget, _w):
         """快捷键翻译
 
         Args:
@@ -187,7 +183,7 @@ class LfyApplication(Adw.Application):
         # pylint: disable=E1101
         self.props.active_window.reset_paned_position()
 
-    def gp_up_action(self):
+    def gp_up_action(self, _widget, _w):
         """快捷键翻译
 
         Args:
@@ -196,7 +192,7 @@ class LfyApplication(Adw.Application):
         # pylint: disable=E1101
         self.props.active_window.up_paned_position()
 
-    def gp_down_action(self):
+    def gp_down_action(self, _widget, _w):
         """快捷键翻译
 
         Args:

@@ -140,20 +140,6 @@
         <attribute name="label" translatable="yes">Copy to translate</attribute>
       </item>
     </section>
-    <section id="st_pref">
-      <item>
-        <attribute name="action">app.preferences</attribute>
-        <attribute name="label" translatable="yes">_Preferences</attribute>
-      </item>
-      <item>
-        <attribute name="action">win.show-help-overlay</attribute>
-        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
-      </item>
-      <item>
-        <attribute name="action">app.about</attribute>
-        <attribute name="label" translatable="yes">_About lfy</attribute>
-      </item>
-    </section>
     <section id="st_gp">
       <item>
         <attribute name="action">app.gp_reset_restore</attribute>
@@ -166,6 +152,20 @@
       <item>
         <attribute name="action">app.gp_down</attribute>
         <attribute name="label" translatable="yes">Hide the translated text</attribute>
+      </item>
+    </section>
+    <section id="st_pref">
+      <item>
+        <attribute name="action">app.preferences</attribute>
+        <attribute name="label" translatable="yes">_Preferences</attribute>
+      </item>
+      <item>
+        <attribute name="action">win.show-help-overlay</attribute>
+        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.about</attribute>
+        <attribute name="label" translatable="yes">_About lfy</attribute>
       </item>
     </section>
   </menu>
