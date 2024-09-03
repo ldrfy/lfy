@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-09-03 11:53+0800\n"
+"POT-Creation-Date: 2024-09-03 12:10+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/cool.ldr.lfy.in.in.desktop:3 data/cool.ldr.lfy.in.appdata.xml:4
-#: lfy/main.py:33 lfy/main.py:95 data/resources/translate.ui:129
+#: lfy/main.py:33 lfy/main.py:95 data/resources/translate.ui:130
 msgid "lfy"
 msgstr "兰译"
 
@@ -342,47 +342,46 @@ msgid "huoshan"
 msgstr "火山"
 
 #: data/resources/translate.ui:71
-msgid "Remove symbols such as line breaks"
-msgstr "移除换行符"
+msgid "Alt + D: Remove symbols such as line breaks"
+msgstr "Alt + D: 移除换行符"
 
-#: data/resources/translate.ui:78 data/resources/help-overlay.ui:60
-#: data/resources/help-overlay.ui:67
-msgid "Splice the next copied text with the previous text"
-msgstr "将下一个复制的文本与上一个文本拼接"
+#: data/resources/translate.ui:78
+msgid "Alt + C: Splice the next copied text with the previous text"
+msgstr "Alt + C: 将下一个复制的文本与上一个文本拼接"
 
 #: data/resources/translate.ui:85
 msgid "translate"
 msgstr "翻译"
 
-#: data/resources/translate.ui:116
+#: data/resources/translate.ui:117
 msgid "Menu"
 msgstr "菜单"
 
-#: data/resources/translate.ui:140 data/resources/help-overlay.ui:52
+#: data/resources/translate.ui:141 data/resources/help-overlay.ui:52
 msgid "Copy to translate"
 msgstr "复制即翻译"
 
-#: data/resources/translate.ui:146 data/resources/help-overlay.ui:19
+#: data/resources/translate.ui:147 data/resources/help-overlay.ui:19
 msgid "Reset/Restore UI"
 msgstr "重置/恢复UI"
 
-#: data/resources/translate.ui:150 data/resources/help-overlay.ui:26
+#: data/resources/translate.ui:151 data/resources/help-overlay.ui:26
 msgid "Hide the original text"
 msgstr "隐藏源文本"
 
-#: data/resources/translate.ui:154 data/resources/help-overlay.ui:33
+#: data/resources/translate.ui:155 data/resources/help-overlay.ui:33
 msgid "Hide the translated text"
 msgstr "隐藏翻译文本"
 
-#: data/resources/translate.ui:160
+#: data/resources/translate.ui:161
 msgid "_Preferences"
 msgstr "_设置"
 
-#: data/resources/translate.ui:164
+#: data/resources/translate.ui:165
 msgid "_Keyboard Shortcuts"
 msgstr "_快捷键"
 
-#: data/resources/translate.ui:168
+#: data/resources/translate.ui:169
 msgid "_About lfy"
 msgstr "_关于 兰译"
 
@@ -475,6 +474,10 @@ msgstr "翻译"
 #: data/resources/help-overlay.ui:59
 msgid "Splice Text"
 msgstr "拼接文本"
+
+#: data/resources/help-overlay.ui:60 data/resources/help-overlay.ui:67
+msgid "Splice the next copied text with the previous text"
+msgstr "将下一个复制的文本与上一个文本拼接"
 
 #: data/resources/help-overlay.ui:66
 msgid "Remove line breaks"
