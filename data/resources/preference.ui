@@ -6,7 +6,6 @@
   <template class="PreferencesWindow" parent="AdwPreferencesWindow">
     <child>
       <object class="AdwPreferencesPage">
-        <property name="valign">start</property>
         <child>
           <object class="AdwPreferencesGroup">
             <child>
@@ -54,40 +53,17 @@
         <child>
           <object class="AdwPreferencesGroup">
             <child>
-              <object class="GtkBox">
-                <child>
-                  <object class="GtkLabel">
-                    <property name="label" translatable="yes">auto check update</property>
-                    <property name="margin-end">5</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkSwitch" id="auto_check_update">
-                    <property name="active">True</property>
-                    <property name="margin-end">16</property>
-                    <property name="state">True</property>
-                    <property name="tooltip-text" translatable="yes">Automatically check for updates when opening software</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkSpinner">
-                    <property name="hexpand">True</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="label" translatable="yes">Notify translation results</property>
-                    <property name="margin-end">5</property>
-                    <property name="tooltip-text" translatable="yes">After the translation is completed, a system notification is automatically sent</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkSwitch" id="notify_translation_results">
-                    <property name="active">True</property>
-                    <property name="state">True</property>
-                    <property name="tooltip-text" translatable="yes">Automatically check for updates when opening software</property>
-                  </object>
-                </child>
+              <object class="AdwSwitchRow" id="auto_check_update">
+                <property name="active">True</property>
+                <property name="subtitle" translatable="yes">Automatically check for updates when opening software</property>
+                <property name="title" translatable="yes">auto check update</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSwitchRow" id="notify_translation_results">
+                <property name="active">True</property>
+                <property name="subtitle" translatable="yes">After the translation is completed, a system notification is automatically sent</property>
+                <property name="title" translatable="yes">Notify translation results</property>
               </object>
             </child>
           </object>
@@ -95,7 +71,9 @@
         <child>
           <object class="AdwPreferencesGroup">
             <child>
-              <object class="GtkBox">
+              <object class="AdwActionRow" id="aar_compare">
+                <property name="subtitle">all</property>
+                <property name="title" translatable="yes">Which services are available in compare model</property>
                 <child>
                   <object class="GtkMenuButton" id="gbtn_compare">
                     <property name="popover">
@@ -110,13 +88,7 @@
                       </object>
                     </property>
                     <property name="tooltip-text" translatable="yes">Which services are available in compare model</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="gl_compare">
-                    <property name="label">all</property>
-                    <property name="margin-start">12</property>
-                    <property name="tooltip-text" translatable="yes">Which services are available in compare model</property>
+                    <property name="valign">center</property>
                   </object>
                 </child>
               </object>
@@ -126,23 +98,24 @@
         <child>
           <object class="AdwPreferencesGroup">
             <child>
-              <object class="GtkBox">
-                <property name="hexpand">True</property>
+              <object class="AdwActionRow">
+                <property name="subtitle" translatable="yes">backup/restore the settings to/from the clipboard, edit or backup it</property>
+                <property name="title" translatable="yes">Software settings backup and restore</property>
                 <child>
                   <object class="GtkButton" id="gb_export">
-                    <property name="hexpand">True</property>
-                    <property name="label" translatable="yes">Export configuration</property>
+                    <property name="label" translatable="yes">backup</property>
                     <property name="margin-end">5</property>
                     <property name="tooltip-text" translatable="yes">Export the configuration to the clipboard, then you can paste it into any file and edit it</property>
+                    <property name="valign">center</property>
                     <signal name="clicked" handler="_export_config"/>
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton" id="gb_import">
-                    <property name="hexpand">True</property>
-                    <property name="label" translatable="yes">Import configuration</property>
+                    <property name="label" translatable="yes">restore</property>
                     <property name="margin-start">5</property>
                     <property name="tooltip-text" translatable="yes">Read the JSON configuration of the clipboard, then import it, and some of the configurations will take effect after reopening the software</property>
+                    <property name="valign">center</property>
                     <signal name="clicked" handler="_import_config"/>
                   </object>
                 </child>

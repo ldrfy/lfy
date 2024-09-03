@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-09-02 20:53+0800\n"
+"POT-Creation-Date: 2024-09-03 11:53+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/cool.ldr.lfy.in.in.desktop:3 data/cool.ldr.lfy.in.appdata.xml:4
-#: lfy/main.py:33 lfy/main.py:99 data/resources/translate.ui:129
+#: lfy/main.py:33 lfy/main.py:95 data/resources/translate.ui:129
 msgid "lfy"
 msgstr "兰译"
 
@@ -37,11 +37,10 @@ msgid "Window size"
 msgstr "窗口大小"
 
 #: data/cool.ldr.lfy.in.gschema.xml:10
-#, fuzzy
 msgid "Automatically check the new version of the software upon startup"
 msgstr "软件打开时，自动检查更新"
 
-#: data/cool.ldr.lfy.in.gschema.xml:14 data/resources/preference.ui:81
+#: data/cool.ldr.lfy.in.gschema.xml:14 data/resources/preference.ui:65
 msgid ""
 "After the translation is completed, a system notification is automatically "
 "sent"
@@ -60,7 +59,6 @@ msgid "The currently selected translation language"
 msgstr "当前选择的翻译语言"
 
 #: data/cool.ldr.lfy.in.gschema.xml:35
-#, fuzzy
 msgid "Split position of translation page"
 msgstr "支持通知翻译内容"
 
@@ -69,7 +67,6 @@ msgid "Baidu app_id and secret_key, used in the middle | split"
 msgstr "百度app_id和secret_key，中间使用 | 分割"
 
 #: data/cool.ldr.lfy.in.gschema.xml:43
-#, fuzzy
 msgid "Baidu API Key and Secret Key for ocr, used in the middle | split"
 msgstr "百度app_id和secret_key，中间使用 | 分割"
 
@@ -86,12 +83,10 @@ msgid "aliyun AccessKey ID and AccessKey Secret, used in the middle | split"
 msgstr "阿里云 AccessKey ID 和 AccessKey Secret，中间使用 | 分割"
 
 #: data/cool.ldr.lfy.in.gschema.xml:59
-#, fuzzy
 msgid "huoshan Access Key ID and Secret Access Key, used in the middle | split"
 msgstr "火山 AccessKey Key ID 和 Secret Access Key，中间使用 | 分割"
 
 #: data/cool.ldr.lfy.in.gschema.xml:63
-#, fuzzy
 msgid "Tencent secret_id and secret_key, used in the middle | split"
 msgstr "请输入 app_id 和 secret_key，类似："
 
@@ -99,42 +94,36 @@ msgstr "请输入 app_id 和 secret_key，类似："
 msgid "VPN address and port"
 msgstr "VPN地址"
 
-#: data/cool.ldr.lfy.in.gschema.xml:71 data/resources/preference.ui:112
-#: data/resources/preference.ui:119
+#: data/cool.ldr.lfy.in.gschema.xml:71 data/resources/preference.ui:76
+#: data/resources/preference.ui:90
 msgid "Which services are available in compare model"
 msgstr "在比较模式下哪些服务被选中"
 
 #: data/cool.ldr.lfy.in.appdata.xml:5
-#, fuzzy
 msgid "Translation software for read paper"
 msgstr "为gnome设计的翻译软件"
 
 #: data/cool.ldr.lfy.in.appdata.xml:15
-#, fuzzy
 msgid "Translation homepage"
 msgstr "为gnome设计的翻译软件"
 
 #: data/cool.ldr.lfy.in.appdata.xml:20
-#, fuzzy
 msgid "Preferences page"
-msgstr "_设置"
+msgstr "设置"
 
 #: data/cool.ldr.lfy.in.appdata.xml:25
 msgid "Set Api Key"
 msgstr "设置密钥"
 
 #: data/cool.ldr.lfy.in.appdata.xml:30
-#, fuzzy
 msgid "Shortcuts"
 msgstr "显示快捷键"
 
 #: data/cool.ldr.lfy.in.appdata.xml:34
-#, fuzzy
 msgid "About"
-msgstr "_关于 兰译"
+msgstr "关于 兰译"
 
 #: data/cool.ldr.lfy.in.appdata.xml:41
-#, fuzzy
 msgid "Add aliyun/huoshan Translate for free"
 msgstr "添加阿里云/火山翻译（需密钥、但免费）"
 
@@ -151,9 +140,8 @@ msgid "Add Bing Translate for free"
 msgstr "添加必应翻译（无需密钥）"
 
 #: data/cool.ldr.lfy.in.appdata.xml:57
-#, fuzzy
 msgid "Fix Google Translate"
-msgstr "翻译"
+msgstr "修复谷歌翻译"
 
 #: data/cool.ldr.lfy.in.appdata.xml:58
 msgid "Improve translation performance"
@@ -185,37 +173,37 @@ msgstr "基础功能完成"
 msgid "yuh"
 msgstr "余航"
 
-#: lfy/main.py:105
+#: lfy/main.py:101
 msgid "translator_credits"
 msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 
-#: lfy/main.py:106
+#: lfy/main.py:102
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
 
-#: lfy/main.py:131 data/resources/help-overlay.ui:20
+#: lfy/main.py:127 data/resources/help-overlay.ui:20
 #: data/resources/help-overlay.ui:27 data/resources/help-overlay.ui:34
 #: data/resources/help-overlay.ui:53
 msgid "Copy detected, translate immediately"
 msgstr "检测到复制，立刻翻译"
 
-#: lfy/main.py:134
+#: lfy/main.py:130
 msgid "Copy detected, not automatically translated"
 msgstr "检测到复制，不自动翻译"
 
-#: lfy/main.py:158
+#: lfy/main.py:154
 msgid "Next translation not remove line breaks"
 msgstr "下次翻译不移除换行"
 
-#: lfy/main.py:159
+#: lfy/main.py:155
 msgid "Next translation remove line breaks"
 msgstr "下次翻译移除换行"
 
-#: lfy/main.py:169
+#: lfy/main.py:165
 msgid "Next translation without splicing text"
 msgstr "下次翻译不拼接文本"
 
-#: lfy/main.py:170
+#: lfy/main.py:166
 msgid "Next translation splicing text"
 msgstr "下次翻译拼接文本"
 
@@ -231,22 +219,22 @@ msgstr "重新打开lfy时生效"
 msgid "Configuration data has been exported to the clipboard"
 msgstr "配置数据已导出到剪贴板"
 
-#: lfy/translate.py:226 lfy/translate.py:260 lfy/api/server/baidu.py:42
+#: lfy/translate.py:229 lfy/translate.py:263 lfy/api/server/baidu.py:42
 #: lfy/api/server/baidu.py:203 lfy/api/server/tencent.py:149
 #: lfy/api/server/aliyun.py:98 lfy/api/server/com.py:28
 #: lfy/api/server/huoshan.py:136
 msgid "something error:"
 msgstr "一些错误发生："
 
-#: lfy/translate.py:242
+#: lfy/translate.py:245
 msgid "OCRing.."
 msgstr "OCR识别中.."
 
-#: lfy/translate.py:244
+#: lfy/translate.py:247
 msgid "Translating.."
 msgstr "翻译中……"
 
-#: lfy/translate.py:257
+#: lfy/translate.py:260
 msgid "Translation completed"
 msgstr "翻译完成"
 
@@ -309,8 +297,7 @@ msgid "please input app_id and secret_key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
 #: lfy/api/server/baidu.py:226
-#, fuzzy
-msgid "please input API Key and  Secret Key like:"
+msgid "please input API Key and Secret Key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
 #: lfy/api/server/google.py:44
@@ -347,9 +334,8 @@ msgid "aliyun"
 msgstr "阿里云"
 
 #: lfy/api/server/aliyun.py:131 lfy/api/server/huoshan.py:177
-#, fuzzy
 msgid "please input {} and {} like:"
-msgstr "请输入 app_id 和 secret_key，类似："
+msgstr "请输入 {} 和 {}，类似："
 
 #: lfy/api/server/huoshan.py:166
 msgid "huoshan"
@@ -376,29 +362,29 @@ msgstr "菜单"
 msgid "Copy to translate"
 msgstr "复制即翻译"
 
-#: data/resources/translate.ui:146
-msgid "_Preferences"
-msgstr "_设置"
-
-#: data/resources/translate.ui:150
-msgid "_Keyboard Shortcuts"
-msgstr "_快捷键"
-
-#: data/resources/translate.ui:154
-msgid "_About lfy"
-msgstr "_关于 兰译"
-
-#: data/resources/translate.ui:160
+#: data/resources/translate.ui:146 data/resources/help-overlay.ui:19
 msgid "Reset/Restore UI"
 msgstr "重置/恢复UI"
 
-#: data/resources/translate.ui:164 data/resources/help-overlay.ui:26
+#: data/resources/translate.ui:150 data/resources/help-overlay.ui:26
 msgid "Hide the original text"
 msgstr "隐藏源文本"
 
-#: data/resources/translate.ui:168 data/resources/help-overlay.ui:33
+#: data/resources/translate.ui:154 data/resources/help-overlay.ui:33
 msgid "Hide the translated text"
 msgstr "隐藏翻译文本"
+
+#: data/resources/translate.ui:160
+msgid "_Preferences"
+msgstr "_设置"
+
+#: data/resources/translate.ui:164
+msgid "_Keyboard Shortcuts"
+msgstr "_快捷键"
+
+#: data/resources/translate.ui:168
+msgid "_About lfy"
+msgstr "_关于 兰译"
 
 #: data/resources/server-preferences.ui:13
 msgid "Translate Server"
@@ -425,45 +411,53 @@ msgstr "输入该服务的OCR识别密钥"
 msgid "how to get API Key"
 msgstr "怎么获取密钥"
 
-#: data/resources/preference.ui:15
+#: data/resources/preference.ui:14
 msgid "setup API Key for translation Server, click on the right to the details"
 msgstr "为翻译服务设置密钥，点右侧查看细节"
 
-#: data/resources/preference.ui:17
+#: data/resources/preference.ui:16
 msgid "API Key"
 msgstr "密钥"
 
-#: data/resources/preference.ui:48
+#: data/resources/preference.ui:47
 msgid "vpn addr and port, like http://127.0.0.1:7890"
 msgstr "代理地址和端口，比如：http://127.0.0.1:7890"
 
-#: data/resources/preference.ui:60
-msgid "auto check update"
-msgstr "自动检查更新"
-
-#: data/resources/preference.ui:69 data/resources/preference.ui:88
+#: data/resources/preference.ui:58
 msgid "Automatically check for updates when opening software"
 msgstr "软件打开时，自动检查更新"
 
-#: data/resources/preference.ui:79
+#: data/resources/preference.ui:59
+msgid "auto check update"
+msgstr "自动检查更新"
+
+#: data/resources/preference.ui:66
 msgid "Notify translation results"
 msgstr "通知翻译结果"
 
-#: data/resources/preference.ui:134
-msgid "Export configuration"
-msgstr "导出配置"
+#: data/resources/preference.ui:102
+msgid "backup/restore the settings to/from the clipboard, edit or backup it"
+msgstr "将设置备份到剪贴板或从剪贴板恢复、编辑或备份"
 
-#: data/resources/preference.ui:136
+#: data/resources/preference.ui:103
+msgid "Software settings backup and restore"
+msgstr "软件设置备份和恢复"
+
+#: data/resources/preference.ui:106
+msgid "backup"
+msgstr "备份"
+
+#: data/resources/preference.ui:108
 msgid ""
 "Export the configuration to the clipboard, then you can paste it into any "
 "file and edit it"
 msgstr "将配置导出到剪贴板，然后您可以将其粘贴到任何文件中并编辑"
 
-#: data/resources/preference.ui:143
-msgid "Import configuration"
-msgstr "导入配置"
+#: data/resources/preference.ui:115
+msgid "restore"
+msgstr "恢复"
 
-#: data/resources/preference.ui:145
+#: data/resources/preference.ui:117
 msgid ""
 "Read the JSON configuration of the clipboard, then import it, and some of "
 "the configurations will take effect after reopening the software"
@@ -495,6 +489,12 @@ msgstr "退出"
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "显示快捷键"
+
+#~ msgid "Export configuration"
+#~ msgstr "导出配置"
+
+#~ msgid "Import configuration"
+#~ msgstr "导入配置"
 
 #, python-brace-format
 #~ msgid "{self.tran_server.name} Translation completed"
