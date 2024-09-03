@@ -68,14 +68,14 @@
                           <object class="GtkCheckButton" id="cbtn_del_wrapping">
                             <property name="action-name">app.del_wrapping</property>
                             <property name="active">True</property>
-                            <property name="tooltip-text" translatable="yes">Remove symbols such as line breaks</property>
+                            <property name="tooltip-text" translatable="yes">Alt + D: Remove symbols such as line breaks</property>
                             <property name="valign">center</property>
                           </object>
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="cbtn_add_old">
                             <property name="action-name">app.splice_text</property>
-                            <property name="tooltip-text" translatable="yes">Splice the next copied text with the previous text</property>
+                            <property name="tooltip-text" translatable="yes">Alt + C: Splice the next copied text with the previous text</property>
                             <property name="valign">center</property>
                           </object>
                         </child>
@@ -83,6 +83,7 @@
                           <object class="GtkButton" id="btn_translate">
                             <property name="action-name">app.translate</property>
                             <property name="label" translatable="yes">translate</property>
+                            <property name="tooltip-text">Ctrl + T</property>
                             <property name="valign">center</property>
                           </object>
                         </child>
