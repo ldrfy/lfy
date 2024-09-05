@@ -190,7 +190,7 @@
 	(2,88,"GtkWidget","tooltip-text","Read the JSON configuration of the clipboard, then import it, and some of the configurations will take effect after reopening the software",1,None,None,None,None,None,None,None,None),
 	(2,88,"GtkWidget","valign","center",None,None,None,None,None,None,None,None,None),
 	(2,89,"AdwActionRow","subtitle","all",None,None,None,None,None,None,None,None,None),
-	(2,89,"AdwPreferencesRow","title","Which services are available in compare model",1,None,None,None,None,None,None,None,None),
+	(2,89,"AdwPreferencesRow","title","Compare model",1,None,None,None,None,None,None,None,None),
 	(2,90,"GtkMenuButton","popover",None,None,None,None,None,91,None,None,None,None),
 	(2,90,"GtkWidget","tooltip-text","Which services are available in compare model",1,None,None,None,None,None,None,None,None),
 	(2,90,"GtkWidget","valign","center",None,None,None,None,None,None,None,None,None),

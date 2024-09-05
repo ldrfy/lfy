@@ -73,7 +73,7 @@
             <child>
               <object class="AdwActionRow" id="aar_compare">
                 <property name="subtitle">all</property>
-                <property name="title" translatable="yes">Which services are available in compare model</property>
+                <property name="title" translatable="yes">Compare model</property>
                 <child>
                   <object class="GtkMenuButton" id="gbtn_compare">
                     <property name="popover">

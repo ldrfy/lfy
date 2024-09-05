@@ -7,6 +7,7 @@ from gettext import gettext as _
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Notify
 
 from lfy import PACKAGE_URL, PACKAGE_URL_BUG
+from lfy.api.utils import is_text
 from lfy.api.utils.check_update import main as check_update
 from lfy.preference import PreferenceWindow
 from lfy.settings import Settings
@@ -66,7 +67,7 @@ class LfyApplication(Adw.Application):
             threading.Thread(target=self.find_update, daemon=True).start()
 
     def do_activate(self, s="", ocr=False):
-        """_summary_
+        """翻译
 
         Args:
             s (str, optional): _description_. Defaults to "".
@@ -225,7 +226,8 @@ class LfyApplication(Adw.Application):
         if span < 1 or len(cf.get_mime_types()) == 0:
             return
 
-        if cf.contain_mime_type("text/plain"):
+        print(cf.get_mime_types())
+        if is_text(cf):
             self.last_clip = time.time()
             cb.read_text_async(None, on_active_copy)
         elif cf.contain_mime_type('image/png'):

@@ -11,6 +11,7 @@ from gi.repository import Adw, GLib, Gtk, Notify
 from lfy.api import (create_server, create_server_ocr, get_lang,
                      get_lang_names, get_server, get_server_names, lang_n2j,
                      server_key2i)
+from lfy.api.constant import NO_TRANSLATED_TXTS
 from lfy.api.server import Server
 from lfy.settings import Settings
 from lfy.widgets.theme_switcher import ThemeSwitcher
@@ -178,13 +179,24 @@ class TranslateWindow(Adw.ApplicationWindow):
             text (_type_): _description_
             reload (bool, optional): _description_. Defaults to False.
         """
+        buffer_from = self.tv_from.get_buffer()
+
         if len(text) == 0:
-            return
-        # 导出或者导入的配置包含密钥，不翻译
-        if "\"server-sk-" in text:
+            buffer_from.set_text(
+                _("This time the content is blank and will not be translated"))
             return
 
-        buffer_from = self.tv_from.get_buffer()
+        # 导出或者导入的配置包含密钥，不翻译
+        s_ntt = _(
+            "This time the content contains private information and is not translated")
+        ss_ntt = []
+        for ntt in NO_TRANSLATED_TXTS:
+            if ntt in text:
+                ss_ntt.append(ntt)
+        if len(ss_ntt) > 0:
+            buffer_from.set_text(f"{s_ntt}:\n{str(ss_ntt)}")
+            return
+
         if not reload:
             if self.last_text_one == text or self.is_tv_copy:
                 self.is_tv_copy = False
