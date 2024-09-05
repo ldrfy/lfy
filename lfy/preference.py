@@ -7,6 +7,7 @@ from gi.repository import Adw, Gdk, Gio, Gtk
 from lfy.api import get_server_names_api_key, get_servers_api_key
 from lfy.api.constant import SERVERS
 from lfy.api.server import Server
+from lfy.api.utils import is_text
 from lfy.api.utils.bak import backup_gsettings, restore_gsettings
 from lfy.settings import Settings
 from lfy.widgets.server_preferences import ServerPreferences
@@ -75,13 +76,22 @@ class PreferenceWindow(Adw.PreferencesWindow):
     def _import_config(self, _b):
 
         def on_active_copy(cb2, res):
-            s = restore_gsettings(cb2.read_text_finish(res))
+            s = cb2.read_text_finish(res)
+            print(s)
+            s = restore_gsettings(s)
             if len(s) == 0:
                 s = _("It takes effect when you restart lfy")
             self.get_root().add_toast(Adw.Toast.new(s))
 
-        if self.cb.get_formats().contain_mime_type("text/plain"):
+        cf = self.cb.get_formats()
+
+        print(cf.get_mime_types())
+
+        if is_text(cf):
             self.cb.read_text_async(None, on_active_copy)
+        else:
+            notice_s = _("The clipboard format is incorrect")
+            self.get_root().add_toast(Adw.Toast.new(notice_s))
 
     @Gtk.Template.Callback()
     def _export_config(self, _b):
