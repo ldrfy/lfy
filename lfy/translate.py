@@ -6,13 +6,14 @@ import time
 import traceback
 from gettext import gettext as _
 
-from gi.repository import Adw, GLib, Gtk, Notify
+from gi.repository import Adw, GLib, Gtk
 
 from lfy.api import (create_server, create_server_ocr, get_lang,
                      get_lang_names, get_server, get_server_names, lang_n2j,
                      server_key2i)
 from lfy.api.constant import NO_TRANSLATED_TXTS
 from lfy.api.server import Server
+from lfy.api.utils.notify import nf_t
 from lfy.settings import Settings
 from lfy.widgets.theme_switcher import ThemeSwitcher
 
@@ -62,6 +63,8 @@ class TranslateWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        self.app = self.get_application()
 
         self.setting = Settings.get()
 
@@ -257,26 +260,24 @@ class TranslateWindow(Adw.ApplicationWindow):
                 self.tv_from.get_buffer().set_text(_("OCRing.."))
             else:
                 self.tv_to.get_buffer().set_text(_("Translating.."))
-        else:
-            # 翻译完成
-            try:
-                if ocr:
-                    self.tv_from.get_buffer().set_text(s)
-                    self.update(s)
-                else:
-                    self.tv_to.get_buffer().set_text(s)
-                    if Settings.get().notify_translation_results:
-                        if len(s) > 250:
-                            s = s[:250]
-                        nt_title = f"{self.tran_server.name} " + \
-                            _("Translation completed")
-                        Notify.Notification.new(nt_title, s).show()
-            except TypeError as e:
-                error_msg = _("something error:")
-                error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
-                em = f"{error_msg}\n\n{error_msg2}"
-                self.tv_to.get_buffer().set_text(em)
-            self.sp_translate.stop()
+            return
+
+        # 翻译完成
+        try:
+            if ocr:
+                self.tv_from.get_buffer().set_text(s)
+                self.update(s)
+                return
+
+            self.tv_to.get_buffer().set_text(s)
+            nf_t(self.app, f"{self.tran_server.name} " +
+                 _("Translation completed"), s)
+        except TypeError as e:
+            error_msg = _("something error:")
+            error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
+            em = f"{error_msg}\n\n{error_msg2}"
+            self.tv_to.get_buffer().set_text(em)
+        self.sp_translate.stop()
 
     def notice_action(self, cbtn: Gtk.CheckButton, text_ok, text_no):
         """_summary_

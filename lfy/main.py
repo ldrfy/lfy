@@ -4,7 +4,7 @@ import threading
 import time
 from gettext import gettext as _
 
-from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Notify
+from gi.repository import Adw, Gdk, Gio, GLib, Gtk
 
 from lfy import PACKAGE_URL, PACKAGE_URL_BUG
 from lfy.api.utils import is_text
@@ -31,7 +31,6 @@ class LfyApplication(Adw.Application):
         self._version = version
         self._application_id = app_id
         self.translate_now = GLib.Variant.new_boolean(True)
-        Notify.init(_('lfy'))
 
         action_trans_now = Gio.SimpleAction.new_stateful(
             'copy2translate', None, self.translate_now)
@@ -226,7 +225,6 @@ class LfyApplication(Adw.Application):
         if span < 1 or len(cf.get_mime_types()) == 0:
             return
 
-        print(cf.get_mime_types())
         if is_text(cf):
             self.last_clip = time.time()
             cb.read_text_async(None, on_active_copy)
