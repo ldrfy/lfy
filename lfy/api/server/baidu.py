@@ -44,7 +44,7 @@ def _translate(session, s, api_key_s, lang_to="auto", lang_from="auto"):
         s1 = ""
         for trans_result in result["trans_result"]:
             s1 += f'{trans_result["dst"]}\n'
-        return True, s1
+        return True, s1.strip()
 
     return False, f'{error_msg}\n\n{result["error_code"]}: {result["error_msg"]}'
 
