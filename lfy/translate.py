@@ -185,8 +185,6 @@ class TranslateWindow(Adw.ApplicationWindow):
         buffer_from = self.tv_from.get_buffer()
 
         if len(text) == 0:
-            buffer_from.set_text(
-                _("This time the content is blank and will not be translated"))
             return
 
         # 导出或者导入的配置包含密钥，不翻译

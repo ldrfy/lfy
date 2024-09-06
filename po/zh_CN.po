@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-09-05 15:02+0800\n"
+"POT-Creation-Date: 2024-09-06 19:55+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/cool.ldr.lfy.in.in.desktop:3 data/cool.ldr.lfy.in.appdata.xml:4
-#: lfy/main.py:34 lfy/main.py:96 data/resources/translate.ui:130
+#: lfy/main.py:95 data/resources/translate.ui:130
 msgid "lfy"
 msgstr "兰译"
 
@@ -172,37 +172,37 @@ msgstr "基础功能完成"
 msgid "yuh"
 msgstr "余航"
 
-#: lfy/main.py:102
+#: lfy/main.py:101
 msgid "translator_credits"
 msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 
-#: lfy/main.py:103
+#: lfy/main.py:102
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
 
-#: lfy/main.py:128 data/resources/help-overlay.ui:20
+#: lfy/main.py:127 data/resources/help-overlay.ui:20
 #: data/resources/help-overlay.ui:27 data/resources/help-overlay.ui:34
 #: data/resources/help-overlay.ui:53
 msgid "Copy detected, translate immediately"
 msgstr "检测到复制，立刻翻译"
 
-#: lfy/main.py:131
+#: lfy/main.py:130
 msgid "Copy detected, not automatically translated"
 msgstr "检测到复制，不自动翻译"
 
-#: lfy/main.py:155
+#: lfy/main.py:154
 msgid "Next translation not remove line breaks"
 msgstr "下次翻译不移除换行"
 
-#: lfy/main.py:156
+#: lfy/main.py:155
 msgid "Next translation remove line breaks"
 msgstr "下次翻译移除换行"
 
-#: lfy/main.py:166
+#: lfy/main.py:165
 msgid "Next translation without splicing text"
 msgstr "下次翻译不拼接文本"
 
-#: lfy/main.py:167
+#: lfy/main.py:166
 msgid "Next translation splicing text"
 msgstr "下次翻译拼接文本"
 
@@ -210,39 +210,35 @@ msgstr "下次翻译拼接文本"
 msgid "compare"
 msgstr "对比"
 
-#: lfy/preference.py:83 lfy/preference.py:123 lfy/preference.py:146
+#: lfy/preference.py:83 lfy/preference.py:121 lfy/preference.py:144
 msgid "It takes effect when you restart lfy"
 msgstr "重新打开lfy时生效"
 
-#: lfy/preference.py:93
+#: lfy/preference.py:91
 msgid "The clipboard format is incorrect"
 msgstr "剪贴板文本格式不正确"
 
-#: lfy/preference.py:101
+#: lfy/preference.py:99
 msgid "Configuration data has been exported to the clipboard"
 msgstr "配置数据已导出到剪贴板"
 
-#: lfy/translate.py:186
-msgid "This time the content is blank and will not be translated"
-msgstr "本次内容为空，不翻译"
-
-#: lfy/translate.py:191
+#: lfy/translate.py:192
 msgid ""
 "This time the content contains private information and is not translated"
 msgstr "本次内容包含隐私信息，不翻译"
 
-#: lfy/translate.py:241 lfy/translate.py:275 lfy/api/server/baidu.py:42
+#: lfy/translate.py:242 lfy/translate.py:274 lfy/api/server/baidu.py:42
 #: lfy/api/server/baidu.py:203 lfy/api/server/tencent.py:149
 #: lfy/api/server/aliyun.py:98 lfy/api/server/com.py:28
 #: lfy/api/server/huoshan.py:136
 msgid "something error:"
 msgstr "一些错误发生："
 
-#: lfy/translate.py:257
+#: lfy/translate.py:258
 msgid "OCRing.."
 msgstr "OCR识别中.."
 
-#: lfy/translate.py:259
+#: lfy/translate.py:260
 msgid "Translating.."
 msgstr "翻译中……"
 
@@ -508,6 +504,9 @@ msgstr "退出"
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "显示快捷键"
+
+#~ msgid "This time the content is blank and will not be translated"
+#~ msgstr "本次内容为空，不翻译"
 
 #~ msgid "Export configuration"
 #~ msgstr "导出配置"
