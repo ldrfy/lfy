@@ -52,14 +52,22 @@ class AllServer(Server):
         # 会导致循环
 
         # 只对比设置中修改的
-        all_servers = [bing.BingServer(), google.GoogleServer(),
-                       aliyun.AliYunServer(), baidu.BaiduServer(),
-                       tencent.TencentServer(), huoshan.HuoShanServer()]
+        all_servers = {
+            server.key: server for server in [
+                bing.BingServer(), google.GoogleServer(),
+                aliyun.AliYunServer(), baidu.BaiduServer(),
+                tencent.TencentServer(), huoshan.HuoShanServer()
+            ]
+        }
         keys = Settings.get().compare_servers
-        self.servers: list[Server] = []
-        for all_server in all_servers:
-            if all_server.key in keys or len(keys) == 0:
-                self.servers.append(all_server)
+
+        # 初始化 self.servers
+        if not keys:  # 如果 keys 为空，则选择所有服务器
+            self.servers = list(all_servers.values())
+        else:
+            # 仅选择在 keys 列表中的服务器，并且按照顺序！
+            self.servers = [all_servers[key]
+                            for key in keys if key in all_servers]
 
         super().__init__("compare", _("compare"), lang_key_ns)
 
