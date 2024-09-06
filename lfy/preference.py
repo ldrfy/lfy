@@ -85,8 +85,6 @@ class PreferenceWindow(Adw.PreferencesWindow):
 
         cf = self.cb.get_formats()
 
-        print(cf.get_mime_types())
-
         if is_text(cf):
             self.cb.read_text_async(None, on_active_copy)
         else:

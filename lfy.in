@@ -31,11 +31,6 @@ if not os.path.exists(PKGDATA_DIR):
 # python lib
 sys.path.append(PYTHON_DIR)
 
-# 这个在archlinux测试可以后台响应剪贴板，但是在flatpak会直接报错，暂时删除
-# gnome47黑屏
-# if "/app/share" not in SCHEMAS_DIR:
-#     print("x11")
-#     os.environ["GDK_BACKEND"] = "x11"
 
 import gettext
 import locale
@@ -47,7 +42,6 @@ gi.require_version("Adw", "1")
 gi.require_version('Gio', '2.0')
 # gi.require_version('Gtk', '4.12')
 gi.require_version('Gtk', '4.0')
-gi.require_version('Notify', '0.7')
 
 from gi.repository import Gio  # pylint: disable=c0413
 
