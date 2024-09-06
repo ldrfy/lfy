@@ -109,7 +109,7 @@ class Server:
             return self.langs[0]
         return self.langs[j]
 
-    def check_translate(self, api_key_s: str) -> tuple[bool, str]:
+    def check_translate(self, api_key_s: str):
         """实现检查翻译的参数
 
         Args:
@@ -121,7 +121,7 @@ class Server:
         print(api_key_s)
         return True, "success"
 
-    def translate_text(self, text: str, lang_to: str, lang_from: str = "auto") -> tuple[bool, str]:
+    def translate_text(self, text: str, lang_to: str, lang_from: str = "auto"):
         """实现文本翻译的逻辑
 
         Args:
@@ -135,7 +135,7 @@ class Server:
         print(f"lang_to={lang_to} text={text}")
         return True, "test"
 
-    def get_api_key_s(self) -> str | None:
+    def get_api_key_s(self):
         """字符串apikey
 
         Returns:
@@ -143,7 +143,7 @@ class Server:
         """
         return None
 
-    def ocr_image(self, img_path: str) -> tuple[bool, str]:
+    def ocr_image(self, img_path: str):
         """图片识别
 
         Args:
@@ -156,7 +156,7 @@ class Server:
         text = ""
         return ok, text
 
-    def check_ocr(self, api_key_ocr_s) -> tuple[bool, str]:
+    def check_ocr(self, api_key_ocr_s):
         """_summary_
 
         Args:
@@ -167,7 +167,7 @@ class Server:
         """
         return True, "success"
 
-    def get_ocr_api_key_s(self) -> str | None:
+    def get_ocr_api_key_s(self):
         """图片识别的字符串apikey
 
         Returns:
