@@ -6,7 +6,7 @@ import time
 import traceback
 from gettext import gettext as _
 
-from gi.repository import Adw, GLib, Gtk
+from gi.repository import Adw, Gdk, GLib, Gtk
 
 from lfy.api import (create_server, create_server_ocr, get_lang,
                      get_lang_names, get_server, get_server_names, lang_n2j,
@@ -97,6 +97,30 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.paned_position = self.setting.translate_paned_position
         if self.paned_position > 0:
             self.gp_translate.set_position(self.paned_position)
+
+        # 创建键盘事件控制器
+        controller = Gtk.EventControllerKey()
+        controller.connect("key-pressed", self.on_key_pressed)
+        # 将控制器添加到文本视图中
+        self.tv_from.add_controller(controller)
+
+    def on_key_pressed(self, _, keyval, _keycode, _state):
+        """文本回车，直接翻译
+
+        Args:
+            _ (controller): _description_
+            keyval (keyval): _description_
+            _keycode (keycode): _description_
+            _state (state): _description_
+
+        Returns:
+            bool: 继续执行默认行为
+        """
+        if keyval == Gdk.KEY_Return:
+            # 加上下面的 可以是ctrl return
+            #  and (state & Gdk.ModifierType.CONTROL_MASK)
+            self.update("reload", True)
+        return False  # 返回 False 以继续执行默认行为
 
     def set_paned_position(self, p):
         """设置或恢复，原文字和翻译的比例
