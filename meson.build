@@ -74,7 +74,7 @@ configure_file(
 dependency('glib-2.0', version: '>= 2.67.1')
 dependency('gobject-introspection-1.0', version: '>= 1.35.0')
 dependency('gtk4', version: '>= 4.5.0')
-dependency('libadwaita-1', version: '>= 1.2.alpha')
+dependency('libadwaita-1', version: '>= 1.4')
 dependency('pygobject-3.0', version: '>= 3.36.1')
 
 subdir('data')
