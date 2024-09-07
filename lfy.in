@@ -1,9 +1,19 @@
 #!@PYTHON@
 
 # lt
+import argparse
+import gettext
+import locale
 import os
 import subprocess
 import sys
+
+import gi
+
+gi.require_version("Adw", "1")
+gi.require_version('Gio', '2.0')
+gi.require_version('Gtk', '4.0')
+gi.require_version('Gdk', '4.0')
 
 APP_ID = '@APP_ID@'
 VERSION = '@VERSION@'
@@ -22,7 +32,8 @@ if not os.path.exists(PKGDATA_DIR):
     SCHEMAS_DIR = os.path.abspath(f"{THIS_DIR}/../share/")
     PKGDATA_DIR = os.path.abspath(f"{SCHEMAS_DIR}/{APP_ID}/")
     LOCALE_DIR = os.path.abspath(f"{SCHEMAS_DIR}/locale/")
-    subprocess.run(["glib-compile-schemas", f"{SCHEMAS_DIR}/glib-2.0/schemas"], check=True)
+    subprocess.run(
+        ["glib-compile-schemas", f"{SCHEMAS_DIR}/glib-2.0/schemas"], check=True)
 
     os.environ["XDG_DATA_DIRS"] = f'{SCHEMAS_DIR}:' + \
         os.environ.get("XDG_DATA_DIRS", "")
@@ -32,28 +43,12 @@ if not os.path.exists(PKGDATA_DIR):
 sys.path.append(PYTHON_DIR)
 
 
-import gettext
-import locale
-
-import gi
-
-# gi.require_version("Adw", "1.4")
-gi.require_version("Adw", "1")
-gi.require_version('Gio', '2.0')
-# gi.require_version('Gtk', '4.12')
-gi.require_version('Gtk', '4.0')
-
-from gi.repository import Gio  # pylint: disable=c0413
-
-
 def set_internationalization():
     """Sets application internationalization."""
     try:
         locale.bindtextdomain(APP_ID, LOCALE_DIR)
         locale.textdomain(APP_ID)
     except AttributeError as e:
-        # Python built without gettext support does not have
-        # bindtextdomain() and textdomain().
         print(f"Some gettext translations will not work. Error:\n{e}")
 
     gettext.bindtextdomain(APP_ID, LOCALE_DIR)
@@ -62,8 +57,11 @@ def set_internationalization():
 
 def set_resources():
     """Sets application ressource file."""
+    from gi.repository import Gio  # pylint: disable=c0415
+
     # pylint: disable=w0212
-    Gio.Resource._register(Gio.resource_load(os.path.join(PKGDATA_DIR, f'{APP_ID}.gresource')))
+    Gio.Resource._register(Gio.resource_load(
+        os.path.join(PKGDATA_DIR, f'{APP_ID}.gresource')))
 
 
 def run_application():
@@ -83,9 +81,25 @@ def main():
         _type_: _description_
     """
     set_internationalization()
+
+    parser = argparse.ArgumentParser(description="translate")
+
+    parser.add_argument('-t', type=str, help='翻译后面的文字')
+    parser.add_argument('-c', action='store_true', help='翻译剪贴板')
+
+    args = parser.parse_args()
+
+    if args.t:
+        from lfy.code import req_text  # pylint: disable=c0415
+        return req_text(args.t)
+
+    # if args.c:
+    #     from lfy.code import req_clip
+    #     return req_clip()
+
     set_resources()
-    return run_application()
+    return sys.exit(run_application())
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    main()
