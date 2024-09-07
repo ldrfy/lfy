@@ -126,7 +126,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         """设置或恢复，原文字和翻译的比例
 
         Args:
-            p (_type_): 设置的位置
+            p (int): 设置的位置
         """
         if self.paned_position > 0:
             p = self.paned_position
@@ -153,7 +153,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.set_paned_position(height)
 
     def save_settings(self, _a):
-        """_summary_
+        """保存设置
 
         Args:
             _a (TranslateWindow): _description_
@@ -196,6 +196,11 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.is_tv_copy = True
 
     def update_ocr(self, path):
+        """执行ocr文本识别
+
+        Args:
+            path (str): _description_
+        """
         threading.Thread(target=self.request_text, daemon=True,
                          args=(path, self.ocr_server, None,)).start()
 
@@ -203,7 +208,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         """翻译
 
         Args:
-            text (_type_): _description_
+            text (str): _description_
             reload (bool, optional): _description_. Defaults to False.
         """
         buffer_from = self.tv_from.get_buffer()
