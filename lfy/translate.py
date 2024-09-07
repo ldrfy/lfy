@@ -104,12 +104,12 @@ class TranslateWindow(Adw.ApplicationWindow):
         Args:
             p (_type_): 设置的位置
         """
-        if self.paned_position < 0:
-            self.paned_position = self.gp_translate.get_position()
-        else:
+        if self.paned_position > 0:
             p = self.paned_position
             # 标记设置过了
             self.paned_position = -1
+        else:
+            self.paned_position = self.gp_translate.get_position()
         self.gp_translate.set_position(p)
 
     def reset_paned_position(self):
