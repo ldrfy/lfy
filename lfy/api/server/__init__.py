@@ -70,6 +70,9 @@ class Server:
             lang_key_ns (dict): 支持哪些翻译语言
         """
 
+        self.can_ocr = False
+        self.can_translate = False
+
         self.key = key
         self.name = name
         self.langs: list[Lang] = []
@@ -143,7 +146,7 @@ class Server:
         """
         return None
 
-    def ocr_image(self, img_path: str):
+    def ocr_image(self, img_path: str, lang_keys=None):
         """图片识别
 
         Args:

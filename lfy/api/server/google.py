@@ -5,9 +5,9 @@ import random
 from gettext import gettext as _
 
 import requests
-from requests import RequestException, ConnectTimeout
+from requests import ConnectTimeout, RequestException
 
-from lfy.api.server import Server, TIME_OUT
+from lfy.api.server import TIME_OUT, Server
 
 
 def _get_session():
@@ -42,6 +42,7 @@ class GoogleServer(Server):
             "it": 8,
         }
         super().__init__("google", _("google"), lang_key_ns, session=_get_session())
+        self.can_translate = True
 
     def translate_text(self, text, lang_to="zh-cn", lang_from="auto", n=0):
         """翻译

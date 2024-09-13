@@ -5,6 +5,7 @@ from gi.repository import Gtk
 
 from lfy.api.constant import SERVERS
 from lfy.api.server import Lang, Server
+from lfy.api.server.ocr import ocr
 
 
 def get_server_names():
@@ -55,7 +56,7 @@ def create_server(key) -> Server:
     Returns:
         _type_: _description_
     """
-    ss = {s.key: s for s in SERVERS}
+    ss = {s.key: s for s in SERVERS if s.can_translate}
 
     if key not in ss.keys():
         return ss["google"]
@@ -68,8 +69,7 @@ def create_server_ocr(key) -> Server:
     Returns:
         _type_: _description_
     """
-    ss = {s.key: s for s in SERVERS if s.get_ocr_api_key_s()
-          is not None}
+    ss = {s.key: s for s in SERVERS if s.can_ocr}
 
     if key not in ss.keys():
         return ss["baidu"]
