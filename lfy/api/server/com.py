@@ -70,6 +70,7 @@ class AllServer(Server):
                             for key in keys if key in all_servers]
 
         super().__init__("compare", _("compare"), lang_key_ns)
+        self.can_translate = True
 
     def translate_text(self, text, lang_to="1", lang_from="auto"):
         """翻译集成

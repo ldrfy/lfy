@@ -118,6 +118,7 @@ class AliYunServer(Server):
             "it": 8
         }
         super().__init__("aliyun", _("aliyun"), lang_key_ns)
+        self.can_translate = True
 
     def check_translate(self, api_key_s):
         """保存时核对 api_key_s

@@ -58,6 +58,7 @@ class BingServer(Server):
             "it": 8,
         }
         super().__init__("bing", _("bing"), lang_key_ns)
+        self.can_translate = True
 
     def translate_text(self, text, lang_to="zh-cn", lang_from="auto", n=0):
         """翻译

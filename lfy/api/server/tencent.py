@@ -9,7 +9,7 @@ from gettext import gettext as _
 
 import requests
 
-from lfy.api.server import Server, TIME_OUT
+from lfy.api.server import TIME_OUT, Server
 from lfy.api.utils import s2ks
 from lfy.settings import Settings
 
@@ -62,6 +62,7 @@ class TencentServer(Server):
             "it": 8,
         }
         super().__init__("tencent", _("tencent"), lang_key_ns)
+        self.can_translate = True
 
     def _get_session(self):
         """初始化请求
