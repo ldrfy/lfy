@@ -24,8 +24,8 @@ def main(img_path):
     return False, None
 
 
-class EasyOcrServer(Server):
-    """EasyOcr文字识别
+class PytesseractServer(Server):
+    """Pytesseract文字识别
     """
 
     def __init__(self):
