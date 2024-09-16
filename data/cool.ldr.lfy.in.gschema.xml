@@ -22,6 +22,10 @@
 			<default>"auto"</default>
 			<description>theme</description>
 		</key>
+		<key type="s" name="server-ocr-selected-key">
+			<default>"baidu"</default>
+			<description>The currently selected OCR service</description>
+		</key>
 		<key type="s" name="server-selected-key">
 			<default>"baidu"</default>
 			<description>The currently selected translation service</description>

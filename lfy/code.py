@@ -4,7 +4,7 @@ from gettext import gettext as _
 
 from gi.repository import Gdk
 
-from lfy.api import create_server, get_lang, server_key2i
+from lfy.api import create_server_t, get_lang, server_key2i
 from lfy.settings import Settings
 
 
@@ -24,7 +24,7 @@ def req_text(s):
         # 设置环境变量
         os.environ['http_proxy'] = proxy_address
         os.environ['https_proxy'] = proxy_address
-    tran_server = create_server(setting.server_selected_key)
+    tran_server = create_server_t(setting.server_selected_key)
 
     try:
 

@@ -28,6 +28,18 @@ class Settings(Gio.Settings):
         return Settings.instance
 
     @property
+    def server_ocr_selected_key(self):
+        """选择OCR的服务的key
+
+        Returns:
+            str: 如：baidu
+        """
+        return self.get_string('server-ocr-selected-key')
+    @server_ocr_selected_key.setter
+    def server_ocr_selected_key(self, key):
+        self.set_string('server-ocr-selected-key', key)
+
+    @property
     def server_selected_key(self):
         """选择翻译的服务的key
 

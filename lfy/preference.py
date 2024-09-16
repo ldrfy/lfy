@@ -4,7 +4,8 @@ from gettext import gettext as _
 
 from gi.repository import Adw, Gdk, Gio, Gtk
 
-from lfy.api import get_server_names_api_key, get_servers_api_key
+from lfy.api import (get_server_names_api_key, get_servers_api_key,
+                     get_servers_t)
 from lfy.api.constant import SERVERS
 from lfy.api.server import Server
 from lfy.api.utils import is_text
@@ -56,13 +57,14 @@ class PreferenceWindow(Adw.PreferencesWindow):
         # ui中无法设置gbtn_compare翻译
         self.gbtn_compare.set_label(_("compare"))
         names = []
+        ss = list(get_servers_t())[1:]
         keys_s = Settings.get().compare_servers
         if len(keys_s) == 0:
-            for se in SERVERS[1:]:
+            for se in ss:
                 keys_s.append(se.key)
 
         self.check_items = []
-        for se in SERVERS[1:]:
+        for se in ss:
             check_button = Gtk.CheckButton(label=se.name)
             if se.key in keys_s:
                 check_button.set_active(True)
