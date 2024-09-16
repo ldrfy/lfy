@@ -6,14 +6,59 @@ from gi.repository import Gtk
 from lfy.api.constant import SERVERS
 from lfy.api.server import Lang, Server
 
+servers_t = None
+servers_o = None
 
-def get_server_names():
-    """获取所有翻译服务的名字
+
+def get_servers_t():
+    """翻译的服务
+
+    Returns:
+        dict: _description_
+    """
+    global servers_t  # pylint:disable=W0603
+    if servers_t is None:
+        servers_t = [s for s in SERVERS if s.can_translate]
+    return servers_t
+
+
+def get_servers_o():
+    """OCR的服务
+
+    Returns:
+        dict: _description_
+    """
+    global servers_o  # pylint:disable=W0603
+    if servers_o is None:
+        servers_o = [s for s in SERVERS if s.can_ocr]
+    return servers_o
+
+
+def get_server_names_t():
+    """翻译的服务名字
+
+    Returns:
+        list: _description_
+    """
+    return get_server_names(get_servers_t())
+
+
+def get_server_names_o():
+    """OCR的服务名字
+
+    Returns:
+        _type_: _description_
+    """
+    return get_server_names(get_servers_o())
+
+
+def get_server_names(ss):
+    """获取所给服务的名字
 
     Returns:
         list: ["百度", "腾讯", ...]
     """
-    return Gtk.StringList.new([s.name for s in SERVERS])
+    return Gtk.StringList.new([s.name for s in ss])
 
 
 def get_servers_api_key():
@@ -49,30 +94,31 @@ def get_server(i: int) -> Server:
     return SERVERS[i]
 
 
-def create_server(key) -> Server:
+def create_server_t(key) -> Server:
     """引擎字典
 
     Returns:
         _type_: _description_
     """
-    ss = {s.key: s for s in SERVERS if s.can_translate}
 
-    if key not in ss.keys():
-        return ss["google"]
-    return ss[key]
+    for s in get_servers_t():
+        if s.key == key:
+            return s
+
+    return get_servers_t()[0]
 
 
-def create_server_ocr(key) -> Server:
+def create_server_o(key) -> Server:
     """引擎字典
 
     Returns:
         _type_: _description_
     """
-    ss = {s.key: s for s in SERVERS if s.can_ocr}
+    for s in get_servers_o():
+        if s.key == key:
+            return s
 
-    if key not in ss.keys():
-        return ss["baidu"]
-    return ss[key]
+    return get_servers_o()[0]
 
 
 def get_lang_names(i=0):

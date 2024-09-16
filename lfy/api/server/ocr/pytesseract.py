@@ -43,7 +43,7 @@ class PytesseractServer(Server):
             "fra": 7,
             "it": 8
         }
-        super().__init__("easyocr", "easyocr", lang_key_ns)
+        super().__init__("pytesseract", "pytesseract", lang_key_ns)
         self.can_ocr = True
 
     def ocr_image(self, img_path: str, lang_keys=None):

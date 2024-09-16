@@ -8,8 +8,8 @@ from gettext import gettext as _
 
 from gi.repository import Adw, Gdk, GLib, Gtk
 
-from lfy.api import (create_server, create_server_ocr, get_lang,
-                     get_lang_names, get_server, get_server_names, lang_n2j,
+from lfy.api import (create_server_o, create_server_t, get_lang,
+                     get_lang_names, get_server, get_server_names_t, lang_n2j,
                      server_key2i)
 from lfy.api.constant import NO_TRANSLATED_TXTS
 from lfy.api.server import Server
@@ -80,11 +80,11 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.toast.set_timeout(2)
 
         i = server_key2i(self.setting.server_selected_key)
-        self.tran_server = create_server(self.setting.server_selected_key)
-        self.ocr_server = create_server_ocr(self.setting.server_selected_key)
+        self.tran_server = create_server_t(self.setting.server_selected_key)
+        self.ocr_server = create_server_o(self.setting.server_ocr_selected_key)
         self.jn = True
 
-        self.dd_server.set_model(get_server_names())
+        self.dd_server.set_model(get_server_names_t())
         self.dd_server.set_selected(i)
 
         self.dd_lang.set_model(get_lang_names(i))
