@@ -5,7 +5,6 @@ from gi.repository import Gtk
 
 from lfy.api.constant import SERVERS
 from lfy.api.server import Lang, Server
-from lfy.api.server.ocr import ocr
 
 
 def get_server_names():
