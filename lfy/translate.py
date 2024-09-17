@@ -201,6 +201,10 @@ class TranslateWindow(Adw.ApplicationWindow):
         Args:
             path (str): _description_
         """
+        _k = self.setting.server_ocr_selected_key
+        if _k != self.ocr_server.key:
+            self.ocr_server = create_server_o(_k)
+
         threading.Thread(target=self.request_text, daemon=True,
                          args=(path, self.ocr_server, None,)).start()
 

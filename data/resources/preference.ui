@@ -10,7 +10,6 @@
           <object class="AdwPreferencesGroup">
             <child>
               <object class="AdwComboRow" id="acr_server">
-                <property name="enable-search">True</property>
                 <property name="subtitle" translatable="yes">setup API Key for translation Server, click on the right to the details</property>
                 <property name="subtitle-lines">3</property>
                 <property name="title" translatable="yes">API Key</property>
@@ -34,6 +33,17 @@
                     </style>
                   </object>
                 </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <child>
+              <object class="AdwComboRow" id="acr_server_ocr">
+                <property name="subtitle" translatable="yes">Online and local recognition</property>
+                <property name="title" translatable="yes">OCR server</property>
+                <signal name="notify::selected" handler="_config_select_server_ocr"/>
               </object>
             </child>
           </object>

@@ -4,9 +4,8 @@ from gettext import gettext as _
 
 from gi.repository import Adw, Gdk, Gio, Gtk
 
-from lfy.api import (get_server_names_api_key, get_servers_api_key,
-                     get_servers_t)
-from lfy.api.constant import SERVERS
+from lfy.api import (get_server_names_api_key, get_server_names_o,
+                     get_servers_api_key, get_servers_o, get_servers_t)
 from lfy.api.server import Server
 from lfy.api.utils import is_text
 from lfy.api.utils.bak import backup_gsettings, restore_gsettings
@@ -24,6 +23,7 @@ class PreferenceWindow(Adw.PreferencesWindow):
     __gtype_name__ = 'PreferencesWindow'
 
     acr_server: Adw.ComboRow = Gtk.Template.Child()
+    acr_server_ocr: Adw.ComboRow = Gtk.Template.Child()
     entry_vpn_addr: Adw.EntryRow = Gtk.Template.Child()
     auto_check_update: Adw.SwitchRow = Gtk.Template.Child()
     notify_translation_results: Adw.SwitchRow = Gtk.Template.Child()
@@ -38,8 +38,8 @@ class PreferenceWindow(Adw.PreferencesWindow):
         sg = Settings.get()
         self.server: Server
         # pylint: disable=E1101
-        self.acr_server.set_model(
-            Gtk.StringList.new(get_server_names_api_key()))
+        self.acr_server.set_model(get_server_names_api_key())
+        self.acr_server_ocr.set_model(get_server_names_o())
         self.entry_vpn_addr.props.text = sg.vpn_addr_port
 
         sg.bind('auto-check-update', self.auto_check_update,
@@ -111,10 +111,12 @@ class PreferenceWindow(Adw.PreferencesWindow):
         # pylint:disable=E1101
         keys = []
         names = []
+        ss = list(get_servers_t())[1:]
+
         for i, check_button in enumerate(self.check_items):
             if check_button.get_active():
-                keys.append(SERVERS[1:][i].key)
-                names.append(SERVERS[1:][i].name)
+                keys.append(ss[i].key)
+                names.append(ss[i].name)
 
         if Settings.get().compare_servers != keys:
             Settings.get().compare_servers = keys
@@ -128,8 +130,12 @@ class PreferenceWindow(Adw.PreferencesWindow):
         self.present_subpage(page)
 
     @Gtk.Template.Callback()
+    def _config_select_server_ocr(self, arc, _value):
+        _k = get_servers_o()[arc.get_selected()].key
+        Settings.get().server_ocr_selected_key = _k
+
+    @Gtk.Template.Callback()
     def _config_select_server(self, arc, _value):
-        """Called on self.translator::notify::selected signal"""
         self.server = get_servers_api_key()[arc.get_selected()]
 
     @Gtk.Template.Callback()

@@ -77,7 +77,7 @@ def get_server_names_api_key():
     Returns:
         list: ["百度", "腾讯", ...]
     """
-    return [s.name for s in get_servers_api_key()]
+    return get_server_names(get_servers_api_key())
 
 
 def get_server(i: int) -> Server:

@@ -51,7 +51,8 @@ class PytesseractServer(Server):
             import pytesseract
             s = "en"
             if lang_keys is None:
-                s = '+'.join(lang_keys)
+                lang_keys = ['ch_sim', 'eng']
+            s = '+'.join(lang_keys)
             return True, pytesseract.image_to_string(img_path, lang=s)
         except ModuleNotFoundError as e:
             print(e)
