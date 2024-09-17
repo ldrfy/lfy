@@ -13,6 +13,7 @@ from lfy.api import (create_server_o, create_server_t, get_lang,
                      server_key2i)
 from lfy.api.constant import NO_TRANSLATED_TXTS
 from lfy.api.server import Server
+from lfy.api.utils import cal_md5
 from lfy.api.utils.notify import nf_t
 from lfy.settings import Settings
 from lfy.widgets.theme_switcher import ThemeSwitcher
@@ -67,6 +68,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.app = self.get_application()
 
         self.setting = Settings.get()
+        self.img_md5 = ""
 
         # 可能包含上次的追加内容
         self.last_text = ""
@@ -262,9 +264,21 @@ class TranslateWindow(Adw.ApplicationWindow):
             s (str): _description_
             server (Server): _description_
         """
-        GLib.idle_add(self.update_ui, "", lk is None)
+        is_ocr = lk is None
+        if is_ocr:
+            print(s)
+            ss = time.time()
+            md5_hash = cal_md5(s)
+            print("4", time.time()-ss)
+            # 防止wayland多次识别
+            if self.img_md5 == md5_hash:
+                print("same image, no ocr", md5_hash)
+                return
+            self.img_md5 = md5_hash
+
+        GLib.idle_add(self.update_ui, "", is_ocr)
         try:
-            if lk is None:
+            if is_ocr:
                 _ok, text = server.ocr_image(s)
                 if self.cbtn_del_wrapping.get_active():
                     text = process_text(text)
@@ -275,7 +289,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             error_msg = _("something error:")
             error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
             text = f"{error_msg}{server.name}\n\n{error_msg2}"
-        GLib.idle_add(self.update_ui, text, lk is None)
+        GLib.idle_add(self.update_ui, text, is_ocr)
 
     def update_ui(self, s="", ocr=False):
         """更新界面
