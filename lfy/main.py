@@ -31,7 +31,8 @@ class LfyApplication(Adw.Application):
         self._version = version
         self._application_id = app_id
         self.translate_now = GLib.Variant.new_boolean(True)
-        self.img_md5 = ""
+        self.img_w = 0
+        self.img_h = 0
 
         action_trans_now = Gio.SimpleAction.new_stateful(
             'copy2translate', None, self.translate_now)
@@ -217,15 +218,18 @@ class LfyApplication(Adw.Application):
             self.do_activate(cb2.read_text_finish(res))
 
         def save_img(cb2, res):
-            ss = time.time()
             texture = cb2.read_texture_finish(res)
-            print("1", time.time()-ss)
             pixbuf = Gdk.pixbuf_get_from_texture(texture)
-            print("2", time.time()-ss)
+
+            if self.img_w == pixbuf.get_width() and \
+                    self.img_h == pixbuf.get_height():
+                return
+
+            self.img_w = pixbuf.get_width()
+            self.img_h = pixbuf.get_height()
 
             path = "/tmp/lfy.png"
             pixbuf.savev(path, "png", (), ())
-            print("3", time.time()-ss)
 
             self.do_activate(path, ocr=True)
 

@@ -41,7 +41,7 @@
           <object class="AdwPreferencesGroup">
             <child>
               <object class="AdwComboRow" id="acr_server_ocr">
-                <property name="subtitle" translatable="yes">Online and local recognition</property>
+                <property name="subtitle" translatable="yes">local or cloud, text recognition</property>
                 <property name="title" translatable="yes">OCR server</property>
                 <signal name="notify::selected" handler="_config_select_server_ocr"/>
               </object>
