@@ -1,4 +1,5 @@
 # main.py
+import hashlib
 import os
 import threading
 import time
@@ -31,6 +32,7 @@ class LfyApplication(Adw.Application):
         self._version = version
         self._application_id = app_id
         self.translate_now = GLib.Variant.new_boolean(True)
+        self.img_md5 = ""
 
         action_trans_now = Gio.SimpleAction.new_stateful(
             'copy2translate', None, self.translate_now)
@@ -214,6 +216,14 @@ class LfyApplication(Adw.Application):
         def save_img(cb2, res):
             texture = cb2.read_texture_finish(res)
             pixbuf = Gdk.pixbuf_get_from_texture(texture)
+
+            md5_hash = hashlib.md5(pixbuf.get_pixels()).hexdigest()
+            # 防止wayland多次识别
+            if self.img_md5 == md5_hash:
+                print("same image, no ocr")
+                return
+            self.img_md5 = md5_hash
+
             path = "/tmp/lfy.png"
             pixbuf.savev(path, "png", (), ())
             self.do_activate(path, ocr=True)
