@@ -35,17 +35,25 @@ class PreferenceWindow(Adw.PreferencesWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        sg = Settings.get()
+        self.sg = Settings.get()
         self.server: Server
         # pylint: disable=E1101
         self.acr_server.set_model(get_server_names_api_key())
-        self.acr_server_ocr.set_model(get_server_names_o())
-        self.entry_vpn_addr.props.text = sg.vpn_addr_port
 
-        sg.bind('auto-check-update', self.auto_check_update,
+        self.ocr_s = 0
+        self.acr_server_ocr.set_model(get_server_names_o())
+        sso = get_servers_o()
+        for i, so in enumerate(sso):
+            if so.key == self.sg.server_ocr_selected_key:
+                self.acr_server_ocr.set_selected(i)
+                break
+
+        self.entry_vpn_addr.props.text = self.sg.vpn_addr_port
+
+        self.sg.bind('auto-check-update', self.auto_check_update,
                 'active', Gio.SettingsBindFlags.DEFAULT)
 
-        sg.bind('notify-translation-results', self.notify_translation_results,
+        self.sg.bind('notify-translation-results', self.notify_translation_results,
                 'active', Gio.SettingsBindFlags.DEFAULT)
         self._init_pop_compare()
         self.cb = Gdk.Display.get_default().get_clipboard()
@@ -58,7 +66,7 @@ class PreferenceWindow(Adw.PreferencesWindow):
         self.gbtn_compare.set_label(_("compare"))
         names = []
         ss = list(get_servers_t())[1:]
-        keys_s = Settings.get().compare_servers
+        keys_s = self.sg.compare_servers
         if len(keys_s) == 0:
             for se in ss:
                 keys_s.append(se.key)
@@ -118,8 +126,8 @@ class PreferenceWindow(Adw.PreferencesWindow):
                 keys.append(ss[i].key)
                 names.append(ss[i].name)
 
-        if Settings.get().compare_servers != keys:
-            Settings.get().compare_servers = keys
+        if self.sg.compare_servers != keys:
+            self.sg.compare_servers = keys
             self.aar_compare.set_subtitle(", ".join(names))
             self.get_root().add_toast(
                 Adw.Toast.new(_("It takes effect when you restart lfy")))
@@ -131,8 +139,11 @@ class PreferenceWindow(Adw.PreferencesWindow):
 
     @Gtk.Template.Callback()
     def _config_select_server_ocr(self, arc, _value):
-        _k = get_servers_o()[arc.get_selected()].key
-        Settings.get().server_ocr_selected_key = _k
+        if self.ocr_s > 0:
+            _k = get_servers_o()[arc.get_selected()].key
+            self.sg.server_ocr_selected_key = _k
+            print("ocr ......",  arc.get_selected(), _k)
+        self.ocr_s += 1
 
     @Gtk.Template.Callback()
     def _config_select_server(self, arc, _value):
@@ -145,7 +156,7 @@ class PreferenceWindow(Adw.PreferencesWindow):
 
         vpn_addr = self.entry_vpn_addr.get_text().strip()
         self.entry_vpn_addr.props.text = vpn_addr
-        Settings.get().vpn_addr_port = vpn_addr
+        self.sg.vpn_addr_port = vpn_addr
         self.entry_vpn_addr.props.sensitive = True
 
         self.get_root().add_toast(

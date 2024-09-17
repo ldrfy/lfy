@@ -203,9 +203,16 @@ class TranslateWindow(Adw.ApplicationWindow):
         Args:
             path (str): _description_
         """
+        md5_hash = cal_md5(path)
+        # 防止wayland多次识别
+        if self.img_md5 == md5_hash:
+            return
+        self.img_md5 = md5_hash
+
         _k = self.setting.server_ocr_selected_key
         if _k != self.ocr_server.key:
             self.ocr_server = create_server_o(_k)
+        print(self.ocr_server.key)
 
         threading.Thread(target=self.request_text, daemon=True,
                          args=(path, self.ocr_server, None,)).start()
@@ -265,18 +272,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             server (Server): _description_
         """
         is_ocr = lk is None
-        if is_ocr:
-            print(s)
-            ss = time.time()
-            md5_hash = cal_md5(s)
-            print("4", time.time()-ss)
-            # 防止wayland多次识别
-            if self.img_md5 == md5_hash:
-                print("same image, no ocr", md5_hash)
-                return
-            self.img_md5 = md5_hash
 
-        GLib.idle_add(self.update_ui, "", is_ocr)
         try:
             if is_ocr:
                 _ok, text = server.ocr_image(s)

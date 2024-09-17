@@ -198,7 +198,7 @@
 	(2,91,"GtkPopover","child",None,None,None,None,None,92,None,None,None,None),
 	(2,91,"GtkPopover","has-arrow","False",None,None,None,None,None,None,None,None,None),
 	(2,92,"GtkListBox","selection-mode","multiple",None,None,None,None,None,None,None,None,None),
-	(2,94,"AdwActionRow","subtitle","Online and local recognition",1,None,None,None,None,None,None,None,None),
+	(2,94,"AdwActionRow","subtitle","local or cloud, text recognition",1,None,None,None,None,None,None,None,None),
 	(2,94,"AdwPreferencesRow","title","OCR server",1,None,None,None,None,None,None,None,None),
 	(6,1,"GtkWindow","modal","True",None,None,None,None,None,None,None,None,None),
 	(6,2,"GtkShortcutsSection","max-height","10",None,None,None,None,None,None,None,None,None),

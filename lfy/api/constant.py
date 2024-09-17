@@ -17,8 +17,9 @@ SERVERS = [
     TencentServer(),
     AliYunServer(),
     HuoShanServer(),
-    EasyOcrServer(),
+    # ocr
     PytesseractServer(),
+    EasyOcrServer(),
 ]
 
 
