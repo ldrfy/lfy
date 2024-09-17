@@ -1,5 +1,4 @@
 # main.py
-import hashlib
 import os
 import threading
 import time
@@ -67,6 +66,15 @@ class LfyApplication(Adw.Application):
         if Settings.get().auto_check_update:
             threading.Thread(target=self.find_update, daemon=True).start()
 
+    def get_translate_win(self):
+        win = self.props.active_window  # pylint: disable=E1101
+        if not win:
+            width, height = Settings.get().window_size
+            win = TranslateWindow(
+                application=self, default_height=height, default_width=width, )
+        win.present()
+        return win
+
     def do_activate(self, s="", ocr=False):
         """翻译
 
@@ -74,12 +82,7 @@ class LfyApplication(Adw.Application):
             s (str, optional): _description_. Defaults to "".
             ocr (bool, optional): _description_. Defaults to False.
         """
-        win = self.props.active_window  # pylint: disable=E1101
-        if not win:
-            width, height = Settings.get().window_size
-            win = TranslateWindow(
-                application=self, default_height=height, default_width=width, )
-        win.present()
+        win = self.get_translate_win()
         if ocr:
             win.update_ocr(s)
         else:
@@ -214,18 +217,16 @@ class LfyApplication(Adw.Application):
             self.do_activate(cb2.read_text_finish(res))
 
         def save_img(cb2, res):
+            ss = time.time()
             texture = cb2.read_texture_finish(res)
+            print("1", time.time()-ss)
             pixbuf = Gdk.pixbuf_get_from_texture(texture)
-
-            md5_hash = hashlib.md5(pixbuf.get_pixels()).hexdigest()
-            # 防止wayland多次识别
-            if self.img_md5 == md5_hash:
-                print("same image, no ocr")
-                return
-            self.img_md5 = md5_hash
+            print("2", time.time()-ss)
 
             path = "/tmp/lfy.png"
             pixbuf.savev(path, "png", (), ())
+            print("3", time.time()-ss)
+
             self.do_activate(path, ocr=True)
 
         span = time.time() - self.last_clip
