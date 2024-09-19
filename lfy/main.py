@@ -2,16 +2,18 @@
 import os
 import threading
 import time
+import json
 from gettext import gettext as _
-
+from datetime import datetime
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk
 
-from lfy import PACKAGE_URL, PACKAGE_URL_BUG
+from lfy import RES_PATH, VERSION
 from lfy.api.utils import is_text
 from lfy.api.utils.check_update import main as check_update
 from lfy.preference import PreferenceWindow
 from lfy.settings import Settings
 from lfy.translate import TranslateWindow
+from lfy.api.utils.bak import backup_gsettings
 
 # 设置代理地址和端口号
 PROXY_ADDRESS = Settings.get().vpn_addr_port
@@ -24,7 +26,7 @@ if len(PROXY_ADDRESS) > 0:
 class LfyApplication(Adw.Application):
     """The main application singleton class."""
 
-    def __init__(self, app_id, version):
+    def __init__(self, app_id, version, schemas_dir):
         super().__init__(application_id=app_id,
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
 
@@ -97,19 +99,37 @@ class LfyApplication(Adw.Application):
             w (_type_): _description_
         """
         # pylint: disable=E1101
-        Adw.AboutWindow(transient_for=self.props.active_window,
-                        application_name=_('lfy'),
-                        application_icon=self._application_id,
-                        version=self._version,
-                        developers=['yuh <yuhldr@qq.com>, 2023-2023'],
-                        designers=['yuh <yuhldr@qq.com>, 2023-2023'],
-                        documenters=['yuh <yuhldr@qq.com>, 2023-2023'],
-                        translator_credits=_('translator_credits'),
-                        comments=_("A translation app for GNOME."),
-                        website=PACKAGE_URL,
-                        issue_url=PACKAGE_URL_BUG,
-                        license_type=Gtk.License.GPL_3_0,
-                        copyright='© 2023 yuh').present()
+        path = f'{RES_PATH}/{self._application_id}.metainfo.xml'
+        print(path)
+
+        ad = Adw.AboutDialog.new_from_appdata(path, VERSION)
+        ad.set_developers(['yuh <yuhldr@qq.com>, 2023-2023'])
+        ad.set_designers(['yuh <yuhldr@qq.com>, 2023-2023'])
+        ad.set_documenters(['yuh <yuhldr@qq.com>, 2023-2023'])
+        ad.set_translator_credits(_('translator_credits'))
+        ad.set_comments(_('A translation app for GNOME.'))
+        ad.set_copyright(_(f'© 2023-{datetime.now().year} yuh'))
+
+        s = f"Version: {VERSION}"
+        gvs = Gtk.get_major_version(), Gtk.get_minor_version(), Gtk.get_micro_version()
+        s += f"\nGTK Version: {gvs[0]}.{gvs[1]}.{gvs[2]}"
+
+        avs = Adw.get_major_version(), Adw.get_minor_version(), Adw.get_micro_version()
+        s += f"\nAdwaita Version: {avs[0]}.{avs[1]}.{avs[2]}"
+
+        backup_data = json.loads(backup_gsettings())
+        ss = {}
+        for k, v in backup_data.items():
+            if "server-sk-" in k and ("key" not in v or "Key" not in v):
+                v = "******"
+            ss[k] = v
+        s += f"\n\n******* config *******\n"
+        s += json.dumps(ss, indent=4, ensure_ascii=False)
+        s += f"\n************"
+
+        ad.set_debug_info(s)
+
+        ad.present(self.props.active_window)
 
     def on_preferences_action(self, _widget, _w):
         """打开设置
