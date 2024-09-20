@@ -48,28 +48,6 @@
                   </object>
                 </child>
                 <child>
-                  <object class="AdwEntryRow" id="api_key_ocr_entry">
-                    <property name="show-apply-button">true</property>
-                    <property name="title" translatable="yes">API Key for OCR,Pay attention to whether there are dividing lines |</property>
-                    <property name="tooltip-text" translatable="yes">Enter an API Key for the Server with OCR.</property>
-                    <signal name="apply" handler="_on_api_key_ocr_apply"/>
-                    <child>
-                      <object class="GtkStack" id="api_key_ocr_stack">
-                        <child>
-                          <object class="GtkStackPage">
-                            <property name="child">
-                              <object class="GtkSpinner" id="api_key_ocr_spinner">
-                                <property name="valign">3</property>
-                              </object>
-                            </property>
-                            <property name="name">spinner</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
                   <object class="GtkLinkButton" id="api_key_link">
                     <property name="label" translatable="yes">how to get API Key</property>
                     <property name="uri">https://github.com/ldrfy/lfy</property>

@@ -18,6 +18,7 @@ lfy/api/server/bing.py
 lfy/api/server/aliyun.py
 lfy/api/server/com.py
 lfy/api/server/huoshan.py
+lfy/widgets/server_preferences.py
 
 data/resources/translate.ui
 data/resources/server-preferences.ui

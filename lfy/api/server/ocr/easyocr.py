@@ -1,6 +1,7 @@
 'ocr'
 from lfy.api.server import Server
 from lfy.api.utils.debug import get_logger
+from lfy.settings import Settings
 
 
 class EasyOcrServer(Server):
@@ -8,35 +9,29 @@ class EasyOcrServer(Server):
     """
 
     def __init__(self):
-
-        # Development documentation
-        # https://fanyi-api.baidu.com/doc/21
-        lang_key_ns = {
-            "auto": 0,
-            "zh": 1,
-            "wyw": 2,
-            "en": 3,
-            "jp": 4,
-            "kor": 5,
-            "de": 6,
-            "fra": 7,
-            "it": 8
-        }
-        super().__init__("easyocr", "easyocr", lang_key_ns)
+        super().__init__("easyocr", "easyocr", {})
         self.can_ocr = True
 
-    def ocr_image(self, img_path: str, lang_keys=None):
+    def ocr_image(self, img_path: str):
         try:
             import easyocr
-            if lang_keys is None:
-                lang_keys = ['ch_sim', 'en']
+            lang_keys = self.get_api_key_s_ocr().split('+')
             reader = easyocr.Reader(lang_keys)
-            list_ = reader.readtext(img_path, detail=0)
-            s = ""
-            for s_ in list_:
-                s += s_ + " "
+            s = " ".join(reader.readtext(img_path, detail=0))
             return True, s.strip()
         except ModuleNotFoundError as e:
             print(e)
             get_logger().error(e)
             return False, "请安装 easyocr\n" + str(e)
+
+    def get_api_key_s_ocr(self):
+        """图片识别的字符串apikey
+
+        Returns:
+            _type_: _description_
+        """
+        return Settings.get().server_sk_easyocr_ocr
+
+    def check_ocr(self, api_key_ocr_s):
+        Settings.get().server_sk_easyocr_ocr = api_key_ocr_s
+        return True, "success"

@@ -4,6 +4,7 @@
 
 import re
 import threading
+from gettext import gettext as _
 
 from gi.repository import Adw, GLib, Gtk
 
@@ -28,24 +29,23 @@ class ServerPreferences(Adw.Bin):
     api_key_stack = Gtk.Template.Child()
     api_key_spinner = Gtk.Template.Child()
 
-    api_key_ocr_entry = Gtk.Template.Child()
-    api_key_ocr_stack = Gtk.Template.Child()
-    api_key_ocr_spinner = Gtk.Template.Child()
-
     api_key_link = Gtk.Template.Child()
 
-    def __init__(self, server: Server, **kwargs):
+    def __init__(self, server: Server, is_ocr=False, **kwargs):
         super().__init__(**kwargs)
         self.server = server
-        self.title.props.subtitle = server.name
-        # Load saved values
-        self.api_key_entry.props.text = server.get_api_key_s()
+        self.is_ocr = is_ocr
+        s = _("Text translate")
+        if is_ocr:
+            s = _("Text recognition")
 
-        ocr_enable = server.get_ocr_api_key_s() is not None
-        if ocr_enable:
-            # print(server.get_ocr_api_key_s())
-            self.api_key_ocr_entry.set_text(server.get_ocr_api_key_s())
-        self.api_key_ocr_entry.set_visible(ocr_enable)
+        self.title.set_title(s)
+        self.title.set_subtitle(server.name)
+
+        if not self.is_ocr:
+            self.api_key_entry.set_text(server.get_api_key_s())
+        else:
+            self.api_key_entry.set_text(server.get_api_key_s_ocr())
 
         self.api_key_link.set_uri(server.get_doc_url())
 
@@ -56,35 +56,22 @@ class ServerPreferences(Adw.Bin):
 
     @Gtk.Template.Callback()
     def _on_api_key_apply(self, _row):
-        """ Called on self.api_key_entry::apply signal """
 
         api_key = self.api_key_entry.get_text()
         api_key = re.sub(r'\s*\|\s*', "  |  ", api_key.strip())
-        self.api_key_entry.props.text = api_key
-        self.api_key_entry.props.sensitive = False
-        self.api_key_stack.props.visible_child_name = 'spinner'
+        self.api_key_entry.set_text(api_key)
+        self.api_key_entry.set_sensitive(False)
+        self.api_key_stack.set_visible_child_name('spinner')
         self.api_key_spinner.start()
 
+        check_ot = self.server.check_translate
+        if self.is_ocr:
+            check_ot = self.server.check_ocr
+
         threading.Thread(target=self.request_text, daemon=True,
-                         args=(self.server.check_translate, api_key,
+                         args=(check_ot, api_key,
                                self.api_key_entry,
                                self.api_key_spinner)).start()
-
-    @Gtk.Template.Callback()
-    def _on_api_key_ocr_apply(self, _row):
-        """ Called on self.api_key_entry::apply signal """
-
-        api_key = self.api_key_ocr_entry.get_text()
-        api_key = re.sub(r'\s*\|\s*', "  |  ", api_key.strip())
-        self.api_key_ocr_entry.set_text(api_key)
-        self.api_key_ocr_entry.set_sensitive(False)
-        self.api_key_ocr_stack.set_visible_child_name('spinner')
-        self.api_key_ocr_spinner.start()
-
-        threading.Thread(target=self.request_text, daemon=True,
-                         args=(self.server.check_ocr, api_key,
-                               self.api_key_ocr_entry,
-                               self.api_key_ocr_spinner)).start()
 
     def update_ui(self, valid, entry, spinner):
         """更新
