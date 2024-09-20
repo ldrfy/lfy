@@ -65,6 +65,8 @@
 	(2,92,"GtkListBox","glb_compare",91,None,None,None,None,None,None),
 	(2,93,"AdwPreferencesGroup",None,5,None,None,None,1,None,None),
 	(2,94,"AdwComboRow","acr_server_ocr",93,None,None,None,-1,None,None),
+	(2,95,"GtkSeparator",None,94,None,None,None,None,None,None),
+	(2,96,"GtkButton","btn_config_server_ocr",94,None,None,None,1,None,None),
 	(6,1,"GtkShortcutsWindow","help_overlay",None,None,None,None,None,None,None),
 	(6,2,"GtkShortcutsSection",None,1,None,None,None,None,None,None),
 	(6,3,"GtkShortcutsGroup","general",2,None,None,None,None,None,None),
@@ -89,10 +91,6 @@
 	(10,20,"GtkStack","api_key_stack",19,None,None,None,None,None,None),
 	(10,21,"GtkStackPage",None,20,None,None,None,None,None,None),
 	(10,22,"GtkSpinner","api_key_spinner",21,None,None,None,None,None,None),
-	(10,24,"AdwEntryRow","api_key_ocr_entry",18,None,None,None,2,None,None),
-	(10,25,"GtkStack","api_key_ocr_stack",24,None,None,None,None,None,None),
-	(10,26,"GtkStackPage",None,25,None,None,None,None,None,None),
-	(10,27,"GtkSpinner","api_key_ocr_spinner",26,None,None,None,None,None,None),
 	(10,28,"GtkLinkButton","api_key_link",18,None,None,None,2,None,None),
 	(12,1,"GtkBox","ThemeSwitcher",None,None,None,None,None,None,None),
 	(12,2,"GtkBox","box",1,None,None,None,None,None,None),
@@ -164,7 +162,7 @@
 	(2,15,"AdwActionRow","subtitle","setup API Key for translation Server, click on the right to the details",1,None,None,None,None,None,None,None,None),
 	(2,15,"AdwActionRow","subtitle-lines","3",None,None,None,None,None,None,None,None,None),
 	(2,15,"AdwActionRow","title-lines","1",None,None,None,None,None,None,None,None,None),
-	(2,15,"AdwPreferencesRow","title","API Key",1,None,None,None,None,None,None,None,None),
+	(2,15,"AdwPreferencesRow","title","Translation keys",1,None,None,None,None,None,None,None,None),
 	(2,16,"GtkWidget","margin-bottom","12",None,None,None,None,None,None,None,None,None),
 	(2,16,"GtkWidget","margin-start","12",None,None,None,None,None,None,None,None,None),
 	(2,16,"GtkWidget","margin-top","12",None,None,None,None,None,None,None,None,None),
@@ -200,6 +198,12 @@
 	(2,92,"GtkListBox","selection-mode","multiple",None,None,None,None,None,None,None,None,None),
 	(2,94,"AdwActionRow","subtitle","local or cloud, text recognition",1,None,None,None,None,None,None,None,None),
 	(2,94,"AdwPreferencesRow","title","OCR server",1,None,None,None,None,None,None,None,None),
+	(2,95,"GtkWidget","margin-bottom","12",None,None,None,None,None,None,None,None,None),
+	(2,95,"GtkWidget","margin-start","12",None,None,None,None,None,None,None,None,None),
+	(2,95,"GtkWidget","margin-top","12",None,None,None,None,None,None,None,None,None),
+	(2,96,"GtkButton","icon-name","open-menu-symbolic",None,None,None,None,None,None,None,None,None),
+	(2,96,"GtkWidget","margin-start","8",None,None,None,None,None,None,None,None,None),
+	(2,96,"GtkWidget","valign","center",None,None,None,None,None,None,None,None,None),
 	(6,1,"GtkWindow","modal","True",None,None,None,None,None,None,None,None,None),
 	(6,2,"GtkShortcutsSection","max-height","10",None,None,None,None,None,None,None,None,None),
 	(6,2,"GtkShortcutsSection","section-name","shortcuts",None,None,None,None,None,None,None,None,None),
@@ -240,12 +244,6 @@
 	(10,21,"GtkStackPage","child",None,None,None,None,None,22,None,None,None,None),
 	(10,21,"GtkStackPage","name","spinner",None,None,None,None,None,None,None,None,None),
 	(10,22,"GtkWidget","valign","3",None,None,None,None,None,None,None,None,None),
-	(10,24,"AdwEntryRow","show-apply-button","true",None,None,None,None,None,None,None,None,None),
-	(10,24,"AdwPreferencesRow","title","API Key for OCR,Pay attention to whether there are dividing lines |",1,None,None,None,None,None,None,None,None),
-	(10,24,"GtkWidget","tooltip-text","Enter an API Key for the Server with OCR.",1,None,None,None,None,None,None,None,None),
-	(10,26,"GtkStackPage","child",None,None,None,None,None,27,None,None,None,None),
-	(10,26,"GtkStackPage","name","spinner",None,None,None,None,None,None,None,None,None),
-	(10,27,"GtkWidget","valign","3",None,None,None,None,None,None,None,None,None),
 	(10,28,"GtkButton","label","how to get API Key",1,None,None,None,None,None,None,None,None),
 	(10,28,"GtkLinkButton","uri","https://github.com/ldrfy/lfy",None,None,None,None,None,None,None,None,None),
 	(12,1,"GtkWidget","hexpand","true",None,None,None,None,None,None,None,None,None),
@@ -276,7 +274,6 @@
 	(77,12,5,"GObject","notify","_on_color_scheme_changed","active",None,None,None,None),
 	(78,10,16,"GtkButton","clicked","_on_back",None,None,None,None,None),
 	(79,10,19,"AdwEntryRow","apply","_on_api_key_apply",None,None,None,None,None),
-	(105,10,24,"AdwEntryRow","apply","_on_api_key_ocr_apply",None,None,None,None,None),
 	(106,2,45,"AdwEntryRow","apply","_on_vpn_apply",None,None,None,None,None),
 	(132,1,168,"GtkTextView","copy-clipboard","_set_tv_copy",None,None,None,None,None),
 	(133,1,168,"GtkTextView","cut-clipboard","_set_tv_copy",None,None,None,None,None),
@@ -287,7 +284,8 @@
 	(140,2,87,"GtkButton","clicked","_export_config",None,None,None,None,None),
 	(141,2,88,"GtkButton","clicked","_import_config",None,None,None,None,None),
 	(144,2,91,"GtkPopover","closed","_on_popover_closed",None,None,None,None,None),
-	(145,2,94,"GObject","notify","_config_select_server_ocr","selected",None,None,None,None)
+	(145,2,94,"GObject","notify","_config_select_server_ocr","selected",None,None,None,None),
+	(146,2,96,"GtkButton","clicked","_open_server_ocr",None,None,None,None,None)
   </object_signal>
   <object_data>
 	(2,17,"GtkWidget",1,1,None,None,None,None,None,None),
@@ -304,7 +302,9 @@
 	(12,1,"GtkWidget",1,1,None,None,None,None,None,None),
 	(12,1,"GtkWidget",2,2,None,1,None,None,None,None),
 	(1,113,"(item)",3,1,None,None,None,None,None,None),
-	(1,113,"(item)",1,2,"theme",1,None,None,None,None)
+	(1,113,"(item)",1,2,"theme",1,None,None,None,None),
+	(2,96,"GtkWidget",1,1,None,None,None,None,None,None),
+	(2,96,"GtkWidget",2,2,None,1,None,None,None,None)
   </object_data>
   <object_data_arg>
 	(2,17,"GtkWidget",2,2,"name","flat"),
@@ -315,6 +315,7 @@
 	(12,5,"GtkWidget",2,2,"name","theme-selector"),
 	(12,5,"GtkWidget",2,3,"name","dark"),
 	(12,1,"GtkWidget",2,2,"name","themeswitcher"),
-	(1,113,"(item)",1,2,"name","custom")
+	(1,113,"(item)",1,2,"name","custom"),
+	(2,96,"GtkWidget",2,2,"name","flat")
   </object_data_arg>
 </cambalache-project>

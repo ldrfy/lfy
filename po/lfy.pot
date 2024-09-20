@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-09-20 15:16+0800\n"
+"POT-Creation-Date: 2024-09-21 00:13+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgstr ""
 msgid "Automatically check the new version of the software upon startup"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:14 data/resources/preference.ui:75
+#: data/cool.ldr.lfy.in.gschema.xml:14 data/resources/preference.ui:93
 msgid ""
 "After the translation is completed, a system notification is automatically "
 "sent"
@@ -66,30 +66,42 @@ msgid "Baidu API Key and Secret Key for ocr, used in the middle | split"
 msgstr ""
 
 #: data/cool.ldr.lfy.in.gschema.xml:51
-msgid "Baidu OCR access_token"
+msgid ""
+"The lang parameters of the pytesseract module, such as Chinese and English "
+"by default"
 msgstr ""
 
 #: data/cool.ldr.lfy.in.gschema.xml:55
-msgid "Baidu OCR access_token expires date"
+msgid ""
+"The lang parameters of the easyocr module, such as Chinese and English by "
+"default, split by +"
 msgstr ""
 
 #: data/cool.ldr.lfy.in.gschema.xml:59
-msgid "aliyun AccessKey ID and AccessKey Secret, used in the middle | split"
+msgid "Baidu OCR access_token"
 msgstr ""
 
 #: data/cool.ldr.lfy.in.gschema.xml:63
-msgid "huoshan Access Key ID and Secret Access Key, used in the middle | split"
+msgid "Baidu OCR access_token expires date"
 msgstr ""
 
 #: data/cool.ldr.lfy.in.gschema.xml:67
-msgid "Tencent secret_id and secret_key, used in the middle | split"
+msgid "aliyun AccessKey ID and AccessKey Secret, used in the middle | split"
 msgstr ""
 
 #: data/cool.ldr.lfy.in.gschema.xml:71
+msgid "huoshan Access Key ID and Secret Access Key, used in the middle | split"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:75
+msgid "Tencent secret_id and secret_key, used in the middle | split"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:79
 msgid "VPN address and port"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:75 data/resources/preference.ui:100
+#: data/cool.ldr.lfy.in.gschema.xml:83 data/resources/preference.ui:118
 msgid "Which services are available in compare model"
 msgstr ""
 
@@ -181,77 +193,80 @@ msgstr ""
 msgid "A translation app for GNOME."
 msgstr ""
 
-#: lfy/main.py:154 data/resources/help-overlay.ui:20
+#: lfy/main.py:157 data/resources/help-overlay.ui:20
 #: data/resources/help-overlay.ui:27 data/resources/help-overlay.ui:34
 #: data/resources/help-overlay.ui:53
 msgid "Copy detected, translate immediately"
 msgstr ""
 
-#: lfy/main.py:157
+#: lfy/main.py:160
 msgid "Copy detected, not automatically translated"
 msgstr ""
 
-#: lfy/main.py:181
+#: lfy/main.py:184
 msgid "Next translation not remove line breaks"
 msgstr ""
 
-#: lfy/main.py:182
+#: lfy/main.py:185
 msgid "Next translation remove line breaks"
 msgstr ""
 
-#: lfy/main.py:192
+#: lfy/main.py:195
 msgid "Next translation without splicing text"
 msgstr ""
 
-#: lfy/main.py:193
+#: lfy/main.py:196
 msgid "Next translation splicing text"
 msgstr ""
 
-#: lfy/preference.py:66 lfy/api/server/com.py:72
+#: lfy/preference.py:69 lfy/api/server/com.py:74
 msgid "compare"
 msgstr ""
 
-#: lfy/preference.py:93 lfy/preference.py:133 lfy/preference.py:163
+#: lfy/preference.py:96 lfy/preference.py:136 lfy/preference.py:170
 msgid "It takes effect when you restart lfy"
 msgstr ""
 
-#: lfy/preference.py:101
+#: lfy/preference.py:104
 msgid "The clipboard format is incorrect"
 msgstr ""
 
-#: lfy/preference.py:109
+#: lfy/preference.py:112
 msgid "Configuration data has been exported to the clipboard"
 msgstr ""
 
-#: lfy/translate.py:234
+#: lfy/preference.py:152
+msgid "Using {} for text recognition"
+msgstr ""
+
+#: lfy/translate.py:235
 msgid ""
 "This time the content contains private information and is not translated"
 msgstr ""
 
-#: lfy/translate.py:285 lfy/translate.py:317 lfy/api/server/baidu.py:42
-#: lfy/api/server/baidu.py:205 lfy/api/server/tencent.py:150
-#: lfy/api/server/aliyun.py:98 lfy/api/server/com.py:28
-#: lfy/api/server/huoshan.py:136
+#: lfy/translate.py:288 lfy/translate.py:321 lfy/api/server/baidu.py:40
+#: lfy/api/server/tencent.py:150 lfy/api/server/aliyun.py:98
+#: lfy/api/server/com.py:29 lfy/api/server/huoshan.py:136
 msgid "something error:"
 msgstr ""
 
-#: lfy/translate.py:301
+#: lfy/translate.py:304
 msgid "OCRing.."
 msgstr ""
 
-#: lfy/translate.py:303
+#: lfy/translate.py:306
 msgid "Translating.."
 msgstr ""
 
-#: lfy/translate.py:315
+#: lfy/translate.py:318
 msgid "Translation completed"
 msgstr ""
 
-#: lfy/api/utils/bak.py:52
+#: lfy/api/utils/bak.py:53
 msgid "error with keys: "
 msgstr ""
 
-#: lfy/api/utils/bak.py:61
+#: lfy/api/utils/bak.py:63
 msgid "Please copy the configuration data in json format first"
 msgstr ""
 
@@ -291,33 +306,28 @@ msgstr ""
 msgid "Italian"
 msgstr ""
 
-#: lfy/api/server/baidu.py:30 lfy/api/server/baidu.py:70
-#: lfy/api/server/tencent.py:127 lfy/api/server/aliyun.py:68
-#: lfy/api/server/huoshan.py:67
+#: lfy/api/server/baidu.py:28 lfy/api/server/tencent.py:127
+#: lfy/api/server/aliyun.py:68 lfy/api/server/huoshan.py:67
 msgid "please input API Key in preference"
 msgstr ""
 
-#: lfy/api/server/baidu.py:131
+#: lfy/api/server/baidu.py:69
 msgid "baidu"
 msgstr ""
 
-#: lfy/api/server/baidu.py:144
+#: lfy/api/server/baidu.py:81
 msgid "please input app_id and secret_key like:"
 msgstr ""
 
-#: lfy/api/server/baidu.py:228
-msgid "please input API Key and Secret Key like:"
-msgstr ""
-
-#: lfy/api/server/google.py:44
+#: lfy/api/server/google.py:45
 msgid "google"
 msgstr ""
 
-#: lfy/api/server/google.py:60 lfy/api/server/bing.py:77
+#: lfy/api/server/google.py:61 lfy/api/server/bing.py:78
 msgid "something error, try other translate engine?"
 msgstr ""
 
-#: lfy/api/server/google.py:72
+#: lfy/api/server/google.py:74
 msgid "The connection timed out. Maybe there is a network problem"
 msgstr ""
 
@@ -329,11 +339,11 @@ msgstr ""
 msgid "please input secret_id and secret_key like:"
 msgstr ""
 
-#: lfy/api/server/bing.py:60
+#: lfy/api/server/bing.py:61
 msgid "bing"
 msgstr ""
 
-#: lfy/api/server/bing.py:128
+#: lfy/api/server/bing.py:131
 #, python-brace-format
 msgid "1000 characters limit! You send {len_text} characters."
 msgstr ""
@@ -348,6 +358,14 @@ msgstr ""
 
 #: lfy/api/server/huoshan.py:166
 msgid "huoshan"
+msgstr ""
+
+#: lfy/widgets/server_preferences.py:38
+msgid "Text translate"
+msgstr ""
+
+#: lfy/widgets/server_preferences.py:40
+msgid "Text recognition"
 msgstr ""
 
 #: data/resources/translate.ui:71
@@ -407,15 +425,7 @@ msgstr ""
 msgid "Enter an API Key for the Server with Translate."
 msgstr ""
 
-#: data/resources/server-preferences.ui:53
-msgid "API Key for OCR,Pay attention to whether there are dividing lines |"
-msgstr ""
-
-#: data/resources/server-preferences.ui:54
-msgid "Enter an API Key for the Server with OCR."
-msgstr ""
-
-#: data/resources/server-preferences.ui:74
+#: data/resources/server-preferences.ui:52
 msgid "how to get API Key"
 msgstr ""
 
@@ -424,7 +434,7 @@ msgid "setup API Key for translation Server, click on the right to the details"
 msgstr ""
 
 #: data/resources/preference.ui:15
-msgid "API Key"
+msgid "Translation keys"
 msgstr ""
 
 #: data/resources/preference.ui:44
@@ -435,49 +445,49 @@ msgstr ""
 msgid "OCR server"
 msgstr ""
 
-#: data/resources/preference.ui:57
+#: data/resources/preference.ui:75
 msgid "vpn addr and port, like http://127.0.0.1:7890"
 msgstr ""
 
-#: data/resources/preference.ui:68
+#: data/resources/preference.ui:86
 msgid "Automatically check for updates when opening software"
 msgstr ""
 
-#: data/resources/preference.ui:69
+#: data/resources/preference.ui:87
 msgid "auto check update"
 msgstr ""
 
-#: data/resources/preference.ui:76
+#: data/resources/preference.ui:94
 msgid "Notify translation results"
 msgstr ""
 
-#: data/resources/preference.ui:86
+#: data/resources/preference.ui:104
 msgid "Compare model"
 msgstr ""
 
-#: data/resources/preference.ui:112
+#: data/resources/preference.ui:130
 msgid "backup/restore the settings to/from the clipboard, edit or backup it"
 msgstr ""
 
-#: data/resources/preference.ui:113
+#: data/resources/preference.ui:131
 msgid "Software settings backup and restore"
 msgstr ""
 
-#: data/resources/preference.ui:116
+#: data/resources/preference.ui:134
 msgid "backup"
 msgstr ""
 
-#: data/resources/preference.ui:118
+#: data/resources/preference.ui:136
 msgid ""
 "Export the configuration to the clipboard, then you can paste it into any "
 "file and edit it"
 msgstr ""
 
-#: data/resources/preference.ui:125
+#: data/resources/preference.ui:143
 msgid "restore"
 msgstr ""
 
-#: data/resources/preference.ui:127
+#: data/resources/preference.ui:145
 msgid ""
 "Read the JSON configuration of the clipboard, then import it, and some of "
 "the configurations will take effect after reopening the software"

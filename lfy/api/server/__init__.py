@@ -139,14 +139,14 @@ class Server:
         return True, "test"
 
     def get_api_key_s(self):
-        """字符串apikey
+        """字符串apikey，翻译的
 
         Returns:
             _type_: _description_
         """
         return None
 
-    def ocr_image(self, img_path: str, lang_keys=None):
+    def ocr_image(self, img_path: str):
         """图片识别
 
         Args:
@@ -170,7 +170,7 @@ class Server:
         """
         return True, "success"
 
-    def get_ocr_api_key_s(self):
+    def get_api_key_s_ocr(self):
         """图片识别的字符串apikey
 
         Returns:

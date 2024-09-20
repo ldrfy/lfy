@@ -1,5 +1,6 @@
 '设置'
 
+import time
 from gettext import gettext as _
 
 from gi.repository import Adw, Gdk, Gio, Gtk
@@ -37,24 +38,26 @@ class PreferenceWindow(Adw.PreferencesWindow):
         super().__init__(**kwargs)
         self.sg = Settings.get()
         self.server: Server
+        self.server_ocr: Server
         # pylint: disable=E1101
         self.acr_server.set_model(get_server_names_api_key())
 
-        self.ocr_s = 0
+        self.ocr_s_time = time.time()
         self.acr_server_ocr.set_model(get_server_names_o())
         sso = get_servers_o()
         for i, so in enumerate(sso):
             if so.key == self.sg.server_ocr_selected_key:
                 self.acr_server_ocr.set_selected(i)
+                self.server_ocr = so
                 break
 
         self.entry_vpn_addr.props.text = self.sg.vpn_addr_port
 
         self.sg.bind('auto-check-update', self.auto_check_update,
-                'active', Gio.SettingsBindFlags.DEFAULT)
+                     'active', Gio.SettingsBindFlags.DEFAULT)
 
         self.sg.bind('notify-translation-results', self.notify_translation_results,
-                'active', Gio.SettingsBindFlags.DEFAULT)
+                     'active', Gio.SettingsBindFlags.DEFAULT)
         self._init_pop_compare()
         self.cb = Gdk.Display.get_default().get_clipboard()
 
@@ -134,16 +137,20 @@ class PreferenceWindow(Adw.PreferencesWindow):
 
     @Gtk.Template.Callback()
     def _open_server(self, _btn):
-        page = ServerPreferences(self.server)
-        self.present_subpage(page)
+        self.present_subpage(ServerPreferences(self.server))
+
+    @Gtk.Template.Callback()
+    def _open_server_ocr(self, _btn):
+        self.present_subpage(ServerPreferences(self.server_ocr, True))
 
     @Gtk.Template.Callback()
     def _config_select_server_ocr(self, arc, _value):
-        if self.ocr_s > 0:
-            _k = get_servers_o()[arc.get_selected()].key
-            self.sg.server_ocr_selected_key = _k
-            print("ocr ......",  arc.get_selected(), _k)
-        self.ocr_s += 1
+        if time.time() - self.ocr_s_time > 0.5:
+            self.server_ocr = get_servers_o()[arc.get_selected()]
+            self.sg.server_ocr_selected_key = self.server_ocr.key
+
+            s = _("Using {} for text recognition").format(self.server_ocr.name)
+            self.get_root().add_toast(Adw.Toast.new(s))
 
     @Gtk.Template.Callback()
     def _config_select_server(self, arc, _value):

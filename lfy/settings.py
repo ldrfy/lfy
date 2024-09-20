@@ -105,6 +105,33 @@ class Settings(Gio.Settings):
         self.set_string('server-sk-baidu-ocr', key)
 
     @property
+    def server_sk_pytesseract_ocr(self):
+        """pytesseract模块的lang参数，默认为中文、英文
+
+        Returns:
+            str: 如：pytesseract
+        """
+        return self.get_string('server-sk-pytesseract-ocr')
+
+    @server_sk_pytesseract_ocr.setter
+    def server_sk_pytesseract_ocr(self, key):
+        self.set_string('server-sk-pytesseract-ocr', key)
+
+    @property
+    def server_sk_easyocr_ocr(self):
+        """easyocr模块的lang参数，默认为中文、英文
+
+        Returns:
+            str: 如：easyocr
+        """
+        return self.get_string('server-sk-easyocr-ocr')
+
+    @server_sk_easyocr_ocr.setter
+    def server_sk_easyocr_ocr(self, key):
+        self.set_string('server-sk-easyocr-ocr', key)
+
+
+    @property
     def ocr_baidu_token(self):
         """百度OCR的服务密钥再次请求得到的token，只是一个字符串
 

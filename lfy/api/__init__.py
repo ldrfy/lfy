@@ -3,11 +3,8 @@
 """
 from gi.repository import Gtk
 
-from lfy.api.constant import SERVERS
+from lfy.api.constant import SERVERS_O, SERVERS_T
 from lfy.api.server import Lang, Server
-
-servers_t = None
-servers_o = None
 
 
 def get_servers_t():
@@ -16,10 +13,7 @@ def get_servers_t():
     Returns:
         dict: _description_
     """
-    global servers_t  # pylint:disable=W0603
-    if servers_t is None:
-        servers_t = [s for s in SERVERS if s.can_translate]
-    return servers_t
+    return SERVERS_T
 
 
 def get_servers_o():
@@ -28,10 +22,7 @@ def get_servers_o():
     Returns:
         dict: _description_
     """
-    global servers_o  # pylint:disable=W0603
-    if servers_o is None:
-        servers_o = [s for s in SERVERS if s.can_ocr]
-    return servers_o
+    return SERVERS_O
 
 
 def get_server_names_t():
@@ -68,7 +59,7 @@ def get_servers_api_key():
         list: ["百度", "腾讯", ...]
     """
 
-    return [s for s in SERVERS if s.get_api_key_s() is not None]
+    return [s for s in SERVERS_T if s.get_api_key_s() is not None]
 
 
 def get_server_names_api_key():
@@ -89,9 +80,10 @@ def get_server(i: int) -> Server:
     Returns:
         _type_: _description_
     """
-    if i >= len(SERVERS):
-        return SERVERS[0]
-    return SERVERS[i]
+    ss = SERVERS_T + SERVERS_O
+    if i >= len(ss):
+        return ss[0]
+    return ss[i]
 
 
 def create_server_t(key) -> Server:
@@ -115,6 +107,7 @@ def create_server_o(key) -> Server:
         _type_: _description_
     """
     for s in get_servers_o():
+        print(s)
         if s.key == key:
             return s
 
@@ -145,7 +138,7 @@ def server_key2i(key: str):
     Returns:
         int: 在 servers 是第几个
     """
-    for i, te in enumerate(SERVERS):
+    for i, te in enumerate(SERVERS_T):
         if te.key == key:
             return i
     return 0

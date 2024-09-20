@@ -12,7 +12,7 @@
               <object class="AdwComboRow" id="acr_server">
                 <property name="subtitle" translatable="yes">setup API Key for translation Server, click on the right to the details</property>
                 <property name="subtitle-lines">3</property>
-                <property name="title" translatable="yes">API Key</property>
+                <property name="title" translatable="yes">Translation keys</property>
                 <property name="title-lines">1</property>
                 <signal name="notify::selected" handler="_config_select_server"/>
                 <child>
@@ -44,6 +44,24 @@
                 <property name="subtitle" translatable="yes">local or cloud, text recognition</property>
                 <property name="title" translatable="yes">OCR server</property>
                 <signal name="notify::selected" handler="_config_select_server_ocr"/>
+                <child>
+                  <object class="GtkSeparator">
+                    <property name="margin-bottom">12</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-top">12</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="btn_config_server_ocr">
+                    <property name="icon-name">open-menu-symbolic</property>
+                    <property name="margin-start">8</property>
+                    <property name="valign">center</property>
+                    <signal name="clicked" handler="_open_server_ocr"/>
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
