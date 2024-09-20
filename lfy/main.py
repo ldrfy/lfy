@@ -13,7 +13,7 @@ from lfy.api.utils import is_text
 from lfy.api.utils.bak import backup_gsettings
 from lfy.api.utils.check_update import main as check_update
 from lfy.api.utils.debug import get_log_handler
-from lfy.preference import PreferenceWindow
+from lfy.preference import PreferencesDialog
 from lfy.settings import Settings
 from lfy.translate import TranslateWindow
 
@@ -143,7 +143,7 @@ class LfyApplication(Adw.Application):
             w (_type_): _description_
         """
         # pylint: disable=E1101
-        PreferenceWindow(transient_for=self.props.active_window).present()
+        PreferencesDialog().present()
 
     def on_action_trans_now(self, action, value):
         """临时设置不相应复制行为
