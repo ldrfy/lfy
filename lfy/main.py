@@ -1,19 +1,20 @@
 # main.py
+import json
 import os
 import threading
 import time
-import json
-from gettext import gettext as _
 from datetime import datetime
+from gettext import gettext as _
+
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk
 
 from lfy import RES_PATH, VERSION
 from lfy.api.utils import is_text
+from lfy.api.utils.bak import backup_gsettings
 from lfy.api.utils.check_update import main as check_update
 from lfy.preference import PreferenceWindow
 from lfy.settings import Settings
 from lfy.translate import TranslateWindow
-from lfy.api.utils.bak import backup_gsettings
 
 # 设置代理地址和端口号
 PROXY_ADDRESS = Settings.get().vpn_addr_port
@@ -108,7 +109,7 @@ class LfyApplication(Adw.Application):
         ad.set_documenters(['yuh <yuhldr@qq.com>, 2023-2023'])
         ad.set_translator_credits(_('translator_credits'))
         ad.set_comments(_('A translation app for GNOME.'))
-        ad.set_copyright(_(f'© 2023-{datetime.now().year} yuh'))
+        ad.set_copyright(f'© 2023-{datetime.now().year} yuh')
 
         s = f"Version: {VERSION}"
         gvs = Gtk.get_major_version(), Gtk.get_minor_version(), Gtk.get_micro_version()

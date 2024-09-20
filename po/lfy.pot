@@ -1,0 +1,515 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR yuhldr
+# This file is distributed under the same license as the cool.ldr.lfy package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: cool.ldr.lfy\n"
+"Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
+"POT-Creation-Date: 2024-09-20 15:16+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/cool.ldr.lfy.in.in.desktop:3
+#: data/resources/cool.ldr.lfy.in.appdata.xml:10
+#: data/resources/translate.ui:130
+msgid "lfy"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:6
+msgid "Window size"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:10
+msgid "Automatically check the new version of the software upon startup"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:14 data/resources/preference.ui:75
+msgid ""
+"After the translation is completed, a system notification is automatically "
+"sent"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:23
+msgid "theme"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:27
+msgid "The currently selected OCR service"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:31
+msgid "The currently selected translation service"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:35
+msgid "The currently selected translation language"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:39
+msgid "Split position of translation page"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:43
+msgid "Baidu app_id and secret_key, used in the middle | split"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:47
+msgid "Baidu API Key and Secret Key for ocr, used in the middle | split"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:51
+msgid "Baidu OCR access_token"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:55
+msgid "Baidu OCR access_token expires date"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:59
+msgid "aliyun AccessKey ID and AccessKey Secret, used in the middle | split"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:63
+msgid "huoshan Access Key ID and Secret Access Key, used in the middle | split"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:67
+msgid "Tencent secret_id and secret_key, used in the middle | split"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:71
+msgid "VPN address and port"
+msgstr ""
+
+#: data/cool.ldr.lfy.in.gschema.xml:75 data/resources/preference.ui:100
+msgid "Which services are available in compare model"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:11
+msgid "Translation software for read paper"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:13
+msgid ""
+"An easy and pleasant way to translate. Support many translation services. "
+"Especially suitable for document translation."
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:19
+msgid "yuh"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:30
+msgid "Translation homepage"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:35
+msgid "Preferences page"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:40
+msgid "Set Api Key"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:45
+msgid "Shortcuts"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:49
+msgid "About"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:60
+msgid "Add aliyun/huoshan Translate for free"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:61
+msgid "Support notification after translation"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:62
+msgid "Supports comparing multiple translations at the same time"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:69
+msgid "Add Bing Translate for free"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:76
+msgid "Fix Google Translate"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:77
+msgid "Improve translation performance"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:78
+msgid "Add Italian language and support Italian translation"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:79
+msgid ""
+"Optimize the structure of translation services and make it more convenient "
+"to create third-party translation services"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:86
+msgid "add shortcut"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:87
+msgid "Automatically check for updates"
+msgstr ""
+
+#: data/resources/cool.ldr.lfy.in.appdata.xml:93
+msgid "Basic functions completed"
+msgstr ""
+
+#: lfy/main.py:110
+msgid "translator_credits"
+msgstr ""
+
+#: lfy/main.py:111
+msgid "A translation app for GNOME."
+msgstr ""
+
+#: lfy/main.py:154 data/resources/help-overlay.ui:20
+#: data/resources/help-overlay.ui:27 data/resources/help-overlay.ui:34
+#: data/resources/help-overlay.ui:53
+msgid "Copy detected, translate immediately"
+msgstr ""
+
+#: lfy/main.py:157
+msgid "Copy detected, not automatically translated"
+msgstr ""
+
+#: lfy/main.py:181
+msgid "Next translation not remove line breaks"
+msgstr ""
+
+#: lfy/main.py:182
+msgid "Next translation remove line breaks"
+msgstr ""
+
+#: lfy/main.py:192
+msgid "Next translation without splicing text"
+msgstr ""
+
+#: lfy/main.py:193
+msgid "Next translation splicing text"
+msgstr ""
+
+#: lfy/preference.py:66 lfy/api/server/com.py:72
+msgid "compare"
+msgstr ""
+
+#: lfy/preference.py:93 lfy/preference.py:133 lfy/preference.py:163
+msgid "It takes effect when you restart lfy"
+msgstr ""
+
+#: lfy/preference.py:101
+msgid "The clipboard format is incorrect"
+msgstr ""
+
+#: lfy/preference.py:109
+msgid "Configuration data has been exported to the clipboard"
+msgstr ""
+
+#: lfy/translate.py:234
+msgid ""
+"This time the content contains private information and is not translated"
+msgstr ""
+
+#: lfy/translate.py:285 lfy/translate.py:317 lfy/api/server/baidu.py:42
+#: lfy/api/server/baidu.py:205 lfy/api/server/tencent.py:150
+#: lfy/api/server/aliyun.py:98 lfy/api/server/com.py:28
+#: lfy/api/server/huoshan.py:136
+msgid "something error:"
+msgstr ""
+
+#: lfy/translate.py:301
+msgid "OCRing.."
+msgstr ""
+
+#: lfy/translate.py:303
+msgid "Translating.."
+msgstr ""
+
+#: lfy/translate.py:315
+msgid "Translation completed"
+msgstr ""
+
+#: lfy/api/utils/bak.py:52
+msgid "error with keys: "
+msgstr ""
+
+#: lfy/api/utils/bak.py:61
+msgid "Please copy the configuration data in json format first"
+msgstr ""
+
+#: lfy/api/server/__init__.py:9
+msgid "Automatic"
+msgstr ""
+
+#: lfy/api/server/__init__.py:11
+msgid "Chinese"
+msgstr ""
+
+#: lfy/api/server/__init__.py:13
+msgid "Classical Chinese"
+msgstr ""
+
+#: lfy/api/server/__init__.py:15
+msgid "English"
+msgstr ""
+
+#: lfy/api/server/__init__.py:17
+msgid "Japanese"
+msgstr ""
+
+#: lfy/api/server/__init__.py:19
+msgid "Korean"
+msgstr ""
+
+#: lfy/api/server/__init__.py:21
+msgid "German"
+msgstr ""
+
+#: lfy/api/server/__init__.py:23
+msgid "French"
+msgstr ""
+
+#: lfy/api/server/__init__.py:25
+msgid "Italian"
+msgstr ""
+
+#: lfy/api/server/baidu.py:30 lfy/api/server/baidu.py:70
+#: lfy/api/server/tencent.py:127 lfy/api/server/aliyun.py:68
+#: lfy/api/server/huoshan.py:67
+msgid "please input API Key in preference"
+msgstr ""
+
+#: lfy/api/server/baidu.py:131
+msgid "baidu"
+msgstr ""
+
+#: lfy/api/server/baidu.py:144
+msgid "please input app_id and secret_key like:"
+msgstr ""
+
+#: lfy/api/server/baidu.py:228
+msgid "please input API Key and Secret Key like:"
+msgstr ""
+
+#: lfy/api/server/google.py:44
+msgid "google"
+msgstr ""
+
+#: lfy/api/server/google.py:60 lfy/api/server/bing.py:77
+msgid "something error, try other translate engine?"
+msgstr ""
+
+#: lfy/api/server/google.py:72
+msgid "The connection timed out. Maybe there is a network problem"
+msgstr ""
+
+#: lfy/api/server/tencent.py:64
+msgid "tencent"
+msgstr ""
+
+#: lfy/api/server/tencent.py:83
+msgid "please input secret_id and secret_key like:"
+msgstr ""
+
+#: lfy/api/server/bing.py:60
+msgid "bing"
+msgstr ""
+
+#: lfy/api/server/bing.py:128
+#, python-brace-format
+msgid "1000 characters limit! You send {len_text} characters."
+msgstr ""
+
+#: lfy/api/server/aliyun.py:120
+msgid "aliyun"
+msgstr ""
+
+#: lfy/api/server/aliyun.py:132 lfy/api/server/huoshan.py:178
+msgid "please input {} and {} like:"
+msgstr ""
+
+#: lfy/api/server/huoshan.py:166
+msgid "huoshan"
+msgstr ""
+
+#: data/resources/translate.ui:71
+msgid "Alt + D: Remove symbols such as line breaks"
+msgstr ""
+
+#: data/resources/translate.ui:78
+msgid "Alt + C: Splice the next copied text with the previous text"
+msgstr ""
+
+#: data/resources/translate.ui:85
+msgid "translate"
+msgstr ""
+
+#: data/resources/translate.ui:117
+msgid "Menu"
+msgstr ""
+
+#: data/resources/translate.ui:141 data/resources/help-overlay.ui:52
+msgid "Copy to translate"
+msgstr ""
+
+#: data/resources/translate.ui:147 data/resources/help-overlay.ui:19
+msgid "Reset/Restore UI"
+msgstr ""
+
+#: data/resources/translate.ui:151 data/resources/help-overlay.ui:26
+msgid "Hide the original text"
+msgstr ""
+
+#: data/resources/translate.ui:155 data/resources/help-overlay.ui:33
+msgid "Hide the translated text"
+msgstr ""
+
+#: data/resources/translate.ui:161
+msgid "_Preferences"
+msgstr ""
+
+#: data/resources/translate.ui:165
+msgid "_Keyboard Shortcuts"
+msgstr ""
+
+#: data/resources/translate.ui:169
+msgid "_About lfy"
+msgstr ""
+
+#: data/resources/server-preferences.ui:13
+msgid "Translate Server"
+msgstr ""
+
+#: data/resources/server-preferences.ui:31
+msgid ""
+"API Key for Translate,Pay attention to whether there are dividing lines |"
+msgstr ""
+
+#: data/resources/server-preferences.ui:32
+msgid "Enter an API Key for the Server with Translate."
+msgstr ""
+
+#: data/resources/server-preferences.ui:53
+msgid "API Key for OCR,Pay attention to whether there are dividing lines |"
+msgstr ""
+
+#: data/resources/server-preferences.ui:54
+msgid "Enter an API Key for the Server with OCR."
+msgstr ""
+
+#: data/resources/server-preferences.ui:74
+msgid "how to get API Key"
+msgstr ""
+
+#: data/resources/preference.ui:13
+msgid "setup API Key for translation Server, click on the right to the details"
+msgstr ""
+
+#: data/resources/preference.ui:15
+msgid "API Key"
+msgstr ""
+
+#: data/resources/preference.ui:44
+msgid "local or cloud, text recognition"
+msgstr ""
+
+#: data/resources/preference.ui:45
+msgid "OCR server"
+msgstr ""
+
+#: data/resources/preference.ui:57
+msgid "vpn addr and port, like http://127.0.0.1:7890"
+msgstr ""
+
+#: data/resources/preference.ui:68
+msgid "Automatically check for updates when opening software"
+msgstr ""
+
+#: data/resources/preference.ui:69
+msgid "auto check update"
+msgstr ""
+
+#: data/resources/preference.ui:76
+msgid "Notify translation results"
+msgstr ""
+
+#: data/resources/preference.ui:86
+msgid "Compare model"
+msgstr ""
+
+#: data/resources/preference.ui:112
+msgid "backup/restore the settings to/from the clipboard, edit or backup it"
+msgstr ""
+
+#: data/resources/preference.ui:113
+msgid "Software settings backup and restore"
+msgstr ""
+
+#: data/resources/preference.ui:116
+msgid "backup"
+msgstr ""
+
+#: data/resources/preference.ui:118
+msgid ""
+"Export the configuration to the clipboard, then you can paste it into any "
+"file and edit it"
+msgstr ""
+
+#: data/resources/preference.ui:125
+msgid "restore"
+msgstr ""
+
+#: data/resources/preference.ui:127
+msgid ""
+"Read the JSON configuration of the clipboard, then import it, and some of "
+"the configurations will take effect after reopening the software"
+msgstr ""
+
+#: data/resources/help-overlay.ui:42
+msgctxt "shortcut window"
+msgid "General"
+msgstr ""
+
+#: data/resources/help-overlay.ui:46
+msgid "Translate"
+msgstr ""
+
+#: data/resources/help-overlay.ui:59
+msgid "Splice Text"
+msgstr ""
+
+#: data/resources/help-overlay.ui:60 data/resources/help-overlay.ui:67
+msgid "Splice the next copied text with the previous text"
+msgstr ""
+
+#: data/resources/help-overlay.ui:66
+msgid "Remove line breaks"
+msgstr ""
+
+#: data/resources/help-overlay.ui:73
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr ""
+
+#: data/resources/help-overlay.ui:79
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr ""

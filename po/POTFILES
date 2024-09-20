@@ -1,7 +1,6 @@
 data/cool.ldr.lfy.in.in.desktop
-data/cool.ldr.lfy.in.metainfo.xml
 data/cool.ldr.lfy.in.gschema.xml
-data/cool.ldr.lfy.in.appdata.xml
+data/resources/cool.ldr.lfy.in.appdata.xml
 
 lfy/main.py
 lfy/preference.py
