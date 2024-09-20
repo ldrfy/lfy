@@ -14,6 +14,7 @@ from lfy.api import (create_server_o, create_server_t, get_lang,
 from lfy.api.constant import NO_TRANSLATED_TXTS
 from lfy.api.server import Server
 from lfy.api.utils import cal_md5
+from lfy.api.utils.debug import get_logger
 from lfy.api.utils.notify import nf_t
 from lfy.settings import Settings
 from lfy.widgets.theme_switcher import ThemeSwitcher
@@ -283,6 +284,7 @@ class TranslateWindow(Adw.ApplicationWindow):
                 _ok, text = server.translate_text(s, lk)
 
         except Exception as e:  # pylint: disable=W0718
+            get_logger().error(e)
             error_msg = _("something error:")
             error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
             text = f"{error_msg}{server.name}\n\n{error_msg2}"
@@ -315,6 +317,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             nf_t(self.app, f"{self.tran_server.name} " +
                  _("Translation completed"), s)
         except TypeError as e:
+            get_logger().error(e)
             error_msg = _("something error:")
             error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
             em = f"{error_msg}\n\n{error_msg2}"

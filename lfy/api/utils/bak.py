@@ -5,6 +5,7 @@ from gettext import gettext as _
 from gi.repository import Gio, GLib
 
 from lfy import APP_ID  # pylint: disable=E0611
+from lfy.api.utils.debug import get_logger
 from lfy.settings import Settings
 
 
@@ -58,4 +59,5 @@ def restore_gsettings(s):
 
     except Exception as e:  # pylint: disable=W0718
         print(e)
+        get_logger().error(e)
         return _('Please copy the configuration data in json format first')

@@ -1,5 +1,6 @@
-
+'ocr本地'
 from lfy.api.server import Server
+from lfy.api.utils.debug import get_logger
 
 
 def lib_ok():
@@ -13,6 +14,7 @@ def lib_ok():
         return True
     except ModuleNotFoundError as e:
         print(e)
+        get_logger().error(e)
         return False
 
 
@@ -56,4 +58,5 @@ class PytesseractServer(Server):
             return True, pytesseract.image_to_string(img_path, lang=s)
         except ModuleNotFoundError as e:
             print(e)
+            get_logger().error(e)
             return False, "请安装 pytesseract\n" + str(e)

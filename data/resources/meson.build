@@ -36,7 +36,7 @@ metainfo = i18n.merge_file(
   output: APP_ID + '.metainfo.xml',
   po_dir: join_paths(meson.project_source_root(), 'po'),
   install: true,
-  install_dir: join_paths(get_option('prefix'), get_option('datadir'), 'resources')
+  install_dir: join_paths(get_option('prefix'), get_option('datadir'), 'metainfo')
 )
 
 

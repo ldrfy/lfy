@@ -12,6 +12,7 @@ from lfy import RES_PATH, VERSION
 from lfy.api.utils import is_text
 from lfy.api.utils.bak import backup_gsettings
 from lfy.api.utils.check_update import main as check_update
+from lfy.api.utils.debug import get_log_handler
 from lfy.preference import PreferenceWindow
 from lfy.settings import Settings
 from lfy.translate import TranslateWindow
@@ -101,7 +102,6 @@ class LfyApplication(Adw.Application):
         """
         # pylint: disable=E1101
         path = f'{RES_PATH}/{self._application_id}.metainfo.xml'
-        print(path)
 
         ad = Adw.AboutDialog.new_from_appdata(path, VERSION)
         ad.set_developers(['yuh <yuhldr@qq.com>, 2023-2023'])
@@ -124,9 +124,12 @@ class LfyApplication(Adw.Application):
             if "server-sk-" in k and ("key" not in v or "Key" not in v):
                 v = "******"
             ss[k] = v
-        s += f"\n\n******* config *******\n"
+        s += "\n\n******* config *******\n"
         s += json.dumps(ss, indent=4, ensure_ascii=False)
-        s += f"\n************"
+        s += "\n************"
+
+        s += "\n\n******* debug log *******\n"
+        s += get_log_handler().get_logs()
 
         ad.set_debug_info(s)
 

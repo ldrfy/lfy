@@ -1,4 +1,6 @@
+'ocr'
 from lfy.api.server import Server
+from lfy.api.utils.debug import get_logger
 
 
 class EasyOcrServer(Server):
@@ -36,4 +38,5 @@ class EasyOcrServer(Server):
             return True, s.strip()
         except ModuleNotFoundError as e:
             print(e)
+            get_logger().error(e)
             return False, "请安装 easyocr\n" + str(e)
