@@ -272,6 +272,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             server (Server): _description_
         """
         is_ocr = lk is None
+        GLib.idle_add(self.update_ui, "", is_ocr)
 
         try:
             if is_ocr:
