@@ -8,6 +8,7 @@ import requests
 from requests import ConnectTimeout, RequestException
 
 from lfy.api.server import TIME_OUT, Server
+from lfy.api.utils.debug import get_logger
 
 
 def _get_session():
@@ -56,7 +57,7 @@ class GoogleServer(Server):
             str: _description_
         """
 
-        if n > 5:
+        if n > 3:
             raise ValueError(_("something error, try other translate engine?"))
 
         text = text.replace("#", "")
@@ -69,9 +70,11 @@ class GoogleServer(Server):
             response = self.session.post(url, params=params, data={'q': text}, timeout=TIME_OUT)
         except ConnectTimeout as e0:
             print("google0", n, type(e0), e0)
+            get_logger().error(e0)
             return False, _("The connection timed out. Maybe there is a network problem")
         except RequestException as e:
             print("google", n, type(e), e)
+            get_logger().error(e)
             return self.translate_text(text, lang_to, lang_from, n + 1)
 
         s = ""

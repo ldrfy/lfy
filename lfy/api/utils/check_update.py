@@ -1,12 +1,11 @@
 """更新
 """
 
-import logging
-
 import requests
 
 from lfy import PACKAGE_URL, VERSION  # pylint: disable=E0611
 from lfy.api.server import TIME_OUT
+from lfy.api.utils.debug import get_logger
 
 
 def get_by_gitee():
@@ -20,13 +19,13 @@ def get_by_gitee():
     try:
         request = requests.get(url, timeout=TIME_OUT)
         if request.status_code == 200:
-            logging.info("gitee update msg ok")
+            get_logger().info("gitee update msg ok")
             return request.json()
     except requests.exceptions.ConnectTimeout as e:
-        logging.error(e)
+        get_logger().error(e)
         return {}
     except Exception as e:  # pylint: disable=W0718
-        logging.error(e)
+        get_logger().error(e)
     return None
 
 
@@ -41,13 +40,13 @@ def get_by_github():
     try:
         request = requests.get(url, timeout=TIME_OUT)
         if request.status_code == 200:
-            logging.info("github update msg ok")
+            get_logger().info("github update msg ok")
             return request.json()
     except requests.exceptions.ConnectTimeout as e:
-        logging.error(e)
+        get_logger().error(e)
         return {}
     except Exception as e:  # pylint: disable=W0718
-        logging.error(e)
+        get_logger().error(e)
     return None
 
 
@@ -99,5 +98,5 @@ def main():
         return None
     # pylint: disable=W0718
     except Exception as e:
-        logging.error(e)
+        get_logger().error(e)
         return error_config

@@ -7,6 +7,7 @@ from multiprocessing import Pool
 
 from lfy.api.server import (Server, aliyun, baidu, bing, google, huoshan,
                             tencent)
+from lfy.api.utils.debug import get_logger
 from lfy.settings import Settings
 
 
@@ -28,6 +29,7 @@ def _translate(args):
         em = _("something error:")
         em = f"{em}{server.name}\n\n"
         em = f"{em}{str(e)}\n\n{traceback.format_exc()}"
+        get_logger().error(e)
         return False, em, server, time.time()-st
 
 

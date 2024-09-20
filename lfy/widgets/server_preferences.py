@@ -2,13 +2,13 @@
 # Copyright 2023 Rafael Mardojai CM
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import logging
 import re
 import threading
 
 from gi.repository import Adw, GLib, Gtk
 
 from lfy.api.server import Server
+from lfy.api.utils.debug import get_logger
 
 
 # pylint: disable=E1101
@@ -114,6 +114,6 @@ class ServerPreferences(Adw.Bin):
         try:
             valid = fun(api_key)
         except Exception as exc:  # pylint: disable=W0718
-            logging.error(exc)
+            get_logger().error(exc)
 
         GLib.idle_add(self.update_ui, valid, entry, spinner)

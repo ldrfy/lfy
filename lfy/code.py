@@ -1,3 +1,4 @@
+'终端翻译'
 import os
 import traceback
 from gettext import gettext as _
@@ -5,6 +6,7 @@ from gettext import gettext as _
 from gi.repository import Gdk
 
 from lfy.api import create_server_t, get_lang, server_key2i
+from lfy.api.utils.debug import get_logger
 from lfy.settings import Settings
 
 
@@ -37,6 +39,7 @@ def req_text(s):
         print(text)
 
     except Exception as e:  # pylint: disable=W0718
+        get_logger().error(e)
         error_msg = _("something error:")
         error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
         text = f"{error_msg}{tran_server.name}\n\n{error_msg2}"

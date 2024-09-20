@@ -9,6 +9,7 @@ import requests
 from requests import RequestException
 
 from lfy.api.server import TIME_OUT, Server
+from lfy.api.utils.debug import get_logger
 
 
 def _init_session():
@@ -83,6 +84,7 @@ class BingServer(Server):
                 hs = self.session.headers
                 print(hs["my_host"])
             except RequestException as e:
+                get_logger().error(e)
                 print("bing-session", n, type(e), e)
                 return self.translate_text(text, lang_to, lang_from, n + 1)
 
@@ -103,6 +105,7 @@ class BingServer(Server):
         try:
             response = self.session.post(url, data=data, timeout=TIME_OUT)
         except RequestException as e:
+            get_logger().error(e)
             print("bing-post", n, type(e), e)
             return self.translate_text(text, lang_to, lang_from, n + 1)
 
