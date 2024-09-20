@@ -2,8 +2,8 @@
 <!-- Created with Cambalache 0.90.4 -->
 <interface>
   <requires lib="gtk" version="4.12"/>
-  <requires lib="libadwaita" version="1.4"/>
-  <template class="PreferencesWindow" parent="AdwPreferencesWindow">
+  <requires lib="libadwaita" version="1.5"/>
+  <template class="PreferencesDialog" parent="AdwPreferencesDialog">
     <child>
       <object class="AdwPreferencesPage">
         <child>

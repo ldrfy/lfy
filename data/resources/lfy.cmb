@@ -43,7 +43,7 @@
 	(1,187,"(item)","app_preferences",186,None,None,None,None,None,None),
 	(1,188,"(item)","win_show-help-overlay",186,None,None,None,1,None,None),
 	(1,189,"(item)","app_about",186,None,None,None,2,None,None),
-	(2,2,"AdwPreferencesWindow","PreferencesWindow",None,None,None,None,-1,None,None),
+	(2,2,"AdwPreferencesDialog","PreferencesDialog",None,None,None,None,-1,None,None),
 	(2,5,"AdwPreferencesPage",None,2,None,None,None,-1,None,None),
 	(2,14,"AdwPreferencesGroup",None,5,None,None,None,None,None,None),
 	(2,15,"AdwComboRow","acr_server",14,None,None,None,None,None,None),

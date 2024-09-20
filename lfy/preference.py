@@ -15,13 +15,13 @@ from lfy.widgets.server_preferences import ServerPreferences
 
 
 @Gtk.Template(resource_path='/cool/ldr/lfy/preference.ui')
-class PreferenceWindow(Adw.PreferencesWindow):
+class PreferencesDialog(Adw.PreferencesDialog):
     """设置
 
     Args:
         Adw (_type_): _description_
     """
-    __gtype_name__ = 'PreferencesWindow'
+    __gtype_name__ = 'PreferencesDialog'
 
     acr_server: Adw.ComboRow = Gtk.Template.Child()
     acr_server_ocr: Adw.ComboRow = Gtk.Template.Child()
