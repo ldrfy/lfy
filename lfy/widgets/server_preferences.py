@@ -14,13 +14,13 @@ from lfy.api.utils.debug import get_logger
 
 # pylint: disable=E1101
 @Gtk.Template(resource_path='/cool/ldr/lfy/server-preferences.ui')
-class ServerPreferences(Adw.Bin):
+class ServerPreferences(Adw.NavigationPage):
     """设置api
 
     Args:
         Adw (_type_): _description_
     """
-    __gtype_name__ = 'ServerPreferences'
+    __gtype_name__ = 'ServerPreferencesPage'
 
     # Child widgets
     title = Gtk.Template.Child()
@@ -48,11 +48,6 @@ class ServerPreferences(Adw.Bin):
             self.api_key_entry.set_text(server.get_api_key_s_ocr())
 
         self.api_key_link.set_uri(server.get_doc_url())
-
-    @Gtk.Template.Callback()
-    def _on_back(self, _button):
-        """ Called on self.back_btn::clicked signal """
-        self.get_root().close_subpage()
 
     @Gtk.Template.Callback()
     def _on_api_key_apply(self, _row):
@@ -86,8 +81,8 @@ class ServerPreferences(Adw.Bin):
             entry.add_css_class('error')
         entry.props.sensitive = True
 
-        toast = Adw.Toast.new(text.replace("\n", ""))
-        self.get_root().add_toast(toast)
+        # TODO: 报错
+        self.add_toast(Adw.Toast.new(text.replace("\n", "")))
         spinner.stop()
 
     def request_text(self, fun, api_key, entry, spinner):

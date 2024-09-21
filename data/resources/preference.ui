@@ -6,6 +6,8 @@
   <template class="PreferencesDialog" parent="AdwPreferencesDialog">
     <child>
       <object class="AdwPreferencesPage">
+        <property name="icon-name">applications-system-symbolic</property>
+        <property name="title" translatable="yes">General</property>
         <child>
           <object class="AdwPreferencesGroup">
             <child>
@@ -81,24 +83,6 @@
         <child>
           <object class="AdwPreferencesGroup">
             <child>
-              <object class="AdwSwitchRow" id="auto_check_update">
-                <property name="active">True</property>
-                <property name="subtitle" translatable="yes">Automatically check for updates when opening software</property>
-                <property name="title" translatable="yes">auto check update</property>
-              </object>
-            </child>
-            <child>
-              <object class="AdwSwitchRow" id="notify_translation_results">
-                <property name="active">True</property>
-                <property name="subtitle" translatable="yes">After the translation is completed, a system notification is automatically sent</property>
-                <property name="title" translatable="yes">Notify translation results</property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="AdwPreferencesGroup">
-            <child>
               <object class="AdwActionRow" id="aar_compare">
                 <property name="subtitle">all</property>
                 <property name="title" translatable="yes">Compare model</property>
@@ -119,6 +103,30 @@
                     <property name="valign">center</property>
                   </object>
                 </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="AdwPreferencesPage">
+        <property name="icon-name">applications-system-symbolic</property>
+        <property name="title" translatable="yes">Other</property>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <child>
+              <object class="AdwSwitchRow" id="auto_check_update">
+                <property name="active">True</property>
+                <property name="subtitle" translatable="yes">Automatically check for updates when opening software</property>
+                <property name="title" translatable="yes">auto check update</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSwitchRow" id="notify_translation_results">
+                <property name="active">True</property>
+                <property name="subtitle" translatable="yes">After the translation is completed, a system notification is automatically sent</property>
+                <property name="title" translatable="yes">Notify translation results</property>
               </object>
             </child>
           </object>

@@ -94,7 +94,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
             s = restore_gsettings(s)
             if len(s) == 0:
                 s = _("It takes effect when you restart lfy")
-            self.get_root().add_toast(Adw.Toast.new(s))
+            self.add_toast(Adw.Toast.new(s))
 
         cf = self.cb.get_formats()
 
@@ -102,7 +102,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
             self.cb.read_text_async(None, on_active_copy)
         else:
             notice_s = _("The clipboard format is incorrect")
-            self.get_root().add_toast(Adw.Toast.new(notice_s))
+            self.add_toast(Adw.Toast.new(notice_s))
 
     @Gtk.Template.Callback()
     def _export_config(self, _b):
@@ -110,7 +110,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
         print(f"\n\n{s}\n\n")
         self.cb.set(s)
         notice_s = _("Configuration data has been exported to the clipboard")
-        self.get_root().add_toast(Adw.Toast.new(notice_s))
+        self.add_toast(Adw.Toast.new(notice_s))
 
     @Gtk.Template.Callback()
     def _on_popover_closed(self, _popover):
@@ -132,16 +132,15 @@ class PreferencesDialog(Adw.PreferencesDialog):
         if self.sg.compare_servers != keys:
             self.sg.compare_servers = keys
             self.aar_compare.set_subtitle(", ".join(names))
-            self.get_root().add_toast(
-                Adw.Toast.new(_("It takes effect when you restart lfy")))
+            self.add_toast(Adw.Toast.new(_("It takes effect when you restart lfy")))
 
     @Gtk.Template.Callback()
     def _open_server(self, _btn):
-        self.present_subpage(ServerPreferences(self.server))
+        self.push_subpage(ServerPreferences(self.server))
 
     @Gtk.Template.Callback()
     def _open_server_ocr(self, _btn):
-        self.present_subpage(ServerPreferences(self.server_ocr, True))
+        self.push_subpage(ServerPreferences(self.server_ocr, True))
 
     @Gtk.Template.Callback()
     def _config_select_server_ocr(self, arc, _value):
@@ -150,7 +149,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
             self.sg.server_ocr_selected_key = self.server_ocr.key
 
             s = _("Using {} for text recognition").format(self.server_ocr.name)
-            self.get_root().add_toast(Adw.Toast.new(s))
+            self.add_toast(Adw.Toast.new(s))
 
     @Gtk.Template.Callback()
     def _config_select_server(self, arc, _value):
@@ -166,5 +165,4 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.sg.vpn_addr_port = vpn_addr
         self.entry_vpn_addr.props.sensitive = True
 
-        self.get_root().add_toast(
-            Adw.Toast.new(_("It takes effect when you restart lfy")))
+        self.add_toast(Adw.Toast.new(_("It takes effect when you restart lfy")))
