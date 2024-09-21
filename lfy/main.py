@@ -143,7 +143,7 @@ class LfyApplication(Adw.Application):
             w (_type_): _description_
         """
         # pylint: disable=E1101
-        PreferencesDialog().present()
+        PreferencesDialog().present(self.props.active_window)
 
     def on_action_trans_now(self, action, value):
         """临时设置不相应复制行为

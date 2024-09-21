@@ -3,7 +3,8 @@
 <interface>
   <requires lib="gtk" version="4.12"/>
   <requires lib="libadwaita" version="1.4"/>
-  <template class="ServerPreferences" parent="AdwBin">
+  <template class="ServerPreferencesPage" parent="AdwNavigationPage">
+    <property name="title" translatable="yes">test</property>
     <child>
       <object class="AdwToolbarView">
         <child type="top">
@@ -13,12 +14,6 @@
                 <property name="title" translatable="yes">Translate Server</property>
               </object>
             </property>
-            <child>
-              <object class="GtkButton">
-                <property name="icon-name">go-previous-symbolic</property>
-                <signal name="clicked" handler="_on_back"/>
-              </object>
-            </child>
           </object>
         </child>
         <child>
