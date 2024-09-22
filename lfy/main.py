@@ -106,7 +106,7 @@ class LfyApplication(Adw.Application):
             w (_type_): _description_
         """
         # pylint: disable=E1101
-        path = f'{RES_PATH}/{self._application_id}.metainfo.xml'
+        path = f'{RES_PATH}/{self._application_id}.appdata.xml'
 
         ad = Adw.AboutDialog.new_from_appdata(path, VERSION)
         ad.set_developers(['yuh <yuhldr@qq.com>, 2023-2023'])
