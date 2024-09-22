@@ -81,9 +81,20 @@ class ServerPreferences(Adw.NavigationPage):
         else:
             entry.add_css_class('error')
         entry.props.sensitive = True
-
-        self.dialog.add_toast(Adw.Toast.new(text.replace("\n", "")))
         spinner.stop()
+
+        # 创建 AlertDialog
+        dialog = Adw.AlertDialog.new(text)
+        dialog.set_title("错误")
+        dialog.set_body(text)
+        dialog.add_response("ok", "确定")
+        dialog.set_default_response("ok")
+        # 设置对话框为模态
+        dialog.set_modal(True)
+        # 连接响应信号
+        dialog.connect("response", lambda dialog, response: dialog.hide())
+        # 显示对话框
+        dialog.show()
 
     def request_text(self, fun, api_key, entry, spinner):
         """验证服务api是否靠谱
