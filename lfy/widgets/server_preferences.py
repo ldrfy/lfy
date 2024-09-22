@@ -31,9 +31,10 @@ class ServerPreferences(Adw.NavigationPage):
 
     api_key_link = Gtk.Template.Child()
 
-    def __init__(self, server: Server, is_ocr=False, **kwargs):
+    def __init__(self, server: Server, is_ocr=False, dialog=None, **kwargs):
         super().__init__(**kwargs)
         self.server = server
+        self.dialog = dialog
         self.is_ocr = is_ocr
         s = _("Text translate")
         if is_ocr:
@@ -42,10 +43,10 @@ class ServerPreferences(Adw.NavigationPage):
         self.title.set_title(s)
         self.title.set_subtitle(server.name)
 
-        if not self.is_ocr:
-            self.api_key_entry.set_text(server.get_api_key_s())
-        else:
-            self.api_key_entry.set_text(server.get_api_key_s_ocr())
+        s = server.get_api_key_s()
+        if self.is_ocr:
+            s = server.get_api_key_s_ocr()
+        self.api_key_entry.set_text(s)
 
         self.api_key_link.set_uri(server.get_doc_url())
 
@@ -81,8 +82,7 @@ class ServerPreferences(Adw.NavigationPage):
             entry.add_css_class('error')
         entry.props.sensitive = True
 
-        # TODO: 报错
-        self.add_toast(Adw.Toast.new(text.replace("\n", "")))
+        self.dialog.add_toast(Adw.Toast.new(text.replace("\n", "")))
         spinner.stop()
 
     def request_text(self, fun, api_key, entry, spinner):

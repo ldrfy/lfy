@@ -132,15 +132,17 @@ class PreferencesDialog(Adw.PreferencesDialog):
         if self.sg.compare_servers != keys:
             self.sg.compare_servers = keys
             self.aar_compare.set_subtitle(", ".join(names))
-            self.add_toast(Adw.Toast.new(_("It takes effect when you restart lfy")))
+            self.add_toast(Adw.Toast.new(
+                _("It takes effect when you restart lfy")))
 
     @Gtk.Template.Callback()
     def _open_server(self, _btn):
-        self.push_subpage(ServerPreferences(self.server))
+        self.push_subpage(ServerPreferences(self.server, dialog=self))
 
     @Gtk.Template.Callback()
     def _open_server_ocr(self, _btn):
-        self.push_subpage(ServerPreferences(self.server_ocr, True))
+        self.push_subpage(ServerPreferences(
+            self.server_ocr, True, dialog=self))
 
     @Gtk.Template.Callback()
     def _config_select_server_ocr(self, arc, _value):
@@ -165,4 +167,5 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.sg.vpn_addr_port = vpn_addr
         self.entry_vpn_addr.props.sensitive = True
 
-        self.add_toast(Adw.Toast.new(_("It takes effect when you restart lfy")))
+        self.add_toast(Adw.Toast.new(
+            _("It takes effect when you restart lfy")))
