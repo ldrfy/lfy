@@ -140,19 +140,9 @@
         <attribute name="action">app.copy2translate</attribute>
         <attribute name="label" translatable="yes">Copy to translate</attribute>
       </item>
-    </section>
-    <section id="st_gp">
-      <item>
-        <attribute name="action">app.gp_reset_restore</attribute>
-        <attribute name="label" translatable="yes">Reset/Restore UI</attribute>
-      </item>
       <item>
         <attribute name="action">app.gp_up</attribute>
         <attribute name="label" translatable="yes">Hide the original text</attribute>
-      </item>
-      <item>
-        <attribute name="action">app.gp_down</attribute>
-        <attribute name="label" translatable="yes">Hide the translated text</attribute>
       </item>
     </section>
     <section id="st_pref">
@@ -163,6 +153,10 @@
       <item>
         <attribute name="action">win.show-help-overlay</attribute>
         <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.find_update</attribute>
+        <attribute name="label" translatable="yes">_Check for updates</attribute>
       </item>
       <item>
         <attribute name="action">app.about</attribute>

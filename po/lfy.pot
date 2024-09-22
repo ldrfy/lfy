@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-09-21 00:13+0800\n"
+"POT-Creation-Date: 2024-09-22 18:27+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgstr ""
 msgid "Automatically check the new version of the software upon startup"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:14 data/resources/preference.ui:93
+#: data/cool.ldr.lfy.in.gschema.xml:14 data/resources/preference.ui:116
 msgid ""
 "After the translation is completed, a system notification is automatically "
 "sent"
@@ -101,7 +101,7 @@ msgstr ""
 msgid "VPN address and port"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:83 data/resources/preference.ui:118
+#: data/cool.ldr.lfy.in.gschema.xml:83 data/resources/preference.ui:90
 msgid "Which services are available in compare model"
 msgstr ""
 
@@ -185,45 +185,53 @@ msgstr ""
 msgid "Basic functions completed"
 msgstr ""
 
-#: lfy/main.py:110
+#: lfy/main.py:115
 msgid "translator_credits"
 msgstr ""
 
-#: lfy/main.py:111
+#: lfy/main.py:116
 msgid "A translation app for GNOME."
 msgstr ""
 
-#: lfy/main.py:157 data/resources/help-overlay.ui:20
+#: lfy/main.py:162 data/resources/help-overlay.ui:20
 #: data/resources/help-overlay.ui:27 data/resources/help-overlay.ui:34
 #: data/resources/help-overlay.ui:53
 msgid "Copy detected, translate immediately"
 msgstr ""
 
-#: lfy/main.py:160
+#: lfy/main.py:165
 msgid "Copy detected, not automatically translated"
 msgstr ""
 
-#: lfy/main.py:184
+#: lfy/main.py:189
 msgid "Next translation not remove line breaks"
 msgstr ""
 
-#: lfy/main.py:185
+#: lfy/main.py:190
 msgid "Next translation remove line breaks"
 msgstr ""
 
-#: lfy/main.py:195
+#: lfy/main.py:200
 msgid "Next translation without splicing text"
 msgstr ""
 
-#: lfy/main.py:196
+#: lfy/main.py:201
 msgid "Next translation splicing text"
+msgstr ""
+
+#: lfy/main.py:302
+msgid "There is no new version. The current version is {}."
+msgstr ""
+
+#: lfy/main.py:304
+msgid "You can go to {} to view the beta version."
 msgstr ""
 
 #: lfy/preference.py:69 lfy/api/server/com.py:74
 msgid "compare"
 msgstr ""
 
-#: lfy/preference.py:96 lfy/preference.py:136 lfy/preference.py:170
+#: lfy/preference.py:96 lfy/preference.py:136 lfy/preference.py:171
 msgid "It takes effect when you restart lfy"
 msgstr ""
 
@@ -235,7 +243,7 @@ msgstr ""
 msgid "Configuration data has been exported to the clipboard"
 msgstr ""
 
-#: lfy/preference.py:152
+#: lfy/preference.py:153
 msgid "Using {} for text recognition"
 msgstr ""
 
@@ -360,11 +368,11 @@ msgstr ""
 msgid "huoshan"
 msgstr ""
 
-#: lfy/widgets/server_preferences.py:38
+#: lfy/widgets/server_preferences.py:39
 msgid "Text translate"
 msgstr ""
 
-#: lfy/widgets/server_preferences.py:40
+#: lfy/widgets/server_preferences.py:41
 msgid "Text recognition"
 msgstr ""
 
@@ -388,109 +396,121 @@ msgstr ""
 msgid "Copy to translate"
 msgstr ""
 
-#: data/resources/translate.ui:147 data/resources/help-overlay.ui:19
-msgid "Reset/Restore UI"
-msgstr ""
-
-#: data/resources/translate.ui:151 data/resources/help-overlay.ui:26
+#: data/resources/translate.ui:145 data/resources/help-overlay.ui:26
 msgid "Hide the original text"
 msgstr ""
 
-#: data/resources/translate.ui:155 data/resources/help-overlay.ui:33
-msgid "Hide the translated text"
-msgstr ""
-
-#: data/resources/translate.ui:161
+#: data/resources/translate.ui:151
 msgid "_Preferences"
 msgstr ""
 
-#: data/resources/translate.ui:165
+#: data/resources/translate.ui:155
 msgid "_Keyboard Shortcuts"
 msgstr ""
 
-#: data/resources/translate.ui:169
+#: data/resources/translate.ui:159
+msgid "_Check for updates"
+msgstr ""
+
+#: data/resources/translate.ui:163
 msgid "_About lfy"
 msgstr ""
 
-#: data/resources/server-preferences.ui:13
+#: data/resources/server-preferences.ui:14
 msgid "Translate Server"
 msgstr ""
 
-#: data/resources/server-preferences.ui:31
+#: data/resources/server-preferences.ui:26
 msgid ""
 "API Key for Translate,Pay attention to whether there are dividing lines |"
 msgstr ""
 
-#: data/resources/server-preferences.ui:32
+#: data/resources/server-preferences.ui:27
 msgid "Enter an API Key for the Server with Translate."
 msgstr ""
 
-#: data/resources/server-preferences.ui:52
+#: data/resources/server-preferences.ui:47
 msgid "how to get API Key"
 msgstr ""
 
-#: data/resources/preference.ui:13
-msgid "setup API Key for translation Server, click on the right to the details"
+#: data/resources/preference.ui:10
+msgid "General"
 msgstr ""
 
 #: data/resources/preference.ui:15
+msgid "setup API Key for translation Server, click on the right to the details"
+msgstr ""
+
+#: data/resources/preference.ui:17
 msgid "Translation keys"
 msgstr ""
 
-#: data/resources/preference.ui:44
+#: data/resources/preference.ui:46
 msgid "local or cloud, text recognition"
 msgstr ""
 
-#: data/resources/preference.ui:45
+#: data/resources/preference.ui:47
 msgid "OCR server"
 msgstr ""
 
-#: data/resources/preference.ui:75
-msgid "vpn addr and port, like http://127.0.0.1:7890"
-msgstr ""
-
-#: data/resources/preference.ui:86
-msgid "Automatically check for updates when opening software"
-msgstr ""
-
-#: data/resources/preference.ui:87
-msgid "auto check update"
-msgstr ""
-
-#: data/resources/preference.ui:94
-msgid "Notify translation results"
-msgstr ""
-
-#: data/resources/preference.ui:104
+#: data/resources/preference.ui:76
 msgid "Compare model"
 msgstr ""
 
-#: data/resources/preference.ui:130
+#: data/resources/preference.ui:103
+msgid "Other"
+msgstr ""
+
+#: data/resources/preference.ui:109
+msgid "Automatically check for updates when opening software"
+msgstr ""
+
+#: data/resources/preference.ui:110
+msgid "auto check update"
+msgstr ""
+
+#: data/resources/preference.ui:117
+msgid "Notify translation results"
+msgstr ""
+
+#: data/resources/preference.ui:128
+msgid "vpn addr and port, like http://127.0.0.1:7890"
+msgstr ""
+
+#: data/resources/preference.ui:138
 msgid "backup/restore the settings to/from the clipboard, edit or backup it"
 msgstr ""
 
-#: data/resources/preference.ui:131
+#: data/resources/preference.ui:139
 msgid "Software settings backup and restore"
 msgstr ""
 
-#: data/resources/preference.ui:134
+#: data/resources/preference.ui:142
 msgid "backup"
 msgstr ""
 
-#: data/resources/preference.ui:136
+#: data/resources/preference.ui:144
 msgid ""
 "Export the configuration to the clipboard, then you can paste it into any "
 "file and edit it"
 msgstr ""
 
-#: data/resources/preference.ui:143
+#: data/resources/preference.ui:151
 msgid "restore"
 msgstr ""
 
-#: data/resources/preference.ui:145
+#: data/resources/preference.ui:153
 msgid ""
 "Read the JSON configuration of the clipboard, then import it, and some of "
 "the configurations will take effect after reopening the software"
+msgstr ""
+
+#: data/resources/help-overlay.ui:19
+msgid "Reset/Restore UI"
+msgstr ""
+
+#: data/resources/help-overlay.ui:33
+msgid "Hide the translated text"
 msgstr ""
 
 #: data/resources/help-overlay.ui:42

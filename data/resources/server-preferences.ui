@@ -4,7 +4,7 @@
   <requires lib="gtk" version="4.12"/>
   <requires lib="libadwaita" version="1.4"/>
   <template class="ServerPreferencesPage" parent="AdwNavigationPage">
-    <property name="title" translatable="yes">test</property>
+    <property name="title">test</property>
     <child>
       <object class="AdwToolbarView">
         <child type="top">
