@@ -9,6 +9,6 @@
     <file compressed="true" preprocess="xml-stripblanks">preference.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">server-preferences.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">theme-switcher.ui</file>
-    <file preprocess="xml-stripblanks">cool.ldr.lfy.metainfo.xml</file>
+    <file preprocess="xml-stripblanks">cool.ldr.lfy.appdata.xml</file>
   </gresource>
 </gresources>

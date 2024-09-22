@@ -5,7 +5,7 @@ appdata_conf.set('APP_ID', APP_ID)
 appdata_conf.set('APP_NAME', meson.project_name())
 appdata_conf.set('PACKAGE_URL', PACKAGE_URL)
 appdata_conf.set('PACKAGE_URL_BUG', PACKAGE_URL_BUG)
-i18n.merge_file(
+appdata = i18n.merge_file(
   input: configure_file(
     output: APP_ID + '.in.appdata.xml',
     input: APP_ID + '.in.appdata.xml',
@@ -27,18 +27,6 @@ if appstream_util.found()
   )
 endif
 
-metainfo = i18n.merge_file(
-  input: configure_file(
-    output: APP_ID + '.in.appdata.xml',
-    input: APP_ID + '.in.appdata.xml',
-    configuration: appdata_conf
-  ),
-  output: APP_ID + '.metainfo.xml',
-  po_dir: join_paths(meson.project_source_root(), 'po'),
-  install: true,
-  install_dir: join_paths(get_option('prefix'), get_option('datadir'), 'metainfo')
-)
-
 
 # Compiling the resources
 # about_dialog is defined in data/ui/meson.build to generate the output file in that directory
@@ -48,6 +36,6 @@ gnome.compile_resources(
   gresource_bundle: true,
   source_dir: meson.current_build_dir(),
   install_dir: PKGDATA_DIR,
-  dependencies: [metainfo],
+  dependencies: [appdata],
   install: true
 )
