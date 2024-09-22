@@ -5,11 +5,11 @@
   <requires lib="libadwaita" version="1.5"/>
   <template class="PreferencesDialog" parent="AdwPreferencesDialog">
     <child>
-      <object class="AdwPreferencesPage">
+      <object class="AdwPreferencesPage" id="app_general">
         <property name="icon-name">applications-system-symbolic</property>
         <property name="title" translatable="yes">General</property>
         <child>
-          <object class="AdwPreferencesGroup">
+          <object class="AdwPreferencesGroup" id="apg_translate">
             <child>
               <object class="AdwComboRow" id="acr_server">
                 <property name="subtitle" translatable="yes">setup API Key for translation Server, click on the right to the details</property>
@@ -40,7 +40,7 @@
           </object>
         </child>
         <child>
-          <object class="AdwPreferencesGroup">
+          <object class="AdwPreferencesGroup" id="apg_ocr">
             <child>
               <object class="AdwComboRow" id="acr_server_ocr">
                 <property name="subtitle" translatable="yes">local or cloud, text recognition</property>
@@ -69,19 +69,7 @@
           </object>
         </child>
         <child>
-          <object class="AdwPreferencesGroup">
-            <child>
-              <object class="AdwEntryRow" id="entry_vpn_addr">
-                <property name="input-purpose">url</property>
-                <property name="show-apply-button">True</property>
-                <property name="title" translatable="yes">vpn addr and port, like http://127.0.0.1:7890</property>
-                <signal name="apply" handler="_on_vpn_apply"/>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="AdwPreferencesGroup">
+          <object class="AdwPreferencesGroup" id="apg_compare">
             <child>
               <object class="AdwActionRow" id="aar_compare">
                 <property name="subtitle">all</property>
@@ -110,11 +98,11 @@
       </object>
     </child>
     <child>
-      <object class="AdwPreferencesPage">
+      <object class="AdwPreferencesPage" id="app_other">
         <property name="icon-name">applications-system-symbolic</property>
         <property name="title" translatable="yes">Other</property>
         <child>
-          <object class="AdwPreferencesGroup">
+          <object class="AdwPreferencesGroup" id="apg_update">
             <child>
               <object class="AdwSwitchRow" id="auto_check_update">
                 <property name="active">True</property>
@@ -132,7 +120,19 @@
           </object>
         </child>
         <child>
-          <object class="AdwPreferencesGroup">
+          <object class="AdwPreferencesGroup" id="apg_vpn">
+            <child>
+              <object class="AdwEntryRow" id="entry_vpn_addr">
+                <property name="input-purpose">url</property>
+                <property name="show-apply-button">True</property>
+                <property name="title" translatable="yes">vpn addr and port, like http://127.0.0.1:7890</property>
+                <signal name="apply" handler="_on_vpn_apply"/>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup" id="apg_bak">
             <child>
               <object class="AdwActionRow">
                 <property name="subtitle" translatable="yes">backup/restore the settings to/from the clipboard, edit or backup it</property>

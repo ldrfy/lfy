@@ -99,7 +99,7 @@ class BaiduServer(Server):
             _type_: _description_
         """
         img_data = None
-        with open(img_path, 'r', encoding='utf-8') as f:
+        with open(img_path, 'rb') as f:
             img_data = f.read()
         if img_data is None:
             return False, ""
