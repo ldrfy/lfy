@@ -8,7 +8,7 @@ from gettext import gettext as _
 
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk
 
-from lfy import RES_PATH, VERSION
+from lfy import PACKAGE_URL, RES_PATH, VERSION
 from lfy.api.utils import is_text
 from lfy.api.utils.bak import backup_gsettings
 from lfy.api.utils.check_update import main as check_update
@@ -49,6 +49,7 @@ class LfyApplication(Adw.Application):
         self.create_action('quit', lambda *_: self.quit(),
                            ['<primary>q'])
         self.create_action('about', self.on_about_action)
+        self.create_action('find_update', self.find_update)
 
         self.create_action('del_wrapping', self.on_del_wrapping_action,
                            ['<alt>d'])
@@ -68,10 +69,14 @@ class LfyApplication(Adw.Application):
         self.cb = Gdk.Display().get_default().get_clipboard()
         self.copy_change_id = self.cb.connect("changed", self.copy)
 
-        if Settings.get().auto_check_update:
-            threading.Thread(target=self.find_update, daemon=True).start()
+        self.find_update()
 
     def get_translate_win(self):
+        """翻译窗口
+
+        Returns:
+            _type_: _description_
+        """
         win = self.props.active_window  # pylint: disable=E1101
         if not win:
             width, height = Settings.get().window_size
@@ -280,12 +285,24 @@ class LfyApplication(Adw.Application):
         # pylint: disable=E1101
         self.props.active_window.tv_from.get_buffer().set_text(update_msg)
 
-    def find_update(self):
+    def find_update(self, _widget=None, _w=None):
         """查找更新
         """
 
-        update_msg = check_update()
-        if update_msg is not None:
-            time.sleep(2)
-            print(update_msg)
-            GLib.idle_add(self.update_app, update_msg)
+        def fu():
+            """更新子线程
+            """
+            update_msg = check_update()
+            if update_msg is not None:
+                time.sleep(2)
+                print(update_msg)
+                GLib.idle_add(self.update_app, update_msg)
+            elif _widget is not None:
+                # 手动更新
+                s = _("There is no new version. The current version is {}.").format(VERSION)
+                s += "\n"
+                s += _("You can go to {} to view the beta version.").format(PACKAGE_URL)
+                GLib.idle_add(self.update_app, s)
+
+        if Settings.get().auto_check_update:
+            threading.Thread(target=fu, daemon=True).start()

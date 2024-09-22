@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-09-21 00:13+0800\n"
+"POT-Creation-Date: 2024-09-22 18:27+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -31,7 +31,7 @@ msgstr "窗口大小"
 msgid "Automatically check the new version of the software upon startup"
 msgstr "软件打开时，自动检查更新"
 
-#: data/cool.ldr.lfy.in.gschema.xml:14 data/resources/preference.ui:93
+#: data/cool.ldr.lfy.in.gschema.xml:14 data/resources/preference.ui:116
 msgid ""
 "After the translation is completed, a system notification is automatically "
 "sent"
@@ -102,7 +102,7 @@ msgstr "请输入 app_id 和 secret_key，类似："
 msgid "VPN address and port"
 msgstr "VPN地址"
 
-#: data/cool.ldr.lfy.in.gschema.xml:83 data/resources/preference.ui:118
+#: data/cool.ldr.lfy.in.gschema.xml:83 data/resources/preference.ui:90
 msgid "Which services are available in compare model"
 msgstr "在比较模式下哪些服务被选中"
 
@@ -186,45 +186,53 @@ msgstr "软件打开时，自动检查更新"
 msgid "Basic functions completed"
 msgstr "基础功能完成"
 
-#: lfy/main.py:110
+#: lfy/main.py:115
 msgid "translator_credits"
 msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 
-#: lfy/main.py:111
+#: lfy/main.py:116
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
 
-#: lfy/main.py:157 data/resources/help-overlay.ui:20
+#: lfy/main.py:162 data/resources/help-overlay.ui:20
 #: data/resources/help-overlay.ui:27 data/resources/help-overlay.ui:34
 #: data/resources/help-overlay.ui:53
 msgid "Copy detected, translate immediately"
 msgstr "检测到复制，立刻翻译"
 
-#: lfy/main.py:160
+#: lfy/main.py:165
 msgid "Copy detected, not automatically translated"
 msgstr "检测到复制，不自动翻译"
 
-#: lfy/main.py:184
+#: lfy/main.py:189
 msgid "Next translation not remove line breaks"
 msgstr "下次翻译不移除换行"
 
-#: lfy/main.py:185
+#: lfy/main.py:190
 msgid "Next translation remove line breaks"
 msgstr "下次翻译移除换行"
 
-#: lfy/main.py:195
+#: lfy/main.py:200
 msgid "Next translation without splicing text"
 msgstr "下次翻译不拼接文本"
 
-#: lfy/main.py:196
+#: lfy/main.py:201
 msgid "Next translation splicing text"
 msgstr "下次翻译拼接文本"
+
+#: lfy/main.py:302
+msgid "There is no new version. The current version is {}."
+msgstr "没有新版本，当前版本为 {}"
+
+#: lfy/main.py:304
+msgid "You can go to {} to view the beta version."
+msgstr "可前往 {} 查看测试版"
 
 #: lfy/preference.py:69 lfy/api/server/com.py:74
 msgid "compare"
 msgstr "对比"
 
-#: lfy/preference.py:96 lfy/preference.py:136 lfy/preference.py:170
+#: lfy/preference.py:96 lfy/preference.py:136 lfy/preference.py:171
 msgid "It takes effect when you restart lfy"
 msgstr "重新打开lfy时生效"
 
@@ -236,7 +244,7 @@ msgstr "剪贴板文本格式不正确"
 msgid "Configuration data has been exported to the clipboard"
 msgstr "配置数据已导出到剪贴板"
 
-#: lfy/preference.py:152
+#: lfy/preference.py:153
 msgid "Using {} for text recognition"
 msgstr "使用 {} 进行文本识别"
 
@@ -361,11 +369,11 @@ msgstr "请输入 {} 和 {}，类似："
 msgid "huoshan"
 msgstr "火山"
 
-#: lfy/widgets/server_preferences.py:38
+#: lfy/widgets/server_preferences.py:39
 msgid "Text translate"
 msgstr "翻译服务"
 
-#: lfy/widgets/server_preferences.py:40
+#: lfy/widgets/server_preferences.py:41
 msgid "Text recognition"
 msgstr "文本识别"
 
@@ -389,110 +397,123 @@ msgstr "菜单"
 msgid "Copy to translate"
 msgstr "复制即翻译"
 
-#: data/resources/translate.ui:147 data/resources/help-overlay.ui:19
-msgid "Reset/Restore UI"
-msgstr "重置/恢复UI"
-
-#: data/resources/translate.ui:151 data/resources/help-overlay.ui:26
+#: data/resources/translate.ui:145 data/resources/help-overlay.ui:26
 msgid "Hide the original text"
 msgstr "隐藏源文本"
 
-#: data/resources/translate.ui:155 data/resources/help-overlay.ui:33
-msgid "Hide the translated text"
-msgstr "隐藏翻译文本"
-
-#: data/resources/translate.ui:161
+#: data/resources/translate.ui:151
 msgid "_Preferences"
 msgstr "_设置"
 
-#: data/resources/translate.ui:165
+#: data/resources/translate.ui:155
 msgid "_Keyboard Shortcuts"
 msgstr "_快捷键"
 
-#: data/resources/translate.ui:169
+#: data/resources/translate.ui:159
+msgid "_Check for updates"
+msgstr "_检查更新"
+
+#: data/resources/translate.ui:163
 msgid "_About lfy"
 msgstr "_关于 兰译"
 
-#: data/resources/server-preferences.ui:13
+#: data/resources/server-preferences.ui:14
 msgid "Translate Server"
 msgstr "翻译服务"
 
-#: data/resources/server-preferences.ui:31
+#: data/resources/server-preferences.ui:26
 msgid ""
 "API Key for Translate,Pay attention to whether there are dividing lines |"
 msgstr "翻译密钥，注意是否有分割线 |"
 
-#: data/resources/server-preferences.ui:32
+#: data/resources/server-preferences.ui:27
 msgid "Enter an API Key for the Server with Translate."
 msgstr "输入该服务的翻译密钥"
 
-#: data/resources/server-preferences.ui:52
+#: data/resources/server-preferences.ui:47
 msgid "how to get API Key"
 msgstr "怎么获取密钥"
 
-#: data/resources/preference.ui:13
+#: data/resources/preference.ui:10
+#, fuzzy
+msgid "General"
+msgstr "通用"
+
+#: data/resources/preference.ui:15
 msgid "setup API Key for translation Server, click on the right to the details"
 msgstr "为翻译服务设置密钥，点右侧查看细节"
 
-#: data/resources/preference.ui:15
+#: data/resources/preference.ui:17
 msgid "Translation keys"
 msgstr "翻译密钥"
 
-#: data/resources/preference.ui:44
+#: data/resources/preference.ui:46
 msgid "local or cloud, text recognition"
 msgstr "本地或云端，进行文本识别"
 
-#: data/resources/preference.ui:45
+#: data/resources/preference.ui:47
 msgid "OCR server"
 msgstr "OCR服务"
 
-#: data/resources/preference.ui:75
-msgid "vpn addr and port, like http://127.0.0.1:7890"
-msgstr "代理地址和端口，比如：http://127.0.0.1:7890"
-
-#: data/resources/preference.ui:86
-msgid "Automatically check for updates when opening software"
-msgstr "软件打开时，自动检查更新"
-
-#: data/resources/preference.ui:87
-msgid "auto check update"
-msgstr "自动检查更新"
-
-#: data/resources/preference.ui:94
-msgid "Notify translation results"
-msgstr "通知翻译结果"
-
-#: data/resources/preference.ui:104
+#: data/resources/preference.ui:76
 msgid "Compare model"
 msgstr "对比模式"
 
-#: data/resources/preference.ui:130
+#: data/resources/preference.ui:103
+msgid "Other"
+msgstr "其他"
+
+#: data/resources/preference.ui:109
+msgid "Automatically check for updates when opening software"
+msgstr "软件打开时，自动检查更新"
+
+#: data/resources/preference.ui:110
+msgid "auto check update"
+msgstr "自动检查更新"
+
+#: data/resources/preference.ui:117
+msgid "Notify translation results"
+msgstr "通知翻译结果"
+
+#: data/resources/preference.ui:128
+msgid "vpn addr and port, like http://127.0.0.1:7890"
+msgstr "代理地址和端口，比如：http://127.0.0.1:7890"
+
+#: data/resources/preference.ui:138
 msgid "backup/restore the settings to/from the clipboard, edit or backup it"
 msgstr "将设置备份到剪贴板或从剪贴板恢复、编辑或备份"
 
-#: data/resources/preference.ui:131
+#: data/resources/preference.ui:139
 msgid "Software settings backup and restore"
 msgstr "软件设置备份和恢复"
 
-#: data/resources/preference.ui:134
+#: data/resources/preference.ui:142
 msgid "backup"
 msgstr "备份"
 
-#: data/resources/preference.ui:136
+#: data/resources/preference.ui:144
 msgid ""
 "Export the configuration to the clipboard, then you can paste it into any "
 "file and edit it"
 msgstr "将配置导出到剪贴板，然后您可以将其粘贴到任何文件中并编辑"
 
-#: data/resources/preference.ui:143
+#: data/resources/preference.ui:151
 msgid "restore"
 msgstr "恢复"
 
-#: data/resources/preference.ui:145
+#: data/resources/preference.ui:153
 msgid ""
 "Read the JSON configuration of the clipboard, then import it, and some of "
 "the configurations will take effect after reopening the software"
 msgstr "读取剪贴板的json配置，然后导入，部分配置重新打开软件以后生效"
+
+#: data/resources/help-overlay.ui:19
+msgid "Reset/Restore UI"
+msgstr "重置/恢复UI"
+
+#: data/resources/help-overlay.ui:33
+msgid "Hide the translated text"
+msgstr "隐藏翻译文本"
 
 #: data/resources/help-overlay.ui:42
 msgctxt "shortcut window"
