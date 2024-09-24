@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-09-22 18:27+0800\n"
+"POT-Creation-Date: 2024-09-24 13:36+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -374,6 +374,14 @@ msgstr ""
 
 #: lfy/widgets/server_preferences.py:41
 msgid "Text recognition"
+msgstr ""
+
+#: lfy/widgets/server_preferences.py:88
+msgid "error message"
+msgstr ""
+
+#: lfy/widgets/server_preferences.py:90
+msgid "Confirm"
 msgstr ""
 
 #: data/resources/translate.ui:71

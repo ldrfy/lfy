@@ -57,7 +57,6 @@ class ServerPreferences(Adw.NavigationPage):
         api_key = re.sub(r'\s*\|\s*', "  |  ", api_key.strip())
         self.api_key_entry.set_text(api_key)
         self.api_key_entry.set_sensitive(False)
-        self.api_key_stack.set_visible_child_name('spinner')
         self.api_key_spinner.start()
 
         check_ot = self.server.check_translate
@@ -76,25 +75,20 @@ class ServerPreferences(Adw.NavigationPage):
             valid (_type_): _description_
         """
         ok, text = valid
-        if ok:
-            entry.remove_css_class('error')
-        else:
-            entry.add_css_class('error')
-        entry.props.sensitive = True
+
+        entry.set_sensitive(True)
         spinner.stop()
 
-        # 创建 AlertDialog
-        dialog = Adw.AlertDialog.new(text)
-        dialog.set_title("错误")
-        dialog.set_body(text)
-        dialog.add_response("ok", "确定")
-        dialog.set_default_response("ok")
-        # 设置对话框为模态
-        dialog.set_modal(True)
-        # 连接响应信号
-        dialog.connect("response", lambda dialog, response: dialog.hide())
-        # 显示对话框
-        dialog.show()
+        if ok:
+            entry.remove_css_class('error')
+            self.dialog.add_toast(Adw.Toast.new(text.strip()))
+        else:
+            entry.add_css_class('error')
+
+            dialog = Adw.AlertDialog.new(_("error message"))
+            dialog.set_body(text)
+            dialog.add_response("confirm",  _("Confirm"))
+            dialog.present(self.get_root())
 
     def request_text(self, fun, api_key, entry, spinner):
         """验证服务api是否靠谱
