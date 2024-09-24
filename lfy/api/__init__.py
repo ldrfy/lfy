@@ -5,6 +5,7 @@ from gi.repository import Gtk
 
 from lfy.api.constant import SERVERS_O, SERVERS_T
 from lfy.api.server import Lang, Server
+from lfy.api.server.com import AllServer
 
 
 def get_servers_t():
@@ -13,7 +14,10 @@ def get_servers_t():
     Returns:
         dict: _description_
     """
-    return SERVERS_T
+    s = [AllServer()]
+    s += SERVERS_T
+
+    return s
 
 
 def get_servers_o():
@@ -59,7 +63,7 @@ def get_servers_api_key():
         list: ["百度", "腾讯", ...]
     """
 
-    return [s for s in SERVERS_T if s.get_api_key_s() is not None]
+    return [s for s in get_servers_t() if s.get_api_key_s() is not None]
 
 
 def get_server_names_api_key():
@@ -80,7 +84,7 @@ def get_server(i: int) -> Server:
     Returns:
         _type_: _description_
     """
-    ss = SERVERS_T + SERVERS_O
+    ss = get_servers_t() + get_servers_o()
     if i >= len(ss):
         return ss[0]
     return ss[i]
@@ -138,7 +142,7 @@ def server_key2i(key: str):
     Returns:
         int: 在 servers 是第几个
     """
-    for i, te in enumerate(SERVERS_T):
+    for i, te in enumerate(get_servers_t()):
         if te.key == key:
             return i
     return 0

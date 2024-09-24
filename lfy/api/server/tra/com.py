@@ -5,8 +5,8 @@ import traceback
 from gettext import gettext as _
 from multiprocessing import Pool
 
-from lfy.api.server import (Server, aliyun, baidu, bing, google, huoshan,
-                            tencent)
+from lfy.api.constant import SERVERS_T
+from lfy.api.server import Server
 from lfy.api.utils.debug import get_logger
 from lfy.settings import Settings
 
@@ -49,17 +49,10 @@ class AllServer(Server):
             "7": 7,
             "8": 8,
         }
-        # 这里不能直接引用
-        # from lfy.api.server import SERVERS
-        # 会导致循环
 
         # 只对比设置中修改的
         all_servers = {
-            server.key: server for server in [
-                bing.BingServer(), google.GoogleServer(),
-                aliyun.AliYunServer(), baidu.BaiduServer(),
-                tencent.TencentServer(), huoshan.HuoShanServer()
-            ]
+            server.key: server for server in SERVERS_T
         }
         keys = Settings.get().compare_servers
 
