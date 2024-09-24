@@ -47,11 +47,11 @@
 			<description>Baidu API Key and Secret Key for ocr, used in the middle | split</description>
 		</key>
 		<key type="s" name="server-sk-pytesseract-ocr">
-			<default>"chi_sim+eng"</default>
+			<default>"chi_sim | eng"</default>
 			<description>The lang parameters of the pytesseract module, such as Chinese and English by default</description>
 		</key>
 		<key type="s" name="server-sk-easyocr-ocr">
-			<default>"ch_sim+en"</default>
+			<default>"ch_sim | en"</default>
 			<description>The lang parameters of the easyocr module, such as Chinese and English by default, split by +</description>
 		</key>
 		<key type="s" name="ocr-baidu-token">

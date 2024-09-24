@@ -19,7 +19,7 @@ class EasyOcrServer(Server):
         try:
             import easyocr
             if lang_keys is None:
-                lang_keys = self.get_api_key_s_ocr().split('+')
+                lang_keys = self.get_api_key_s_ocr().split('|')
             reader = easyocr.Reader(lang_keys)
             s = " ".join(reader.readtext(img_path, detail=0))
             return True, s.strip()
@@ -27,7 +27,7 @@ class EasyOcrServer(Server):
             print(e)
             get_logger().error(e)
             s = _("please install python whl")
-            s += (str(e).replace("No module named", ""))
+            s += str(e).replace("No module named", "")
             return False, s
 
         except Exception as e:  # pylint: disable=W0718
