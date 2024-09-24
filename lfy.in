@@ -73,7 +73,7 @@ def run_application():
         _type_: _description_
     """
     from lfy.main import LfyApplication  # pylint: disable=c0415
-    return LfyApplication(APP_ID, VERSION, SCHEMAS_DIR).run(sys.argv)
+    return LfyApplication(APP_ID, VERSION).run(sys.argv)
 
 
 def main():

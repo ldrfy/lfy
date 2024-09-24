@@ -5,7 +5,7 @@ from gi.repository import Gtk
 
 from lfy.api.constant import SERVERS_O, SERVERS_T
 from lfy.api.server import Lang, Server
-from lfy.api.server.com import AllServer
+from lfy.api.server.tra.com import AllServer
 
 
 def get_servers_t():
@@ -111,7 +111,6 @@ def create_server_o(key) -> Server:
         _type_: _description_
     """
     for s in get_servers_o():
-        print(s)
         if s.key == key:
             return s
 

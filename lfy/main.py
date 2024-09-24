@@ -28,7 +28,7 @@ if len(PROXY_ADDRESS) > 0:
 class LfyApplication(Adw.Application):
     """The main application singleton class."""
 
-    def __init__(self, app_id, version, schemas_dir):
+    def __init__(self, app_id, version):
         super().__init__(application_id=app_id,
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
 
