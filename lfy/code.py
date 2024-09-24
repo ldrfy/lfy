@@ -5,9 +5,32 @@ from gettext import gettext as _
 
 from gi.repository import Gdk
 
-from lfy.api import create_server_t, get_lang, server_key2i
+from lfy.api import create_server_o, create_server_t, get_lang, server_key2i
+from lfy.api.server import Server
 from lfy.api.utils.debug import get_logger
 from lfy.settings import Settings
+
+
+def ocr_img(s):
+    """命令行识别
+
+    Args:
+        s (str): 图片路径
+    """
+    setting = Settings.get()
+    server: Server = create_server_o(setting.server_ocr_selected_key)
+
+    try:
+        print(server.name)
+        _ok, text = server.ocr_image(s)
+        print(text)
+
+    except Exception as e:  # pylint: disable=W0718
+        get_logger().error(e)
+        error_msg = _("something error:")
+        error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
+        text = f"{error_msg}{server.name}\n\n{error_msg2}"
+
 
 
 def req_text(s):
@@ -45,6 +68,8 @@ def req_text(s):
         text = f"{error_msg}{tran_server.name}\n\n{error_msg2}"
 
 def req_clip():
+    """获取截剪贴板
+    """
     print("req_clip")
     def on_active_copy(cb2, res):
         req_text(cb2.read_text_finish(res))
