@@ -43,4 +43,3 @@ if __name__== "__main__":
     import pytesseract
     s = pytesseract.image_to_string(img_path, lang="eng")
     print(s)
-

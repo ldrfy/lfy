@@ -86,23 +86,28 @@ def main():
 
     parser = argparse.ArgumentParser(description="translate")
 
-    parser.add_argument('-t', type=str, help='翻译后面的文字')
+    parser.add_argument('-l', type=str, help='待翻译文字或待OCR文件')
+    parser.add_argument('-s', type=str, help='所用服务', default="")
+    parser.add_argument('-t', type=int, help='翻译后面的文字')
     parser.add_argument('-o', type=str, help='识别图片')
-    parser.add_argument('-c', action='store_true', help='翻译剪贴板')
 
     args = parser.parse_args()
 
     if args.t:
-        from lfy.code import req_text  # pylint: disable=c0415
-        return req_text(args.t)
-
+        if len(args.s) > 0:
+            from lfy.code import req_text
+            print(req_text(args.l, args.s, args.t))
+            return
+        print(get_help_server(False))
+        return
     if args.o:
-        from lfy.code import ocr_img  # pylint: disable=c0415
-        return ocr_img(args.o)
-
-    # if args.c:
-    #     from lfy.code import req_clip
-    #     return req_clip()
+        if len(args.s) > 0:
+            from lfy.code import ocr_img
+            print(req_ocr(args.l, args.s, args.o))
+            return
+        print(get_help_server(True))
+        return
+    
 
     set_resources()
     return sys.exit(run_application())

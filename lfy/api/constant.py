@@ -30,3 +30,6 @@ SERVERS_O = [
 NO_TRANSLATED_TXTS = [
     "\"server-sk-",
 ]
+
+CODE_SERVER_N_HELP = -2
+CODE_SERVER_N_DEFAULT = -3

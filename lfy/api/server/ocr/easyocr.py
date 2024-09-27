@@ -15,11 +15,12 @@ class EasyOcrServer(Server):
         super().__init__("easyocr", "easyocr", {})
         self.can_ocr = True
 
-    def ocr_image(self, img_path: str, lang_keys=None):
+    def ocr_image(self, img_path: str, lang_str=None):
         try:
             import easyocr
-            if lang_keys is None:
-                lang_keys = self.get_api_key_s_ocr().split('|')
+            if lang_str is None:
+                lang_str = self.get_api_key_s_ocr()
+            lang_keys = lang_str.split("|")
             reader = easyocr.Reader(lang_keys)
             s = " ".join(reader.readtext(img_path, detail=0))
             return True, s.strip()

@@ -15,15 +15,21 @@ class PytesseractServer(Server):
     def __init__(self):
 
         # 获取系统默认语言，英语添加
-
-        super().__init__("pytesseract", "pytesseract", {})
+        lang_key_ns = {
+            "chi_sim": 1,
+            "eng": 3,
+            "fra": 7,
+            "ita": 8
+        }
+        super().__init__("pytesseract", "pytesseract", lang_key_ns)
         self.can_ocr = True
 
-    def ocr_image(self, img_path: str, lang=None):
+    def ocr_image(self, img_path: str, lang_str=None):
         try:
             import pytesseract
-            if lang is None:
-                lang = self.get_api_key_s_ocr()
+            if lang_str is None:
+                lang_str = self.get_api_key_s_ocr()
+            lang = "+".join(lang_str.split("|"))
             print(lang)
             return True, pytesseract.image_to_string(img_path, lang=lang)
         except ModuleNotFoundError as e:

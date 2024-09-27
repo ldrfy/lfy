@@ -146,7 +146,7 @@ class Server:
         """
         return None
 
-    def ocr_image(self, img_path: str):
+    def ocr_image(self, img_path: str, lang_str=None):
         """图片识别
 
         Args:
