@@ -78,7 +78,7 @@ class BaiduServer(Server):
         # Development documentation
         # https://fanyi-api.baidu.com/doc/21
 
-        super().__init__("baidu_ocr", _("baidu"), {})
+        super().__init__("baidu", _("baidu"), {})
         self.can_ocr = True
 
     def get_api_key_s_ocr(self):
@@ -89,7 +89,7 @@ class BaiduServer(Server):
         """
         return Settings.get().server_sk_baidu_ocr
 
-    def ocr_image(self, img_path):
+    def ocr_image(self, img_path, lang_str=None):
         """图文识别
 
         Args:

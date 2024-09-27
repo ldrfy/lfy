@@ -9,8 +9,8 @@ from gettext import gettext as _
 from gi.repository import Adw, Gdk, GLib, Gtk
 
 from lfy.api import (create_server_o, create_server_t, get_lang,
-                     get_lang_names, get_server, get_server_names_t, lang_n2j,
-                     server_key2i)
+                     get_lang_names, get_server_names_t, get_server_t,
+                     lang_n2j, server_key2i)
 from lfy.api.constant import NO_TRANSLATED_TXTS
 from lfy.api.server import Server
 from lfy.api.utils import cal_md5
@@ -166,7 +166,7 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         i = self.dd_server.get_selected()
         j = self.dd_lang.get_selected()
-        self.setting.server_selected_key = get_server(i).key
+        self.setting.server_selected_key = get_server_t(i).key
         n = get_lang(i, j).n
         self.setting.lang_selected_n = n
 
@@ -257,7 +257,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         text = buffer_from.get_text(start_iter, end_iter, False)
 
         i = self.dd_server.get_selected()
-        server: Server = get_server(i)
+        server: Server = get_server_t(i)
         if server.key != self.tran_server.key:
             self.tran_server = server
         lk = get_lang(i, self.dd_lang.get_selected()).key

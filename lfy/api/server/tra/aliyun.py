@@ -108,7 +108,6 @@ class AliYunServer(Server):
         # Development documentation
         # https://help.aliyun.com/zh/machine-translation/developer-reference/machine-translation-language-code-list
         lang_key_ns = {
-            "auto": 0,
             "zh": 1,
             "en": 3,
             "ja": 4,
