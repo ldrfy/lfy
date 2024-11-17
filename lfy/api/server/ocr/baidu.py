@@ -125,7 +125,7 @@ class BaiduServer(Server):
         ok, token = _get_token(self.session, self.get_api_key_s_ocr())
         if not ok:
             return False, token
-        params = {"image": img}
+        params = {"image": img, "language_type": lang_str}
         request_url = request_url + "?access_token=" + token
         headers = {'content-type': 'application/x-www-form-urlencoded'}
         res = self.session.post(request_url,
