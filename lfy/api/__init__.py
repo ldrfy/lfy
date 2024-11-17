@@ -192,3 +192,20 @@ def lang_n2j(i: int, n: int):
         if lang.n == n:
             return j
     return 0
+
+
+def lang_n2key(server: Server, n: int):
+    """不同server的langs真正唯一的是n，不同server的key不一样
+
+    Args:
+        server (Server): _description_
+        n (int): _description_
+
+    Returns:
+        Lang: 语言类
+    """
+
+    for lang in server.langs:
+        if lang.n == n:
+            return lang
+    return None

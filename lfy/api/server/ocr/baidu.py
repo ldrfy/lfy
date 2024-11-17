@@ -76,9 +76,19 @@ class BaiduServer(Server):
     def __init__(self):
 
         # Development documentation
-        # https://fanyi-api.baidu.com/doc/21
+        # https://ai.baidu.com/ai-doc/OCR/zk3h7xz52
+        lang_key_ns = {
+            # 中英混合，默认
+            "CHN_ENG": 1,
+            "ENG": 3,
+            "JAP": 4,
+            "KOR": 5,
+            "GER": 6,
+            "FRE": 7,
+            "ITA": 8
+        }
 
-        super().__init__("baidu", _("baidu"), {})
+        super().__init__("baidu", _("baidu"), lang_key_ns)
         self.can_ocr = True
 
     def get_api_key_s_ocr(self):
