@@ -7,6 +7,7 @@ import locale
 import os
 import subprocess
 import sys
+from gettext import gettext as _
 
 import gi
 
@@ -84,14 +85,14 @@ def main():
     """
     set_internationalization()
 
-    parser = argparse.ArgumentParser(description='命令行翻译或文本识别，如 lfy -t "who am i" -s bing -l 1 或 lfy -o "/tmp/xxx.png" -s baidu -l 1')
+    parser = argparse.ArgumentParser(description=_('Command line translation or text recognition, such as {} or {}').format('lfy -t "who am i" -s bing -l 1', 'lfy -o "/tmp/xxx.png" -s baidu -l 1'))
 
-    parser.add_argument('-t', type=str, help='翻译，后面接文字')
-    parser.add_argument('-o', type=str, help='识别图片，后面接文件路径')
-    parser.add_argument('-c', action='store_true', help='自动翻译剪贴板，暂时无效')
+    parser.add_argument('-t', type=str, help=_('Translate, followed by text'))
+    parser.add_argument('-o', type=str, help=_('Recognize image, followed by file path'))
+    parser.add_argument('-c', action='store_true', help=_('Automatically translate clipboard, temporarily invalid'))
 
-    parser.add_argument('-s', type=str, help='使用什么服务引擎，若未输入-s，将根据 -t 或 -o 提供帮助', default="", nargs='?')
-    parser.add_argument('-l', type=int, help='待翻译/识别的语言，若未输入-l，将根据 -s 的输入自动提供对应帮助', default=-1, nargs='?')
+    parser.add_argument('-s', type=str, help=_('Which service engine to use, if -s is not entered, help will be provided based on -t or -o'), default="", nargs='?')
+    parser.add_argument('-l', type=int, help=_('The language to be translated/recognized, if -l is not entered, corresponding help will be provided based on the input of -s'), default=-1, nargs='?')
 
     args = parser.parse_args()
 

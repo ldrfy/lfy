@@ -1,3 +1,4 @@
+'初始信息'
 import os
 
 APP_NAME = '@APP_NAME@'

@@ -52,7 +52,7 @@ conf.set('PACKAGE_URL_BUG', PACKAGE_URL_BUG)
 
 
 configure_file(
-  input: 'define.in',
+  input: 'define.py',
   output: '__init__.py',
   configuration: conf,
   install: true,
@@ -61,7 +61,7 @@ configure_file(
 
 
 configure_file(
-  input: meson.project_name() + '.in',
+  input: meson.project_name() + '.py',
   output: meson.project_name(),
   configuration: conf,
   install: true,

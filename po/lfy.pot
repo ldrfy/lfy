@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-09-24 13:36+0800\n"
+"POT-Creation-Date: 2024-11-17 17:26+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -185,6 +185,34 @@ msgstr ""
 msgid "Basic functions completed"
 msgstr ""
 
+#: lfy.py:88
+msgid "Command line translation or text recognition, such as {} or {}"
+msgstr ""
+
+#: lfy.py:90
+msgid "Translate, followed by text"
+msgstr ""
+
+#: lfy.py:91
+msgid "Recognize image, followed by file path"
+msgstr ""
+
+#: lfy.py:92
+msgid "Automatically translate clipboard, temporarily invalid"
+msgstr ""
+
+#: lfy.py:94
+msgid ""
+"Which service engine to use, if -s is not entered, help will be provided "
+"based on -t or -o"
+msgstr ""
+
+#: lfy.py:95
+msgid ""
+"The language to be translated/recognized, if -l is not entered, "
+"corresponding help will be provided based on the input of -s"
+msgstr ""
+
 #: lfy/main.py:115
 msgid "translator_credits"
 msgstr ""
@@ -227,7 +255,22 @@ msgstr ""
 msgid "You can go to {} to view the beta version."
 msgstr ""
 
-#: lfy/preference.py:69 lfy/api/server/com.py:74
+#: lfy/code.py:105
+msgid "no text"
+msgstr ""
+
+#: lfy/code.py:114 lfy/code.py:148 lfy/translate.py:288 lfy/translate.py:321
+#: lfy/api/server/tra/baidu.py:40 lfy/api/server/tra/tencent.py:150
+#: lfy/api/server/tra/aliyun.py:98 lfy/api/server/tra/com.py:29
+#: lfy/api/server/tra/huoshan.py:136 lfy/api/server/ocr/baidu.py:139
+msgid "something error:"
+msgstr ""
+
+#: lfy/code.py:139
+msgid "the file does not exist: {}"
+msgstr ""
+
+#: lfy/preference.py:69 lfy/api/server/tra/com.py:67
 msgid "compare"
 msgstr ""
 
@@ -250,12 +293,6 @@ msgstr ""
 #: lfy/translate.py:235
 msgid ""
 "This time the content contains private information and is not translated"
-msgstr ""
-
-#: lfy/translate.py:288 lfy/translate.py:321 lfy/api/server/baidu.py:40
-#: lfy/api/server/tencent.py:150 lfy/api/server/aliyun.py:98
-#: lfy/api/server/com.py:29 lfy/api/server/huoshan.py:136
-msgid "something error:"
 msgstr ""
 
 #: lfy/translate.py:304
@@ -314,58 +351,72 @@ msgstr ""
 msgid "Italian"
 msgstr ""
 
-#: lfy/api/server/baidu.py:28 lfy/api/server/tencent.py:127
-#: lfy/api/server/aliyun.py:68 lfy/api/server/huoshan.py:67
+#: lfy/api/server/tra/baidu.py:28 lfy/api/server/tra/tencent.py:127
+#: lfy/api/server/tra/aliyun.py:68 lfy/api/server/tra/huoshan.py:67
+#: lfy/api/server/ocr/baidu.py:30
 msgid "please input API Key in preference"
 msgstr ""
 
-#: lfy/api/server/baidu.py:69
+#: lfy/api/server/tra/baidu.py:69 lfy/api/server/ocr/baidu.py:91
 msgid "baidu"
 msgstr ""
 
-#: lfy/api/server/baidu.py:81
+#: lfy/api/server/tra/baidu.py:81
 msgid "please input app_id and secret_key like:"
 msgstr ""
 
-#: lfy/api/server/google.py:45
+#: lfy/api/server/tra/google.py:45
 msgid "google"
 msgstr ""
 
-#: lfy/api/server/google.py:61 lfy/api/server/bing.py:78
+#: lfy/api/server/tra/google.py:61 lfy/api/server/tra/bing.py:78
 msgid "something error, try other translate engine?"
 msgstr ""
 
-#: lfy/api/server/google.py:74
+#: lfy/api/server/tra/google.py:74
 msgid "The connection timed out. Maybe there is a network problem"
 msgstr ""
 
-#: lfy/api/server/tencent.py:64
+#: lfy/api/server/tra/tencent.py:64
 msgid "tencent"
 msgstr ""
 
-#: lfy/api/server/tencent.py:83
+#: lfy/api/server/tra/tencent.py:83
 msgid "please input secret_id and secret_key like:"
 msgstr ""
 
-#: lfy/api/server/bing.py:61
+#: lfy/api/server/tra/bing.py:61
 msgid "bing"
 msgstr ""
 
-#: lfy/api/server/bing.py:131
+#: lfy/api/server/tra/bing.py:131
 #, python-brace-format
 msgid "1000 characters limit! You send {len_text} characters."
 msgstr ""
 
-#: lfy/api/server/aliyun.py:120
+#: lfy/api/server/tra/aliyun.py:119
 msgid "aliyun"
 msgstr ""
 
-#: lfy/api/server/aliyun.py:132 lfy/api/server/huoshan.py:178
+#: lfy/api/server/tra/aliyun.py:131 lfy/api/server/tra/huoshan.py:178
 msgid "please input {} and {} like:"
 msgstr ""
 
-#: lfy/api/server/huoshan.py:166
+#: lfy/api/server/tra/huoshan.py:166
 msgid "huoshan"
+msgstr ""
+
+#: lfy/api/server/ocr/baidu.py:162
+msgid "please input API Key and Secret Key like:"
+msgstr ""
+
+#: lfy/api/server/ocr/easyocr.py:30 lfy/api/server/ocr/pytesseract.py:38
+#: lfy/api/server/ocr/pytesseract.py:77
+msgid "please install python whl"
+msgstr ""
+
+#: lfy/api/server/ocr/pytesseract.py:73
+msgid "Tesseract OCR database {} is not installed"
 msgstr ""
 
 #: lfy/widgets/server_preferences.py:39
