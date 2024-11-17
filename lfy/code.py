@@ -136,7 +136,7 @@ def req_ocr(s=None, key_server=None, key_lang_n=-1):
             return get_help_lang(server)
 
         if not s or not os.path.exists(s):
-            return _("the file does not exist") + "\n" + s
+            return _("the file does not exist: {}").format(s)
         print("ocr", server.name, lang_selected.get_name())
         set_vpn()
 

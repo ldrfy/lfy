@@ -2,7 +2,9 @@ data/cool.ldr.lfy.in.in.desktop
 data/cool.ldr.lfy.in.gschema.xml
 data/resources/cool.ldr.lfy.in.appdata.xml
 
+lfy.py
 lfy/main.py
+lfy/code.py
 lfy/preference.py
 lfy/translate.py
 
@@ -11,13 +13,16 @@ lfy/api/utils/__init__.py
 lfy/api/utils/bak.py
 lfy/api/utils/check_update.py
 lfy/api/server/__init__.py
-lfy/api/server/baidu.py
-lfy/api/server/google.py
-lfy/api/server/tencent.py
-lfy/api/server/bing.py
-lfy/api/server/aliyun.py
-lfy/api/server/com.py
-lfy/api/server/huoshan.py
+lfy/api/server/tra/baidu.py
+lfy/api/server/tra/google.py
+lfy/api/server/tra/tencent.py
+lfy/api/server/tra/bing.py
+lfy/api/server/tra/aliyun.py
+lfy/api/server/tra/com.py
+lfy/api/server/tra/huoshan.py
+lfy/api/server/ocr/baidu.py
+lfy/api/server/ocr/easyocr.py
+lfy/api/server/ocr/pytesseract.py
 lfy/widgets/server_preferences.py
 
 data/resources/translate.ui

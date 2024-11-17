@@ -71,8 +71,8 @@ test-aur: clear
 	cp -r ../../../data lfy-${VERSION}/ && \
 	cp -r ../../../po lfy-${VERSION}/ && \
 	cp -r ../../../pkg lfy-${VERSION}/ && \
-	cp -r ../../../lfy.in lfy-${VERSION}/ && \
-	cp -r ../../../define.in lfy-${VERSION}/ && \
+	cp -r ../../../lfy.py lfy-${VERSION}/ && \
+	cp -r ../../../define.py lfy-${VERSION}/ && \
 	cp -r ../../../meson.build lfy-${VERSION}/ && \
 	zip -r v${VERSION}.zip lfy-${VERSION} && \
 	rm -r lfy-${VERSION} && \
