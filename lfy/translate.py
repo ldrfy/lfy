@@ -98,7 +98,9 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.connect('unrealize', self.save_settings)
 
         self.paned_position = self.setting.translate_paned_position
-        if self.paned_position > 0:
+        _w, h = self.get_default_size()
+        self.paned_position_auto = True
+        if self.paned_position not in (0, h-52, int(h/5*2)):
             self.gp_translate.set_position(self.paned_position)
 
         # 创建键盘事件控制器
@@ -131,18 +133,17 @@ class TranslateWindow(Adw.ApplicationWindow):
         Args:
             p (int): 设置的位置
         """
-        if self.paned_position > 0:
-            p = self.paned_position
-            # 标记设置过了
-            self.paned_position = -1
-        else:
+        if self.paned_position_auto:
             self.paned_position = self.gp_translate.get_position()
-        self.gp_translate.set_position(p)
+            self.gp_translate.set_position(p)
+        else:
+            self.gp_translate.set_position(self.paned_position)
+        self.paned_position_auto = not self.paned_position_auto
 
     def reset_paned_position(self):
         """重置原文字和翻译的比例
         """
-        self.set_paned_position(self.get_allocated_height() / 5 * 2)
+        self.set_paned_position(int(self.get_allocated_height() / 5 * 2))
 
     def up_paned_position(self):
         """只看翻译
@@ -152,8 +153,7 @@ class TranslateWindow(Adw.ApplicationWindow):
     def down_paned_position(self):
         """只看原文字
         """
-        height = self.get_allocated_height()
-        self.set_paned_position(height)
+        self.set_paned_position(self.get_allocated_height())
 
     def save_settings(self, _a):
         """保存设置
@@ -163,14 +163,16 @@ class TranslateWindow(Adw.ApplicationWindow):
         """
         if not self.is_maximized():
             self.setting.window_size = self.get_default_size()
+            _w, h = self.get_default_size()
+            self.paned_position = self.gp_translate.get_position()
+            if self.paned_position not in (0, h-52, int(h/5*2)):
+                self.setting.translate_paned_position = self.paned_position/1.0
 
         i = self.dd_server.get_selected()
         j = self.dd_lang.get_selected()
         self.setting.server_selected_key = get_server_t(i).key
         n = get_lang(i, j).n
         self.setting.lang_selected_n = n
-
-        self.setting.translate_paned_position = self.gp_translate.get_position()
 
     @Gtk.Template.Callback()
     def _on_server_changed(self, drop_down, _a):

@@ -51,3 +51,16 @@ def cal_md5(file_path):
         for chunk in iter(lambda: file.read(4096), b""):
             md5_hash.update(chunk)
     return md5_hash.hexdigest()
+
+
+def get_os_release():
+    """版本信息
+
+    Returns:
+        _type_: _description_
+    """
+    try:
+        with open("/etc/os-release", "r", encoding="utf8") as f:
+            return f.read()
+    except FileNotFoundError:
+        return "OS release info not found"

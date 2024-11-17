@@ -54,6 +54,17 @@
 
 
 	<releases>
+		<release version="0.0.8" date="2024-11-17">
+			<description>
+				<ul>
+					<li>Add local OCR recognition through pytesseract</li>
+					<li>Add import and export settings</li>
+					<li>Add translate or OCR in terminal, like `lfy -h` </li>
+					<li>Add debug in About Page</li>
+					<li>The dividing line in the middle of the translation page can be moved</li>
+				</ul>
+			</description>
+		</release>
 		<release version="0.0.7" date="2024-08-19">
 			<description>
 				<ul>
