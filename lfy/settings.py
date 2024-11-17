@@ -35,6 +35,7 @@ class Settings(Gio.Settings):
             str: 如：baidu
         """
         return self.get_string('server-ocr-selected-key')
+
     @server_ocr_selected_key.setter
     def server_ocr_selected_key(self, key):
         self.set_string('server-ocr-selected-key', key)
@@ -72,11 +73,11 @@ class Settings(Gio.Settings):
         Returns:
             int: 如 0
         """
-        return self.get_int('translate-paned-position')
+        return self.get_double('translate-paned-position')
 
     @translate_paned_position.setter
     def translate_paned_position(self, n):
-        self.set_int('translate-paned-position', n)
+        self.set_double('translate-paned-position', n)
 
     @property
     def server_sk_baidu(self):
@@ -129,7 +130,6 @@ class Settings(Gio.Settings):
     @server_sk_easyocr_ocr.setter
     def server_sk_easyocr_ocr(self, key):
         self.set_string('server-sk-easyocr-ocr', key)
-
 
     @property
     def ocr_baidu_token(self):

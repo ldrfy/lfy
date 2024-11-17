@@ -34,8 +34,8 @@
 			<default>3</default>
 			<description>The currently selected translation language</description>
 		</key>
-		<key type="i" name="translate-paned-position">
-			<default>-1</default>
+		<key type="d" name="translate-paned-position">
+			<default>-1.0</default>
 			<description>Split position of translation page</description>
 		</key>
 		<key type="s" name="server-sk-baidu">

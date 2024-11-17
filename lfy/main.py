@@ -1,6 +1,7 @@
 # main.py
 import json
 import os
+import platform
 import threading
 import time
 from datetime import datetime
@@ -9,7 +10,7 @@ from gettext import gettext as _
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk
 
 from lfy import PACKAGE_URL, RES_PATH, VERSION
-from lfy.api.utils import is_text
+from lfy.api.utils import get_os_release, is_text
 from lfy.api.utils.bak import backup_gsettings
 from lfy.api.utils.check_update import main as check_update
 from lfy.api.utils.debug import get_log_handler
@@ -117,6 +118,9 @@ class LfyApplication(Adw.Application):
         ad.set_copyright(f'© 2023-{datetime.now().year} yuh')
 
         s = f"Version: {VERSION}"
+        s += f"\nSystem: {platform.system()}"
+        s += f"\nRelease: {platform.release()}"
+
         gvs = Gtk.get_major_version(), Gtk.get_minor_version(), Gtk.get_micro_version()
         s += f"\nGTK Version: {gvs[0]}.{gvs[1]}.{gvs[2]}"
 
@@ -135,6 +139,9 @@ class LfyApplication(Adw.Application):
 
         s += "\n\n******* debug log *******\n"
         s += get_log_handler().get_logs()
+
+        s += "\n\n******* other *******\n"
+        s += get_os_release()
 
         ad.set_debug_info(s)
 
@@ -210,7 +217,7 @@ class LfyApplication(Adw.Application):
         self.props.active_window.update("reload", True)
 
     def gp_reset_action(self, _widget, _w):
-        """快捷键翻译
+        """分割线恢复
 
         Args:
             f (_type_): _description_
@@ -219,7 +226,7 @@ class LfyApplication(Adw.Application):
         self.props.active_window.reset_paned_position()
 
     def gp_up_action(self, _widget, _w):
-        """快捷键翻译
+        """分割线向上
 
         Args:
             f (_type_): _description_
@@ -228,7 +235,7 @@ class LfyApplication(Adw.Application):
         self.props.active_window.up_paned_position()
 
     def gp_down_action(self, _widget, _w):
-        """快捷键翻译
+        """分割线向下
 
         Args:
             f (_type_): _description_
@@ -299,7 +306,8 @@ class LfyApplication(Adw.Application):
                 GLib.idle_add(self.update_app, update_msg)
             elif _widget is not None:
                 # 手动更新
-                s = _("There is no new version. The current version is {}.").format(VERSION)
+                s = _("There is no new version. The current version is {}.").format(
+                    VERSION)
                 s += "\n"
                 s += _("You can go to {} to view the beta version.").format(PACKAGE_URL)
                 GLib.idle_add(self.update_app, s)
