@@ -84,7 +84,7 @@ test-rpm: clear
 	make PREFIX="/usr" DESTDIR="${PWD}/${BUILD_PKG}/rpm/" test
 
 	cd "${PWD}/${BUILD_PKG}/rpm/SPECS/" &&\
-	rpmbuild -bb lfy.spec && \
+	rpmbuild -bb lfy.spec --define "_topdir ${PWD}/${BUILD_PKG}/rpm/" && \
 	cd ../ && \
 	mv ./RPMS/x86_64/*.rpm ${DISK}
 

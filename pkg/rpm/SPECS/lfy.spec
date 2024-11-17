@@ -1,5 +1,4 @@
 %define Name @APP_NAME@
-%define _topdir %(echo $PWD)/..
 
 Name: %{Name}
 Version: @VERSION@
@@ -25,4 +24,5 @@ Support many translation services. Especially suitable for document translation.
 
 
 %install
-mv %{_builddir}/../usr %{buildroot}
+pwd
+mv %{_topdir}/usr %{buildroot}
