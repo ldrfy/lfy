@@ -62,6 +62,7 @@ class TranslateWindow(Adw.ApplicationWindow):
     menu_btn: Gtk.MenuButton = Gtk.Template.Child()
     ato_translate: Adw.ToastOverlay = Gtk.Template.Child()
     gp_translate: Gtk.Paned = Gtk.Template.Child()
+    header_bar: Adw.HeaderBar = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -98,9 +99,8 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.connect('unrealize', self.save_settings)
 
         self.paned_position = self.setting.translate_paned_position
-        _w, h = self.get_default_size()
         self.paned_position_auto = True
-        if self.paned_position not in (0, h-52, int(h/5*2)):
+        if self.paned_position > 0:
             self.gp_translate.set_position(self.paned_position)
 
         # 创建键盘事件控制器
@@ -165,8 +165,14 @@ class TranslateWindow(Adw.ApplicationWindow):
             self.setting.window_size = self.get_default_size()
             _w, h = self.get_default_size()
             self.paned_position = self.gp_translate.get_position()
-            if self.paned_position not in (0, h-52, int(h/5*2)):
+
+            h1 = h - (self.header_bar.get_height() +
+                      self.gp_translate.get_margin_bottom() + 1)
+            print("......", self.paned_position, h,
+                  h-self.paned_position, h1)
+            if self.paned_position not in (0, h1, int(h/5*2)):
                 self.setting.translate_paned_position = self.paned_position/1.0
+                print("xxxx")
 
         i = self.dd_server.get_selected()
         j = self.dd_lang.get_selected()
