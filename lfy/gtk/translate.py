@@ -16,8 +16,8 @@ from lfy.api.server import Server
 from lfy.api.utils import cal_md5
 from lfy.api.utils.debug import get_logger
 from lfy.api.utils.notify import nf_t
-from lfy.settings import Settings
-from lfy.widgets.theme_switcher import ThemeSwitcher
+from lfy.gtk.settings import Settings
+from lfy.gtk.widgets.theme_switcher import ThemeSwitcher
 
 
 # pylint: disable=E1101

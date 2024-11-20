@@ -10,8 +10,8 @@ from lfy.api import (get_server_names_api_key, get_server_names_o,
 from lfy.api.server import Server
 from lfy.api.utils import is_text
 from lfy.api.utils.bak import backup_gsettings, restore_gsettings
-from lfy.settings import Settings
-from lfy.widgets.server_preferences import ServerPreferences
+from lfy.gtk.settings import Settings
+from lfy.gtk.widgets.server_preferences import ServerPreferences
 
 
 @Gtk.Template(resource_path='/cool/ldr/lfy/preference.ui')
