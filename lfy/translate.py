@@ -88,10 +88,10 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.ocr_server = create_server_o(self.setting.server_ocr_selected_key)
         self.jn = True
 
-        self.dd_server.set_model(get_server_names_t())
+        self.dd_server.set_model(Gtk.StringList.new(get_server_names_t()))
         self.dd_server.set_selected(i)
 
-        self.dd_lang.set_model(get_lang_names(i))
+        self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
         self.dd_lang.set_selected(lang_n2j(i, self.setting.lang_selected_n))
 
         self.menu_btn.props.popover.add_child(ThemeSwitcher(), 'theme')

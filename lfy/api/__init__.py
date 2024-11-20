@@ -1,7 +1,6 @@
 """翻译服务集合
 
 """
-from gi.repository import Gtk
 
 from lfy.api.constant import SERVERS_O, SERVERS_T
 from lfy.api.server import Lang, Server
@@ -53,7 +52,7 @@ def get_server_names(ss):
     Returns:
         list: ["百度", "腾讯", ...]
     """
-    return Gtk.StringList.new([s.name for s in ss])
+    return [s.name for s in ss]
 
 
 def get_servers_api_key():
@@ -146,7 +145,7 @@ def get_lang_names(i=0):
     Returns:
         list: 如 ["auto"]
     """
-    return Gtk.StringList.new(get_server_t(i).get_lang_names())
+    return get_server_t(i).get_lang_names()
 
 
 def get_lang(i=0, j=0) -> Lang:
