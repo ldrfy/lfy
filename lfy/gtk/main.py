@@ -14,9 +14,9 @@ from lfy.api.utils import get_os_release, is_text
 from lfy.api.utils.bak import backup_gsettings
 from lfy.api.utils.check_update import main as check_update
 from lfy.api.utils.debug import get_log_handler
-from lfy.preference import PreferencesDialog
-from lfy.settings import Settings
-from lfy.translate import TranslateWindow
+from lfy.gtk.preference import PreferencesDialog
+from lfy.gtk.settings import Settings
+from lfy.gtk.translate import TranslateWindow
 
 # 设置代理地址和端口号
 PROXY_ADDRESS = Settings.get().vpn_addr_port
