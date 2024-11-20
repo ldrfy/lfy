@@ -40,10 +40,10 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.server: Server
         self.server_ocr: Server
         # pylint: disable=E1101
-        self.acr_server.set_model(get_server_names_api_key())
+        self.acr_server.set_model(Gtk.StringList.new(get_server_names_api_key()))
 
         self.ocr_s_time = time.time()
-        self.acr_server_ocr.set_model(get_server_names_o())
+        self.acr_server_ocr.set_model(Gtk.StringList.new(get_server_names_o()))
         sso = get_servers_o()
         for i, so in enumerate(sso):
             if so.key == self.sg.server_ocr_selected_key:
