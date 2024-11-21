@@ -1,5 +1,26 @@
 '工具'
 import hashlib
+import re
+
+
+# pylint: disable=E1101
+def process_text(text):
+    """文本预处理
+
+    Args:
+        text (str): _description_
+
+    Returns:
+        str: _description_
+    """
+    # 删除空行
+    s_from = re.sub(r'\n\s*\n', '\n', text)
+    # 删除多余空格
+    s_from = re.sub(r' +', ' ', s_from)
+    # 删除所有换行，除了句号后面的换行
+    s_from = re.sub(r"-[\n|\r]+", "", s_from)
+    s_from = re.sub(r"(?<!\.|-|。)[\n|\r]+", " ", s_from)
+    return s_from
 
 
 def s2ks(s):
