@@ -43,7 +43,7 @@ class Settings:
 
         Raises:
             ValueError: _description_
-        """    
+        """
         if not self.qt:
             from gi.repository import GLib
 
