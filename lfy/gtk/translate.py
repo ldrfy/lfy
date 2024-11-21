@@ -1,6 +1,5 @@
 '''翻译主窗口'''
 
-import re
 import threading
 import time
 import traceback
@@ -13,31 +12,11 @@ from lfy.api import (create_server_o, create_server_t, get_lang,
                      lang_n2j, server_key2i)
 from lfy.api.constant import NO_TRANSLATED_TXTS
 from lfy.api.server import Server
-from lfy.api.utils import cal_md5
+from lfy.api.utils import cal_md5, process_text
 from lfy.api.utils.debug import get_logger
 from lfy.api.utils.settings import Settings
 from lfy.gtk.notify import nf_t
 from lfy.gtk.widgets.theme_switcher import ThemeSwitcher
-
-
-# pylint: disable=E1101
-def process_text(text):
-    """文本预处理
-
-    Args:
-        text (str): _description_
-
-    Returns:
-        str: _description_
-    """
-    # 删除空行
-    s_from = re.sub(r'\n\s*\n', '\n', text)
-    # 删除多余空格
-    s_from = re.sub(r' +', ' ', s_from)
-    # 删除所有换行，除了句号后面的换行
-    s_from = re.sub(r"-[\n|\r]+", "", s_from)
-    s_from = re.sub(r"(?<!\.|-|。)[\n|\r]+", " ", s_from)
-    return s_from
 
 
 @Gtk.Template(resource_path='/cool/ldr/lfy/translate.ui')
@@ -84,15 +63,18 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.toast.set_timeout(2)
 
         i = server_key2i(self.setting.g("server-selected-key"))
-        self.tran_server = create_server_t(self.setting.g("server-selected-key"))
-        self.ocr_server = create_server_o(self.setting.g("server-ocr-selected-key"))
+        self.tran_server = create_server_t(
+            self.setting.g("server-selected-key"))
+        self.ocr_server = create_server_o(
+            self.setting.g("server-ocr-selected-key"))
         self.jn = True
 
         self.dd_server.set_model(Gtk.StringList.new(get_server_names_t()))
         self.dd_server.set_selected(i)
 
         self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
-        self.dd_lang.set_selected(lang_n2j(i, self.setting.g("lang-selected-n")))
+        self.dd_lang.set_selected(
+            lang_n2j(i, self.setting.g("lang-selected-n")))
 
         self.menu_btn.props.popover.add_child(ThemeSwitcher(), 'theme')
 
@@ -170,7 +152,8 @@ class TranslateWindow(Adw.ApplicationWindow):
             print("......", self.paned_position, h,
                   h-self.paned_position, h1)
             if self.paned_position not in (0, h1, int(h/5*2)):
-                self.setting.s("translate-paned-position", self.paned_position/1.0)
+                self.setting.s("translate-paned-position",
+                               self.paned_position/1.0)
                 print("xxxx")
 
         i = self.dd_server.get_selected()

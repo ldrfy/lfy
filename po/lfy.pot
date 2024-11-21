@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-11-17 17:26+0800\n"
+"POT-Creation-Date: 2024-11-22 00:14+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,301 +17,397 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/cool.ldr.lfy.in.in.desktop:3
-#: data/resources/cool.ldr.lfy.in.appdata.xml:10
-#: data/resources/translate.ui:130
+#: data/cool.ldr.lfy.in.in.desktop:3 data/gtk/cool.ldr.lfy.in.appdata.xml:10
+#: data/gtk/translate.ui:130
 msgid "lfy"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:6
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:6
 msgid "Window size"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:10
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:10
 msgid "Automatically check the new version of the software upon startup"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:14 data/resources/preference.ui:116
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:14 data/gtk/preference.ui:116
 msgid ""
 "After the translation is completed, a system notification is automatically "
 "sent"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:23
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:23
 msgid "theme"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:27
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:27
 msgid "The currently selected OCR service"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:31
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:31
 msgid "The currently selected translation service"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:35
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:35
 msgid "The currently selected translation language"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:39
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:39
 msgid "Split position of translation page"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:43
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:43
 msgid "Baidu app_id and secret_key, used in the middle | split"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:47
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:47
 msgid "Baidu API Key and Secret Key for ocr, used in the middle | split"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:51
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:51
 msgid ""
 "The lang parameters of the pytesseract module, such as Chinese and English "
 "by default"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:55
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:55
 msgid ""
 "The lang parameters of the easyocr module, such as Chinese and English by "
 "default, split by +"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:59
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:59
 msgid "Baidu OCR access_token"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:63
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:63
 msgid "Baidu OCR access_token expires date"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:67
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:67
 msgid "aliyun AccessKey ID and AccessKey Secret, used in the middle | split"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:71
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:71
 msgid "huoshan Access Key ID and Secret Access Key, used in the middle | split"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:75
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:75
 msgid "Tencent secret_id and secret_key, used in the middle | split"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:79
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:79
 msgid "VPN address and port"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.gschema.xml:83 data/resources/preference.ui:90
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:83 data/gtk/preference.ui:90
 msgid "Which services are available in compare model"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:11
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:11
 msgid "Translation software for read paper"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:13
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:13
 msgid ""
 "An easy and pleasant way to translate. Support many translation services. "
 "Especially suitable for document translation."
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:19
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:19
 msgid "yuh"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:30
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:30
 msgid "Translation homepage"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:35
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:35
 msgid "Preferences page"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:40
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:40
 msgid "Set Api Key"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:45
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:45
 msgid "Shortcuts"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:49
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:71
 msgid "About"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:60
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:60
+msgid "Add local OCR recognition through pytesseract"
+msgstr ""
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:61
+msgid "Add import and export settings"
+msgstr ""
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:62
+msgid "Add translate or OCR in terminal, like `lfy -h`"
+msgstr ""
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:63
+msgid "Add debug in About Page"
+msgstr ""
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:64
+msgid "The dividing line in the middle of the translation page can be moved"
+msgstr ""
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:71
 msgid "Add aliyun/huoshan Translate for free"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:61
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:72
 msgid "Support notification after translation"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:62
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:73
 msgid "Supports comparing multiple translations at the same time"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:69
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:80
 msgid "Add Bing Translate for free"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:76
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:87
 msgid "Fix Google Translate"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:77
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:88
 msgid "Improve translation performance"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:78
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:89
 msgid "Add Italian language and support Italian translation"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:79
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:90
 msgid ""
 "Optimize the structure of translation services and make it more convenient "
 "to create third-party translation services"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:86
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:97
 msgid "add shortcut"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:87
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:98
 msgid "Automatically check for updates"
 msgstr ""
 
-#: data/resources/cool.ldr.lfy.in.appdata.xml:93
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:104
 msgid "Basic functions completed"
 msgstr ""
 
-#: lfy.py:88
+#: lfy/code.py:106
+msgid "no text"
+msgstr ""
+
+#: lfy/code.py:115 lfy/code.py:149 lfy/gtk/translate.py:274
+#: lfy/gtk/translate.py:307 lfy/api/server/tra/baidu.py:40
+#: lfy/api/server/tra/tencent.py:150 lfy/api/server/tra/aliyun.py:98
+#: lfy/api/server/tra/com.py:29 lfy/api/server/tra/huoshan.py:136
+#: lfy/api/server/ocr/baidu.py:139
+msgid "something error:"
+msgstr ""
+
+#: lfy/code.py:140
+msgid "the file does not exist: {}"
+msgstr ""
+
+#: lfy/code.py:157
 msgid "Command line translation or text recognition, such as {} or {}"
 msgstr ""
 
-#: lfy.py:90
+#: lfy/code.py:160
 msgid "Translate, followed by text"
 msgstr ""
 
-#: lfy.py:91
+#: lfy/code.py:162
 msgid "Recognize image, followed by file path"
 msgstr ""
 
-#: lfy.py:92
+#: lfy/code.py:164
 msgid "Automatically translate clipboard, temporarily invalid"
 msgstr ""
 
-#: lfy.py:94
+#: lfy/code.py:167
 msgid ""
 "Which service engine to use, if -s is not entered, help will be provided "
 "based on -t or -o"
 msgstr ""
 
-#: lfy.py:95
+#: lfy/code.py:169
 msgid ""
 "The language to be translated/recognized, if -l is not entered, "
 "corresponding help will be provided based on the input of -s"
 msgstr ""
 
-#: lfy/main.py:115
+#: lfy/gtk/main.py:117
 msgid "translator_credits"
 msgstr ""
 
-#: lfy/main.py:116
+#: lfy/gtk/main.py:118
 msgid "A translation app for GNOME."
 msgstr ""
 
-#: lfy/main.py:162 data/resources/help-overlay.ui:20
-#: data/resources/help-overlay.ui:27 data/resources/help-overlay.ui:34
-#: data/resources/help-overlay.ui:53
+#: lfy/gtk/main.py:170 data/gtk/help-overlay.ui:20 data/gtk/help-overlay.ui:27
+#: data/gtk/help-overlay.ui:34 data/gtk/help-overlay.ui:53
 msgid "Copy detected, translate immediately"
 msgstr ""
 
-#: lfy/main.py:165
+#: lfy/gtk/main.py:173
 msgid "Copy detected, not automatically translated"
 msgstr ""
 
-#: lfy/main.py:189
+#: lfy/gtk/main.py:197
 msgid "Next translation not remove line breaks"
 msgstr ""
 
-#: lfy/main.py:190
+#: lfy/gtk/main.py:198
 msgid "Next translation remove line breaks"
 msgstr ""
 
-#: lfy/main.py:200
+#: lfy/gtk/main.py:208
 msgid "Next translation without splicing text"
 msgstr ""
 
-#: lfy/main.py:201
+#: lfy/gtk/main.py:209
 msgid "Next translation splicing text"
 msgstr ""
 
-#: lfy/main.py:302
+#: lfy/gtk/main.py:310
 msgid "There is no new version. The current version is {}."
 msgstr ""
 
-#: lfy/main.py:304
+#: lfy/gtk/main.py:313
 msgid "You can go to {} to view the beta version."
 msgstr ""
 
-#: lfy/code.py:105
-msgid "no text"
-msgstr ""
-
-#: lfy/code.py:114 lfy/code.py:148 lfy/translate.py:288 lfy/translate.py:321
-#: lfy/api/server/tra/baidu.py:40 lfy/api/server/tra/tencent.py:150
-#: lfy/api/server/tra/aliyun.py:98 lfy/api/server/tra/com.py:29
-#: lfy/api/server/tra/huoshan.py:136 lfy/api/server/ocr/baidu.py:139
-msgid "something error:"
-msgstr ""
-
-#: lfy/code.py:139
-msgid "the file does not exist: {}"
-msgstr ""
-
-#: lfy/preference.py:69 lfy/api/server/tra/com.py:67
+#: lfy/gtk/preference.py:71 lfy/api/server/tra/com.py:67
 msgid "compare"
 msgstr ""
 
-#: lfy/preference.py:96 lfy/preference.py:136 lfy/preference.py:171
+#: lfy/gtk/preference.py:98 lfy/gtk/preference.py:138 lfy/gtk/preference.py:173
 msgid "It takes effect when you restart lfy"
 msgstr ""
 
-#: lfy/preference.py:104
+#: lfy/gtk/preference.py:106
 msgid "The clipboard format is incorrect"
 msgstr ""
 
-#: lfy/preference.py:112
+#: lfy/gtk/preference.py:114
 msgid "Configuration data has been exported to the clipboard"
 msgstr ""
 
-#: lfy/preference.py:153
+#: lfy/gtk/preference.py:155
 msgid "Using {} for text recognition"
 msgstr ""
 
-#: lfy/translate.py:235
+#: lfy/gtk/translate.py:221
 msgid ""
 "This time the content contains private information and is not translated"
 msgstr ""
 
-#: lfy/translate.py:304
+#: lfy/gtk/translate.py:290
 msgid "OCRing.."
 msgstr ""
 
-#: lfy/translate.py:306
+#: lfy/gtk/translate.py:292
 msgid "Translating.."
 msgstr ""
 
-#: lfy/translate.py:318
+#: lfy/gtk/translate.py:304
 msgid "Translation completed"
 msgstr ""
 
-#: lfy/api/utils/bak.py:53
+#: lfy/gtk/widgets/server_preferences.py:39
+msgid "Text translate"
+msgstr ""
+
+#: lfy/gtk/widgets/server_preferences.py:41
+msgid "Text recognition"
+msgstr ""
+
+#: lfy/gtk/widgets/server_preferences.py:88
+msgid "error message"
+msgstr ""
+
+#: lfy/gtk/widgets/server_preferences.py:90
+msgid "Confirm"
+msgstr ""
+
+#: lfy/qt/preference.py:10
+msgid "Settings"
+msgstr ""
+
+#: lfy/qt/preference.py:15
+msgid ""
+"This is the settings window where you can configure application parameters."
+msgstr ""
+
+#: lfy/qt/translate.py:49
+msgid "Process"
+msgstr ""
+
+#: lfy/qt/translate.py:51 data/gtk/translate.ui:71
+msgid "Alt + D: Remove symbols such as line breaks"
+msgstr ""
+
+#: lfy/qt/translate.py:53
+msgid "Append Previous"
+msgstr ""
+
+#: lfy/qt/translate.py:55 data/gtk/translate.ui:78
+msgid "Alt + C: Splice the next copied text with the previous text"
+msgstr ""
+
+#: lfy/qt/translate.py:57 data/gtk/translate.ui:85
+msgid "translate"
+msgstr ""
+
+#: lfy/qt/tray.py:27
+msgid "Open"
+msgstr ""
+
+#: lfy/qt/tray.py:31
+msgid "Hide"
+msgstr ""
+
+#: lfy/qt/tray.py:35
+msgid "preference"
+msgstr ""
+
+#: lfy/qt/tray.py:39
+msgid "about"
+msgstr ""
+
+#: lfy/qt/tray.py:43
+msgid "Quit"
+msgstr ""
+
+#: lfy/qt/tray.py:51
+msgid "warn"
+msgstr ""
+
+#: lfy/qt/tray.py:51
+msgid "quit?"
+msgstr ""
+
+#: lfy/qt/tray.py:76
+msgid "This is the About window, displaying application information."
+msgstr ""
+
+#: lfy/api/utils/bak.py:57
 msgid "error with keys: "
 msgstr ""
 
-#: lfy/api/utils/bak.py:63
+#: lfy/api/utils/bak.py:66
 msgid "Please copy the configuration data in json format first"
 msgstr ""
 
@@ -419,186 +515,158 @@ msgstr ""
 msgid "Tesseract OCR database {} is not installed"
 msgstr ""
 
-#: lfy/widgets/server_preferences.py:39
-msgid "Text translate"
-msgstr ""
-
-#: lfy/widgets/server_preferences.py:41
-msgid "Text recognition"
-msgstr ""
-
-#: lfy/widgets/server_preferences.py:88
-msgid "error message"
-msgstr ""
-
-#: lfy/widgets/server_preferences.py:90
-msgid "Confirm"
-msgstr ""
-
-#: data/resources/translate.ui:71
-msgid "Alt + D: Remove symbols such as line breaks"
-msgstr ""
-
-#: data/resources/translate.ui:78
-msgid "Alt + C: Splice the next copied text with the previous text"
-msgstr ""
-
-#: data/resources/translate.ui:85
-msgid "translate"
-msgstr ""
-
-#: data/resources/translate.ui:117
+#: data/gtk/translate.ui:117
 msgid "Menu"
 msgstr ""
 
-#: data/resources/translate.ui:141 data/resources/help-overlay.ui:52
+#: data/gtk/translate.ui:141 data/gtk/help-overlay.ui:52
 msgid "Copy to translate"
 msgstr ""
 
-#: data/resources/translate.ui:145 data/resources/help-overlay.ui:26
+#: data/gtk/translate.ui:145 data/gtk/help-overlay.ui:26
 msgid "Hide the original text"
 msgstr ""
 
-#: data/resources/translate.ui:151
+#: data/gtk/translate.ui:151
 msgid "_Preferences"
 msgstr ""
 
-#: data/resources/translate.ui:155
+#: data/gtk/translate.ui:155
 msgid "_Keyboard Shortcuts"
 msgstr ""
 
-#: data/resources/translate.ui:159
+#: data/gtk/translate.ui:159
 msgid "_Check for updates"
 msgstr ""
 
-#: data/resources/translate.ui:163
+#: data/gtk/translate.ui:163
 msgid "_About lfy"
 msgstr ""
 
-#: data/resources/server-preferences.ui:14
+#: data/gtk/server-preferences.ui:14
 msgid "Translate Server"
 msgstr ""
 
-#: data/resources/server-preferences.ui:26
+#: data/gtk/server-preferences.ui:26
 msgid ""
 "API Key for Translate,Pay attention to whether there are dividing lines |"
 msgstr ""
 
-#: data/resources/server-preferences.ui:27
+#: data/gtk/server-preferences.ui:27
 msgid "Enter an API Key for the Server with Translate."
 msgstr ""
 
-#: data/resources/server-preferences.ui:47
+#: data/gtk/server-preferences.ui:47
 msgid "how to get API Key"
 msgstr ""
 
-#: data/resources/preference.ui:10
+#: data/gtk/preference.ui:10
 msgid "General"
 msgstr ""
 
-#: data/resources/preference.ui:15
+#: data/gtk/preference.ui:15
 msgid "setup API Key for translation Server, click on the right to the details"
 msgstr ""
 
-#: data/resources/preference.ui:17
+#: data/gtk/preference.ui:17
 msgid "Translation keys"
 msgstr ""
 
-#: data/resources/preference.ui:46
+#: data/gtk/preference.ui:46
 msgid "local or cloud, text recognition"
 msgstr ""
 
-#: data/resources/preference.ui:47
+#: data/gtk/preference.ui:47
 msgid "OCR server"
 msgstr ""
 
-#: data/resources/preference.ui:76
+#: data/gtk/preference.ui:76
 msgid "Compare model"
 msgstr ""
 
-#: data/resources/preference.ui:103
+#: data/gtk/preference.ui:103
 msgid "Other"
 msgstr ""
 
-#: data/resources/preference.ui:109
+#: data/gtk/preference.ui:109
 msgid "Automatically check for updates when opening software"
 msgstr ""
 
-#: data/resources/preference.ui:110
+#: data/gtk/preference.ui:110
 msgid "auto check update"
 msgstr ""
 
-#: data/resources/preference.ui:117
+#: data/gtk/preference.ui:117
 msgid "Notify translation results"
 msgstr ""
 
-#: data/resources/preference.ui:128
+#: data/gtk/preference.ui:128
 msgid "vpn addr and port, like http://127.0.0.1:7890"
 msgstr ""
 
-#: data/resources/preference.ui:138
+#: data/gtk/preference.ui:138
 msgid "backup/restore the settings to/from the clipboard, edit or backup it"
 msgstr ""
 
-#: data/resources/preference.ui:139
+#: data/gtk/preference.ui:139
 msgid "Software settings backup and restore"
 msgstr ""
 
-#: data/resources/preference.ui:142
+#: data/gtk/preference.ui:142
 msgid "backup"
 msgstr ""
 
-#: data/resources/preference.ui:144
+#: data/gtk/preference.ui:144
 msgid ""
 "Export the configuration to the clipboard, then you can paste it into any "
 "file and edit it"
 msgstr ""
 
-#: data/resources/preference.ui:151
+#: data/gtk/preference.ui:151
 msgid "restore"
 msgstr ""
 
-#: data/resources/preference.ui:153
+#: data/gtk/preference.ui:153
 msgid ""
 "Read the JSON configuration of the clipboard, then import it, and some of "
 "the configurations will take effect after reopening the software"
 msgstr ""
 
-#: data/resources/help-overlay.ui:19
+#: data/gtk/help-overlay.ui:19
 msgid "Reset/Restore UI"
 msgstr ""
 
-#: data/resources/help-overlay.ui:33
+#: data/gtk/help-overlay.ui:33
 msgid "Hide the translated text"
 msgstr ""
 
-#: data/resources/help-overlay.ui:42
+#: data/gtk/help-overlay.ui:42
 msgctxt "shortcut window"
 msgid "General"
 msgstr ""
 
-#: data/resources/help-overlay.ui:46
+#: data/gtk/help-overlay.ui:46
 msgid "Translate"
 msgstr ""
 
-#: data/resources/help-overlay.ui:59
+#: data/gtk/help-overlay.ui:59
 msgid "Splice Text"
 msgstr ""
 
-#: data/resources/help-overlay.ui:60 data/resources/help-overlay.ui:67
+#: data/gtk/help-overlay.ui:60 data/gtk/help-overlay.ui:67
 msgid "Splice the next copied text with the previous text"
 msgstr ""
 
-#: data/resources/help-overlay.ui:66
+#: data/gtk/help-overlay.ui:66
 msgid "Remove line breaks"
 msgstr ""
 
-#: data/resources/help-overlay.ui:73
+#: data/gtk/help-overlay.ui:73
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr ""
 
-#: data/resources/help-overlay.ui:79
+#: data/gtk/help-overlay.ui:79
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr ""

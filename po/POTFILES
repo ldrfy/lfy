@@ -1,12 +1,19 @@
 data/cool.ldr.lfy.in.in.desktop
-data/cool.ldr.lfy.in.gschema.xml
-data/resources/cool.ldr.lfy.in.appdata.xml
+data/gtk/cool.ldr.lfy.in.gschema.xml
+data/gtk/cool.ldr.lfy.in.appdata.xml
 
 lfy.py
-lfy/main.py
 lfy/code.py
-lfy/preference.py
-lfy/translate.py
+
+lfy/gtk/main.py
+lfy/gtk/notify.py
+lfy/gtk/preference.py
+lfy/gtk/translate.py
+lfy/gtk/widgets/server_preferences.py
+
+lfy/qt/preference.py
+lfy/qt/translate.py
+lfy/qt/tray.py
 
 lfy/api/__init__.py
 lfy/api/utils/__init__.py
@@ -23,9 +30,8 @@ lfy/api/server/tra/huoshan.py
 lfy/api/server/ocr/baidu.py
 lfy/api/server/ocr/easyocr.py
 lfy/api/server/ocr/pytesseract.py
-lfy/widgets/server_preferences.py
 
-data/resources/translate.ui
-data/resources/server-preferences.ui
-data/resources/preference.ui
-data/resources/help-overlay.ui
+data/gtk/translate.ui
+data/gtk/server-preferences.ui
+data/gtk/preference.ui
+data/gtk/help-overlay.ui

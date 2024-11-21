@@ -61,6 +61,10 @@ class TrayIcon(QSystemTrayIcon):
     def show_setting_window(self):
         PreferenceWindow().exec()
 
+    def show_msg(self, title, msg):
+        self.showMessage(
+            title, msg, QSystemTrayIcon.MessageIcon.Information, 2000)
+
 
 class AboutWindow(QDialog):
     def __init__(self):

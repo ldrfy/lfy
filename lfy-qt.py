@@ -51,6 +51,8 @@ if __name__ == "__main__":
     icon = QIcon.fromTheme(APP_ID)
     window = TranslateWindow()
     window.setWindowIcon(icon)
-    TrayIcon(window, app, icon).show()
+    tray = TrayIcon(window, app, icon)
+    tray.show()
+    window.tray = tray
     window.show()
     sys.exit(app.exec())

@@ -11,8 +11,9 @@ from lfy.api import (create_server_o, create_server_t, get_lang,
                      get_lang_names, get_server_names_t, get_server_t,
                      lang_n2j, server_key2i)
 from lfy.api.server import Server
+from lfy.api.utils import process_text
 from lfy.api.utils.settings import Settings
-from lfy.qt.utils import MyThread
+from lfy.qt import MyThread
 
 
 class TranslateWindow(QMainWindow):
@@ -45,9 +46,14 @@ class TranslateWindow(QMainWindow):
         self.cb_lang.currentIndexChanged.connect(self._on_lang_changed)
 
         # 右边的两个选择按钮
-        self.cb_del_wrapping = QCheckBox("", self)
-        self.cb_add_old = QCheckBox("", self)
-        # 普通按钮
+        self.cb_del_wrapping = QCheckBox(_("Process"), self)
+        self.cb_del_wrapping.setToolTip(_(
+            "Alt + D: Remove symbols such as line breaks"))
+
+        self.cb_add_old = QCheckBox(_("Append"), self)
+        self.cb_add_old.setToolTip(_(
+            "Alt + C: Splice the next copied text with the previous text"))
+
         self.btn_translate = QPushButton(_("translate"), self)
 
         middle_layout.addWidget(self.cb_server)
@@ -71,7 +77,9 @@ class TranslateWindow(QMainWindow):
         self.jn = False
         self.server_t = None
         self.lang_t = None
-        self.thread = None
+        self.my_thread = None
+        self.tray = None
+        self.text_last = ""
 
         self.set_data()
 
@@ -79,11 +87,6 @@ class TranslateWindow(QMainWindow):
         self.s = Settings()
 
         self.btn_translate.clicked.connect(self.translate_text)
-        self.cb_add_old.setToolTip(_(
-            "Alt + C: Splice the next copied text with the previous text"))
-
-        self.cb_del_wrapping.setToolTip(_(
-            "Alt + D: Remove symbols such as line breaks"))
 
         server_key_t = self.s.g("server-selected-key", "bing")
         server_key_o = self.s.g("server_ocr_selected_key", "baidu")
@@ -98,6 +101,7 @@ class TranslateWindow(QMainWindow):
         j = lang_n2j(i, n)
         self.lang_t = get_lang(i, j)
         self.cb_lang.setCurrentIndex(j)
+        self.cb_del_wrapping.setChecked(True)
 
     def _on_server_changed(self):
         i = self.cb_server.currentIndex()
@@ -127,44 +131,51 @@ class TranslateWindow(QMainWindow):
 
     def ocr_image(self, img_path):
         def oo(p=None):
-            print(p)
             _ok, text_from = self.server_o.ocr_image(
                 img_path, self.lang_t.key)
             return (_ok, text_from)
+
         def next_(param):
             _ok, s = param
             if not _ok:
-                self.set_ui((s, "文本识别失败！"))
+                self.set_text_from_to((s, "文本识别失败！"))
                 return
-            self.set_ui((s, "文本识别成功！"))
+            self.set_text_from_to((s, "文本识别成功！"))
             self.translate_text()
 
-        self.set_ui(("识别中", "..."))
-        self.thread = MyThread(oo)
-        self.thread.signal.connect(next_)
-        self.thread.start()
+        self.set_text_from_to(("识别中...", "识别中..."))
+        self.my_thread = MyThread(oo)
+        self.my_thread.signal.connect(next_)
+        self.my_thread.start()
 
     def set_text_from_to(self, text):
         text_from, text_to = text
         self.te_from.setPlainText(text_from)
         self.te_to.setPlainText(text_to)
-        self.thread = None
 
+        if "..." != text_to[-3:]:
+            self.my_thread = None
+            self.tray.show_msg("翻译成功！", text_to)
+            self.text_last = text_from
 
     def translate_text(self):
         text_from = self.te_from.toPlainText()
+        if self.cb_del_wrapping.isChecked():
+            text_from = process_text(text_from)
+
+        if self.cb_add_old.isChecked():
+            text_from = self.text_last + text_from
+
         if not text_from:
-            print("no")
             return
 
         def tt(p=None):
-            print(p)
             _ok, text_to = self.server_t.translate_text(
                 text_from, self.lang_t.key)
             return (text_from, text_to)
 
         self.set_text_from_to((text_from, "翻译中..."))
 
-        self.thread = MyThread(tt)
-        self.thread.signal.connect(self.set_text_from_to)
-        self.thread.start()
+        self.my_thread = MyThread(tt)
+        self.my_thread.signal.connect(self.set_text_from_to)
+        self.my_thread.start()
