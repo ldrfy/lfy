@@ -9,7 +9,8 @@
 from gi.repository import Adw, Gio, GObject, Gtk
 
 from lfy import RES_PATH  # pylint: disable=E0611
-from lfy.gtk.settings import Settings
+from lfy import APP_ID
+from lfy.api.utils.settings import Settings
 
 
 @Gtk.Template(resource_path=f'{RES_PATH}/theme-switcher.ui')
@@ -64,9 +65,9 @@ class ThemeSwitcher(Gtk.Box):
 
         self.style_manager = Adw.StyleManager.get_default()
 
-        self.color_scheme = Settings.get().color_scheme
+        self.color_scheme = Settings().g("color-scheme")
 
-        Settings.get().bind(
+        Gio.Settings(APP_ID).bind(
             'color-scheme',
             self,
             'selected_color_scheme',

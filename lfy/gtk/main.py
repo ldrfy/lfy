@@ -14,12 +14,12 @@ from lfy.api.utils import get_os_release, is_text
 from lfy.api.utils.bak import backup_gsettings
 from lfy.api.utils.check_update import main as check_update
 from lfy.api.utils.debug import get_log_handler
+from lfy.api.utils.settings import Settings
 from lfy.gtk.preference import PreferencesDialog
-from lfy.gtk.settings import Settings
 from lfy.gtk.translate import TranslateWindow
 
 # 设置代理地址和端口号
-PROXY_ADDRESS = Settings.get().vpn_addr_port
+PROXY_ADDRESS = Settings().g("vpn-addr-port")
 if len(PROXY_ADDRESS) > 0:
     # 设置环境变量
     os.environ['http_proxy'] = PROXY_ADDRESS
@@ -80,9 +80,10 @@ class LfyApplication(Adw.Application):
         """
         win = self.props.active_window  # pylint: disable=E1101
         if not win:
-            width, height = Settings.get().window_size
+            width, height = Settings().g("window-size")
+            print(width, height)
             win = TranslateWindow(
-                application=self, default_height=height, default_width=width, )
+                application=self, default_height=int(height), default_width=int(width), )
         win.present()
         return win
 
@@ -312,5 +313,5 @@ class LfyApplication(Adw.Application):
                 s += _("You can go to {} to view the beta version.").format(PACKAGE_URL)
                 GLib.idle_add(self.update_app, s)
 
-        if Settings.get().auto_check_update:
+        if Settings().g("auto-check-update"):
             threading.Thread(target=fu, daemon=True).start()

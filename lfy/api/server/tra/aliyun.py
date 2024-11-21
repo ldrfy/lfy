@@ -10,7 +10,7 @@ from gettext import gettext as _
 from urllib.parse import quote, quote_plus
 
 from lfy.api.server import TIME_OUT, Server
-from lfy.settings import Settings
+from lfy.api.utils.settings import Settings
 
 
 def _compose_string_to_sign(method, queries):
@@ -134,7 +134,7 @@ class AliYunServer(Server):
             return False, error_msg + " XXXX | XXXX"
         ok, text = _translate(self.session, "success", api_key_s)
         if ok:
-            Settings.get().server_sk_aliyun = api_key_s
+            Settings().s("server-sk-aliyun", api_key_s)
         return ok, text
 
     def translate_text(self, text, lang_to="en", lang_from="auto"):
@@ -156,4 +156,4 @@ class AliYunServer(Server):
         Returns:
             _type_: _description_
         """
-        return Settings.get().server_sk_aliyun
+        return Settings().g("server-sk-aliyun")

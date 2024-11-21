@@ -4,7 +4,7 @@ from gettext import gettext as _
 from lfy.api.server import Server
 from lfy.api.server.ocr import gen_img
 from lfy.api.utils.debug import get_logger
-from lfy.settings import Settings
+from lfy.api.utils.settings import Settings
 
 
 class EasyOcrServer(Server):
@@ -41,11 +41,11 @@ class EasyOcrServer(Server):
         Returns:
             _type_: _description_
         """
-        return Settings.get().server_sk_easyocr_ocr
+        return Settings().g("server-sk-easyocr-ocr")
 
     def check_ocr(self, api_key_ocr_s):
         path = gen_img("success")
         ok, text = self.ocr_image(path)
         if ok:
-            Settings.get().server_sk_easyocr_ocr = api_key_ocr_s
+            Settings().s("server-sk-easyocr-ocr", api_key_ocr_s)
         return ok, text

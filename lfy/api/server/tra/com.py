@@ -8,7 +8,7 @@ from multiprocessing import Pool
 from lfy.api.constant import SERVERS_T
 from lfy.api.server import Server
 from lfy.api.utils.debug import get_logger
-from lfy.settings import Settings
+from lfy.api.utils.settings import Settings
 
 
 def _translate(args):
@@ -54,7 +54,7 @@ class AllServer(Server):
         all_servers = {
             server.key: server for server in SERVERS_T
         }
-        keys = Settings.get().compare_servers
+        keys = Settings().g("compare-servers")
 
         # 初始化 self.servers
         if not keys:  # 如果 keys 为空，则选择所有服务器

@@ -1,4 +1,3 @@
-import gettext
 from gettext import gettext as _
 
 from PyQt6.QtWidgets import (QCheckBox, QComboBox, QDialog, QHBoxLayout, QMenu,

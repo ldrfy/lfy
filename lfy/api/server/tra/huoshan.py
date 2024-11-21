@@ -8,7 +8,7 @@ from gettext import gettext as _
 
 from lfy.api.server import TIME_OUT, Server
 from lfy.api.utils import s2ks
-from lfy.settings import Settings
+from lfy.api.utils.settings import Settings
 
 
 def hex_digest(input_bytes):
@@ -181,7 +181,7 @@ class HuoShanServer(Server):
             return False, error_msg + " LTAI5tQiXnC6ffwfe | rWPiBuk1xdwwdfafwefwef"
         ok, text = _translate(self.session, "success", api_key_s)
         if ok:
-            Settings.get().server_sk_huoshan = api_key_s
+            Settings().s("server-sk-huoshan", api_key_s)
         return ok, text
 
     def translate_text(self, text, lang_to="en", lang_from="auto"):
@@ -203,5 +203,5 @@ class HuoShanServer(Server):
         Returns:
             _type_: _description_
         """
-        return Settings.get().server_sk_huoshan
+        return Settings().g("server-sk-huoshan")
         # Access Key ID|Secret Access Key

@@ -1,12 +1,12 @@
 '托盘图标'
 from gettext import gettext as _
 
-from preference import PreferenceWindow
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import (QDialog, QMenu, QMessageBox, QSystemTrayIcon,
                              QTextEdit, QVBoxLayout)
 
 from lfy import APP_NAME
+from lfy.qt.preference import PreferenceWindow
 
 
 class TrayIcon(QSystemTrayIcon):

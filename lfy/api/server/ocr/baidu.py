@@ -6,7 +6,7 @@ from gettext import gettext as _
 
 from lfy.api.server import TIME_OUT, Server
 from lfy.api.utils import s2ks
-from lfy.settings import Settings
+from lfy.api.utils.settings import Settings
 
 
 def _get_token(session, ocr_api_key_s):
@@ -15,12 +15,12 @@ def _get_token(session, ocr_api_key_s):
     Returns:
         _type_: _description_
     """
-    sg = Settings.get()
+    sg = Settings()
 
-    expires_in_date = sg.ocr_baidu_token_expires_date
+    expires_in_date = sg.g("ocr-baidu-token-expires-date")
 
     if expires_in_date - time.time() > 0:
-        access_token = sg.ocr_baidu_token
+        access_token = sg.g("ocr-baidu-token")
         if len(access_token) != 0:
             return True, access_token
 
@@ -33,8 +33,8 @@ def _get_token(session, ocr_api_key_s):
         _get_token_by_url(session, api_key, secret_key)
 
     if ok:
-        sg.ocr_baidu_token = access_token
-        sg.ocr_baidu_token_expires_date = expires_in_date
+        sg.s("ocr-baidu-token", access_token)
+        sg.s("ocr-baidu-token-expires-date", expires_in_date)
 
     return ok, access_token
 
@@ -97,7 +97,7 @@ class BaiduServer(Server):
         Returns:
             _type_: _description_
         """
-        return Settings.get().server_sk_baidu_ocr
+        return Settings().g("server-sk-baidu-ocr")
 
     def ocr_image(self, img_path, lang_str=None):
         """图文识别
@@ -135,7 +135,7 @@ class BaiduServer(Server):
 
         if "error_code" in res:
             if 110 == res["error_code"]:
-                Settings.get().ocr_baidu_token = ""
+                Settings().s("ocr-baidu-token", "")
             error_msg = _("something error:")
             return False, f'{error_msg}\n\n{res["error_code"]}: {res["error_msg"]}'
 
@@ -165,8 +165,8 @@ class BaiduServer(Server):
         ok, access_token, expires_in_date = \
             _get_token_by_url(self.session, api_key, secret_key)
         if ok:
-            sg = Settings.get()
-            sg.server_sk_baidu_ocr = api_key_ocr_s
-            sg.ocr_baidu_token = access_token
-            sg.ocr_baidu_token_expires_date = expires_in_date
+            ss = Settings()
+            ss.s("server-sk-baidu-ocr", api_key_ocr_s)
+            ss.s("ocr-baidu-token", access_token)
+            ss.s("ocr-baidu-token-expires-date", expires_in_date)
         return ok, "success"

@@ -11,7 +11,7 @@ import requests
 
 from lfy.api.server import TIME_OUT, Server
 from lfy.api.utils import s2ks
-from lfy.settings import Settings
+from lfy.api.utils.settings import Settings
 
 
 def _get_string_to_sign(method, endpoint, params):
@@ -85,7 +85,7 @@ class TencentServer(Server):
             return False, error + " a121343 | fdsdsdg"
         ok, text = self._translate("success", api_key_s, "en")
         if ok:
-            Settings.get().server_sk_tencent = api_key_s
+            Settings().s("server-sk-tencent", api_key_s)
         return ok, text
 
     def translate_text(self, text, lang_to="auto", lang_from="auto"):
@@ -107,7 +107,7 @@ class TencentServer(Server):
         Returns:
             _type_: _description_
         """
-        return Settings.get().server_sk_tencent
+        return Settings().g("server-sk-tencent")
 
     def _translate(self, query_text, api_key_s, lang_to="zh", lang_from="auto"):
         """腾讯翻译接口

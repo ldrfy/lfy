@@ -5,7 +5,7 @@ from gettext import gettext as _
 from lfy.api.server import Server
 from lfy.api.server.ocr import gen_img
 from lfy.api.utils.debug import get_logger
-from lfy.settings import Settings
+from lfy.api.utils.settings import Settings
 
 
 class PytesseractServer(Server):
@@ -49,7 +49,7 @@ class PytesseractServer(Server):
         Returns:
             _type_: _description_
         """
-        return Settings.get().server_sk_pytesseract_ocr
+        return Settings().g("server-sk-pytesseract-ocr")
 
     def check_ocr(self, api_key_ocr_s):
         """ocr环境
@@ -82,5 +82,5 @@ class PytesseractServer(Server):
         if not ok:
             return ok, text
 
-        Settings.get().server_sk_pytesseract_ocr = api_key_ocr_s
+        Settings().s("server-sk-pytesseract-ocr", api_key_ocr_s)
         return ok, text

@@ -1,22 +1,4 @@
-subdir('resources')
-
-# Install gsettings schema
-gschema_conf = configuration_data()
-gschema_conf.set('APP_ID', APP_ID)
-configure_file(
-  input: APP_ID + '.in.gschema.xml',
-  output: APP_ID + '.gschema.xml',
-  configuration: gschema_conf,
-  install: true,
-  install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas')
-)
-
-compile_schemas = find_program('glib-compile-schemas', required: false)
-if compile_schemas.found()
-  test('Validate schema file', compile_schemas,
-    args: ['--strict', '--dry-run', meson.current_source_dir()]
-  )
-endif
+subdir('gtk')
 
 
 # Merging the translations with the desktop file

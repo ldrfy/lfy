@@ -1,17 +1,11 @@
 #!@PYTHON@
-
-# lt
 import os
 import subprocess
 import sys
 from gettext import gettext as _
 
-import gi
-
-gi.require_version("Adw", "1")
-gi.require_version('Gio', '2.0')
-gi.require_version('Gtk', '4.0')
-gi.require_version('Gdk', '4.0')
+from PyQt6.QtGui import QIcon
+from PyQt6.QtWidgets import QApplication
 
 APP_ID = '@APP_ID@'
 VERSION = '@VERSION@'
@@ -40,8 +34,8 @@ if not os.path.exists(PKGDATA_DIR):
 sys.path.append(PYTHON_DIR)
 
 
-if __name__ == '__main__':
-    os.environ[f'{APP_ID}.ui'] = 'gtk'
+if __name__ == "__main__":
+    os.environ[f'{APP_ID}.ui'] = 'qt'
 
     from lfy import set_internationalization
     set_internationalization(APP_ID, LOCALE_DIR)
@@ -49,12 +43,14 @@ if __name__ == '__main__':
     from lfy.code import parse_lfy
     parse_lfy()
 
-    from gi.repository import Gio  # pylint: disable=c0415
+    app = QApplication(sys.argv)
 
-    # pylint: disable=w0212
-    Gio.Resource._register(Gio.resource_load(
-        os.path.join(PKGDATA_DIR, f'{APP_ID}.gresource')))
+    from lfy.qt.translate import TranslateWindow
+    from lfy.qt.tray import TrayIcon
 
-    from lfy.gtk.main import LfyApplication
-
-    sys.exit(LfyApplication(APP_ID, VERSION).run(sys.argv))
+    icon = QIcon.fromTheme(APP_ID)
+    window = TranslateWindow()
+    window.setWindowIcon(icon)
+    TrayIcon(window, app, icon).show()
+    window.show()
+    sys.exit(app.exec())
