@@ -1,16 +1,15 @@
 '终端翻译'
+import argparse
 import os
 import traceback
 from gettext import gettext as _
-
-from gi.repository import Gdk
 
 from lfy.api import (create_server_o, create_server_t, get_servers_o,
                      get_servers_t, lang_n2key)
 from lfy.api.server import Server
 from lfy.api.utils import is_text
 from lfy.api.utils.debug import get_logger
-from lfy.settings import Settings
+from lfy.api.utils.settings import Settings
 
 
 def req_clip(key_server, key_lang_n):
@@ -20,6 +19,8 @@ def req_clip(key_server, key_lang_n):
         key_server (str): _description_
         key_lang (str): _description_
     """
+    from gi.repository import Gdk
+
     def on_active_copy(cb2, res):
         return req_text(cb2.read_text_finish(res), key_server, key_lang_n)
 
@@ -148,3 +149,33 @@ def req_ocr(s=None, key_server=None, key_lang_n=-1):
         error_msg = _("something error:")
         error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
         return f"{error_msg}{server.name}\n\n{error_msg2}"
+
+
+def parse_lfy():
+    """设置
+    """
+    parser = argparse.ArgumentParser(description=_('Command line translation or text recognition, such as {} or {}').format(
+        'lfy -t "who am i" -s bing -l 1', 'lfy -o "/tmp/xxx.png" -s baidu -l 1'))
+
+    parser.add_argument('-t', type=str, help=_('Translate, followed by text'))
+    parser.add_argument(
+        '-o', type=str, help=_('Recognize image, followed by file path'))
+    parser.add_argument('-c', action='store_true',
+                        help=_('Automatically translate clipboard, temporarily invalid'))
+
+    parser.add_argument('-s', type=str, help=_(
+        'Which service engine to use, if -s is not entered, help will be provided based on -t or -o'), default="", nargs='?')
+    parser.add_argument('-l', type=int, help=_(
+        'The language to be translated/recognized, if -l is not entered, corresponding help will be provided based on the input of -s'), default=-1, nargs='?')
+
+    args = parser.parse_args()
+
+    if args.c:
+        print(req_clip(args.s, args.l))
+        return
+    if args.t:
+        print(req_text(args.t, args.s, args.l))
+        return
+    if args.o:
+        print(req_ocr(args.o, args.s, args.l))
+        return

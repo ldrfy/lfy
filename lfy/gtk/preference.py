@@ -5,12 +5,13 @@ from gettext import gettext as _
 
 from gi.repository import Adw, Gdk, Gio, Gtk
 
+from lfy import APP_ID
 from lfy.api import (get_server_names_api_key, get_server_names_o,
                      get_servers_api_key, get_servers_o, get_servers_t)
 from lfy.api.server import Server
 from lfy.api.utils import is_text
 from lfy.api.utils.bak import backup_gsettings, restore_gsettings
-from lfy.gtk.settings import Settings
+from lfy.api.utils.settings import Settings
 from lfy.gtk.widgets.server_preferences import ServerPreferences
 
 
@@ -36,28 +37,29 @@ class PreferencesDialog(Adw.PreferencesDialog):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.sg = Settings.get()
+        self.sg = Settings()
         self.server: Server
         self.server_ocr: Server
         # pylint: disable=E1101
-        self.acr_server.set_model(Gtk.StringList.new(get_server_names_api_key()))
+        self.acr_server.set_model(
+            Gtk.StringList.new(get_server_names_api_key()))
 
         self.ocr_s_time = time.time()
         self.acr_server_ocr.set_model(Gtk.StringList.new(get_server_names_o()))
         sso = get_servers_o()
         for i, so in enumerate(sso):
-            if so.key == self.sg.server_ocr_selected_key:
+            if so.key == self.sg.g("server-ocr-selected-key"):
                 self.acr_server_ocr.set_selected(i)
                 self.server_ocr = so
                 break
 
-        self.entry_vpn_addr.props.text = self.sg.vpn_addr_port
+        self.entry_vpn_addr.props.text = self.sg.g("vpn-addr-port")
+        self.sg0 = Gio.Settings(APP_ID)
+        self.sg0.bind('auto-check-update', self.auto_check_update,
+                      'active', Gio.SettingsBindFlags.DEFAULT)
 
-        self.sg.bind('auto-check-update', self.auto_check_update,
-                     'active', Gio.SettingsBindFlags.DEFAULT)
-
-        self.sg.bind('notify-translation-results', self.notify_translation_results,
-                     'active', Gio.SettingsBindFlags.DEFAULT)
+        self.sg0.bind('notify-translation-results', self.notify_translation_results,
+                      'active', Gio.SettingsBindFlags.DEFAULT)
         self._init_pop_compare()
         self.cb = Gdk.Display.get_default().get_clipboard()
 
@@ -69,7 +71,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.gbtn_compare.set_label(_("compare"))
         names = []
         ss = list(get_servers_t())[1:]
-        keys_s = self.sg.compare_servers
+        keys_s = self.sg.g("compare-servers")
         if len(keys_s) == 0:
             for se in ss:
                 keys_s.append(se.key)
@@ -129,8 +131,8 @@ class PreferencesDialog(Adw.PreferencesDialog):
                 keys.append(ss[i].key)
                 names.append(ss[i].name)
 
-        if self.sg.compare_servers != keys:
-            self.sg.compare_servers = keys
+        if self.sg.g("compare-servers") != keys:
+            self.sg.s("compare-servers", keys)
             self.aar_compare.set_subtitle(", ".join(names))
             self.add_toast(Adw.Toast.new(
                 _("It takes effect when you restart lfy")))
@@ -148,7 +150,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
     def _config_select_server_ocr(self, arc, _value):
         if time.time() - self.ocr_s_time > 0.5:
             self.server_ocr = get_servers_o()[arc.get_selected()]
-            self.sg.server_ocr_selected_key = self.server_ocr.key
+            self.sg.s("server-ocr-selected-key", self.server_ocr.key)
 
             s = _("Using {} for text recognition").format(self.server_ocr.name)
             self.add_toast(Adw.Toast.new(s))
@@ -164,7 +166,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
 
         vpn_addr = self.entry_vpn_addr.get_text().strip()
         self.entry_vpn_addr.props.text = vpn_addr
-        self.sg.vpn_addr_port = vpn_addr
+        self.sg.s("vpn-addr-port", vpn_addr)
         self.entry_vpn_addr.props.sensitive = True
 
         self.add_toast(Adw.Toast.new(

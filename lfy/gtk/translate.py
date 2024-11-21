@@ -16,7 +16,7 @@ from lfy.api.server import Server
 from lfy.api.utils import cal_md5
 from lfy.api.utils.debug import get_logger
 from lfy.api.utils.notify import nf_t
-from lfy.gtk.settings import Settings
+from lfy.api.utils.settings import Settings
 from lfy.gtk.widgets.theme_switcher import ThemeSwitcher
 
 
@@ -69,7 +69,7 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         self.app = self.get_application()
 
-        self.setting = Settings.get()
+        self.setting = Settings()
         self.img_md5 = ""
 
         # 可能包含上次的追加内容
@@ -83,22 +83,21 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.toast = Adw.Toast.new("")
         self.toast.set_timeout(2)
 
-        i = server_key2i(self.setting.server_selected_key)
-        self.tran_server = create_server_t(self.setting.server_selected_key)
-        self.ocr_server = create_server_o(self.setting.server_ocr_selected_key)
+        i = server_key2i(self.setting.g("server-selected-key"))
+        self.tran_server = create_server_t(self.setting.g("server-selected-key"))
+        self.ocr_server = create_server_o(self.setting.g("server-ocr-selected-key"))
         self.jn = True
 
         self.dd_server.set_model(Gtk.StringList.new(get_server_names_t()))
         self.dd_server.set_selected(i)
 
         self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
-        self.dd_lang.set_selected(lang_n2j(i, self.setting.lang_selected_n))
+        self.dd_lang.set_selected(lang_n2j(i, self.setting.g("lang-selected-n")))
 
         self.menu_btn.props.popover.add_child(ThemeSwitcher(), 'theme')
 
         self.connect('unrealize', self.save_settings)
-
-        self.paned_position = self.setting.translate_paned_position
+        self.paned_position = self.setting.g("translate-paned-position")
         self.paned_position_auto = True
         if self.paned_position > 0:
             self.gp_translate.set_position(self.paned_position)
@@ -162,7 +161,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             _a (TranslateWindow): _description_
         """
         if not self.is_maximized():
-            self.setting.window_size = self.get_default_size()
+            self.setting.s("window-size", self.get_default_size())
             _w, h = self.get_default_size()
             self.paned_position = self.gp_translate.get_position()
 
@@ -171,21 +170,21 @@ class TranslateWindow(Adw.ApplicationWindow):
             print("......", self.paned_position, h,
                   h-self.paned_position, h1)
             if self.paned_position not in (0, h1, int(h/5*2)):
-                self.setting.translate_paned_position = self.paned_position/1.0
+                self.setting.s("translate-paned-position", self.paned_position/1.0)
                 print("xxxx")
 
         i = self.dd_server.get_selected()
         j = self.dd_lang.get_selected()
-        self.setting.server_selected_key = get_server_t(i).key
+        self.setting.s("server-selected-key", get_server_t(i).key)
         n = get_lang(i, j).n
-        self.setting.lang_selected_n = n
+        self.setting.s("lang-selected-n", n)
 
     @Gtk.Template.Callback()
     def _on_server_changed(self, drop_down, _a):
         # 初始化，会不断调用这个
         if time.time() - self.creat_time > 1:
             i = drop_down.get_selected()
-            lang_select_index = lang_n2j(i, self.setting.lang_selected_n)
+            lang_select_index = lang_n2j(i, self.setting.g("lang-selected-n"))
             # 等于0时_on_lang_changed不会相应多次
             self.jn = lang_select_index == 0
 
@@ -218,7 +217,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             return
         self.img_md5 = md5_hash
 
-        _k = self.setting.server_ocr_selected_key
+        _k = self.setting.g("server-ocr-selected-key")
         if _k != self.ocr_server.key:
             self.ocr_server = create_server_o(_k)
         print(self.ocr_server.key)

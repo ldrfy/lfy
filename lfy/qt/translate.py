@@ -5,13 +5,14 @@ from PyQt6.QtCore import QSettings, Qt
 from PyQt6.QtWidgets import (QCheckBox, QComboBox, QHBoxLayout, QMainWindow,
                              QPushButton, QSplitter, QTextEdit, QVBoxLayout,
                              QWidget)
-from utils import MyThread
 
 from lfy import APP_NAME
 from lfy.api import (create_server_o, create_server_t, get_lang,
                      get_lang_names, get_server_names_t, get_server_t,
                      lang_n2j, server_key2i)
 from lfy.api.server import Server
+from lfy.api.utils.settings import Settings
+from lfy.qt.utils import MyThread
 
 
 class TranslateWindow(QMainWindow):
@@ -75,7 +76,7 @@ class TranslateWindow(QMainWindow):
         self.set_data()
 
     def set_data(self):
-        self.s = QSettings("cool.ldr", "lfy")
+        self.s = Settings()
 
         self.btn_translate.clicked.connect(self.translate_text)
         self.cb_add_old.setToolTip(_(
@@ -84,8 +85,8 @@ class TranslateWindow(QMainWindow):
         self.cb_del_wrapping.setToolTip(_(
             "Alt + D: Remove symbols such as line breaks"))
 
-        server_key_t = self.s.value("server_selected_key", "bing")
-        server_key_o = self.s.value("server_ocr_selected_key", "baidu")
+        server_key_t = self.s.g("server-selected-key", "bing")
+        server_key_o = self.s.g("server_ocr_selected_key", "baidu")
 
         self.server_t = create_server_t(server_key_t)
         self.server_o = create_server_o(server_key_o)
@@ -93,26 +94,30 @@ class TranslateWindow(QMainWindow):
         self.cb_server.addItems(get_server_names_t())
         i = server_key2i(server_key_t)
         self.cb_server.setCurrentIndex(i)
-        j = lang_n2j(i, self.s.value("lang_selected_n", 0, int))
+        n = self.s.g("lang-selected-n", 0, int)
+        j = lang_n2j(i, n)
+        self.lang_t = get_lang(i, j)
         self.cb_lang.setCurrentIndex(j)
 
     def _on_server_changed(self):
         i = self.cb_server.currentIndex()
-        j = lang_n2j(i, self.s.value("lang_selected_n", 0, int))
+        j = lang_n2j(i, self.s.g("lang-selected-n", 0, int))
         self.jn = False
         self.cb_lang.clear()
         self.cb_lang.addItems(get_lang_names(i))
         self.jn = True
         self.cb_lang.setCurrentIndex(j)
 
-        self.s.setValue("server_selected_key", get_server_t(i).key)
+        self.s.s("server-selected-key", get_server_t(i).key)
 
     def _on_lang_changed(self):
         if not self.jn:
             return
         i = self.cb_server.currentIndex()
         j = self.cb_lang.currentIndex()
-        self.s.setValue("lang_selected_n", get_lang(i, j).n)
+        n = get_lang(i, j).n
+        self.s.s("lang-selected-n", n)
+        n = self.s.g("lang-selected-n", 0, int)
 
         server: Server = get_server_t(i)
         if server.key != self.server_t.key:
@@ -143,6 +148,7 @@ class TranslateWindow(QMainWindow):
         text_from, text_to = text
         self.te_from.setPlainText(text_from)
         self.te_to.setPlainText(text_to)
+        self.thread = None
 
 
     def translate_text(self):
