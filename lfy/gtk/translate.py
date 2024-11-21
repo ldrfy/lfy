@@ -15,8 +15,8 @@ from lfy.api.constant import NO_TRANSLATED_TXTS
 from lfy.api.server import Server
 from lfy.api.utils import cal_md5
 from lfy.api.utils.debug import get_logger
-from lfy.api.utils.notify import nf_t
 from lfy.api.utils.settings import Settings
+from lfy.gtk.notify import nf_t
 from lfy.gtk.widgets.theme_switcher import ThemeSwitcher
 
 
@@ -161,8 +161,8 @@ class TranslateWindow(Adw.ApplicationWindow):
             _a (TranslateWindow): _description_
         """
         if not self.is_maximized():
-            self.setting.s("window-size", self.get_default_size())
-            _w, h = self.get_default_size()
+            w, h = self.get_default_size()
+            self.setting.s("window-size", [w, h])
             self.paned_position = self.gp_translate.get_position()
 
             h1 = h - (self.header_bar.get_height() +
