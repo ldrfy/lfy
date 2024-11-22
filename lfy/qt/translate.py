@@ -1,22 +1,27 @@
 '翻译主窗口'
 from gettext import gettext as _
 
-from PyQt6.QtCore import QSettings, Qt
-from PyQt6.QtWidgets import (QCheckBox, QComboBox, QHBoxLayout, QMainWindow,
-                             QPushButton, QSplitter, QTextEdit, QVBoxLayout,
-                             QWidget)
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import (QApplication, QCheckBox, QComboBox, QHBoxLayout,
+                             QMainWindow, QPushButton, QSplitter, QTextEdit,
+                             QVBoxLayout, QWidget)
 
 from lfy import APP_NAME
 from lfy.api import (create_server_o, create_server_t, get_lang,
                      get_lang_names, get_server_names_t, get_server_t,
                      lang_n2j, server_key2i)
 from lfy.api.server import Server
-from lfy.api.utils import process_text
-from lfy.api.utils.settings import Settings
 from lfy.qt import MyThread
+from lfy.utils import cal_md5, process_text
+from lfy.utils.settings import Settings
 
 
 class TranslateWindow(QMainWindow):
+    """翻译主窗口
+
+    Args:
+        QMainWindow (_type_): _description_
+    """
     def __init__(self):
         super().__init__()
 
@@ -62,7 +67,6 @@ class TranslateWindow(QMainWindow):
         middle_layout.addWidget(self.cb_del_wrapping)
         middle_layout.addWidget(self.cb_add_old)
         middle_layout.addWidget(self.btn_translate)
-
         # 下面的文本编辑框
         self.te_to = QTextEdit(self)
 
@@ -74,19 +78,26 @@ class TranslateWindow(QMainWindow):
 
         main_layout.addWidget(splitter)
 
+        middle_layout.setContentsMargins(0, 0, 0, 0)
+        bottom_layout.setContentsMargins(0, 0, 0, 0)
+        bottom_layout.setSpacing(0)
+
         self.jn = False
         self.server_t = None
         self.lang_t = None
         self.my_thread = None
         self.tray = None
         self.text_last = ""
+        self.img_md5 = ""
 
         self.set_data()
 
     def set_data(self):
+        """_summary_
+        """
         self.s = Settings()
 
-        self.btn_translate.clicked.connect(self.translate_text)
+        self.btn_translate.clicked.connect(self.update_translate)
 
         server_key_t = self.s.g("server-selected-key", "bing")
         server_key_o = self.s.g("server_ocr_selected_key", "baidu")
@@ -127,12 +138,25 @@ class TranslateWindow(QMainWindow):
         if server.key != self.server_t.key:
             self.server_t = server
         self.lang_t = get_lang(i, j)
-        self.translate_text()
+        self.update_translate()
 
     def ocr_image(self, img_path):
-        def oo(p=None):
-            _ok, text_from = self.server_o.ocr_image(
-                img_path, self.lang_t.key)
+        """_summary_
+
+        Args:
+            img_path (str): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        md5_hash = cal_md5(img_path)
+        print(md5_hash)
+        # 防止wayland多次识别
+        if self.img_md5 == md5_hash:
+            return
+        self.img_md5 = md5_hash
+        def oo(_p=None):
+            _ok, text_from = self.server_o.ocr_image(img_path)
             return (_ok, text_from)
 
         def next_(param):
@@ -141,7 +165,7 @@ class TranslateWindow(QMainWindow):
                 self.set_text_from_to((s, "文本识别失败！"))
                 return
             self.set_text_from_to((s, "文本识别成功！"))
-            self.translate_text()
+            self.update_translate()
 
         self.set_text_from_to(("识别中...", "识别中..."))
         self.my_thread = MyThread(oo)
@@ -149,6 +173,11 @@ class TranslateWindow(QMainWindow):
         self.my_thread.start()
 
     def set_text_from_to(self, text):
+        """_summary_
+
+        Args:
+            text (_type_): _description_
+        """
         text_from, text_to = text
         self.te_from.setPlainText(text_from)
         self.te_to.setPlainText(text_to)
@@ -158,10 +187,22 @@ class TranslateWindow(QMainWindow):
             self.tray.show_msg("翻译成功！", text_to)
             self.text_last = text_from
 
-    def translate_text(self):
-        text_from = self.te_from.toPlainText()
+    def update_translate(self, reload=True):
+        """无参数翻译
+        """
+        self.translate_text(self.te_from.toPlainText(), reload)
+
+    def translate_text(self, text_from, reload=False):
+        """翻译
+
+        Returns:
+            _type_: _description_
+        """
         if self.cb_del_wrapping.isChecked():
             text_from = process_text(text_from)
+
+        if text_from == self.text_last and not reload:
+            return
 
         if self.cb_add_old.isChecked():
             text_from = self.text_last + text_from
@@ -169,7 +210,7 @@ class TranslateWindow(QMainWindow):
         if not text_from:
             return
 
-        def tt(p=None):
+        def tt(_p=None):
             _ok, text_to = self.server_t.translate_text(
                 text_from, self.lang_t.key)
             return (text_from, text_to)

@@ -7,8 +7,8 @@ from multiprocessing import Pool
 
 from lfy.api.constant import SERVERS_T
 from lfy.api.server import Server
-from lfy.api.utils.debug import get_logger
-from lfy.api.utils.settings import Settings
+from lfy.utils.debug import get_logger
+from lfy.utils.settings import Settings
 
 
 def _translate(args):

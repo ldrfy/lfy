@@ -1,5 +1,6 @@
-TO_LANG = zh_CN
-VERSION = 0.0.7
+TO_LANG=zh_CN
+VERSION=0.0.7
+BUILD_TYPE=qt
 DISK = ../../../dist/
 BUILD_PKG=build/pkg
 DESTDIR = "/"
@@ -8,15 +9,17 @@ PREFIX = "${HOME}/.local/"
 
 clear:
 	rm -rf build test
-	mkdir -p dist
+	mkdir -p dist/${BUILD_TYPE}
 	rm -rf {HOME}/.local/share/glib-2.0/schemas/gschemas.compiled
 	rm -rf {HOME}/.local/lib/lfy
+	rm -rf /tmp/v${VERSION}.zip
+
 
 test:clear
-	meson setup build --prefix=${PREFIX}
+	meson setup build --prefix=${PREFIX} -Dbuild_type=${BUILD_TYPE}
 	meson compile -C build
 	meson test -C build
-	meson dist -C build --allow-dirty
+	# meson dist -C build --allow-dirty
 	DESTDIR=${DESTDIR} meson install -C build
 
 
@@ -39,8 +42,21 @@ update-po:
 	msgmerge -U ./po/${TO_LANG}.po ./po/lfy.pot
 
 
-.PHONY: build other update-pot update-po po-init test whl
+.PHONY: build other update-pot update-po po-init test whl rename
 
+
+test-zip:
+	mkdir /tmp/lfy-${VERSION} && \
+	cp -r lfy /tmp/lfy-${VERSION}/ && \
+	cp -r data /tmp/lfy-${VERSION}/ && \
+	cp -r po /tmp/lfy-${VERSION}/ && \
+	cp -r pkg /tmp/lfy-${VERSION}/ && \
+	cp -r define.py /tmp/lfy-${VERSION}/ && \
+	cp -r meson.build /tmp/lfy-${VERSION}/ && \
+	cp -r meson_options.txt /tmp/lfy-${VERSION}/ && \
+	cd /tmp/ && \
+	zip -r v${VERSION}.zip lfy-${VERSION} && \
+	rm -r lfy-${VERSION}
 
 
 test-deb: clear
@@ -50,50 +66,45 @@ test-deb: clear
 	mv deb/DEBIAN/control ./ && \
 	sed 's/any/amd64/g' ./control > ./deb/DEBIAN/control && \
 	dpkg -b deb ./deb/lfy-${VERSION}-x86_64.deb && \
-	cd deb && mv ./lfy-${VERSION}-x86_64.deb ${DISK}
+	cd deb && \
+	mv ./*.deb ${DISK}/${BUILD_TYPE}/
 
 
 test-flatpak:clear
-	meson setup build
+	meson setup build -Dbuild_type=gtk
 	cd ${BUILD_PKG}/flatpak && \
 	flatpak-builder --repo=repo build-dir cool.ldr.lfy.yaml && \
 	flatpak build-bundle repo cool.ldr.lfy-${VERSION}.flatpak cool.ldr.lfy && \
 	flatpak install -y --user cool.ldr.lfy-${VERSION}.flatpak && \
-	mv cool.ldr.lfy-${VERSION}.flatpak ${DISK}
+	mv cool.ldr.lfy-${VERSION}.flatpak ${DISK}/gtk
 
 
-test-aur: clear
-	meson setup build
+test-aur: clear test-zip
+	meson setup build -Dbuild_type=${BUILD_TYPE}
 
 	cd ${BUILD_PKG}/aur && \
-	mkdir lfy-${VERSION} && \
-	cp -r ../../../lfy lfy-${VERSION}/ && \
-	cp -r ../../../data lfy-${VERSION}/ && \
-	cp -r ../../../po lfy-${VERSION}/ && \
-	cp -r ../../../pkg lfy-${VERSION}/ && \
-	cp -r ../../../lfy-qt.py lfy-${VERSION}/ && \
-	cp -r ../../../lfy.py lfy-${VERSION}/ && \
-	cp -r ../../../define.py lfy-${VERSION}/ && \
-	cp -r ../../../meson.build lfy-${VERSION}/ && \
-	zip -r v${VERSION}.zip lfy-${VERSION} && \
-	rm -r lfy-${VERSION} && \
+	cp /tmp/v${VERSION}.zip ./ && \
 	makepkg -sf && \
-	mv *.pkg.tar.zst ${DISK}
+	mv *.zst ${DISK}/${BUILD_TYPE}/
 
 
-test-rpm: clear
-	make PREFIX="/usr" DESTDIR="${PWD}/${BUILD_PKG}/rpm/" test
+test-rpm: clear test-zip
+	meson setup build -Dbuild_type=${BUILD_TYPE}
 
-	cd "${PWD}/${BUILD_PKG}/rpm/SPECS/" &&\
-	rpmbuild -bb lfy.spec --define "_topdir ${PWD}/${BUILD_PKG}/rpm/" && \
-	cd ../ && \
-	mv ./RPMS/x86_64/*.rpm ${DISK}
+	mkdir -p ${PWD}/${BUILD_PKG}/rpm/SOURCES/lfy-${VERSION} && \
+	cd ${PWD}/${BUILD_PKG}/rpm/SOURCES/ && \
+	cp /tmp/v${VERSION}.zip ./
 
+	rpmbuild -bb ${PWD}/${BUILD_PKG}/rpm/SPECS/lfy.spec --define "_topdir ${PWD}/${BUILD_PKG}/rpm/"
+	cd ${BUILD_PKG}/rpm/ && \
+	mv RPMS/x86_64/*.rpm ${DISK}/${BUILD_TYPE}/
 
-release: test-deb test-rpm test-flatpak
-	cd ${BUILD_PKG}/aur && \
-	makepkg -sf && \
-	mv *.pkg.tar.zst ${DISK}
+release:
+	make test-deb
+	make test-rpm
+	make BUILD_TYPE=gtk test-deb
+	make BUILD_TYPE=gtk test-rpm
+	# make BUILD_TYPE=gtk test-flatpak
 
 uninstall:
 	cd build && ninja uninstall

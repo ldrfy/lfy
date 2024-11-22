@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-11-22 00:14+0800\n"
+"POT-Creation-Date: 2024-11-22 16:53+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -135,7 +135,7 @@ msgstr "设置密钥"
 msgid "Shortcuts"
 msgstr "显示快捷键"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:71
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:95
 msgid "About"
 msgstr "关于 兰译"
 
@@ -205,48 +205,48 @@ msgstr "软件打开时，自动检查更新"
 msgid "Basic functions completed"
 msgstr "基础功能完成"
 
-#: lfy/code.py:106
+#: lfy/code.py:76
 msgid "no text"
 msgstr "没有文本"
 
-#: lfy/code.py:115 lfy/code.py:149 lfy/gtk/translate.py:274
-#: lfy/gtk/translate.py:307 lfy/api/server/tra/baidu.py:40
+#: lfy/code.py:85 lfy/code.py:119 lfy/gtk/translate.py:278
+#: lfy/gtk/translate.py:311 lfy/api/server/tra/baidu.py:40
 #: lfy/api/server/tra/tencent.py:150 lfy/api/server/tra/aliyun.py:98
 #: lfy/api/server/tra/com.py:29 lfy/api/server/tra/huoshan.py:136
-#: lfy/api/server/ocr/baidu.py:139
+#: lfy/api/server/ocr/baidu.py:143
 msgid "something error:"
 msgstr "一些错误发生："
 
-#: lfy/code.py:140
+#: lfy/code.py:110
 msgid "the file does not exist: {}"
 msgstr "此文件不存在：{}"
 
-#: lfy/code.py:157
+#: lfy/code.py:127
 msgid "Command line translation or text recognition, such as {} or {}"
 msgstr "命令行翻译或文本识别，如 {} 或 {}"
 
-#: lfy/code.py:160
+#: lfy/code.py:132
 msgid "Translate, followed by text"
 msgstr "翻译，后面接文字"
 
-#: lfy/code.py:162
+#: lfy/code.py:134
 msgid "Recognize image, followed by file path"
 msgstr "识别图片，后面接文件路径"
 
-#: lfy/code.py:164
-msgid "Automatically translate clipboard, temporarily invalid"
-msgstr "自动翻译剪贴板，暂时无效"
-
-#: lfy/code.py:167
+#: lfy/code.py:137
+#, fuzzy
 msgid ""
-"Which service engine to use, if -s is not entered, help will be provided "
-"based on -t or -o"
+"Which service engine to use, if -s is not "
+"entered,                                help will be provided based on -t or "
+"-o"
 msgstr "使用什么服务引擎，若未输入-s，将根据 -t 或 -o 提供帮助"
 
-#: lfy/code.py:169
+#: lfy/code.py:140
+#, fuzzy
 msgid ""
-"The language to be translated/recognized, if -l is not entered, "
-"corresponding help will be provided based on the input of -s"
+"The language to be translated/recognized, if -l is not "
+"entered,                                corresponding help will be provided "
+"based on the input of -s"
 msgstr "待翻译/识别的语言，若未输入-l，将根据 -s 的输入自动提供对应帮助"
 
 #: lfy/gtk/main.py:117
@@ -310,20 +310,20 @@ msgstr "配置数据已导出到剪贴板"
 msgid "Using {} for text recognition"
 msgstr "使用 {} 进行文本识别"
 
-#: lfy/gtk/translate.py:221
+#: lfy/gtk/translate.py:225
 msgid ""
 "This time the content contains private information and is not translated"
 msgstr "本次内容包含隐私信息，不翻译"
 
-#: lfy/gtk/translate.py:290
+#: lfy/gtk/translate.py:294
 msgid "OCRing.."
 msgstr "OCR识别中.."
 
-#: lfy/gtk/translate.py:292
+#: lfy/gtk/translate.py:296
 msgid "Translating.."
 msgstr "翻译中……"
 
-#: lfy/gtk/translate.py:304
+#: lfy/gtk/translate.py:308
 msgid "Translation completed"
 msgstr "翻译完成"
 
@@ -352,56 +352,55 @@ msgid ""
 "This is the settings window where you can configure application parameters."
 msgstr "这是设置窗口，您可以在其中配置应用程序参数。"
 
-#: lfy/qt/translate.py:49
+#: lfy/qt/translate.py:54
 msgid "Process"
 msgstr "处理"
 
-#: lfy/qt/translate.py:51 data/gtk/translate.ui:71
+#: lfy/qt/translate.py:56 data/gtk/translate.ui:71
 msgid "Alt + D: Remove symbols such as line breaks"
 msgstr "Alt + D: 移除换行符"
 
-#: lfy/qt/translate.py:53
+#: lfy/qt/translate.py:58
 msgid "Append"
 msgstr "拼接"
 
-#: lfy/qt/translate.py:55 data/gtk/translate.ui:78
+#: lfy/qt/translate.py:60 data/gtk/translate.ui:78
 msgid "Alt + C: Splice the next copied text with the previous text"
 msgstr "Alt + C: 将下一个复制的文本与上一个文本拼接"
 
-#: lfy/qt/translate.py:57 data/gtk/translate.ui:85
+#: lfy/qt/translate.py:62 data/gtk/translate.ui:85
 msgid "translate"
 msgstr "翻译"
 
-#: lfy/qt/tray.py:27
+#: lfy/qt/tray.py:28
 msgid "Open"
 msgstr "打开"
 
-#: lfy/qt/tray.py:31
+#: lfy/qt/tray.py:32
 msgid "Hide"
 msgstr "隐藏"
 
-#: lfy/qt/tray.py:35
+#: lfy/qt/tray.py:36
 msgid "preference"
 msgstr "设置"
 
-#: lfy/qt/tray.py:39
+#: lfy/qt/tray.py:40
 msgid "about"
 msgstr "关于"
 
-#: lfy/qt/tray.py:43
-#, fuzzy
+#: lfy/qt/tray.py:44
 msgid "Quit"
 msgstr "退出"
 
-#: lfy/qt/tray.py:51
+#: lfy/qt/tray.py:74
 msgid "warn"
 msgstr "警告"
 
-#: lfy/qt/tray.py:51
+#: lfy/qt/tray.py:74
 msgid "quit?"
 msgstr "退出？"
 
-#: lfy/qt/tray.py:76
+#: lfy/qt/tray.py:100
 msgid "This is the About window, displaying application information."
 msgstr "这是“关于”窗口，显示应用程序信息。"
 
@@ -504,7 +503,7 @@ msgstr "请输入 {} 和 {}，类似："
 msgid "huoshan"
 msgstr "火山"
 
-#: lfy/api/server/ocr/baidu.py:162
+#: lfy/api/server/ocr/baidu.py:166
 msgid "please input API Key and Secret Key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
@@ -673,6 +672,9 @@ msgstr "退出"
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "显示快捷键"
+
+#~ msgid "Automatically translate clipboard, temporarily invalid"
+#~ msgstr "自动翻译剪贴板，暂时无效"
 
 #~ msgid "API Key for OCR,Pay attention to whether there are dividing lines |"
 #~ msgstr "OCR识别密钥，注意是否有分割线 |"

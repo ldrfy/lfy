@@ -10,7 +10,7 @@ from gettext import gettext as _
 from urllib.parse import quote, quote_plus
 
 from lfy.api.server import TIME_OUT, Server
-from lfy.api.utils.settings import Settings
+from lfy.utils.settings import Settings
 
 
 def _compose_string_to_sign(method, queries):

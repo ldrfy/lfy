@@ -9,7 +9,7 @@ import requests
 from requests import RequestException
 
 from lfy.api.server import TIME_OUT, Server
-from lfy.api.utils.debug import get_logger
+from lfy.utils.debug import get_logger
 
 
 def _init_session():

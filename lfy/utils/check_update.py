@@ -5,7 +5,7 @@ import requests
 
 from lfy import PACKAGE_URL, VERSION  # pylint: disable=E0611
 from lfy.api.server import TIME_OUT
-from lfy.api.utils.debug import get_logger
+from lfy.utils.debug import get_logger
 
 
 def get_by_gitee():

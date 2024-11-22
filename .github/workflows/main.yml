@@ -27,7 +27,9 @@ jobs:
         sudo apt-get install python-gi-dev cmake make meson gobject-introspection libadwaita-1-dev gettext desktop-file-utils libxml2-utils appstream-util flatpak-builder rpm
 
     - name: Build deb package
-      run: make test-deb
+      run: |
+        make BUILD_TYPE=gtk test-deb
+        make BUILD_TYPE=qt test-deb
 
     - name: Build flatpak package
       run: |
@@ -37,7 +39,8 @@ jobs:
 
     - name: Build rpm package
       run: |
-        make test-rpm
+        make BUILD_TYPE=gtk test-rpm
+        make BUILD_TYPE=qt test-rpm
 
     # - name: Build archlinux package
     #   uses: rustdesk-org/arch-makepkg-action@master

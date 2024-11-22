@@ -9,7 +9,7 @@ from gettext import gettext as _
 from gi.repository import Adw, GLib, Gtk
 
 from lfy.api.server import Server
-from lfy.api.utils.debug import get_logger
+from lfy.utils.debug import get_logger
 
 
 # pylint: disable=E1101

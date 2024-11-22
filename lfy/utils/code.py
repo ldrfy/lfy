@@ -7,38 +7,9 @@ from gettext import gettext as _
 from lfy.api import (create_server_o, create_server_t, get_servers_o,
                      get_servers_t, lang_n2key)
 from lfy.api.server import Server
-from lfy.api.utils import is_text
-from lfy.api.utils.debug import get_logger
-from lfy.api.utils.settings import Settings
+from lfy.utils.debug import get_logger
+from lfy.utils.settings import Settings
 
-
-def req_clip(key_server, key_lang_n):
-    """读取剪贴板，此方法暂时无效
-
-    Args:
-        key_server (str): _description_
-        key_lang (str): _description_
-    """
-    from gi.repository import Gdk
-
-    def on_active_copy(cb2, res):
-        return req_text(cb2.read_text_finish(res), key_server, key_lang_n)
-
-    def save_img(cb2, res):
-        texture = cb2.read_texture_finish(res)
-        pixbuf = Gdk.pixbuf_get_from_texture(texture)
-
-        path = "/tmp/lfy.png"
-        pixbuf.savev(path, "png", (), ())
-        return req_ocr(path, key_server, key_lang_n)
-
-    cb = Gdk.Display().get_default().get_clipboard()
-    cf = cb.get_formats()
-    if is_text(cf):
-        cb.read_text_async(None, on_active_copy)
-    elif cf.contain_mime_type('image/png'):
-        cb.read_texture_async(None, save_img)
-    return "no text or image"
 
 def get_help_lang(server: Server):
     """某个服务的lang key
@@ -72,10 +43,9 @@ def get_help_server(is_ocr=False):
 def set_vpn():
     """_summary_
     """
-    setting = Settings.get()
 
     # 设置代理地址和端口号
-    proxy_address = setting.vpn_addr_port
+    proxy_address = Settings().g("vpn-addr-port")
     if len(proxy_address) > 0:
         # 设置环境变量
         os.environ['http_proxy'] = proxy_address
@@ -154,25 +124,24 @@ def req_ocr(s=None, key_server=None, key_lang_n=-1):
 def parse_lfy():
     """设置
     """
-    parser = argparse.ArgumentParser(description=_('Command line translation or text recognition, such as {} or {}').format(
-        'lfy -t "who am i" -s bing -l 1', 'lfy -o "/tmp/xxx.png" -s baidu -l 1'))
+    des = _('Command line translation or text recognition, such as {} or {}')\
+        .format('lfy -t "who am i" -s bing -l 1', 'lfy -o "/tmp/xxx.png" -s baidu -l 1')
+    parser = argparse.ArgumentParser(description=des)
 
-    parser.add_argument('-t', type=str, help=_('Translate, followed by text'))
-    parser.add_argument(
-        '-o', type=str, help=_('Recognize image, followed by file path'))
-    parser.add_argument('-c', action='store_true',
-                        help=_('Automatically translate clipboard, temporarily invalid'))
+    parser.add_argument('-t', type=str,
+                        help=_('Translate, followed by text'))
+    parser.add_argument('-o', type=str,
+                        help=_('Recognize image, followed by file path'))
 
-    parser.add_argument('-s', type=str, help=_(
-        'Which service engine to use, if -s is not entered, help will be provided based on -t or -o'), default="", nargs='?')
-    parser.add_argument('-l', type=int, help=_(
-        'The language to be translated/recognized, if -l is not entered, corresponding help will be provided based on the input of -s'), default=-1, nargs='?')
+    parser.add_argument('-s', type=str, default="", nargs='?',
+                        help=_('Which service engine to use, if -s is not entered, \
+                               help will be provided based on -t or -o'))
+    parser.add_argument('-l', type=int, default=-1, nargs='?',
+                        help=_('The language to be translated/recognized, if -l is not entered, \
+                               corresponding help will be provided based on the input of -s'))
 
     args = parser.parse_args()
 
-    if args.c:
-        print(req_clip(args.s, args.l))
-        return
     if args.t:
         print(req_text(args.t, args.s, args.l))
         return

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-11-22 00:14+0800\n"
+"POT-Creation-Date: 2024-11-22 16:53+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -134,7 +134,7 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:71
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:95
 msgid "About"
 msgstr ""
 
@@ -204,48 +204,46 @@ msgstr ""
 msgid "Basic functions completed"
 msgstr ""
 
-#: lfy/code.py:106
+#: lfy/code.py:76
 msgid "no text"
 msgstr ""
 
-#: lfy/code.py:115 lfy/code.py:149 lfy/gtk/translate.py:274
-#: lfy/gtk/translate.py:307 lfy/api/server/tra/baidu.py:40
+#: lfy/code.py:85 lfy/code.py:119 lfy/gtk/translate.py:278
+#: lfy/gtk/translate.py:311 lfy/api/server/tra/baidu.py:40
 #: lfy/api/server/tra/tencent.py:150 lfy/api/server/tra/aliyun.py:98
 #: lfy/api/server/tra/com.py:29 lfy/api/server/tra/huoshan.py:136
-#: lfy/api/server/ocr/baidu.py:139
+#: lfy/api/server/ocr/baidu.py:143
 msgid "something error:"
 msgstr ""
 
-#: lfy/code.py:140
+#: lfy/code.py:110
 msgid "the file does not exist: {}"
 msgstr ""
 
-#: lfy/code.py:157
+#: lfy/code.py:127
 msgid "Command line translation or text recognition, such as {} or {}"
 msgstr ""
 
-#: lfy/code.py:160
+#: lfy/code.py:132
 msgid "Translate, followed by text"
 msgstr ""
 
-#: lfy/code.py:162
+#: lfy/code.py:134
 msgid "Recognize image, followed by file path"
 msgstr ""
 
-#: lfy/code.py:164
-msgid "Automatically translate clipboard, temporarily invalid"
+#: lfy/code.py:137
+msgid ""
+"Which service engine to use, if -s is not "
+"entered,                                help will be provided based on -t or "
+"-o"
 msgstr ""
 
-#: lfy/code.py:167
+#: lfy/code.py:140
 msgid ""
-"Which service engine to use, if -s is not entered, help will be provided "
-"based on -t or -o"
-msgstr ""
-
-#: lfy/code.py:169
-msgid ""
-"The language to be translated/recognized, if -l is not entered, "
-"corresponding help will be provided based on the input of -s"
+"The language to be translated/recognized, if -l is not "
+"entered,                                corresponding help will be provided "
+"based on the input of -s"
 msgstr ""
 
 #: lfy/gtk/main.py:117
@@ -309,20 +307,20 @@ msgstr ""
 msgid "Using {} for text recognition"
 msgstr ""
 
-#: lfy/gtk/translate.py:221
+#: lfy/gtk/translate.py:225
 msgid ""
 "This time the content contains private information and is not translated"
 msgstr ""
 
-#: lfy/gtk/translate.py:290
+#: lfy/gtk/translate.py:294
 msgid "OCRing.."
 msgstr ""
 
-#: lfy/gtk/translate.py:292
+#: lfy/gtk/translate.py:296
 msgid "Translating.."
 msgstr ""
 
-#: lfy/gtk/translate.py:304
+#: lfy/gtk/translate.py:308
 msgid "Translation completed"
 msgstr ""
 
@@ -351,55 +349,55 @@ msgid ""
 "This is the settings window where you can configure application parameters."
 msgstr ""
 
-#: lfy/qt/translate.py:49
+#: lfy/qt/translate.py:54
 msgid "Process"
 msgstr ""
 
-#: lfy/qt/translate.py:51 data/gtk/translate.ui:71
+#: lfy/qt/translate.py:56 data/gtk/translate.ui:71
 msgid "Alt + D: Remove symbols such as line breaks"
 msgstr ""
 
-#: lfy/qt/translate.py:53
-msgid "Append Previous"
+#: lfy/qt/translate.py:58
+msgid "Append"
 msgstr ""
 
-#: lfy/qt/translate.py:55 data/gtk/translate.ui:78
+#: lfy/qt/translate.py:60 data/gtk/translate.ui:78
 msgid "Alt + C: Splice the next copied text with the previous text"
 msgstr ""
 
-#: lfy/qt/translate.py:57 data/gtk/translate.ui:85
+#: lfy/qt/translate.py:62 data/gtk/translate.ui:85
 msgid "translate"
 msgstr ""
 
-#: lfy/qt/tray.py:27
+#: lfy/qt/tray.py:28
 msgid "Open"
 msgstr ""
 
-#: lfy/qt/tray.py:31
+#: lfy/qt/tray.py:32
 msgid "Hide"
 msgstr ""
 
-#: lfy/qt/tray.py:35
+#: lfy/qt/tray.py:36
 msgid "preference"
 msgstr ""
 
-#: lfy/qt/tray.py:39
+#: lfy/qt/tray.py:40
 msgid "about"
 msgstr ""
 
-#: lfy/qt/tray.py:43
+#: lfy/qt/tray.py:44
 msgid "Quit"
 msgstr ""
 
-#: lfy/qt/tray.py:51
+#: lfy/qt/tray.py:74
 msgid "warn"
 msgstr ""
 
-#: lfy/qt/tray.py:51
+#: lfy/qt/tray.py:74
 msgid "quit?"
 msgstr ""
 
-#: lfy/qt/tray.py:76
+#: lfy/qt/tray.py:100
 msgid "This is the About window, displaying application information."
 msgstr ""
 
@@ -502,7 +500,7 @@ msgstr ""
 msgid "huoshan"
 msgstr ""
 
-#: lfy/api/server/ocr/baidu.py:162
+#: lfy/api/server/ocr/baidu.py:166
 msgid "please input API Key and Secret Key like:"
 msgstr ""
 

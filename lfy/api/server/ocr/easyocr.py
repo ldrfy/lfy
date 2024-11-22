@@ -3,8 +3,8 @@ from gettext import gettext as _
 
 from lfy.api.server import Server
 from lfy.api.server.ocr import gen_img
-from lfy.api.utils.debug import get_logger
-from lfy.api.utils.settings import Settings
+from lfy.utils.debug import get_logger
+from lfy.utils.settings import Settings
 
 
 class EasyOcrServer(Server):

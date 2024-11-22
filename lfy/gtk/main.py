@@ -10,13 +10,13 @@ from gettext import gettext as _
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk
 
 from lfy import PACKAGE_URL, RES_PATH, VERSION
-from lfy.api.utils import get_os_release, is_text
-from lfy.api.utils.bak import backup_gsettings
-from lfy.api.utils.check_update import main as check_update
-from lfy.api.utils.debug import get_log_handler
-from lfy.api.utils.settings import Settings
 from lfy.gtk.preference import PreferencesDialog
 from lfy.gtk.translate import TranslateWindow
+from lfy.utils import get_os_release, is_text
+from lfy.utils.bak import backup_gsettings
+from lfy.utils.check_update import main as check_update
+from lfy.utils.debug import get_log_handler
+from lfy.utils.settings import Settings
 
 # 设置代理地址和端口号
 PROXY_ADDRESS = Settings().g("vpn-addr-port")
