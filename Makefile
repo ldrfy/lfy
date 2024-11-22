@@ -67,16 +67,16 @@ test-deb: clear
 	sed 's/any/amd64/g' ./control > ./deb/DEBIAN/control && \
 	dpkg -b deb ./deb/lfy-${VERSION}-x86_64.deb && \
 	cd deb && \
-	mv ./*.deb ${DISK}/${BUILD_TYPE}/
+	mv lfy-${VERSION}-x86_64.deb ${DISK}/lfy-${VERSION}-x86_64-${BUILD_TYPE}.deb
 
 
 test-flatpak:clear
-	meson setup build -Dbuild_type=gtk
+	meson setup build -Dbuild_type=${BUILD_TYPE}
 	cd ${BUILD_PKG}/flatpak && \
 	flatpak-builder --repo=repo build-dir cool.ldr.lfy.yaml && \
 	flatpak build-bundle repo cool.ldr.lfy-${VERSION}.flatpak cool.ldr.lfy && \
 	flatpak install -y --user cool.ldr.lfy-${VERSION}.flatpak && \
-	mv cool.ldr.lfy-${VERSION}.flatpak ${DISK}/gtk
+	mv cool.ldr.lfy-${VERSION}.flatpak ${DISK}/cool.ldr.lfy-${VERSION}-${BUILD_TYPE}.flatpak
 
 
 test-aur: clear test-zip
@@ -85,7 +85,7 @@ test-aur: clear test-zip
 	cd ${BUILD_PKG}/aur && \
 	cp /tmp/v${VERSION}.zip ./ && \
 	makepkg -sf && \
-	mv *.zst ${DISK}/${BUILD_TYPE}/
+	mv lfy-${VERSION}-1-any.pkg.tar.zst ${DISK}/lfy-${VERSION}-1-any-${BUILD_TYPE}.pkg.tar.zst
 
 
 test-rpm: clear test-zip
@@ -97,15 +97,16 @@ test-rpm: clear test-zip
 
 	rpmbuild -bb ${PWD}/${BUILD_PKG}/rpm/SPECS/lfy.spec --define "_topdir ${PWD}/${BUILD_PKG}/rpm/"
 	cd ${BUILD_PKG}/rpm/ && \
-	mv RPMS/x86_64/*.rpm ${DISK}/${BUILD_TYPE}/
+	mv RPMS/x86_64/lfy-${VERSION}-1.x86_64.rpm ${DISK}/lfy-${VERSION}-1.x86_64-${BUILD_TYPE}.rpm
 
 release:
+	make test-aur
 	make test-deb
 	make test-rpm
+	make BUILD_TYPE=gtk test-aur
 	make BUILD_TYPE=gtk test-deb
 	make BUILD_TYPE=gtk test-rpm
-	# make BUILD_TYPE=gtk test-flatpak
+	make BUILD_TYPE=gtk test-flatpak
 
 uninstall:
 	cd build && ninja uninstall
-
