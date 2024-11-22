@@ -1,12 +1,13 @@
 '托盘图标'
 from gettext import gettext as _
 
-from PyQt6.QtGui import QAction
-from PyQt6.QtWidgets import (QDialog, QMenu, QMessageBox, QSystemTrayIcon,
-                             QTextEdit, QVBoxLayout)
+from PyQt6.QtGui import QAction, QClipboard
+from PyQt6.QtWidgets import (QApplication, QDialog, QMenu, QMessageBox,
+                             QSystemTrayIcon, QTextEdit, QVBoxLayout)
 
 from lfy import APP_NAME
 from lfy.qt.preference import PreferenceWindow
+from lfy.qt.translate import TranslateWindow
 
 
 class TrayIcon(QSystemTrayIcon):
@@ -18,18 +19,18 @@ class TrayIcon(QSystemTrayIcon):
     ) -> None:
         QSystemTrayIcon.__init__(self, icon, parent)
         # QSystemTrayIcon also tries to save parent info but it screws up the type info
-        self.w = parent
-        self.app = app
+        self.w: TranslateWindow = parent
+        self.app: QApplication = app
         self.setToolTip(APP_NAME)
 
         # 创建托盘菜单
         tray_menu = QMenu(parent)
         open_action = QAction(_("Open"), self)
-        open_action.triggered.connect(parent.show)
+        open_action.triggered.connect(self.w.show)
         tray_menu.addAction(open_action)
 
         hide_action = QAction(_("Hide"), self)
-        hide_action.triggered.connect(parent.close)
+        hide_action.triggered.connect(self.w.close)
         tray_menu.addAction(hide_action)
 
         pf_action = QAction(_("preference"), self)
@@ -46,6 +47,26 @@ class TrayIcon(QSystemTrayIcon):
         tray_menu.addAction(quit_action)
 
         self.setContextMenu(tray_menu)
+
+        self.clipboard: QClipboard = self.app.clipboard()
+        self.clipboard.dataChanged.connect(self._on_clipboard_data_changed)
+
+    def _on_clipboard_data_changed(self):
+        if self.clipboard.mimeData().hasImage():
+            # 如果是图片，处理图片
+            image = self.clipboard.image()
+            if not image.isNull():
+                file_path = "/tmp/lfy.png"
+                image.save(file_path, "PNG")
+                if not self.w.isVisible():
+                    self.w.show()
+                self.w.ocr_image(file_path)
+        elif self.clipboard.mimeData().hasText():
+            text = self.clipboard.text()
+            if not self.w.isVisible():
+                self.w.show()
+            self.w.translate_text(text)
+
 
     def quit_app(self):
         re = QMessageBox.warning(self.w, _("warn"), _("quit?"),

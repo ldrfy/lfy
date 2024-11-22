@@ -2,7 +2,7 @@
 from gi.repository import Gio
 
 from lfy import APP_ID
-from lfy.api.utils.settings import Settings
+from lfy.utils.settings import Settings
 
 
 def nf_t(app, title, txt, id_str="translate_end"):

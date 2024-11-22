@@ -46,7 +46,7 @@ if __name__ == '__main__':
     from lfy import set_internationalization
     set_internationalization(APP_ID, LOCALE_DIR)
 
-    from lfy.code import parse_lfy
+    from lfy.utils.code import parse_lfy
     parse_lfy()
 
     from gi.repository import Gio  # pylint: disable=c0415

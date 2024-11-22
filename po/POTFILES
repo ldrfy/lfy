@@ -16,9 +16,6 @@ lfy/qt/translate.py
 lfy/qt/tray.py
 
 lfy/api/__init__.py
-lfy/api/utils/__init__.py
-lfy/api/utils/bak.py
-lfy/api/utils/check_update.py
 lfy/api/server/__init__.py
 lfy/api/server/tra/baidu.py
 lfy/api/server/tra/google.py
@@ -30,6 +27,11 @@ lfy/api/server/tra/huoshan.py
 lfy/api/server/ocr/baidu.py
 lfy/api/server/ocr/easyocr.py
 lfy/api/server/ocr/pytesseract.py
+
+
+lfy/utils/__init__.py
+lfy/utils/bak.py
+lfy/utils/check_update.py
 
 data/gtk/translate.ui
 data/gtk/server-preferences.ui

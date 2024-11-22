@@ -6,8 +6,8 @@ pkgdesc="A translation app by gtk4 and adwaita."
 arch=('any')
 url="@PACKAGE_URL@"
 license=('GPL3')
-depends=('libadwaita' 'python-gobject' 'python-requests')
-makedepends=('git' 'gobject-introspection' 'meson')
+depends=(@DEPS@)
+makedepends=(@BUILD_DEPS@)
 checkdepends=('appstream-glib')
 source=(${url}/archive/refs/tags/v${pkgver}.zip)
 sha256sums=("SKIP")
@@ -15,7 +15,7 @@ sha256sums=("SKIP")
 
 build() {
   cd ${pkgname}-${pkgver}
-  meson setup _build --prefix="/usr"
+  meson setup _build --prefix="/usr" -Dbuild_type=@BUILD_TYPE@
   meson compile -C _build
 }
 

@@ -1,6 +1,5 @@
 #!@PYTHON@
 import os
-import subprocess
 import sys
 from gettext import gettext as _
 
@@ -23,8 +22,6 @@ if not os.path.exists(PKGDATA_DIR):
     PYTHON_DIR = os.path.abspath(f"{THIS_DIR}/../lib/")
     SCHEMAS_DIR = os.path.abspath(f"{THIS_DIR}/../share/")
     LOCALE_DIR = os.path.abspath(f"{SCHEMAS_DIR}/locale/")
-    subprocess.run(
-        ["glib-compile-schemas", f"{SCHEMAS_DIR}/glib-2.0/schemas"], check=True)
 
     os.environ["XDG_DATA_DIRS"] = f'{SCHEMAS_DIR}:' + \
         os.environ.get("XDG_DATA_DIRS", "")
@@ -40,7 +37,7 @@ if __name__ == "__main__":
     from lfy import set_internationalization
     set_internationalization(APP_ID, LOCALE_DIR)
 
-    from lfy.code import parse_lfy
+    from lfy.utils.code import parse_lfy
     parse_lfy()
 
     app = QApplication(sys.argv)

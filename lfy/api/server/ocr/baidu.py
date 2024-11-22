@@ -5,8 +5,8 @@ import time
 from gettext import gettext as _
 
 from lfy.api.server import TIME_OUT, Server
-from lfy.api.utils import s2ks
-from lfy.api.utils.settings import Settings
+from lfy.utils import s2ks
+from lfy.utils.settings import Settings
 
 
 def _get_token(session, ocr_api_key_s):
@@ -17,7 +17,7 @@ def _get_token(session, ocr_api_key_s):
     """
     sg = Settings()
 
-    expires_in_date = sg.g("ocr-baidu-token-expires-date")
+    expires_in_date = sg.g("ocr-baidu-token-expires-date", t=int)
 
     if expires_in_date - time.time() > 0:
         access_token = sg.g("ocr-baidu-token")
@@ -125,7 +125,11 @@ class BaiduServer(Server):
         ok, token = _get_token(self.session, self.get_api_key_s_ocr())
         if not ok:
             return False, token
-        params = {"image": img, "language_type": lang_str}
+        params = {"image": img}
+        print(lang_str)
+        if lang_str is not None:
+            params["language_type"] = lang_str
+
         request_url = request_url + "?access_token=" + token
         headers = {'content-type': 'application/x-www-form-urlencoded'}
         res = self.session.post(request_url,

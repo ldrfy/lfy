@@ -20,7 +20,7 @@ def set_internationalization(appid, locale_dir):
         locale.bindtextdomain(appid, locale_dir)
         locale.textdomain(appid)
     except AttributeError as e:
-        from lfy.api.utils.debug import get_logger
+        from lfy.utils.debug import get_logger
         get_logger().error(e)
         print(f"Some gettext translations will not work. Error:\n{e}")
 

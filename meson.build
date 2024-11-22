@@ -1,17 +1,28 @@
-project('lfy',
-          version: '0.0.7',
+project(
+    'lfy',
+    version: '0.0.7',
     meson_version: '>= 0.62.0',
-  default_options: [ 'warning_level=2', 'werror=false', ],
+    default_options: [
+        'warning_level=2',
+        'werror=false',
+    ],
 )
 
-i18n = import('i18n')
-gnome = import('gnome')
-python = import('python')
+bt = get_option('build_type')
 
-# get_option('datadir')
-# share/
-# get_option('localedir')
-# locale/
+if bt == 'gtk'
+
+    gnome = import('gnome')
+
+    gnome.post_install(
+        glib_compile_schemas: true,
+        gtk_update_icon_cache: true,
+        update_desktop_database: true,
+    )
+endif
+
+i18n = import('i18n')
+python = import('python')
 
 APP_ID = 'cool.ldr.' + meson.project_name()
 # PKGLIB_DIR = join_paths(get_option('prefix'), get_option('libdir'), APPLICATION_ID)
@@ -25,14 +36,6 @@ PACKAGE_URL_BUG = 'https://github.com/ldrfy/lfy/issues'
 py_installation = python.find_installation('python3')
 # /usr/lib/python3.11/site-packages
 PYTHON_DIR = join_paths(get_option('prefix'), 'lib')
-# PYTHON_DIR = py_installation.get_path('purelib')
-# 也是上面的，但是有些系统 /usr/local
-# /usr/local/lib/python3.11/site-packages
-# PYTHON_LOCAL_DIR = py_installation.get_install_dir()
-# message(PYTHON_DIR)
-# message(PKGDATA_DIR)
-# error(PKGDATA_DIR)
-
 
 conf = configuration_data()
 conf.set('LOCAL_BUILD', 'False')
@@ -50,49 +53,38 @@ conf.set('PYTHON_DIR', PYTHON_DIR)
 conf.set('PACKAGE_URL', PACKAGE_URL)
 conf.set('PACKAGE_URL_BUG', PACKAGE_URL_BUG)
 
-
 configure_file(
-  input: 'define.py',
-  output: '__init__.py',
-  configuration: conf,
-  install: true,
-  install_dir: join_paths(PYTHON_DIR, meson.project_name())
+    input: 'define.py',
+    output: '__init__.py',
+    configuration: conf,
+    install: true,
+    install_dir: join_paths(PYTHON_DIR, meson.project_name()),
 )
 
-
 configure_file(
-  input: meson.project_name() + '.py',
-  output: meson.project_name(),
-  configuration: conf,
-  install: true,
-  install_dir: get_option('bindir'),
-  install_mode: 'r-xr-xr-x'
+    input: meson.project_name() + '/' + bt + '/' + meson.project_name() + '.py',
+    output: meson.project_name(),
+    configuration: conf,
+    install: true,
+    install_dir: get_option('bindir'),
+    install_mode: 'r-xr-xr-x',
 )
-
-
-configure_file(
-  input: meson.project_name() + '-qt.py',
-  output: meson.project_name() + '-qt',
-  configuration: conf,
-  install: true,
-  install_dir: get_option('bindir'),
-  install_mode: 'r-xr-xr-x'
-)
-
 
 subdir('data')
 subdir('po')
 subdir('pkg')
 
-
 install_subdir(
-    meson.project_name(),
-    install_dir: PYTHON_DIR
+    meson.project_name() + '/api',
+    install_dir: join_paths(PYTHON_DIR, meson.project_name()),
 )
 
+install_subdir(
+    meson.project_name() + '/utils',
+    install_dir: join_paths(PYTHON_DIR, meson.project_name()),
+)
 
-gnome.post_install(
-     glib_compile_schemas: true,
-    gtk_update_icon_cache: true,
-  update_desktop_database: true,
+install_subdir(
+    meson.project_name() + '/' + bt,
+    install_dir: join_paths(PYTHON_DIR, meson.project_name()),
 )

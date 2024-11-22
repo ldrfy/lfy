@@ -7,8 +7,8 @@ from datetime import datetime, timezone
 from gettext import gettext as _
 
 from lfy.api.server import TIME_OUT, Server
-from lfy.api.utils import s2ks
-from lfy.api.utils.settings import Settings
+from lfy.utils import s2ks
+from lfy.utils.settings import Settings
 
 
 def hex_digest(input_bytes):

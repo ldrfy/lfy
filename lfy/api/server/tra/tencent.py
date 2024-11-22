@@ -10,8 +10,8 @@ from gettext import gettext as _
 import requests
 
 from lfy.api.server import TIME_OUT, Server
-from lfy.api.utils import s2ks
-from lfy.api.utils.settings import Settings
+from lfy.utils import s2ks
+from lfy.utils.settings import Settings
 
 
 def _get_string_to_sign(method, endpoint, params):

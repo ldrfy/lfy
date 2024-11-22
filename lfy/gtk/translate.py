@@ -12,11 +12,11 @@ from lfy.api import (create_server_o, create_server_t, get_lang,
                      lang_n2j, server_key2i)
 from lfy.api.constant import NO_TRANSLATED_TXTS
 from lfy.api.server import Server
-from lfy.api.utils import cal_md5, process_text
-from lfy.api.utils.debug import get_logger
-from lfy.api.utils.settings import Settings
 from lfy.gtk.notify import nf_t
 from lfy.gtk.widgets.theme_switcher import ThemeSwitcher
+from lfy.utils import cal_md5, process_text
+from lfy.utils.debug import get_logger
+from lfy.utils.settings import Settings
 
 
 @Gtk.Template(resource_path='/cool/ldr/lfy/translate.ui')
