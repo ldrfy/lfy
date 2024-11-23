@@ -4,7 +4,8 @@ BUILD_TYPE=qt
 DISK = ../../../dist/
 BUILD_PKG=build/pkg
 DESTDIR = "/"
-PREFIX = "${HOME}/.local/"
+# PREFIX = "${HOME}/.local/"
+PREFIX = "${PWD}/test/"
 
 
 clear:
@@ -13,6 +14,7 @@ clear:
 	rm -rf {HOME}/.local/share/glib-2.0/schemas/gschemas.compiled
 	rm -rf {HOME}/.local/lib/lfy
 	rm -rf /tmp/v${VERSION}.zip
+	rm -rf /tmp/lfy-${VERSION}
 
 
 test:clear
@@ -51,7 +53,6 @@ test-zip:
 	cp -r data /tmp/lfy-${VERSION}/ && \
 	cp -r po /tmp/lfy-${VERSION}/ && \
 	cp -r pkg /tmp/lfy-${VERSION}/ && \
-	cp -r define.py /tmp/lfy-${VERSION}/ && \
 	cp -r meson.build /tmp/lfy-${VERSION}/ && \
 	cp -r meson_options.txt /tmp/lfy-${VERSION}/ && \
 	cd /tmp/ && \

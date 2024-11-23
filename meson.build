@@ -25,7 +25,6 @@ i18n = import('i18n')
 python = import('python')
 
 APP_ID = 'cool.ldr.' + meson.project_name()
-# PKGLIB_DIR = join_paths(get_option('prefix'), get_option('libdir'), APPLICATION_ID)
 SCHEMAS_DIR = join_paths(get_option('prefix'), get_option('datadir'))
 PKGDATA_DIR = join_paths(SCHEMAS_DIR, APP_ID)
 LOCALE_DIR = join_paths(SCHEMAS_DIR, 'locale')
@@ -34,7 +33,6 @@ PACKAGE_URL = 'https://github.com/ldrfy/lfy'
 PACKAGE_URL_BUG = 'https://github.com/ldrfy/lfy/issues'
 
 py_installation = python.find_installation('python3')
-# /usr/lib/python3.11/site-packages
 PYTHON_DIR = join_paths(get_option('prefix'), 'lib')
 
 conf = configuration_data()
@@ -54,7 +52,7 @@ conf.set('PACKAGE_URL', PACKAGE_URL)
 conf.set('PACKAGE_URL_BUG', PACKAGE_URL_BUG)
 
 configure_file(
-    input: 'define.py',
+    input: meson.project_name() + '/' +'__init__.py',
     output: '__init__.py',
     configuration: conf,
     install: true,
