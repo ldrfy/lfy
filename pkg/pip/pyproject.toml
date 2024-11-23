@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "@APP_NAME@"
+version = "@VERSION@"
+description = "听书"
+readme = "readme.md"
+authors = [{ name = "yuhldr", email = "yuhldr@qq.com" }]
+dependencies = [
+    @DEPS@
+]
+
+# 包含的脚本
+[project.scripts]
+heartale = "heartale:run_play"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["heartale*"]

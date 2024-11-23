@@ -24,6 +24,11 @@ class MyPlainTextEdit(QPlainTextEdit):
 
 
 class MyThread(QThread):
+    """_summary_
+
+    Args:
+        QThread (_type_): _description_
+    """
     signal = pyqtSignal(tuple)
 
     def __init__(self, fun, param=None):
@@ -32,6 +37,8 @@ class MyThread(QThread):
         super().__init__()
 
     def run(self):
+        """_summary_
+        """
         start_ = time.time()
         result = self.fun(self.param)
 

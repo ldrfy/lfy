@@ -1,55 +1,20 @@
 #!@PYTHON@
 import os
 import sys
-from gettext import gettext as _
 
-from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QApplication
-
-APP_ID = '@APP_ID@'
-VERSION = '@VERSION@'
-
-SCHEMAS_DIR = '@SCHEMAS_DIR@'
+APP_NAME = '@APP_NAME@'
 PYTHON_DIR = '@PYTHON_DIR@'
 
-LOCALE_DIR = '@LOCALE_DIR@'
-
-
-if not os.path.exists(SCHEMAS_DIR):
-    # 说明是pip这一类的
-    print(f"路径修正：{SCHEMAS_DIR}")
+print("PYTHON_DIR", PYTHON_DIR)
+if not os.path.exists(f"{PYTHON_DIR}/{APP_NAME}"):
+    print("修正")
     THIS_DIR, THIS_FILENAME = os.path.split(__file__)
     PYTHON_DIR = os.path.abspath(f"{THIS_DIR}/../lib/")
-    SCHEMAS_DIR = os.path.abspath(f"{THIS_DIR}/../share/")
-    LOCALE_DIR = os.path.abspath(f"{SCHEMAS_DIR}/locale/")
-
-    os.environ["XDG_DATA_DIRS"] = f'{SCHEMAS_DIR}:' + \
-        os.environ.get("XDG_DATA_DIRS", "")
-    print(SCHEMAS_DIR)
-
-# python lib
+    print(PYTHON_DIR)
 sys.path.append(PYTHON_DIR)
 
+from lfy.qt.main import main  # pylint: disable=C0413
 
 if __name__ == "__main__":
-    os.environ[f'{APP_ID}.ui'] = 'qt'
 
-    from lfy import set_internationalization
-    set_internationalization(APP_ID, LOCALE_DIR)
-
-    from lfy.utils.code import parse_lfy
-    parse_lfy()
-
-    app = QApplication(sys.argv)
-
-    from lfy.qt.translate import TranslateWindow
-    from lfy.qt.tray import TrayIcon
-
-    icon = QIcon.fromTheme(APP_ID)
-    window = TranslateWindow()
-    window.setWindowIcon(icon)
-    tray = TrayIcon(window, app, icon)
-    tray.show()
-    window.tray = tray
-    window.show()
-    sys.exit(app.exec())
+    main()

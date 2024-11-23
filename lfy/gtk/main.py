@@ -1,20 +1,23 @@
-# main.py
+'gtk版本入口'
 import json
 import os
 import platform
+import sys
 import threading
 import time
 from datetime import datetime
 from gettext import gettext as _
 
-from gi.repository import Adw, Gdk, Gio, GLib, Gtk
+from gi.repository import (Adw, Gdk, Gio, GLib,  # pylint: disable=E0401,C0413
+                           Gtk)
 
-from lfy import PACKAGE_URL, RES_PATH, VERSION
+from lfy import APP_ID, PACKAGE_URL, PKGDATA_DIR, RES_PATH, VERSION
 from lfy.gtk.preference import PreferencesDialog
 from lfy.gtk.translate import TranslateWindow
 from lfy.utils import get_os_release, is_text
 from lfy.utils.bak import backup_gsettings
 from lfy.utils.check_update import main as check_update
+from lfy.utils.code import parse_lfy
 from lfy.utils.debug import get_log_handler
 from lfy.utils.settings import Settings
 
@@ -315,3 +318,12 @@ class LfyApplication(Adw.Application):
 
         if Settings().g("auto-check-update"):
             threading.Thread(target=fu, daemon=True).start()
+
+
+def main():
+    os.environ[f'{APP_ID}.ui'] = 'gtk'
+
+    parse_lfy()
+
+
+    sys.exit(LfyApplication(APP_ID, VERSION).run(sys.argv))
