@@ -9,7 +9,7 @@ PREFIX = "${HOME}/.local/"
 
 clear:
 	rm -rf build test
-	mkdir -p dist/${BUILD_TYPE}
+	mkdir -p dist
 	rm -rf {HOME}/.local/share/glib-2.0/schemas/gschemas.compiled
 	rm -rf {HOME}/.local/lib/lfy
 	rm -rf /tmp/v${VERSION}.zip
