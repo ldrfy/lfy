@@ -13,7 +13,7 @@ from lfy.api import (create_server_o, create_server_t, get_lang,
                      lang_n2j, server_key2i)
 from lfy.api.server import Server
 from lfy.qt import MyPlainTextEdit, MyThread
-from lfy.utils import cal_md5, process_text
+from lfy.utils import process_text
 from lfy.utils.settings import Settings
 
 
@@ -90,7 +90,6 @@ class TranslateWindow(QMainWindow):
         self.my_thread = None
         self.tray: QSystemTrayIcon = None
         self.text_last = ""
-        self.img_md5 = ""
 
         self.set_data()
 
@@ -162,13 +161,6 @@ class TranslateWindow(QMainWindow):
         Returns:
             _type_: _description_
         """
-        md5_hash = cal_md5(img_path)
-        print(md5_hash)
-        # 防止wayland多次识别
-        if self.img_md5 == md5_hash:
-            return
-        self.img_md5 = md5_hash
-
         def oo(_p=None):
             _ok, text_from = self.server_o.ocr_image(img_path)
             return (_ok, text_from)
@@ -201,12 +193,12 @@ class TranslateWindow(QMainWindow):
             self.text_last = text_from
             self.cleanup_thread()
 
-    def update_translate(self, reload=True):
+    def update_translate(self):
         """无参数翻译
         """
-        self.translate_text(self.te_from.toPlainText(), reload)
+        self.translate_text(self.te_from.toPlainText())
 
-    def translate_text(self, text_from, reload=False):
+    def translate_text(self, text_from):
         """翻译
 
         Returns:
@@ -215,8 +207,6 @@ class TranslateWindow(QMainWindow):
         if self.cb_del_wrapping.isChecked():
             text_from = process_text(text_from)
 
-        if text_from == self.text_last and not reload:
-            return
 
         if self.cb_add_old.isChecked():
             text_from = self.text_last + text_from

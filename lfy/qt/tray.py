@@ -8,6 +8,7 @@ from PyQt6.QtWidgets import (QApplication, QDialog, QMenu, QMessageBox,
 from lfy import APP_NAME
 from lfy.qt.preference import PreferenceWindow
 from lfy.qt.translate import TranslateWindow
+from lfy.utils import cal_md5
 
 
 class TrayIcon(QSystemTrayIcon):
@@ -51,18 +52,32 @@ class TrayIcon(QSystemTrayIcon):
         self.clipboard: QClipboard = self.app.clipboard()
         self.clipboard.dataChanged.connect(self._on_clipboard_data_changed)
 
+        self.img_md5 = ""
+        self.text_last = ""
+
     def _on_clipboard_data_changed(self):
+
         if self.clipboard.mimeData().hasImage():
             # 如果是图片，处理图片
             image = self.clipboard.image()
             if not image.isNull():
                 file_path = "/tmp/lfy.png"
                 image.save(file_path, "PNG")
+
+                md5_hash = cal_md5(file_path)
+                if self.img_md5 == md5_hash:
+                    return
+                self.img_md5 = md5_hash
+
                 if not self.w.isVisible():
                     self.w.show()
                 self.w.ocr_image(file_path)
         elif self.clipboard.mimeData().hasText():
             text = self.clipboard.text()
+            if text == self.text_last:
+                return
+            self.text_last = text
+
             if not self.w.isVisible():
                 self.w.show()
             self.w.translate_text(text)
