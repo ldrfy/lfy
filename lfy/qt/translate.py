@@ -2,8 +2,9 @@
 from gettext import gettext as _
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import (QApplication, QCheckBox, QComboBox, QHBoxLayout,
-                             QMainWindow, QPushButton, QSplitter, QTextEdit,
+from PyQt6.QtGui import QKeyEvent
+from PyQt6.QtWidgets import (QCheckBox, QComboBox, QHBoxLayout, QMainWindow,
+                             QPushButton, QSplitter, QSystemTrayIcon,
                              QVBoxLayout, QWidget)
 
 from lfy import APP_NAME
@@ -11,7 +12,7 @@ from lfy.api import (create_server_o, create_server_t, get_lang,
                      get_lang_names, get_server_names_t, get_server_t,
                      lang_n2j, server_key2i)
 from lfy.api.server import Server
-from lfy.qt import MyThread
+from lfy.qt import MyPlainTextEdit, MyThread
 from lfy.utils import cal_md5, process_text
 from lfy.utils.settings import Settings
 
@@ -22,6 +23,7 @@ class TranslateWindow(QMainWindow):
     Args:
         QMainWindow (_type_): _description_
     """
+
     def __init__(self):
         super().__init__()
 
@@ -36,7 +38,7 @@ class TranslateWindow(QMainWindow):
         splitter = QSplitter(Qt.Orientation.Vertical, self)
 
         # 上面的文本编辑框
-        self.te_from = QTextEdit(self)
+        self.te_from = MyPlainTextEdit(self)
 
         # 中间的布局（包含选择按钮和普通按钮）
         middle_widget = QWidget(self)
@@ -68,7 +70,7 @@ class TranslateWindow(QMainWindow):
         middle_layout.addWidget(self.cb_add_old)
         middle_layout.addWidget(self.btn_translate)
         # 下面的文本编辑框
-        self.te_to = QTextEdit(self)
+        self.te_to = MyPlainTextEdit(self)
 
         bottom_layout.addWidget(middle_widget)
         bottom_layout.addWidget(self.te_to)
@@ -86,7 +88,7 @@ class TranslateWindow(QMainWindow):
         self.server_t = None
         self.lang_t = None
         self.my_thread = None
-        self.tray = None
+        self.tray: QSystemTrayIcon = None
         self.text_last = ""
         self.img_md5 = ""
 
@@ -113,6 +115,17 @@ class TranslateWindow(QMainWindow):
         self.lang_t = get_lang(i, j)
         self.cb_lang.setCurrentIndex(j)
         self.cb_del_wrapping.setChecked(True)
+
+    def keyPressEvent(self, event: QKeyEvent):
+        """监听键盘
+
+        Args:
+            event (QKeyEvent): _description_
+        """
+        if event.key() == Qt.Key.Key_T and event.modifiers() == Qt.KeyboardModifier.ControlModifier:
+            self.update_translate()
+        else:
+            super().keyPressEvent(event)
 
     def _on_server_changed(self):
         i = self.cb_server.currentIndex()
@@ -155,6 +168,7 @@ class TranslateWindow(QMainWindow):
         if self.img_md5 == md5_hash:
             return
         self.img_md5 = md5_hash
+
         def oo(_p=None):
             _ok, text_from = self.server_o.ocr_image(img_path)
             return (_ok, text_from)
@@ -183,9 +197,9 @@ class TranslateWindow(QMainWindow):
         self.te_to.setPlainText(text_to)
 
         if "..." != text_to[-3:]:
-            self.my_thread = None
             self.tray.show_msg("翻译成功！", text_to)
             self.text_last = text_from
+            self.cleanup_thread()
 
     def update_translate(self, reload=True):
         """无参数翻译
@@ -220,3 +234,8 @@ class TranslateWindow(QMainWindow):
         self.my_thread = MyThread(tt)
         self.my_thread.signal.connect(self.set_text_from_to)
         self.my_thread.start()
+
+    def cleanup_thread(self):
+        self.my_thread.quit()  # 确保线程正常退出
+        self.my_thread.wait()   # 等待线程结束
+        self.my_thread.deleteLater()  # 删除线程，释放资源
