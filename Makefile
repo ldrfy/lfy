@@ -79,7 +79,8 @@ test-pip: clear
 	mv usr/lib/lfy ./ && \
 	mv usr/share/icons/hicolor/scalable/apps ./lfy/resources/ && \
 	mv usr/share/locale ./lfy/resources/ && \
-	python -m build
+	python -m build && \
+	cp dist/lfy-${VERSION}-py3-none-any.whl ${DISK}/lfy-${VERSION}-py3-none-any-${BUILD_TYPE}.whl
 
 
 
@@ -125,6 +126,7 @@ release:
 	make test-aur
 	make test-deb
 	make test-rpm
+	make test-pip
 	make BUILD_TYPE=gtk test-aur
 	make BUILD_TYPE=gtk test-deb
 	make BUILD_TYPE=gtk test-rpm

@@ -4,7 +4,7 @@ if bt == 'qt'
     # deps += ' python3-PyQt6'
     deps = deps0 + ' ,"pillow", "PyQt6"'
 else
-    deps = deps0 + ' ,"pillow", "PyGObject'
+    deps = deps0 + ' ,"pillow", "PyGObject"'
 endif
 
 conf_pkg_pip = configuration_data()
