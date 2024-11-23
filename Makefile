@@ -74,6 +74,8 @@ test-deb: clear
 # python-build
 test-pip: clear
 	make PREFIX="/usr" DESTDIR="${PWD}/${BUILD_PKG}/pip" test
+	cp README.md ${BUILD_PKG}/pip/
+	cp LICENSE ${BUILD_PKG}/pip/
 
 	cd ${BUILD_PKG}/pip && \
 	mv usr/lib/lfy ./ && \
