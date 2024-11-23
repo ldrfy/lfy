@@ -71,6 +71,18 @@ test-deb: clear
 	mv lfy-${VERSION}-x86_64.deb ${DISK}/lfy-${VERSION}-x86_64-${BUILD_TYPE}.deb
 
 
+# python-build
+test-pip: clear
+	make PREFIX="/usr" DESTDIR="${PWD}/${BUILD_PKG}/pip" test
+
+	cd ${BUILD_PKG}/pip && \
+	mv usr/lib/lfy ./ && \
+	mv usr/share/icons/hicolor/scalable/apps ./lfy/resources/ && \
+	mv usr/share/locale ./lfy/resources/ && \
+	python -m build
+
+
+
 test-flatpak:clear
 	meson setup build -Dbuild_type=${BUILD_TYPE}
 	cd ${BUILD_PKG}/flatpak && \
