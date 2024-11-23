@@ -3,13 +3,13 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
+dependencies = [@DEPS@]
+
 name = "@APP_NAME@"
 version = "@VERSION@"
 description = "test"
 readme = "readme.md"
 authors = [{ name = "yuhldr", email = "yuhldr@qq.com" }]
-dependencies = [@DEPS@]
-
 # 包含的脚本
 [project.scripts]
 @APP_NAME@ = "@APP_NAME@.@BUILD_TYPE@.main:main"
@@ -20,4 +20,4 @@ include = ["@APP_NAME@*"]
 
 
 [tool.setuptools.package-data]
-"@APP_NAME@" = ["resources/*"]
+"@APP_NAME@" = ["resources/*", "resources/locale/*/LC_MESSAGES/*"]
