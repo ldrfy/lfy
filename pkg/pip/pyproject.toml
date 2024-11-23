@@ -5,17 +5,19 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "@APP_NAME@"
 version = "@VERSION@"
-description = "听书"
+description = "test"
 readme = "readme.md"
 authors = [{ name = "yuhldr", email = "yuhldr@qq.com" }]
-dependencies = [
-    @DEPS@
-]
+dependencies = [@DEPS@]
 
 # 包含的脚本
 [project.scripts]
-heartale = "heartale:run_play"
+@APP_NAME@ = "@APP_NAME@.@BUILD_TYPE@.main:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["heartale*"]
+include = ["@APP_NAME@*"]
+
+
+[tool.setuptools.package-data]
+"@APP_NAME@" = ["resources/*"]

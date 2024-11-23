@@ -8,4 +8,5 @@ subdir('deb/DEBIAN')
 subdir('aur')
 subdir('flatpak')
 subdir('rpm/SPECS')
+subdir('pip')
 
