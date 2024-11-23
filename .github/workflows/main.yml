@@ -35,7 +35,7 @@ jobs:
       run: |
         sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         sudo flatpak install flathub org.gnome.Platform//46 org.gnome.Sdk//46 -y
-        make test-flatpak
+        make BUILD_TYPE=gtk test-flatpak
 
     - name: Build rpm package
       run: |
