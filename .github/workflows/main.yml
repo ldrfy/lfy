@@ -24,7 +24,7 @@ jobs:
     - name: Prepare
       run: |
         sudo apt-get update
-        sudo apt-get install python-gi-dev cmake make meson gobject-introspection libadwaita-1-dev gettext desktop-file-utils libxml2-utils appstream-util flatpak-builder rpm python-build
+        sudo apt-get install python-gi-dev cmake make meson gobject-introspection libadwaita-1-dev gettext desktop-file-utils libxml2-utils appstream-util flatpak-builder rpm python3-build
 
     - name: Build deb package
       run: |
