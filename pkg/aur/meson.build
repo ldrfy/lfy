@@ -1,7 +1,9 @@
-deps = '"libadwaita" "python-requests" "python-pillow"'
+deps = '"python-requests" "python-pillow"'
 build_deps = '"meson"'
 if bt == 'gtk'
-    deps += ' "gobject-introspection"'
+    deps += ' "libadwaita" "gobject-introspection"'
+else
+    deps += ' "python-pyqt6" "qt6-svg"'
 endif
 
 conf_pkg_aur = configuration_data()
