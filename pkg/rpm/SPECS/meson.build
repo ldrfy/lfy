@@ -11,11 +11,6 @@ conf_pkg_rpm = configuration_data()
 foreach key : conf_pkg.keys()
     conf_pkg_rpm.set(key, conf_pkg.get(key))
 endforeach
-if bt == 'qt'
-    deps = deps0 + ' python3-Pillow python3-PyQt6'
-else
-    deps = deps0 + ' python3-Pillow python3-gobject libadwaita typelib-1_0-Gtk-4_0'
-endif
 conf_pkg_rpm.set('DEPS', deps)
 conf_pkg_rpm.set('BUILD_TYPE', bt)
 
@@ -28,9 +23,14 @@ configure_file(
 
 
 conf_pkg_rpm_suse = configuration_data()
-foreach key : conf_pkg_rpm.keys()
-    conf_pkg_rpm_suse.set(key, conf_pkg_rpm.get(key))
+foreach key : conf_pkg.keys()
+    conf_pkg_rpm_suse.set(key, conf_pkg.get(key))
 endforeach
+if bt == 'qt'
+    deps = deps0 + ' python3-Pillow python3-PyQt6'
+else
+    deps = deps0 + ' python3-Pillow python3-gobject typelib-1_0-Gtk-4_0 typelib-1_0-Adw-1'
+endif
 conf_pkg_rpm_suse.set('DEPS', deps)
 conf_pkg_rpm_suse.set('BUILD_TYPE', bt)
 
