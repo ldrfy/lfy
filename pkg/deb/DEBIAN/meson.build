@@ -1,4 +1,4 @@
-deps = 'python3,python3-requests'
+deps = 'python3,python3-requests python3-pillow'
 if bt == 'qt'
     deps += ',python3-pyqt6,python3-pyqt6.qtsvg'
 else

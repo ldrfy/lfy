@@ -95,9 +95,18 @@ test-rpm: clear test-zip
 	cd ${PWD}/${BUILD_PKG}/rpm/SOURCES/ && \
 	cp /tmp/v${VERSION}.zip ./
 
-	rpmbuild -bb ${PWD}/${BUILD_PKG}/rpm/SPECS/lfy.spec --define "_topdir ${PWD}/${BUILD_PKG}/rpm/"
+	rpmbuild -bb ${PWD}/${BUILD_PKG}/rpm/SPECS/lfy.spec \
+		--define "_topdir ${PWD}/${BUILD_PKG}/rpm/"
 	cd ${BUILD_PKG}/rpm/ && \
-	mv RPMS/x86_64/lfy-${VERSION}-1.x86_64.rpm ${DISK}/lfy-${VERSION}-1.x86_64-${BUILD_TYPE}.rpm
+	mv RPMS/x86_64/lfy-${VERSION}-1.x86_64.rpm \
+		${DISK}/lfy-${VERSION}-1.x86_64-${BUILD_TYPE}.rpm
+
+	rpmbuild -bb ${PWD}/${BUILD_PKG}/rpm/SPECS/lfy-suse.spec \
+		--define "_topdir ${PWD}/${BUILD_PKG}/rpm/"
+	cd ${BUILD_PKG}/rpm/ && \
+	mv RPMS/x86_64/lfy-${VERSION}-1.x86_64.rpm \
+		${DISK}/lfy-${VERSION}-1.x86_64-${BUILD_TYPE}-suse.rpm
+
 
 release:
 	make test-aur

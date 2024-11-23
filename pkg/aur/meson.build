@@ -1,4 +1,4 @@
-deps = '"libadwaita" "python-requests"'
+deps = '"libadwaita" "python-requests" "python-pillow"'
 build_deps = '"meson"'
 if bt == 'gtk'
     deps += ' "gobject-introspection"'
