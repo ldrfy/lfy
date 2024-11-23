@@ -20,10 +20,3 @@ configure_file(
     configuration: conf_pkg_pip,
     install: false,
 )
-
-configure_file(
-    input: 'MANIFEST.in',
-    output: 'MANIFEST.in',
-    configuration: conf_pkg_pip,
-    install: false,
-)
