@@ -13,9 +13,9 @@ SCHEMAS_DIR = '@SCHEMAS_DIR@'
 PYTHON_DIR = '@PYTHON_DIR@'
 
 LOCALE_DIR = '@LOCALE_DIR@'
-PKGDATA_DIR = '@PKGDATA_DIR@'
 
-if not os.path.exists(PKGDATA_DIR):
+
+if not os.path.exists(SCHEMAS_DIR):
     # 说明是pip这一类的
     print(f"路径修正：{SCHEMAS_DIR}")
     THIS_DIR, THIS_FILENAME = os.path.split(__file__)
