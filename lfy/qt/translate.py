@@ -49,7 +49,6 @@ class TranslateWindow(QMainWindow):
         self.cb_server.currentIndexChanged.connect(self._on_server_changed)
 
         self.cb_lang = QComboBox(self)
-        self.cb_lang.setEditable(True)
         self.cb_lang.currentIndexChanged.connect(self._on_lang_changed)
 
         # 右边的两个选择按钮
@@ -97,6 +96,8 @@ class TranslateWindow(QMainWindow):
         """_summary_
         """
         self.s = Settings()
+        self.cb_server.setEditable(True)
+        self.cb_lang.setEditable(True)
 
         self.btn_translate.clicked.connect(self.update_translate)
 
@@ -106,8 +107,10 @@ class TranslateWindow(QMainWindow):
         self.server_t = create_server_t(server_key_t)
         self.server_o = create_server_o(server_key_o)
 
-        self.cb_server.addItems(get_server_names_t())
         i = server_key2i(server_key_t)
+        self.jn = i == 0
+        self.cb_server.addItems(get_server_names_t())
+        self.jn = True
         self.cb_server.setCurrentIndex(i)
         n = self.s.g("lang-selected-n", 0, int)
         j = lang_n2j(i, n)
@@ -127,21 +130,31 @@ class TranslateWindow(QMainWindow):
             super().keyPressEvent(event)
 
     def _on_server_changed(self):
+        if not self.jn:
+            # 初始化时
+            return
         i = self.cb_server.currentIndex()
         j = lang_n2j(i, self.s.g("lang-selected-n", 0, int))
-        self.jn = False
+
+        self.jn = j == 0
         self.cb_lang.clear()
         self.cb_lang.addItems(get_lang_names(i))
         self.jn = True
-        self.cb_lang.setCurrentIndex(j)
+        if j != 0:
+            # 新设置会是0，无需再设置
+            self.cb_lang.setCurrentIndex(j)
 
         self.s.s("server-selected-key", get_server_t(i).key)
 
     def _on_lang_changed(self):
         if not self.jn:
             return
-        i = self.cb_server.currentIndex()
         j = self.cb_lang.currentIndex()
+
+        if j < 0:
+            # self.cb_lang.clear()
+            return
+        i = self.cb_server.currentIndex()
         n = get_lang(i, j).n
         self.s.s("lang-selected-n", n)
         n = self.s.g("lang-selected-n", 0, int)
@@ -206,7 +219,6 @@ class TranslateWindow(QMainWindow):
         """
         if self.cb_del_wrapping.isChecked():
             text_from = process_text(text_from)
-
 
         if self.cb_add_old.isChecked():
             text_from = self.text_last + text_from
