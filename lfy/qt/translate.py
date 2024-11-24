@@ -1,4 +1,5 @@
 '翻译主窗口'
+import traceback
 from gettext import gettext as _
 
 from PyQt6.QtCore import Qt
@@ -15,6 +16,7 @@ from lfy.api.constant import NO_TRANSLATED_TXTS
 from lfy.api.server import Server
 from lfy.qt import MyPlainTextEdit, MyThread
 from lfy.utils import process_text
+from lfy.utils.debug import get_logger
 from lfy.utils.settings import Settings
 
 
@@ -241,8 +243,14 @@ class TranslateWindow(QMainWindow):
             return
 
         def tt(_p=None):
-            _ok, text_to = self.server_t.translate_text(
-                text_from, self.lang_t.key)
+            try:
+                _ok, text_to = self.server_t.translate_text(
+                    text_from, self.lang_t.key)
+            except Exception as e:  # pylint: disable=W0718
+                get_logger().error(e)
+                error_msg = _("something error:")
+                error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
+                text_to = f"{error_msg}{self.server_t.name}\n\n{error_msg2}"
             return (text_from, text_to)
 
         self.set_text_from_to((text_from, "翻译中..."))
