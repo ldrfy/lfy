@@ -1,5 +1,4 @@
 #!@PYTHON@
-import os
 import sys
 
 APP_NAME = '@APP_NAME@'

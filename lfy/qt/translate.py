@@ -53,15 +53,15 @@ class TranslateWindow(QMainWindow):
         self.cb_lang.currentIndexChanged.connect(self._on_lang_changed)
 
         # 右边的两个选择按钮
-        self.cb_del_wrapping = QCheckBox(_("Process"), self)
+        self.cb_del_wrapping = QCheckBox(_("Remove line breaks"), self)
         self.cb_del_wrapping.setToolTip(_(
             "Alt + D: Remove symbols such as line breaks"))
 
-        self.cb_add_old = QCheckBox(_("Append"), self)
+        self.cb_add_old = QCheckBox(_("Splice Text"), self)
         self.cb_add_old.setToolTip(_(
             "Alt + C: Splice the next copied text with the previous text"))
 
-        btn_translate = QPushButton(_("translate"), self)
+        btn_translate = QPushButton(_("Translate"), self)
         btn_translate.clicked.connect(self.update_translate)
 
         middle_layout.addWidget(self.cb_server)
