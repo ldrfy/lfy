@@ -10,6 +10,7 @@ from gettext import gettext as _
 from urllib.parse import quote, quote_plus
 
 from lfy.api.server import TIME_OUT, Server
+from lfy.utils import s2ks
 from lfy.utils.settings import Settings
 
 
@@ -60,11 +61,9 @@ def _translate(session, s, api_key_s, lang_to="en", lang_from="auto"):
         _type_: _description_
     """
     # .strip()
-    [access_key_id, access_key_secret] = api_key_s.split("|")
-    access_key_id = access_key_id.strip()
-    access_key_secret = access_key_secret.strip()
+    access_key_id, access_key_secret = s2ks(api_key_s)
 
-    if access_key_id == "AccessKey ID" or access_key_secret == "AccessKey Secret":
+    if access_key_secret is None or access_key_id == "AccessKey ID":
         return False, _("please input API Key in preference")
 
     encoded_body = {
@@ -89,7 +88,8 @@ def _translate(session, s, api_key_s, lang_to="en", lang_from="auto"):
     encoded_body["Signature"] = signature
 
     response = session.post("https://mt.aliyuncs.com/",
-                            headers={"Content-Type": "application/x-www-form-urlencoded"},
+                            headers={
+                                "Content-Type": "application/x-www-form-urlencoded"},
                             data=encoded_body, timeout=TIME_OUT)
     result = response.json()
     if result["Code"] == "200":
@@ -129,7 +129,8 @@ class AliYunServer(Server):
             bool: _description_
         """
         error_msg_template = _("please input {} and {} like:")
-        error_msg = error_msg_template.format("AccessKey ID", "AccessKey Secret")
+        error_msg = error_msg_template.format(
+            "AccessKey ID", "AccessKey Secret")
         if "|" not in api_key_s:
             return False, error_msg + " XXXX | XXXX"
         ok, text = _translate(self.session, "success", api_key_s)
