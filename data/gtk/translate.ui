@@ -82,7 +82,7 @@
                         <child>
                           <object class="GtkButton" id="btn_translate">
                             <property name="action-name">app.translate</property>
-                            <property name="label" translatable="yes">translate</property>
+                            <property name="label" translatable="yes">Translate</property>
                             <property name="tooltip-text">Ctrl + T</property>
                             <property name="valign">center</property>
                           </object>
