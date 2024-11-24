@@ -97,12 +97,12 @@ class TranslateWindow(QMainWindow):
     def set_data(self):
         """_summary_
         """
-        self.s = Settings()
+        self.sg = Settings()
         self.cb_server.setEditable(True)
         self.cb_lang.setEditable(True)
 
-        server_key_t = self.s.g("server-selected-key", "bing")
-        server_key_o = self.s.g("server_ocr_selected_key", "baidu")
+        server_key_t = self.sg.g("server-selected-key", "bing")
+        server_key_o = self.sg.g("server-ocr-selected-key", "baidu")
 
         self.server_t = create_server_t(server_key_t)
         self.server_o = create_server_o(server_key_o)
@@ -112,7 +112,7 @@ class TranslateWindow(QMainWindow):
         self.cb_server.addItems(get_server_names_t())
         self.jn = True
         self.cb_server.setCurrentIndex(i)
-        n = self.s.g("lang-selected-n", 0, int)
+        n = self.sg.g("lang-selected-n", 0, int)
         j = lang_n2j(i, n)
         self.lang_t = get_lang(i, j)
         self.cb_lang.setCurrentIndex(j)
@@ -134,7 +134,7 @@ class TranslateWindow(QMainWindow):
             # 初始化时
             return
         i = self.cb_server.currentIndex()
-        j = lang_n2j(i, self.s.g("lang-selected-n", 0, int))
+        j = lang_n2j(i, self.sg.g("lang-selected-n", 0, int))
 
         self.jn = j == 0
         self.cb_lang.clear()
@@ -144,7 +144,7 @@ class TranslateWindow(QMainWindow):
             # 新设置会是0，无需再设置
             self.cb_lang.setCurrentIndex(j)
 
-        self.s.s("server-selected-key", get_server_t(i).key)
+        self.sg.s("server-selected-key", get_server_t(i).key)
 
     def _on_lang_changed(self):
         if not self.jn:
@@ -156,8 +156,8 @@ class TranslateWindow(QMainWindow):
             return
         i = self.cb_server.currentIndex()
         n = get_lang(i, j).n
-        self.s.s("lang-selected-n", n)
-        n = self.s.g("lang-selected-n", 0, int)
+        self.sg.s("lang-selected-n", n)
+        n = self.sg.g("lang-selected-n", 0, int)
 
         server: Server = get_server_t(i)
         if server.key != self.server_t.key:
@@ -202,7 +202,8 @@ class TranslateWindow(QMainWindow):
         self.te_to.setPlainText(text_to)
 
         if "..." != text_to[-3:]:
-            self.tray.show_msg("翻译成功！", text_to)
+            if self.sg.g("notify-translation-results", d=True, t=bool):
+                self.tray.show_msg("翻译成功！", text_to)
             self.text_last = text_from
             self.my_thread.clean_up()
 

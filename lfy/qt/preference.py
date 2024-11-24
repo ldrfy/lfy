@@ -102,11 +102,11 @@ class PreferenceWindow(QMainWindow):
             self._on_auto_check_update)
 
         cb_auto_check_update.setChecked(
-            self.sg.g("auto-check-update", t=bool))
+            self.sg.g("auto-check-update", d=True, t=bool))
         self.vl_normal.addWidget(cb_auto_check_update)
         cb_notify = QCheckBox(_("Notify translation results"))
         cb_notify.setChecked(
-            self.sg.g("notify-translation-results", t=bool))
+            self.sg.g("notify-translation-results", d=True, t=bool))
         cb_notify.stateChanged.connect(
             self._on_cb_notify)
         self.vl_normal.addWidget(cb_notify)
@@ -158,7 +158,8 @@ class PreferenceWindow(QMainWindow):
         """
 
         ss = list(get_servers_t())[1:]
-        keys_s = self.sg.g("compare-servers")
+        keys_s = self.sg.g("compare-servers", [], t=list)
+        print(keys_s)
         if len(keys_s) == 0:
             for se in ss:
                 keys_s.append(se.key)
