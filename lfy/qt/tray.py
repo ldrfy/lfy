@@ -8,6 +8,7 @@ from lfy import APP_NAME, PACKAGE_URL, PACKAGE_URL_BUG, VERSION
 from lfy.qt.preference import PreferenceWindow
 from lfy.qt.translate import TranslateWindow
 from lfy.utils import cal_md5
+from lfy.utils.settings import Settings
 
 
 class TrayIcon(QSystemTrayIcon):
@@ -22,12 +23,25 @@ class TrayIcon(QSystemTrayIcon):
         self.w: TranslateWindow = parent
         self.app: QApplication = app
         self.setToolTip(APP_NAME)
+        self.sg = Settings()
 
         # 创建托盘菜单
         tray_menu = QMenu(parent)
         open_action = QAction(_("Open"), self)
         open_action.triggered.connect(self.w.show)
         tray_menu.addAction(open_action)
+
+        self.cb: QClipboard = self.app.clipboard()
+
+        self.auto_action = QAction(
+            _('Copy to translate'), triggered=self.copy2translate)
+        self.auto_action.setEnabled(True)
+        self.auto_action.setCheckable(True)
+        self.auto_action.setChecked(
+            self.sg.g("copy-auto-translate", d=True, t=bool))
+        self.copy2translate()
+
+        tray_menu.addAction(self.auto_action)
 
         pf_action = QAction(_("Preference"), self)
         pf_action.triggered.connect(self.show_setting_window)
@@ -38,14 +52,10 @@ class TrayIcon(QSystemTrayIcon):
         tray_menu.addAction(about_action)
 
         quit_action = QAction(_("Quit"), self)
-        # quit_action.triggered.connect(parent.close)
         quit_action.triggered.connect(self.quit_app)
         tray_menu.addAction(quit_action)
 
         self.setContextMenu(tray_menu)
-
-        self.cb: QClipboard = self.app.clipboard()
-        self.cb.dataChanged.connect(self._on_clipboard_data_changed)
 
         self.img_md5 = ""
         self.text_last = ""
@@ -78,6 +88,8 @@ class TrayIcon(QSystemTrayIcon):
             self.w.translate_text(text)
 
     def quit_app(self):
+        """退出程序
+        """
         re = QMessageBox.warning(self.w, _("warn"), _("quit?"),
                                  QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
                                  QMessageBox.StandardButton.No)
@@ -86,6 +98,8 @@ class TrayIcon(QSystemTrayIcon):
             self.app.quit()  # 退出程序
 
     def show_about_window(self):
+        """关于窗口
+        """
         s = f'''<h3>{APP_NAME}</h3>
             <p>{VERSION}</p>
             <p><a href="{PACKAGE_URL}">home</a> < /p >
@@ -107,3 +121,20 @@ class TrayIcon(QSystemTrayIcon):
     def show_msg(self, title, msg):
         self.showMessage(
             title, msg, QSystemTrayIcon.MessageIcon.Information, 2000)
+
+    def copy2translate(self):
+        """复制即翻译可以选择暂停，并且会记住选择
+        """
+        auto_translate = self.auto_action.isChecked()
+        self.sg.s("copy-auto-translate", auto_translate)
+        if auto_translate:
+            t = _("Copy to translate")
+            m = _("Copy detected, translate immediately")
+            n = QSystemTrayIcon.MessageIcon.Warning
+            self.cb.dataChanged.connect(self._on_clipboard_data_changed)
+        else:
+            self.cb.disconnect()
+            t = _("Stop copy to translate")
+            m = _("Copy detected, not automatically translated")
+            n = QSystemTrayIcon.MessageIcon.Critical
+        self.showMessage(t, m, n, 2000)
