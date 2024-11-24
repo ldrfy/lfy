@@ -9,7 +9,7 @@ name = "@APP_NAME@"
 version = "@VERSION@"
 description = "Translation software for read paper"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
