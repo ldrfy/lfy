@@ -173,4 +173,5 @@ class BaiduServer(Server):
             ss.s("server-sk-baidu-ocr", api_key_ocr_s)
             ss.s("ocr-baidu-token", access_token)
             ss.s("ocr-baidu-token-expires-date", expires_in_date)
-        return ok, "success"
+            return True, "success"
+        return False, access_token
