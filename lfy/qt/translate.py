@@ -11,6 +11,7 @@ from lfy import APP_NAME
 from lfy.api import (create_server_o, create_server_t, get_lang,
                      get_lang_names, get_server_names_t, get_server_t,
                      lang_n2j, server_key2i)
+from lfy.api.constant import NO_TRANSLATED_TXTS
 from lfy.api.server import Server
 from lfy.qt import MyPlainTextEdit, MyThread
 from lfy.utils import process_text
@@ -60,14 +61,15 @@ class TranslateWindow(QMainWindow):
         self.cb_add_old.setToolTip(_(
             "Alt + C: Splice the next copied text with the previous text"))
 
-        self.btn_translate = QPushButton(_("translate"), self)
+        btn_translate = QPushButton(_("translate"), self)
+        btn_translate.clicked.connect(self.update_translate)
 
         middle_layout.addWidget(self.cb_server)
         middle_layout.addWidget(self.cb_lang)
         middle_layout.addStretch(1)  # 用来拉伸中间部分
         middle_layout.addWidget(self.cb_del_wrapping)
         middle_layout.addWidget(self.cb_add_old)
-        middle_layout.addWidget(self.btn_translate)
+        middle_layout.addWidget(btn_translate)
         # 下面的文本编辑框
         self.te_to = MyPlainTextEdit(self)
 
@@ -79,7 +81,7 @@ class TranslateWindow(QMainWindow):
 
         main_layout.addWidget(splitter)
 
-        middle_layout.setContentsMargins(0, 0, 0, 0)
+        middle_layout.setContentsMargins(1, 0, 1, 5)
         bottom_layout.setContentsMargins(0, 0, 0, 0)
         bottom_layout.setSpacing(0)
 
@@ -98,8 +100,6 @@ class TranslateWindow(QMainWindow):
         self.s = Settings()
         self.cb_server.setEditable(True)
         self.cb_lang.setEditable(True)
-
-        self.btn_translate.clicked.connect(self.update_translate)
 
         server_key_t = self.s.g("server-selected-key", "bing")
         server_key_o = self.s.g("server_ocr_selected_key", "baidu")
@@ -204,7 +204,7 @@ class TranslateWindow(QMainWindow):
         if "..." != text_to[-3:]:
             self.tray.show_msg("翻译成功！", text_to)
             self.text_last = text_from
-            self.cleanup_thread()
+            self.my_thread.clean_up()
 
     def update_translate(self):
         """无参数翻译
@@ -217,6 +217,19 @@ class TranslateWindow(QMainWindow):
         Returns:
             _type_: _description_
         """
+
+        s_ntt = _(
+            "This time the content contains private information and is not translated")
+        ss_ntt = []
+        for ntt in NO_TRANSLATED_TXTS:
+            if ntt in text_from:
+                ss_ntt.append(ntt)
+        if len(ss_ntt) > 0:
+            self.tray.showMessage(
+                "no", f"{s_ntt}:\n{str(ss_ntt)}", QSystemTrayIcon.MessageIcon.Warning, 3000)
+
+            return
+
         if self.cb_del_wrapping.isChecked():
             text_from = process_text(text_from)
 
@@ -236,8 +249,3 @@ class TranslateWindow(QMainWindow):
         self.my_thread = MyThread(tt)
         self.my_thread.signal.connect(self.set_text_from_to)
         self.my_thread.start()
-
-    def cleanup_thread(self):
-        self.my_thread.quit()  # 确保线程正常退出
-        self.my_thread.wait()   # 等待线程结束
-        self.my_thread.deleteLater()  # 删除线程，释放资源

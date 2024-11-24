@@ -2,10 +2,9 @@
 from gettext import gettext as _
 
 from PyQt6.QtGui import QAction, QClipboard
-from PyQt6.QtWidgets import (QApplication, QDialog, QMenu, QMessageBox,
-                             QSystemTrayIcon, QTextEdit, QVBoxLayout)
+from PyQt6.QtWidgets import QApplication, QMenu, QMessageBox, QSystemTrayIcon
 
-from lfy import APP_NAME
+from lfy import APP_NAME, PACKAGE_URL, PACKAGE_URL_BUG, VERSION
 from lfy.qt.preference import PreferenceWindow
 from lfy.qt.translate import TranslateWindow
 from lfy.utils import cal_md5
@@ -30,15 +29,11 @@ class TrayIcon(QSystemTrayIcon):
         open_action.triggered.connect(self.w.show)
         tray_menu.addAction(open_action)
 
-        hide_action = QAction(_("Hide"), self)
-        hide_action.triggered.connect(self.w.close)
-        tray_menu.addAction(hide_action)
-
-        pf_action = QAction(_("preference"), self)
+        pf_action = QAction(_("Preference"), self)
         pf_action.triggered.connect(self.show_setting_window)
         tray_menu.addAction(pf_action)
 
-        about_action = QAction(_("about"), self)
+        about_action = QAction(_("About"), self)
         about_action.triggered.connect(self.show_about_window)
         tray_menu.addAction(about_action)
 
@@ -49,17 +44,17 @@ class TrayIcon(QSystemTrayIcon):
 
         self.setContextMenu(tray_menu)
 
-        self.clipboard: QClipboard = self.app.clipboard()
-        self.clipboard.dataChanged.connect(self._on_clipboard_data_changed)
+        self.cb: QClipboard = self.app.clipboard()
+        self.cb.dataChanged.connect(self._on_clipboard_data_changed)
 
         self.img_md5 = ""
         self.text_last = ""
 
     def _on_clipboard_data_changed(self):
 
-        if self.clipboard.mimeData().hasImage():
+        if self.cb.mimeData().hasImage():
             # 如果是图片，处理图片
-            image = self.clipboard.image()
+            image = self.cb.image()
             if not image.isNull():
                 file_path = "/tmp/lfy.png"
                 image.save(file_path, "PNG")
@@ -72,8 +67,8 @@ class TrayIcon(QSystemTrayIcon):
                 if not self.w.isVisible():
                     self.w.show()
                 self.w.ocr_image(file_path)
-        elif self.clipboard.mimeData().hasText():
-            text = self.clipboard.text()
+        elif self.cb.mimeData().hasText():
+            text = self.cb.text()
             if text == self.text_last:
                 return
             self.text_last = text
@@ -81,7 +76,6 @@ class TrayIcon(QSystemTrayIcon):
             if not self.w.isVisible():
                 self.w.show()
             self.w.translate_text(text)
-
 
     def quit_app(self):
         re = QMessageBox.warning(self.w, _("warn"), _("quit?"),
@@ -92,25 +86,24 @@ class TrayIcon(QSystemTrayIcon):
             self.app.quit()  # 退出程序
 
     def show_about_window(self):
-        AboutWindow().exec()
+        s = f'''<h3>{APP_NAME}</h3>
+            <p>{VERSION}</p>
+            <p><a href="{PACKAGE_URL}">home</a> < /p >
+            <p><a href="{PACKAGE_URL_BUG}">bug report</a></p>
+            <p>&copy; 2024 yuhldr</p>
+            <p>'''
+        s += _("Translation software for read paper")
+        s += "</p>"
+        QMessageBox.about(
+            self.w,
+            "About",
+            s
+        )
 
     def show_setting_window(self):
-        PreferenceWindow().exec()
+        self.prf = PreferenceWindow(self.cb, self)
+        self.prf.show()
 
     def show_msg(self, title, msg):
         self.showMessage(
             title, msg, QSystemTrayIcon.MessageIcon.Information, 2000)
-
-
-class AboutWindow(QDialog):
-    def __init__(self):
-        super().__init__()
-        self.setWindowTitle(_("About"))
-        self.setGeometry(150, 150, 400, 200)
-        self.setModal(True)
-        text_edit = QTextEdit(self)
-        text_edit.setText(
-            _("This is the About window, displaying application information."))
-        text_edit.setReadOnly(True)
-        layout = QVBoxLayout(self)
-        layout.addWidget(text_edit)
