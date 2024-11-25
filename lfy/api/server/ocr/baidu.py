@@ -17,7 +17,7 @@ def _get_token(session, ocr_api_key_s):
     """
     sg = Settings()
 
-    expires_in_date = sg.g("ocr-baidu-token-expires-date", t=int)
+    expires_in_date = sg.g("ocr-baidu-token-expires-date", t=float)
 
     if expires_in_date - time.time() > 0:
         access_token = sg.g("ocr-baidu-token")
