@@ -83,7 +83,7 @@ class TranslateWindow(QMainWindow):
 
         main_layout.addWidget(splitter)
 
-        middle_layout.setContentsMargins(1, 0, 1, 5)
+        middle_layout.setContentsMargins(1, 5, 1, 5)
         bottom_layout.setContentsMargins(0, 0, 0, 0)
         bottom_layout.setSpacing(0)
 

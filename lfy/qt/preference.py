@@ -27,7 +27,7 @@ class PreferenceWindow(QMainWindow):
         super().__init__()
         self.sg = Settings()
 
-        self.resize(500, 400)
+        self.resize(500, 300)
         self.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
 
         tw = QTabWidget(self)
@@ -114,6 +114,9 @@ class PreferenceWindow(QMainWindow):
         gb_c = QGroupBox(_("Compare model"))
         hl_c = QHBoxLayout()
         self.ccb = CheckableComboBox()
+        self.ccb.lineEdit().textChanged.connect(
+            lambda: self._cm_servers(self.ccb.checkedItemsStr()))
+
         hl_c.addWidget(self.ccb)
         gb_c.setLayout(hl_c)
         self.vl_normal.addWidget(gb_c)
@@ -266,3 +269,7 @@ class PreferenceWindow(QMainWindow):
     def open_url_o(self):
         url = get_servers_o()[self.cb_o.currentIndex()].get_doc_url()
         QDesktopServices.openUrl(QUrl(url))
+
+    def _cm_servers(self, ns):
+        ss = list(get_servers_t())[1:]
+        self.sg.s("compare-servers", [s.key for s in ss if s.name in ns])
