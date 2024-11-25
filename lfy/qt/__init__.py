@@ -117,9 +117,3 @@ class CheckableComboBox(QComboBox):
         """判断某条目是否被选中"""
         item = self.model().item(index, 0)
         return item.checkState() == Qt.CheckState.Checked
-
-    def showPopup(self):
-        """下拉列表美化"""
-        self.view().setMinimumWidth(self.width())  # 宽度
-        self.view().setMaximumHeight(200)  # 最大高度
-        super().showPopup()

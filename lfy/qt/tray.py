@@ -53,8 +53,8 @@ class TrayIcon(QSystemTrayIcon):
         self.copy2translate()
         tray_menu.addAction(self.auto_action)
 
-        pf_action = QAction(_("Preference"), self)
-        pf_action.triggered.connect(PreferenceWindow(self.cb, self).show)
+        pf_action = QAction(_("Preference") + " Ctrl+,", self)
+        pf_action.triggered.connect(self.open_prf)
         tray_menu.addAction(pf_action)
 
         about_action = QAction(_("About"), self)
@@ -99,6 +99,11 @@ class TrayIcon(QSystemTrayIcon):
             if not self.w.isVisible():
                 self.w.show()
             self.w.translate_text(text)
+
+    def open_prf(self):
+        """_summary_
+        """
+        PreferenceWindow(self.cb, self).show()
 
     def quit_app(self):
         """退出程序
