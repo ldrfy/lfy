@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-11-25 01:58+0800\n"
+"POT-Creation-Date: 2024-11-25 12:33+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -105,7 +105,7 @@ msgstr "VPN地址"
 msgid "Which services are available in compare model"
 msgstr "在比较模式下哪些服务被选中"
 
-#: data/cool.ldr.lfy.in.appdata.xml:11 lfy/qt/tray.py:109
+#: data/cool.ldr.lfy.in.appdata.xml:11 lfy/qt/tray.py:116
 msgid "Translation software for read paper"
 msgstr "为gnome设计的翻译软件"
 
@@ -135,7 +135,7 @@ msgstr "设置密钥"
 msgid "Shortcuts"
 msgstr "显示快捷键"
 
-#: data/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:50
+#: data/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:55
 msgid "About"
 msgstr "关于"
 
@@ -213,13 +213,13 @@ msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
 
-#: lfy/gtk/main.py:173 lfy/qt/tray.py:132 data/gtk/help-overlay.ui:20
+#: lfy/gtk/main.py:173 lfy/qt/tray.py:139 data/gtk/help-overlay.ui:20
 #: data/gtk/help-overlay.ui:27 data/gtk/help-overlay.ui:34
 #: data/gtk/help-overlay.ui:53
 msgid "Copy detected, translate immediately"
 msgstr "检测到复制，立刻翻译"
 
-#: lfy/gtk/main.py:176 lfy/qt/tray.py:138
+#: lfy/gtk/main.py:176 lfy/qt/tray.py:145
 msgid "Copy detected, not automatically translated"
 msgstr "检测到复制，不自动翻译"
 
@@ -239,20 +239,22 @@ msgstr "下次翻译不拼接文本"
 msgid "Next translation splicing text"
 msgstr "下次翻译拼接文本"
 
-#: lfy/gtk/main.py:313
-msgid "There is no new version. The current version is {}."
-msgstr "没有新版本，当前版本为 {}"
-
-#: lfy/gtk/main.py:316
-msgid "You can go to {} to view the beta version."
-msgstr "可前往 {} 查看测试版"
+#: lfy/gtk/main.py:313 lfy/qt/tray.py:178
+msgid ""
+"There is no new version.                      \n"
+"The current version is {}.                      \n"
+"You can go to {} to view the beta version."
+msgstr ""
+"没有新版本\n"
+"当前版本为 {}。\n"
+"可前往 {} 查看测试版"
 
 #: lfy/gtk/preference.py:71 lfy/api/server/tra/com.py:67
 msgid "compare"
 msgstr "对比"
 
 #: lfy/gtk/preference.py:98 lfy/gtk/preference.py:138 lfy/gtk/preference.py:173
-#: lfy/qt/preference.py:202
+#: lfy/qt/preference.py:206
 msgid "It takes effect when you restart lfy"
 msgstr "重新打开lfy时生效"
 
@@ -260,7 +262,7 @@ msgstr "重新打开lfy时生效"
 msgid "The clipboard format is incorrect"
 msgstr "剪贴板文本格式不正确"
 
-#: lfy/gtk/preference.py:114 lfy/qt/preference.py:212
+#: lfy/gtk/preference.py:114 lfy/qt/preference.py:216
 msgid "Configuration data has been exported to the clipboard"
 msgstr "配置数据已导出到剪贴板"
 
@@ -268,12 +270,12 @@ msgstr "配置数据已导出到剪贴板"
 msgid "Using {} for text recognition"
 msgstr "使用 {} 进行文本识别"
 
-#: lfy/gtk/translate.py:225 lfy/qt/translate.py:222
+#: lfy/gtk/translate.py:225 lfy/qt/translate.py:225
 msgid ""
 "This time the content contains private information and is not translated"
 msgstr "本次内容包含隐私信息，不翻译"
 
-#: lfy/gtk/translate.py:278 lfy/gtk/translate.py:311
+#: lfy/gtk/translate.py:278 lfy/gtk/translate.py:311 lfy/qt/translate.py:251
 #: lfy/api/server/tra/baidu.py:40 lfy/api/server/tra/tencent.py:150
 #: lfy/api/server/tra/aliyun.py:98 lfy/api/server/tra/com.py:29
 #: lfy/api/server/tra/huoshan.py:136 lfy/api/server/ocr/baidu.py:143
@@ -318,7 +320,7 @@ msgstr "翻译密钥"
 msgid "how to get API Key"
 msgstr "怎么获取密钥"
 
-#: lfy/qt/preference.py:57 lfy/qt/preference.py:86 lfy/qt/preference.py:126
+#: lfy/qt/preference.py:57 lfy/qt/preference.py:86 lfy/qt/preference.py:129
 msgid "Save"
 msgstr "保存"
 
@@ -342,78 +344,90 @@ msgstr "通知翻译结果"
 msgid "Compare model"
 msgstr "对比模式"
 
-#: lfy/qt/preference.py:121
+#: lfy/qt/preference.py:124
 msgid "vpn addr and port"
 msgstr "VPN地址和端口"
 
-#: lfy/qt/preference.py:133 data/gtk/preference.ui:139
+#: lfy/qt/preference.py:136 data/gtk/preference.ui:139
 msgid "Software settings backup and restore"
 msgstr "软件设置备份和恢复"
 
-#: lfy/qt/preference.py:136 data/gtk/preference.ui:142
+#: lfy/qt/preference.py:139 data/gtk/preference.ui:142
 msgid "backup"
 msgstr "备份"
 
-#: lfy/qt/preference.py:140 data/gtk/preference.ui:151
+#: lfy/qt/preference.py:143 data/gtk/preference.ui:151
 msgid "restore"
 msgstr "恢复"
 
-#: lfy/qt/preference.py:148 data/gtk/preference.ui:103
+#: lfy/qt/preference.py:151 data/gtk/preference.ui:103
 msgid "Other"
 msgstr "其他"
 
-#: lfy/qt/preference.py:197
+#: lfy/qt/preference.py:201
 msgid "No data in the clipboard"
 msgstr ""
 
-#: lfy/qt/translate.py:56 data/gtk/help-overlay.ui:66
+#: lfy/qt/translate.py:58 data/gtk/help-overlay.ui:66
 msgid "Remove line breaks"
 msgstr "移除换行符"
 
-#: lfy/qt/translate.py:58 data/gtk/translate.ui:71
+#: lfy/qt/translate.py:60 data/gtk/translate.ui:71
 msgid "Alt + D: Remove symbols such as line breaks"
 msgstr "Alt + D: 移除换行符"
 
-#: lfy/qt/translate.py:60 data/gtk/help-overlay.ui:59
+#: lfy/qt/translate.py:62 data/gtk/help-overlay.ui:59
 msgid "Splice Text"
 msgstr "拼接文本"
 
-#: lfy/qt/translate.py:62 data/gtk/translate.ui:78
+#: lfy/qt/translate.py:64 data/gtk/translate.ui:78
 msgid "Alt + C: Splice the next copied text with the previous text"
 msgstr "Alt + C: 将下一个复制的文本与上一个文本拼接"
 
-#: lfy/qt/translate.py:64 data/gtk/translate.ui:85 data/gtk/help-overlay.ui:46
+#: lfy/qt/translate.py:66 data/gtk/translate.ui:85 data/gtk/help-overlay.ui:46
 msgid "Translate"
 msgstr "翻译"
 
-#: lfy/qt/tray.py:30
+#: lfy/qt/tray.py:34
 msgid "Open"
 msgstr "打开"
 
-#: lfy/qt/tray.py:37 lfy/qt/tray.py:131 data/gtk/translate.ui:141
+#: lfy/qt/tray.py:38 data/gtk/translate.ui:159
+msgid "Check for updates"
+msgstr "检查更新"
+
+#: lfy/qt/tray.py:43 lfy/qt/tray.py:138 data/gtk/translate.ui:141
 #: data/gtk/help-overlay.ui:52
 msgid "Copy to translate"
 msgstr "复制即翻译"
 
-#: lfy/qt/tray.py:46
+#: lfy/qt/tray.py:51
 msgid "Preference"
 msgstr "设置"
 
-#: lfy/qt/tray.py:54
+#: lfy/qt/tray.py:59
 msgid "Quit"
 msgstr "退出"
 
-#: lfy/qt/tray.py:93
+#: lfy/qt/tray.py:100
 msgid "warn"
 msgstr "警告"
 
-#: lfy/qt/tray.py:93
+#: lfy/qt/tray.py:100
 msgid "quit?"
 msgstr "退出？"
 
-#: lfy/qt/tray.py:137
+#: lfy/qt/tray.py:144
 msgid "Stop copy to translate"
 msgstr "停止复制即翻译"
+
+#: lfy/qt/tray.py:174
+msgid "New version available!"
+msgstr "找到新版本！"
+
+#: lfy/qt/tray.py:182
+msgid "No new version!"
+msgstr "暂无新版本！"
 
 #: lfy/api/server/__init__.py:9
 msgid "Automatic"
@@ -452,7 +466,7 @@ msgid "Italian"
 msgstr "意大利语"
 
 #: lfy/api/server/tra/baidu.py:28 lfy/api/server/tra/tencent.py:127
-#: lfy/api/server/tra/aliyun.py:68 lfy/api/server/tra/huoshan.py:67
+#: lfy/api/server/tra/aliyun.py:67 lfy/api/server/tra/huoshan.py:67
 #: lfy/api/server/ocr/baidu.py:30
 msgid "please input API Key in preference"
 msgstr "请在设置中填写 API Key"
@@ -579,10 +593,6 @@ msgstr "_设置"
 msgid "_Keyboard Shortcuts"
 msgstr "_快捷键"
 
-#: data/gtk/translate.ui:159
-msgid "_Check for updates"
-msgstr "_检查更新"
-
 #: data/gtk/translate.ui:163
 msgid "_About lfy"
 msgstr "_关于 兰译"
@@ -658,3 +668,9 @@ msgstr "退出"
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "显示快捷键"
+
+#~ msgid "There is no new version. The current version is {}."
+#~ msgstr "没有新版本，当前版本为 {}"
+
+#~ msgid "You can go to {} to view the beta version."
+#~ msgstr "可前往 {} 查看测试版"

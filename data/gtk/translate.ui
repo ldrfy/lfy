@@ -156,7 +156,7 @@
       </item>
       <item>
         <attribute name="action">app.find_update</attribute>
-        <attribute name="label" translatable="yes">_Check for updates</attribute>
+        <attribute name="label" translatable="yes">Check for updates</attribute>
       </item>
       <item>
         <attribute name="action">app.about</attribute>
