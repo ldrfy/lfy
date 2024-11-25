@@ -3,7 +3,7 @@ import traceback
 from gettext import gettext as _
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QKeyEvent
+from PyQt6.QtGui import QKeyEvent, QKeySequence, QShortcut
 from PyQt6.QtWidgets import (QCheckBox, QComboBox, QHBoxLayout, QMainWindow,
                              QPushButton, QSplitter, QSystemTrayIcon,
                              QVBoxLayout, QWidget)
@@ -120,16 +120,27 @@ class TranslateWindow(QMainWindow):
         self.cb_lang.setCurrentIndex(j)
         self.cb_del_wrapping.setChecked(True)
 
-    def keyPressEvent(self, event: QKeyEvent):
-        """监听键盘
+        self.sts(["Alt+D", "Alt+C", "Ctrl+T", "Ctrl+,"],
+                 [self._del_wrapping, self._add_old, self.update_translate, self._open_prf])
+
+    def sts(self, keys, fs):
+        """批量快捷键
 
         Args:
-            event (QKeyEvent): _description_
+            keys (_type_): _description_
+            fs (_type_): _description_
         """
-        if event.key() == Qt.Key.Key_T and event.modifiers() == Qt.KeyboardModifier.ControlModifier:
-            self.update_translate()
-        else:
-            super().keyPressEvent(event)
+        for k, f in zip(keys, fs):
+            QShortcut(QKeySequence(k), self).activated.connect(f)
+
+    def _add_old(self):
+        self.cb_add_old.setChecked(not self.cb_add_old.isChecked())
+
+    def _del_wrapping(self):
+        self.cb_del_wrapping.setChecked(not self.cb_del_wrapping.isChecked())
+
+    def _open_prf(self):
+        self.tray.open_prf()
 
     def _on_server_changed(self):
         if not self.jn:
