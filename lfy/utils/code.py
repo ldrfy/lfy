@@ -82,9 +82,8 @@ def req_text(s, key_server="", key_lang_n=-1):
 
     except Exception as e:  # pylint: disable=W0718
         get_logger().error(e)
-        error_msg = _("something error:")
-        error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
-        return f"{error_msg}{server.name}\n\n{error_msg2}"
+        return _("something error: {}")\
+            .format(f"{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
 
 
 def req_ocr(s=None, key_server=None, key_lang_n=-1):
@@ -116,9 +115,8 @@ def req_ocr(s=None, key_server=None, key_lang_n=-1):
 
     except Exception as e:  # pylint: disable=W0718
         get_logger().error(e)
-        error_msg = _("something error:")
-        error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
-        return f"{error_msg}{server.name}\n\n{error_msg2}"
+        return _("something error: {}")\
+            .format(f"{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
 
 
 def parse_lfy():

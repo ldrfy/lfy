@@ -15,6 +15,12 @@ from lfy.utils.settings import Settings
 
 
 class TrayIcon(QSystemTrayIcon):
+    """托盘图标
+
+    Args:
+        QSystemTrayIcon (_type_): _description_
+    """
+
     def __init__(
         self,
         parent,
@@ -22,7 +28,6 @@ class TrayIcon(QSystemTrayIcon):
         icon
     ) -> None:
         QSystemTrayIcon.__init__(self, icon, parent)
-        # QSystemTrayIcon also tries to save parent info but it screws up the type info
         self.w: TranslateWindow = parent
         self.app: QApplication = app
         self.setToolTip(APP_NAME)
@@ -49,7 +54,7 @@ class TrayIcon(QSystemTrayIcon):
         tray_menu.addAction(self.auto_action)
 
         pf_action = QAction(_("Preference"), self)
-        pf_action.triggered.connect(self.show_setting_window)
+        pf_action.triggered.connect(PreferenceWindow(self.cb, self).show)
         tray_menu.addAction(pf_action)
 
         about_action = QAction(_("About"), self)
@@ -65,7 +70,8 @@ class TrayIcon(QSystemTrayIcon):
         self.img_md5 = ""
         self.text_last = ""
         self.my_thread = None
-        self.find_update()
+        if self.sg.g("auto-check-update"):
+            self.find_update()
 
     def _on_clipboard_data_changed(self):
 
@@ -101,8 +107,8 @@ class TrayIcon(QSystemTrayIcon):
                                  QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
                                  QMessageBox.StandardButton.No)
         if re == QMessageBox.StandardButton.Yes:
-            self.setVisible(False)  # 隐藏托盘控件，托盘图标刷新不及时，提前隐藏
-            self.app.quit()  # 退出程序
+            self.setVisible(False)
+            self.app.quit()
 
     def show_about_window(self):
         """关于窗口
@@ -120,14 +126,6 @@ class TrayIcon(QSystemTrayIcon):
             "About",
             s
         )
-
-    def show_setting_window(self):
-        self.prf = PreferenceWindow(self.cb, self)
-        self.prf.show()
-
-    def show_msg(self, title, msg):
-        self.showMessage(
-            title, msg, QSystemTrayIcon.MessageIcon.Information, 2000)
 
     def copy2translate(self):
         """复制即翻译可以选择暂停，并且会记住选择
@@ -171,17 +169,22 @@ class TrayIcon(QSystemTrayIcon):
             update_msg = check_update()
             if update_msg is not None:
                 time.sleep(2)
-                return (_("New version available!"), update_msg, QSystemTrayIcon.MessageIcon.Warning)
+                return (_("New version available!"),
+                        update_msg, QSystemTrayIcon.MessageIcon.Warning)
 
             if not auto:
                 # 手动更新
                 s = _("There is no new version.\
                       \nThe current version is {}.\
                       \nYou can go to {} to view the beta version.")\
-                      .format(VERSION, PACKAGE_URL)
-                return (_("No new version!"), s, QSystemTrayIcon.MessageIcon.Critical)
+                    .format(VERSION, PACKAGE_URL)
+                return (_("No new version!"), s,
+                        QSystemTrayIcon.MessageIcon.Critical)
             return (None, None, None)
-        if self.sg.g("auto-check-update"):
-            self.my_thread = MyThread(fu)
-            self.my_thread.signal.connect(self.update_app)
-            self.my_thread.start()
+
+        self.my_thread = MyThread(fu)
+        self.my_thread.signal.connect(self.update_app)
+        self.my_thread.start()
+
+        if not auto:
+            self.w.te_from.setPlainText(_("Check for updates") + "...")

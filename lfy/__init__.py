@@ -25,7 +25,10 @@ try:
     locale.bindtextdomain(APP_ID, LOCALE_DIR)
     locale.textdomain(APP_ID)
 except AttributeError as e:
-    print(f"Some gettext translations will not work. Error:\n{e}")
+    print(f"Some gettext/locale translations will not work. Error:\n{e}")
 
-gettext.bindtextdomain(APP_ID, LOCALE_DIR)
-gettext.textdomain(APP_ID)
+try:
+    gettext.bindtextdomain(APP_ID, LOCALE_DIR)
+    gettext.textdomain(APP_ID)
+except AttributeError as e:
+    print(f"Some gettext translations will not work. Error:\n{e}")

@@ -133,11 +133,9 @@ def _translate(session, s, api_key_s, lang_to="en", lang_from="auto"):
         headers=header, data=json.dumps(request_body), timeout=TIME_OUT
     ).json()
 
-    error_msg = _("something error:")
-
     if "Error" in res["ResponseMetadata"]:
         rmd = res["ResponseMetadata"]["Error"]
-        return False, f'{error_msg}\n\n{rmd["Code"]}: {rmd["Message"]}'
+        return False, _("something error: {}").format(f'\n\n{rmd["Code"]}: {rmd["Message"]}')
 
     translation_list = res.get("TranslationList", [])
     if translation_list:
@@ -176,7 +174,8 @@ class HuoShanServer(Server):
             bool: _description_
         """
         error_msg_template = _("please input {} and {} like:")
-        error_msg = error_msg_template.format("Access Key ID", "Secret Access Key")
+        error_msg = error_msg_template.format(
+            "Access Key ID", "Secret Access Key")
         if "|" not in api_key_s:
             return False, error_msg + " LTAI5tQiXnC6ffwfe | rWPiBuk1xdwwdfafwefwef"
         ok, text = _translate(self.session, "success", api_key_s)
