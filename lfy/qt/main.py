@@ -8,12 +8,19 @@ from lfy import APP_ID
 from lfy.qt.translate import TranslateWindow
 from lfy.qt.tray import TrayIcon
 from lfy.utils.code import parse_lfy
+from lfy.utils.settings import Settings
+
+# 设置代理地址和端口号
+PROXY_ADDRESS = Settings().g("vpn-addr-port")
+if len(PROXY_ADDRESS) > 0:
+    # 设置环境变量
+    os.environ['http_proxy'] = PROXY_ADDRESS
+    os.environ['https_proxy'] = PROXY_ADDRESS
 
 
 def main():
     """_summary_
     """
-    os.environ[f'{APP_ID}.ui'] = 'qt'
 
     parse_lfy()
 

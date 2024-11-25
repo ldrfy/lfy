@@ -1,8 +1,13 @@
 '自定义部件'
+import os
 import time
 
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from PyQt6.QtWidgets import QComboBox, QLineEdit, QPlainTextEdit
+
+from lfy import APP_ID
+
+os.environ[f'{APP_ID}.ui'] = 'qt'
 
 
 class MyPlainTextEdit(QPlainTextEdit):
