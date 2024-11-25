@@ -26,9 +26,8 @@ def _translate(args):
         a, b = server.translate_text(text, lang_to, lang_from)
         return a, b, server, time.time()-st
     except Exception as e:  # pylint: disable=W0718
-        em = _("something error:")
-        em = f"{em}{server.name}\n\n"
-        em = f"{em}{str(e)}\n\n{traceback.format_exc()}"
+        em = _("something error: {}")\
+            .format(f"{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
         get_logger().error(e)
         return False, em, server, time.time()-st
 

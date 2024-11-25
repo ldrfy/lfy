@@ -37,14 +37,14 @@ def _translate(session, s, api_key_s, lang_to="auto", lang_from="auto"):
 
     result = session.get(url, timeout=TIME_OUT).json()
 
-    error_msg = _("something error:")
     if "error_code" not in result:
         s1 = ""
         for trans_result in result["trans_result"]:
             s1 += f'{trans_result["dst"]}\n'
         return True, s1.strip()
 
-    return False, f'{error_msg}\n\n{result["error_code"]}: {result["error_msg"]}'
+    return False, _("something error: {}")\
+        .format(f'\n\n{result["error_code"]}: {result["error_msg"]}')
 
 
 class BaiduServer(Server):

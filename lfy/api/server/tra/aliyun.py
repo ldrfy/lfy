@@ -95,8 +95,8 @@ def _translate(session, s, api_key_s, lang_to="en", lang_from="auto"):
     if result["Code"] == "200":
         return True, result["Data"]["Translated"]
 
-    error_msg = _("something error:")
-    return False, f'{error_msg}\n\n{result["Code"]}: {result["Message"]}'
+    return False, _("something error: {}")\
+        .format(f'{result["Code"]}: {result["Message"]}')
 
 
 class AliYunServer(Server):

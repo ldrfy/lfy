@@ -140,8 +140,8 @@ class BaiduServer(Server):
         if "error_code" in res:
             if 110 == res["error_code"]:
                 Settings().s("ocr-baidu-token", "")
-            error_msg = _("something error:")
-            return False, f'{error_msg}\n\n{res["error_code"]}: {res["error_msg"]}'
+            return False, _("something error: {}")\
+                .format(f'\n\n{res["error_code"]}: {res["error_msg"]}')
 
         for word in res["words_result"]:
             s += word["words"] + '\n'

@@ -147,7 +147,7 @@ class TencentServer(Server):
 
         result = request.json()["Response"]
         if "Error" in result:
-            error_msg = _("something error:")
-            return False, f'{error_msg}\n\n{result["Error"]["Code"]}: {result["Error"]["Message"]}'
+            return False, _("something error: {}")\
+                .format(f'\n\n{result["Error"]["Code"]}: {result["Error"]["Message"]}')
 
         return True, result["TargetText"]

@@ -275,9 +275,8 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         except Exception as e:  # pylint: disable=W0718
             get_logger().error(e)
-            error_msg = _("something error:")
-            error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
-            text = f"{error_msg}{server.name}\n\n{error_msg2}"
+            text = _("something error: {}")\
+                .format(f"{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
         GLib.idle_add(self.update_ui, text, is_ocr)
 
     def update_ui(self, s="", ocr=False):
@@ -291,9 +290,9 @@ class TranslateWindow(Adw.ApplicationWindow):
             # 开始翻译
             self.sp_translate.start()
             if ocr:
-                self.tv_from.get_buffer().set_text(_("OCRing.."))
+                self.tv_from.get_buffer().set_text(_("OCRing..."))
             else:
-                self.tv_to.get_buffer().set_text(_("Translating.."))
+                self.tv_to.get_buffer().set_text(_("Translating..."))
             return
 
         # 翻译完成
@@ -308,9 +307,8 @@ class TranslateWindow(Adw.ApplicationWindow):
                  _("Translation completed"), s)
         except TypeError as e:
             get_logger().error(e)
-            error_msg = _("something error:")
-            error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
-            em = f"{error_msg}\n\n{error_msg2}"
+            em = _("something error: {}")\
+                .format(f"\n\n{str(e)}\n\n{traceback.format_exc()}")
             self.tv_to.get_buffer().set_text(em)
         self.sp_translate.stop()
 

@@ -177,23 +177,25 @@ class TranslateWindow(QMainWindow):
             _type_: _description_
         """
         def oo(_p=None):
-            _ok, text_from = self.server_o.ocr_image(img_path)
+            try:
+                _ok, text_from = self.server_o.ocr_image(img_path)
+            except Exception as e:  # pylint: disable=W0718
+                get_logger().error(e)
+                text_from = f"OCR error: {self.server_o.name}\
+                    \n\n{str(e)}\n\n{traceback.format_exc()}"
+                _ok = False
             return (_ok, text_from)
 
         def next_(param):
             _ok, s = param
-            if not _ok:
-                self.set_text_from_to((s, "文本识别失败！"))
-                return
-            self.set_text_from_to((s, "文本识别成功！"))
-            self.update_translate()
+            self.translate_text(s)
 
-        self.set_text_from_to(("识别中...", "识别中..."))
+        self.set_text_from_to((_("OCRing..."), _("OCRing...")), True)
         self.my_thread = MyThread(oo)
         self.my_thread.signal.connect(next_)
         self.my_thread.start()
 
-    def set_text_from_to(self, text):
+    def set_text_from_to(self, text, loading=False):
         """_summary_
 
         Args:
@@ -203,9 +205,11 @@ class TranslateWindow(QMainWindow):
         self.te_from.setPlainText(text_from)
         self.te_to.setPlainText(text_to)
 
-        if "..." != text_to[-3:]:
+        if not loading:
             if self.sg.g("notify-translation-results", d=True, t=bool):
-                self.tray.show_msg("翻译成功！", text_to)
+                self.tray.showMessage(_("Translation completed"), text_to,
+                                      QSystemTrayIcon.MessageIcon.Information, 2000)
+
             self.text_last = text_from
             self.my_thread.clean_up()
 
@@ -228,8 +232,8 @@ class TranslateWindow(QMainWindow):
             if ntt in text_from:
                 ss_ntt.append(ntt)
         if len(ss_ntt) > 0:
-            self.tray.showMessage(
-                "no", f"{s_ntt}:\n{str(ss_ntt)}", QSystemTrayIcon.MessageIcon.Warning, 3000)
+            self.tray.showMessage("no", f"{s_ntt}:\n{str(ss_ntt)}",
+                                  QSystemTrayIcon.MessageIcon.Warning, 3000)
 
             return
 
@@ -248,12 +252,11 @@ class TranslateWindow(QMainWindow):
                     text_from, self.lang_t.key)
             except Exception as e:  # pylint: disable=W0718
                 get_logger().error(e)
-                error_msg = _("something error:")
-                error_msg2 = f"{str(e)}\n\n{traceback.format_exc()}"
-                text_to = f"{error_msg}{self.server_t.name}\n\n{error_msg2}"
+                text_to = _("something error: {}")\
+                    .format(f"{self.server_t.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
             return (text_from, text_to)
 
-        self.set_text_from_to((text_from, "翻译中..."))
+        self.set_text_from_to((text_from, _("Translating...")), True)
 
         self.my_thread = MyThread(tt)
         self.my_thread.signal.connect(self.set_text_from_to)
