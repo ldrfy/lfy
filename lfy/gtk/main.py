@@ -310,10 +310,10 @@ class LfyApplication(Adw.Application):
                 GLib.idle_add(self.update_app, update_msg)
             elif _widget is not None:
                 # 手动更新
-                s = _("There is no new version. The current version is {}.").format(
-                    VERSION)
-                s += "\n"
-                s += _("You can go to {} to view the beta version.").format(PACKAGE_URL)
+                s = _("There is no new version.\
+                      \nThe current version is {}.\
+                      \nYou can go to {} to view the beta version.")\
+                      .format(VERSION, PACKAGE_URL)
                 GLib.idle_add(self.update_app, s)
 
         if Settings().g("auto-check-update"):
