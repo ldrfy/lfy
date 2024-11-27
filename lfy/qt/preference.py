@@ -28,7 +28,8 @@ class PreferenceWindow(QMainWindow):
         self.sg = Settings()
 
         self.resize(500, 300)
-        self.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
+        self.setWindowFlags(self.windowFlags() |
+                            Qt.WindowType.WindowStaysOnTopHint)
 
         tw = QTabWidget(self)
         self.cb = clipboard

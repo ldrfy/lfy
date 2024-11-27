@@ -3,7 +3,7 @@ import traceback
 from gettext import gettext as _
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QKeyEvent, QKeySequence, QShortcut
+from PyQt6.QtGui import QKeySequence, QShortcut
 from PyQt6.QtWidgets import (QCheckBox, QComboBox, QHBoxLayout, QMainWindow,
                              QPushButton, QSplitter, QSystemTrayIcon,
                              QVBoxLayout, QWidget)
@@ -29,8 +29,9 @@ class TranslateWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        self.setWindowFlags(self.windowFlags() |
+                            Qt.WindowType.WindowStaysOnTopHint)
 
-        self.setWindowTitle(_(APP_NAME))
         self.setGeometry(100, 100, 600, 400)
         # 创建中心部件
         central_widget = QWidget(self)

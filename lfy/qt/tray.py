@@ -30,7 +30,6 @@ class TrayIcon(QSystemTrayIcon):
         QSystemTrayIcon.__init__(self, icon, parent)
         self.w: TranslateWindow = parent
         self.app: QApplication = app
-        self.setToolTip(APP_NAME)
         self.sg = Settings()
         self.cb: QClipboard = self.app.clipboard()
 
@@ -118,17 +117,17 @@ class TrayIcon(QSystemTrayIcon):
     def show_about_window(self):
         """关于窗口
         """
-        s = f'''<h3>{APP_NAME}</h3>
+        s = f'''<h3>{_(APP_NAME)}</h3>
             <p>{VERSION}</p>
-            <p><a href="{PACKAGE_URL}">home</a> < /p >
-            <p><a href="{PACKAGE_URL_BUG}">bug report</a></p>
+            <p><a href="{PACKAGE_URL}">Home</a> < /p >
+            <p><a href="{PACKAGE_URL_BUG}">Bug Report</a></p>
             <p>&copy; 2024 yuhldr</p>
             <p>'''
         s += _("Translation software for read paper")
         s += "</p>"
         QMessageBox.about(
             self.w,
-            "About",
+            _("About"),
             s
         )
 
