@@ -37,7 +37,7 @@ def main():
     app.setApplicationName(_(APP_NAME))
     app.setDesktopFileName(APP_ID)
 
-    window = TranslateWindow()
+    window = TranslateWindow(app)
     tray = TrayIcon(window, app, icon)
     tray.show()
     window.tray = tray

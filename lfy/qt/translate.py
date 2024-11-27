@@ -4,11 +4,10 @@ from gettext import gettext as _
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QKeySequence, QShortcut
-from PyQt6.QtWidgets import (QCheckBox, QComboBox, QHBoxLayout, QMainWindow,
-                             QPushButton, QSplitter, QSystemTrayIcon,
-                             QVBoxLayout, QWidget)
+from PyQt6.QtWidgets import (QApplication, QCheckBox, QComboBox, QHBoxLayout,
+                             QMainWindow, QMessageBox, QPushButton, QSplitter,
+                             QSystemTrayIcon, QVBoxLayout, QWidget)
 
-from lfy import APP_NAME
 from lfy.api import (create_server_o, create_server_t, get_lang,
                      get_lang_names, get_server_names_t, get_server_t,
                      lang_n2j, server_key2i)
@@ -27,8 +26,10 @@ class TranslateWindow(QMainWindow):
         QMainWindow (_type_): _description_
     """
 
-    def __init__(self):
+    def __init__(self, app):
         super().__init__()
+        self.app: QApplication = app
+
         self.setWindowFlags(self.windowFlags() |
                             Qt.WindowType.WindowStaysOnTopHint)
 
@@ -121,8 +122,9 @@ class TranslateWindow(QMainWindow):
         self.cb_lang.setCurrentIndex(j)
         self.cb_del_wrapping.setChecked(True)
 
-        self.sts(["Alt+D", "Alt+C", "Ctrl+T", "Ctrl+,"],
-                 [self._del_wrapping, self._add_old, self.update_translate, self._open_prf])
+        self.sts(["Alt+D", "Alt+C", "Ctrl+T", "Ctrl+,", "Ctrl+Q", "Ctrl+H"],
+                 [self._del_wrapping, self._add_old, self.update_translate,
+                  self._open_prf, self._quit_app, self.hide])
 
     def sts(self, keys, fs):
         """批量快捷键
@@ -133,6 +135,15 @@ class TranslateWindow(QMainWindow):
         """
         for k, f in zip(keys, fs):
             QShortcut(QKeySequence(k), self).activated.connect(f)
+
+    def _quit_app(self):
+
+        re = QMessageBox.warning(self, _("warn"), _("quit?"),
+                                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                                 QMessageBox.StandardButton.No)
+        if re == QMessageBox.StandardButton.Yes:
+            self.setVisible(False)
+            self.app.quit()
 
     def _add_old(self):
         self.cb_add_old.setChecked(not self.cb_add_old.isChecked())

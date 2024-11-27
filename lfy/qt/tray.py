@@ -61,7 +61,7 @@ class TrayIcon(QSystemTrayIcon):
         tray_menu.addAction(about_action)
 
         quit_action = QAction(_("Quit"), self)
-        quit_action.triggered.connect(self.quit_app)
+        quit_action.triggered.connect(self.app.quit)
         tray_menu.addAction(quit_action)
 
         self.setContextMenu(tray_menu)
@@ -103,16 +103,6 @@ class TrayIcon(QSystemTrayIcon):
         """_summary_
         """
         PreferenceWindow(self.cb, self).show()
-
-    def quit_app(self):
-        """退出程序
-        """
-        re = QMessageBox.warning(self.w, _("warn"), _("quit?"),
-                                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-                                 QMessageBox.StandardButton.No)
-        if re == QMessageBox.StandardButton.Yes:
-            self.setVisible(False)
-            self.app.quit()
 
     def show_about_window(self):
         """关于窗口
