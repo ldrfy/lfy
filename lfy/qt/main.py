@@ -21,10 +21,13 @@ if len(PROXY_ADDRESS) > 0:
 
 
 def main():
-    """_summary_
+    """qt版本入口
     """
 
-    parse_lfy()
+    s = parse_lfy()
+    if s:
+        print(s)
+        return
 
     app = QApplication(sys.argv)
 

@@ -321,9 +321,13 @@ class LfyApplication(Adw.Application):
 
 
 def main():
+    """gtk版本入口
+    """
     os.environ[f'{APP_ID}.ui'] = 'gtk'
 
-    parse_lfy()
-
+    s = parse_lfy()
+    if s:
+        print(s)
+        return
 
     sys.exit(LfyApplication(APP_ID, VERSION).run(sys.argv))

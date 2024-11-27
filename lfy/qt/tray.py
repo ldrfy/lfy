@@ -60,7 +60,7 @@ class TrayIcon(QSystemTrayIcon):
         about_action.triggered.connect(self.show_about_window)
         tray_menu.addAction(about_action)
 
-        quit_action = QAction(_("Quit"), self)
+        quit_action = QAction(_("Quit") + " Ctrl+Q", self)
         quit_action.triggered.connect(self.app.quit)
         tray_menu.addAction(quit_action)
 

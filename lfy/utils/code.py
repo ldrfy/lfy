@@ -141,8 +141,7 @@ def parse_lfy():
     args = parser.parse_args()
 
     if args.t:
-        print(req_text(args.t, args.s, args.l))
-        return
+        return req_text(args.t, args.s, args.l)
     if args.o:
-        print(req_ocr(args.o, args.s, args.l))
-        return
+        return req_ocr(args.o, args.s, args.l)
+    return None
