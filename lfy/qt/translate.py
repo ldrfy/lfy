@@ -282,7 +282,7 @@ class TranslateWindow(QMainWindow):
             text_from = process_text(text_from)
 
         if self.cb_add_old.isChecked():
-            text_from = self.text_last + text_from
+            text_from = self.text_last + " " + text_from
 
         if not text_from:
             return
