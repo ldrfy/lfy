@@ -5,15 +5,16 @@ from gettext import gettext as _
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QKeySequence, QShortcut
 from PyQt6.QtWidgets import (QApplication, QCheckBox, QComboBox, QHBoxLayout,
-                             QMainWindow, QMessageBox, QPushButton, QSplitter,
-                             QSystemTrayIcon, QVBoxLayout, QWidget)
+                             QMainWindow, QMessageBox, QPlainTextEdit,
+                             QPushButton, QSplitter, QSystemTrayIcon,
+                             QVBoxLayout, QWidget)
 
 from lfy.api import (create_server_o, create_server_t, get_lang,
                      get_lang_names, get_server_names_t, get_server_t,
                      lang_n2j, server_key2i)
 from lfy.api.constant import NO_TRANSLATED_TXTS
 from lfy.api.server import Server
-from lfy.qt import MyPlainTextEdit, MyThread
+from lfy.qt import MyThread
 from lfy.utils import process_text
 from lfy.utils.debug import get_logger
 from lfy.utils.settings import Settings
@@ -43,7 +44,7 @@ class TranslateWindow(QMainWindow):
         splitter = QSplitter(Qt.Orientation.Vertical, self)
 
         # 上面的文本编辑框
-        self.te_from = MyPlainTextEdit(self)
+        self.te_from = QPlainTextEdit(self)
 
         # 中间的布局（包含选择按钮和普通按钮）
         middle_widget = QWidget(self)
@@ -75,7 +76,7 @@ class TranslateWindow(QMainWindow):
         middle_layout.addWidget(self.cb_add_old)
         middle_layout.addWidget(btn_translate)
         # 下面的文本编辑框
-        self.te_to = MyPlainTextEdit(self)
+        self.te_to = QPlainTextEdit(self)
 
         bottom_layout.addWidget(middle_widget)
         bottom_layout.addWidget(self.te_to)
@@ -95,6 +96,7 @@ class TranslateWindow(QMainWindow):
         self.my_thread = None
         self.tray: QSystemTrayIcon = None
         self.text_last = ""
+        self.translate_next = True
 
         self.set_data()
 
@@ -122,9 +124,21 @@ class TranslateWindow(QMainWindow):
         self.cb_lang.setCurrentIndex(j)
         self.cb_del_wrapping.setChecked(True)
 
-        self.sts(["Alt+D", "Alt+C", "Ctrl+T", "Ctrl+,", "Ctrl+Q", "Ctrl+H"],
-                 [self._del_wrapping, self._add_old, self.update_translate,
-                  self._open_prf, self._quit_app, self.hide])
+        self.sts(["CTRL+SHIFT+C", "Alt+D", "Alt+C", "Ctrl+T",
+                  "Ctrl+,", "Ctrl+Q", "Ctrl+H"],
+                 [self._copy_text, self._del_wrapping, self._add_old,
+                  self.update_translate, self._open_prf, self._quit_app,
+                  self.hide])
+
+    def _copy_text(self):
+        """复制，但是不进行翻译
+        """
+        if self.te_from.hasFocus() and self.te_from.textCursor().hasSelection():
+            self.translate_next = False
+            self.te_from.copy()
+        elif self.te_to.hasFocus() and self.te_to.textCursor().hasSelection():
+            self.translate_next = False
+            self.te_to.copy()
 
     def sts(self, keys, fs):
         """批量快捷键
@@ -247,6 +261,10 @@ class TranslateWindow(QMainWindow):
         Returns:
             _type_: _description_
         """
+        if not self.translate_next:
+            self.translate_next = True
+            return
+        self.translate_next = True
 
         s_ntt = _(
             "This time the content contains private information and is not translated")

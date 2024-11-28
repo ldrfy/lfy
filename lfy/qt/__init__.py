@@ -3,31 +3,11 @@ import os
 import time
 
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
-from PyQt6.QtWidgets import QComboBox, QLineEdit, QPlainTextEdit
+from PyQt6.QtWidgets import QComboBox, QLineEdit
 
 from lfy import APP_ID
 
 os.environ[f'{APP_ID}.ui'] = 'qt'
-
-
-class MyPlainTextEdit(QPlainTextEdit):
-    """禁止复制响应
-
-    Args:
-        QPlainTextEdit (_type_): _description_
-    """
-
-    def keyPressEvent(self, event):
-        """内部的ctrl c不要响应
-
-        Args:
-            event (_type_): _description_
-        """
-        if event.modifiers() == Qt.KeyboardModifier.ControlModifier and event.key() == Qt.Key.Key_C:
-            # 阻止事件传播，防止触发 QClipboard 的复制
-            event.accept()
-        else:
-            super().keyPressEvent(event)
 
 
 class MyThread(QThread):
