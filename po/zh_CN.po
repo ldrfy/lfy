@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-11-25 18:33+0800\n"
+"POT-Creation-Date: 2024-11-28 20:14+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -41,7 +41,6 @@ msgid "theme"
 msgstr "主题"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:27
-#, fuzzy
 msgid "The currently selected OCR service"
 msgstr "当前选定的翻译服务"
 
@@ -135,7 +134,7 @@ msgstr "设置密钥"
 msgid "Shortcuts"
 msgstr "显示快捷键"
 
-#: data/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:60
+#: data/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:58 lfy/qt/tray.py:126
 msgid "About"
 msgstr "关于"
 
@@ -254,7 +253,6 @@ msgid "compare"
 msgstr "对比"
 
 #: lfy/gtk/preference.py:98 lfy/gtk/preference.py:138 lfy/gtk/preference.py:173
-#: lfy/qt/preference.py:206
 msgid "It takes effect when you restart lfy"
 msgstr "重新打开lfy时生效"
 
@@ -262,7 +260,7 @@ msgstr "重新打开lfy时生效"
 msgid "The clipboard format is incorrect"
 msgstr "剪贴板文本格式不正确"
 
-#: lfy/gtk/preference.py:114 lfy/qt/preference.py:216
+#: lfy/gtk/preference.py:114
 msgid "Configuration data has been exported to the clipboard"
 msgstr "配置数据已导出到剪贴板"
 
@@ -270,12 +268,12 @@ msgstr "配置数据已导出到剪贴板"
 msgid "Using {} for text recognition"
 msgstr "使用 {} 进行文本识别"
 
-#: lfy/gtk/translate.py:225 lfy/qt/translate.py:229
+#: lfy/gtk/translate.py:225 lfy/qt/translate.py:276
 msgid ""
 "This time the content contains private information and is not translated"
 msgstr "本次内容包含隐私信息，不翻译"
 
-#: lfy/gtk/translate.py:278 lfy/gtk/translate.py:310 lfy/qt/translate.py:255
+#: lfy/gtk/translate.py:278 lfy/gtk/translate.py:310 lfy/qt/translate.py:303
 #: lfy/api/server/tra/baidu.py:46 lfy/api/server/tra/tencent.py:150
 #: lfy/api/server/tra/aliyun.py:98 lfy/api/server/tra/com.py:29
 #: lfy/api/server/tra/huoshan.py:138 lfy/api/server/ocr/baidu.py:143
@@ -283,15 +281,15 @@ msgstr "本次内容包含隐私信息，不翻译"
 msgid "something error: {}"
 msgstr "一些错误发生："
 
-#: lfy/gtk/translate.py:293 lfy/qt/translate.py:193
+#: lfy/gtk/translate.py:293 lfy/qt/translate.py:236
 msgid "OCRing..."
 msgstr "OCR识别中.."
 
-#: lfy/gtk/translate.py:295 lfy/qt/translate.py:259
+#: lfy/gtk/translate.py:295 lfy/qt/translate.py:307
 msgid "Translating..."
 msgstr "翻译中……"
 
-#: lfy/gtk/translate.py:307 lfy/qt/translate.py:210
+#: lfy/gtk/translate.py:307 lfy/qt/translate.py:253
 msgid "Translation completed"
 msgstr "翻译完成"
 
@@ -311,111 +309,154 @@ msgstr "错误信息"
 msgid "Confirm"
 msgstr "确认"
 
-#: lfy/qt/preference.py:41 data/gtk/preference.ui:17
+#: lfy/qt/preference.py:42 data/gtk/preference.ui:17
 msgid "Translation keys"
 msgstr "翻译密钥"
 
-#: lfy/qt/preference.py:53 lfy/qt/preference.py:82
+#: lfy/qt/preference.py:54 lfy/qt/preference.py:83
 #: data/gtk/server-preferences.ui:47
 msgid "how to get API Key"
 msgstr "怎么获取密钥"
 
-#: lfy/qt/preference.py:57 lfy/qt/preference.py:86 lfy/qt/preference.py:129
+#: lfy/qt/preference.py:58 lfy/qt/preference.py:87 lfy/qt/preference.py:130
 msgid "Save"
 msgstr "保存"
 
-#: lfy/qt/preference.py:68 data/gtk/preference.ui:47
+#: lfy/qt/preference.py:69 data/gtk/preference.ui:47
 msgid "OCR server"
 msgstr "OCR服务"
 
-#: lfy/qt/preference.py:95 data/gtk/preference.ui:10
+#: lfy/qt/preference.py:96 data/gtk/preference.ui:10
 msgid "General"
 msgstr "通用"
 
-#: lfy/qt/preference.py:100 data/gtk/preference.ui:110
+#: lfy/qt/preference.py:101 data/gtk/preference.ui:110
 msgid "auto check update"
 msgstr "自动检查更新"
 
-#: lfy/qt/preference.py:107 data/gtk/preference.ui:117
+#: lfy/qt/preference.py:108 data/gtk/preference.ui:117
 msgid "Notify translation results"
 msgstr "通知翻译结果"
 
-#: lfy/qt/preference.py:114 data/gtk/preference.ui:76
+#: lfy/qt/preference.py:115 data/gtk/preference.ui:76
 msgid "Compare model"
 msgstr "对比模式"
 
-#: lfy/qt/preference.py:124
+#: lfy/qt/preference.py:125
 msgid "vpn addr and port"
 msgstr "VPN地址和端口"
 
-#: lfy/qt/preference.py:136 data/gtk/preference.ui:139
+#: lfy/qt/preference.py:137 data/gtk/preference.ui:139
 msgid "Software settings backup and restore"
 msgstr "软件设置备份和恢复"
 
-#: lfy/qt/preference.py:139 data/gtk/preference.ui:142
+#: lfy/qt/preference.py:140 data/gtk/preference.ui:142
 msgid "backup"
 msgstr "备份"
 
-#: lfy/qt/preference.py:143 data/gtk/preference.ui:151
+#: lfy/qt/preference.py:142 data/gtk/preference.ui:153
+msgid ""
+"Read the JSON configuration of the clipboard, then import it, and some of "
+"the configurations will take effect after reopening the software"
+msgstr "读取剪贴板的json配置，然后导入，部分配置重新打开软件以后生效"
+
+#: lfy/qt/preference.py:146 data/gtk/preference.ui:151
 msgid "restore"
 msgstr "恢复"
 
-#: lfy/qt/preference.py:151 data/gtk/preference.ui:103
+#: lfy/qt/preference.py:148 data/gtk/preference.ui:144
+msgid ""
+"Export the configuration to the clipboard, then you can paste it into any "
+"file and edit it"
+msgstr "将配置导出到剪贴板，然后您可以将其粘贴到任何文件中并编辑"
+
+#: lfy/qt/preference.py:156 data/gtk/preference.ui:103
 msgid "Other"
 msgstr "其他"
 
-#: lfy/qt/preference.py:201
-msgid "No data in the clipboard"
-msgstr ""
+#: lfy/qt/preference.py:209
+msgid "Import successful!"
+msgstr "导入成功！"
 
-#: lfy/qt/translate.py:58 data/gtk/help-overlay.ui:66
+#: lfy/qt/preference.py:210
+msgid "It takes effect when you restart lfy."
+msgstr "重新打开lfy时生效。"
+
+#: lfy/qt/preference.py:214
+msgid "Import failed!"
+msgstr "导入失败！"
+
+#: lfy/qt/preference.py:215
+msgid "No configuration data in the clipboard."
+msgstr "剪贴板中没有配置数据。"
+
+#: lfy/qt/preference.py:220
+msgid "Export successful!"
+msgstr "导出成功！"
+
+#: lfy/qt/preference.py:221
+msgid "Configuration data has been exported to the clipboard."
+msgstr "配置数据已导出到剪贴板"
+
+#: lfy/qt/translate.py:61 data/gtk/help-overlay.ui:66
 msgid "Remove line breaks"
 msgstr "移除换行符"
 
-#: lfy/qt/translate.py:60 data/gtk/translate.ui:71
+#: lfy/qt/translate.py:63 data/gtk/translate.ui:71
 msgid "Alt + D: Remove symbols such as line breaks"
 msgstr "Alt + D: 移除换行符"
 
-#: lfy/qt/translate.py:62 data/gtk/help-overlay.ui:59
+#: lfy/qt/translate.py:65 data/gtk/help-overlay.ui:59
 msgid "Splice Text"
 msgstr "拼接文本"
 
-#: lfy/qt/translate.py:64 data/gtk/translate.ui:78
+#: lfy/qt/translate.py:67 data/gtk/translate.ui:78
 msgid "Alt + C: Splice the next copied text with the previous text"
 msgstr "Alt + C: 将下一个复制的文本与上一个文本拼接"
 
-#: lfy/qt/translate.py:66 data/gtk/translate.ui:85 data/gtk/help-overlay.ui:46
+#: lfy/qt/translate.py:69 lfy/qt/translate.py:71 data/gtk/translate.ui:85
+#: data/gtk/help-overlay.ui:46
 msgid "Translate"
 msgstr "翻译"
 
-#: lfy/qt/tray.py:39
+#: lfy/qt/translate.py:128
+msgid ""
+"Select text and use the shortcut key '{}' to copy, the copied text will not "
+"be automatically translated"
+msgstr "选择文字并用快捷键 '{}' 复制，复制的文字将不会自动翻译"
+
+#: lfy/qt/translate.py:161
+msgid "warn"
+msgstr "警告"
+
+#: lfy/qt/translate.py:161
+msgid "quit?"
+msgstr "退出？"
+
+#: lfy/qt/translate.py:282
+msgid "Not translated this time!"
+msgstr "本次不翻译！"
+
+#: lfy/qt/tray.py:37
 msgid "Open"
 msgstr "打开"
 
-#: lfy/qt/tray.py:43 lfy/qt/tray.py:190 data/gtk/translate.ui:159
+#: lfy/qt/tray.py:41 lfy/qt/tray.py:190 data/gtk/translate.ui:159
 msgid "Check for updates"
 msgstr "检查更新"
 
-#: lfy/qt/tray.py:48 lfy/qt/tray.py:136 data/gtk/translate.ui:141
+#: lfy/qt/tray.py:46 lfy/qt/tray.py:136 data/gtk/translate.ui:141
 #: data/gtk/help-overlay.ui:52
 msgid "Copy to translate"
 msgstr "复制即翻译"
 
-#: lfy/qt/tray.py:56
+#: lfy/qt/tray.py:54
 msgid "Preference"
 msgstr "设置"
 
-#: lfy/qt/tray.py:64
+#: lfy/qt/tray.py:62
 msgid "Quit"
 msgstr "退出"
-
-#: lfy/qt/tray.py:106
-msgid "warn"
-msgstr "警告"
-
-#: lfy/qt/tray.py:106
-msgid "quit?"
-msgstr "退出？"
 
 #: lfy/qt/tray.py:142
 msgid "Stop copy to translate"
@@ -562,19 +603,15 @@ msgid "Recognize image, followed by file path"
 msgstr "识别图片，后面接文件路径"
 
 #: lfy/utils/code.py:135
-#, fuzzy
 msgid ""
-"Which service engine to use, if -s is not "
-"entered,                                help will be provided based on -t or "
-"-o"
+"Which service engine to use, if -s is not entered, help will be provided "
+"based on -t or -o"
 msgstr "使用什么服务引擎，若未输入-s，将根据 -t 或 -o 提供帮助"
 
-#: lfy/utils/code.py:138
-#, fuzzy
+#: lfy/utils/code.py:137
 msgid ""
-"The language to be translated/recognized, if -l is not "
-"entered,                                corresponding help will be provided "
-"based on the input of -s"
+"The language to be translated/recognized, if -l is not entered, "
+"corresponding help will be provided based on the input of -s"
 msgstr "待翻译/识别的语言，若未输入-l，将根据 -s 的输入自动提供对应帮助"
 
 #: data/gtk/translate.ui:117
@@ -629,18 +666,6 @@ msgstr "代理地址和端口，比如：http://127.0.0.1:7890"
 #: data/gtk/preference.ui:138
 msgid "backup/restore the settings to/from the clipboard, edit or backup it"
 msgstr "将设置备份到剪贴板或从剪贴板恢复、编辑或备份"
-
-#: data/gtk/preference.ui:144
-msgid ""
-"Export the configuration to the clipboard, then you can paste it into any "
-"file and edit it"
-msgstr "将配置导出到剪贴板，然后您可以将其粘贴到任何文件中并编辑"
-
-#: data/gtk/preference.ui:153
-msgid ""
-"Read the JSON configuration of the clipboard, then import it, and some of "
-"the configurations will take effect after reopening the software"
-msgstr "读取剪贴板的json配置，然后导入，部分配置重新打开软件以后生效"
 
 #: data/gtk/help-overlay.ui:19
 msgid "Reset/Restore UI"

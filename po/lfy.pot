@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-11-25 18:35+0800\n"
+"POT-Creation-Date: 2024-11-28 20:15+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -134,7 +134,7 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: data/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:60
+#: data/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:58 lfy/qt/tray.py:126
 msgid "About"
 msgstr ""
 
@@ -250,7 +250,6 @@ msgid "compare"
 msgstr ""
 
 #: lfy/gtk/preference.py:98 lfy/gtk/preference.py:138 lfy/gtk/preference.py:173
-#: lfy/qt/preference.py:206
 msgid "It takes effect when you restart lfy"
 msgstr ""
 
@@ -258,7 +257,7 @@ msgstr ""
 msgid "The clipboard format is incorrect"
 msgstr ""
 
-#: lfy/gtk/preference.py:114 lfy/qt/preference.py:216
+#: lfy/gtk/preference.py:114
 msgid "Configuration data has been exported to the clipboard"
 msgstr ""
 
@@ -266,12 +265,12 @@ msgstr ""
 msgid "Using {} for text recognition"
 msgstr ""
 
-#: lfy/gtk/translate.py:225 lfy/qt/translate.py:229
+#: lfy/gtk/translate.py:225 lfy/qt/translate.py:276
 msgid ""
 "This time the content contains private information and is not translated"
 msgstr ""
 
-#: lfy/gtk/translate.py:278 lfy/gtk/translate.py:310 lfy/qt/translate.py:255
+#: lfy/gtk/translate.py:278 lfy/gtk/translate.py:310 lfy/qt/translate.py:303
 #: lfy/api/server/tra/baidu.py:46 lfy/api/server/tra/tencent.py:150
 #: lfy/api/server/tra/aliyun.py:98 lfy/api/server/tra/com.py:29
 #: lfy/api/server/tra/huoshan.py:138 lfy/api/server/ocr/baidu.py:143
@@ -279,15 +278,15 @@ msgstr ""
 msgid "something error: {}"
 msgstr ""
 
-#: lfy/gtk/translate.py:293 lfy/qt/translate.py:193
+#: lfy/gtk/translate.py:293 lfy/qt/translate.py:236
 msgid "OCRing..."
 msgstr ""
 
-#: lfy/gtk/translate.py:295 lfy/qt/translate.py:259
+#: lfy/gtk/translate.py:295 lfy/qt/translate.py:307
 msgid "Translating..."
 msgstr ""
 
-#: lfy/gtk/translate.py:307 lfy/qt/translate.py:210
+#: lfy/gtk/translate.py:307 lfy/qt/translate.py:253
 msgid "Translation completed"
 msgstr ""
 
@@ -307,110 +306,153 @@ msgstr ""
 msgid "Confirm"
 msgstr ""
 
-#: lfy/qt/preference.py:41 data/gtk/preference.ui:17
+#: lfy/qt/preference.py:42 data/gtk/preference.ui:17
 msgid "Translation keys"
 msgstr ""
 
-#: lfy/qt/preference.py:53 lfy/qt/preference.py:82
+#: lfy/qt/preference.py:54 lfy/qt/preference.py:83
 #: data/gtk/server-preferences.ui:47
 msgid "how to get API Key"
 msgstr ""
 
-#: lfy/qt/preference.py:57 lfy/qt/preference.py:86 lfy/qt/preference.py:129
+#: lfy/qt/preference.py:58 lfy/qt/preference.py:87 lfy/qt/preference.py:130
 msgid "Save"
 msgstr ""
 
-#: lfy/qt/preference.py:68 data/gtk/preference.ui:47
+#: lfy/qt/preference.py:69 data/gtk/preference.ui:47
 msgid "OCR server"
 msgstr ""
 
-#: lfy/qt/preference.py:95 data/gtk/preference.ui:10
+#: lfy/qt/preference.py:96 data/gtk/preference.ui:10
 msgid "General"
 msgstr ""
 
-#: lfy/qt/preference.py:100 data/gtk/preference.ui:110
+#: lfy/qt/preference.py:101 data/gtk/preference.ui:110
 msgid "auto check update"
 msgstr ""
 
-#: lfy/qt/preference.py:107 data/gtk/preference.ui:117
+#: lfy/qt/preference.py:108 data/gtk/preference.ui:117
 msgid "Notify translation results"
 msgstr ""
 
-#: lfy/qt/preference.py:114 data/gtk/preference.ui:76
+#: lfy/qt/preference.py:115 data/gtk/preference.ui:76
 msgid "Compare model"
 msgstr ""
 
-#: lfy/qt/preference.py:124
+#: lfy/qt/preference.py:125
 msgid "vpn addr and port"
 msgstr ""
 
-#: lfy/qt/preference.py:136 data/gtk/preference.ui:139
+#: lfy/qt/preference.py:137 data/gtk/preference.ui:139
 msgid "Software settings backup and restore"
 msgstr ""
 
-#: lfy/qt/preference.py:139 data/gtk/preference.ui:142
+#: lfy/qt/preference.py:140 data/gtk/preference.ui:142
 msgid "backup"
 msgstr ""
 
-#: lfy/qt/preference.py:143 data/gtk/preference.ui:151
+#: lfy/qt/preference.py:142 data/gtk/preference.ui:153
+msgid ""
+"Read the JSON configuration of the clipboard, then import it, and some of "
+"the configurations will take effect after reopening the software"
+msgstr ""
+
+#: lfy/qt/preference.py:146 data/gtk/preference.ui:151
 msgid "restore"
 msgstr ""
 
-#: lfy/qt/preference.py:151 data/gtk/preference.ui:103
+#: lfy/qt/preference.py:148 data/gtk/preference.ui:144
+msgid ""
+"Export the configuration to the clipboard, then you can paste it into any "
+"file and edit it"
+msgstr ""
+
+#: lfy/qt/preference.py:156 data/gtk/preference.ui:103
 msgid "Other"
 msgstr ""
 
-#: lfy/qt/preference.py:201
-msgid "No data in the clipboard"
+#: lfy/qt/preference.py:209
+msgid "Import successful!"
 msgstr ""
 
-#: lfy/qt/translate.py:58 data/gtk/help-overlay.ui:66
+#: lfy/qt/preference.py:210
+msgid "It takes effect when you restart lfy."
+msgstr ""
+
+#: lfy/qt/preference.py:214
+msgid "Import failed!"
+msgstr ""
+
+#: lfy/qt/preference.py:215
+msgid "No configuration data in the clipboard."
+msgstr ""
+
+#: lfy/qt/preference.py:220
+msgid "Export successful!"
+msgstr ""
+
+#: lfy/qt/preference.py:221
+msgid "Configuration data has been exported to the clipboard."
+msgstr ""
+
+#: lfy/qt/translate.py:61 data/gtk/help-overlay.ui:66
 msgid "Remove line breaks"
 msgstr ""
 
-#: lfy/qt/translate.py:60 data/gtk/translate.ui:71
+#: lfy/qt/translate.py:63 data/gtk/translate.ui:71
 msgid "Alt + D: Remove symbols such as line breaks"
 msgstr ""
 
-#: lfy/qt/translate.py:62 data/gtk/help-overlay.ui:59
+#: lfy/qt/translate.py:65 data/gtk/help-overlay.ui:59
 msgid "Splice Text"
 msgstr ""
 
-#: lfy/qt/translate.py:64 data/gtk/translate.ui:78
+#: lfy/qt/translate.py:67 data/gtk/translate.ui:78
 msgid "Alt + C: Splice the next copied text with the previous text"
 msgstr ""
 
-#: lfy/qt/translate.py:66 data/gtk/translate.ui:85 data/gtk/help-overlay.ui:46
+#: lfy/qt/translate.py:69 lfy/qt/translate.py:71 data/gtk/translate.ui:85
+#: data/gtk/help-overlay.ui:46
 msgid "Translate"
 msgstr ""
 
-#: lfy/qt/tray.py:39
+#: lfy/qt/translate.py:128
+msgid ""
+"Select text and use the shortcut key '{}' to copy, the copied text will not "
+"be automatically translated"
+msgstr ""
+
+#: lfy/qt/translate.py:161
+msgid "warn"
+msgstr ""
+
+#: lfy/qt/translate.py:161
+msgid "quit?"
+msgstr ""
+
+#: lfy/qt/translate.py:282
+msgid "Not translated this time!"
+msgstr ""
+
+#: lfy/qt/tray.py:37
 msgid "Open"
 msgstr ""
 
-#: lfy/qt/tray.py:43 lfy/qt/tray.py:190 data/gtk/translate.ui:159
+#: lfy/qt/tray.py:41 lfy/qt/tray.py:190 data/gtk/translate.ui:159
 msgid "Check for updates"
 msgstr ""
 
-#: lfy/qt/tray.py:48 lfy/qt/tray.py:136 data/gtk/translate.ui:141
+#: lfy/qt/tray.py:46 lfy/qt/tray.py:136 data/gtk/translate.ui:141
 #: data/gtk/help-overlay.ui:52
 msgid "Copy to translate"
 msgstr ""
 
-#: lfy/qt/tray.py:56
+#: lfy/qt/tray.py:54
 msgid "Preference"
 msgstr ""
 
-#: lfy/qt/tray.py:64
+#: lfy/qt/tray.py:62
 msgid "Quit"
-msgstr ""
-
-#: lfy/qt/tray.py:106
-msgid "warn"
-msgstr ""
-
-#: lfy/qt/tray.py:106
-msgid "quit?"
 msgstr ""
 
 #: lfy/qt/tray.py:142
@@ -559,16 +601,14 @@ msgstr ""
 
 #: lfy/utils/code.py:135
 msgid ""
-"Which service engine to use, if -s is not "
-"entered,                                help will be provided based on -t or "
-"-o"
+"Which service engine to use, if -s is not entered, help will be provided "
+"based on -t or -o"
 msgstr ""
 
-#: lfy/utils/code.py:138
+#: lfy/utils/code.py:137
 msgid ""
-"The language to be translated/recognized, if -l is not "
-"entered,                                corresponding help will be provided "
-"based on the input of -s"
+"The language to be translated/recognized, if -l is not entered, "
+"corresponding help will be provided based on the input of -s"
 msgstr ""
 
 #: data/gtk/translate.ui:117
@@ -622,18 +662,6 @@ msgstr ""
 
 #: data/gtk/preference.ui:138
 msgid "backup/restore the settings to/from the clipboard, edit or backup it"
-msgstr ""
-
-#: data/gtk/preference.ui:144
-msgid ""
-"Export the configuration to the clipboard, then you can paste it into any "
-"file and edit it"
-msgstr ""
-
-#: data/gtk/preference.ui:153
-msgid ""
-"Read the JSON configuration of the clipboard, then import it, and some of "
-"the configurations will take effect after reopening the software"
 msgstr ""
 
 #: data/gtk/help-overlay.ui:19

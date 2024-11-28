@@ -203,24 +203,23 @@ class PreferenceWindow(QMainWindow):
         self.le_o.setText(get_servers_o()[i].get_api_key_s_ocr())
 
     def _import_config(self):
-        s = _("No data in the clipboard")
         if self.cb.mimeData().hasText():
             s = restore_gsettings(self.cb.text())
             if len(s) == 0:
-                self.tray.showMessage(
-                    "ok", _("It takes effect when you restart lfy"), QSystemTrayIcon.MessageIcon.Information, 2000)
+                self.tray.showMessage(_("Import successful!"),
+                                      _("It takes effect when you restart lfy."),
+                                      QSystemTrayIcon.MessageIcon.Information, 2000)
                 return
 
-        self.tray.showMessage(
-            "no", s, QSystemTrayIcon.MessageIcon.Critical, 3000)
+        self.tray.showMessage(_("Import failed!"),
+                              _("No configuration data in the clipboard."),
+                              QSystemTrayIcon.MessageIcon.Critical, 3000)
 
     def _export_config(self):
-        s = backup_gsettings()
-        print(f"\n\n{s}\n\n")
-        self.cb.setText(s)
-        notice_s = _("Configuration data has been exported to the clipboard")
-        self.tray.showMessage(
-            "no", notice_s, QSystemTrayIcon.MessageIcon.Warning, 3000)
+        self.cb.setText(backup_gsettings())
+        self.tray.showMessage(_("Export successful!"),
+                              _("Configuration data has been exported to the clipboard."),
+                              QSystemTrayIcon.MessageIcon.Information, 3000)
 
     def _on_cb_notify(self, state):
         self.sg.s("notify-translation-results", state)

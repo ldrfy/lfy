@@ -68,6 +68,7 @@ class TranslateWindow(QMainWindow):
 
         btn_translate = QPushButton(_("Translate"), self)
         btn_translate.clicked.connect(self.update_translate)
+        btn_translate.setToolTip(_("Translate") + ": `Ctrl+T`")
 
         middle_layout.addWidget(self.cb_server)
         middle_layout.addWidget(self.cb_lang)
@@ -124,7 +125,12 @@ class TranslateWindow(QMainWindow):
         self.cb_lang.setCurrentIndex(j)
         self.cb_del_wrapping.setChecked(True)
 
-        self.sts(["CTRL+SHIFT+C", "Alt+D", "Alt+C", "Ctrl+T",
+        tt = _("Select text and use the shortcut key '{}' to copy, the copied text will not be automatically translated") \
+            .format("Ctrl+Shift+C")
+        self.te_from.setToolTip(tt)
+        self.te_to.setToolTip(tt)
+
+        self.sts(["Ctrl+Shift+C", "Alt+D", "Alt+C", "Ctrl+T",
                   "Ctrl+,", "Ctrl+Q", "Ctrl+H"],
                  [self._copy_text, self._del_wrapping, self._add_old,
                   self.update_translate, self._open_prf, self._quit_app,
@@ -273,7 +279,8 @@ class TranslateWindow(QMainWindow):
             if ntt in text_from:
                 ss_ntt.append(ntt)
         if len(ss_ntt) > 0:
-            self.tray.showMessage("no", f"{s_ntt}:\n{str(ss_ntt)}",
+            self.tray.showMessage(_("Not translated this time!"),
+                                  f"{s_ntt}:\n{str(ss_ntt)}",
                                   QSystemTrayIcon.MessageIcon.Warning, 3000)
 
             return

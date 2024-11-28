@@ -132,11 +132,9 @@ def parse_lfy():
                         help=_('Recognize image, followed by file path'))
 
     parser.add_argument('-s', type=str, default="", nargs='?',
-                        help=_('Which service engine to use, if -s is not entered, \
-                               help will be provided based on -t or -o'))
+                        help=_('Which service engine to use, if -s is not entered, help will be provided based on -t or -o'))
     parser.add_argument('-l', type=int, default=-1, nargs='?',
-                        help=_('The language to be translated/recognized, if -l is not entered, \
-                               corresponding help will be provided based on the input of -s'))
+                        help=_('The language to be translated/recognized, if -l is not entered, corresponding help will be provided based on the input of -s'))
 
     args = parser.parse_args()
 
