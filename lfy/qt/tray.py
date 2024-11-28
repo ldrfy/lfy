@@ -2,7 +2,7 @@
 import time
 from gettext import gettext as _
 
-from PyQt6.QtGui import QAction, QClipboard
+from PyQt6.QtGui import QAction, QClipboard, QIcon
 from PyQt6.QtWidgets import QApplication, QMenu, QMessageBox, QSystemTrayIcon
 
 from lfy import APP_NAME, PACKAGE_URL, PACKAGE_URL_BUG, VERSION
@@ -23,15 +23,14 @@ class TrayIcon(QSystemTrayIcon):
 
     def __init__(
         self,
-        parent,
-        app,
-        icon
+        parent: TranslateWindow,
+        app: QApplication,
+        icon: QIcon
     ) -> None:
         QSystemTrayIcon.__init__(self, icon, parent)
-        self.w: TranslateWindow = parent
-        self.app: QApplication = app
+        self.w = parent
         self.sg = Settings()
-        self.cb: QClipboard = self.app.clipboard()
+        self.cb: QClipboard = app.clipboard()
 
         # 创建托盘菜单
         tray_menu = QMenu(parent)
@@ -61,7 +60,7 @@ class TrayIcon(QSystemTrayIcon):
         tray_menu.addAction(about_action)
 
         quit_action = QAction(_("Quit") + " Ctrl+Q", self)
-        quit_action.triggered.connect(self.app.quit)
+        quit_action.triggered.connect(app.quit)
         tray_menu.addAction(quit_action)
 
         self.setContextMenu(tray_menu)
@@ -71,6 +70,13 @@ class TrayIcon(QSystemTrayIcon):
         self.my_thread = None
         if self.sg.g("auto-check-update"):
             self.find_update()
+
+        # 绑定托盘单击事件
+        self.activated.connect(self._tray_icon_clicked)
+
+    def _tray_icon_clicked(self, reason):
+        if reason == QSystemTrayIcon.ActivationReason.Trigger:
+            self.w.show()
 
     def _on_clipboard_data_changed(self):
 
