@@ -40,9 +40,15 @@ def main():
     app.setApplicationName(_(APP_NAME))
     app.setDesktopFileName(APP_ID)
 
+    # windows阻止最后一个窗口关闭时退出应用tray
+    app.setQuitOnLastWindowClosed(False)
     window = TranslateWindow(app)
     tray = TrayIcon(window, app, icon)
     tray.show()
     window.tray = tray
     window.show()
     sys.exit(app.exec())
+
+
+if __name__ == "__main__":
+    main()

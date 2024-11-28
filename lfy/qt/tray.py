@@ -76,7 +76,10 @@ class TrayIcon(QSystemTrayIcon):
 
     def _tray_icon_clicked(self, reason):
         if reason == QSystemTrayIcon.ActivationReason.Trigger:
-            self.w.show()
+            if not self.w.isVisible():
+                self.w.show()
+            else:
+                self.w.hide()
 
     def _on_clipboard_data_changed(self):
 
