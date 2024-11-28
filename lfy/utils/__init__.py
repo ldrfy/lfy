@@ -34,11 +34,24 @@ def s2ks(s):
     """
     if "|" not in s:
         return None, None
+    if r'\s+\|\s+' in s:
+        print("-----", s)
+        s = clear_key(s)
+        print("======", s)
 
     [app_id, secret_key] = s.split("|")
-    a = app_id.strip()
-    b = secret_key.strip()
-    return a, b
+    return app_id, secret_key
+
+def clear_key(s, str_new="|"):
+    """清楚设置中的空格
+
+    Args:
+        s (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    return re.sub(r'\s*\|\s*', str_new, s.strip())
 
 
 def is_text(cf):

@@ -30,7 +30,6 @@ class PytesseractServer(Server):
             if lang_str is None:
                 lang_str = self.get_api_key_s_ocr()
             lang = "+".join(lang_str.split("|"))
-            print(lang)
             return True, pytesseract.image_to_string(img_path, lang=lang)
         except ModuleNotFoundError as e:
             print(e)
@@ -61,16 +60,15 @@ class PytesseractServer(Server):
             _type_: _description_
         """
         path = gen_img("success")
-        lang_str = "+".join(api_key_ocr_s.split("|"))
         try:
             import pytesseract
             langs = pytesseract.get_languages()
-            langs_ = []
-            for lang in lang_str.split("+"):
+            langs_no = []
+            for lang in api_key_ocr_s.split("|"):
                 if lang not in langs:
-                    langs_.append(lang)
-            if len(langs_) > 0:
-                return False, _("Tesseract OCR database {} is not installed").format("-".join(langs_))
+                    langs_no.append(lang)
+            if len(langs_no) > 0:
+                return False, _("Tesseract OCR database {} is not installed").format("-".join(langs_no))
         except ModuleNotFoundError as e:
             print(e)
             get_logger().error(e)

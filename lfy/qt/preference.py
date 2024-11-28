@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import (QCheckBox, QComboBox, QGroupBox, QHBoxLayout,
 from lfy.api import (get_server_names_api_key, get_server_names_o,
                      get_servers_api_key, get_servers_o, get_servers_t)
 from lfy.qt import CheckableComboBox, MyThread
+from lfy.utils import clear_key
 from lfy.utils.bak import backup_gsettings, restore_gsettings
 from lfy.utils.settings import Settings
 
@@ -194,13 +195,16 @@ class PreferenceWindow(QMainWindow):
     def _on_changed_t(self, i):
         if i < 0:
             return
-        self.le_t.setText(get_servers_api_key()[i].get_api_key_s())
+        # 保存时，去掉空格，但是显示时，保留
+        s = clear_key(get_servers_api_key()[i].get_api_key_s(), "  |  ")
+        self.le_t.setText(s)
 
     def _on_changed_o(self, i):
         if i < 0:
             return
-
-        self.le_o.setText(get_servers_o()[i].get_api_key_s_ocr())
+        # 保存时，去掉空格，但是显示时，保留
+        s = clear_key(get_servers_o()[i].get_api_key_s_ocr(), "  |  ")
+        self.le_o.setText(s)
 
     def _import_config(self):
         if self.cb.mimeData().hasText():
@@ -233,30 +237,31 @@ class PreferenceWindow(QMainWindow):
     def _on_btn_to_save(self, ocr=False):
 
         def notice_s(p):
-            t, ok, m = p
+            t, ok, m, le, api_key = p
             n = QSystemTrayIcon.MessageIcon.Information
             if not ok:
                 n = QSystemTrayIcon.MessageIcon.Critical
             self.tray.showMessage(t, m, n, 3000)
             my_thread.clean_up()
+            # 保存时，去掉空格，但是显示时，保留
+            le.setText(clear_key(api_key, "  |  "))
 
-        def tt(_p=None):
+        def tt(p=None):
+            le, api_key = p
             if ocr:
-                api_key = re.sub(r'\s*\|\s*', "  |  ",
-                                 self.le_o.text().strip())
                 st = get_servers_o()[self.cb_o.currentIndex()]
                 _ok, _s = st.check_ocr(api_key)
                 if _ok:
                     self.sg.s("server-ocr-selected-key", st.key)
             else:
-                api_key = re.sub(r'\s*\|\s*', "  |  ",
-                                 self.le_t.text().strip())
                 st = get_servers_api_key()[self.cb_t.currentIndex()]
                 _ok, _s = st.check_translate(api_key)
 
-            return (st.name, _ok, _s)
+            return (st.name, _ok, _s, le, api_key)
 
-        my_thread = MyThread(tt)
+        le: QLineEdit = self.le_t if not ocr else self.le_o
+        # 保存时，去掉空格，但是显示时，保留
+        my_thread = MyThread(tt, (le, clear_key(le.text())))
         my_thread.signal.connect(notice_s)
         my_thread.start()
 

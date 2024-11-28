@@ -2,13 +2,13 @@
 # Copyright 2023 Rafael Mardojai CM
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import re
 import threading
 from gettext import gettext as _
 
 from gi.repository import Adw, GLib, Gtk
 
 from lfy.api.server import Server
+from lfy.utils import clear_key
 from lfy.utils.debug import get_logger
 
 
@@ -46,16 +46,15 @@ class ServerPreferences(Adw.NavigationPage):
         s = server.get_api_key_s()
         if self.is_ocr:
             s = server.get_api_key_s_ocr()
-        self.api_key_entry.set_text(s)
+        self.api_key_entry.set_text(clear_key(s, "  |  "))
 
         self.api_key_link.set_uri(server.get_doc_url())
 
     @Gtk.Template.Callback()
     def _on_api_key_apply(self, _row):
 
-        api_key = self.api_key_entry.get_text()
-        api_key = re.sub(r'\s*\|\s*', "  |  ", api_key.strip())
-        self.api_key_entry.set_text(api_key)
+        api_key = clear_key(self.api_key_entry.get_text())
+        self.api_key_entry.set_text(clear_key(api_key, "  |  "))
         self.api_key_entry.set_sensitive(False)
         self.api_key_spinner.start()
 

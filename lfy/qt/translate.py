@@ -233,7 +233,8 @@ class TranslateWindow(QMainWindow):
             _ok, s = param
             self.translate_text(s)
 
-        self.set_text_from_to((_("OCRing..."), _("OCRing...")), True)
+        _s = self.server_o.name + " " + _("OCRing...")
+        self.set_text_from_to((_s, _s), True)
         self.my_thread = MyThread(oo)
         self.my_thread.signal.connect(next_)
         self.my_thread.start()
