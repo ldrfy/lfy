@@ -138,10 +138,14 @@ class PreferenceWindow(QMainWindow):
 
         hl_json = QHBoxLayout()
         btn_backup = QPushButton(_("backup"))
+        btn_backup.setToolTip(
+            _("Read the JSON configuration of the clipboard, then import it, and some of the configurations will take effect after reopening the software"))
         btn_backup.clicked.connect(self._export_config)
 
         hl_json.addWidget(btn_backup)
         btn_restore = QPushButton(_("restore"))
+        btn_restore.setToolTip(
+            _("Export the configuration to the clipboard, then you can paste it into any file and edit it"))
         btn_restore.clicked.connect(self._import_config)
 
         hl_json.addWidget(btn_restore)
