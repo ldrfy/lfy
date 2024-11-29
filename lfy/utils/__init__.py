@@ -2,6 +2,8 @@
 import hashlib
 import re
 
+from lfy.utils.debug import get_logger
+
 
 # pylint: disable=E1101
 def process_text(text):
@@ -23,7 +25,7 @@ def process_text(text):
     return s_from
 
 
-def s2ks(s):
+def s2ks(sk):
     """_summary_
 
     Args:
@@ -32,17 +34,15 @@ def s2ks(s):
     Returns:
         _type_: _description_
     """
-    if "|" not in s:
+    if "|" not in sk:
         return None, None
-    if r'\s+\|\s+' in s:
-        print("-----", s)
-        s = clear_key(s)
-        print("======", s)
+    if r'\s+\|\s+' in sk:
+        sk = clear_key(sk)
 
-    [app_id, secret_key] = s.split("|")
+    [app_id, secret_key] = sk.split("|")
     return app_id, secret_key
 
-def clear_key(s, str_new="|"):
+def clear_key(sk, str_new="|"):
     """清楚设置中的空格
 
     Args:
@@ -51,7 +51,7 @@ def clear_key(s, str_new="|"):
     Returns:
         _type_: _description_
     """
-    return re.sub(r'\s*\|\s*', str_new, s.strip())
+    return re.sub(r'\s*\|\s*', str_new, sk.strip())
 
 
 def is_text(cf):
@@ -99,3 +99,46 @@ def get_os_release():
             return f.read()
     except FileNotFoundError:
         return "OS release info not found"
+
+
+def gen_img(text="success"):
+    """生成图片，TODO:这里应该生成需要语言字体的文字，现在有问题
+
+    Args:
+        text (str, optional): _description_. Defaults to "success".
+    """
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+    except ModuleNotFoundError as e:
+        print(e)
+        get_logger().error(e)
+        return None
+
+    w, h = 256, 128
+    # 创建一个白色背景的图片 (宽1024px，高1024px)
+    img = Image.new('RGB', (w, h), color='white')
+
+    # 创建一个绘图对象
+    d = ImageDraw.Draw(img)
+
+    # 使用 Pillow 自带的默认字体
+    font = ImageFont.load_default(60)
+
+    # 定义文本
+    text = "success"
+
+    # 使用 textbbox 计算文本的边界框，返回 (left, top, right, bottom)
+    text_bbox = d.textbbox((0, 0), text, font=font)
+    text_width = text_bbox[2] - text_bbox[0]
+    text_height = text_bbox[3] - text_bbox[1]
+
+    # 将文本居中
+    position = ((w - text_width) // 2, (h - text_height) // 2)
+
+    # 在图片上添加文本，设置颜色为绿色
+    d.text(position, text, fill=(0, 128, 0), font=font)
+
+    # 保存图片
+    path = "/tmp/lfy.png"
+    img.save(path)
+    return path

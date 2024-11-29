@@ -12,6 +12,8 @@ from lfy.api import (create_server_o, create_server_t, get_lang,
                      lang_n2j, server_key2i)
 from lfy.api.constant import NO_TRANSLATED_TXTS
 from lfy.api.server import Server
+from lfy.api.server.ocr import ServerOCR
+from lfy.api.server.tra import ServerTra
 from lfy.gtk.notify import nf_t
 from lfy.gtk.widgets.theme_switcher import ThemeSwitcher
 from lfy.utils import cal_md5, process_text
@@ -171,7 +173,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             # 等于0时_on_lang_changed不会相应多次
             self.jn = lang_select_index == 0
 
-            self.dd_lang.set_model(get_lang_names(i))
+            self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
             # 如果不是0,这时候_on_lang_changed还会被调用
             self.dd_lang.set_selected(lang_select_index)
 
@@ -267,10 +269,12 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         try:
             if is_ocr:
+                server: ServerOCR = server
                 _ok, text = server.ocr_image(s)
                 if self.cbtn_del_wrapping.get_active():
                     text = process_text(text)
             else:
+                server: ServerTra = server
                 _ok, text = server.translate_text(s, lk)
 
         except Exception as e:  # pylint: disable=W0718

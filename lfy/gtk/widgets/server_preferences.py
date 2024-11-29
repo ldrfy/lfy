@@ -25,7 +25,7 @@ class ServerPreferences(Adw.NavigationPage):
     # Child widgets
     title = Gtk.Template.Child()
     page = Gtk.Template.Child()
-    api_key_entry = Gtk.Template.Child()
+    api_key_entry: Adw.EntryRow = Gtk.Template.Child()
     api_key_stack = Gtk.Template.Child()
     api_key_spinner = Gtk.Template.Child()
 
@@ -43,10 +43,8 @@ class ServerPreferences(Adw.NavigationPage):
         self.title.set_title(s)
         self.title.set_subtitle(server.name)
 
-        s = server.get_api_key_s()
-        if self.is_ocr:
-            s = server.get_api_key_s_ocr()
-        self.api_key_entry.set_text(clear_key(s, "  |  "))
+        self.api_key_entry.set_text(clear_key(server.get_conf(), "  |  "))
+        self.api_key_entry.set_tooltip_text(server.sk_placeholder_text)
 
         self.api_key_link.set_uri(server.get_doc_url())
 
@@ -58,13 +56,9 @@ class ServerPreferences(Adw.NavigationPage):
         self.api_key_entry.set_sensitive(False)
         self.api_key_spinner.start()
 
-        check_ot = self.server.check_translate
-        if self.is_ocr:
-            check_ot = self.server.check_ocr
-
         threading.Thread(target=self.request_text, daemon=True,
-                         args=(check_ot, api_key,
-                               self.api_key_entry,
+                         args=(self.server.check_conf,
+                               api_key, self.api_key_entry,
                                self.api_key_spinner)).start()
 
     def update_ui(self, valid, entry, spinner):

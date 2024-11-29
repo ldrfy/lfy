@@ -3,6 +3,17 @@ import os
 from lfy import APP_ID, APP_NAME
 
 
+def init_sg(qt, ss):
+    if ss is not None:
+        return ss
+    if not qt:
+        from gi.repository import Gio
+        return Gio.Settings.new(APP_ID)
+
+    from PyQt6.QtCore import QSettings
+    return QSettings(APP_ID, APP_NAME)
+
+
 class Settings:
 
     def __init__(self, qt=None):
@@ -10,13 +21,8 @@ class Settings:
             qt = os.environ.get(f'{APP_ID}.ui') == 'qt'
 
         self.qt = qt
+        self.ss = None
 
-        if qt:
-            from PyQt6.QtCore import QSettings
-            self.ss = QSettings(APP_ID, APP_NAME)
-        else:
-            from gi.repository import Gio
-            self.ss = Gio.Settings.new(APP_ID)
         super().__init__()
 
     def g(self, key, d=None, t=str):
@@ -29,6 +35,7 @@ class Settings:
         Returns:
             _type_: _description_
         """
+        self.ss = init_sg(self.qt, self.ss)
         if not self.qt:
             return self.ss.get_value(key).unpack()
 
@@ -44,6 +51,8 @@ class Settings:
         Raises:
             ValueError: _description_
         """
+        self.ss = init_sg(self.qt, self.ss)
+
         if not self.qt:
             from gi.repository import GLib
 

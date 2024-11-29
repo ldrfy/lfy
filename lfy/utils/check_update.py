@@ -84,7 +84,8 @@ def main():
     Returns:
         str: 更新信息或None
     """
-    error_config = f"Please update. There is a problem with the current version configuration.\n\n{PACKAGE_URL}"  # pylint: disable=C0301
+    error_config = f"Please update. There is a problem with the current version configuration.\n\n{
+        PACKAGE_URL}"  # pylint: disable=C0301
     try:
         data = get_by_github()
         if data is None or "version" not in data:

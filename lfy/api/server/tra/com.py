@@ -6,7 +6,7 @@ from gettext import gettext as _
 from multiprocessing import Pool
 
 from lfy.api.constant import SERVERS_T
-from lfy.api.server import Server
+from lfy.api.server.tra import ServerTra
 from lfy.utils.debug import get_logger
 from lfy.utils.settings import Settings
 
@@ -22,6 +22,7 @@ def _translate(args):
     """
     st = time.time()
     server, text, lang_to, lang_from = args
+    server: ServerTra
     try:
         a, b = server.translate_text(text, lang_to, lang_from)
         return a, b, server, time.time()-st
@@ -32,11 +33,13 @@ def _translate(args):
         return False, em, server, time.time()-st
 
 
-class AllServer(Server):
+class AllServer(ServerTra):
     """翻译集合
     """
 
     def __init__(self):
+
+        super().__init__("compare", _("compare"))
 
         # https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support
         lang_key_ns = {
@@ -50,9 +53,9 @@ class AllServer(Server):
         }
 
         # 只对比设置中修改的
-        all_servers = {
-            server.key: server for server in SERVERS_T
-        }
+        all_servers = {}
+        for server in SERVERS_T:
+            all_servers[server.key] = server
         keys = Settings().g("compare-servers")
 
         # 初始化 self.servers
@@ -63,22 +66,12 @@ class AllServer(Server):
             self.servers = [all_servers[key]
                             for key in keys if key in all_servers]
 
-        super().__init__("compare", _("compare"), lang_key_ns)
-        self.can_translate = True
+        self.set_data(lang_key_ns)
 
     def translate_text(self, text, lang_to="1", lang_from="auto"):
-        """翻译集成
-
-        Args:
-            text (str): 待翻译字符
-            lang_to (str, optional): 翻译成什么语言. Defaults to "zh-cn".
-            lang_from (str, optional): 文本是什么语言. Defaults to "auto".
-
-        Returns:
-            str: _description_
-        """
         args = []
         for server in self.servers:
+            server: ServerTra
             lang_to_ = "en"
             for lang in server.langs:
                 if lang.n == int(lang_to):

@@ -4,7 +4,8 @@ import base64
 import time
 from gettext import gettext as _
 
-from lfy.api.server import TIME_OUT, Server
+from lfy.api.server import TIME_OUT
+from lfy.api.server.ocr import ServerOCR
 from lfy.utils import s2ks
 from lfy.utils.settings import Settings
 
@@ -24,13 +25,8 @@ def _get_token(session, ocr_api_key_s):
         if len(access_token) != 0:
             return True, access_token
 
-    api_key, secret_key = s2ks(ocr_api_key_s)
-    # API Key | Secret Key
-    if api_key is None or api_key == "API Key":
-        return False, _("please input API Key in preference") + ": OCR"
-
     ok, access_token, expires_in_date = \
-        _get_token_by_url(session, api_key, secret_key)
+        _get_token_by_url(session, ocr_api_key_s)
 
     if ok:
         sg.s("ocr-baidu-token", access_token)
@@ -39,7 +35,7 @@ def _get_token(session, ocr_api_key_s):
     return ok, access_token
 
 
-def _get_token_by_url(session, api_key, secret_key):
+def _get_token_by_url(session, config_str):
     """获取token
 
     Args:
@@ -49,6 +45,12 @@ def _get_token_by_url(session, api_key, secret_key):
     Returns:
         _type_: _description_
     """
+
+    api_key, secret_key = s2ks(config_str)
+    if api_key is None or api_key == "API Key":
+        error_msg = _("please input API Key and Secret Key like:")
+        return False, error_msg + " 121343 | fdsdsdg", ""
+
     ok = False
     expires_in_date = -1
 
@@ -69,7 +71,7 @@ def _get_token_by_url(session, api_key, secret_key):
     return ok, str(access_token), expires_in_date
 
 
-class BaiduServer(Server):
+class BaiduServer(ServerOCR):
     """百度翻译
     """
 
@@ -88,26 +90,10 @@ class BaiduServer(Server):
             "ITA": 8
         }
 
-        super().__init__("baidu", _("baidu"), lang_key_ns)
-        self.can_ocr = True
+        super().__init__("baidu", _("baidu"))
+        self.set_data(lang_key_ns, "API Key | Secret Key")
 
-    def get_api_key_s_ocr(self):
-        """图片识别的字符串apikey
-
-        Returns:
-            _type_: _description_
-        """
-        return Settings().g("server-sk-baidu-ocr")
-
-    def ocr_image(self, img_path, lang_str=None):
-        """图文识别
-
-        Args:
-            img_path (_type_): _description_
-
-        Returns:
-            _type_: _description_
-        """
+    def ocr_image(self, img_path, conf_str=None):
         img_data = None
         with open(img_path, 'rb') as f:
             img_data = f.read()
@@ -122,13 +108,13 @@ class BaiduServer(Server):
 
         request_url += "general_basic"
 
-        ok, token = _get_token(self.session, self.get_api_key_s_ocr())
+        ok, token = _get_token(self.session, self.get_conf())
         if not ok:
             return False, token
         params = {"image": img}
-        print(lang_str)
-        if lang_str is not None:
-            params["language_type"] = lang_str
+        print(conf_str)
+        if conf_str is not None:
+            params["language_type"] = conf_str
 
         request_url = request_url + "?access_token=" + token
         headers = {'content-type': 'application/x-www-form-urlencoded'}
@@ -152,26 +138,12 @@ class BaiduServer(Server):
 
         return ok, s
 
-    def check_ocr(self, api_key_ocr_s):
-        """OCR测试
-
-        Args:
-            api_key_ocr_s (str): _description_
-
-        Returns:
-            _type_: _description_
-        """
-        api_key, secret_key = s2ks(api_key_ocr_s)
-        if api_key is None or api_key == "API Key":
-            error_msg = _("please input API Key and Secret Key like:")
-            return False, error_msg + " 121343 | fdsdsdg"
-
+    def check_conf(self, conf_str):
         ok, access_token, expires_in_date = \
-            _get_token_by_url(self.session, api_key, secret_key)
+            _get_token_by_url(self.session, conf_str)
         if ok:
-            ss = Settings()
-            ss.s("server-sk-baidu-ocr", api_key_ocr_s)
-            ss.s("ocr-baidu-token", access_token)
-            ss.s("ocr-baidu-token-expires-date", expires_in_date)
+            self.set_conf(conf_str)
+            Settings().s("ocr-baidu-token", access_token)
+            Settings().s("ocr-baidu-token-expires-date", expires_in_date)
             return True, "success"
         return False, access_token

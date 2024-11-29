@@ -6,8 +6,8 @@ from gettext import gettext as _
 from gi.repository import Adw, Gdk, Gio, Gtk
 
 from lfy import APP_ID
-from lfy.api import (get_server_names_api_key, get_server_names_o,
-                     get_servers_api_key, get_servers_o, get_servers_t)
+from lfy.api import (get_server_names_o, get_server_names_t_sk, get_servers_o,
+                     get_servers_t, get_servers_t_sk)
 from lfy.api.server import Server
 from lfy.gtk.widgets.server_preferences import ServerPreferences
 from lfy.utils import is_text
@@ -42,7 +42,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.server_ocr: Server
         # pylint: disable=E1101
         self.acr_server.set_model(
-            Gtk.StringList.new(get_server_names_api_key()))
+            Gtk.StringList.new(get_server_names_t_sk()))
 
         self.ocr_s_time = time.time()
         self.acr_server_ocr.set_model(Gtk.StringList.new(get_server_names_o()))
@@ -157,7 +157,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
 
     @Gtk.Template.Callback()
     def _config_select_server(self, arc, _value):
-        self.server = get_servers_api_key()[arc.get_selected()]
+        self.server = get_servers_t_sk()[arc.get_selected()]
 
     @Gtk.Template.Callback()
     def _on_vpn_apply(self, _row):

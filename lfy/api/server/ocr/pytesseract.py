@@ -2,13 +2,12 @@
 
 from gettext import gettext as _
 
-from lfy.api.server import Server
-from lfy.api.server.ocr import gen_img
+from lfy.api.server.ocr import ServerOCR
+from lfy.utils import gen_img
 from lfy.utils.debug import get_logger
-from lfy.utils.settings import Settings
 
 
-class PytesseractServer(Server):
+class PytesseractServer(ServerOCR):
     """Pytesseract文字识别
     """
 
@@ -21,15 +20,15 @@ class PytesseractServer(Server):
             "fra": 7,
             "ita": 8
         }
-        super().__init__("pytesseract", "pytesseract", lang_key_ns)
-        self.can_ocr = True
+        super().__init__("pytesseract", "pytesseract")
+        self.set_data(lang_key_ns, "eng | chi_sim | fra | ita")
 
-    def ocr_image(self, img_path: str, lang_str=None):
+    def ocr_image(self, img_path, conf_str=None):
         try:
             import pytesseract
-            if lang_str is None:
-                lang_str = self.get_api_key_s_ocr()
-            lang = "+".join(lang_str.split("|"))
+            if conf_str is None:
+                conf_str = self.get_conf()
+            lang = "+".join(conf_str.split("|"))
             return True, pytesseract.image_to_string(img_path, lang=lang)
         except ModuleNotFoundError as e:
             print(e)
@@ -42,33 +41,23 @@ class PytesseractServer(Server):
             get_logger().error(e)
             return False, str(e)
 
-    def get_api_key_s_ocr(self):
-        """图片识别的字符串apikey
-
-        Returns:
-            _type_: _description_
-        """
-        return Settings().g("server-sk-pytesseract-ocr")
-
-    def check_ocr(self, api_key_ocr_s):
-        """ocr环境
-
-        Args:
-            api_key_ocr_s (str): _description_
-
-        Returns:
-            _type_: _description_
-        """
-        path = gen_img("success")
+    def check_conf(self, conf_str):
         try:
             import pytesseract
+
+            # 放在 import 后面，因为未安装 pytesseract 会引发异常
+            path = gen_img("success")
+            if path is None:
+                return True, _("The Python library `Pillow` is not installed, you cannot test whether the setting is successful now, if the OCR reports an error in the future, please change this content")
+
             langs = pytesseract.get_languages()
             langs_no = []
-            for lang in api_key_ocr_s.split("|"):
+            for lang in conf_str.split("|"):
                 if lang not in langs:
                     langs_no.append(lang)
             if len(langs_no) > 0:
-                return False, _("Tesseract OCR database {} is not installed").format("-".join(langs_no))
+                return False, _("Tesseract OCR database {} is not installed")\
+                    .format("-".join(langs_no))
         except ModuleNotFoundError as e:
             print(e)
             get_logger().error(e)
@@ -76,9 +65,9 @@ class PytesseractServer(Server):
             s += str(e).replace("No module named", "")
             return False, s
 
-        ok, text = self.ocr_image(path, api_key_ocr_s)
+        ok, text = self.ocr_image(path, conf_str)
         if not ok:
             return ok, text
 
-        Settings().s("server-sk-pytesseract-ocr", api_key_ocr_s)
+        self.set_conf(conf_str)
         return ok, text

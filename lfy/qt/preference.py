@@ -1,5 +1,4 @@
 '设置'
-import re
 from gettext import gettext as _
 
 from PyQt6.QtCore import Qt, QUrl
@@ -9,8 +8,10 @@ from PyQt6.QtWidgets import (QCheckBox, QComboBox, QGroupBox, QHBoxLayout,
                              QSystemTrayIcon, QTabWidget, QToolButton,
                              QVBoxLayout, QWidget)
 
-from lfy.api import (get_server_names_api_key, get_server_names_o,
-                     get_servers_api_key, get_servers_o, get_servers_t)
+from lfy.api import (get_server_names_o, get_server_names_t_sk, get_servers_o,
+                     get_servers_t, get_servers_t_sk)
+from lfy.api.server.ocr import ServerOCR
+from lfy.api.server.tra import ServerTra
 from lfy.qt import CheckableComboBox, MyThread
 from lfy.utils import clear_key
 from lfy.utils.bak import backup_gsettings, restore_gsettings
@@ -53,7 +54,7 @@ class PreferenceWindow(QMainWindow):
         btn_q_t.setIcon(self.style().standardIcon(
             QStyle.StandardPixmap.SP_TitleBarContextHelpButton))
         btn_q_t.setToolTip(_("how to get API Key"))
-        btn_q_t.clicked.connect(self.open_url_t)
+        btn_q_t.clicked.connect(self._open_url_t)
         hl_t.addWidget(btn_q_t)
 
         btn_t_save = QPushButton(_("Save"))
@@ -82,7 +83,7 @@ class PreferenceWindow(QMainWindow):
         btn_q_o.setIcon(self.style().standardIcon(
             QStyle.StandardPixmap.SP_TitleBarContextHelpButton))
         btn_q_o.setToolTip(_("how to get API Key"))
-        btn_q_o.clicked.connect(self.open_url_o)
+        btn_q_o.clicked.connect(self._open_url_o)
         hl_o.addWidget(btn_q_o)
 
         btn_o_save = QPushButton(_("Save"))
@@ -180,7 +181,7 @@ class PreferenceWindow(QMainWindow):
         self.ccb.addCheckableItems(names, cs)
 
         # xx
-        self.cb_t.addItems(get_server_names_api_key())
+        self.cb_t.addItems(get_server_names_t_sk())
 
         self.cb_o.addItems(get_server_names_o())
         sso = get_servers_o()
@@ -195,16 +196,20 @@ class PreferenceWindow(QMainWindow):
     def _on_changed_t(self, i):
         if i < 0:
             return
+        st: ServerTra = get_servers_t_sk()[i]
         # 保存时，去掉空格，但是显示时，保留
-        s = clear_key(get_servers_api_key()[i].get_api_key_s(), "  |  ")
-        self.le_t.setText(s)
+        self.le_t.setText(clear_key(st.get_conf(), "  |  "))
+        self.le_t.setToolTip(st.sk_placeholder_text)
+        self.le_t.setPlaceholderText(st.sk_placeholder_text)
 
     def _on_changed_o(self, i):
         if i < 0:
             return
+        so: ServerOCR = get_servers_o()[i]
         # 保存时，去掉空格，但是显示时，保留
-        s = clear_key(get_servers_o()[i].get_api_key_s_ocr(), "  |  ")
-        self.le_o.setText(s)
+        self.le_o.setText(clear_key(so.get_conf(), "  |  "))
+        self.le_o.setToolTip(so.sk_placeholder_text)
+        self.le_o.setPlaceholderText(so.sk_placeholder_text)
 
     def _import_config(self):
         if self.cb.mimeData().hasText():
@@ -249,17 +254,20 @@ class PreferenceWindow(QMainWindow):
         def tt(p=None):
             le, api_key = p
             if ocr:
-                st = get_servers_o()[self.cb_o.currentIndex()]
-                _ok, _s = st.check_ocr(api_key)
+                st: ServerOCR = get_servers_o()[self.cb_o.currentIndex()]
+                _ok, _s = st.check_conf(api_key)
                 if _ok:
                     self.sg.s("server-ocr-selected-key", st.key)
             else:
-                st = get_servers_api_key()[self.cb_t.currentIndex()]
-                _ok, _s = st.check_translate(api_key)
+                st: ServerTra = get_servers_t_sk()[self.cb_t.currentIndex()]
+                _ok, _s = st.check_conf(api_key)
 
             return (st.name, _ok, _s, le, api_key)
 
         le: QLineEdit = self.le_t if not ocr else self.le_o
+        if not le.text():
+            print("empty")
+            return
         # 保存时，去掉空格，但是显示时，保留
         my_thread = MyThread(tt, (le, clear_key(le.text())))
         my_thread.signal.connect(notice_s)
@@ -271,14 +279,14 @@ class PreferenceWindow(QMainWindow):
     def _on_o_save(self):
         self._on_btn_to_save(True)
 
-    def open_url_t(self):
-        url = get_servers_api_key()[self.cb_t.currentIndex()].get_doc_url()
+    def _open_url_t(self):
+        url = get_servers_t_sk()[self.cb_t.currentIndex()].get_doc_url()
         QDesktopServices.openUrl(QUrl(url))
 
-    def open_url_o(self):
+    def _open_url_o(self):
         url = get_servers_o()[self.cb_o.currentIndex()].get_doc_url()
         QDesktopServices.openUrl(QUrl(url))
 
     def _cm_servers(self, ns):
-        ss = list(get_servers_t())[1:]
-        self.sg.s("compare-servers", [s.key for s in ss if s.name in ns])
+        self.sg.s("compare-servers",
+                  [s.key for s in list(get_servers_t())[1:] if s.name in ns])

@@ -8,7 +8,8 @@ from urllib.parse import urlparse
 import requests
 from requests import RequestException
 
-from lfy.api.server import TIME_OUT, Server
+from lfy.api.server import TIME_OUT
+from lfy.api.server.tra import ServerTra
 from lfy.utils.debug import get_logger
 
 
@@ -30,8 +31,8 @@ def _init_session():
     match = params_pattern.search(content)
     if match:
         params = match.group(1)
-        key, token, _time = [p.strip('"').replace('[', '') \
-                                 .replace(']', '') for p in params.split(',')]
+        key, token, _time = [p.strip('"').replace('[', '')
+                             .replace(']', '') for p in params.split(',')]
         session.headers.update({'key': key, 'token': token})
     match = re.search(r'IG:"(\w+)"', content)
 
@@ -42,7 +43,7 @@ def _init_session():
     return session
 
 
-class BingServer(Server):
+class BingServer(ServerTra):
     """bing翻译，无需apikey
     """
 
@@ -58,22 +59,10 @@ class BingServer(Server):
             "fr": 7,
             "it": 8,
         }
-        super().__init__("bing", _("bing"), lang_key_ns)
-        self.can_translate = True
+        super().__init__("bing", _("bing"))
+        self.set_data(lang_key_ns, session=_init_session())
 
     def translate_text(self, text, lang_to="zh-cn", lang_from="auto", n=0):
-        """翻译
-
-        Args:
-            text (str): 待翻译字符
-            lang_to (str, optional): 翻译成什么语言. Defaults to "zh-cn".
-            lang_from (str, optional): 文本是什么语言. Defaults to "auto".
-            n (int, optional): 刷新了几次. Defaults to "auto".
-
-        Returns:
-            str: _description_
-        """
-
         if n > 5:
             raise ValueError(_("something error, try other translate engine?"))
 
@@ -91,10 +80,12 @@ class BingServer(Server):
         # 自动重定向的新url，注意辨别
         host = hs["my_host"]
         if "my_iid" not in hs:
-            iid = f"translator.{random.randint(5019, 5026)}.{random.randint(1, 3)}"
+            iid = f"translator.{random.randint(5019, 5026)}.{
+                random.randint(1, 3)}"
             self.session.headers.update({'my_iid': iid})
             hs = self.session.headers
-        url = f'https://{host}/ttranslatev3?isVertical=1&&IG={hs["IG"]}&IID={hs["my_iid"]}'
+        url = f'https://{host}/ttranslatev3?isVertical=1&&IG={
+            hs["IG"]}&IID={hs["my_iid"]}'
 
         data = {'': '', 'text': text, 'to': lang_to,
                 'token': hs['token'], 'key': hs['key'], "fromLang": lang_from}

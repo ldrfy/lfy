@@ -9,9 +9,9 @@ from datetime import datetime, timezone
 from gettext import gettext as _
 from urllib.parse import quote, quote_plus
 
-from lfy.api.server import TIME_OUT, Server
+from lfy.api.server import TIME_OUT
+from lfy.api.server.tra import ServerTra
 from lfy.utils import s2ks
-from lfy.utils.settings import Settings
 
 
 def _compose_string_to_sign(method, queries):
@@ -38,10 +38,6 @@ def _sign_string(sign, secret):
 def _random_string(length):
     letters = string.ascii_letters + string.digits
     return ''.join(random.choice(letters) for _ in range(length))
-
-
-def _base64_encode(buffer):
-    return base64.b64encode(buffer).decode('utf-8')
 
 
 def _get_iso_8061_date():
@@ -99,7 +95,7 @@ def _translate(session, s, api_key_s, lang_to="en", lang_from="auto"):
         .format(f'{result["Code"]}: {result["Message"]}')
 
 
-class AliYunServer(Server):
+class AliYunServer(ServerTra):
     """阿里云翻译
     """
 
@@ -116,45 +112,17 @@ class AliYunServer(Server):
             "fr": 7,
             "it": 8
         }
-        super().__init__("aliyun", _("aliyun"), lang_key_ns)
-        self.can_translate = True
+        super().__init__("aliyun", _("aliyun"))
+        self.set_data(lang_key_ns, "AccessKey ID | AccessKey Secret")
 
-    def check_translate(self, api_key_s):
-        """保存时核对 api_key_s
-
-        Args:
-            api_key_s (str): 保存api_key
-
-        Returns:
-            bool: _description_
-        """
-        error_msg_template = _("please input {} and {} like:")
-        error_msg = error_msg_template.format(
-            "AccessKey ID", "AccessKey Secret")
-        if "|" not in api_key_s:
-            return False, error_msg + " XXXX | XXXX"
-        ok, text = _translate(self.session, "success", api_key_s)
+    def check_conf(self, conf_str):
+        ok, s = super().check_conf(conf_str)
+        if not ok:
+            return ok, s
+        ok, text = _translate(self.session, "success", conf_str)
         if ok:
-            Settings().s("server-sk-aliyun", api_key_s)
+            self.set_conf(conf_str)
         return ok, text
 
-    def translate_text(self, text, lang_to="en", lang_from="auto"):
-        """翻译接口
-
-        Args:
-            text (_type_): 待翻译字符串
-            lang_from (str, optional): _description_. Defaults to "auto".
-            lang_to (str, optional): _description_. Defaults to "auto".
-
-        Returns:
-            _type_: _description_
-        """
-        return _translate(self.session, text, self.get_api_key_s(), lang_to, lang_from)
-
-    def get_api_key_s(self):
-        """设置自动加载保存的api
-
-        Returns:
-            _type_: _description_
-        """
-        return Settings().g("server-sk-aliyun")
+    def translate_text(self, text, lang_to="en", lang_from="auto", n=0):
+        return _translate(self.session, text, self.get_conf(), lang_to, lang_from)

@@ -1,26 +1,24 @@
 'ocr'
 from gettext import gettext as _
 
-from lfy.api.server import Server
-from lfy.api.server.ocr import gen_img
+from lfy.api.server.ocr import ServerOCR
+from lfy.utils import gen_img
 from lfy.utils.debug import get_logger
-from lfy.utils.settings import Settings
 
 
-class EasyOcrServer(Server):
+class EasyOcrServer(ServerOCR):
     """EasyOcr文字识别
     """
 
     def __init__(self):
-        super().__init__("easyocr", "easyocr", {})
-        self.can_ocr = True
+        super().__init__("easyocr", "easyocr")
 
-    def ocr_image(self, img_path: str, lang_str=None):
+    def ocr_image(self, img_path, conf_str=None):
         try:
             import easyocr
-            if lang_str is None:
-                lang_str = self.get_api_key_s_ocr()
-            lang_keys = lang_str.split("|")
+            if conf_str is None:
+                conf_str = self.get_conf()
+            lang_keys = conf_str.split("|")
             reader = easyocr.Reader(lang_keys)
             s = " ".join(reader.readtext(img_path, detail=0))
             return True, s.strip()
@@ -35,17 +33,22 @@ class EasyOcrServer(Server):
             get_logger().error(e)
             return False, str(e)
 
-    def get_api_key_s_ocr(self):
-        """图片识别的字符串apikey
+    def check_conf(self, conf_str):
+        try:
+            import easyocr
 
-        Returns:
-            _type_: _description_
-        """
-        return Settings().g("server-sk-easyocr-ocr")
+            # 放在 import 后面，因为未安装 pytesseract 会引发异常
+            path = gen_img("success")
+            if path is None:
+                return True, _("The Python library `Pillow` is not installed, you cannot test whether the setting is successful now, if the OCR reports an error in the future, please change this content")
+            ok, text = self.ocr_image(path)
+            if ok:
+                self.set_conf(conf_str)
+            return ok, text
 
-    def check_ocr(self, api_key_ocr_s):
-        path = gen_img("success")
-        ok, text = self.ocr_image(path)
-        if ok:
-            Settings().s("server-sk-easyocr-ocr", api_key_ocr_s)
-        return ok, text
+        except ModuleNotFoundError as e:
+            print(e)
+            get_logger().error(e)
+            s = _("please install python whl")
+            s += str(e).replace("No module named", "")
+            return False, s

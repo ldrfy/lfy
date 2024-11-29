@@ -55,23 +55,23 @@ def get_server_names(ss):
     return [s.name for s in ss]
 
 
-def get_servers_api_key():
+def get_servers_t_sk():
     """哪些需要填写api
 
     Returns:
         list: ["百度", "腾讯", ...]
     """
 
-    return [s for s in get_servers_t() if s.get_api_key_s() is not None]
+    return [s for s in get_servers_t() if s.sk_placeholder_text]
 
 
-def get_server_names_api_key():
+def get_server_names_t_sk():
     """哪些需要填写api
 
     Returns:
         list: ["百度", "腾讯", ...]
     """
-    return get_server_names(get_servers_api_key())
+    return get_server_names(get_servers_t_sk())
 
 
 def get_server(i: int, ss) -> Server:

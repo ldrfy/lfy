@@ -1,45 +1,34 @@
-from PIL import Image, ImageDraw, ImageFont
+'OCR'
+from lfy.api.server import Server
 
 
-def gen_img(text="success"):
-    """生成图片，TODO:这里应该生成需要语言字体的文字，现在有问题
-
-    Args:
-        text (str, optional): _description_. Defaults to "success".
+class ServerOCR(Server):
+    """翻译基础类
     """
-    w,h = 256,128
-    # 创建一个白色背景的图片 (宽1024px，高1024px)
-    img = Image.new('RGB', (w, h), color='white')
 
-    # 创建一个绘图对象
-    d = ImageDraw.Draw(img)
+    def ocr_image(self, img_path: str, conf_str=None):
+        """图片识别
 
-    # 使用 Pillow 自带的默认字体
-    font = ImageFont.load_default(60)
+        Args:
+            img_path (str): _description_
 
-    # 定义文本
-    text = "success"
+        Returns:
+            str: _description_
+        """
+        ok = True
+        text = f"{img_path}, {conf_str}"
+        return ok, text
 
-    # 使用 textbbox 计算文本的边界框，返回 (left, top, right, bottom)
-    text_bbox = d.textbbox((0, 0), text, font=font)
-    text_width = text_bbox[2] - text_bbox[0]
-    text_height = text_bbox[3] - text_bbox[1]
+    def get_doc_url(self, d="o"):
+        """文档连接
 
-    # 将文本居中
-    position = ((w - text_width) // 2, (h - text_height) // 2)
+        Returns:
+            _type_: _description_
+        """
+        return super().get_doc_url(d)
 
-    # 在图片上添加文本，设置颜色为绿色
-    d.text(position, text, fill=(0, 128, 0), font=font)
+    def get_conf(self, add="ocr"):
+        return super().get_conf(add)
 
-    # 保存图片
-    path = "/tmp/lfy.png"
-    img.save(path)
-    return path
-
-
-if __name__== "__main__":
-    img_path = gen_img()
-
-    import pytesseract
-    s = pytesseract.image_to_string(img_path, lang="eng")
-    print(s)
+    def get_conf_key(self, add="ocr"):
+        return super().get_conf_key(add)

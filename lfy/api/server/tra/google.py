@@ -7,7 +7,8 @@ from gettext import gettext as _
 import requests
 from requests import ConnectTimeout, RequestException
 
-from lfy.api.server import TIME_OUT, Server
+from lfy.api.server import TIME_OUT
+from lfy.api.server.tra import ServerTra
 from lfy.utils.debug import get_logger
 
 
@@ -26,7 +27,7 @@ def _get_session():
     return session
 
 
-class GoogleServer(Server):
+class GoogleServer(ServerTra):
     """google翻译
     """
 
@@ -42,20 +43,10 @@ class GoogleServer(Server):
             "fr": 7,
             "it": 8,
         }
-        super().__init__("google", _("google"), lang_key_ns, session=_get_session())
-        self.can_translate = True
+        super().__init__("google", _("google"))
+        self.set_data(lang_key_ns, session=_get_session())
 
     def translate_text(self, text, lang_to="zh-cn", lang_from="auto", n=0):
-        """翻译
-
-        Args:
-            text (str): 待翻译字符
-            lang_to (str, optional): 翻译成什么语言. Defaults to "zh-cn".
-            lang_from (str, optional): 文本是什么语言. Defaults to "auto".
-
-        Returns:
-            str: _description_
-        """
 
         if n > 3:
             raise ValueError(_("something error, try other translate engine?"))
@@ -67,7 +58,8 @@ class GoogleServer(Server):
                   'format': "html", 'v': "1.0"}
 
         try:
-            response = self.session.post(url, params=params, data={'q': text}, timeout=TIME_OUT)
+            response = self.session.post(url, params=params, data={
+                                         'q': text}, timeout=TIME_OUT)
         except ConnectTimeout as e0:
             print("google0", n, type(e0), e0)
             get_logger().error(e0)

@@ -7,11 +7,9 @@ import random
 import time
 from gettext import gettext as _
 
-import requests
-
-from lfy.api.server import TIME_OUT, Server
+from lfy.api.server import TIME_OUT
+from lfy.api.server.tra import ServerTra
 from lfy.utils import s2ks
-from lfy.utils.settings import Settings
 
 
 def _get_string_to_sign(method, endpoint, params):
@@ -45,7 +43,51 @@ def _sign_str(key, s, method):
     return base64.b64encode(hmac_str)
 
 
-class TencentServer(Server):
+def _translate(session, query_text, api_key_s, lang_to="zh", lang_from="auto"):
+    """腾讯翻译接口
+
+    Args:
+        query_text (str): _description_
+        api_key_s (str): secret_id|secret_key
+        lang_from (str, optional): _description_. Defaults to "auto".
+        lang_to (str, optional): _description_. Defaults to "zh".
+
+    Returns:
+        _type_: _description_
+    """
+
+    secret_id, secret_key = s2ks(api_key_s)
+    if secret_id is None or secret_id == "secret_id":
+        return False, _("please input API Key in preference")
+
+    data = {
+        "Action": "TextTranslate",
+        "Region": "ap-beijing",
+        "SecretId": secret_id,
+        "Timestamp": int(time.time()),
+        "Nonce": random.randint(1, int(1e6)),
+        "Version": "2018-03-21",
+        "ProjectId": 0,
+        "Source": lang_from,
+        "SourceText": query_text,
+        "Target": lang_to
+    }
+    endpoint = "tmt.tencentcloudapi.com"
+    s = _get_string_to_sign("GET", endpoint, data)
+
+    data["Signature"] = _sign_str(secret_key, s, hashlib.sha1)
+    request = session.get(
+        f"https://{endpoint}", params=data, timeout=TIME_OUT)
+
+    result = request.json()["Response"]
+    if "Error" in result:
+        return False, _("something error: {}")\
+            .format(f'\n\n{result["Error"]["Code"]}: {result["Error"]["Message"]}')
+
+    return True, result["TargetText"]
+
+
+class TencentServer(ServerTra):
     """tencent翻译
     """
 
@@ -61,93 +103,18 @@ class TencentServer(Server):
             "fr": 7,
             "it": 8,
         }
-        super().__init__("tencent", _("tencent"), lang_key_ns)
-        self.can_translate = True
+        super().__init__("tencent", _("tencent"))
+        # https://cloud.tencent.com/document/product/551/104415
+        self.set_data(lang_key_ns, "Secretid | Secretkey")
 
-    def _get_session(self):
-        """初始化请求
-        """
-        if self.session is None:
-            self.session = requests.Session()
-        return self.session
-
-    def check_translate(self, api_key_s):
-        """保存时核对api
-
-        Args:
-            api_key_s (str): _description_
-
-        Returns:
-            _type_: _description_
-        """
-        error = _("please input secret_id and secret_key like:")
-        if "|" not in api_key_s:
-            return False, error + " a121343 | fdsdsdg"
-        ok, text = self._translate("success", api_key_s, "en")
+    def check_conf(self, conf_str):
+        ok, s = super().check_conf(conf_str)
+        if not ok:
+            return ok, s
+        ok, text = _translate(self.session, "success", conf_str, "en")
         if ok:
-            Settings().s("server-sk-tencent", api_key_s)
+            self.set_conf(conf_str)
         return ok, text
 
     def translate_text(self, text, lang_to="auto", lang_from="auto"):
-        """翻译接口
-
-        Args:
-            text (str): _description_
-            lang_to (str, optional): _description_. Defaults to "auto".
-            lang_from (str, optional): _description_. Defaults to "auto".
-
-        Returns:
-            _type_: _description_
-        """
-        return self._translate(text, self.get_api_key_s(), lang_to, lang_from)
-
-    def get_api_key_s(self):
-        """设置自动加载保存的api
-
-        Returns:
-            _type_: _description_
-        """
-        return Settings().g("server-sk-tencent")
-
-    def _translate(self, query_text, api_key_s, lang_to="zh", lang_from="auto"):
-        """腾讯翻译接口
-
-        Args:
-            query_text (str): _description_
-            api_key_s (str): secret_id|secret_key
-            lang_from (str, optional): _description_. Defaults to "auto".
-            lang_to (str, optional): _description_. Defaults to "zh".
-
-        Returns:
-            _type_: _description_
-        """
-
-        secret_id, secret_key = s2ks(api_key_s)
-        if secret_id is None or secret_id == "secret_id":
-            return False, _("please input API Key in preference")
-
-        data = {
-            "Action": "TextTranslate",
-            "Region": "ap-beijing",
-            "SecretId": secret_id,
-            "Timestamp": int(time.time()),
-            "Nonce": random.randint(1, int(1e6)),
-            "Version": "2018-03-21",
-            "ProjectId": 0,
-            "Source": lang_from,
-            "SourceText": query_text,
-            "Target": lang_to
-        }
-        endpoint = "tmt.tencentcloudapi.com"
-        s = _get_string_to_sign("GET", endpoint, data)
-
-        data["Signature"] = _sign_str(secret_key, s, hashlib.sha1)
-        request = self._get_session().get(
-            f"https://{endpoint}", params=data, timeout=TIME_OUT)
-
-        result = request.json()["Response"]
-        if "Error" in result:
-            return False, _("something error: {}")\
-                .format(f'\n\n{result["Error"]["Code"]}: {result["Error"]["Message"]}')
-
-        return True, result["TargetText"]
+        return _translate(self.session, text, self.get_conf(), lang_to, lang_from)
