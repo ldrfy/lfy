@@ -34,8 +34,8 @@ def main():
     icon = QIcon.fromTheme(APP_ID)
     if icon.isNull():
         # 如果图标未加载成功，使用默认图标
-        icon = QIcon(os.path.join(os.path.dirname(
-            __file__), f"../resources/{APP_ID}.svg"))
+        icon = QIcon(os.path.join(os.path.dirname(__file__),
+                                  f"../resources/{APP_ID}.svg"))
     app.setWindowIcon(icon)
     app.setApplicationName(_(APP_NAME))
     app.setDesktopFileName(APP_ID)
