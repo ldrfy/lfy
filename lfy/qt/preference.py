@@ -210,6 +210,9 @@ class PreferenceWindow(QMainWindow):
         self.le_o.setText(clear_key(so.get_conf(), "  |  "))
         self.le_o.setToolTip(so.sk_placeholder_text)
         self.le_o.setPlaceholderText(so.sk_placeholder_text)
+        self.tray.showMessage(_("OCR server"),
+                              _("Using {} for text recognition").format(so.name),
+                              QSystemTrayIcon.MessageIcon.Information, 3000)
 
     def _import_config(self):
         if self.cb.mimeData().hasText():

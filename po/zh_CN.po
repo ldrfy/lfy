@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-11-28 20:14+0800\n"
+"POT-Creation-Date: 2024-11-29 19:20+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/cool.ldr.lfy.in.in.desktop:3 data/cool.ldr.lfy.in.appdata.xml:10
+#: data/cool.ldr.lfy.in.in.desktop:3 data/gtk/cool.ldr.lfy.in.appdata.xml:10
 #: data/gtk/translate.ui:130
 msgid "lfy"
 msgstr "兰译"
@@ -104,103 +104,103 @@ msgstr "VPN地址"
 msgid "Which services are available in compare model"
 msgstr "在比较模式下哪些服务被选中"
 
-#: data/cool.ldr.lfy.in.appdata.xml:11 lfy/qt/tray.py:122
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:11 lfy/qt/tray.py:125
 msgid "Translation software for read paper"
 msgstr "为gnome设计的翻译软件"
 
-#: data/cool.ldr.lfy.in.appdata.xml:13
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:13
 msgid ""
 "An easy and pleasant way to translate. Support many translation services. "
 "Especially suitable for document translation."
 msgstr "一种简单愉快的翻译方式。支持多种翻译服务。特别适合文档翻译。"
 
-#: data/cool.ldr.lfy.in.appdata.xml:19
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:19
 msgid "yuh"
 msgstr "余航"
 
-#: data/cool.ldr.lfy.in.appdata.xml:30
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:30
 msgid "Translation homepage"
 msgstr "为gnome设计的翻译软件"
 
-#: data/cool.ldr.lfy.in.appdata.xml:35
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:35
 msgid "Preferences page"
 msgstr "设置"
 
-#: data/cool.ldr.lfy.in.appdata.xml:40
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:40
 msgid "Set Api Key"
 msgstr "设置密钥"
 
-#: data/cool.ldr.lfy.in.appdata.xml:45
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:45
 msgid "Shortcuts"
 msgstr "显示快捷键"
 
-#: data/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:58 lfy/qt/tray.py:126
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:58 lfy/qt/tray.py:129
 msgid "About"
 msgstr "关于"
 
-#: data/cool.ldr.lfy.in.appdata.xml:60
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:60
 msgid "Add local OCR recognition through pytesseract"
 msgstr "通过pytesseract添加本地OCR识别"
 
-#: data/cool.ldr.lfy.in.appdata.xml:61
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:61
 msgid "Add import and export settings"
 msgstr "添加导入和导出设置"
 
-#: data/cool.ldr.lfy.in.appdata.xml:62
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:62
 msgid "Add translate or OCR in terminal, like `lfy -h`"
 msgstr "在终端中添加翻译或OCR，如`lfy-h`"
 
-#: data/cool.ldr.lfy.in.appdata.xml:63
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:63
 msgid "Add debug in About Page"
 msgstr "在“关于”页面中添加调试"
 
-#: data/cool.ldr.lfy.in.appdata.xml:64
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:64
 msgid "The dividing line in the middle of the translation page can be moved"
 msgstr "翻译页面中间的分界线可以移动"
 
-#: data/cool.ldr.lfy.in.appdata.xml:71
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:71
 msgid "Add aliyun/huoshan Translate for free"
 msgstr "添加阿里云/火山翻译（需密钥、但免费）"
 
-#: data/cool.ldr.lfy.in.appdata.xml:72
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:72
 msgid "Support notification after translation"
 msgstr "支持通知翻译内容"
 
-#: data/cool.ldr.lfy.in.appdata.xml:73
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:73
 msgid "Supports comparing multiple translations at the same time"
 msgstr "支持同时比较多个翻译"
 
-#: data/cool.ldr.lfy.in.appdata.xml:80
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:80
 msgid "Add Bing Translate for free"
 msgstr "添加必应翻译（无需密钥）"
 
-#: data/cool.ldr.lfy.in.appdata.xml:87
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:87
 msgid "Fix Google Translate"
 msgstr "修复谷歌翻译"
 
-#: data/cool.ldr.lfy.in.appdata.xml:88
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:88
 msgid "Improve translation performance"
 msgstr "提高翻译性能"
 
-#: data/cool.ldr.lfy.in.appdata.xml:89
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:89
 msgid "Add Italian language and support Italian translation"
 msgstr "添加意大利语言，支持意大利语翻译"
 
-#: data/cool.ldr.lfy.in.appdata.xml:90
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:90
 msgid ""
 "Optimize the structure of translation services and make it more convenient "
 "to create third-party translation services"
 msgstr "优化翻译服务结构，打造第三方翻译服务更便捷"
 
-#: data/cool.ldr.lfy.in.appdata.xml:97
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:97
 msgid "add shortcut"
 msgstr "添加快捷键"
 
-#: data/cool.ldr.lfy.in.appdata.xml:98
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:98
 msgid "Automatically check for updates"
 msgstr "软件打开时，自动检查更新"
 
-#: data/cool.ldr.lfy.in.appdata.xml:104
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:104
 msgid "Basic functions completed"
 msgstr "基础功能完成"
 
@@ -212,13 +212,13 @@ msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
 
-#: lfy/gtk/main.py:173 lfy/qt/tray.py:137 data/gtk/help-overlay.ui:20
+#: lfy/gtk/main.py:173 lfy/qt/tray.py:140 data/gtk/help-overlay.ui:20
 #: data/gtk/help-overlay.ui:27 data/gtk/help-overlay.ui:34
 #: data/gtk/help-overlay.ui:53
 msgid "Copy detected, translate immediately"
 msgstr "检测到复制，立刻翻译"
 
-#: lfy/gtk/main.py:176 lfy/qt/tray.py:143
+#: lfy/gtk/main.py:176 lfy/qt/tray.py:146
 msgid "Copy detected, not automatically translated"
 msgstr "检测到复制，不自动翻译"
 
@@ -238,7 +238,7 @@ msgstr "下次翻译不拼接文本"
 msgid "Next translation splicing text"
 msgstr "下次翻译拼接文本"
 
-#: lfy/gtk/main.py:313 lfy/qt/tray.py:177
+#: lfy/gtk/main.py:313 lfy/qt/tray.py:180
 msgid ""
 "There is no new version.                      \n"
 "The current version is {}.                      \n"
@@ -248,7 +248,7 @@ msgstr ""
 "当前版本为 {}。\n"
 "可前往 {} 查看测试版"
 
-#: lfy/gtk/preference.py:71 lfy/api/server/tra/com.py:66
+#: lfy/gtk/preference.py:71 lfy/api/server/tra/com.py:42
 msgid "compare"
 msgstr "对比"
 
@@ -268,28 +268,28 @@ msgstr "配置数据已导出到剪贴板"
 msgid "Using {} for text recognition"
 msgstr "使用 {} 进行文本识别"
 
-#: lfy/gtk/translate.py:225 lfy/qt/translate.py:276
+#: lfy/gtk/translate.py:227 lfy/qt/translate.py:277
 msgid ""
 "This time the content contains private information and is not translated"
 msgstr "本次内容包含隐私信息，不翻译"
 
-#: lfy/gtk/translate.py:278 lfy/gtk/translate.py:310 lfy/qt/translate.py:303
-#: lfy/api/server/tra/baidu.py:46 lfy/api/server/tra/tencent.py:150
-#: lfy/api/server/tra/aliyun.py:98 lfy/api/server/tra/com.py:29
-#: lfy/api/server/tra/huoshan.py:138 lfy/api/server/ocr/baidu.py:143
+#: lfy/gtk/translate.py:282 lfy/gtk/translate.py:314 lfy/qt/translate.py:304
+#: lfy/api/server/tra/baidu.py:46 lfy/api/server/tra/tencent.py:84
+#: lfy/api/server/tra/aliyun.py:94 lfy/api/server/tra/com.py:30
+#: lfy/api/server/tra/huoshan.py:139 lfy/api/server/ocr/baidu.py:129
 #: lfy/utils/code.py:85 lfy/utils/code.py:118
 msgid "something error: {}"
-msgstr "一些错误发生："
+msgstr "一些错误发生：{}"
 
-#: lfy/gtk/translate.py:293 lfy/qt/translate.py:236
+#: lfy/gtk/translate.py:297 lfy/qt/translate.py:236
 msgid "OCRing..."
 msgstr "OCR识别中.."
 
-#: lfy/gtk/translate.py:295 lfy/qt/translate.py:307
+#: lfy/gtk/translate.py:299 lfy/qt/translate.py:308
 msgid "Translating..."
 msgstr "翻译中……"
 
-#: lfy/gtk/translate.py:307 lfy/qt/translate.py:253
+#: lfy/gtk/translate.py:311 lfy/qt/translate.py:254
 msgid "Translation completed"
 msgstr "翻译完成"
 
@@ -301,100 +301,100 @@ msgstr "翻译服务"
 msgid "Text recognition"
 msgstr "文本识别"
 
-#: lfy/gtk/widgets/server_preferences.py:88
+#: lfy/gtk/widgets/server_preferences.py:81
 msgid "error message"
 msgstr "错误信息"
 
-#: lfy/gtk/widgets/server_preferences.py:90
+#: lfy/gtk/widgets/server_preferences.py:83
 msgid "Confirm"
 msgstr "确认"
 
-#: lfy/qt/preference.py:42 data/gtk/preference.ui:17
+#: lfy/qt/preference.py:44 data/gtk/preference.ui:17
 msgid "Translation keys"
 msgstr "翻译密钥"
 
-#: lfy/qt/preference.py:54 lfy/qt/preference.py:83
+#: lfy/qt/preference.py:56 lfy/qt/preference.py:85
 #: data/gtk/server-preferences.ui:47
 msgid "how to get API Key"
 msgstr "怎么获取密钥"
 
-#: lfy/qt/preference.py:58 lfy/qt/preference.py:87 lfy/qt/preference.py:130
+#: lfy/qt/preference.py:60 lfy/qt/preference.py:89 lfy/qt/preference.py:132
 msgid "Save"
 msgstr "保存"
 
-#: lfy/qt/preference.py:69 data/gtk/preference.ui:47
+#: lfy/qt/preference.py:71 data/gtk/preference.ui:47
 msgid "OCR server"
 msgstr "OCR服务"
 
-#: lfy/qt/preference.py:96 data/gtk/preference.ui:10
+#: lfy/qt/preference.py:98 data/gtk/preference.ui:10
 msgid "General"
 msgstr "通用"
 
-#: lfy/qt/preference.py:101 data/gtk/preference.ui:110
+#: lfy/qt/preference.py:103 data/gtk/preference.ui:110
 msgid "auto check update"
 msgstr "自动检查更新"
 
-#: lfy/qt/preference.py:108 data/gtk/preference.ui:117
+#: lfy/qt/preference.py:110 data/gtk/preference.ui:117
 msgid "Notify translation results"
 msgstr "通知翻译结果"
 
-#: lfy/qt/preference.py:115 data/gtk/preference.ui:76
+#: lfy/qt/preference.py:117 data/gtk/preference.ui:76
 msgid "Compare model"
 msgstr "对比模式"
 
-#: lfy/qt/preference.py:125
+#: lfy/qt/preference.py:127
 msgid "vpn addr and port"
 msgstr "VPN地址和端口"
 
-#: lfy/qt/preference.py:137 data/gtk/preference.ui:139
+#: lfy/qt/preference.py:139 data/gtk/preference.ui:139
 msgid "Software settings backup and restore"
 msgstr "软件设置备份和恢复"
 
-#: lfy/qt/preference.py:140 data/gtk/preference.ui:142
+#: lfy/qt/preference.py:142 data/gtk/preference.ui:142
 msgid "backup"
 msgstr "备份"
 
-#: lfy/qt/preference.py:142 data/gtk/preference.ui:153
+#: lfy/qt/preference.py:144 data/gtk/preference.ui:153
 msgid ""
 "Read the JSON configuration of the clipboard, then import it, and some of "
 "the configurations will take effect after reopening the software"
 msgstr "读取剪贴板的json配置，然后导入，部分配置重新打开软件以后生效"
 
-#: lfy/qt/preference.py:146 data/gtk/preference.ui:151
+#: lfy/qt/preference.py:148 data/gtk/preference.ui:151
 msgid "restore"
 msgstr "恢复"
 
-#: lfy/qt/preference.py:148 data/gtk/preference.ui:144
+#: lfy/qt/preference.py:150 data/gtk/preference.ui:144
 msgid ""
 "Export the configuration to the clipboard, then you can paste it into any "
 "file and edit it"
 msgstr "将配置导出到剪贴板，然后您可以将其粘贴到任何文件中并编辑"
 
-#: lfy/qt/preference.py:156 data/gtk/preference.ui:103
+#: lfy/qt/preference.py:158 data/gtk/preference.ui:103
 msgid "Other"
 msgstr "其他"
 
-#: lfy/qt/preference.py:209
+#: lfy/qt/preference.py:218
 msgid "Import successful!"
 msgstr "导入成功！"
 
-#: lfy/qt/preference.py:210
+#: lfy/qt/preference.py:219
 msgid "It takes effect when you restart lfy."
 msgstr "重新打开lfy时生效。"
 
-#: lfy/qt/preference.py:214
+#: lfy/qt/preference.py:223
 msgid "Import failed!"
 msgstr "导入失败！"
 
-#: lfy/qt/preference.py:215
+#: lfy/qt/preference.py:224
 msgid "No configuration data in the clipboard."
 msgstr "剪贴板中没有配置数据。"
 
-#: lfy/qt/preference.py:220
+#: lfy/qt/preference.py:229
 msgid "Export successful!"
 msgstr "导出成功！"
 
-#: lfy/qt/preference.py:221
+#: lfy/qt/preference.py:230
 msgid "Configuration data has been exported to the clipboard."
 msgstr "配置数据已导出到剪贴板"
 
@@ -433,7 +433,7 @@ msgstr "警告"
 msgid "quit?"
 msgstr "退出？"
 
-#: lfy/qt/translate.py:282
+#: lfy/qt/translate.py:283
 msgid "Not translated this time!"
 msgstr "本次不翻译！"
 
@@ -441,11 +441,11 @@ msgstr "本次不翻译！"
 msgid "Open"
 msgstr "打开"
 
-#: lfy/qt/tray.py:41 lfy/qt/tray.py:190 data/gtk/translate.ui:159
+#: lfy/qt/tray.py:41 lfy/qt/tray.py:193 data/gtk/translate.ui:159
 msgid "Check for updates"
 msgstr "检查更新"
 
-#: lfy/qt/tray.py:46 lfy/qt/tray.py:136 data/gtk/translate.ui:141
+#: lfy/qt/tray.py:46 lfy/qt/tray.py:139 data/gtk/translate.ui:141
 #: data/gtk/help-overlay.ui:52
 msgid "Copy to translate"
 msgstr "复制即翻译"
@@ -458,119 +458,122 @@ msgstr "设置"
 msgid "Quit"
 msgstr "退出"
 
-#: lfy/qt/tray.py:142
+#: lfy/qt/tray.py:145
 msgid "Stop copy to translate"
 msgstr "停止复制即翻译"
 
-#: lfy/qt/tray.py:172
+#: lfy/qt/tray.py:175
 msgid "New version available!"
 msgstr "找到新版本！"
 
-#: lfy/qt/tray.py:181
+#: lfy/qt/tray.py:184
 msgid "No new version!"
 msgstr "暂无新版本！"
 
-#: lfy/api/server/__init__.py:9
+#: lfy/api/server/__init__.py:14
 msgid "Automatic"
 msgstr "自动"
 
-#: lfy/api/server/__init__.py:11
+#: lfy/api/server/__init__.py:16
 msgid "Chinese"
 msgstr "中文"
 
-#: lfy/api/server/__init__.py:13
+#: lfy/api/server/__init__.py:18
 msgid "Classical Chinese"
 msgstr "文言文"
 
-#: lfy/api/server/__init__.py:15
+#: lfy/api/server/__init__.py:20
 msgid "English"
 msgstr "英文"
 
-#: lfy/api/server/__init__.py:17
+#: lfy/api/server/__init__.py:22
 msgid "Japanese"
 msgstr "日文"
 
-#: lfy/api/server/__init__.py:19
+#: lfy/api/server/__init__.py:24
 msgid "Korean"
 msgstr "韩文"
 
-#: lfy/api/server/__init__.py:21
+#: lfy/api/server/__init__.py:26
 msgid "German"
 msgstr "德语"
 
-#: lfy/api/server/__init__.py:23
+#: lfy/api/server/__init__.py:28
 msgid "French"
 msgstr "法语"
 
-#: lfy/api/server/__init__.py:25
+#: lfy/api/server/__init__.py:30
 msgid "Italian"
 msgstr "意大利语"
 
-#: lfy/api/server/tra/baidu.py:28 lfy/api/server/tra/tencent.py:127
-#: lfy/api/server/tra/aliyun.py:67 lfy/api/server/tra/huoshan.py:67
-#: lfy/api/server/ocr/baidu.py:30
+#: lfy/api/server/__init__.py:142
+msgid "Developers, please set sk_placeholder_text"
+msgstr "开发者，请设置 sk_placeholder_text"
+
+#: lfy/api/server/__init__.py:144
+#, fuzzy
+msgid "please input {} like: {}"
+msgstr "请输入 {} 和 {}，类似："
+
+#: lfy/api/server/tra/baidu.py:28 lfy/api/server/tra/tencent.py:61
+#: lfy/api/server/tra/aliyun.py:63 lfy/api/server/tra/huoshan.py:67
 msgid "please input API Key in preference"
 msgstr "请在设置中填写 API Key"
 
-#: lfy/api/server/tra/baidu.py:69 lfy/api/server/ocr/baidu.py:91
+#: lfy/api/server/tra/baidu.py:69 lfy/api/server/ocr/baidu.py:93
 msgid "baidu"
 msgstr "百度"
 
-#: lfy/api/server/tra/baidu.py:81
-msgid "please input app_id and secret_key like:"
-msgstr "请输入 app_id 和 secret_key，类似："
-
-#: lfy/api/server/tra/google.py:45
+#: lfy/api/server/tra/google.py:46
 msgid "google"
 msgstr "谷歌"
 
-#: lfy/api/server/tra/google.py:61 lfy/api/server/tra/bing.py:78
+#: lfy/api/server/tra/google.py:52 lfy/api/server/tra/bing.py:67
 msgid "something error, try other translate engine?"
 msgstr "出现了一些错误，试试其他翻译引擎？"
 
-#: lfy/api/server/tra/google.py:74
+#: lfy/api/server/tra/google.py:66
 msgid "The connection timed out. Maybe there is a network problem"
 msgstr "连接超时，网络可能有问题（比如需要代理）"
 
-#: lfy/api/server/tra/tencent.py:64
+#: lfy/api/server/tra/tencent.py:106
 msgid "tencent"
 msgstr "腾讯"
 
-#: lfy/api/server/tra/tencent.py:83
-msgid "please input secret_id and secret_key like:"
-msgstr "请输入 app_id 和 secret_key，类似："
-
-#: lfy/api/server/tra/bing.py:61
+#: lfy/api/server/tra/bing.py:62
 msgid "bing"
 msgstr "必应"
 
-#: lfy/api/server/tra/bing.py:131
+#: lfy/api/server/tra/bing.py:122
 #, python-brace-format
 msgid "1000 characters limit! You send {len_text} characters."
 msgstr "被限制在1000个字符! 你发送了 {len_text} 个字符."
 
-#: lfy/api/server/tra/aliyun.py:119
+#: lfy/api/server/tra/aliyun.py:115
 msgid "aliyun"
 msgstr "阿里云"
 
-#: lfy/api/server/tra/aliyun.py:131 lfy/api/server/tra/huoshan.py:176
-msgid "please input {} and {} like:"
-msgstr "请输入 {} 和 {}，类似："
-
-#: lfy/api/server/tra/huoshan.py:164
+#: lfy/api/server/tra/huoshan.py:165
 msgid "huoshan"
 msgstr "火山"
 
-#: lfy/api/server/ocr/baidu.py:166
+#: lfy/api/server/ocr/baidu.py:51
 msgid "please input API Key and Secret Key like:"
 msgstr "请输入 app_id 和 secret_key，类似："
 
-#: lfy/api/server/ocr/easyocr.py:30 lfy/api/server/ocr/pytesseract.py:38
-#: lfy/api/server/ocr/pytesseract.py:77
+#: lfy/api/server/ocr/easyocr.py:28 lfy/api/server/ocr/easyocr.py:52
+#: lfy/api/server/ocr/pytesseract.py:36 lfy/api/server/ocr/pytesseract.py:64
 msgid "please install python whl"
 msgstr "请安装python库"
 
-#: lfy/api/server/ocr/pytesseract.py:73
+#: lfy/api/server/ocr/easyocr.py:43 lfy/api/server/ocr/pytesseract.py:51
+msgid ""
+"The Python library `Pillow` is not installed, you cannot test whether the "
+"setting is successful now, if the OCR reports an error in the future, please "
+"change this content"
+msgstr "Python库`Pillow`未安装，现在无法测试设置是否成功，以后如果OCR报错，请更改此内容"
+
+#: lfy/api/server/ocr/pytesseract.py:59
 msgid "Tesseract OCR database {} is not installed"
 msgstr "未安装 Tesseract OCR 数据库 {}"
 
@@ -693,3 +696,9 @@ msgstr "退出"
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "显示快捷键"
+
+#~ msgid "please input app_id and secret_key like:"
+#~ msgstr "请输入 app_id 和 secret_key，类似："
+
+#~ msgid "please input secret_id and secret_key like:"
+#~ msgstr "请输入 app_id 和 secret_key，类似："

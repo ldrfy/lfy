@@ -1,6 +1,6 @@
 data/cool.ldr.lfy.in.in.desktop
 data/gtk/cool.ldr.lfy.in.gschema.xml
-data/cool.ldr.lfy.in.appdata.xml
+data/gtk/cool.ldr.lfy.in.appdata.xml
 
 
 lfy/gtk/main.py
