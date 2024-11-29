@@ -82,7 +82,7 @@ test-pip: clear
 	mv usr/share/icons/hicolor/scalable/apps ./lfy/resources/ && \
 	mv usr/share/locale ./lfy/resources/ && \
 	python -m build && \
-	cp dist/lfy-${VERSION}-py3-none-any.whl ${DISK}/lfy-${VERSION}-py3-none-any-${BUILD_TYPE}.whl
+	cp dist/lfy-${VERSION}-py3-none-any.whl ${DISK}/
 
 
 

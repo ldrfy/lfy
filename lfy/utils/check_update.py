@@ -1,6 +1,8 @@
 """更新
 """
 
+from gettext import gettext as _
+
 import requests
 
 from lfy import PACKAGE_URL, VERSION  # pylint: disable=E0611
@@ -84,14 +86,13 @@ def main():
     Returns:
         str: 更新信息或None
     """
-    error_config = f"Please update. There is a problem with the current version configuration.\n\n{
-        PACKAGE_URL}"  # pylint: disable=C0301
+    s = f"Please update. There is a problem with the current version configuration.\n\n{PACKAGE_URL}"
     try:
         data = get_by_github()
         if data is None or "version" not in data:
             data = get_by_gitee()
         if data is None or "version" not in data:
-            return error_config
+            return s
 
         v = data["version"]
         if compare_versions(v, VERSION):
@@ -100,4 +101,4 @@ def main():
     # pylint: disable=W0718
     except Exception as e:
         get_logger().error(e)
-        return error_config
+        return s

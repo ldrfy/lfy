@@ -72,7 +72,7 @@ def _translate(session, s, api_key_s, lang_to="en", lang_from="auto"):
     # https://www.volcengine.com/docs/4640/65067
     curr_time = get_date_time_now()
 
-    data = {
+    d = {
         "method": "POST",
         "url": "/",
         "param": "Action=TranslateText&Version=2020-06-01",
@@ -99,30 +99,29 @@ def _translate(session, s, api_key_s, lang_to="en", lang_from="auto"):
     }
 
     canonical_request = "\n".join([
-        data["method"],
-        data["url"],
-        data["param"],
+        d["method"],
+        d["url"],
+        d["param"],
         get_string_headers(header),
         get_signed_headers(header),
         header["X-Content-Sha256"]
     ])
 
     hash_canonical_request = hex_digest(sha256_digest(canonical_request))
-    credential_scope = f"{
-        curr_time}/{data['region']}/{data['service']}/request"
+    credential_scope = f"{curr_time}/{d['region']}/{d['service']}/request"
 
     signing_str = "\n".join([
-        data["algorithm"],
+        d["algorithm"],
         curr_time,
         credential_scope,
         hash_canonical_request
     ])
 
-    signing_key = get_signing_key(sk, data)
+    signing_key = get_signing_key(sk, d)
     sign = hex_digest(hmac_sha256_digest(signing_key, signing_str))
 
     authorization = ", ".join([
-        f"{data['algorithm']} Credential={ak}/{credential_scope}",
+        f"{d['algorithm']} Credential={ak}/{credential_scope}",
         "SignedHeaders=" + get_signed_headers(header),
         f"Signature={sign}"
     ])

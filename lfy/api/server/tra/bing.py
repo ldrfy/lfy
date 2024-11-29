@@ -43,6 +43,28 @@ def _init_session():
     return session
 
 
+def g_iid():
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
+    return f"translator.{random.randint(5019, 5026)}.{random.randint(1, 3)}"
+
+
+def g_url(host, hs):
+    """_summary_
+
+    Args:
+        host (_type_): _description_
+        hs (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    return f'https://{host}/ttranslatev3?isVertical=1&&IG={hs["IG"]}&IID={hs["my_iid"]}'
+
+
 class BingServer(ServerTra):
     """bing翻译，无需apikey
     """
@@ -80,12 +102,8 @@ class BingServer(ServerTra):
         # 自动重定向的新url，注意辨别
         host = hs["my_host"]
         if "my_iid" not in hs:
-            iid = f"translator.{random.randint(5019, 5026)}.{
-                random.randint(1, 3)}"
-            self.session.headers.update({'my_iid': iid})
+            self.session.headers.update({'my_iid': g_iid()})
             hs = self.session.headers
-        url = f'https://{host}/ttranslatev3?isVertical=1&&IG={
-            hs["IG"]}&IID={hs["my_iid"]}'
 
         data = {'': '', 'text': text, 'to': lang_to,
                 'token': hs['token'], 'key': hs['key'], "fromLang": lang_from}
@@ -94,6 +112,7 @@ class BingServer(ServerTra):
             data['tryFetchingGenderDebiasedTranslations'] = True
 
         try:
+            url = g_url(host, hs)
             response = self.session.post(url, data=data, timeout=TIME_OUT)
         except RequestException as e:
             get_logger().error(e)
