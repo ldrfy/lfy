@@ -106,7 +106,7 @@ msgstr "在比较模式下哪些服务被选中"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:11 lfy/qt/tray.py:125
 msgid "Translation software for read paper"
-msgstr "为gnome设计的翻译软件"
+msgstr "为文献阅读设计的翻译软件"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:13
 msgid ""
