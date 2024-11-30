@@ -36,6 +36,7 @@ class PreferenceWindow(QMainWindow):
         tw = QTabWidget(self)
         self.cb = clipboard
         self.tray = tray
+        self.server_ocr = None
 
         self.tab_general = QWidget()
         self.vl_general = QVBoxLayout(self.tab_general)
@@ -187,8 +188,8 @@ class PreferenceWindow(QMainWindow):
         sso = get_servers_o()
         for i, so in enumerate(sso):
             if so.key == self.sg.g("server-ocr-selected-key"):
-                self.cb_o.setCurrentIndex(i)
                 self.server_ocr = so
+                self.cb_o.setCurrentIndex(i)
                 break
 
         self.le_vpn.setText(self.sg.g("vpn-addr-port"))
@@ -204,6 +205,8 @@ class PreferenceWindow(QMainWindow):
 
     def _on_changed_o(self, i):
         if i < 0:
+            return
+        if not self.server_ocr:
             return
         so: ServerOCR = get_servers_o()[i]
         # 保存时，去掉空格，但是显示时，保留
