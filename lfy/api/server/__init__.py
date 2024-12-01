@@ -28,6 +28,8 @@ LANGUAGE_NAMES = [
     _("French"),
     # 8
     _("Italian"),
+    # 9
+    _("Spanish"),
 ]
 
 

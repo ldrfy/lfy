@@ -21,7 +21,7 @@ class PytesseractServer(ServerOCR):
             "ita": 8
         }
         super().__init__("pytesseract", "pytesseract")
-        self.set_data(lang_key_ns, "eng | chi_sim | fra | ita")
+        self.set_data(lang_key_ns, "eng | chi_sim | ita | fra")
 
     def ocr_image(self, img_path, conf_str=None):
         try:
