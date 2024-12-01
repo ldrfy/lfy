@@ -265,7 +265,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             server (Server): _description_
         """
         is_ocr = lk is None
-        GLib.idle_add(self.update_ui, "", is_ocr)
+        GLib.idle_add(self.update_ui, "", is_ocr, server.name)
 
         try:
             if is_ocr:
@@ -283,7 +283,7 @@ class TranslateWindow(Adw.ApplicationWindow):
                 .format(f"{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
         GLib.idle_add(self.update_ui, text, is_ocr)
 
-    def update_ui(self, s="", ocr=False):
+    def update_ui(self, s="", ocr=False, name=""):
         """更新界面
 
         Args:
@@ -294,7 +294,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             # 开始翻译
             self.sp_translate.start()
             if ocr:
-                self.tv_from.get_buffer().set_text(_("OCRing..."))
+                self.tv_from.get_buffer().set_text(_("{} OCRing...").format(name))
             else:
                 self.tv_to.get_buffer().set_text(_("Translating..."))
             return
