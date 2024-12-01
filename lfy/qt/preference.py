@@ -170,7 +170,6 @@ class PreferenceWindow(QMainWindow):
 
         ss = list(get_servers_t())[1:]
         keys_s = self.sg.g("compare-servers", [], t=list)
-        print(keys_s)
         if len(keys_s) == 0:
             for se in ss:
                 keys_s.append(se.key)
@@ -186,9 +185,10 @@ class PreferenceWindow(QMainWindow):
 
         self.cb_o.addItems(get_server_names_o())
         sso = get_servers_o()
+        sok = self.sg.g("server-ocr-selected-key", "easyocr")
         for i, so in enumerate(sso):
-            if so.key == self.sg.g("server-ocr-selected-key"):
-                self.server_ocr = so
+            if so.key == sok:
+                self.server_ocr = sok
                 self.cb_o.setCurrentIndex(i)
                 break
 

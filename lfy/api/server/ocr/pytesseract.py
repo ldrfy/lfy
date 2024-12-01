@@ -28,6 +28,9 @@ class PytesseractServer(ServerOCR):
             import pytesseract
             if conf_str is None:
                 conf_str = self.get_conf()
+                if not conf_str:
+                    return False, _("please input `{sk}` for `{server}` in preference")\
+                        .format(sk=self.sk_placeholder_text, server=self.name)
             lang = "+".join(conf_str.split("|"))
             return True, pytesseract.image_to_string(img_path, lang=lang)
         except ModuleNotFoundError as e:

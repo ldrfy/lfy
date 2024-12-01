@@ -109,7 +109,7 @@ class TranslateWindow(QMainWindow):
         self.cb_lang.setEditable(True)
 
         server_key_t = self.sg.g("server-selected-key", "bing")
-        server_key_o = self.sg.g("server-ocr-selected-key", "baidu")
+        server_key_o = self.sg.g("server-ocr-selected-key", "easyocr")
 
         self.server_t = create_server_t(server_key_t)
         self.server_o = create_server_o(server_key_o)

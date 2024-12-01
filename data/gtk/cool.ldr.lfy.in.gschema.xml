@@ -23,7 +23,7 @@
 			<description>theme</description>
 		</key>
 		<key type="s" name="server-ocr-selected-key">
-			<default>"baidu"</default>
+			<default>"easyocr"</default>
 			<description>The currently selected OCR service</description>
 		</key>
 		<key type="s" name="server-selected-key">
@@ -39,11 +39,11 @@
 			<description>Split position of translation page</description>
 		</key>
 		<key type="s" name="server-sk-baidu">
-			<default>"app_id | secret_key"</default>
+			<default>""</default>
 			<description>Baidu app_id and secret_key, used in the middle | split</description>
 		</key>
 		<key type="s" name="server-sk-baidu-ocr">
-			<default>"API Key | Secret Key"</default>
+			<default>""</default>
 			<description>Baidu API Key and Secret Key for ocr, used in the middle | split</description>
 		</key>
 		<key type="s" name="server-sk-pytesseract-ocr">
@@ -63,15 +63,15 @@
 			<description>Baidu OCR access_token expires date</description>
 		</key>
 		<key type="s" name="server-sk-aliyun">
-			<default>"AccessKey ID | AccessKey Secret"</default>
+			<default>""</default>
 			<description>aliyun AccessKey ID and AccessKey Secret, used in the middle | split</description>
 		</key>
 		<key type="s" name="server-sk-huoshan">
-			<default>"Access Key ID | Secret Access Key"</default>
+			<default>""</default>
 			<description>huoshan Access Key ID and Secret Access Key, used in the middle | split</description>
 		</key>
 		<key type="s" name="server-sk-tencent">
-			<default>"secret_id | secret_key"</default>
+			<default>""</default>
 			<description>Tencent secret_id and secret_key, used in the middle | split</description>
 		</key>
 		<key type="s" name="vpn-addr-port">

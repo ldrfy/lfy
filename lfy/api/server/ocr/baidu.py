@@ -10,7 +10,7 @@ from lfy.utils import s2ks
 from lfy.utils.settings import Settings
 
 
-def _get_token(session, ocr_api_key_s):
+def _get_token(p: ServerOCR):
     """https://ai.baidu.com/ai-doc/REFERENCE/Ck3dwjhhu
 
     Returns:
@@ -25,8 +25,7 @@ def _get_token(session, ocr_api_key_s):
         if len(access_token) != 0:
             return True, access_token
 
-    ok, access_token, expires_in_date = \
-        _get_token_by_url(session, ocr_api_key_s)
+    ok, access_token, expires_in_date = _get_token_by_url(p)
 
     if ok:
         sg.s("ocr-baidu-token", access_token)
@@ -35,7 +34,7 @@ def _get_token(session, ocr_api_key_s):
     return ok, access_token
 
 
-def _get_token_by_url(session, config_str):
+def _get_token_by_url(p: ServerOCR):
     """获取token
 
     Args:
@@ -46,10 +45,10 @@ def _get_token_by_url(session, config_str):
         _type_: _description_
     """
 
-    api_key, secret_key = s2ks(config_str)
+    api_key, secret_key = s2ks(p.get_conf())
     if api_key is None or api_key == "API Key":
-        error_msg = _("please input API Key and Secret Key like:")
-        return False, error_msg + " 121343 | fdsdsdg", ""
+        return False, _("please input `{sk}` for `{server}` in preference")\
+            .format(sk=p.sk_placeholder_text, server=p.name), 0
 
     ok = False
     expires_in_date = -1
@@ -58,7 +57,7 @@ def _get_token_by_url(session, config_str):
     url0 = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials"
     url = f'{url0}&client_id={api_key}&client_secret={secret_key}'
 
-    request = session.get(url, timeout=TIME_OUT)
+    request = p.session.get(url, timeout=TIME_OUT)
 
     jsons = request.json()
     if "access_token" not in jsons:
@@ -108,7 +107,7 @@ class BaiduServer(ServerOCR):
 
         request_url += "general_basic"
 
-        ok, token = _get_token(self.session, self.get_conf())
+        ok, token = _get_token(self)
         if not ok:
             return False, token
         params = {"image": img}
@@ -139,8 +138,7 @@ class BaiduServer(ServerOCR):
         return ok, s
 
     def check_conf(self, conf_str):
-        ok, access_token, expires_in_date = \
-            _get_token_by_url(self.session, conf_str)
+        ok, access_token, expires_in_date = _get_token_by_url(self)
         if ok:
             self.set_conf(conf_str)
             Settings().s("ocr-baidu-token", access_token)

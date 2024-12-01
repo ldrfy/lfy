@@ -29,8 +29,13 @@ class EasyOcrServer(ServerOCR):
     def ocr_image(self, img_path, conf_str=None):
         try:
             import easyocr
-            if conf_str is None:
+            if not conf_str:
                 conf_str = self.get_conf()
+                if not conf_str:
+                    return False, _("please input `{sk}` for `{server}` in preference")\
+                        .format(sk=self.sk_placeholder_text, server=self.name)
+
+            print("------", conf_str)
             reader = easyocr.Reader(conf_str.split("|"))
             s = " ".join(reader.readtext(img_path, detail=0))
             return True, s.strip()

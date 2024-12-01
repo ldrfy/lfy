@@ -43,7 +43,7 @@ def _sign_str(key, s, method):
     return base64.b64encode(hmac_str)
 
 
-def _translate(session, query_text, api_key_s, lang_to="zh", lang_from="auto"):
+def _translate(p: ServerTra, query_text, lang_to="zh", lang_from="auto"):
     """腾讯翻译接口
 
     Args:
@@ -56,9 +56,10 @@ def _translate(session, query_text, api_key_s, lang_to="zh", lang_from="auto"):
         _type_: _description_
     """
 
-    secret_id, secret_key = s2ks(api_key_s)
+    secret_id, secret_key = s2ks(p.get_conf())
     if secret_id is None or secret_id == "secret_id":
-        return False, _("please input API Key in preference")
+        return False, _("please input `{sk}` for `{server}` in preference")\
+            .format(sk=p.sk_placeholder_text, server=p.name)
 
     data = {
         "Action": "TextTranslate",
@@ -76,8 +77,8 @@ def _translate(session, query_text, api_key_s, lang_to="zh", lang_from="auto"):
     s = _get_string_to_sign("GET", endpoint, data)
 
     data["Signature"] = _sign_str(secret_key, s, hashlib.sha1)
-    request = session.get(
-        f"https://{endpoint}", params=data, timeout=TIME_OUT)
+    request = p.session.get(f"https://{endpoint}",
+                            params=data, timeout=TIME_OUT)
 
     result = request.json()["Response"]
     if "Error" in result:
@@ -111,10 +112,10 @@ class TencentServer(ServerTra):
         ok, s = super().check_conf(conf_str)
         if not ok:
             return ok, s
-        ok, text = _translate(self.session, "success", conf_str, "en")
+        ok, text = _translate(self, "success", "en")
         if ok:
             self.set_conf(conf_str)
         return ok, text
 
     def translate_text(self, text, lang_to="auto", lang_from="auto"):
-        return _translate(self.session, text, self.get_conf(), lang_to, lang_from)
+        return _translate(self, text, lang_to, lang_from)

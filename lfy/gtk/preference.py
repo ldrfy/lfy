@@ -47,8 +47,10 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.ocr_s_time = time.time()
         self.acr_server_ocr.set_model(Gtk.StringList.new(get_server_names_o()))
         sso = get_servers_o()
+        sok = self.sg.g("server-ocr-selected-key", "easyocr")
+
         for i, so in enumerate(sso):
-            if so.key == self.sg.g("server-ocr-selected-key"):
+            if so.key == sok:
                 self.acr_server_ocr.set_selected(i)
                 self.server_ocr = so
                 break

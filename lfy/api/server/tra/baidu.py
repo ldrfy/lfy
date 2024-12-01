@@ -10,7 +10,7 @@ from lfy.api.server.tra import ServerTra
 from lfy.utils import s2ks
 
 
-def _translate(session, s, api_key_s, lang_to="auto", lang_from="auto"):
+def _translate(p: ServerTra, s, lang_to="auto", lang_from="auto"):
     """翻译
 
     Args:
@@ -23,9 +23,10 @@ def _translate(session, s, api_key_s, lang_to="auto", lang_from="auto"):
         _type_: _description_
     """
 
-    app_id, secret_key = s2ks(api_key_s)
+    app_id, secret_key = s2ks(p.get_conf())
     if app_id is None or app_id == "app_id":
-        return False, _("please input API Key in preference")
+        return False, _("please input `{sk}` for `{server}` in preference")\
+            .format(sk=p.sk_placeholder_text, server=p.name)
 
     url = "https://api.fanyi.baidu.com/api/trans/vip/translate"
     url = f"{url}?from={lang_from}&to={lang_to}&appid={app_id}&q={quote(s)}"
@@ -35,7 +36,7 @@ def _translate(session, s, api_key_s, lang_to="auto", lang_from="auto"):
     sign = hashlib.md5(sign.encode()).hexdigest()
     url = f"{url}&salt={salt}&sign={sign}"
 
-    result = session.get(url, timeout=TIME_OUT).json()
+    result = p.session.get(url, timeout=TIME_OUT).json()
 
     if "error_code" not in result:
         s1 = ""
@@ -73,10 +74,10 @@ class BaiduServer(ServerTra):
         ok, s = super().check_conf(conf_str)
         if not ok:
             return ok, s
-        ok, text = _translate(self.session, "success", conf_str)
+        ok, text = _translate(self, "success")
         if ok:
             self.set_conf(conf_str)
         return ok, text
 
     def translate_text(self, text, lang_to="auto", lang_from="auto"):
-        return _translate(self.session, text, self.get_conf(), lang_to, lang_from)
+        return _translate(self, text, lang_to, lang_from)

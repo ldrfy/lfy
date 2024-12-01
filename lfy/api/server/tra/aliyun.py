@@ -44,7 +44,7 @@ def _get_iso_8061_date():
     return datetime.now(timezone.utc).isoformat()
 
 
-def _translate(session, s, api_key_s, lang_to="en", lang_from="auto"):
+def _translate(p: ServerTra, s, lang_to="en", lang_from="auto"):
     """翻译
 
     Args:
@@ -57,10 +57,11 @@ def _translate(session, s, api_key_s, lang_to="en", lang_from="auto"):
         _type_: _description_
     """
     # .strip()
-    access_key_id, access_key_secret = s2ks(api_key_s)
+    access_key_id, access_key_secret = s2ks(p.get_conf())
 
     if access_key_secret is None or access_key_id == "AccessKey ID":
-        return False, _("please input API Key in preference")
+        return False, _("please input `{sk}` for `{server}` in preference")\
+            .format(sk=p.sk_placeholder_text, server=p.name)
 
     encoded_body = {
         "AccessKeyId": access_key_id,
@@ -78,15 +79,15 @@ def _translate(session, s, api_key_s, lang_to="en", lang_from="auto"):
     }
 
     string_to_sign = _compose_string_to_sign("POST", encoded_body)
-    signature = _sign_string(
-        string_to_sign, access_key_secret + "&")
+    signature = _sign_string(string_to_sign,
+                             access_key_secret + "&")
 
     encoded_body["Signature"] = signature
 
-    response = session.post("https://mt.aliyuncs.com/",
-                            headers={
-                                "Content-Type": "application/x-www-form-urlencoded"},
-                            data=encoded_body, timeout=TIME_OUT)
+    response = p.session.post("https://mt.aliyuncs.com/",
+                              headers={"Content-Type":
+                                       "application/x-www-form-urlencoded"},
+                              data=encoded_body, timeout=TIME_OUT)
     result = response.json()
     if result["Code"] == "200":
         return True, result["Data"]["Translated"]
@@ -119,10 +120,10 @@ class AliYunServer(ServerTra):
         ok, s = super().check_conf(conf_str)
         if not ok:
             return ok, s
-        ok, text = _translate(self.session, "success", conf_str)
+        ok, text = _translate(self, "success")
         if ok:
             self.set_conf(conf_str)
         return ok, text
 
-    def translate_text(self, text, lang_to="en", lang_from="auto", n=0):
-        return _translate(self.session, text, self.get_conf(), lang_to, lang_from)
+    def translate_text(self, text, lang_to="en", lang_from="auto"):
+        return _translate(self, text, lang_to, lang_from)

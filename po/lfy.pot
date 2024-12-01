@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-11-29 19:20+0800\n"
+"POT-Creation-Date: 2024-12-01 16:15+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -245,23 +245,24 @@ msgid ""
 "You can go to {} to view the beta version."
 msgstr ""
 
-#: lfy/gtk/preference.py:71 lfy/api/server/tra/com.py:42
+#: lfy/gtk/preference.py:73 lfy/api/server/tra/com.py:42
 msgid "compare"
 msgstr ""
 
-#: lfy/gtk/preference.py:98 lfy/gtk/preference.py:138 lfy/gtk/preference.py:173
+#: lfy/gtk/preference.py:100 lfy/gtk/preference.py:140
+#: lfy/gtk/preference.py:175
 msgid "It takes effect when you restart lfy"
 msgstr ""
 
-#: lfy/gtk/preference.py:106
+#: lfy/gtk/preference.py:108
 msgid "The clipboard format is incorrect"
 msgstr ""
 
-#: lfy/gtk/preference.py:114
+#: lfy/gtk/preference.py:116
 msgid "Configuration data has been exported to the clipboard"
 msgstr ""
 
-#: lfy/gtk/preference.py:155
+#: lfy/gtk/preference.py:157 lfy/qt/preference.py:217
 msgid "Using {} for text recognition"
 msgstr ""
 
@@ -271,9 +272,9 @@ msgid ""
 msgstr ""
 
 #: lfy/gtk/translate.py:282 lfy/gtk/translate.py:314 lfy/qt/translate.py:304
-#: lfy/api/server/tra/baidu.py:46 lfy/api/server/tra/tencent.py:84
-#: lfy/api/server/tra/aliyun.py:94 lfy/api/server/tra/com.py:30
-#: lfy/api/server/tra/huoshan.py:139 lfy/api/server/ocr/baidu.py:129
+#: lfy/api/server/tra/baidu.py:47 lfy/api/server/tra/tencent.py:85
+#: lfy/api/server/tra/aliyun.py:95 lfy/api/server/tra/com.py:30
+#: lfy/api/server/tra/huoshan.py:139 lfy/api/server/ocr/baidu.py:128
 #: lfy/utils/code.py:85 lfy/utils/code.py:118
 msgid "something error: {}"
 msgstr ""
@@ -306,92 +307,92 @@ msgstr ""
 msgid "Confirm"
 msgstr ""
 
-#: lfy/qt/preference.py:44 data/gtk/preference.ui:17
+#: lfy/qt/preference.py:45 data/gtk/preference.ui:17
 msgid "Translation keys"
 msgstr ""
 
-#: lfy/qt/preference.py:56 lfy/qt/preference.py:85
+#: lfy/qt/preference.py:57 lfy/qt/preference.py:86
 #: data/gtk/server-preferences.ui:47
 msgid "how to get API Key"
 msgstr ""
 
-#: lfy/qt/preference.py:60 lfy/qt/preference.py:89 lfy/qt/preference.py:132
+#: lfy/qt/preference.py:61 lfy/qt/preference.py:90 lfy/qt/preference.py:133
 msgid "Save"
 msgstr ""
 
-#: lfy/qt/preference.py:71 data/gtk/preference.ui:47
+#: lfy/qt/preference.py:72 lfy/qt/preference.py:216 data/gtk/preference.ui:47
 msgid "OCR server"
 msgstr ""
 
-#: lfy/qt/preference.py:98 data/gtk/preference.ui:10
+#: lfy/qt/preference.py:99 data/gtk/preference.ui:10
 msgid "General"
 msgstr ""
 
-#: lfy/qt/preference.py:103 data/gtk/preference.ui:110
+#: lfy/qt/preference.py:104 data/gtk/preference.ui:110
 msgid "auto check update"
 msgstr ""
 
-#: lfy/qt/preference.py:110 data/gtk/preference.ui:117
+#: lfy/qt/preference.py:111 data/gtk/preference.ui:117
 msgid "Notify translation results"
 msgstr ""
 
-#: lfy/qt/preference.py:117 data/gtk/preference.ui:76
+#: lfy/qt/preference.py:118 data/gtk/preference.ui:76
 msgid "Compare model"
 msgstr ""
 
-#: lfy/qt/preference.py:127
+#: lfy/qt/preference.py:128
 msgid "vpn addr and port"
 msgstr ""
 
-#: lfy/qt/preference.py:139 data/gtk/preference.ui:139
+#: lfy/qt/preference.py:140 data/gtk/preference.ui:139
 msgid "Software settings backup and restore"
 msgstr ""
 
-#: lfy/qt/preference.py:142 data/gtk/preference.ui:142
+#: lfy/qt/preference.py:143 data/gtk/preference.ui:142
 msgid "backup"
 msgstr ""
 
-#: lfy/qt/preference.py:144 data/gtk/preference.ui:153
+#: lfy/qt/preference.py:145 data/gtk/preference.ui:153
 msgid ""
 "Read the JSON configuration of the clipboard, then import it, and some of "
 "the configurations will take effect after reopening the software"
 msgstr ""
 
-#: lfy/qt/preference.py:148 data/gtk/preference.ui:151
+#: lfy/qt/preference.py:149 data/gtk/preference.ui:151
 msgid "restore"
 msgstr ""
 
-#: lfy/qt/preference.py:150 data/gtk/preference.ui:144
+#: lfy/qt/preference.py:151 data/gtk/preference.ui:144
 msgid ""
 "Export the configuration to the clipboard, then you can paste it into any "
 "file and edit it"
 msgstr ""
 
-#: lfy/qt/preference.py:158 data/gtk/preference.ui:103
+#: lfy/qt/preference.py:159 data/gtk/preference.ui:103
 msgid "Other"
 msgstr ""
 
-#: lfy/qt/preference.py:218
+#: lfy/qt/preference.py:224
 msgid "Import successful!"
 msgstr ""
 
-#: lfy/qt/preference.py:219
+#: lfy/qt/preference.py:225
 msgid "It takes effect when you restart lfy."
 msgstr ""
 
-#: lfy/qt/preference.py:223
+#: lfy/qt/preference.py:229
 msgid "Import failed!"
 msgstr ""
 
-#: lfy/qt/preference.py:224
+#: lfy/qt/preference.py:230
 msgid "No configuration data in the clipboard."
 msgstr ""
 
-#: lfy/qt/preference.py:229
+#: lfy/qt/preference.py:235
 msgid "Export successful!"
 msgstr ""
 
-#: lfy/qt/preference.py:230
+#: lfy/qt/preference.py:236
 msgid "Configuration data has been exported to the clipboard."
 msgstr ""
 
@@ -503,20 +504,27 @@ msgstr ""
 msgid "Italian"
 msgstr ""
 
-#: lfy/api/server/__init__.py:142
-msgid "Developers, please set sk_placeholder_text"
+#: lfy/api/server/__init__.py:32
+msgid "Spanish"
 msgstr ""
 
 #: lfy/api/server/__init__.py:144
+msgid "Developers, please set sk_placeholder_text"
+msgstr ""
+
+#: lfy/api/server/__init__.py:146
 msgid "please input {} like: {}"
 msgstr ""
 
 #: lfy/api/server/tra/baidu.py:28 lfy/api/server/tra/tencent.py:61
 #: lfy/api/server/tra/aliyun.py:63 lfy/api/server/tra/huoshan.py:67
-msgid "please input API Key in preference"
+#: lfy/api/server/ocr/baidu.py:50 lfy/api/server/ocr/easyocr.py:35
+#: lfy/api/server/ocr/pytesseract.py:32
+#, python-brace-format
+msgid "please input `{sk}` for `{server}` in preference"
 msgstr ""
 
-#: lfy/api/server/tra/baidu.py:69 lfy/api/server/ocr/baidu.py:93
+#: lfy/api/server/tra/baidu.py:70 lfy/api/server/ocr/baidu.py:92
 msgid "baidu"
 msgstr ""
 
@@ -524,7 +532,7 @@ msgstr ""
 msgid "google"
 msgstr ""
 
-#: lfy/api/server/tra/google.py:52 lfy/api/server/tra/bing.py:67
+#: lfy/api/server/tra/google.py:52 lfy/api/server/tra/bing.py:89
 msgid "something error, try other translate engine?"
 msgstr ""
 
@@ -532,20 +540,20 @@ msgstr ""
 msgid "The connection timed out. Maybe there is a network problem"
 msgstr ""
 
-#: lfy/api/server/tra/tencent.py:106
+#: lfy/api/server/tra/tencent.py:107
 msgid "tencent"
 msgstr ""
 
-#: lfy/api/server/tra/bing.py:62
+#: lfy/api/server/tra/bing.py:84
 msgid "bing"
 msgstr ""
 
-#: lfy/api/server/tra/bing.py:122
+#: lfy/api/server/tra/bing.py:141
 #, python-brace-format
 msgid "1000 characters limit! You send {len_text} characters."
 msgstr ""
 
-#: lfy/api/server/tra/aliyun.py:115
+#: lfy/api/server/tra/aliyun.py:116
 msgid "aliyun"
 msgstr ""
 
@@ -553,23 +561,19 @@ msgstr ""
 msgid "huoshan"
 msgstr ""
 
-#: lfy/api/server/ocr/baidu.py:51
-msgid "please input API Key and Secret Key like:"
-msgstr ""
-
-#: lfy/api/server/ocr/easyocr.py:28 lfy/api/server/ocr/easyocr.py:52
-#: lfy/api/server/ocr/pytesseract.py:36 lfy/api/server/ocr/pytesseract.py:64
+#: lfy/api/server/ocr/easyocr.py:45 lfy/api/server/ocr/easyocr.py:69
+#: lfy/api/server/ocr/pytesseract.py:39 lfy/api/server/ocr/pytesseract.py:67
 msgid "please install python whl"
 msgstr ""
 
-#: lfy/api/server/ocr/easyocr.py:43 lfy/api/server/ocr/pytesseract.py:51
+#: lfy/api/server/ocr/easyocr.py:60 lfy/api/server/ocr/pytesseract.py:54
 msgid ""
 "The Python library `Pillow` is not installed, you cannot test whether the "
 "setting is successful now, if the OCR reports an error in the future, please "
 "change this content"
 msgstr ""
 
-#: lfy/api/server/ocr/pytesseract.py:59
+#: lfy/api/server/ocr/pytesseract.py:62
 msgid "Tesseract OCR database {} is not installed"
 msgstr ""
 

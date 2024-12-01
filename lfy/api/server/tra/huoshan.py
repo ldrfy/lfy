@@ -48,7 +48,7 @@ def get_signed_headers(header):
     return ";".join(header_list)
 
 
-def _translate(session, s, api_key_s, lang_to="en", lang_from="auto"):
+def _translate(p: ServerTra, s, lang_to="en", lang_from="auto"):
     """翻译
 
     Args:
@@ -61,10 +61,11 @@ def _translate(session, s, api_key_s, lang_to="en", lang_from="auto"):
         _type_: _description_
     """
 
-    ak, sk = s2ks(api_key_s)
+    ak, sk = s2ks(p.get_conf())
 
     if ak is None or ak == "Access Key ID":
-        return False, _("please input API Key in preference")
+        return False, _("please input `{sk}` for `{server}` in preference")\
+            .format(sk=p.sk_placeholder_text, server=p.name)
 
     # 签名算法
     # https://www.volcengine.com/docs/6369/67269
@@ -128,7 +129,7 @@ def _translate(session, s, api_key_s, lang_to="en", lang_from="auto"):
 
     header["Authorization"] = authorization
 
-    res = session.post(
+    res = p.session.post(
         "https://translate.volcengineapi.com/?Action=TranslateText&Version=2020-06-01",
         headers=header, data=json.dumps(request_body), timeout=TIME_OUT
     ).json()
@@ -169,10 +170,10 @@ class HuoShanServer(ServerTra):
         ok, s = super().check_conf(conf_str)
         if not ok:
             return ok, s
-        ok, text = _translate(self.session, "success", conf_str)
+        ok, text = _translate(self, "success")
         if ok:
             self.set_conf(conf_str)
         return ok, text
 
     def translate_text(self, text, lang_to="en", lang_from="auto"):
-        return _translate(self.session, text, self.get_conf(), lang_to, lang_from)
+        return _translate(self, text, lang_to, lang_from)
