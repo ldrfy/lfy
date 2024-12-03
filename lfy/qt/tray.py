@@ -87,7 +87,9 @@ class TrayIcon(QSystemTrayIcon):
         """_summary_
         """
         auto_update, _i = p
-        self.copy2translate()
+        if self.auto_action.isChecked():
+            self._on_clipboard_data_changed()
+            self.cb.dataChanged.connect(self._on_clipboard_data_changed)
         if auto_update:
             self.find_update()
 

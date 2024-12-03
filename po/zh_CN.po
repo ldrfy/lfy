@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-12-03 13:49+0800\n"
+"POT-Creation-Date: 2024-12-03 21:41+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -18,17 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/cool.ldr.lfy.in.in.desktop:3 data/gtk/cool.ldr.lfy.in.appdata.xml:10
-#: data/gtk/translate.ui:130
+#: data/gtk/translate.ui:132
 msgid "lfy"
 msgstr "兰译"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:6
-msgid "Window size"
-msgstr "窗口大小"
-
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:10
 msgid "Automatically check the new version of the software upon startup"
 msgstr "软件打开时，自动检查更新"
+
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:10
+#, fuzzy
+msgid "Copy to Translate"
+msgstr "复制即翻译"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:14 data/gtk/preference.ui:116
 msgid ""
@@ -53,58 +54,54 @@ msgid "The currently selected translation language"
 msgstr "当前选择的翻译语言"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:39
-msgid "Split position of translation page"
-msgstr "支持通知翻译内容"
-
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:43
 msgid "Baidu app_id and secret_key, used in the middle | split"
 msgstr "百度app_id和secret_key，中间使用 | 分割"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:47
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:43
 msgid "Baidu API Key and Secret Key for ocr, used in the middle | split"
 msgstr "百度app_id和secret_key，中间使用 | 分割"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:51
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:47
 msgid ""
 "The lang parameters of the pytesseract module, such as Chinese and English "
 "by default"
 msgstr "pytesseract模块的lang参数，默认为中文、英文"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:55
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:51
 msgid ""
 "The lang parameters of the easyocr module, such as Chinese and English by "
 "default, split by +"
 msgstr "easyocr模块的lang参数，默认是中文和英文，用+分割"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:59
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:55
 msgid "Baidu OCR access_token"
 msgstr "百度OCR access_token"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:63
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:59
 msgid "Baidu OCR access_token expires date"
 msgstr "百度OCR access_token 过期时间"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:67
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:63
 msgid "aliyun AccessKey ID and AccessKey Secret, used in the middle | split"
 msgstr "阿里云 AccessKey ID 和 AccessKey Secret，中间使用 | 分割"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:71
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:67
 msgid "huoshan Access Key ID and Secret Access Key, used in the middle | split"
 msgstr "火山 AccessKey Key ID 和 Secret Access Key，中间使用 | 分割"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:75
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:71
 msgid "Tencent secret_id and secret_key, used in the middle | split"
 msgstr "请输入 app_id 和 secret_key，类似："
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:79
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:75
 msgid "VPN address and port"
 msgstr "VPN地址"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:83 data/gtk/preference.ui:90
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:79 data/gtk/preference.ui:90
 msgid "Which services are available in compare model"
 msgstr "在比较模式下哪些服务被选中"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:11 lfy/qt/tray.py:142
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:11 lfy/qt/tray.py:144
 msgid "Translation software for read paper"
 msgstr "为文献阅读设计的翻译软件"
 
@@ -134,7 +131,7 @@ msgstr "设置密钥"
 msgid "Shortcuts"
 msgstr "显示快捷键"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:57 lfy/qt/tray.py:146
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:57 lfy/qt/tray.py:148
 msgid "About"
 msgstr "关于"
 
@@ -204,41 +201,39 @@ msgstr "软件打开时，自动检查更新"
 msgid "Basic functions completed"
 msgstr "基础功能完成"
 
-#: lfy/gtk/main.py:133
+#: lfy/gtk/main.py:105
 msgid "translator_credits"
 msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 
-#: lfy/gtk/main.py:134
+#: lfy/gtk/main.py:106
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
 
-#: lfy/gtk/main.py:186 lfy/qt/tray.py:157 data/gtk/help-overlay.ui:20
-#: data/gtk/help-overlay.ui:27 data/gtk/help-overlay.ui:34
-#: data/gtk/help-overlay.ui:53
+#: lfy/gtk/main.py:131 lfy/qt/tray.py:159 data/gtk/help-overlay.ui:26
 msgid "Copy detected, translate immediately"
 msgstr "检测到复制，立刻翻译"
 
-#: lfy/gtk/main.py:189 lfy/qt/tray.py:163
+#: lfy/gtk/main.py:134 lfy/qt/tray.py:165
 msgid "Copy detected, not automatically translated"
 msgstr "检测到复制，不自动翻译"
 
-#: lfy/gtk/main.py:213
+#: lfy/gtk/main.py:174
 msgid "Next translation not remove line breaks"
 msgstr "下次翻译不移除换行"
 
-#: lfy/gtk/main.py:214
+#: lfy/gtk/main.py:175
 msgid "Next translation remove line breaks"
 msgstr "下次翻译移除换行"
 
-#: lfy/gtk/main.py:224
+#: lfy/gtk/main.py:184
 msgid "Next translation without splicing text"
 msgstr "下次翻译不拼接文本"
 
-#: lfy/gtk/main.py:225
+#: lfy/gtk/main.py:185
 msgid "Next translation splicing text"
 msgstr "下次翻译拼接文本"
 
-#: lfy/gtk/main.py:326 lfy/qt/tray.py:197
+#: lfy/gtk/main.py:257 lfy/qt/tray.py:199
 msgid ""
 "There is no new version.                      \n"
 "The current version is {}.                      \n"
@@ -269,16 +264,16 @@ msgstr "配置数据已导出到剪贴板"
 msgid "Using {} for text recognition"
 msgstr "使用 {} 进行文本识别"
 
-#: lfy/gtk/translate.py:67 lfy/gtk/translate.py:68
+#: lfy/gtk/translate.py:68 lfy/gtk/translate.py:69
 msgid "Loading"
 msgstr "加载中"
 
-#: lfy/gtk/translate.py:245 lfy/qt/translate.py:300
+#: lfy/gtk/translate.py:196 lfy/qt/translate.py:299
 msgid ""
 "This time the content contains private information and is not translated"
 msgstr "本次内容包含隐私信息，不翻译"
 
-#: lfy/gtk/translate.py:300 lfy/gtk/translate.py:332 lfy/qt/translate.py:327
+#: lfy/gtk/translate.py:245 lfy/gtk/translate.py:277 lfy/qt/translate.py:326
 #: lfy/api/server/tra/baidu.py:47 lfy/api/server/tra/tencent.py:85
 #: lfy/api/server/tra/aliyun.py:95 lfy/api/server/tra/com.py:30
 #: lfy/api/server/tra/huoshan.py:139 lfy/api/server/ocr/baidu.py:128
@@ -286,16 +281,16 @@ msgstr "本次内容包含隐私信息，不翻译"
 msgid "something error: {}"
 msgstr "一些错误发生：{}"
 
-#: lfy/gtk/translate.py:315 lfy/qt/translate.py:259
+#: lfy/gtk/translate.py:260 lfy/qt/translate.py:258
 #, fuzzy
 msgid "{} OCRing..."
 msgstr "{} OCR识别中.."
 
-#: lfy/gtk/translate.py:317 lfy/qt/translate.py:331
+#: lfy/gtk/translate.py:262 lfy/qt/translate.py:330
 msgid "Translating..."
 msgstr "翻译中……"
 
-#: lfy/gtk/translate.py:329 lfy/qt/translate.py:277
+#: lfy/gtk/translate.py:274 lfy/qt/translate.py:276
 msgid "Translation completed"
 msgstr "翻译完成"
 
@@ -404,46 +399,46 @@ msgstr "导出成功！"
 msgid "Configuration data has been exported to the clipboard."
 msgstr "配置数据已导出到剪贴板"
 
-#: lfy/qt/translate.py:64 data/gtk/help-overlay.ui:66
+#: lfy/qt/translate.py:64 data/gtk/translate.ui:71 data/gtk/help-overlay.ui:39
 msgid "Remove line breaks"
 msgstr "移除换行符"
 
-#: lfy/qt/translate.py:66 data/gtk/translate.ui:71
+#: lfy/qt/translate.py:66 data/gtk/translate.ui:72
 msgid "Alt + D: Remove symbols such as line breaks"
 msgstr "Alt + D: 移除换行符"
 
-#: lfy/qt/translate.py:68 data/gtk/help-overlay.ui:59
+#: lfy/qt/translate.py:68 data/gtk/translate.ui:79 data/gtk/help-overlay.ui:32
 msgid "Splice Text"
 msgstr "拼接文本"
 
-#: lfy/qt/translate.py:70 data/gtk/translate.ui:78
+#: lfy/qt/translate.py:70 data/gtk/translate.ui:80
 msgid "Alt + C: Splice the next copied text with the previous text"
 msgstr "Alt + C: 将下一个复制的文本与上一个文本拼接"
 
-#: lfy/qt/translate.py:72 lfy/qt/translate.py:74 data/gtk/translate.ui:85
-#: data/gtk/help-overlay.ui:46
+#: lfy/qt/translate.py:72 lfy/qt/translate.py:74 data/gtk/translate.ui:87
+#: data/gtk/help-overlay.ui:19
 msgid "Translate"
 msgstr "翻译"
 
-#: lfy/qt/translate.py:137 lfy/qt/translate.py:138
+#: lfy/qt/translate.py:138 lfy/qt/translate.py:139
 msgid "Loading..."
 msgstr ""
 
-#: lfy/qt/translate.py:151
+#: lfy/qt/translate.py:152
 msgid ""
 "Select text and use the shortcut key '{}' to copy, the copied text will not "
 "be automatically translated"
 msgstr "选择文字并用快捷键 '{}' 复制，复制的文字将不会自动翻译"
 
-#: lfy/qt/translate.py:184
+#: lfy/qt/translate.py:185
 msgid "warn"
 msgstr "警告"
 
-#: lfy/qt/translate.py:184
+#: lfy/qt/translate.py:185
 msgid "quit?"
 msgstr "退出？"
 
-#: lfy/qt/translate.py:306
+#: lfy/qt/translate.py:305
 msgid "Not translated this time!"
 msgstr "本次不翻译！"
 
@@ -451,12 +446,12 @@ msgstr "本次不翻译！"
 msgid "Open"
 msgstr "打开"
 
-#: lfy/qt/tray.py:41 lfy/qt/tray.py:210 data/gtk/translate.ui:159
+#: lfy/qt/tray.py:41 lfy/qt/tray.py:212
 msgid "Check for updates"
 msgstr "检查更新"
 
-#: lfy/qt/tray.py:45 lfy/qt/tray.py:156 data/gtk/translate.ui:141
-#: data/gtk/help-overlay.ui:52
+#: lfy/qt/tray.py:45 lfy/qt/tray.py:158 data/gtk/translate.ui:143
+#: data/gtk/help-overlay.ui:25
 msgid "Copy to translate"
 msgstr "复制即翻译"
 
@@ -468,15 +463,15 @@ msgstr "设置"
 msgid "Quit"
 msgstr "退出"
 
-#: lfy/qt/tray.py:162
+#: lfy/qt/tray.py:164
 msgid "Stop copy to translate"
 msgstr "停止复制即翻译"
 
-#: lfy/qt/tray.py:192
+#: lfy/qt/tray.py:194
 msgid "New version available!"
 msgstr "找到新版本！"
 
-#: lfy/qt/tray.py:201
+#: lfy/qt/tray.py:203
 msgid "No new version!"
 msgstr "暂无新版本！"
 
@@ -592,11 +587,11 @@ msgstr ""
 msgid "Tesseract OCR database {} is not installed"
 msgstr "未安装 Tesseract OCR 数据库 {}"
 
-#: lfy/utils/bak.py:57
+#: lfy/utils/bak.py:58
 msgid "error with keys: "
 msgstr "如下key错误: "
 
-#: lfy/utils/bak.py:66
+#: lfy/utils/bak.py:67
 msgid "Please copy the configuration data in json format first"
 msgstr "请先复制json格式的配置数据"
 
@@ -632,23 +627,28 @@ msgid ""
 "corresponding help will be provided based on the input of -s"
 msgstr "待翻译/识别的语言，若未输入-l，将根据 -s 的输入自动提供对应帮助"
 
-#: data/gtk/translate.ui:117
+#: data/gtk/translate.ui:119
 msgid "Menu"
 msgstr "菜单"
 
-#: data/gtk/translate.ui:145 data/gtk/help-overlay.ui:26
+#: data/gtk/translate.ui:147
 msgid "Hide the original text"
 msgstr "隐藏源文本"
 
-#: data/gtk/translate.ui:151
+#: data/gtk/translate.ui:153
 msgid "_Preferences"
 msgstr "_设置"
 
-#: data/gtk/translate.ui:155
+#: data/gtk/translate.ui:157
 msgid "_Keyboard Shortcuts"
 msgstr "_快捷键"
 
-#: data/gtk/translate.ui:163
+#: data/gtk/translate.ui:161
+#, fuzzy
+msgid "_Check for updates"
+msgstr "检查更新"
+
+#: data/gtk/translate.ui:165
 msgid "_About lfy"
 msgstr "_关于 兰译"
 
@@ -685,29 +685,33 @@ msgstr "代理地址和端口，比如：http://127.0.0.1:7890"
 msgid "backup/restore the settings to/from the clipboard, edit or backup it"
 msgstr "将设置备份到剪贴板或从剪贴板恢复、编辑或备份"
 
-#: data/gtk/help-overlay.ui:19
-msgid "Reset/Restore UI"
-msgstr "重置/恢复UI"
-
-#: data/gtk/help-overlay.ui:33
-msgid "Hide the translated text"
-msgstr "隐藏翻译文本"
-
-#: data/gtk/help-overlay.ui:42
+#: data/gtk/help-overlay.ui:15
 msgctxt "shortcut window"
 msgid "General"
 msgstr "通用"
 
-#: data/gtk/help-overlay.ui:60 data/gtk/help-overlay.ui:67
+#: data/gtk/help-overlay.ui:33 data/gtk/help-overlay.ui:40
 msgid "Splice the next copied text with the previous text"
 msgstr "将下一个复制的文本与上一个文本拼接"
 
-#: data/gtk/help-overlay.ui:73
+#: data/gtk/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "退出"
 
-#: data/gtk/help-overlay.ui:79
+#: data/gtk/help-overlay.ui:52
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "显示快捷键"
+
+#~ msgid "Window size"
+#~ msgstr "窗口大小"
+
+#~ msgid "Split position of translation page"
+#~ msgstr "支持通知翻译内容"
+
+#~ msgid "Reset/Restore UI"
+#~ msgstr "重置/恢复UI"
+
+#~ msgid "Hide the translated text"
+#~ msgstr "隐藏翻译文本"

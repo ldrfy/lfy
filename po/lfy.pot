@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-12-03 13:49+0800\n"
+"POT-Creation-Date: 2024-12-03 21:41+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,16 +18,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/cool.ldr.lfy.in.in.desktop:3 data/gtk/cool.ldr.lfy.in.appdata.xml:10
-#: data/gtk/translate.ui:130
+#: data/gtk/translate.ui:132
 msgid "lfy"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:6
-msgid "Window size"
+msgid "Automatically check the new version of the software upon startup"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:10
-msgid "Automatically check the new version of the software upon startup"
+msgid "Copy to Translate"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:14 data/gtk/preference.ui:116
@@ -53,58 +53,54 @@ msgid "The currently selected translation language"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:39
-msgid "Split position of translation page"
-msgstr ""
-
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:43
 msgid "Baidu app_id and secret_key, used in the middle | split"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:47
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:43
 msgid "Baidu API Key and Secret Key for ocr, used in the middle | split"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:51
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:47
 msgid ""
 "The lang parameters of the pytesseract module, such as Chinese and English "
 "by default"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:55
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:51
 msgid ""
 "The lang parameters of the easyocr module, such as Chinese and English by "
 "default, split by +"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:59
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:55
 msgid "Baidu OCR access_token"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:63
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:59
 msgid "Baidu OCR access_token expires date"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:67
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:63
 msgid "aliyun AccessKey ID and AccessKey Secret, used in the middle | split"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:71
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:67
 msgid "huoshan Access Key ID and Secret Access Key, used in the middle | split"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:75
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:71
 msgid "Tencent secret_id and secret_key, used in the middle | split"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:79
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:75
 msgid "VPN address and port"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:83 data/gtk/preference.ui:90
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:79 data/gtk/preference.ui:90
 msgid "Which services are available in compare model"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:11 lfy/qt/tray.py:142
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:11 lfy/qt/tray.py:144
 msgid "Translation software for read paper"
 msgstr ""
 
@@ -134,7 +130,7 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:57 lfy/qt/tray.py:146
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:57 lfy/qt/tray.py:148
 msgid "About"
 msgstr ""
 
@@ -204,41 +200,39 @@ msgstr ""
 msgid "Basic functions completed"
 msgstr ""
 
-#: lfy/gtk/main.py:133
+#: lfy/gtk/main.py:105
 msgid "translator_credits"
 msgstr ""
 
-#: lfy/gtk/main.py:134
+#: lfy/gtk/main.py:106
 msgid "A translation app for GNOME."
 msgstr ""
 
-#: lfy/gtk/main.py:186 lfy/qt/tray.py:157 data/gtk/help-overlay.ui:20
-#: data/gtk/help-overlay.ui:27 data/gtk/help-overlay.ui:34
-#: data/gtk/help-overlay.ui:53
+#: lfy/gtk/main.py:131 lfy/qt/tray.py:159 data/gtk/help-overlay.ui:26
 msgid "Copy detected, translate immediately"
 msgstr ""
 
-#: lfy/gtk/main.py:189 lfy/qt/tray.py:163
+#: lfy/gtk/main.py:134 lfy/qt/tray.py:165
 msgid "Copy detected, not automatically translated"
 msgstr ""
 
-#: lfy/gtk/main.py:213
+#: lfy/gtk/main.py:174
 msgid "Next translation not remove line breaks"
 msgstr ""
 
-#: lfy/gtk/main.py:214
+#: lfy/gtk/main.py:175
 msgid "Next translation remove line breaks"
 msgstr ""
 
-#: lfy/gtk/main.py:224
+#: lfy/gtk/main.py:184
 msgid "Next translation without splicing text"
 msgstr ""
 
-#: lfy/gtk/main.py:225
+#: lfy/gtk/main.py:185
 msgid "Next translation splicing text"
 msgstr ""
 
-#: lfy/gtk/main.py:326 lfy/qt/tray.py:197
+#: lfy/gtk/main.py:257 lfy/qt/tray.py:199
 msgid ""
 "There is no new version.                      \n"
 "The current version is {}.                      \n"
@@ -266,16 +260,16 @@ msgstr ""
 msgid "Using {} for text recognition"
 msgstr ""
 
-#: lfy/gtk/translate.py:67 lfy/gtk/translate.py:68
+#: lfy/gtk/translate.py:68 lfy/gtk/translate.py:69
 msgid "Loading"
 msgstr ""
 
-#: lfy/gtk/translate.py:245 lfy/qt/translate.py:300
+#: lfy/gtk/translate.py:196 lfy/qt/translate.py:299
 msgid ""
 "This time the content contains private information and is not translated"
 msgstr ""
 
-#: lfy/gtk/translate.py:300 lfy/gtk/translate.py:332 lfy/qt/translate.py:327
+#: lfy/gtk/translate.py:245 lfy/gtk/translate.py:277 lfy/qt/translate.py:326
 #: lfy/api/server/tra/baidu.py:47 lfy/api/server/tra/tencent.py:85
 #: lfy/api/server/tra/aliyun.py:95 lfy/api/server/tra/com.py:30
 #: lfy/api/server/tra/huoshan.py:139 lfy/api/server/ocr/baidu.py:128
@@ -283,15 +277,15 @@ msgstr ""
 msgid "something error: {}"
 msgstr ""
 
-#: lfy/gtk/translate.py:315 lfy/qt/translate.py:259
+#: lfy/gtk/translate.py:260 lfy/qt/translate.py:258
 msgid "{} OCRing..."
 msgstr ""
 
-#: lfy/gtk/translate.py:317 lfy/qt/translate.py:331
+#: lfy/gtk/translate.py:262 lfy/qt/translate.py:330
 msgid "Translating..."
 msgstr ""
 
-#: lfy/gtk/translate.py:329 lfy/qt/translate.py:277
+#: lfy/gtk/translate.py:274 lfy/qt/translate.py:276
 msgid "Translation completed"
 msgstr ""
 
@@ -400,46 +394,46 @@ msgstr ""
 msgid "Configuration data has been exported to the clipboard."
 msgstr ""
 
-#: lfy/qt/translate.py:64 data/gtk/help-overlay.ui:66
+#: lfy/qt/translate.py:64 data/gtk/translate.ui:71 data/gtk/help-overlay.ui:39
 msgid "Remove line breaks"
 msgstr ""
 
-#: lfy/qt/translate.py:66 data/gtk/translate.ui:71
+#: lfy/qt/translate.py:66 data/gtk/translate.ui:72
 msgid "Alt + D: Remove symbols such as line breaks"
 msgstr ""
 
-#: lfy/qt/translate.py:68 data/gtk/help-overlay.ui:59
+#: lfy/qt/translate.py:68 data/gtk/translate.ui:79 data/gtk/help-overlay.ui:32
 msgid "Splice Text"
 msgstr ""
 
-#: lfy/qt/translate.py:70 data/gtk/translate.ui:78
+#: lfy/qt/translate.py:70 data/gtk/translate.ui:80
 msgid "Alt + C: Splice the next copied text with the previous text"
 msgstr ""
 
-#: lfy/qt/translate.py:72 lfy/qt/translate.py:74 data/gtk/translate.ui:85
-#: data/gtk/help-overlay.ui:46
+#: lfy/qt/translate.py:72 lfy/qt/translate.py:74 data/gtk/translate.ui:87
+#: data/gtk/help-overlay.ui:19
 msgid "Translate"
 msgstr ""
 
-#: lfy/qt/translate.py:137 lfy/qt/translate.py:138
+#: lfy/qt/translate.py:138 lfy/qt/translate.py:139
 msgid "Loading..."
 msgstr ""
 
-#: lfy/qt/translate.py:151
+#: lfy/qt/translate.py:152
 msgid ""
 "Select text and use the shortcut key '{}' to copy, the copied text will not "
 "be automatically translated"
 msgstr ""
 
-#: lfy/qt/translate.py:184
+#: lfy/qt/translate.py:185
 msgid "warn"
 msgstr ""
 
-#: lfy/qt/translate.py:184
+#: lfy/qt/translate.py:185
 msgid "quit?"
 msgstr ""
 
-#: lfy/qt/translate.py:306
+#: lfy/qt/translate.py:305
 msgid "Not translated this time!"
 msgstr ""
 
@@ -447,12 +441,12 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: lfy/qt/tray.py:41 lfy/qt/tray.py:210 data/gtk/translate.ui:159
+#: lfy/qt/tray.py:41 lfy/qt/tray.py:212
 msgid "Check for updates"
 msgstr ""
 
-#: lfy/qt/tray.py:45 lfy/qt/tray.py:156 data/gtk/translate.ui:141
-#: data/gtk/help-overlay.ui:52
+#: lfy/qt/tray.py:45 lfy/qt/tray.py:158 data/gtk/translate.ui:143
+#: data/gtk/help-overlay.ui:25
 msgid "Copy to translate"
 msgstr ""
 
@@ -464,15 +458,15 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: lfy/qt/tray.py:162
+#: lfy/qt/tray.py:164
 msgid "Stop copy to translate"
 msgstr ""
 
-#: lfy/qt/tray.py:192
+#: lfy/qt/tray.py:194
 msgid "New version available!"
 msgstr ""
 
-#: lfy/qt/tray.py:201
+#: lfy/qt/tray.py:203
 msgid "No new version!"
 msgstr ""
 
@@ -585,11 +579,11 @@ msgstr ""
 msgid "Tesseract OCR database {} is not installed"
 msgstr ""
 
-#: lfy/utils/bak.py:57
+#: lfy/utils/bak.py:58
 msgid "error with keys: "
 msgstr ""
 
-#: lfy/utils/bak.py:66
+#: lfy/utils/bak.py:67
 msgid "Please copy the configuration data in json format first"
 msgstr ""
 
@@ -625,23 +619,27 @@ msgid ""
 "corresponding help will be provided based on the input of -s"
 msgstr ""
 
-#: data/gtk/translate.ui:117
+#: data/gtk/translate.ui:119
 msgid "Menu"
 msgstr ""
 
-#: data/gtk/translate.ui:145 data/gtk/help-overlay.ui:26
+#: data/gtk/translate.ui:147
 msgid "Hide the original text"
 msgstr ""
 
-#: data/gtk/translate.ui:151
+#: data/gtk/translate.ui:153
 msgid "_Preferences"
 msgstr ""
 
-#: data/gtk/translate.ui:155
+#: data/gtk/translate.ui:157
 msgid "_Keyboard Shortcuts"
 msgstr ""
 
-#: data/gtk/translate.ui:163
+#: data/gtk/translate.ui:161
+msgid "_Check for updates"
+msgstr ""
+
+#: data/gtk/translate.ui:165
 msgid "_About lfy"
 msgstr ""
 
@@ -678,29 +676,21 @@ msgstr ""
 msgid "backup/restore the settings to/from the clipboard, edit or backup it"
 msgstr ""
 
-#: data/gtk/help-overlay.ui:19
-msgid "Reset/Restore UI"
-msgstr ""
-
-#: data/gtk/help-overlay.ui:33
-msgid "Hide the translated text"
-msgstr ""
-
-#: data/gtk/help-overlay.ui:42
+#: data/gtk/help-overlay.ui:15
 msgctxt "shortcut window"
 msgid "General"
 msgstr ""
 
-#: data/gtk/help-overlay.ui:60 data/gtk/help-overlay.ui:67
+#: data/gtk/help-overlay.ui:33 data/gtk/help-overlay.ui:40
 msgid "Splice the next copied text with the previous text"
 msgstr ""
 
-#: data/gtk/help-overlay.ui:73
+#: data/gtk/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr ""
 
-#: data/gtk/help-overlay.ui:79
+#: data/gtk/help-overlay.ui:52
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr ""
