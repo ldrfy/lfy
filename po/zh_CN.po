@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-12-03 21:41+0800\n"
+"POT-Creation-Date: 2024-12-03 21:47+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -27,7 +27,6 @@ msgid "Automatically check the new version of the software upon startup"
 msgstr "软件打开时，自动检查更新"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:10
-#, fuzzy
 msgid "Copy to Translate"
 msgstr "复制即翻译"
 
@@ -132,6 +131,7 @@ msgid "Shortcuts"
 msgstr "显示快捷键"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:57 lfy/qt/tray.py:148
+#: data/gtk/translate.ui:155
 msgid "About"
 msgstr "关于"
 
@@ -282,7 +282,6 @@ msgid "something error: {}"
 msgstr "一些错误发生：{}"
 
 #: lfy/gtk/translate.py:260 lfy/qt/translate.py:258
-#, fuzzy
 msgid "{} OCRing..."
 msgstr "{} OCR识别中.."
 
@@ -446,17 +445,16 @@ msgstr "本次不翻译！"
 msgid "Open"
 msgstr "打开"
 
-#: lfy/qt/tray.py:41 lfy/qt/tray.py:212
+#: lfy/qt/tray.py:41 lfy/qt/tray.py:212 data/gtk/translate.ui:151
 msgid "Check for updates"
 msgstr "检查更新"
 
-#: lfy/qt/tray.py:45 lfy/qt/tray.py:158 data/gtk/translate.ui:143
-#: data/gtk/help-overlay.ui:25
+#: lfy/qt/tray.py:45 lfy/qt/tray.py:158 data/gtk/help-overlay.ui:25
 msgid "Copy to translate"
 msgstr "复制即翻译"
 
-#: lfy/qt/tray.py:53
-msgid "Preference"
+#: lfy/qt/tray.py:53 data/gtk/translate.ui:143
+msgid "Preferences"
 msgstr "设置"
 
 #: lfy/qt/tray.py:61
@@ -519,15 +517,10 @@ msgstr ""
 msgid "Developers, please set sk_placeholder_text"
 msgstr "开发者，请设置 sk_placeholder_text"
 
-#: lfy/api/server/__init__.py:146
-#, fuzzy
-msgid "please input {} like: {}"
-msgstr "请输入 {} 和 {}，类似："
-
-#: lfy/api/server/tra/baidu.py:28 lfy/api/server/tra/tencent.py:61
-#: lfy/api/server/tra/aliyun.py:63 lfy/api/server/tra/huoshan.py:67
-#: lfy/api/server/ocr/baidu.py:50 lfy/api/server/ocr/easyocr.py:35
-#: lfy/api/server/ocr/pytesseract.py:32
+#: lfy/api/server/__init__.py:146 lfy/api/server/tra/baidu.py:28
+#: lfy/api/server/tra/tencent.py:61 lfy/api/server/tra/aliyun.py:63
+#: lfy/api/server/tra/huoshan.py:67 lfy/api/server/ocr/baidu.py:50
+#: lfy/api/server/ocr/easyocr.py:35 lfy/api/server/ocr/pytesseract.py:32
 #, python-brace-format
 msgid "please input `{sk}` for `{server}` in preference"
 msgstr "请在设置中为 `{server}` 填写 `{sk}`"
@@ -632,25 +625,8 @@ msgid "Menu"
 msgstr "菜单"
 
 #: data/gtk/translate.ui:147
-msgid "Hide the original text"
-msgstr "隐藏源文本"
-
-#: data/gtk/translate.ui:153
-msgid "_Preferences"
-msgstr "_设置"
-
-#: data/gtk/translate.ui:157
 msgid "_Keyboard Shortcuts"
 msgstr "_快捷键"
-
-#: data/gtk/translate.ui:161
-#, fuzzy
-msgid "_Check for updates"
-msgstr "检查更新"
-
-#: data/gtk/translate.ui:165
-msgid "_About lfy"
-msgstr "_关于 兰译"
 
 #: data/gtk/server-preferences.ui:14
 msgid "Translate Server"
@@ -703,15 +679,3 @@ msgstr "退出"
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "显示快捷键"
-
-#~ msgid "Window size"
-#~ msgstr "窗口大小"
-
-#~ msgid "Split position of translation page"
-#~ msgstr "支持通知翻译内容"
-
-#~ msgid "Reset/Restore UI"
-#~ msgstr "重置/恢复UI"
-
-#~ msgid "Hide the translated text"
-#~ msgstr "隐藏翻译文本"

@@ -143,8 +143,8 @@ class Server:
         if not self.sk_placeholder_text:
             return False, _("Developers, please set sk_placeholder_text")
         if "|" in self.sk_placeholder_text and "|" not in conf_str:
-            return False, _("please input {} like: {}")\
-                .format(self.sk_placeholder_text, "121343 | fdsdsdg")
+            return False, _("please input `{sk}` for `{server}` in preference")\
+                .format(sk=self.sk_placeholder_text, server=self.name)
         return True, f"success: {conf_str}"
 
     def set_conf(self, conf_str):

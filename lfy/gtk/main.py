@@ -144,8 +144,7 @@ class LfyApplication(Adw.Application):
 
         names = ['preferences', 'quit', 'about',
                  'find_update', 'del_wrapping', 'splice_text',
-                 'translate', 'gp_reset_restore', 'gp_up',
-                 'gp_down', 'copy2translate']
+                 'translate', 'copy2translate']
         callbacks = [self.on_preferences_action, self.quit, self.on_about_action,
                      self.find_update, self.on_del_wrapping_action, self.on_splice_text_action,
                      self.set_translate_action, self.on_action_trans_now]

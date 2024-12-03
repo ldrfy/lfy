@@ -50,7 +50,7 @@ class TrayIcon(QSystemTrayIcon):
                                               d=True, t=bool))
         tray_menu.addAction(self.auto_action)
 
-        pf_action = QAction(_("Preference") + " Ctrl+,", self)
+        pf_action = QAction(_("Preferences") + " Ctrl+,", self)
         pf_action.triggered.connect(self.open_prf)
         tray_menu.addAction(pf_action)
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-12-03 21:41+0800\n"
+"POT-Creation-Date: 2024-12-03 21:56+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -131,6 +131,7 @@ msgid "Shortcuts"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:57 lfy/qt/tray.py:148
+#: data/gtk/translate.ui:155
 msgid "About"
 msgstr ""
 
@@ -441,17 +442,16 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: lfy/qt/tray.py:41 lfy/qt/tray.py:212
+#: lfy/qt/tray.py:41 lfy/qt/tray.py:212 data/gtk/translate.ui:151
 msgid "Check for updates"
 msgstr ""
 
-#: lfy/qt/tray.py:45 lfy/qt/tray.py:158 data/gtk/translate.ui:143
-#: data/gtk/help-overlay.ui:25
+#: lfy/qt/tray.py:45 lfy/qt/tray.py:158 data/gtk/help-overlay.ui:25
 msgid "Copy to translate"
 msgstr ""
 
-#: lfy/qt/tray.py:53
-msgid "Preference"
+#: lfy/qt/tray.py:53 data/gtk/translate.ui:143
+msgid "Preferences"
 msgstr ""
 
 #: lfy/qt/tray.py:61
@@ -514,14 +514,10 @@ msgstr ""
 msgid "Developers, please set sk_placeholder_text"
 msgstr ""
 
-#: lfy/api/server/__init__.py:146
-msgid "please input {} like: {}"
-msgstr ""
-
-#: lfy/api/server/tra/baidu.py:28 lfy/api/server/tra/tencent.py:61
-#: lfy/api/server/tra/aliyun.py:63 lfy/api/server/tra/huoshan.py:67
-#: lfy/api/server/ocr/baidu.py:50 lfy/api/server/ocr/easyocr.py:35
-#: lfy/api/server/ocr/pytesseract.py:32
+#: lfy/api/server/__init__.py:146 lfy/api/server/tra/baidu.py:28
+#: lfy/api/server/tra/tencent.py:61 lfy/api/server/tra/aliyun.py:63
+#: lfy/api/server/tra/huoshan.py:67 lfy/api/server/ocr/baidu.py:50
+#: lfy/api/server/ocr/easyocr.py:35 lfy/api/server/ocr/pytesseract.py:32
 #, python-brace-format
 msgid "please input `{sk}` for `{server}` in preference"
 msgstr ""
@@ -624,23 +620,7 @@ msgid "Menu"
 msgstr ""
 
 #: data/gtk/translate.ui:147
-msgid "Hide the original text"
-msgstr ""
-
-#: data/gtk/translate.ui:153
-msgid "_Preferences"
-msgstr ""
-
-#: data/gtk/translate.ui:157
 msgid "_Keyboard Shortcuts"
-msgstr ""
-
-#: data/gtk/translate.ui:161
-msgid "_Check for updates"
-msgstr ""
-
-#: data/gtk/translate.ui:165
-msgid "_About lfy"
 msgstr ""
 
 #: data/gtk/server-preferences.ui:14
