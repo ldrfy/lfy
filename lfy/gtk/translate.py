@@ -96,6 +96,8 @@ class TranslateWindow(Adw.ApplicationWindow):
     def _set_data(self, data_s, i):
         """异步初始化
         """
+        # 0的再设置也无效
+        self.jn = i == 0
         self.dd_server.set_model(data_s)
         self.jn = True
         self.dd_server.set_selected(i)
@@ -136,15 +138,15 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         i = drop_down.get_selected()
 
-        lang_select_index = lang_n2j(i, self.sg.g("lang-selected-n"))
-        self.jn = False
+        j = lang_n2j(i, self.sg.g("lang-selected-n"))
+        # 0的再设置也无效
+        self.jn = j == 0
         self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
         self.jn = True
-        self.dd_lang.set_selected(lang_select_index)
+        self.dd_lang.set_selected(j)
 
     @Gtk.Template.Callback()
     def _on_lang_changed(self, _drop_down, _a):
-
         if not self.jn:
             return
 
@@ -214,7 +216,6 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         start_iter, end_iter = buffer_from.get_bounds()
         text = buffer_from.get_text(start_iter, end_iter, False)
-        print("======", text)
 
         threading.Thread(target=self.request_text, daemon=True,
                          args=(text, self.tra_server, self.lang_t.key,)).start()
