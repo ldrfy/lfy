@@ -16,7 +16,7 @@ from lfy.api.server.ocr import ServerOCR
 from lfy.api.server.tra import ServerTra
 from lfy.gtk.notify import nf_t
 from lfy.gtk.widgets.theme_switcher import ThemeSwitcher
-from lfy.utils import cal_md5, process_text
+from lfy.utils import process_text
 from lfy.utils.debug import get_logger
 from lfy.utils.settings import Settings
 
@@ -51,12 +51,9 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.app = self.get_application()
 
         self.sg = Settings()
-        self.img_md5 = ""
 
         # 可能包含上次的追加内容
         self.last_text = ""
-        # 这次复制的
-        self.last_text_one = ""
         # 是不是软件内复制的，这种可能是想粘贴到其他地方，不响应即可
         self.is_tv_copy = False
         # 放置初始化时，不断调用误以为选择
@@ -169,8 +166,7 @@ class TranslateWindow(Adw.ApplicationWindow):
 
             h1 = h - (self.header_bar.get_height() +
                       self.gp_translate.get_margin_bottom() + 1)
-            print("......", self.paned_position, h,
-                  h-self.paned_position, h1)
+
             if self.paned_position not in (0, h1, int(h/5*2)):
                 self.sg.s("translate-paned-position",
                           self.paned_position/1.0)
@@ -214,16 +210,10 @@ class TranslateWindow(Adw.ApplicationWindow):
         Args:
             path (str): _description_
         """
-        md5_hash = cal_md5(path)
-        # 防止wayland多次识别
-        if self.img_md5 == md5_hash:
-            return
-        self.img_md5 = md5_hash
 
         _k = self.sg.g("server-ocr-selected-key")
         if _k != self.ocr_server.key:
             self.ocr_server = create_server_o(_k)
-        print(self.ocr_server.key)
 
         threading.Thread(target=self.request_text, daemon=True,
                          args=(path, self.ocr_server, None,)).start()
@@ -252,10 +242,10 @@ class TranslateWindow(Adw.ApplicationWindow):
             return
 
         if not reload:
-            if self.last_text_one == text or self.is_tv_copy:
+            if self.is_tv_copy:
                 self.is_tv_copy = False
                 return
-            self.last_text_one = text
+
             if self.cbtn_add_old.get_active():
                 text = f"{self.last_text} {text}"
             if self.cbtn_del_wrapping.get_active() and del_wrapping:

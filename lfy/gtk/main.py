@@ -14,7 +14,7 @@ from gi.repository import (Adw, Gdk, Gio, GLib,  # pylint: disable=E0401,C0413
 from lfy import APP_ID, PACKAGE_URL, RES_PATH, VERSION
 from lfy.gtk.preference import PreferencesDialog
 from lfy.gtk.translate import TranslateWindow
-from lfy.utils import get_os_release, is_text
+from lfy.utils import cal_md5, get_os_release, is_text
 from lfy.utils.bak import backup_gsettings
 from lfy.utils.check_update import main as check_update
 from lfy.utils.code import parse_lfy
@@ -41,6 +41,9 @@ class LfyApplication(Adw.Application):
         self.translate_now = GLib.Variant.new_boolean(True)
         self.img_w = 0
         self.img_h = 0
+        self.cb = Gdk.Display().get_default().get_clipboard()
+        self.img_md5 = ""
+        self.text_last = ""
 
         action_trans_now = Gio.SimpleAction.new_stateful(
             'copy2translate', None, self.translate_now)
@@ -80,10 +83,8 @@ class LfyApplication(Adw.Application):
                 break
         GLib.idle_add(self.do_startup1)
 
-
     def do_startup1(self):
 
-        self.cb = Gdk.Display().get_default().get_clipboard()
         self.copy_change_id = self.cb.connect("changed", self._connnect_copy)
 
         self.find_update()
@@ -184,7 +185,8 @@ class LfyApplication(Adw.Application):
         action.props.state = value
         if value:
             text = _("Copy detected, translate immediately")
-            self.copy_change_id = self.cb.connect("changed", self._connnect_copy)
+            self.copy_change_id = self.cb.connect(
+                "changed", self._connnect_copy)
         else:
             text = _("Copy detected, not automatically translated")
             self.cb.disconnect(self.copy_change_id)
@@ -266,9 +268,12 @@ class LfyApplication(Adw.Application):
         Args:
             cb (function): _description_
         """
-
         def on_active_copy(cb2, res):
-            self.do_activate(cb2.read_text_finish(res))
+            text = cb2.read_text_finish(res)
+            if text == self.text_last:
+                return
+            self.text_last = text
+            self.do_activate(text)
 
         def save_img(cb2, res):
             texture = cb2.read_texture_finish(res)
@@ -283,6 +288,12 @@ class LfyApplication(Adw.Application):
 
             path = "/tmp/lfy.png"
             pixbuf.savev(path, "png", (), ())
+
+            md5_hash = cal_md5(path)
+            # 防止wayland多次识别
+            if self.img_md5 == md5_hash:
+                return
+            self.img_md5 = md5_hash
 
             self.do_activate(path, ocr=True)
 
