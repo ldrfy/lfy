@@ -34,7 +34,7 @@ def s2ks(sk):
     Returns:
         _type_: _description_
     """
-    if "|" not in sk:
+    if not sk or "|" not in sk:
         return None, None
     if r'\s+\|\s+' in sk:
         sk = clear_key(sk)
