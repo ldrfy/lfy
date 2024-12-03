@@ -90,10 +90,11 @@ class TranslateWindow(Adw.ApplicationWindow):
     def _get_data(self):
         """异步获取数据
         """
-        i = server_key2i(self.sg.g("server-selected-key"))
+        server_key_t = self.sg.g("server-selected-key")
+        i = server_key2i(server_key_t)
         j = lang_n2j(i, self.sg.g("lang-selected-n"))
 
-        self.tra_server = create_server_t(self.sg.g("server-selected-key"))
+        self.tra_server = create_server_t(server_key_t)
         self.ocr_server = create_server_o(self.sg.g("server-ocr-selected-key"))
 
         data_s = Gtk.StringList.new(get_server_names_t())

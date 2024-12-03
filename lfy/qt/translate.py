@@ -1,4 +1,5 @@
 '翻译主窗口'
+import time
 import traceback
 from gettext import gettext as _
 
@@ -14,6 +15,8 @@ from lfy.api import (create_server_o, create_server_t, get_lang,
                      lang_n2j, server_key2i)
 from lfy.api.constant import NO_TRANSLATED_TXTS
 from lfy.api.server import Server
+from lfy.api.server.ocr import ServerOCR
+from lfy.api.server.tra import ServerTra
 from lfy.qt import MyThread
 from lfy.utils import process_text
 from lfy.utils.debug import get_logger
@@ -91,8 +94,12 @@ class TranslateWindow(QMainWindow):
         bottom_layout.setContentsMargins(0, 0, 0, 0)
         bottom_layout.setSpacing(0)
 
+        # 不响应选择tra服务
         self.jn = False
-        self.server_t = None
+        # 翻译服务
+        self.server_t: ServerTra = None
+        # OCR服务
+        self.server_o: ServerOCR = None
         self.lang_t = None
         self.my_thread = None
         self.tray: QSystemTrayIcon = None
@@ -101,12 +108,7 @@ class TranslateWindow(QMainWindow):
 
         self.set_data()
 
-    def set_data(self):
-        """_summary_
-        """
-        self.sg = Settings()
-        self.cb_server.setEditable(True)
-        self.cb_lang.setEditable(True)
+    def _get_sl(self, _p=None):
 
         server_key_t = self.sg.g("server-selected-key", "bing")
         server_key_o = self.sg.g("server-ocr-selected-key", "easyocr")
@@ -115,14 +117,35 @@ class TranslateWindow(QMainWindow):
         self.server_o = create_server_o(server_key_o)
 
         i = server_key2i(server_key_t)
+        j = lang_n2j(i, self.sg.g("lang-selected-n", 0, int))
+        self.lang_t = get_lang(i, j)
+
+        return i, get_server_names_t(), j
+
+    def _set_sl(self, p=None):
+        i, sns, j = p
         self.jn = i == 0
-        self.cb_server.addItems(get_server_names_t())
+        self.cb_server.addItems(sns)
         self.jn = True
         self.cb_server.setCurrentIndex(i)
-        n = self.sg.g("lang-selected-n", 0, int)
-        j = lang_n2j(i, n)
-        self.lang_t = get_lang(i, j)
+
         self.cb_lang.setCurrentIndex(j)
+
+    def set_data(self):
+        """_summary_
+        """
+        self.cb_server.addItems([_("Loading...")])
+        self.cb_lang.addItems([_("Loading...")])
+
+        self.sg = Settings()
+        self.cb_server.setEditable(True)
+        self.cb_lang.setEditable(True)
+
+        # 加速启动
+        self.my_thread = MyThread(self._get_sl)
+        self.my_thread.signal.connect(self._set_sl)
+        self.my_thread.start()
+
         self.cb_del_wrapping.setChecked(True)
 
         tt = _("Select text and use the shortcut key '{}' to copy, the copied text will not be automatically translated") \

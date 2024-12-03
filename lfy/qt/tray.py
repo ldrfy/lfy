@@ -42,13 +42,12 @@ class TrayIcon(QSystemTrayIcon):
         fu_action.triggered.connect(self.find_update)
         tray_menu.addAction(fu_action)
 
-        self.auto_action = QAction(
-            _('Copy to translate'), triggered=self.copy2translate)
+        self.auto_action = QAction(_('Copy to translate'),
+                                   triggered=self.copy2translate)
         self.auto_action.setEnabled(True)
         self.auto_action.setCheckable(True)
-        self.auto_action.setChecked(
-            self.sg.g("copy-auto-translate", d=True, t=bool))
-        self.copy2translate()
+        self.auto_action.setChecked(self.sg.g("copy-auto-translate",
+                                              d=True, t=bool))
         tray_menu.addAction(self.auto_action)
 
         pf_action = QAction(_("Preference") + " Ctrl+,", self)
@@ -68,11 +67,29 @@ class TrayIcon(QSystemTrayIcon):
         self.img_md5 = ""
         self.text_last = ""
         self.my_thread = None
-        if self.sg.g("auto-check-update"):
-            self.find_update()
-
         # 绑定托盘单击事件
         self.activated.connect(self._tray_icon_clicked)
+
+        self.my_thread = MyThread(self.do_startup0)
+        self.my_thread.signal.connect(self.do_startup1)
+        self.my_thread.start()
+
+    def do_startup0(self, _p=None):
+        """_summary_
+        """
+        for _i in range(100):
+            time.sleep(0.1)
+            if self.w and self.w.server_o:
+                break
+        return (self.sg.g("auto-check-update"), 0)
+
+    def do_startup1(self, p=None):
+        """_summary_
+        """
+        auto_update, _i = p
+        self.copy2translate()
+        if auto_update:
+            self.find_update()
 
     def _tray_icon_clicked(self, reason):
         if reason == QSystemTrayIcon.ActivationReason.Trigger:

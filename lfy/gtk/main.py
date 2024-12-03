@@ -73,13 +73,10 @@ class LfyApplication(Adw.Application):
         threading.Thread(target=self.do_startup0, daemon=True).start()
 
     def do_startup0(self):
-        print("do_startup0")
         for _i in range(30):
-            print(_i)
             time.sleep(0.1)
             win = self.props.active_window
             if win and win.ocr_server:
-                print(_i)
                 break
         GLib.idle_add(self.do_startup1)
 

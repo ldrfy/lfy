@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-12-01 19:25+0800\n"
+"POT-Creation-Date: 2024-12-03 13:49+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -104,7 +104,7 @@ msgstr "VPN地址"
 msgid "Which services are available in compare model"
 msgstr "在比较模式下哪些服务被选中"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:11 lfy/qt/tray.py:125
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:11 lfy/qt/tray.py:142
 msgid "Translation software for read paper"
 msgstr "为文献阅读设计的翻译软件"
 
@@ -134,7 +134,7 @@ msgstr "设置密钥"
 msgid "Shortcuts"
 msgstr "显示快捷键"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:58 lfy/qt/tray.py:129
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:57 lfy/qt/tray.py:146
 msgid "About"
 msgstr "关于"
 
@@ -204,41 +204,41 @@ msgstr "软件打开时，自动检查更新"
 msgid "Basic functions completed"
 msgstr "基础功能完成"
 
-#: lfy/gtk/main.py:120
+#: lfy/gtk/main.py:133
 msgid "translator_credits"
 msgstr "yuh <yuhldr@qq.com>, 2023-2023"
 
-#: lfy/gtk/main.py:121
+#: lfy/gtk/main.py:134
 msgid "A translation app for GNOME."
 msgstr "一个翻译软件，为gnome桌面设计"
 
-#: lfy/gtk/main.py:173 lfy/qt/tray.py:140 data/gtk/help-overlay.ui:20
+#: lfy/gtk/main.py:186 lfy/qt/tray.py:157 data/gtk/help-overlay.ui:20
 #: data/gtk/help-overlay.ui:27 data/gtk/help-overlay.ui:34
 #: data/gtk/help-overlay.ui:53
 msgid "Copy detected, translate immediately"
 msgstr "检测到复制，立刻翻译"
 
-#: lfy/gtk/main.py:176 lfy/qt/tray.py:146
+#: lfy/gtk/main.py:189 lfy/qt/tray.py:163
 msgid "Copy detected, not automatically translated"
 msgstr "检测到复制，不自动翻译"
 
-#: lfy/gtk/main.py:200
+#: lfy/gtk/main.py:213
 msgid "Next translation not remove line breaks"
 msgstr "下次翻译不移除换行"
 
-#: lfy/gtk/main.py:201
+#: lfy/gtk/main.py:214
 msgid "Next translation remove line breaks"
 msgstr "下次翻译移除换行"
 
-#: lfy/gtk/main.py:211
+#: lfy/gtk/main.py:224
 msgid "Next translation without splicing text"
 msgstr "下次翻译不拼接文本"
 
-#: lfy/gtk/main.py:212
+#: lfy/gtk/main.py:225
 msgid "Next translation splicing text"
 msgstr "下次翻译拼接文本"
 
-#: lfy/gtk/main.py:313 lfy/qt/tray.py:180
+#: lfy/gtk/main.py:326 lfy/qt/tray.py:197
 msgid ""
 "There is no new version.                      \n"
 "The current version is {}.                      \n"
@@ -269,12 +269,16 @@ msgstr "配置数据已导出到剪贴板"
 msgid "Using {} for text recognition"
 msgstr "使用 {} 进行文本识别"
 
-#: lfy/gtk/translate.py:227 lfy/qt/translate.py:277
+#: lfy/gtk/translate.py:67 lfy/gtk/translate.py:68
+msgid "Loading"
+msgstr "加载中"
+
+#: lfy/gtk/translate.py:245 lfy/qt/translate.py:300
 msgid ""
 "This time the content contains private information and is not translated"
 msgstr "本次内容包含隐私信息，不翻译"
 
-#: lfy/gtk/translate.py:282 lfy/gtk/translate.py:314 lfy/qt/translate.py:304
+#: lfy/gtk/translate.py:300 lfy/gtk/translate.py:332 lfy/qt/translate.py:327
 #: lfy/api/server/tra/baidu.py:47 lfy/api/server/tra/tencent.py:85
 #: lfy/api/server/tra/aliyun.py:95 lfy/api/server/tra/com.py:30
 #: lfy/api/server/tra/huoshan.py:139 lfy/api/server/ocr/baidu.py:128
@@ -282,16 +286,16 @@ msgstr "本次内容包含隐私信息，不翻译"
 msgid "something error: {}"
 msgstr "一些错误发生：{}"
 
-#: lfy/gtk/translate.py:297 lfy/qt/translate.py:236
+#: lfy/gtk/translate.py:315 lfy/qt/translate.py:259
 #, fuzzy
 msgid "{} OCRing..."
 msgstr "{} OCR识别中.."
 
-#: lfy/gtk/translate.py:299 lfy/qt/translate.py:308
+#: lfy/gtk/translate.py:317 lfy/qt/translate.py:331
 msgid "Translating..."
 msgstr "翻译中……"
 
-#: lfy/gtk/translate.py:311 lfy/qt/translate.py:254
+#: lfy/gtk/translate.py:329 lfy/qt/translate.py:277
 msgid "Translation completed"
 msgstr "翻译完成"
 
@@ -400,42 +404,46 @@ msgstr "导出成功！"
 msgid "Configuration data has been exported to the clipboard."
 msgstr "配置数据已导出到剪贴板"
 
-#: lfy/qt/translate.py:61 data/gtk/help-overlay.ui:66
+#: lfy/qt/translate.py:64 data/gtk/help-overlay.ui:66
 msgid "Remove line breaks"
 msgstr "移除换行符"
 
-#: lfy/qt/translate.py:63 data/gtk/translate.ui:71
+#: lfy/qt/translate.py:66 data/gtk/translate.ui:71
 msgid "Alt + D: Remove symbols such as line breaks"
 msgstr "Alt + D: 移除换行符"
 
-#: lfy/qt/translate.py:65 data/gtk/help-overlay.ui:59
+#: lfy/qt/translate.py:68 data/gtk/help-overlay.ui:59
 msgid "Splice Text"
 msgstr "拼接文本"
 
-#: lfy/qt/translate.py:67 data/gtk/translate.ui:78
+#: lfy/qt/translate.py:70 data/gtk/translate.ui:78
 msgid "Alt + C: Splice the next copied text with the previous text"
 msgstr "Alt + C: 将下一个复制的文本与上一个文本拼接"
 
-#: lfy/qt/translate.py:69 lfy/qt/translate.py:71 data/gtk/translate.ui:85
+#: lfy/qt/translate.py:72 lfy/qt/translate.py:74 data/gtk/translate.ui:85
 #: data/gtk/help-overlay.ui:46
 msgid "Translate"
 msgstr "翻译"
 
-#: lfy/qt/translate.py:128
+#: lfy/qt/translate.py:137 lfy/qt/translate.py:138
+msgid "Loading..."
+msgstr ""
+
+#: lfy/qt/translate.py:151
 msgid ""
 "Select text and use the shortcut key '{}' to copy, the copied text will not "
 "be automatically translated"
 msgstr "选择文字并用快捷键 '{}' 复制，复制的文字将不会自动翻译"
 
-#: lfy/qt/translate.py:161
+#: lfy/qt/translate.py:184
 msgid "warn"
 msgstr "警告"
 
-#: lfy/qt/translate.py:161
+#: lfy/qt/translate.py:184
 msgid "quit?"
 msgstr "退出？"
 
-#: lfy/qt/translate.py:283
+#: lfy/qt/translate.py:306
 msgid "Not translated this time!"
 msgstr "本次不翻译！"
 
@@ -443,32 +451,32 @@ msgstr "本次不翻译！"
 msgid "Open"
 msgstr "打开"
 
-#: lfy/qt/tray.py:41 lfy/qt/tray.py:193 data/gtk/translate.ui:159
+#: lfy/qt/tray.py:41 lfy/qt/tray.py:210 data/gtk/translate.ui:159
 msgid "Check for updates"
 msgstr "检查更新"
 
-#: lfy/qt/tray.py:46 lfy/qt/tray.py:139 data/gtk/translate.ui:141
+#: lfy/qt/tray.py:45 lfy/qt/tray.py:156 data/gtk/translate.ui:141
 #: data/gtk/help-overlay.ui:52
 msgid "Copy to translate"
 msgstr "复制即翻译"
 
-#: lfy/qt/tray.py:54
+#: lfy/qt/tray.py:53
 msgid "Preference"
 msgstr "设置"
 
-#: lfy/qt/tray.py:62
+#: lfy/qt/tray.py:61
 msgid "Quit"
 msgstr "退出"
 
-#: lfy/qt/tray.py:145
+#: lfy/qt/tray.py:162
 msgid "Stop copy to translate"
 msgstr "停止复制即翻译"
 
-#: lfy/qt/tray.py:175
+#: lfy/qt/tray.py:192
 msgid "New version available!"
 msgstr "找到新版本！"
 
-#: lfy/qt/tray.py:184
+#: lfy/qt/tray.py:201
 msgid "No new version!"
 msgstr "暂无新版本！"
 

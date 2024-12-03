@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-12-01 19:25+0800\n"
+"POT-Creation-Date: 2024-12-03 13:49+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,7 +104,7 @@ msgstr ""
 msgid "Which services are available in compare model"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:11 lfy/qt/tray.py:125
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:11 lfy/qt/tray.py:142
 msgid "Translation software for read paper"
 msgstr ""
 
@@ -134,7 +134,7 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:58 lfy/qt/tray.py:129
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:57 lfy/qt/tray.py:146
 msgid "About"
 msgstr ""
 
@@ -204,41 +204,41 @@ msgstr ""
 msgid "Basic functions completed"
 msgstr ""
 
-#: lfy/gtk/main.py:120
+#: lfy/gtk/main.py:133
 msgid "translator_credits"
 msgstr ""
 
-#: lfy/gtk/main.py:121
+#: lfy/gtk/main.py:134
 msgid "A translation app for GNOME."
 msgstr ""
 
-#: lfy/gtk/main.py:173 lfy/qt/tray.py:140 data/gtk/help-overlay.ui:20
+#: lfy/gtk/main.py:186 lfy/qt/tray.py:157 data/gtk/help-overlay.ui:20
 #: data/gtk/help-overlay.ui:27 data/gtk/help-overlay.ui:34
 #: data/gtk/help-overlay.ui:53
 msgid "Copy detected, translate immediately"
 msgstr ""
 
-#: lfy/gtk/main.py:176 lfy/qt/tray.py:146
+#: lfy/gtk/main.py:189 lfy/qt/tray.py:163
 msgid "Copy detected, not automatically translated"
 msgstr ""
 
-#: lfy/gtk/main.py:200
+#: lfy/gtk/main.py:213
 msgid "Next translation not remove line breaks"
 msgstr ""
 
-#: lfy/gtk/main.py:201
+#: lfy/gtk/main.py:214
 msgid "Next translation remove line breaks"
 msgstr ""
 
-#: lfy/gtk/main.py:211
+#: lfy/gtk/main.py:224
 msgid "Next translation without splicing text"
 msgstr ""
 
-#: lfy/gtk/main.py:212
+#: lfy/gtk/main.py:225
 msgid "Next translation splicing text"
 msgstr ""
 
-#: lfy/gtk/main.py:313 lfy/qt/tray.py:180
+#: lfy/gtk/main.py:326 lfy/qt/tray.py:197
 msgid ""
 "There is no new version.                      \n"
 "The current version is {}.                      \n"
@@ -266,12 +266,16 @@ msgstr ""
 msgid "Using {} for text recognition"
 msgstr ""
 
-#: lfy/gtk/translate.py:227 lfy/qt/translate.py:277
+#: lfy/gtk/translate.py:67 lfy/gtk/translate.py:68
+msgid "Loading"
+msgstr ""
+
+#: lfy/gtk/translate.py:245 lfy/qt/translate.py:300
 msgid ""
 "This time the content contains private information and is not translated"
 msgstr ""
 
-#: lfy/gtk/translate.py:282 lfy/gtk/translate.py:314 lfy/qt/translate.py:304
+#: lfy/gtk/translate.py:300 lfy/gtk/translate.py:332 lfy/qt/translate.py:327
 #: lfy/api/server/tra/baidu.py:47 lfy/api/server/tra/tencent.py:85
 #: lfy/api/server/tra/aliyun.py:95 lfy/api/server/tra/com.py:30
 #: lfy/api/server/tra/huoshan.py:139 lfy/api/server/ocr/baidu.py:128
@@ -279,15 +283,15 @@ msgstr ""
 msgid "something error: {}"
 msgstr ""
 
-#: lfy/gtk/translate.py:297 lfy/qt/translate.py:236
+#: lfy/gtk/translate.py:315 lfy/qt/translate.py:259
 msgid "{} OCRing..."
 msgstr ""
 
-#: lfy/gtk/translate.py:299 lfy/qt/translate.py:308
+#: lfy/gtk/translate.py:317 lfy/qt/translate.py:331
 msgid "Translating..."
 msgstr ""
 
-#: lfy/gtk/translate.py:311 lfy/qt/translate.py:254
+#: lfy/gtk/translate.py:329 lfy/qt/translate.py:277
 msgid "Translation completed"
 msgstr ""
 
@@ -396,42 +400,46 @@ msgstr ""
 msgid "Configuration data has been exported to the clipboard."
 msgstr ""
 
-#: lfy/qt/translate.py:61 data/gtk/help-overlay.ui:66
+#: lfy/qt/translate.py:64 data/gtk/help-overlay.ui:66
 msgid "Remove line breaks"
 msgstr ""
 
-#: lfy/qt/translate.py:63 data/gtk/translate.ui:71
+#: lfy/qt/translate.py:66 data/gtk/translate.ui:71
 msgid "Alt + D: Remove symbols such as line breaks"
 msgstr ""
 
-#: lfy/qt/translate.py:65 data/gtk/help-overlay.ui:59
+#: lfy/qt/translate.py:68 data/gtk/help-overlay.ui:59
 msgid "Splice Text"
 msgstr ""
 
-#: lfy/qt/translate.py:67 data/gtk/translate.ui:78
+#: lfy/qt/translate.py:70 data/gtk/translate.ui:78
 msgid "Alt + C: Splice the next copied text with the previous text"
 msgstr ""
 
-#: lfy/qt/translate.py:69 lfy/qt/translate.py:71 data/gtk/translate.ui:85
+#: lfy/qt/translate.py:72 lfy/qt/translate.py:74 data/gtk/translate.ui:85
 #: data/gtk/help-overlay.ui:46
 msgid "Translate"
 msgstr ""
 
-#: lfy/qt/translate.py:128
+#: lfy/qt/translate.py:137 lfy/qt/translate.py:138
+msgid "Loading..."
+msgstr ""
+
+#: lfy/qt/translate.py:151
 msgid ""
 "Select text and use the shortcut key '{}' to copy, the copied text will not "
 "be automatically translated"
 msgstr ""
 
-#: lfy/qt/translate.py:161
+#: lfy/qt/translate.py:184
 msgid "warn"
 msgstr ""
 
-#: lfy/qt/translate.py:161
+#: lfy/qt/translate.py:184
 msgid "quit?"
 msgstr ""
 
-#: lfy/qt/translate.py:283
+#: lfy/qt/translate.py:306
 msgid "Not translated this time!"
 msgstr ""
 
@@ -439,32 +447,32 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: lfy/qt/tray.py:41 lfy/qt/tray.py:193 data/gtk/translate.ui:159
+#: lfy/qt/tray.py:41 lfy/qt/tray.py:210 data/gtk/translate.ui:159
 msgid "Check for updates"
 msgstr ""
 
-#: lfy/qt/tray.py:46 lfy/qt/tray.py:139 data/gtk/translate.ui:141
+#: lfy/qt/tray.py:45 lfy/qt/tray.py:156 data/gtk/translate.ui:141
 #: data/gtk/help-overlay.ui:52
 msgid "Copy to translate"
 msgstr ""
 
-#: lfy/qt/tray.py:54
+#: lfy/qt/tray.py:53
 msgid "Preference"
 msgstr ""
 
-#: lfy/qt/tray.py:62
+#: lfy/qt/tray.py:61
 msgid "Quit"
 msgstr ""
 
-#: lfy/qt/tray.py:145
+#: lfy/qt/tray.py:162
 msgid "Stop copy to translate"
 msgstr ""
 
-#: lfy/qt/tray.py:175
+#: lfy/qt/tray.py:192
 msgid "New version available!"
 msgstr ""
 
-#: lfy/qt/tray.py:184
+#: lfy/qt/tray.py:201
 msgid "No new version!"
 msgstr ""
 
