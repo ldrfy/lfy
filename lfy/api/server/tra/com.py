@@ -5,7 +5,7 @@ import traceback
 from gettext import gettext as _
 from multiprocessing import Pool
 
-from lfy.api.constant import SERVERS_T
+from lfy.api.constant import get_servers_t
 from lfy.api.server.tra import ServerTra
 from lfy.utils.debug import get_logger
 from lfy.utils.settings import Settings
@@ -54,7 +54,7 @@ class AllServer(ServerTra):
 
         # 只对比设置中修改的
         all_servers = {}
-        for server in SERVERS_T:
+        for server in get_servers_t():
             all_servers[server.key] = server
         keys = Settings().g("compare-servers")
 

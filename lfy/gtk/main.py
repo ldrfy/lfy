@@ -11,7 +11,7 @@ from gettext import gettext as _
 from gi.repository import (Adw, Gdk, Gio, GLib,  # pylint: disable=E0401,C0413
                            Gtk)
 
-from lfy import APP_ID, PACKAGE_URL, PKGDATA_DIR, RES_PATH, VERSION
+from lfy import APP_ID, PACKAGE_URL, RES_PATH, VERSION
 from lfy.gtk.preference import PreferencesDialog
 from lfy.gtk.translate import TranslateWindow
 from lfy.utils import get_os_release, is_text
@@ -70,8 +70,24 @@ class LfyApplication(Adw.Application):
                            ['<primary>d'])
         self.last_clip = 0
 
+        threading.Thread(target=self.do_startup0, daemon=True).start()
+
+    def do_startup0(self):
+        print("do_startup0")
+        for _i in range(30):
+            print(_i)
+            time.sleep(0.1)
+            win = self.props.active_window
+            if win and win.ocr_server:
+                print(_i)
+                break
+        GLib.idle_add(self.do_startup1)
+
+
+    def do_startup1(self):
+
         self.cb = Gdk.Display().get_default().get_clipboard()
-        self.copy_change_id = self.cb.connect("changed", self.copy)
+        self.copy_change_id = self.cb.connect("changed", self._connnect_copy)
 
         self.find_update()
 
@@ -84,9 +100,9 @@ class LfyApplication(Adw.Application):
         win = self.props.active_window  # pylint: disable=E1101
         if not win:
             width, height = Settings().g("window-size")
-            print(width, height)
-            win = TranslateWindow(
-                application=self, default_height=int(height), default_width=int(width), )
+            win = TranslateWindow(application=self,
+                                  default_height=int(height),
+                                  default_width=int(width), )
         win.present()
         return win
 
@@ -97,7 +113,7 @@ class LfyApplication(Adw.Application):
             s (str, optional): _description_. Defaults to "".
             ocr (bool, optional): _description_. Defaults to False.
         """
-        win = self.get_translate_win()
+        win: TranslateWindow = self.get_translate_win()
         if ocr:
             win.update_ocr(s)
         else:
@@ -171,7 +187,7 @@ class LfyApplication(Adw.Application):
         action.props.state = value
         if value:
             text = _("Copy detected, translate immediately")
-            self.copy_change_id = self.cb.connect("changed", self.copy)
+            self.copy_change_id = self.cb.connect("changed", self._connnect_copy)
         else:
             text = _("Copy detected, not automatically translated")
             self.cb.disconnect(self.copy_change_id)
@@ -247,7 +263,7 @@ class LfyApplication(Adw.Application):
         # pylint: disable=E1101
         self.props.active_window.down_paned_position()
 
-    def copy(self, cb):
+    def _connnect_copy(self, cb):
         """翻译
 
         Args:
@@ -313,7 +329,7 @@ class LfyApplication(Adw.Application):
                 s = _("There is no new version.\
                       \nThe current version is {}.\
                       \nYou can go to {} to view the beta version.")\
-                      .format(VERSION, PACKAGE_URL)
+                    .format(VERSION, PACKAGE_URL)
                 GLib.idle_add(self.update_app, s)
 
         if Settings().g("auto-check-update"):

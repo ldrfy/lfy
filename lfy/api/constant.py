@@ -9,22 +9,35 @@ from lfy.api.server.tra.google import GoogleServer
 from lfy.api.server.tra.huoshan import HuoShanServer
 from lfy.api.server.tra.tencent import TencentServer
 
-# 翻译服务
-SERVERS_T = [
-    GoogleServer(),
-    BingServer(),
-    BaiduServer(),
-    TencentServer(),
-    AliYunServer(),
-    HuoShanServer(),
-]
+SERVERS_TRA = []
+SERVERS_OCR = []
 
-# OCR文本识别服务
-SERVERS_O = [
-    BaiduOCRServer(),
-    PytesseractServer(),
-    EasyOcrServer(),
-]
+# 翻译服务
+def get_servers_t():
+    global SERVERS_TRA
+    if not SERVERS_TRA:
+        SERVERS_TRA = [
+            GoogleServer(),
+            BingServer(),
+            BaiduServer(),
+            TencentServer(),
+            AliYunServer(),
+            HuoShanServer(),
+        ]
+
+    return SERVERS_TRA
+
+def get_servers_o():
+    # OCR文本识别服务
+    global SERVERS_OCR
+    if not SERVERS_OCR:
+
+        SERVERS_OCR = [
+            BaiduOCRServer(),
+            PytesseractServer(),
+            EasyOcrServer(),
+        ]
+    return SERVERS_OCR
 
 
 NO_TRANSLATED_TXTS = [

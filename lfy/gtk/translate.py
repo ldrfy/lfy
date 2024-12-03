@@ -50,7 +50,7 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         self.app = self.get_application()
 
-        self.setting = Settings()
+        self.sg = Settings()
         self.img_md5 = ""
 
         # 可能包含上次的追加内容
@@ -64,24 +64,13 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.toast = Adw.Toast.new("")
         self.toast.set_timeout(2)
 
-        i = server_key2i(self.setting.g("server-selected-key"))
-        self.tran_server = create_server_t(
-            self.setting.g("server-selected-key"))
-        self.ocr_server = create_server_o(
-            self.setting.g("server-ocr-selected-key"))
-        self.jn = True
-
-        self.dd_server.set_model(Gtk.StringList.new(get_server_names_t()))
-        self.dd_server.set_selected(i)
-
-        self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
-        self.dd_lang.set_selected(
-            lang_n2j(i, self.setting.g("lang-selected-n")))
+        self.dd_server.set_model(Gtk.StringList.new([_("Loading")]))
+        self.dd_lang.set_model(Gtk.StringList.new([_("Loading")]))
 
         self.menu_btn.props.popover.add_child(ThemeSwitcher(), 'theme')
 
         self.connect('unrealize', self.save_settings)
-        self.paned_position = self.setting.g("translate-paned-position")
+        self.paned_position = self.sg.g("translate-paned-position")
         self.paned_position_auto = True
         if self.paned_position > 0:
             self.gp_translate.set_position(self.paned_position)
@@ -91,6 +80,34 @@ class TranslateWindow(Adw.ApplicationWindow):
         controller.connect("key-pressed", self.on_key_pressed)
         # 将控制器添加到文本视图中
         self.tv_from.add_controller(controller)
+
+        self.tra_server = None
+        self.ocr_server = None
+        self.jn = True
+
+        threading.Thread(target=self._get_data, daemon=True).start()
+
+    def _get_data(self):
+        """异步获取数据
+        """
+        i = server_key2i(self.sg.g("server-selected-key"))
+        j = lang_n2j(i, self.sg.g("lang-selected-n"))
+
+        self.tra_server = create_server_t(self.sg.g("server-selected-key"))
+        self.ocr_server = create_server_o(self.sg.g("server-ocr-selected-key"))
+
+        data_s = Gtk.StringList.new(get_server_names_t())
+        data_lang = Gtk.StringList.new(get_lang_names(i))
+
+        GLib.idle_add(self._set_data, data_s, i, data_lang, j)
+
+    def _set_data(self, data_s, i, data_lang, j):
+        """异步初始化
+        """
+        self.dd_server.set_model(data_s)
+        self.dd_server.set_selected(i)
+        self.dd_lang.set_model(data_lang)
+        self.dd_lang.set_selected(j)
 
     def on_key_pressed(self, _, keyval, _keycode, _state):
         """文本回车，直接翻译
@@ -146,7 +163,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         """
         if not self.is_maximized():
             w, h = self.get_default_size()
-            self.setting.s("window-size", [w, h])
+            self.sg.s("window-size", [w, h])
             self.paned_position = self.gp_translate.get_position()
 
             h1 = h - (self.header_bar.get_height() +
@@ -154,22 +171,22 @@ class TranslateWindow(Adw.ApplicationWindow):
             print("......", self.paned_position, h,
                   h-self.paned_position, h1)
             if self.paned_position not in (0, h1, int(h/5*2)):
-                self.setting.s("translate-paned-position",
-                               self.paned_position/1.0)
+                self.sg.s("translate-paned-position",
+                          self.paned_position/1.0)
                 print("xxxx")
 
         i = self.dd_server.get_selected()
         j = self.dd_lang.get_selected()
-        self.setting.s("server-selected-key", get_server_t(i).key)
+        self.sg.s("server-selected-key", get_server_t(i).key)
         n = get_lang(i, j).n
-        self.setting.s("lang-selected-n", n)
+        self.sg.s("lang-selected-n", n)
 
     @Gtk.Template.Callback()
     def _on_server_changed(self, drop_down, _a):
         # 初始化，会不断调用这个
         if time.time() - self.creat_time > 1:
             i = drop_down.get_selected()
-            lang_select_index = lang_n2j(i, self.setting.g("lang-selected-n"))
+            lang_select_index = lang_n2j(i, self.sg.g("lang-selected-n"))
             # 等于0时_on_lang_changed不会相应多次
             self.jn = lang_select_index == 0
 
@@ -202,7 +219,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             return
         self.img_md5 = md5_hash
 
-        _k = self.setting.g("server-ocr-selected-key")
+        _k = self.sg.g("server-ocr-selected-key")
         if _k != self.ocr_server.key:
             self.ocr_server = create_server_o(_k)
         print(self.ocr_server.key)
@@ -250,12 +267,12 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         i = self.dd_server.get_selected()
         server: Server = get_server_t(i)
-        if server.key != self.tran_server.key:
-            self.tran_server = server
+        if server.key != self.tra_server.key:
+            self.tra_server = server
         lk = get_lang(i, self.dd_lang.get_selected()).key
 
         threading.Thread(target=self.request_text, daemon=True,
-                         args=(text, self.tran_server, lk,)).start()
+                         args=(text, self.tra_server, lk,)).start()
 
     def request_text(self, s, server, lk=None):
         """子线程翻译
@@ -307,7 +324,7 @@ class TranslateWindow(Adw.ApplicationWindow):
                 return
 
             self.tv_to.get_buffer().set_text(s)
-            nf_t(self.app, f"{self.tran_server.name} " +
+            nf_t(self.app, f"{self.tra_server.name} " +
                  _("Translation completed"), s)
         except TypeError as e:
             get_logger().error(e)
