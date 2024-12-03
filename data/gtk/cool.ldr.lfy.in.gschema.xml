@@ -9,6 +9,10 @@
 			<default>true</default>
 			<description>Automatically check the new version of the software upon startup</description>
 		</key>
+		<key type="b" name="copy-auto-translate">
+			<default>true</default>
+			<description>Copy to Translate</description>
+		</key>
 		<key type="b" name="notify-translation-results">
 			<default>true</default>
 			<description>After the translation is completed, a system notification is automatically sent</description>
@@ -58,7 +62,7 @@
 			<default>""</default>
 			<description>Baidu OCR access_token</description>
 		</key>
-		<key type="i" name="ocr-baidu-token-expires-date">
+		<key type="d" name="ocr-baidu-token-expires-date">
 			<default>0</default>
 			<description>Baidu OCR access_token expires date</description>
 		</key>

@@ -16,16 +16,17 @@ def backup_gsettings(qt=None):
         qt = os.environ.get(f'{APP_ID}.ui') == 'qt'
 
     backup_data = {}
-    ss = Settings()
+    sg = Settings()
 
     if qt:
-        keys = ss.ss.allKeys()
+        sg.init_sg()
+        keys = sg.ss.allKeys()
     else:
         from gi.repository import Gio
         keys = Gio.SettingsSchemaSource.get_default()\
             .lookup(APP_ID, True).list_keys()
 
-    backup_data = {key: ss.g(key) for key in keys}
+    backup_data = {key: sg.g(key) for key in keys}
 
     # indent自动格式化
     # ensure_ascii 中文显示没问题

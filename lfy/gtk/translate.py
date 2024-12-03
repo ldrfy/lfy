@@ -52,6 +52,9 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         self.sg = Settings()
 
+        self.tra_server = None
+        self.ocr_server = None
+        self.jn = True
         # 可能包含上次的追加内容
         self.last_text = ""
         # 是不是软件内复制的，这种可能是想粘贴到其他地方，不响应即可
@@ -77,10 +80,6 @@ class TranslateWindow(Adw.ApplicationWindow):
         controller.connect("key-pressed", self.on_key_pressed)
         # 将控制器添加到文本视图中
         self.tv_from.add_controller(controller)
-
-        self.tra_server = None
-        self.ocr_server = None
-        self.jn = True
 
         threading.Thread(target=self._get_data, daemon=True).start()
 
@@ -170,7 +169,6 @@ class TranslateWindow(Adw.ApplicationWindow):
             if self.paned_position not in (0, h1, int(h/5*2)):
                 self.sg.s("translate-paned-position",
                           self.paned_position/1.0)
-                print("xxxx")
 
         i = self.dd_server.get_selected()
         j = self.dd_lang.get_selected()

@@ -237,10 +237,12 @@ class PreferenceWindow(QMainWindow):
                               QSystemTrayIcon.MessageIcon.Information, 3000)
 
     def _on_cb_notify(self, state):
-        self.sg.s("notify-translation-results", state)
+        print(state, "----_on_cb_notify")
+        self.sg.s("notify-translation-results", state != 0)
 
     def _on_auto_check_update(self, state):
-        self.sg.s("auto-check-update", state)
+        print(state, "----_on_auto_check_update")
+        self.sg.s("auto-check-update", state != 0)
 
     def _on_vpn_save(self):
         self.sg.s("vpn-addr-port", self.le_vpn.text())

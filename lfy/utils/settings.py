@@ -3,19 +3,9 @@ import os
 from lfy import APP_ID, APP_NAME
 
 
-def init_sg(qt, ss):
-    if ss is not None:
-        return ss
-    if not qt:
-        from gi.repository import Gio
-        return Gio.Settings.new(APP_ID)
-
-    from PyQt6.QtCore import QSettings
-    return QSettings(APP_ID, APP_NAME)
-
-
 class Settings:
-
+    """qt gtk 设置
+    """
     def __init__(self, qt=None):
         if qt is None:
             qt = os.environ.get(f'{APP_ID}.ui') == 'qt'
@@ -25,7 +15,18 @@ class Settings:
 
         super().__init__()
 
-    def g(self, key, d=None, t=str):
+    def init_sg(self):
+        if self.ss is not None:
+            return
+        if not self.qt:
+            from gi.repository import Gio
+            self.ss = Gio.Settings.new(APP_ID)
+            return
+
+        from PyQt6.QtCore import QSettings
+        self.ss = QSettings(APP_ID, APP_NAME)
+
+    def g(self, key, d=None, t=None):
         """读取
 
         Args:
@@ -35,11 +36,29 @@ class Settings:
         Returns:
             _type_: _description_
         """
-        self.ss = init_sg(self.qt, self.ss)
+
+        self.init_sg()
         if not self.qt:
             return self.ss.get_value(key).unpack()
+        if t is not None:
+            return self.ss.value(key, d, type=t)
 
-        return self.ss.value(key, d, type=t)
+        v = self.ss.value(key, d)
+
+        if v is None or not isinstance(v, str):
+            return v
+        if v in ["true", "True"]:
+            return True
+        if v in ["false", "False"]:
+            return False
+        try:
+            return int(v)
+        except ValueError:
+            try:
+                # 尝试转换为小数
+                return float(v)
+            except ValueError:
+                return v
 
     def s(self, key, value):
         """保存
@@ -51,17 +70,17 @@ class Settings:
         Raises:
             ValueError: _description_
         """
-        self.ss = init_sg(self.qt, self.ss)
+        self.init_sg()
 
         if not self.qt:
             from gi.repository import GLib
 
             if isinstance(value, str):
                 self.ss.set_string(key, value)
-            elif isinstance(value, int):
-                self.ss.set_int(key, value)
             elif isinstance(value, bool):
                 self.ss.set_boolean(key, value)
+            elif isinstance(value, int):
+                self.ss.set_int(key, value)
             elif isinstance(value, float):
                 self.ss.set_double(key, value)
             elif isinstance(value, list):

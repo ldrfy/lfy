@@ -14,7 +14,7 @@ from lfy.utils.settings import Settings
 
 # 设置代理地址和端口号
 PROXY_ADDRESS = Settings().g("vpn-addr-port")
-if len(PROXY_ADDRESS) > 0:
+if PROXY_ADDRESS:
     # 设置环境变量
     os.environ['http_proxy'] = PROXY_ADDRESS
     os.environ['https_proxy'] = PROXY_ADDRESS
