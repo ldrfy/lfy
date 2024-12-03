@@ -199,7 +199,9 @@ class PreferenceWindow(QMainWindow):
             return
         st: ServerTra = get_servers_t_sk()[i]
         # 保存时，去掉空格，但是显示时，保留
-        self.le_t.setText(clear_key(st.get_conf(), "  |  "))
+        conf_str = st.get_conf()
+        if conf_str:
+            self.le_t.setText(clear_key(conf_str, "  |  "))
         self.le_t.setToolTip(st.sk_placeholder_text)
         self.le_t.setPlaceholderText(st.sk_placeholder_text)
 
@@ -210,7 +212,9 @@ class PreferenceWindow(QMainWindow):
             return
         so: ServerOCR = get_servers_o()[i]
         # 保存时，去掉空格，但是显示时，保留
-        self.le_o.setText(clear_key(so.get_conf(), "  |  "))
+        conf_str = so.get_conf()
+        if conf_str:
+            self.le_o.setText(clear_key(conf_str, "  |  "))
         self.le_o.setToolTip(so.sk_placeholder_text)
         self.le_o.setPlaceholderText(so.sk_placeholder_text)
         self.tray.showMessage(_("OCR server"),
