@@ -43,7 +43,10 @@ class ServerPreferences(Adw.NavigationPage):
         self.title.set_title(s)
         self.title.set_subtitle(server.name)
 
-        self.api_key_entry.set_text(clear_key(server.get_conf(), "  |  "))
+        conf_str = server.get_conf()
+        if conf_str:
+            self.api_key_entry.set_text(clear_key(conf_str, "  |  "))
+        self.api_key_entry.set_title(server.sk_placeholder_text)
         self.api_key_entry.set_tooltip_text(server.sk_placeholder_text)
 
         self.api_key_link.set_uri(server.get_doc_url())

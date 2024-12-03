@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- Created with Cambalache 0.90.4 -->
+<!-- Created with Cambalache 0.94.0 -->
 <interface>
   <requires lib="gtk" version="4.12"/>
-  <requires lib="libadwaita" version="1.4"/>
+  <requires lib="libadwaita" version="1.6"/>
   <template class="ServerPreferencesPage" parent="AdwNavigationPage">
     <property name="title">test</property>
     <child>
@@ -23,8 +23,6 @@
                 <child>
                   <object class="AdwEntryRow" id="api_key_entry">
                     <property name="show-apply-button">true</property>
-                    <property name="title" translatable="yes">API Key for Translate,Pay attention to whether there are dividing lines |</property>
-                    <property name="tooltip-text" translatable="yes">Enter an API Key for the Server with Translate.</property>
                     <signal name="apply" handler="_on_api_key_apply"/>
                     <child>
                       <object class="GtkStack" id="api_key_stack">
