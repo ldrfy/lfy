@@ -19,7 +19,7 @@ from lfy.utils.settings import Settings
 
 # 设置代理地址和端口号
 PROXY_ADDRESS = Settings().g("vpn-addr-port")
-if len(PROXY_ADDRESS) > 0:
+if PROXY_ADDRESS:
     # 设置环境变量
     os.environ['http_proxy'] = PROXY_ADDRESS
     os.environ['https_proxy'] = PROXY_ADDRESS
@@ -41,20 +41,17 @@ class LfyApplication(Adw.Application):
         self.text_last = ""
         self.copy_id = None
 
-        action_trans_now = Gio.SimpleAction.new_stateful('copy2translate', None,
-                                                         GLib.Variant.new_boolean(
-                                                             self.sg.g("copy-auto-translate")))
-        action_trans_now.connect('change-state', self.on_action_trans_now)
-        self.add_action(action_trans_now)
-        self.set_accels_for_action("app.copy2translate", ['<alt>t'])
-
         self.create_actions()
 
         threading.Thread(target=self.do_startup0, daemon=True).start()
         self.connect('activate', self.on_activate)
 
     def on_activate(self, _app):
+        """激活
 
+        Args:
+            _app (_type_): _description_
+        """
         width, height = self.sg.g("window-size")
         self.win = TranslateWindow(application=self,
                                    default_height=int(height),
@@ -146,29 +143,31 @@ class LfyApplication(Adw.Application):
 
     def create_actions(self):
         """创建菜单
-
-        Args:
-            name (_type_): _description_
-            callback (function): _description_
-            shortcuts (_type_, optional): _description_. Defaults to None.
         """
 
         names = ['preferences', 'quit', 'about',
                  'find_update', 'del_wrapping', 'splice_text',
                  'translate', 'gp_reset_restore', 'gp_up',
-                 'gp_down']
+                 'gp_down', 'copy2translate']
         callbacks = [self.on_preferences_action, self.quit, self.on_about_action,
                      self.find_update, self.on_del_wrapping_action, self.on_splice_text_action,
-                     self.set_translate_action, self.gp_reset_action, self.gp_up_action,
-                     self.gp_down_action]
+                     self.set_translate_action, self._gp_reset_action, self._gp_up_action,
+                     self._gp_down_action, self.on_action_trans_now]
         shortcuts = ['<Ctrl>comma', '<primary>q', None,
                      None, '<alt>d', '<alt>c',
                      '<primary>t', '<primary>r', '<primary>u',
-                     '<primary>d']
+                     '<primary>d', '<alt>t']
+        states = [None, None, None,
+                  None, None, None,
+                  None, None, None,
+                  None, GLib.Variant.new_boolean(self.sg.g("copy-auto-translate"))]
 
-        for name, fun, shortcut in zip(names, callbacks, shortcuts):
-            action = Gio.SimpleAction.new(name, None)
-            action.connect("activate", fun)
+        for name, fun, shortcut, state in zip(names, callbacks, shortcuts, states):
+            action = Gio.SimpleAction(name=name, state=state)
+            if state:
+                action.connect('change-state', fun)
+            else:
+                action.connect("activate", fun)
             self.add_action(action)
             if shortcut:
                 self.set_accels_for_action(f"app.{name}", [shortcut])
@@ -199,7 +198,7 @@ class LfyApplication(Adw.Application):
         """
         self.win.update("reload", True)
 
-    def gp_reset_action(self, _widget, _w):
+    def _gp_reset_action(self, _widget, _w):
         """分割线恢复
 
         Args:
@@ -208,7 +207,7 @@ class LfyApplication(Adw.Application):
         # pylint: disable=E1101
         self.win.reset_paned_position()
 
-    def gp_up_action(self, _widget, _w):
+    def _gp_up_action(self, _widget, _w):
         """分割线向上
 
         Args:
@@ -217,7 +216,7 @@ class LfyApplication(Adw.Application):
         # pylint: disable=E1101
         self.win.up_paned_position()
 
-    def gp_down_action(self, _widget, _w):
+    def _gp_down_action(self, _widget, _w):
         """分割线向下
 
         Args:
@@ -294,7 +293,7 @@ class LfyApplication(Adw.Application):
                     .format(VERSION, PACKAGE_URL)
                 GLib.idle_add(self.update_app, s)
 
-        if Settings().g("auto-check-update"):
+        if self.sg.g("auto-check-update"):
             threading.Thread(target=fu, daemon=True).start()
 
 
