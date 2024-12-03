@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="lfy">
 	<schema id="@APP_ID@" path="/cool/ldr/lfy/">
-		<key type="ai" name="window-size">
-			<default>[800, 300]</default>
-			<description>Window size</description>
-		</key>
 		<key type="b" name="auto-check-update">
 			<default>true</default>
 			<description>Automatically check the new version of the software upon startup</description>
@@ -37,10 +33,6 @@
 		<key type="i" name="lang-selected-n">
 			<default>3</default>
 			<description>The currently selected translation language</description>
-		</key>
-		<key type="d" name="translate-paned-position">
-			<default>-1.0</default>
-			<description>Split position of translation page</description>
 		</key>
 		<key type="s" name="server-sk-baidu">
 			<default>""</default>

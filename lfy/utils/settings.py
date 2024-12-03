@@ -2,6 +2,7 @@
 import os
 
 from lfy import APP_ID, APP_NAME
+from lfy.utils.debug import get_logger
 
 
 class Settings:
@@ -63,7 +64,8 @@ class Settings:
                 # 尝试转换为小数
                 v = float(v)
             except ValueError as e:
-                print(e)
+                get_logger().info(e)
+
         return v
 
     def s(self, key, value):

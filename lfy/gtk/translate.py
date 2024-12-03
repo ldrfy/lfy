@@ -1,7 +1,6 @@
 '''翻译主窗口'''
 
 import threading
-import time
 import traceback
 from gettext import gettext as _
 
@@ -54,13 +53,15 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         self.tra_server = None
         self.ocr_server = None
-        self.jn = True
+        # 翻译的key
+        self.lang_t = None
+
+        self.jn = False
         # 可能包含上次的追加内容
         self.last_text = ""
         # 是不是软件内复制的，这种可能是想粘贴到其他地方，不响应即可
         self.is_tv_copy = False
         # 放置初始化时，不断调用误以为选择
-        self.creat_time = time.time()
         self.toast = Adw.Toast.new("")
         self.toast.set_timeout(2)
 
@@ -70,10 +71,6 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.menu_btn.props.popover.add_child(ThemeSwitcher(), 'theme')
 
         self.connect('unrealize', self.save_settings)
-        self.paned_position = self.sg.g("translate-paned-position")
-        self.paned_position_auto = True
-        if self.paned_position > 0:
-            self.gp_translate.set_position(self.paned_position)
 
         # 创建键盘事件控制器
         controller = Gtk.EventControllerKey()
@@ -88,23 +85,20 @@ class TranslateWindow(Adw.ApplicationWindow):
         """
         server_key_t = self.sg.g("server-selected-key")
         i = server_key2i(server_key_t)
-        j = lang_n2j(i, self.sg.g("lang-selected-n"))
 
         self.tra_server = create_server_t(server_key_t)
         self.ocr_server = create_server_o(self.sg.g("server-ocr-selected-key"))
 
         data_s = Gtk.StringList.new(get_server_names_t())
-        data_lang = Gtk.StringList.new(get_lang_names(i))
 
-        GLib.idle_add(self._set_data, data_s, i, data_lang, j)
+        GLib.idle_add(self._set_data, data_s, i)
 
-    def _set_data(self, data_s, i, data_lang, j):
+    def _set_data(self, data_s, i):
         """异步初始化
         """
         self.dd_server.set_model(data_s)
+        self.jn = True
         self.dd_server.set_selected(i)
-        self.dd_lang.set_model(data_lang)
-        self.dd_lang.set_selected(j)
 
     def on_key_pressed(self, _, keyval, _keycode, _state):
         """文本回车，直接翻译
@@ -124,79 +118,46 @@ class TranslateWindow(Adw.ApplicationWindow):
             self.update("reload", True)
         return False  # 返回 False 以继续执行默认行为
 
-    def set_paned_position(self, p):
-        """设置或恢复，原文字和翻译的比例
-
-        Args:
-            p (int): 设置的位置
-        """
-        if self.paned_position_auto:
-            self.paned_position = self.gp_translate.get_position()
-            self.gp_translate.set_position(p)
-        else:
-            self.gp_translate.set_position(self.paned_position)
-        self.paned_position_auto = not self.paned_position_auto
-
-    def reset_paned_position(self):
-        """重置原文字和翻译的比例
-        """
-        self.set_paned_position(int(self.get_allocated_height() / 5 * 2))
-
-    def up_paned_position(self):
-        """只看翻译
-        """
-        self.set_paned_position(0)
-
-    def down_paned_position(self):
-        """只看原文字
-        """
-        self.set_paned_position(self.get_allocated_height())
-
     def save_settings(self, _a):
         """保存设置
 
         Args:
             _a (TranslateWindow): _description_
         """
-        if not self.is_maximized():
-            w, h = self.get_default_size()
-            self.sg.s("window-size", [w, h])
-            self.paned_position = self.gp_translate.get_position()
 
-            h1 = h - (self.header_bar.get_height() +
-                      self.gp_translate.get_margin_bottom() + 1)
-
-            if self.paned_position not in (0, h1, int(h/5*2)):
-                self.sg.s("translate-paned-position",
-                          self.paned_position/1.0)
-
-        i = self.dd_server.get_selected()
-        j = self.dd_lang.get_selected()
-        self.sg.s("server-selected-key", get_server_t(i).key)
-        n = get_lang(i, j).n
-        self.sg.s("lang-selected-n", n)
+        self.sg.s("server-selected-key", self.tra_server.key)
+        self.sg.s("lang-selected-n", self.lang_t.n)
 
     @Gtk.Template.Callback()
     def _on_server_changed(self, drop_down, _a):
-        # 初始化，会不断调用这个
-        if time.time() - self.creat_time > 1:
-            i = drop_down.get_selected()
-            lang_select_index = lang_n2j(i, self.sg.g("lang-selected-n"))
-            # 等于0时_on_lang_changed不会相应多次
-            self.jn = lang_select_index == 0
 
-            self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
-            # 如果不是0,这时候_on_lang_changed还会被调用
-            self.dd_lang.set_selected(lang_select_index)
+        if not self.jn:
+            return
+
+        i = drop_down.get_selected()
+
+        lang_select_index = lang_n2j(i, self.sg.g("lang-selected-n"))
+        self.jn = False
+        self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
+        self.jn = True
+        self.dd_lang.set_selected(lang_select_index)
 
     @Gtk.Template.Callback()
     def _on_lang_changed(self, _drop_down, _a):
-        if time.time() - self.creat_time > 1:
-            # 改变 _on_server_changed 时，这个函数会被调用两次
-            if self.jn:
-                self.save_settings("")
-                self.update(self.last_text, True)
-            self.jn = True
+
+        if not self.jn:
+            return
+
+        i = self.dd_server.get_selected()
+        j = self.dd_lang.get_selected()
+
+        server: Server = get_server_t(i)
+        if server.key != self.tra_server.key:
+            self.tra_server = server
+        self.lang_t = get_lang(i, j)
+
+        self.save_settings("")
+        self.update(self.last_text, True)
 
     @Gtk.Template.Callback()
     def _set_tv_copy(self, _a):
@@ -253,15 +214,10 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         start_iter, end_iter = buffer_from.get_bounds()
         text = buffer_from.get_text(start_iter, end_iter, False)
-
-        i = self.dd_server.get_selected()
-        server: Server = get_server_t(i)
-        if server.key != self.tra_server.key:
-            self.tra_server = server
-        lk = get_lang(i, self.dd_lang.get_selected()).key
+        print("======", text)
 
         threading.Thread(target=self.request_text, daemon=True,
-                         args=(text, self.tra_server, lk,)).start()
+                         args=(text, self.tra_server, self.lang_t.key,)).start()
 
     def request_text(self, s, server, lk=None):
         """子线程翻译
@@ -330,12 +286,12 @@ class TranslateWindow(Adw.ApplicationWindow):
             text_ok (_type_): _description_
             text_no (_type_): _description_
         """
-        if time.time() - self.creat_time > 1:
-            cbtn.set_active(not cbtn.get_active())
-            if not cbtn.get_active():
-                self.toast_msg(text_ok)
-            else:
-                self.toast_msg(text_no)
+
+        cbtn.set_active(not cbtn.get_active())
+        if not cbtn.get_active():
+            self.toast_msg(text_ok)
+        else:
+            self.toast_msg(text_no)
 
     def toast_msg(self, toast_msg):
         """_summary_

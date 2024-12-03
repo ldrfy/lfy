@@ -125,6 +125,7 @@ class TranslateWindow(QMainWindow):
     def _set_sl(self, p=None):
         i, sns, j = p
         self.jn = i == 0
+        self.cb_server.clear()
         self.cb_server.addItems(sns)
         self.jn = True
         self.cb_server.setCurrentIndex(i)
@@ -220,17 +221,15 @@ class TranslateWindow(QMainWindow):
         j = self.cb_lang.currentIndex()
 
         if j < 0:
-            # self.cb_lang.clear()
             return
         i = self.cb_server.currentIndex()
-        n = get_lang(i, j).n
-        self.sg.s("lang-selected-n", n)
-        n = self.sg.g("lang-selected-n", 0, int)
 
         server: Server = get_server_t(i)
         if server.key != self.server_t.key:
             self.server_t = server
         self.lang_t = get_lang(i, j)
+        self.sg.s("lang-selected-n", self.lang_t.n)
+
         self.update_translate()
 
     def ocr_image(self, img_path):

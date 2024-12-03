@@ -52,10 +52,7 @@ class LfyApplication(Adw.Application):
         Args:
             _app (_type_): _description_
         """
-        width, height = self.sg.g("window-size")
-        self.win = TranslateWindow(application=self,
-                                   default_height=int(height),
-                                   default_width=int(width), )
+        self.win = TranslateWindow(application=self)
         self.win.present()
 
     def do_startup0(self):
@@ -151,14 +148,11 @@ class LfyApplication(Adw.Application):
                  'gp_down', 'copy2translate']
         callbacks = [self.on_preferences_action, self.quit, self.on_about_action,
                      self.find_update, self.on_del_wrapping_action, self.on_splice_text_action,
-                     self.set_translate_action, self._gp_reset_action, self._gp_up_action,
-                     self._gp_down_action, self.on_action_trans_now]
+                     self.set_translate_action, self.on_action_trans_now]
         shortcuts = ['<Ctrl>comma', '<primary>q', None,
                      None, '<alt>d', '<alt>c',
-                     '<primary>t', '<primary>r', '<primary>u',
-                     '<primary>d', '<alt>t']
+                     '<primary>t', '<alt>t']
         states = [None, None, None,
-                  None, None, None,
                   None, None, None,
                   None, GLib.Variant.new_boolean(self.sg.g("copy-auto-translate"))]
 
@@ -197,33 +191,6 @@ class LfyApplication(Adw.Application):
             f (_type_): _description_
         """
         self.win.update("reload", True)
-
-    def _gp_reset_action(self, _widget, _w):
-        """分割线恢复
-
-        Args:
-            f (_type_): _description_
-        """
-        # pylint: disable=E1101
-        self.win.reset_paned_position()
-
-    def _gp_up_action(self, _widget, _w):
-        """分割线向上
-
-        Args:
-            f (_type_): _description_
-        """
-        # pylint: disable=E1101
-        self.win.up_paned_position()
-
-    def _gp_down_action(self, _widget, _w):
-        """分割线向下
-
-        Args:
-            f (_type_): _description_
-        """
-        # pylint: disable=E1101
-        self.win.down_paned_position()
 
     def _get_copy(self, cb: Gdk.Clipboard):
         """翻译
