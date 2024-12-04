@@ -201,7 +201,8 @@ class PreferenceWindow(QMainWindow):
         # 保存时，去掉空格，但是显示时，保留
         conf_str = st.get_conf()
         if conf_str:
-            self.le_t.setText(clear_key(conf_str, "  |  "))
+            conf_str = clear_key(conf_str, "  |  ")
+        self.le_t.setText(conf_str)
         self.le_t.setToolTip(st.sk_placeholder_text)
         self.le_t.setPlaceholderText(st.sk_placeholder_text)
 
@@ -214,7 +215,8 @@ class PreferenceWindow(QMainWindow):
         # 保存时，去掉空格，但是显示时，保留
         conf_str = so.get_conf()
         if conf_str:
-            self.le_o.setText(clear_key(conf_str, "  |  "))
+            conf_str = clear_key(conf_str, "  |  ")
+        self.le_o.setText(conf_str)
         self.le_o.setToolTip(so.sk_placeholder_text)
         self.le_o.setPlaceholderText(so.sk_placeholder_text)
         self.tray.showMessage(_("OCR server"),
