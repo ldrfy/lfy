@@ -6,6 +6,7 @@ BUILD_PKG=build/pkg
 DESTDIR = "/"
 # PREFIX = "${HOME}/.local/"
 PREFIX = "${PWD}/test/"
+BASE_URL = https://github.com/ldrfy/lfy/releases/download/auto
 
 
 clear:
@@ -136,3 +137,35 @@ release:
 
 uninstall:
 	cd build && ninja uninstall
+
+
+GTK_FILES = \
+    lfy-$(VERSION)-1-any-gtk.pkg.tar.zst \
+    lfy-$(VERSION)-x86_64-gtk.deb \
+    lfy-$(VERSION)-1.x86_64-gtk.rpm \
+    lfy-$(VERSION)-1.x86_64-gtk-suse.rpm \
+    cool.ldr.lfy-$(VERSION)-gtk.flatpak
+
+QT_FILES = \
+    lfy-$(VERSION)-1-any-qt.pkg.tar.zst \
+    lfy-$(VERSION)-x86_64-qt.deb \
+    lfy-$(VERSION)-1.x86_64-qt.rpm \
+    lfy-$(VERSION)-1.x86_64-qt-suse.rpm \
+    x \
+	lfy-$(VERSION)-py3-none-any.whl
+
+generate:
+	@echo -n "gtk|"
+	@for f in $(GTK_FILES); do \
+		echo -n "[$$f]($(BASE_URL)/$$f)|"; \
+	done
+	@echo
+	@echo -n "qt|"
+	@for f in $(QT_FILES); do \
+		if [ "$$f" = "x" ]; then \
+			echo -n "|"; \
+		else \
+			echo -n "[$$f]($(BASE_URL)/$$f)|"; \
+		fi \
+	done
+	@echo

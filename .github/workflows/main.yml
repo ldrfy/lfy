@@ -60,5 +60,6 @@ jobs:
         tag_name: ${{ env.TAG_NAME }}
         prerelease: true
         draft: false
+        body_path: data/release.md
         files: |
           dist/*
