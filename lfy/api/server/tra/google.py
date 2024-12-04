@@ -46,14 +46,14 @@ class GoogleServer(ServerTra):
         super().__init__("google", _("google"))
         self.set_data(lang_key_ns, session=_get_session())
 
-    def translate_text(self, text, lang_to="zh-cn", lang_from="auto", n=0):
+    def translate_text(self, text, lang_to="en", fun_tra=None, n=0):
 
         if n > 3:
-            raise ValueError(_("something error, try other translate engine?"))
+            return False, _("something error, try other translate engine?")
 
         text = text.replace("#", "")
         url = 'https://translate.google.com/translate_a/t'
-        params = {'tl': lang_to, 'sl': lang_from, 'ie': 'UTF-8',
+        params = {'tl': lang_to, 'sl': "auto", 'ie': 'UTF-8',
                   'oe': 'UTF-8', 'client': 'at', 'dj': '1',
                   'format': "html", 'v': "1.0"}
 
@@ -67,7 +67,7 @@ class GoogleServer(ServerTra):
         except RequestException as e:
             print("google", n, type(e), e)
             get_logger().error(e)
-            return self.translate_text(text, lang_to, lang_from, n + 1)
+            return self.translate_text(text, lang_to, n=n + 1)
 
         s = ""
         for res in response.json():

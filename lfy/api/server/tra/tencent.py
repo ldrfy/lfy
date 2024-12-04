@@ -43,13 +43,12 @@ def _sign_str(key, s, method):
     return base64.b64encode(hmac_str)
 
 
-def _translate(p: ServerTra, query_text, lang_to="zh", lang_from="auto"):
+def _translate(p: ServerTra, query_text, lang_to="en"):
     """腾讯翻译接口
 
     Args:
         query_text (str): _description_
         api_key_s (str): secret_id|secret_key
-        lang_from (str, optional): _description_. Defaults to "auto".
         lang_to (str, optional): _description_. Defaults to "zh".
 
     Returns:
@@ -57,9 +56,6 @@ def _translate(p: ServerTra, query_text, lang_to="zh", lang_from="auto"):
     """
 
     secret_id, secret_key = s2ks(p.get_conf())
-    if secret_id is None or secret_id == "secret_id":
-        return False, _("please input `{sk}` for `{server}` in preference")\
-            .format(sk=p.sk_placeholder_text, server=p.name)
 
     data = {
         "Action": "TextTranslate",
@@ -69,7 +65,7 @@ def _translate(p: ServerTra, query_text, lang_to="zh", lang_from="auto"):
         "Nonce": random.randint(1, int(1e6)),
         "Version": "2018-03-21",
         "ProjectId": 0,
-        "Source": lang_from,
+        "Source": "auto",
         "SourceText": query_text,
         "Target": lang_to
     }
@@ -108,8 +104,8 @@ class TencentServer(ServerTra):
         # https://cloud.tencent.com/document/product/551/104415
         self.set_data(lang_key_ns, "Secretid | Secretkey")
 
-    def check_conf(self, conf_str, fun_check=_translate, fun_args=None):
+    def check_conf(self, conf_str, fun_check=_translate):
         return super().check_conf(conf_str, fun_check)
 
-    def translate_text(self, text, lang_to="auto", lang_from="auto"):
-        return _translate(self, text, lang_to, lang_from)
+    def translate_text(self, text, lang_to, fun_tra=_translate):
+        return super().translate_text(text, lang_to, fun_tra)

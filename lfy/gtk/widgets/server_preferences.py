@@ -93,10 +93,11 @@ class ServerPreferences(Adw.NavigationPage):
             server (_type_): _description_
             api_key (_type_): _description_
         """
-        valid = False
-        try:
-            valid = fun(api_key)
-        except Exception as exc:  # pylint: disable=W0718
-            get_logger().error(exc)
+        # try:
+        #     valid = fun(api_key)
+        # except Exception as exc:  # pylint: disable=W0718
+        #     get_logger().error(exc)
+        #     valid = False, str(exc)
+        valid = fun(api_key)
 
         GLib.idle_add(self.update_ui, valid, entry, spinner)

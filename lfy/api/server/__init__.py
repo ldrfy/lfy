@@ -132,7 +132,7 @@ class Server:
             return self.langs[0]
         return self.langs[j]
 
-    def check_conf(self, conf_str: str, fun_check, fun_args: str = "success"):
+    def check_conf(self, conf_str: str, fun_check):
         """保存前核对配置
 
         Args:
@@ -143,12 +143,21 @@ class Server:
         """
         self._conf_str = conf_str
         if not self.sk_placeholder_text:
+            self._conf_str = None
             return False, _("Developers, please set sk_placeholder_text")
-        if "|" in self.sk_placeholder_text and "|" not in conf_str:
+
+        sk_ok = not self.get_conf() \
+            or (self.sk_placeholder_text.count("|") == 1
+                and self.get_conf().count("|") != 1) \
+            or self.get_conf()[0] == "|" \
+            or self.get_conf()[-1] == "|" \
+
+        if sk_ok:
+            self._conf_str = None
             return False, _("please input `{sk}` for `{server}` in preference")\
                 .format(sk=self.sk_placeholder_text, server=self.name)
 
-        ok, text = fun_check(self, fun_args)
+        ok, text = fun_check(self, "success")
         if ok:
             self.set_conf()
         else:

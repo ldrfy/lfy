@@ -24,6 +24,28 @@ def _fun_check(so: ServerOCR, p):
         return False, s
 
 
+def _fun_ocr(so: ServerOCR, img_path):
+    try:
+        import easyocr
+
+        if not so.get_conf():
+            return False, _("please input `{sk}` for `{server}` in preference")\
+                .format(sk=so.sk_placeholder_text, server=so.name)
+        reader = easyocr.Reader(so.get_conf().split("|"))
+        s = " ".join(reader.readtext(img_path, detail=0))
+        return True, s.strip()
+    except ModuleNotFoundError as e:
+        print(e)
+        get_logger().error(e)
+        s = _("please install python whl")
+        s += str(e).replace("No module named", "")
+        return False, s
+
+    except Exception as e:  # pylint: disable=W0718
+        get_logger().error(e)
+        return False, str(e)
+
+
 class EasyOcrServer(ServerOCR):
     """EasyOcr文字识别
     """
@@ -44,26 +66,8 @@ class EasyOcrServer(ServerOCR):
         super().__init__("easyocr", "easyocr")
         self.set_data(lang_key_ns, "ch_sim | en | it | fr")
 
-    def ocr_image(self, img_path):
-        try:
-            import easyocr
+    def ocr_image(self, img_path, fun_ocr=_fun_ocr):
+        return super().ocr_image(img_path, fun_ocr)
 
-            if not self.get_conf():
-                return False, _("please input `{sk}` for `{server}` in preference")\
-                    .format(sk=self.sk_placeholder_text, server=self.name)
-            reader = easyocr.Reader(self.get_conf().split("|"))
-            s = " ".join(reader.readtext(img_path, detail=0))
-            return True, s.strip()
-        except ModuleNotFoundError as e:
-            print(e)
-            get_logger().error(e)
-            s = _("please install python whl")
-            s += str(e).replace("No module named", "")
-            return False, s
-
-        except Exception as e:  # pylint: disable=W0718
-            get_logger().error(e)
-            return False, str(e)
-
-    def check_conf(self, conf_str, fun_check=None, fun_args=None):
-        return super().check_conf(conf_str, _fun_check)
+    def check_conf(self, conf_str, fun_check=_fun_check):
+        return super().check_conf(conf_str, fun_check)

@@ -10,7 +10,7 @@ from lfy.utils import s2ks
 from lfy.utils.settings import Settings
 
 
-def _get_token(p: ServerOCR):
+def _get_token(so: ServerOCR):
     """https://ai.baidu.com/ai-doc/REFERENCE/Ck3dwjhhu
 
     Returns:
@@ -25,7 +25,7 @@ def _get_token(p: ServerOCR):
         if len(access_token) != 0:
             return True, access_token
 
-    ok, access_token, expires_in_date = _get_token_by_url(p)
+    ok, access_token, expires_in_date = _get_token_by_url(so)
 
     if ok:
         sg.s("ocr-baidu-token", access_token)
@@ -34,7 +34,7 @@ def _get_token(p: ServerOCR):
     return ok, access_token
 
 
-def _get_token_by_url(p: ServerOCR):
+def _get_token_by_url(so: ServerOCR):
     """获取token
 
     Args:
@@ -45,11 +45,7 @@ def _get_token_by_url(p: ServerOCR):
         _type_: _description_
     """
 
-    api_key, secret_key = s2ks(p.get_conf())
-    if api_key is None or api_key == "API Key":
-        return False, _("please input `{sk}` for `{server}` in preference")\
-            .format(sk=p.sk_placeholder_text, server=p.name), 0
-
+    api_key, secret_key = s2ks(so.get_conf())
     ok = False
     expires_in_date = -1
 
@@ -57,7 +53,7 @@ def _get_token_by_url(p: ServerOCR):
     url0 = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials"
     url = f'{url0}&client_id={api_key}&client_secret={secret_key}'
 
-    request = p.session.get(url, timeout=TIME_OUT)
+    request = so.session.get(url, timeout=TIME_OUT)
 
     jsons = request.json()
     if "access_token" not in jsons:
@@ -78,6 +74,50 @@ def _fun_check(so: ServerOCR, p):
         return True, p
 
     return False, access_token
+
+
+def _fun_ocr(so: ServerOCR, img_path):
+    img_data = None
+    with open(img_path, 'rb') as f:
+        img_data = f.read()
+    if img_data is None:
+        return False, ""
+
+    img = base64.b64encode(img_data)
+
+    # open('./images/lt.png', 'rb').read()
+    s = ""
+    request_url = "https://aip.baidubce.com/rest/2.0/ocr/v1/"
+
+    request_url += "general_basic"
+
+    ok, token = _get_token(so)
+    if not ok:
+        return False, token
+    params = {"image": img}
+    # if self.get_conf() is not None:
+    #     params["language_type"] = self.get_conf()
+
+    request_url = request_url + "?access_token=" + token
+    headers = {'content-type': 'application/x-www-form-urlencoded'}
+    res = so.session.post(request_url,
+                          data=params,
+                          headers=headers,
+                          timeout=TIME_OUT).json()
+
+    if "error_code" in res:
+        if 110 == res["error_code"]:
+            Settings().s("ocr-baidu-token", "")
+        return False, _("something error: {}")\
+            .format(f'\n\n{res["error_code"]}: {res["error_msg"]}')
+
+    for word in res["words_result"]:
+        s += word["words"] + '\n'
+
+        s_ = word["words"]
+        if s_[len(s_) - 1:len(s_)] != "-":
+            s += " "
+    return ok, s
 
 
 class BaiduServer(ServerOCR):
@@ -102,49 +142,8 @@ class BaiduServer(ServerOCR):
         super().__init__("baidu", _("baidu"))
         self.set_data(lang_key_ns, "API Key | Secret Key")
 
-    def ocr_image(self, img_path):
-        img_data = None
-        with open(img_path, 'rb') as f:
-            img_data = f.read()
-        if img_data is None:
-            return False, ""
+    def ocr_image(self, img_path, fun_ocr=_fun_ocr):
+        return super().ocr_image(img_path, fun_ocr)
 
-        img = base64.b64encode(img_data)
-
-        # open('./images/lt.png', 'rb').read()
-        s = ""
-        request_url = "https://aip.baidubce.com/rest/2.0/ocr/v1/"
-
-        request_url += "general_basic"
-
-        ok, token = _get_token(self)
-        if not ok:
-            return False, token
-        params = {"image": img}
-        # if self.get_conf() is not None:
-        #     params["language_type"] = self.get_conf()
-
-        request_url = request_url + "?access_token=" + token
-        headers = {'content-type': 'application/x-www-form-urlencoded'}
-        res = self.session.post(request_url,
-                                data=params,
-                                headers=headers,
-                                timeout=TIME_OUT).json()
-
-        if "error_code" in res:
-            if 110 == res["error_code"]:
-                Settings().s("ocr-baidu-token", "")
-            return False, _("something error: {}")\
-                .format(f'\n\n{res["error_code"]}: {res["error_msg"]}')
-
-        for word in res["words_result"]:
-            s += word["words"] + '\n'
-
-            s_ = word["words"]
-            if s_[len(s_) - 1:len(s_)] != "-":
-                s += " "
-
-        return ok, s
-
-    def check_conf(self, conf_str, fun_check=None, fun_args=None):
-        return super().check_conf(conf_str, _fun_check)
+    def check_conf(self, conf_str, fun_check=_fun_check):
+        return super().check_conf(conf_str, fun_check)

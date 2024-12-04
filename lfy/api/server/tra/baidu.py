@@ -10,26 +10,22 @@ from lfy.api.server.tra import ServerTra
 from lfy.utils import s2ks
 
 
-def _translate(p: ServerTra, s, lang_to="auto", lang_from="auto"):
+def _translate(p: ServerTra, s, lang_to="auto"):
     """翻译
 
     Args:
         s (str): 待翻译字符串
         api_key_s (str): 输入的原始字符串
         lang_to (str, optional): 字符串翻译为xx语言. Defaults to "auto".
-        lang_from (str, optional): 待翻译字符串语言. Defaults to "auto".
 
     Returns:
         _type_: _description_
     """
 
     app_id, secret_key = s2ks(p.get_conf())
-    if app_id is None or app_id == "app_id":
-        return False, _("please input `{sk}` for `{server}` in preference")\
-            .format(sk=p.sk_placeholder_text, server=p.name)
 
     url = "https://api.fanyi.baidu.com/api/trans/vip/translate"
-    url = f"{url}?from={lang_from}&to={lang_to}&appid={app_id}&q={quote(s)}"
+    url = f"{url}?from=auto&to={lang_to}&appid={app_id}&q={quote(s)}"
 
     salt = random.randint(32768, 65536)
     sign = app_id + s + str(salt) + secret_key
@@ -70,8 +66,8 @@ class BaiduServer(ServerTra):
         super().__init__("baidu", _("baidu"))
         self.set_data(lang_key_ns, "APP ID | secret key")
 
-    def check_conf(self, conf_str, fun_check=_translate, fun_args=None):
+    def check_conf(self, conf_str, fun_check=_translate):
         return super().check_conf(conf_str, fun_check)
 
-    def translate_text(self, text, lang_to="auto", lang_from="auto"):
-        return _translate(self, text, lang_to, lang_from)
+    def translate_text(self, text, lang_to, fun_tra=_translate):
+        return super().translate_text(text, lang_to, fun_tra)

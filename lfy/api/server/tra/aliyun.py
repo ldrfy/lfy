@@ -44,24 +44,19 @@ def _get_iso_8061_date():
     return datetime.now(timezone.utc).isoformat()
 
 
-def _translate(p: ServerTra, s, lang_to="en", lang_from="auto"):
+def _translate(p: ServerTra, s, lang_to="en"):
     """翻译
 
     Args:
         s (str): 待翻译字符串
         api_key_s (str): 输入的原始字符串
         lang_to (str, optional): 字符串翻译为xx语言. Defaults to "auto".
-        lang_from (str, optional): 待翻译字符串语言. Defaults to "auto".
 
     Returns:
         _type_: _description_
     """
     # .strip()
     access_key_id, access_key_secret = s2ks(p.get_conf())
-
-    if access_key_secret is None or access_key_id == "AccessKey ID":
-        return False, _("please input `{sk}` for `{server}` in preference")\
-            .format(sk=p.sk_placeholder_text, server=p.name)
 
     encoded_body = {
         "AccessKeyId": access_key_id,
@@ -71,7 +66,7 @@ def _translate(p: ServerTra, s, lang_to="en", lang_from="auto"):
         "SignatureMethod": "HMAC-SHA1",
         "SignatureNonce": quote(_random_string(12)),
         "SignatureVersion": "1.0",
-        "SourceLanguage": lang_from,
+        "SourceLanguage": "auto",
         "SourceText": _encode_rfc3986_uri_component(s),
         "TargetLanguage": lang_to,
         "Timestamp": _get_iso_8061_date(),
@@ -116,8 +111,8 @@ class AliYunServer(ServerTra):
         super().__init__("aliyun", _("aliyun"))
         self.set_data(lang_key_ns, "AccessKey ID | AccessKey Secret")
 
-    def check_conf(self, conf_str, fun_check=_translate, fun_args=None):
+    def check_conf(self, conf_str, fun_check=_translate):
         return super().check_conf(conf_str, fun_check)
 
-    def translate_text(self, text, lang_to="en", lang_from="auto"):
-        return _translate(self, text, lang_to, lang_from)
+    def translate_text(self, text, lang_to, fun_tra=_translate):
+        return super().translate_text(text, lang_to, fun_tra)

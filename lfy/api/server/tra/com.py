@@ -21,10 +21,10 @@ def _translate(args):
         _type_: _description_
     """
     st = time.time()
-    server, text, lang_to, lang_from = args
+    server, text, lang_to = args
     server: ServerTra
     try:
-        a, b = server.translate_text(text, lang_to, lang_from)
+        a, b = server.translate_text(text, lang_to)
         return a, b, server, time.time()-st
     except Exception as e:  # pylint: disable=W0718
         em = _("something error: {}")\
@@ -63,12 +63,12 @@ class AllServer(ServerTra):
             self.servers = list(all_servers.values())
         else:
             # 仅选择在 keys 列表中的服务器，并且按照顺序！
-            self.servers = [all_servers[key]
-                            for key in keys if key in all_servers]
+            self.servers = [all_servers[key] for key in keys
+                            if key in all_servers]
 
         self.set_data(lang_key_ns)
 
-    def translate_text(self, text, lang_to="1", lang_from="auto"):
+    def translate_text(self, text, lang_to="1", fun_tra=None):
         args = []
         for server in self.servers:
             server: ServerTra
@@ -77,7 +77,7 @@ class AllServer(ServerTra):
                 if lang.n == int(lang_to):
                     lang_to_ = lang.key
                     break
-            args.append((server, text, lang_to_, lang_from))
+            args.append((server, text, lang_to_))
         with Pool(len(args)) as p:
             s_ok = ""
             s_error = ""
