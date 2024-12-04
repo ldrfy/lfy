@@ -36,7 +36,6 @@ class PreferenceWindow(QMainWindow):
         tw = QTabWidget(self)
         self.cb = clipboard
         self.tray = tray
-        self.server_ocr = None
 
         self.tab_general = QWidget()
         self.vl_general = QVBoxLayout(self.tab_general)
@@ -168,27 +167,25 @@ class PreferenceWindow(QMainWindow):
         """初始化数据
         """
 
-        ss = list(get_servers_t())[1:]
+        sts = list(get_servers_t())[1:]
         keys_s = self.sg.g("compare-servers", [], t=list)
-        if len(keys_s) == 0:
-            for se in ss:
+        if keys_s:
+            for se in sts:
                 keys_s.append(se.key)
         cs = []
         names = []
-        for se in ss:
+        for se in sts:
             cs.append(se.key in keys_s)
             names.append(se.name)
         self.ccb.addCheckableItems(names, cs)
 
-        # xx
         self.cb_t.addItems(get_server_names_t_sk())
-
         self.cb_o.addItems(get_server_names_o())
-        sso = get_servers_o()
+
+        sos = get_servers_o()
         sok = self.sg.g("server-ocr-selected-key", "easyocr")
-        for i, so in enumerate(sso):
+        for i, so in enumerate(sos):
             if so.key == sok:
-                self.server_ocr = sok
                 self.cb_o.setCurrentIndex(i)
                 break
 
@@ -209,8 +206,6 @@ class PreferenceWindow(QMainWindow):
 
     def _on_changed_o(self, i):
         if i < 0:
-            return
-        if not self.server_ocr:
             return
         so: ServerOCR = get_servers_o()[i]
         # 保存时，去掉空格，但是显示时，保留
@@ -245,11 +240,9 @@ class PreferenceWindow(QMainWindow):
                               QSystemTrayIcon.MessageIcon.Information, 3000)
 
     def _on_cb_notify(self, state):
-        print(state, "----_on_cb_notify")
         self.sg.s("notify-translation-results", state != 0)
 
     def _on_auto_check_update(self, state):
-        print(state, "----_on_auto_check_update")
         self.sg.s("auto-check-update", state != 0)
 
     def _on_vpn_save(self):
