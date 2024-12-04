@@ -70,6 +70,16 @@ def _get_token_by_url(p: ServerOCR):
     return ok, str(access_token), expires_in_date
 
 
+def _fun_check(so: ServerOCR, p):
+    ok, access_token, expires_in_date = _get_token_by_url(so)
+    if ok:
+        Settings().s("ocr-baidu-token", access_token)
+        Settings().s("ocr-baidu-token-expires-date", expires_in_date)
+        return True, p
+
+    return False, access_token
+
+
 class BaiduServer(ServerOCR):
     """百度翻译
     """
@@ -92,7 +102,7 @@ class BaiduServer(ServerOCR):
         super().__init__("baidu", _("baidu"))
         self.set_data(lang_key_ns, "API Key | Secret Key")
 
-    def ocr_image(self, img_path, conf_str=None):
+    def ocr_image(self, img_path):
         img_data = None
         with open(img_path, 'rb') as f:
             img_data = f.read()
@@ -111,9 +121,8 @@ class BaiduServer(ServerOCR):
         if not ok:
             return False, token
         params = {"image": img}
-        print(conf_str)
-        if conf_str is not None:
-            params["language_type"] = conf_str
+        # if self.get_conf() is not None:
+        #     params["language_type"] = self.get_conf()
 
         request_url = request_url + "?access_token=" + token
         headers = {'content-type': 'application/x-www-form-urlencoded'}
@@ -137,11 +146,5 @@ class BaiduServer(ServerOCR):
 
         return ok, s
 
-    def check_conf(self, conf_str):
-        ok, access_token, expires_in_date = _get_token_by_url(self)
-        if ok:
-            self.set_conf(conf_str)
-            Settings().s("ocr-baidu-token", access_token)
-            Settings().s("ocr-baidu-token-expires-date", expires_in_date)
-            return True, "success"
-        return False, access_token
+    def check_conf(self, conf_str, fun_check=None, fun_args=None):
+        return super().check_conf(conf_str, _fun_check)

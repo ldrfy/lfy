@@ -79,7 +79,7 @@ class Server:
 
         self.session = None
         self.sk_placeholder_text = None
-        self.config_str = None
+        self._conf_str = None
         self.langs: list[Lang] = []
 
         self.key = key
@@ -132,7 +132,7 @@ class Server:
             return self.langs[0]
         return self.langs[j]
 
-    def check_conf(self, conf_str: str):
+    def check_conf(self, conf_str: str, fun_check, fun_args: str = "success"):
         """保存前核对配置
 
         Args:
@@ -141,15 +141,22 @@ class Server:
         Returns:
             _type_: _description_
         """
-        self.config_str = conf_str
+        self._conf_str = conf_str
         if not self.sk_placeholder_text:
             return False, _("Developers, please set sk_placeholder_text")
         if "|" in self.sk_placeholder_text and "|" not in conf_str:
             return False, _("please input `{sk}` for `{server}` in preference")\
                 .format(sk=self.sk_placeholder_text, server=self.name)
-        return True, f"success: {conf_str}"
 
-    def set_conf(self, conf_str):
+        ok, text = fun_check(self, fun_args)
+        if ok:
+            self.set_conf()
+        else:
+            self._conf_str = None
+
+        return ok, text
+
+    def set_conf(self):
         """设置配置
 
         Args:
@@ -158,7 +165,7 @@ class Server:
         Returns:
             _type_: _description_
         """
-        Settings().s(self.get_conf_key(), conf_str)
+        Settings().s(self.get_conf_key(), self._conf_str)
 
     def get_conf_key(self, add=""):
         """配置保存时的key
@@ -180,6 +187,6 @@ class Server:
         Returns:
             _type_: _description_
         """
-        if not self.config_str:
-            self.config_str = Settings().g(self.get_conf_key(add))
-        return self.config_str
+        if not self._conf_str:
+            self._conf_str = Settings().g(self.get_conf_key(add))
+        return self._conf_str

@@ -6,6 +6,24 @@ from lfy.utils import gen_img
 from lfy.utils.debug import get_logger
 
 
+def _fun_check(so: ServerOCR, p):
+    try:
+        import easyocr
+
+        # 放在 import 后面，因为未安装 pytesseract 会引发异常
+        path = gen_img(p)
+        if path is None:
+            return True, _("The Python library `Pillow` is not installed, you cannot test whether the setting is successful now, if the OCR reports an error in the future, please change this content")
+        return so.ocr_image(path)
+
+    except ModuleNotFoundError as e:
+        print(e)
+        get_logger().error(e)
+        s = _("please install python whl")
+        s += str(e).replace("No module named", "")
+        return False, s
+
+
 class EasyOcrServer(ServerOCR):
     """EasyOcr文字识别
     """
@@ -26,17 +44,14 @@ class EasyOcrServer(ServerOCR):
         super().__init__("easyocr", "easyocr")
         self.set_data(lang_key_ns, "ch_sim | en | it | fr")
 
-    def ocr_image(self, img_path, conf_str=None):
+    def ocr_image(self, img_path):
         try:
             import easyocr
-            if not conf_str:
-                conf_str = self.get_conf()
-                if not conf_str:
-                    return False, _("please input `{sk}` for `{server}` in preference")\
-                        .format(sk=self.sk_placeholder_text, server=self.name)
 
-            print("------", conf_str)
-            reader = easyocr.Reader(conf_str.split("|"))
+            if not self.get_conf():
+                return False, _("please input `{sk}` for `{server}` in preference")\
+                    .format(sk=self.sk_placeholder_text, server=self.name)
+            reader = easyocr.Reader(self.get_conf().split("|"))
             s = " ".join(reader.readtext(img_path, detail=0))
             return True, s.strip()
         except ModuleNotFoundError as e:
@@ -50,22 +65,5 @@ class EasyOcrServer(ServerOCR):
             get_logger().error(e)
             return False, str(e)
 
-    def check_conf(self, conf_str):
-        try:
-            import easyocr
-
-            # 放在 import 后面，因为未安装 pytesseract 会引发异常
-            path = gen_img("success")
-            if path is None:
-                return True, _("The Python library `Pillow` is not installed, you cannot test whether the setting is successful now, if the OCR reports an error in the future, please change this content")
-            ok, text = self.ocr_image(path, conf_str)
-            if ok:
-                self.set_conf(conf_str)
-            return ok, text
-
-        except ModuleNotFoundError as e:
-            print(e)
-            get_logger().error(e)
-            s = _("please install python whl")
-            s += str(e).replace("No module named", "")
-            return False, s
+    def check_conf(self, conf_str, fun_check=None, fun_args=None):
+        return super().check_conf(conf_str, _fun_check)

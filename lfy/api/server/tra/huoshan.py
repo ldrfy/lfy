@@ -166,14 +166,8 @@ class HuoShanServer(ServerTra):
         # https://www.volcengine.com/docs/4640/127684
         self.set_data(lang_key_ns, "Access Key ID | Secret Access Key")
 
-    def check_conf(self, conf_str):
-        ok, s = super().check_conf(conf_str)
-        if not ok:
-            return ok, s
-        ok, text = _translate(self, "success")
-        if ok:
-            self.set_conf(conf_str)
-        return ok, text
+    def check_conf(self, conf_str, fun_check=_translate, fun_args=None):
+        return super().check_conf(conf_str, fun_check)
 
     def translate_text(self, text, lang_to="en", lang_from="auto"):
         return _translate(self, text, lang_to, lang_from)

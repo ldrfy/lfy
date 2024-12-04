@@ -108,14 +108,8 @@ class TencentServer(ServerTra):
         # https://cloud.tencent.com/document/product/551/104415
         self.set_data(lang_key_ns, "Secretid | Secretkey")
 
-    def check_conf(self, conf_str):
-        ok, s = super().check_conf(conf_str)
-        if not ok:
-            return ok, s
-        ok, text = _translate(self, "success", "en")
-        if ok:
-            self.set_conf(conf_str)
-        return ok, text
+    def check_conf(self, conf_str, fun_check=_translate, fun_args=None):
+        return super().check_conf(conf_str, fun_check)
 
     def translate_text(self, text, lang_to="auto", lang_from="auto"):
         return _translate(self, text, lang_to, lang_from)

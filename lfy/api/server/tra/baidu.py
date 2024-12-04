@@ -70,14 +70,8 @@ class BaiduServer(ServerTra):
         super().__init__("baidu", _("baidu"))
         self.set_data(lang_key_ns, "APP ID | secret key")
 
-    def check_conf(self, conf_str):
-        ok, s = super().check_conf(conf_str)
-        if not ok:
-            return ok, s
-        ok, text = _translate(self, "success")
-        if ok:
-            self.set_conf(conf_str)
-        return ok, text
+    def check_conf(self, conf_str, fun_check=_translate, fun_args=None):
+        return super().check_conf(conf_str, fun_check)
 
     def translate_text(self, text, lang_to="auto", lang_from="auto"):
         return _translate(self, text, lang_to, lang_from)

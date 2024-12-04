@@ -6,7 +6,7 @@ class ServerOCR(Server):
     """翻译基础类
     """
 
-    def ocr_image(self, img_path: str, conf_str=None):
+    def ocr_image(self, img_path: str):
         """图片识别
 
         Args:
@@ -16,7 +16,7 @@ class ServerOCR(Server):
             str: _description_
         """
         ok = True
-        text = f"{img_path}, {conf_str}"
+        text = f"{img_path}, {self.get_conf()}"
         return ok, text
 
     def get_doc_url(self, d="o"):
