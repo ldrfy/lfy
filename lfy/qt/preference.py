@@ -2,7 +2,7 @@
 from gettext import gettext as _
 
 from PyQt6.QtCore import Qt, QUrl
-from PyQt6.QtGui import QClipboard, QDesktopServices
+from PyQt6.QtGui import QClipboard, QDesktopServices, QIcon
 from PyQt6.QtWidgets import (QCheckBox, QComboBox, QGroupBox, QHBoxLayout,
                              QLineEdit, QMainWindow, QPushButton, QStyle,
                              QSystemTrayIcon, QTabWidget, QToolButton,
@@ -58,9 +58,9 @@ class PreferenceWindow(QMainWindow):
         btn_q_t.clicked.connect(self._open_url_t)
         hl_t.addWidget(btn_q_t)
 
-        btn_t_save = QPushButton(_("Save"))
-        btn_t_save.clicked.connect(self._on_t_save)
-        hl_t.addWidget(btn_t_save)
+        self.btn_t_save = QPushButton(_("Save"))
+        self.btn_t_save.clicked.connect(self._on_t_save)
+        hl_t.addWidget(self.btn_t_save)
 
         self.le_t = QLineEdit()
         vl_t.addWidget(self.le_t)
@@ -87,9 +87,9 @@ class PreferenceWindow(QMainWindow):
         btn_q_o.clicked.connect(self._open_url_o)
         hl_o.addWidget(btn_q_o)
 
-        btn_o_save = QPushButton(_("Save"))
-        btn_o_save.clicked.connect(self._on_o_save)
-        hl_o.addWidget(btn_o_save)
+        self.btn_o_save = QPushButton(_("Save"))
+        self.btn_o_save.clicked.connect(self._on_o_save)
+        hl_o.addWidget(self.btn_o_save)
 
         vl_o.addLayout(hl_o)
         gb_o.setLayout(vl_o)
@@ -205,6 +205,7 @@ class PreferenceWindow(QMainWindow):
         self.le_t.setText(conf_str)
         self.le_t.setToolTip(st.sk_placeholder_text)
         self.le_t.setPlaceholderText(st.sk_placeholder_text)
+        self.btn_t_save.setIcon(QIcon())
 
     def _on_changed_o(self, i):
         if i < 0:
@@ -222,6 +223,7 @@ class PreferenceWindow(QMainWindow):
         self.tray.showMessage(_("OCR server"),
                               _("Using {} for text recognition").format(so.name),
                               QSystemTrayIcon.MessageIcon.Information, 3000)
+        self.btn_o_save.setIcon(QIcon())
 
     def _import_config(self):
         if self.cb.mimeData().hasText():
@@ -256,17 +258,22 @@ class PreferenceWindow(QMainWindow):
     def _on_btn_to_save(self, ocr=False):
 
         def notice_s(p):
-            t, ok, m, le, api_key = p
+            t, ok, m, le, api_key, btn_save = p
+            btn_save: QPushButton = btn_save
+            le: QLineEdit = le
             n = QSystemTrayIcon.MessageIcon.Information
+            icon_id = QStyle.StandardPixmap.SP_DialogApplyButton
             if not ok:
                 n = QSystemTrayIcon.MessageIcon.Critical
+                icon_id = QStyle.StandardPixmap.SP_DialogCancelButton
             self.tray.showMessage(t, m, n, 3000)
+            btn_save.setIcon(self.style().standardIcon(icon_id))
             my_thread.clean_up()
             # 保存时，去掉空格，但是显示时，保留
             le.setText(clear_key(api_key, "  |  "))
 
         def tt(p=None):
-            le, api_key = p
+            le, api_key, btn_save = p
             if ocr:
                 st: ServerOCR = get_servers_o()[self.cb_o.currentIndex()]
                 _ok, _s = st.check_conf(api_key)
@@ -276,14 +283,17 @@ class PreferenceWindow(QMainWindow):
                 st: ServerTra = get_servers_t_sk()[self.cb_t.currentIndex()]
                 _ok, _s = st.check_conf(api_key)
 
-            return (st.name, _ok, _s, le, api_key)
+            return (st.name, _ok, _s, le, api_key, btn_save)
 
         le: QLineEdit = self.le_t if not ocr else self.le_o
+        btn_save: QPushButton = self.btn_t_save if not ocr else self.btn_o_save
+        btn_save.setIcon(QIcon())
         if not le.text():
             print("empty")
             return
         # 保存时，去掉空格，但是显示时，保留
-        my_thread = MyThread(tt, (le, clear_key(le.text())))
+
+        my_thread = MyThread(tt, (le, clear_key(le.text()), btn_save))
         my_thread.signal.connect(notice_s)
         my_thread.start()
 
