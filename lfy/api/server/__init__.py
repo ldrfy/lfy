@@ -79,6 +79,7 @@ class Server:
 
         self.session = None
         self.sk_placeholder_text = None
+        self.config_str = None
         self.langs: list[Lang] = []
 
         self.key = key
@@ -140,6 +141,7 @@ class Server:
         Returns:
             _type_: _description_
         """
+        self.config_str = conf_str
         if not self.sk_placeholder_text:
             return False, _("Developers, please set sk_placeholder_text")
         if "|" in self.sk_placeholder_text and "|" not in conf_str:
@@ -178,4 +180,6 @@ class Server:
         Returns:
             _type_: _description_
         """
-        return Settings().g(self.get_conf_key(add))
+        if not self.config_str:
+            self.config_str = Settings().g(self.get_conf_key(add))
+        return self.config_str
