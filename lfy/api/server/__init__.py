@@ -3,6 +3,7 @@ from gettext import gettext as _
 
 import requests
 
+from lfy.utils import clear_key
 from lfy.utils.settings import Settings
 
 TIME_OUT = 3
@@ -141,18 +142,20 @@ class Server:
         Returns:
             _type_: _description_
         """
-        self._conf_str = conf_str
+        self._conf_str = clear_key(conf_str.strip())
+
         if not self.sk_placeholder_text:
             self._conf_str = None
             return False, _("Developers, please set sk_placeholder_text")
 
-        sk_ok = not self.get_conf() \
+        sk_no = not self.get_conf() \
             or (self.sk_placeholder_text.count("|") == 1
                 and self.get_conf().count("|") != 1) \
             or self.get_conf()[0] == "|" \
-            or self.get_conf()[-1] == "|" \
-
-        if sk_ok:
+            or self.get_conf()[-1] == "|"
+        print("sk_no", sk_no, f"|{self.get_conf()}|",
+              f"|{conf_str}|", f"|{self._conf_str}|")
+        if sk_no:
             self._conf_str = None
             return False, _("please input `{sk}` for `{server}` in preference")\
                 .format(sk=self.sk_placeholder_text, server=self.name)
@@ -196,6 +199,6 @@ class Server:
         Returns:
             _type_: _description_
         """
-        if not self._conf_str:
+        if self._conf_str is None:
             self._conf_str = Settings().g(self.get_conf_key(add))
         return self._conf_str

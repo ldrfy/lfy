@@ -23,18 +23,18 @@ class ServerPreferences(Adw.NavigationPage):
     __gtype_name__ = 'ServerPreferencesPage'
 
     # Child widgets
-    title = Gtk.Template.Child()
-    page = Gtk.Template.Child()
-    api_key_entry: Adw.EntryRow = Gtk.Template.Child()
-    api_key_stack = Gtk.Template.Child()
-    api_key_spinner = Gtk.Template.Child()
+    title: Adw.WindowTitle = Gtk.Template.Child()
 
-    api_key_link = Gtk.Template.Child()
+    api_key_entry: Adw.EntryRow = Gtk.Template.Child()
+    api_key_stack: Gtk.Stack = Gtk.Template.Child()
+    api_key_spinner: Gtk.Spinner = Gtk.Template.Child()
+
+    api_key_link: Gtk.LinkButton = Gtk.Template.Child()
 
     def __init__(self, server: Server, is_ocr=False, dialog=None, **kwargs):
         super().__init__(**kwargs)
         self.server = server
-        self.dialog = dialog
+        self.dialog: Adw.PreferencesDialog = dialog
         self.is_ocr = is_ocr
         s = _("Text translate")
         if is_ocr:
@@ -54,50 +54,48 @@ class ServerPreferences(Adw.NavigationPage):
     @Gtk.Template.Callback()
     def _on_api_key_apply(self, _row):
 
-        api_key = clear_key(self.api_key_entry.get_text())
-        self.api_key_entry.set_text(clear_key(api_key, "  |  "))
+        api_key = self.api_key_entry.get_text().strip()
         self.api_key_entry.set_sensitive(False)
         self.api_key_spinner.start()
 
         threading.Thread(target=self.request_text, daemon=True,
-                         args=(self.server.check_conf,
-                               api_key, self.api_key_entry,
-                               self.api_key_spinner)).start()
+                         args=(self.server.check_conf, api_key)).start()
 
-    def update_ui(self, valid, entry, spinner):
+    def update_ui(self, ok, text, api_key):
         """更新
 
         Args:
             valid (_type_): _description_
         """
-        ok, text = valid
 
-        entry.set_sensitive(True)
-        spinner.stop()
+        self.api_key_entry.set_sensitive(True)
+        self.api_key_entry.set_text(clear_key(api_key, "  |  "))
+        self.api_key_spinner.stop()
 
         if ok:
-            entry.remove_css_class('error')
+            self.api_key_entry.remove_css_class('error')
             self.dialog.add_toast(Adw.Toast.new(text.strip()))
         else:
-            entry.add_css_class('error')
+            self.api_key_entry.add_css_class('error')
 
             dialog = Adw.AlertDialog.new(_("error message"))
             dialog.set_body(text)
             dialog.add_response("confirm",  _("Confirm"))
             dialog.present(self.get_root())
 
-    def request_text(self, fun, api_key, entry, spinner):
+    def request_text(self, fun, api_key):
         """验证服务api是否靠谱
 
         Args:
             server (_type_): _description_
             api_key (_type_): _description_
         """
-        # try:
-        #     valid = fun(api_key)
-        # except Exception as exc:  # pylint: disable=W0718
-        #     get_logger().error(exc)
-        #     valid = False, str(exc)
-        valid = fun(api_key)
+        ok = False
+        text = ""
+        try:
+            ok, text = fun(api_key)
+        except Exception as exc:  # pylint: disable=W0718
+            get_logger().error(exc)
+            text = str(exc)
 
-        GLib.idle_add(self.update_ui, valid, entry, spinner)
+        GLib.idle_add(self.update_ui, ok, text, api_key)

@@ -61,6 +61,7 @@ class LfyApplication(Adw.Application):
         for _i in range(100):
             time.sleep(0.1)
             if self.win and self.win.ocr_server:
+                print(f"{_i*0.1}s")
                 break
         GLib.idle_add(self.do_startup1)
 
