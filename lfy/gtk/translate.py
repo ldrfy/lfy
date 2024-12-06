@@ -186,10 +186,11 @@ class TranslateWindow(Adw.ApplicationWindow):
             text (str): _description_
             reload (bool, optional): _description_. Defaults to False.
         """
-        buffer_from = self.tv_from.get_buffer()
 
-        if len(text) == 0:
+        if not text:
             return
+
+        buffer_from = self.tv_from.get_buffer()
 
         # 导出或者导入的配置包含密钥，不翻译
         s_ntt = _(

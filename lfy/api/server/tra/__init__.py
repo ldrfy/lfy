@@ -20,7 +20,8 @@ class ServerTra(Server):
         Returns:
             str: _description_
         """
-        if not self.get_conf():
+
+        if self.sk_placeholder_text and not self.get_conf():
             return False, _("please input `{sk}` for `{server}` in preference")\
                 .format(sk=self.sk_placeholder_text, server=self.name)
 

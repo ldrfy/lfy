@@ -27,6 +27,34 @@ def _get_session():
     return session
 
 
+def _translate(st: ServerTra, text, lang_to, n=0):
+
+    if n > 3:
+        return False, _("something error, try other translate engine?")
+
+    text = text.replace("#", "")
+    url = 'https://translate.google.com/translate_a/t'
+    params = {'tl': lang_to, 'sl': "auto", 'ie': 'UTF-8',
+              'oe': 'UTF-8', 'client': 'at', 'dj': '1',
+              'format': "html", 'v': "1.0"}
+
+    try:
+        response = st.session.post(url, params=params, data={
+            'q': text}, timeout=TIME_OUT)
+    except ConnectTimeout as e0:
+        get_logger().error(e0)
+        return False, _("The connection timed out. Maybe there is a network problem")
+    except RequestException as e:
+        get_logger().error(e)
+        return _translate(st, text, lang_to, n=n + 1)
+
+    s = ""
+    for res in response.json():
+        s += res[0]
+
+    return True, s
+
+
 class GoogleServer(ServerTra):
     """google翻译
     """
@@ -46,31 +74,5 @@ class GoogleServer(ServerTra):
         super().__init__("google", _("google"))
         self.set_data(lang_key_ns, session=_get_session())
 
-    def translate_text(self, text, lang_to="en", fun_tra=None, n=0):
-
-        if n > 3:
-            return False, _("something error, try other translate engine?")
-
-        text = text.replace("#", "")
-        url = 'https://translate.google.com/translate_a/t'
-        params = {'tl': lang_to, 'sl': "auto", 'ie': 'UTF-8',
-                  'oe': 'UTF-8', 'client': 'at', 'dj': '1',
-                  'format': "html", 'v': "1.0"}
-
-        try:
-            response = self.session.post(url, params=params, data={
-                                         'q': text}, timeout=TIME_OUT)
-        except ConnectTimeout as e0:
-            print("google0", n, type(e0), e0)
-            get_logger().error(e0)
-            return False, _("The connection timed out. Maybe there is a network problem")
-        except RequestException as e:
-            print("google", n, type(e), e)
-            get_logger().error(e)
-            return self.translate_text(text, lang_to, n=n + 1)
-
-        s = ""
-        for res in response.json():
-            s += res[0]
-
-        return True, s
+    def translate_text(self, text, lang_to, fun_tra=_translate):
+        return super().translate_text(text, lang_to, fun_tra)

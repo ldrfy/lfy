@@ -288,6 +288,9 @@ class TranslateWindow(QMainWindow):
     def translate_text(self, text_from):
         """翻译
 
+        Args:
+            text_from (str): _description_
+
         Returns:
             _type_: _description_
         """

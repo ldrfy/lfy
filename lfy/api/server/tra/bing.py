@@ -65,6 +65,65 @@ def g_url(host, hs):
     return f'https://{host}/ttranslatev3?isVertical=1&&IG={hs["IG"]}&IID={hs["my_iid"]}'
 
 
+def _translate(st: ServerTra, text, lang_to, n=0):
+
+    if n > 5:
+        return False, _("something error, try other translate engine?")
+
+    hs = st.session.headers
+    if "IG" not in hs:
+        try:
+            st.session = _init_session()
+            hs = st.session.headers
+            print(hs["my_host"])
+        except RequestException as e:
+            get_logger().error(e)
+            print("bing-session", n, type(e), e)
+            return _translate(st, text, lang_to, n=n + 1)
+
+    # 自动重定向的新url，注意辨别
+    host = hs["my_host"]
+    if "my_iid" not in hs:
+        st.session.headers.update({'my_iid': g_iid()})
+        hs = st.session.headers
+
+    data = {'': '', 'text': text, "fromLang": "auto-detect",
+            'to': lang_to, 'token': hs['token'], 'key': hs['key'],
+            'tryFetchingGenderDebiasedTranslations': True}
+
+    try:
+        url = g_url(host, hs)
+        response = st.session.post(url, data=data, timeout=TIME_OUT)
+    except RequestException as e:
+        get_logger().error(e)
+        print("bing-post", n, type(e), e)
+        return _translate(st, text, lang_to, n=n + 1)
+
+    # 没有代理时，中国区出现这个
+    if len(response.text.strip()) == 0:
+        return _translate(st, text, lang_to, n=n + 1)
+
+    res = response.json()
+
+    if isinstance(res, list):
+        return True, res[0]["translations"][0]["text"]
+
+    if isinstance(res, dict):
+        if 'ShowCaptcha' in res.keys():
+            st.session = _init_session()
+            print("bing-ShowCaptcha", n)
+            return _translate(st, text, lang_to, n=n + 1)
+
+        if 'statusCode' in res.keys():
+            if res['statusCode'] == 400:
+                res['errorMessage'] \
+                    = _('1000 characters limit! You send {len_text} characters.') \
+                    .format(len_text=len(text))
+            return False, res["errorMessage"]
+
+    return False, str(res)
+
+
 class BingServer(ServerTra):
     """bing翻译，无需apikey
     """
@@ -84,59 +143,5 @@ class BingServer(ServerTra):
         super().__init__("bing", _("bing"))
         self.set_data(lang_key_ns, session=_init_session())
 
-    def translate_text(self, text, lang_to="en", fun_tra=None, n=0):
-        if n > 5:
-            return False, _("something error, try other translate engine?")
-
-        hs = self.session.headers
-        if "IG" not in hs:
-            try:
-                self.session = _init_session()
-                hs = self.session.headers
-                print(hs["my_host"])
-            except RequestException as e:
-                get_logger().error(e)
-                print("bing-session", n, type(e), e)
-                return self.translate_text(text, lang_to, n=n + 1)
-
-        # 自动重定向的新url，注意辨别
-        host = hs["my_host"]
-        if "my_iid" not in hs:
-            self.session.headers.update({'my_iid': g_iid()})
-            hs = self.session.headers
-
-        data = {'': '', 'text': text, "fromLang": "auto-detect",
-                'to': lang_to, 'token': hs['token'], 'key': hs['key'],
-                'tryFetchingGenderDebiasedTranslations': True}
-
-        try:
-            url = g_url(host, hs)
-            response = self.session.post(url, data=data, timeout=TIME_OUT)
-        except RequestException as e:
-            get_logger().error(e)
-            print("bing-post", n, type(e), e)
-            return self.translate_text(text, lang_to, n=n + 1)
-
-        # 没有代理时，中国区出现这个
-        if len(response.text.strip()) == 0:
-            return self.translate_text(text, lang_to, n=n + 1)
-
-        res = response.json()
-
-        if isinstance(res, list):
-            return True, res[0]["translations"][0]["text"]
-
-        if isinstance(res, dict):
-            if 'ShowCaptcha' in res.keys():
-                self.session = _init_session()
-                print("bing-ShowCaptcha", n)
-                return self.translate_text(text, lang_to, n=n + 1)
-
-            if 'statusCode' in res.keys():
-                if res['statusCode'] == 400:
-                    res['errorMessage'] \
-                        = _('1000 characters limit! You send {len_text} characters.') \
-                        .format(len_text=len(text))
-                return False, res["errorMessage"]
-
-        return False, str(res)
+    def translate_text(self, text, lang_to, fun_tra=_translate):
+        return super().translate_text(text, lang_to, fun_tra)
