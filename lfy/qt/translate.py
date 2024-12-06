@@ -89,6 +89,7 @@ class TranslateWindow(QMainWindow):
         splitter.addWidget(bottom_widget)
 
         main_layout.addWidget(splitter)
+        splitter.setSizes([1, 2])
 
         middle_layout.setContentsMargins(1, 5, 1, 5)
         bottom_layout.setContentsMargins(0, 0, 0, 0)
@@ -294,6 +295,10 @@ class TranslateWindow(QMainWindow):
             self.translate_next = True
             return
         self.translate_next = True
+
+        if not text_from:
+            print("text is None")
+            return
 
         s_ntt = _(
             "This time the content contains private information and is not translated")

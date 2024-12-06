@@ -44,7 +44,7 @@ class MyThread(QThread):
 
 class CheckableComboBox(QComboBox):
     def __init__(self, parent=None):
-        super(CheckableComboBox, self).__init__(parent)
+        super().__init__(parent)
 
         # 设置 LineEdit 为只读，显示选中项
         self.setLineEdit(QLineEdit())
