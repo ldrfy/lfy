@@ -261,7 +261,7 @@ class TranslateWindow(QMainWindow):
         self.te_to.setPlainText(text_to)
 
         if not loading:
-            if self.sg.g("notify-translation-results", d=True, t=bool):
+            if self.tray and self.sg.g("notify-translation-results", d=True, t=bool):
                 self.tray.showMessage(_("Translation completed"), text_to,
                                       QSystemTrayIcon.MessageIcon.Information, 2000)
 
@@ -297,10 +297,11 @@ class TranslateWindow(QMainWindow):
         for ntt in NO_TRANSLATED_TXTS:
             if ntt in text_from:
                 ss_ntt.append(ntt)
-        if len(ss_ntt) > 0:
-            self.tray.showMessage(_("Not translated this time!"),
-                                  f"{s_ntt}:\n{str(ss_ntt)}",
-                                  QSystemTrayIcon.MessageIcon.Warning, 3000)
+        if ss_ntt:
+            if self.tray:
+                self.tray.showMessage(_("Not translated this time!"),
+                                      f"{s_ntt}:\n{str(ss_ntt)}",
+                                      QSystemTrayIcon.MessageIcon.Warning, 3000)
 
             return
 

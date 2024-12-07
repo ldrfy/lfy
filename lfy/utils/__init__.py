@@ -1,7 +1,10 @@
 '工具'
 import hashlib
+import os
 import re
+import sys
 
+from lfy import APP_ID, APP_NAME
 from lfy.utils.debug import get_logger
 
 
@@ -41,6 +44,7 @@ def s2ks(sk):
 
     [app_id, secret_key] = sk.split("|")
     return app_id, secret_key
+
 
 def clear_key(sk, str_new="|"):
     """清楚设置中的空格
@@ -101,6 +105,43 @@ def get_os_release():
         return "OS release info not found"
 
 
+def get_cache_dir():
+    """缓存目录
+
+    Raises:
+        EnvironmentError: _description_
+
+    Returns:
+        _type_: _description_
+    """
+    # 判断操作系统是否为Windows
+    if sys.platform.startswith('win'):
+        # 如果是Windows，使用环境变量获取缓存目录
+        cache_dir = os.getenv('LOCALAPPDATA') or os.getenv('APPDATA')
+        if cache_dir is None:
+            raise EnvironmentError(
+                "Cannot determine the cache directory for Windows.")
+        cache_dir = os.path.join(cache_dir, APP_ID)
+    else:
+        # 对于其他操作系统，例如Linux和macOS，通常使用XDG Base Directory Specification
+        xdg_cache_home = os.getenv('XDG_CACHE_HOME')
+        if xdg_cache_home is None:
+            home = os.path.expanduser("~")
+            xdg_cache_home = os.path.join(home, '.cache')
+        cache_dir = os.path.join(xdg_cache_home, APP_ID)
+
+    # 确保缓存目录存在
+    if not os.path.exists(cache_dir):
+        os.makedirs(cache_dir)
+    return cache_dir
+
+
+def get_cache_img_path():
+    """_summary_
+    """
+    return os.path.join(get_cache_dir(), f"{APP_NAME}.png")
+
+
 def gen_img(text="success"):
     """生成图片，TODO:这里应该生成需要语言字体的文字，现在有问题
 
@@ -139,6 +180,6 @@ def gen_img(text="success"):
     d.text(position, text, fill=(0, 128, 0), font=font)
 
     # 保存图片
-    path = "/tmp/lfy.png"
+    path = get_cache_img_path()
     img.save(path)
     return path

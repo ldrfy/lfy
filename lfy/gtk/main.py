@@ -12,7 +12,7 @@ from lfy import APP_ID, PACKAGE_URL, RES_PATH, VERSION
 from lfy.gtk import get_gtk_msg
 from lfy.gtk.preference import PreferencesDialog
 from lfy.gtk.translate import TranslateWindow
-from lfy.utils import cal_md5, is_text
+from lfy.utils import cal_md5, get_cache_img_path, is_text
 from lfy.utils.check_update import main as check_update
 from lfy.utils.code import parse_lfy
 from lfy.utils.settings import Settings
@@ -195,7 +195,7 @@ class LfyApplication(Adw.Application):
             texture = cb2.read_texture_finish(res)
             pixbuf = Gdk.pixbuf_get_from_texture(texture)
 
-            path = "/tmp/lfy.png"
+            path = get_cache_img_path()
             pixbuf.savev(path, "png", (), ())
 
             md5_hash = cal_md5(path)

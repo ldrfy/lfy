@@ -9,7 +9,7 @@ from lfy import APP_NAME, PACKAGE_URL, PACKAGE_URL_BUG, VERSION
 from lfy.qt import MyThread
 from lfy.qt.preference import PreferenceWindow
 from lfy.qt.translate import TranslateWindow
-from lfy.utils import cal_md5
+from lfy.utils import cal_md5, get_cache_img_path
 from lfy.utils.check_update import main as check_update
 from lfy.utils.settings import Settings
 
@@ -89,7 +89,7 @@ class TrayIcon(QSystemTrayIcon):
             # 如果是图片，处理图片
             image = self.cb.image()
             if not image.isNull():
-                file_path = "/tmp/lfy.png"
+                file_path = get_cache_img_path()
                 image.save(file_path, "PNG")
 
                 md5_hash = cal_md5(file_path)
