@@ -10,6 +10,32 @@ from lfy.api.server import TIME_OUT
 from lfy.utils.debug import get_logger
 
 
+def get_by_url(url, bz=""):
+    """通过url获取更新信息
+
+    Args:
+        url (str): url
+        bz (str, optional): 备注. Defaults to "".
+
+    Returns:
+        dict: 更新信息
+    """
+    try:
+        request = requests.get(url, timeout=TIME_OUT)
+        if request.status_code == 200:
+            get_logger().info("%s update msg ok", bz)
+            return request.json()
+    except requests.exceptions.ConnectTimeout as e:
+        get_logger().error(e)
+        return {}
+    except requests.exceptions.ProxyError as e:
+        get_logger().error(e)
+        return {}
+    except Exception as e:  # pylint: disable=W0718
+        get_logger().error(e)
+    return None
+
+
 def get_by_gitee():
     """gitee
 
@@ -18,17 +44,7 @@ def get_by_gitee():
     """
     url = "https://gitee.com/yuhldr/lfy/raw/main/data/version.json"
 
-    try:
-        request = requests.get(url, timeout=TIME_OUT)
-        if request.status_code == 200:
-            get_logger().info("gitee update msg ok")
-            return request.json()
-    except requests.exceptions.ConnectTimeout as e:
-        get_logger().error(e)
-        return {}
-    except Exception as e:  # pylint: disable=W0718
-        get_logger().error(e)
-    return None
+    return get_by_url(url, "gitee")
 
 
 def get_by_github():
@@ -39,17 +55,7 @@ def get_by_github():
     """
     url = "https://raw.githubusercontent.com/ldrfy/lfy/main/data/version.json"
 
-    try:
-        request = requests.get(url, timeout=TIME_OUT)
-        if request.status_code == 200:
-            get_logger().info("github update msg ok")
-            return request.json()
-    except requests.exceptions.ConnectTimeout as e:
-        get_logger().error(e)
-        return {}
-    except Exception as e:  # pylint: disable=W0718
-        get_logger().error(e)
-    return None
+    return get_by_url(url, "github")
 
 
 def compare_versions(v_new, v_old):
@@ -86,7 +92,8 @@ def main():
     Returns:
         str: 更新信息或None
     """
-    s = f"Please update. There is a problem with the current version configuration.\n\n{PACKAGE_URL}"
+    s = f"Please update. There is a problem with the current version configuration.\n\n{
+        PACKAGE_URL}"
     try:
         data = get_by_github()
         if data is None or "version" not in data:
