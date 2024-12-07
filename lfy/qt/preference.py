@@ -128,6 +128,7 @@ class PreferenceWindow(QMainWindow):
         hl_vpn = QHBoxLayout()
         self.le_vpn = QLineEdit()
         self.le_vpn.setPlaceholderText("http://127.0.0.1:7890")
+        self.le_vpn.setToolTip("http://127.0.0.1:7890")
         hl_vpn.addWidget(self.le_vpn)
         btn_vpn_save = QPushButton(_("Save"))
         btn_vpn_save.clicked.connect(self._on_vpn_save)

@@ -67,6 +67,9 @@ def g_url(host, hs):
 
 def _translate(st: ServerTra, text, lang_to, n=0):
 
+    if st.session is None:
+        st.session = _init_session()
+
     if n > 5:
         return False, _("something error, try other translate engine?")
 
@@ -141,7 +144,7 @@ class BingServer(ServerTra):
             "it": 8,
         }
         super().__init__("bing", _("bing"))
-        self.set_data(lang_key_ns, session=_init_session())
+        self.set_data(lang_key_ns)
 
     def translate_text(self, text, lang_to, fun_tra=_translate):
         return super().translate_text(text, lang_to, fun_tra)
