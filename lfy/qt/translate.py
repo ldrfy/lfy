@@ -109,7 +109,15 @@ class TranslateWindow(QMainWindow):
 
         self.set_data()
 
-    def _get_sl(self, _p=None):
+    def set_data(self):
+        """_summary_
+        """
+
+        self.sg = Settings()
+        self.cb_server.setEditable(True)
+        self.cb_lang.setEditable(True)
+
+        # 加速启动
 
         server_key_t = self.sg.g("server-selected-key", "bing")
         server_key_o = self.sg.g("server-ocr-selected-key", "easyocr")
@@ -121,32 +129,12 @@ class TranslateWindow(QMainWindow):
         j = lang_n2j(i, self.sg.g("lang-selected-n", 0, int))
         self.lang_t = get_lang(i, j)
 
-        return i, get_server_names_t(), j
-
-    def _set_sl(self, p=None):
-        i, sns, j = p
         self.jn = i == 0
-        self.cb_server.clear()
-        self.cb_server.addItems(sns)
+        self.cb_server.addItems(get_server_names_t())
         self.jn = True
         self.cb_server.setCurrentIndex(i)
 
         self.cb_lang.setCurrentIndex(j)
-
-    def set_data(self):
-        """_summary_
-        """
-        self.cb_server.addItems([_("Loading...")])
-        self.cb_lang.addItems([_("Loading...")])
-
-        self.sg = Settings()
-        self.cb_server.setEditable(True)
-        self.cb_lang.setEditable(True)
-
-        # 加速启动
-        self.my_thread = MyThread(self._get_sl)
-        self.my_thread.signal.connect(self._set_sl)
-        self.my_thread.start()
 
         self.cb_del_wrapping.setChecked(True)
 

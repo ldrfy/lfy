@@ -70,27 +70,10 @@ class TrayIcon(QSystemTrayIcon):
         # 绑定托盘单击事件
         self.activated.connect(self._tray_icon_clicked)
 
-        self.my_thread = MyThread(self.do_startup0)
-        self.my_thread.signal.connect(self.do_startup1)
-        self.my_thread.start()
-
-    def do_startup0(self, _p=None):
-        """_summary_
-        """
-        for _i in range(100):
-            time.sleep(0.1)
-            if self.w and self.w.server_o:
-                break
-        return (self.sg.g("auto-check-update"), 0)
-
-    def do_startup1(self, p=None):
-        """_summary_
-        """
-        auto_update, _i = p
         if self.auto_action.isChecked():
             self._on_clipboard_data_changed()
             self.cb.dataChanged.connect(self._on_clipboard_data_changed)
-        if auto_update:
+        if self.sg.g("auto-check-update"):
             self.find_update()
 
     def _tray_icon_clicked(self, reason):

@@ -43,7 +43,14 @@ class LfyApplication(Adw.Application):
 
         self.create_actions()
 
-        threading.Thread(target=self.do_startup0, daemon=True).start()
+        if self.sg.g("copy-auto-translate"):
+            self.copy_id = self.cb.connect("changed", self._get_copy)
+            self._get_copy(self.cb)
+        else:
+            self.update_tr("Copy to translate? Try `<Alt>+T`")
+
+        self.find_update()
+
         self.connect('activate', self.on_activate)
 
     def on_activate(self, _app):
@@ -54,27 +61,6 @@ class LfyApplication(Adw.Application):
         """
         self.win = TranslateWindow(application=self)
         self.win.present()
-
-    def do_startup0(self):
-        """异步
-        """
-        for _i in range(100):
-            time.sleep(0.1)
-            if self.win and self.win.ocr_server:
-                print(f"{_i*0.1}s")
-                break
-        GLib.idle_add(self.do_startup1)
-
-    def do_startup1(self):
-        """异步
-        """
-        if self.sg.g("copy-auto-translate"):
-            self.copy_id = self.cb.connect("changed", self._get_copy)
-            self._get_copy(self.cb)
-        else:
-            self.update_tr("Copy to translate? Try `<Alt>+T`")
-
-        self.find_update()
 
     def update_tr(self, s="", ocr=False):
         """翻译

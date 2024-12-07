@@ -65,8 +65,20 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.toast = Adw.Toast.new("")
         self.toast.set_timeout(2)
 
-        self.dd_server.set_model(Gtk.StringList.new([_("Loading")]))
-        self.dd_lang.set_model(Gtk.StringList.new([_("Loading")]))
+        server_key_t = self.sg.g("server-selected-key")
+        i = server_key2i(server_key_t)
+
+        self.tra_server = create_server_t(server_key_t)
+        self.ocr_server = create_server_o(self.sg.g("server-ocr-selected-key"))
+
+        data_s = Gtk.StringList.new(get_server_names_t())
+
+        # 0的再设置也无效
+        self.jn = i == 0
+        self.dd_server.set_model(data_s)
+        self.jn = True
+        self.dd_server.set_selected(i)
+
 
         self.menu_btn.props.popover.add_child(ThemeSwitcher(), 'theme')
 
@@ -78,29 +90,6 @@ class TranslateWindow(Adw.ApplicationWindow):
         # 将控制器添加到文本视图中
         self.tv_from.add_controller(controller)
 
-        threading.Thread(target=self._get_data, daemon=True).start()
-
-    def _get_data(self):
-        """异步获取数据
-        """
-        server_key_t = self.sg.g("server-selected-key")
-        i = server_key2i(server_key_t)
-
-        self.tra_server = create_server_t(server_key_t)
-        self.ocr_server = create_server_o(self.sg.g("server-ocr-selected-key"))
-
-        data_s = Gtk.StringList.new(get_server_names_t())
-
-        GLib.idle_add(self._set_data, data_s, i)
-
-    def _set_data(self, data_s, i):
-        """异步初始化
-        """
-        # 0的再设置也无效
-        self.jn = i == 0
-        self.dd_server.set_model(data_s)
-        self.jn = True
-        self.dd_server.set_selected(i)
 
     def on_key_pressed(self, _, keyval, _keycode, _state):
         """文本回车，直接翻译
