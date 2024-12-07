@@ -92,8 +92,8 @@ def main():
     Returns:
         str: 更新信息或None
     """
-    s = f"Please update. There is a problem with the current version configuration.\n\n{
-        PACKAGE_URL}"
+    s = "Please update. There is a problem with the current version configuration.\n\n"
+    s += PACKAGE_URL
     try:
         data = get_by_github()
         if data is None or "version" not in data:
