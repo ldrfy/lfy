@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 from gettext import gettext as _
 
-from gi.repository import Adw, Gdk, Gio, GLib  # pylint: disable=E0401,C0413
+from gi.repository import Adw, Gdk, Gio, GLib
 
 from lfy import APP_ID, PACKAGE_URL, RES_PATH, VERSION
 from lfy.gtk import get_gtk_msg

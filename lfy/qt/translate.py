@@ -1,6 +1,4 @@
 '翻译主窗口'
-import time
-import traceback
 from gettext import gettext as _
 
 from PyQt6.QtCore import Qt
@@ -19,7 +17,6 @@ from lfy.api.server.ocr import ServerOCR
 from lfy.api.server.tra import ServerTra
 from lfy.qt import MyThread
 from lfy.utils import process_text
-from lfy.utils.debug import get_logger
 from lfy.utils.settings import Settings
 
 
@@ -231,13 +228,8 @@ class TranslateWindow(QMainWindow):
             _type_: _description_
         """
         def oo(_p=None):
-            try:
-                _ok, text_from = self.server_o.ocr_image(img_path)
-            except Exception as e:  # pylint: disable=W0718
-                get_logger().error(e)
-                text_from = f"OCR error: {self.server_o.name}\
-                    \n\n{str(e)}\n\n{traceback.format_exc()}"
-                _ok = False
+            _ok, text_from = self.server_o.ocr_image(img_path)
+
             return (_ok, text_from)
 
         def next_(param):
@@ -315,13 +307,9 @@ class TranslateWindow(QMainWindow):
             return
 
         def tt(_p=None):
-            try:
-                _ok, text_to = self.server_t.translate_text(
-                    text_from, self.lang_t.key)
-            except Exception as e:  # pylint: disable=W0718
-                get_logger().error(e)
-                text_to = _("something error: {}")\
-                    .format(f"{self.server_t.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
+            _ok, text_to = self.server_t.translate_text(
+                text_from, self.lang_t.key)
+
             return (text_from, text_to)
 
         self.set_text_from_to((text_from, _("Translating...")), True)

@@ -111,7 +111,7 @@ class AliYunServer(ServerTra):
         super().__init__("aliyun", _("aliyun"))
         self.set_data(lang_key_ns, "AccessKey ID | AccessKey Secret")
 
-    def check_conf(self, conf_str, fun_check=_translate):
+    def check_conf(self, conf_str, fun_check=_translate, py_libs=None):
         return super().check_conf(conf_str, fun_check)
 
     def translate_text(self, text, lang_to, fun_tra=_translate):

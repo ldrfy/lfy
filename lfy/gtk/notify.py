@@ -1,11 +1,11 @@
 '提示'
-from gi.repository import Gio
+from gi.repository import Adw, Gio
 
 from lfy import APP_ID
 from lfy.utils.settings import Settings
 
 
-def nf_t(app, title, txt, id_str="translate_end"):
+def nf_t(app: Adw.Application, title, txt, id_str="translate_end"):
     """翻译以后提示
 
     Args:

@@ -1,9 +1,11 @@
 '翻译服务的基础类'
+import traceback
 from gettext import gettext as _
 
 import requests
 
-from lfy.utils import clear_key
+from lfy.utils import check_libs, clear_key
+from lfy.utils.debug import get_logger
 from lfy.utils.settings import Settings
 
 TIME_OUT = 3
@@ -133,7 +135,7 @@ class Server:
             return self.langs[0]
         return self.langs[j]
 
-    def check_conf(self, conf_str: str, fun_check):
+    def check_conf(self, conf_str: str, fun_check, py_libs=None):
         """保存前核对配置
 
         Args:
@@ -142,6 +144,10 @@ class Server:
         Returns:
             _type_: _description_
         """
+        s = check_libs(py_libs)
+        if s:
+            return False, s
+
         self._conf_str = clear_key(conf_str.strip())
 
         if not self.sk_placeholder_text:
@@ -160,13 +166,20 @@ class Server:
             return False, _("please input `{sk}` for `{server}` in preference")\
                 .format(sk=self.sk_placeholder_text, server=self.name)
 
-        ok, text = fun_check(self, "success")
-        if ok:
-            self.set_conf()
-        else:
-            self._conf_str = None
+        try:
+            ok, text = fun_check(self, "success")
+            if ok:
+                self.set_conf()
+            else:
+                self._conf_str = None
 
-        return ok, text
+            return ok, text
+        except Exception as e:  # pylint: disable=W0718
+            text = _("something error: {}")\
+                .format(f"{self.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
+            get_logger().error(text)
+            print(text)
+        return False, text
 
     def set_conf(self):
         """设置配置

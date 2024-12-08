@@ -1,7 +1,6 @@
 '''翻译主窗口'''
 
 import threading
-import traceback
 from gettext import gettext as _
 
 from gi.repository import Adw, Gdk, GLib, Gtk
@@ -16,7 +15,6 @@ from lfy.api.server.tra import ServerTra
 from lfy.gtk.notify import nf_t
 from lfy.gtk.widgets.theme_switcher import ThemeSwitcher
 from lfy.utils import process_text
-from lfy.utils.debug import get_logger
 from lfy.utils.settings import Settings
 
 
@@ -79,7 +77,6 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.jn = True
         self.dd_server.set_selected(i)
 
-
         self.menu_btn.props.popover.add_child(ThemeSwitcher(), 'theme')
 
         self.connect('unrealize', self.save_settings)
@@ -89,7 +86,6 @@ class TranslateWindow(Adw.ApplicationWindow):
         controller.connect("key-pressed", self.on_key_pressed)
         # 将控制器添加到文本视图中
         self.tv_from.add_controller(controller)
-
 
     def on_key_pressed(self, _, keyval, _keycode, _state):
         """文本回车，直接翻译
@@ -220,20 +216,15 @@ class TranslateWindow(Adw.ApplicationWindow):
         is_ocr = lk is None
         GLib.idle_add(self.update_ui, "", is_ocr, server.name)
 
-        try:
-            if is_ocr:
-                server: ServerOCR = server
-                _ok, text = server.ocr_image(s)
-                if self.cbtn_del_wrapping.get_active():
-                    text = process_text(text)
-            else:
-                server: ServerTra = server
-                _ok, text = server.translate_text(s, lk)
+        if is_ocr:
+            server: ServerOCR = server
+            _ok, text = server.ocr_image(s)
+            if self.cbtn_del_wrapping.get_active():
+                text = process_text(text)
+        else:
+            server: ServerTra = server
+            _ok, text = server.translate_text(s, lk)
 
-        except Exception as e:  # pylint: disable=W0718
-            get_logger().error(e)
-            text = _("something error: {}")\
-                .format(f"{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
         GLib.idle_add(self.update_ui, text, is_ocr)
 
     def update_ui(self, s="", ocr=False, name=""):
@@ -243,7 +234,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             s (str, optional): 翻译以后的文本. Defaults to True.
             ocr (bool, optional): OCR. Defaults to False.
         """
-        if len(s) == 0:
+        if s:
             # 开始翻译
             self.sp_translate.start()
             if ocr:
@@ -253,20 +244,15 @@ class TranslateWindow(Adw.ApplicationWindow):
             return
 
         # 翻译完成
-        try:
-            if ocr:
-                self.tv_from.get_buffer().set_text(s)
-                self.update(s)
-                return
+        if ocr:
+            self.tv_from.get_buffer().set_text(s)
+            self.update(s)
+            return
 
-            self.tv_to.get_buffer().set_text(s)
-            nf_t(self.app, f"{self.tra_server.name} " +
-                 _("Translation completed"), s)
-        except TypeError as e:
-            get_logger().error(e)
-            em = _("something error: {}")\
-                .format(f"\n\n{str(e)}\n\n{traceback.format_exc()}")
-            self.tv_to.get_buffer().set_text(em)
+        self.tv_to.get_buffer().set_text(s)
+        nf_t(self.app, f"{self.tra_server.name} " +
+             _("Translation completed"), s)
+
         self.sp_translate.stop()
 
     def notice_action(self, cbtn: Gtk.CheckButton, text_ok, text_no):

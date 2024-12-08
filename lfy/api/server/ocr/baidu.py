@@ -142,8 +142,8 @@ class BaiduServer(ServerOCR):
         super().__init__("baidu", _("baidu"))
         self.set_data(lang_key_ns, "API Key | Secret Key")
 
-    def ocr_image(self, img_path, fun_ocr=_fun_ocr):
+    def ocr_image(self, img_path, fun_ocr=_fun_ocr, py_libs=None):
         return super().ocr_image(img_path, fun_ocr)
 
-    def check_conf(self, conf_str, fun_check=_fun_check):
+    def check_conf(self, conf_str, fun_check=_fun_check, py_libs=None):
         return super().check_conf(conf_str, fun_check)

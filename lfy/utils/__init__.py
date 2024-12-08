@@ -3,6 +3,7 @@ import hashlib
 import os
 import re
 import sys
+from gettext import gettext as _
 
 from lfy import APP_ID, APP_NAME
 from lfy.utils.debug import get_logger
@@ -148,12 +149,7 @@ def gen_img(text="success"):
     Args:
         text (str, optional): _description_. Defaults to "success".
     """
-    try:
-        from PIL import Image, ImageDraw, ImageFont
-    except ModuleNotFoundError as e:
-        print(e)
-        get_logger().error(e)
-        return None
+    from PIL import Image, ImageDraw, ImageFont  # pylint: disable=C0415
 
     w, h = 256, 128
     # 创建一个白色背景的图片 (宽1024px，高1024px)
@@ -183,3 +179,38 @@ def gen_img(text="success"):
     path = get_cache_img_path()
     img.save(path)
     return path
+
+
+def check_lib_installed(library_name):
+    """某个库是否被安装
+
+    Args:
+        library_name (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    try:
+        __import__(library_name)
+        return True
+    except ImportError:
+        return False
+
+
+def check_libs(py_libs):
+    """_summary_
+
+    Args:
+        py_libs (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    no_libs = [py_lib for py_lib in py_libs
+               if not check_lib_installed(py_lib)]
+    if no_libs:
+        s = _("please install python whl: {}")\
+            .format(",".join(no_libs))
+        get_logger().error(s)
+        return s
+    return None
