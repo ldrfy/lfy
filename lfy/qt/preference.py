@@ -183,7 +183,7 @@ class PreferenceWindow(QMainWindow):
 
         sts = list(get_servers_t())[1:]
         keys_s = self.sg.g("compare-servers", [], t=list)
-        if keys_s:
+        if not keys_s:
             for se in sts:
                 keys_s.append(se.key)
         cs = []

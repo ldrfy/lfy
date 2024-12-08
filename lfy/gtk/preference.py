@@ -73,7 +73,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
         names = []
         ss = list(get_servers_t())[1:]
         keys_s = self.sg.g("compare-servers")
-        if len(keys_s) == 0:
+        if not keys_s:
             for se in ss:
                 keys_s.append(se.key)
 
