@@ -8,10 +8,7 @@ from gi.repository import Adw, Gdk, GLib, Gtk
 from lfy.api import (create_server_o, create_server_t, get_lang,
                      get_lang_names, get_server_names_t, get_server_t,
                      lang_n2j, server_key2i)
-from lfy.api.constant import NO_TRANSLATED_TXTS
 from lfy.api.server import Server
-from lfy.api.server.ocr import ServerOCR
-from lfy.api.server.tra import ServerTra
 from lfy.gtk.notify import nf_t
 from lfy.gtk.widgets.theme_switcher import ThemeSwitcher
 from lfy.utils import process_text
@@ -64,11 +61,9 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.tra_server = create_server_t(server_key_t)
         self.ocr_server = create_server_o(self.sg.g("server-ocr-selected-key"))
 
-        data_s = Gtk.StringList.new(get_server_names_t())
-
         # 0的再设置也无效
         self.jn = i == 0
-        self.dd_server.set_model(data_s)
+        self.dd_server.set_model(Gtk.StringList.new(get_server_names_t()))
         self.jn = True
         self.dd_server.set_selected(i)
 
@@ -97,7 +92,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         if keyval == Gdk.KEY_Return:
             # 加上下面的 可以是ctrl return
             #  and (state & Gdk.ModifierType.CONTROL_MASK)
-            self.update("reload", True)
+            self.translate_text("reload", True)
         return False  # 返回 False 以继续执行默认行为
 
     def save_settings(self, _a):
@@ -139,13 +134,13 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.lang_t = get_lang(i, j)
 
         self.save_settings("")
-        self.update(self.last_text, True)
+        self.translate_text(self.last_text, True)
 
     @Gtk.Template.Callback()
     def _set_tv_copy(self, _a):
         self.is_tv_copy = True
 
-    def update_ocr(self, path):
+    def ocr_image(self, path):
         """执行ocr文本识别
 
         Args:
@@ -159,7 +154,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         threading.Thread(target=self.req_ocr, daemon=True,
                          args=(path,)).start()
 
-    def update(self, text, reload=False, del_wrapping=True):
+    def translate_text(self, text, reload=False, del_wrapping=True):
         """翻译
 
         Args:
@@ -171,17 +166,6 @@ class TranslateWindow(Adw.ApplicationWindow):
             return
 
         buffer_from = self.tv_from.get_buffer()
-
-        # 导出或者导入的配置包含密钥，不翻译
-        s_ntt = _(
-            "This time the content contains private information and is not translated")
-        ss_ntt = []
-        for ntt in NO_TRANSLATED_TXTS:
-            if ntt in text:
-                ss_ntt.append(ntt)
-        if len(ss_ntt) > 0:
-            buffer_from.set_text(f"{s_ntt}:\n{str(ss_ntt)}")
-            return
 
         if not reload:
             if self.is_tv_copy:
@@ -237,7 +221,7 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         def _ed(s):
             self.tv_from.get_buffer().set_text(s)
-            self.update(s)
+            self.translate_text(s)
 
         GLib.idle_add(_ing, self.ocr_server.name)
 
@@ -247,7 +231,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         GLib.idle_add(_ed, text)
 
     def notice_action(self, cbtn: Gtk.CheckButton, text_ok, text_no):
-        """_summary_
+        """在 main.py 中的通知
 
         Args:
             ok (_type_): _description_
@@ -262,7 +246,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             self.toast_msg(text_no)
 
     def toast_msg(self, toast_msg):
-        """_summary_
+        """在 main.py 中的通知
 
         Args:
             toast_msg (str): _description_

@@ -49,8 +49,3 @@ def get_ass():
 
 
 ALL_SELECT_SERVERS: list[ServerTra] = get_ass()
-
-
-NO_TRANSLATED_TXTS = [
-    "\"server-sk-",
-]

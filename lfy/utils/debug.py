@@ -42,14 +42,6 @@ in_memory_handler = InMemoryLogHandler(max_logs=10)
 in_memory_handler.setFormatter(formatter)
 logger.addHandler(in_memory_handler)
 
-# 测试日志输出
-# for i in range(15):
-#     logger.info(f"Log message {i}")
-
-# 打印当前的内存日志
-# print("Current logs:")
-# print(in_memory_handler.get_logs())
-
 
 def get_logger():
     """提供给外部的接口

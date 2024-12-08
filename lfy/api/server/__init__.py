@@ -103,14 +103,11 @@ class Server:
                 if s:
                     return False, s
 
-            aa = kwargs["fun_main"](self, *args)
-            print(aa, "------")
-            return aa
+            return kwargs["fun_main"](self, *args)
         except Exception as e:  # pylint: disable=W0718
             text = _("something error: {}")\
                 .format(f"{self.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
             get_logger().error(text)
-            print(text)
         return False, text
 
     def set_data(self, lang_key_ns: dict,
@@ -186,8 +183,7 @@ class Server:
                 and self.get_conf().count("|") != 1) \
             or self.get_conf()[0] == "|" \
             or self.get_conf()[-1] == "|"
-        print("sk_no", sk_no, f"|{self.get_conf()}|",
-              f"|{conf_str}|", f"|{self._conf_str}|")
+
         if sk_no:
             self._conf_str = None
             return False, _("please input `{sk}` for `{server}` in preference")\
@@ -202,10 +198,8 @@ class Server:
 
             return ok, text
         except Exception as e:  # pylint: disable=W0718
-            text = _("something error: {}")\
-                .format(f"{self.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
-            get_logger().error(text)
-            print(text)
+            get_logger().error(_("something error: {}")
+                               .format(f"{self.name}\n\n{str(e)}\n\n{traceback.format_exc()}"))
         return False, text
 
     def set_conf(self):

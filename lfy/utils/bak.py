@@ -62,6 +62,5 @@ def restore_gsettings(s, qt=None):
         return ""
 
     except Exception as e:  # pylint: disable=W0718
-        print(e)
         get_logger().error(e)
         return _('Please copy the configuration data in json format first')

@@ -69,9 +69,9 @@ class LfyApplication(Adw.Application):
         """
 
         if ocr:
-            self.win.update_ocr(s)
+            self.win.ocr_image(s)
         else:
-            self.win.update(s)
+            self.win.translate_text(s)
 
     def on_about_action(self, _widget, _w):
         """_summary_
@@ -174,7 +174,7 @@ class LfyApplication(Adw.Application):
         Args:
             f (_type_): _description_
         """
-        self.win.update("reload", True)
+        self.win.translate_text("reload", True)
 
     def _get_copy(self, cb: Gdk.Clipboard):
         """翻译
@@ -234,7 +234,6 @@ class LfyApplication(Adw.Application):
             update_msg = check_update()
             if update_msg is not None:
                 time.sleep(2)
-                print(update_msg)
                 GLib.idle_add(self.update_app, update_msg)
             elif _widget is not None:
                 # 手动更新

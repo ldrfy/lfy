@@ -12,7 +12,6 @@ from PyQt6.QtWidgets import (QApplication, QCheckBox, QComboBox, QHBoxLayout,
 from lfy.api import (create_server_o, create_server_t, get_lang,
                      get_lang_names, get_server_names_t, get_server_t,
                      lang_n2j, server_key2i)
-from lfy.api.constant import NO_TRANSLATED_TXTS
 from lfy.api.server import Server
 from lfy.api.server.ocr import ServerOCR
 from lfy.api.server.tra import ServerTra
@@ -281,21 +280,6 @@ class TranslateWindow(QMainWindow):
         self.translate_next = True
 
         if not text_from:
-            print("text is None")
-            return
-
-        s_ntt = _(
-            "This time the content contains private information and is not translated")
-        ss_ntt = []
-        for ntt in NO_TRANSLATED_TXTS:
-            if ntt in text_from:
-                ss_ntt.append(ntt)
-        if ss_ntt:
-            if self.tray:
-                self.tray.showMessage(_("Not translated this time!"),
-                                      f"{s_ntt}:\n{str(ss_ntt)}",
-                                      QSystemTrayIcon.MessageIcon.Warning, 3000)
-
             return
 
         if self.cb_del_wrapping.isChecked():

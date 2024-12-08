@@ -109,11 +109,9 @@ class PreferencesDialog(Adw.PreferencesDialog):
 
     @Gtk.Template.Callback()
     def _export_config(self, _b):
-        s = backup_gsettings()
-        print(f"\n\n{s}\n\n")
-        self.cb.set(s)
-        notice_s = _("Configuration data has been exported to the clipboard")
-        self.add_toast(Adw.Toast.new(notice_s))
+        self.cb.set(backup_gsettings())
+        self.add_toast(Adw.Toast.new(
+            _("Configuration data has been exported to the clipboard")))
 
     @Gtk.Template.Callback()
     def _on_popover_closed(self, _popover):

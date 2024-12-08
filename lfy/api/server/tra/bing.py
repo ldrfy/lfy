@@ -78,7 +78,6 @@ def _get_data(st: ServerTra, text, lang_to, n=0):
             print(hs["my_host"])
         except RequestException as e:
             get_logger().error(e)
-            print("bing-session", n, type(e), e)
             return _translate(st, text, lang_to, n=n + 1)
 
     # 自动重定向的新url，注意辨别
@@ -105,7 +104,6 @@ def _translate(st: ServerTra, text, lang_to, n=0):
         response = st.session.post(url, data=data, timeout=TIME_OUT)
     except RequestException as e:
         get_logger().error(e)
-        print("bing-post", n, type(e), e)
         return _translate(st, text, lang_to, n=n + 1)
 
     # 没有代理时，中国区出现这个
@@ -120,7 +118,6 @@ def _translate(st: ServerTra, text, lang_to, n=0):
     if isinstance(res, dict):
         if 'ShowCaptcha' in res.keys():
             st.session = _init_session()
-            print("bing-ShowCaptcha", n)
             return _translate(st, text, lang_to, n=n + 1)
 
         if 'statusCode' in res.keys():

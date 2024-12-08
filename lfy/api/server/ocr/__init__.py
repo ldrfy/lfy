@@ -1,4 +1,5 @@
 'OCR'
+import os
 from gettext import gettext as _
 
 from lfy.api.server import Server
@@ -23,6 +24,8 @@ class ServerOCR(Server):
         return super().get_conf_key(add)
 
     def main(self, *args, **kwargs):
+        if not os.path.exists(args[0]):
+            return False, "file not exists"
         if len(args) != 1 and len(args) != 2:
             raise ValueError("args: img_path, (conf_str)")
         return super().main(*args, **kwargs)

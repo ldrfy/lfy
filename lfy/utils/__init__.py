@@ -206,6 +206,8 @@ def check_libs(py_libs):
     Returns:
         _type_: _description_
     """
+    if not py_libs:
+        return None
     no_libs = [py_lib for py_lib in py_libs
                if not check_lib_installed(py_lib)]
     if no_libs:

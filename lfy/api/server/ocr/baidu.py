@@ -80,15 +80,12 @@ def _fun_ocr(so: ServerOCR, img_path, ocr_p=""):
     img_data = None
     with open(img_path, 'rb') as f:
         img_data = f.read()
-    if img_data is None:
-        return False, ""
 
     ok, token = _get_token(so)
     if not ok:
         return False, token
     params = {"image": base64.b64encode(img_data)}
 
-    print("ocr------", ocr_p)
     if ocr_p:
         params["language_type"] = ocr_p
 
