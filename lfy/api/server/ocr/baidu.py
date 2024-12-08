@@ -76,34 +76,27 @@ def _fun_check(so: ServerOCR, p):
     return False, access_token
 
 
-def _fun_ocr(so: ServerOCR, img_path):
+def _fun_ocr(so: ServerOCR, img_path, ocr_p=""):
     img_data = None
     with open(img_path, 'rb') as f:
         img_data = f.read()
     if img_data is None:
         return False, ""
 
-    img = base64.b64encode(img_data)
-
-    # open('./images/lt.png', 'rb').read()
-    s = ""
-    request_url = "https://aip.baidubce.com/rest/2.0/ocr/v1/"
-
-    request_url += "general_basic"
-
     ok, token = _get_token(so)
     if not ok:
         return False, token
-    params = {"image": img}
-    # if self.get_conf() is not None:
-    #     params["language_type"] = self.get_conf()
+    params = {"image": base64.b64encode(img_data)}
 
-    request_url = request_url + "?access_token=" + token
+    print("ocr------", ocr_p)
+    if ocr_p:
+        params["language_type"] = ocr_p
+
+    request_url = "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic"
+
     headers = {'content-type': 'application/x-www-form-urlencoded'}
-    res = so.session.post(request_url,
-                          data=params,
-                          headers=headers,
-                          timeout=TIME_OUT).json()
+    res = so.session.post(request_url + "?access_token=" + token,
+                          data=params, headers=headers, timeout=TIME_OUT).json()
 
     if "error_code" in res:
         if 110 == res["error_code"]:
@@ -111,6 +104,7 @@ def _fun_ocr(so: ServerOCR, img_path):
         return False, _("something error: {}")\
             .format(f'\n\n{res["error_code"]}: {res["error_msg"]}')
 
+    s = ""
     for word in res["words_result"]:
         s += word["words"] + '\n'
 
@@ -142,8 +136,8 @@ class BaiduServer(ServerOCR):
         super().__init__("baidu", _("baidu"))
         self.set_data(lang_key_ns, "API Key | Secret Key")
 
-    def ocr_image(self, img_path, fun_ocr=_fun_ocr, py_libs=None):
-        return super().ocr_image(img_path, fun_ocr)
+    def main(self, *args, **kwargs):
+        return super().main(*args, fun_main=_fun_ocr)
 
     def check_conf(self, conf_str, fun_check=_fun_check, py_libs=None):
         return super().check_conf(conf_str, fun_check)

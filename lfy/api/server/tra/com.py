@@ -23,7 +23,7 @@ def _translate0(args):
     server, text, lang_to = args
     server: ServerTra
     try:
-        a, b = server.translate_text(text, lang_to)
+        a, b = server.main(text, lang_to)
         return a, b, server, time.time()-st
     except Exception as e:  # pylint: disable=W0718
         em = _("something error: {}")\
@@ -94,5 +94,5 @@ class AllServer(ServerTra):
 
         self.set_data(lang_key_ns)
 
-    def translate_text(self, text, lang_to, fun_tra=_translate):
-        return super().translate_text(text, lang_to, fun_tra)
+    def main(self, *args, **kwargs):
+        return super().main(*args, fun_main=_translate)

@@ -1,34 +1,12 @@
 'OCR'
-import traceback
 from gettext import gettext as _
 
 from lfy.api.server import Server
-from lfy.utils import check_libs
-from lfy.utils.debug import get_logger
 
 
 class ServerOCR(Server):
     """翻译基础类
     """
-
-    def ocr_image(self, img_path: str, fun_ocr=None, py_libs=None):
-        """图片识别
-
-        Args:
-            img_path (str): _description_
-
-        Returns:
-            str: _description_
-        """
-        s = check_libs(py_libs)
-        if s:
-            return False, s
-
-        if not self.get_conf():
-            return False, _("please input `{sk}` for `{server}` in preference")\
-                .format(sk=self.sk_placeholder_text, server=self.name)
-
-        return super().main(fun_ocr, img_path)
 
     def get_doc_url(self, d="o"):
         """文档连接
@@ -43,3 +21,8 @@ class ServerOCR(Server):
 
     def get_conf_key(self, add="ocr"):
         return super().get_conf_key(add)
+
+    def main(self, *args, **kwargs):
+        if len(args) != 1 and len(args) != 2:
+            raise ValueError("args: img_path, (conf_str)")
+        return super().main(*args, **kwargs)

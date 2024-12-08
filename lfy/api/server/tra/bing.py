@@ -152,5 +152,5 @@ class BingServer(ServerTra):
         super().__init__("bing", _("bing"))
         self.set_data(lang_key_ns)
 
-    def translate_text(self, text, lang_to, fun_tra=_translate):
-        return super().translate_text(text, lang_to, fun_tra)
+    def main(self, *args, **kwargs):
+        return super().main(*args, fun_main=_translate)

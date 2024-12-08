@@ -229,7 +229,7 @@ class TranslateWindow(QMainWindow):
             _type_: _description_
         """
         def oo(_p=None):
-            _ok, text_from = self.server_o.ocr_image(img_path)
+            _ok, text_from = self.server_o.main(img_path)
 
             return (_ok, text_from)
 
@@ -308,8 +308,7 @@ class TranslateWindow(QMainWindow):
             return
 
         def tt(_p=None):
-            _ok, text_to = self.server_t.translate_text(
-                text_from, self.lang_t.key)
+            _ok, text_to = self.server_t.main(text_from, self.lang_t.key)
 
             return (text_from, text_to)
 

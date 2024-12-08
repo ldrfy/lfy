@@ -87,17 +87,25 @@ class Server:
         self.key = key
         self.name = name
 
-    def main(self, fun_main, *args):
+    def main(self, *args, **kwargs):
         """_summary_
-
-        Args:
-            fun_main (_type_): _description_
 
         Returns:
             _type_: _description_
         """
         try:
-            return fun_main(self, args)
+
+            if self.sk_placeholder_text and not self.get_conf():
+                return False, _("please input `{sk}` for `{server}` in preference")\
+                    .format(sk=self.sk_placeholder_text, server=self.name)
+            if "py_libs" in kwargs:
+                s = check_libs(kwargs.get("py_libs"))
+                if s:
+                    return False, s
+
+            aa = kwargs["fun_main"](self, *args)
+            print(aa, "------")
+            return aa
         except Exception as e:  # pylint: disable=W0718
             text = _("something error: {}")\
                 .format(f"{self.name}\n\n{str(e)}\n\n{traceback.format_exc()}")

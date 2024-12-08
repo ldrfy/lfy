@@ -35,7 +35,7 @@ def get_ass():
     """
     # 只对比设置中修改的
     all_servers = {}
-    for server in SERVERS_OCR:
+    for server in SERVERS_TRA:
         all_servers[server.key] = server
     keys = Settings().g("compare-servers")
 

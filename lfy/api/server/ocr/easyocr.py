@@ -6,17 +6,17 @@ from lfy.utils import gen_img
 
 
 def _fun_check(so: ServerOCR, p):
-    return so.ocr_image(gen_img(p))
+    return so.main(gen_img(p))
 
 
-def _fun_ocr(so: ServerOCR, img_path):
+def _fun_ocr(so: ServerOCR, img_path, ocr_p=""):
 
     import easyocr  # pylint: disable=C0415
 
-    if not so.get_conf():
-        return False, _("please input `{sk}` for `{server}` in preference")\
-            .format(sk=so.sk_placeholder_text, server=so.name)
-    reader = easyocr.Reader(so.get_conf().split("|"))
+    if not ocr_p:
+        ocr_p = so.get_conf()
+
+    reader = easyocr.Reader(ocr_p.split("|"))
     s = " ".join(reader.readtext(img_path, detail=0))
     return True, s.strip()
 
@@ -41,8 +41,8 @@ class EasyOcrServer(ServerOCR):
         super().__init__("easyocr", "easyocr")
         self.set_data(lang_key_ns, "ch_sim | en | it | fr")
 
-    def ocr_image(self, img_path, fun_ocr=_fun_ocr, py_libs=None):
-        return super().ocr_image(img_path, fun_ocr, ["easyocr"])
+    def main(self, *args, **kwargs):
+        return super().main(*args, fun_main=_fun_ocr, py_libs=["easyocr"])
 
     def check_conf(self, conf_str, fun_check=_fun_check, py_libs=None):
         return super().check_conf(conf_str, fun_check, ["easyocr", "pillow"])

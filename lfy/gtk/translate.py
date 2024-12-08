@@ -156,8 +156,8 @@ class TranslateWindow(Adw.ApplicationWindow):
         if _k != self.ocr_server.key:
             self.ocr_server = create_server_o(_k)
 
-        threading.Thread(target=self.request_text, daemon=True,
-                         args=(path, self.ocr_server, None,)).start()
+        threading.Thread(target=self.req_ocr, daemon=True,
+                         args=(path,)).start()
 
     def update(self, text, reload=False, del_wrapping=True):
         """翻译
@@ -198,57 +198,53 @@ class TranslateWindow(Adw.ApplicationWindow):
         start_iter, end_iter = buffer_from.get_bounds()
         text = buffer_from.get_text(start_iter, end_iter, False)
 
-        threading.Thread(target=self.request_text, daemon=True,
-                         args=(text, self.tra_server, self.lang_t.key,)).start()
+        threading.Thread(target=self.req_tra, daemon=True,
+                         args=(text,)).start()
 
-    def request_text(self, s, server, lk=None):
+    def req_tra(self, s):
         """子线程翻译
 
         Args:
             s (str): _description_
             server (Server): _description_
         """
-        is_ocr = lk is None
-        GLib.idle_add(self.update_ui, "", is_ocr, server.name)
 
-        if is_ocr:
-            server: ServerOCR = server
-            _ok, text = server.ocr_image(s)
-            if self.cbtn_del_wrapping.get_active():
-                text = process_text(text)
-        else:
-            server: ServerTra = server
-            _ok, text = server.translate_text(s, lk)
+        def _ing():
+            self.sp_translate.start()
+            self.tv_to.get_buffer().set_text(_("Translating..."))
 
-        GLib.idle_add(self.update_ui, text, is_ocr)
+        def _ed(s):
+            self.tv_to.get_buffer().set_text(s)
+            nf_t(self.app, f"{self.tra_server.name} " +
+                 _("Translation completed"), s)
+            self.sp_translate.stop()
 
-    def update_ui(self, s="", ocr=False, name=""):
-        """更新界面
+        GLib.idle_add(_ing)
+        _ok, text = self.tra_server.main(s, self.lang_t.key)
+        GLib.idle_add(_ed, text)
+
+    def req_ocr(self, s):
+        """子线程翻译
 
         Args:
-            s (str, optional): 翻译以后的文本. Defaults to True.
-            ocr (bool, optional): OCR. Defaults to False.
+            s (str): _description_
+            server (Server): _description_
         """
-        if s:
-            # 开始翻译
-            self.sp_translate.start()
-            if ocr:
-                self.tv_from.get_buffer().set_text(_("{} OCRing...").format(name))
-            else:
-                self.tv_to.get_buffer().set_text(_("Translating..."))
-            return
 
-        # 翻译完成
-        if ocr:
+        def _ing(name):
+            self.sp_translate.start()
+            self.tv_from.get_buffer().set_text(_("{} OCRing...").format(name))
+
+        def _ed(s):
             self.tv_from.get_buffer().set_text(s)
             self.update(s)
-            return
 
-        self.tv_to.get_buffer().set_text(s)
-        nf_t(self.app, f"{self.tra_server.name} " +
-             _("Translation completed"), s)
+        GLib.idle_add(_ing, self.ocr_server.name)
 
-        self.sp_translate.stop()
+        _ok, text = self.ocr_server.main(s)
+        if _ok and self.cbtn_del_wrapping.get_active():
+            text = process_text(text)
+        GLib.idle_add(_ed, text)
 
     def notice_action(self, cbtn: Gtk.CheckButton, text_ok, text_no):
         """_summary_

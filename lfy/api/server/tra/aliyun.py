@@ -114,5 +114,5 @@ class AliYunServer(ServerTra):
     def check_conf(self, conf_str, fun_check=_translate, py_libs=None):
         return super().check_conf(conf_str, fun_check)
 
-    def translate_text(self, text, lang_to, fun_tra=_translate):
-        return super().translate_text(text, lang_to, fun_tra)
+    def main(self, *args, **kwargs):
+        return super().main(*args, fun_main=_translate)

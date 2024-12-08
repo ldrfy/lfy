@@ -77,7 +77,7 @@ def req_text(s, key_server="", key_lang_n=-1):
         print(s)
         set_vpn()
 
-        _ok, text = server.translate_text(s, lang_selected.key)
+        _ok, text = server.main(s, lang_selected.key)
         return text
 
     except Exception as e:  # pylint: disable=W0718
@@ -110,7 +110,7 @@ def req_ocr(s=None, key_server=None, key_lang_n=-1):
         print("ocr", server.name, lang_selected.get_name())
         set_vpn()
 
-        _ok, text = server.ocr_image(s, lang_selected.key)
+        _ok, text = server.main(s, lang_selected.key)
         return text
 
     except Exception as e:  # pylint: disable=W0718
