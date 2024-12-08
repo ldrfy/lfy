@@ -40,4 +40,4 @@ class PytesseractServer(ServerOCR):
         return super().main(*args, fun_main=_fun_ocr, py_libs=["pytesseract"])
 
     def check_conf(self, conf_str, fun_check=_fun_check, py_libs=None):
-        return super().check_conf(conf_str, fun_check, ["pytesseract", "pillow"])
+        return super().check_conf(conf_str, fun_check, ["pytesseract", "PIL"])
