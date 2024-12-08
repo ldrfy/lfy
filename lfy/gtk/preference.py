@@ -1,4 +1,5 @@
 '设置'
+# pylint: disable=E1101
 
 import time
 from gettext import gettext as _
@@ -40,7 +41,6 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.sg = Settings()
         self.server: Server
         self.server_ocr: Server
-        # pylint: disable=E1101
         self.acr_server.set_model(
             Gtk.StringList.new(get_server_names_t_sk()))
 
@@ -68,7 +68,6 @@ class PreferencesDialog(Adw.PreferencesDialog):
     def _init_pop_compare(self):
         """初始化compare弹出菜单
         """
-        # pylint:disable=E1101
         # ui中无法设置gbtn_compare翻译
         self.gbtn_compare.set_label(_("compare"))
         names = []
@@ -123,7 +122,6 @@ class PreferencesDialog(Adw.PreferencesDialog):
         Args:
             _popover (_type_): _description_
         """
-        # pylint:disable=E1101
         keys = []
         names = []
         ss = list(get_servers_t())[1:]
@@ -163,7 +161,6 @@ class PreferencesDialog(Adw.PreferencesDialog):
 
     @Gtk.Template.Callback()
     def _on_vpn_apply(self, _row):
-        # pylint: disable=E1101
         self.entry_vpn_addr.props.sensitive = False
 
         vpn_addr = self.entry_vpn_addr.get_text().strip()

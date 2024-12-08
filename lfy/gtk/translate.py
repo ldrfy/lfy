@@ -1,5 +1,5 @@
 '''翻译主窗口'''
-
+# pylint: disable=E1101
 import threading
 from gettext import gettext as _
 
@@ -49,8 +49,6 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         self.sg = Settings()
 
-        self.tra_server = None
-        self.ocr_server = None
         # 翻译的key
         self.lang_t = None
 
@@ -59,9 +57,6 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.last_text = ""
         # 是不是软件内复制的，这种可能是想粘贴到其他地方，不响应即可
         self.is_tv_copy = False
-        # 放置初始化时，不断调用误以为选择
-        self.toast = Adw.Toast.new("")
-        self.toast.set_timeout(2)
 
         server_key_t = self.sg.g("server-selected-key")
         i = server_key2i(server_key_t)
@@ -276,6 +271,9 @@ class TranslateWindow(Adw.ApplicationWindow):
         Args:
             toast_msg (str): _description_
         """
-        self.toast.dismiss()
-        self.toast.set_title(toast_msg)
-        self.ato_translate.add_toast(self.toast)
+        # 放置初始化时，不断调用误以为选择
+        toast = Adw.Toast.new("")
+        toast.set_timeout(2)
+        toast.dismiss()
+        toast.set_title(toast_msg)
+        self.ato_translate.add_toast(toast)

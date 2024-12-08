@@ -2,8 +2,7 @@
 
 """
 
-from lfy.api.constant import get_servers_o as SERVERS_O
-from lfy.api.constant import get_servers_t as SERVERS_T
+from lfy.api.constant import SERVERS_OCR, SERVERS_TRA
 from lfy.api.server import Lang, Server
 from lfy.api.server.tra.com import AllServer
 
@@ -16,7 +15,7 @@ def get_servers_t():
     """
     s = [AllServer()]
 
-    s += SERVERS_T()
+    s += SERVERS_TRA
 
     return s
 
@@ -27,7 +26,7 @@ def get_servers_o():
     Returns:
         dict: _description_
     """
-    return SERVERS_O()
+    return SERVERS_OCR
 
 
 def get_server_names_t():

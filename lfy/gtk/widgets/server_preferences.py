@@ -1,7 +1,4 @@
-# Copyright 2023 Mufeed Ali
-# Copyright 2023 Rafael Mardojai CM
-# SPDX-License-Identifier: GPL-3.0-or-later
-
+'设置api key'
 import threading
 from gettext import gettext as _
 

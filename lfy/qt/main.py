@@ -3,8 +3,8 @@ import os
 import sys
 from gettext import gettext as _
 
-from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QApplication
+from PyQt6.QtGui import QIcon  # pylint: disable=E0611
+from PyQt6.QtWidgets import QApplication  # pylint: disable=E0611
 
 from lfy import APP_ID, APP_NAME
 from lfy.qt.translate import TranslateWindow

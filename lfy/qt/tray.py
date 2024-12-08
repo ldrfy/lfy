@@ -2,8 +2,9 @@
 import time
 from gettext import gettext as _
 
-from PyQt6.QtGui import QAction, QClipboard, QIcon
-from PyQt6.QtWidgets import QApplication, QMenu, QMessageBox, QSystemTrayIcon
+from PyQt6.QtGui import QAction, QClipboard, QIcon  # pylint: disable=E0611
+from PyQt6.QtWidgets import (QApplication, QMenu,  # pylint: disable=E0611
+                             QMessageBox, QSystemTrayIcon)
 
 from lfy import APP_NAME, PACKAGE_URL, PACKAGE_URL_BUG, VERSION
 from lfy.qt import MyThread

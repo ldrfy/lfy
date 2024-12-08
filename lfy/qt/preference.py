@@ -1,12 +1,13 @@
 '设置'
 from gettext import gettext as _
 
-from PyQt6.QtCore import Qt, QUrl
-from PyQt6.QtGui import QClipboard, QDesktopServices, QIcon
-from PyQt6.QtWidgets import (QCheckBox, QComboBox, QGroupBox, QHBoxLayout,
-                             QLineEdit, QMainWindow, QPushButton, QStyle,
-                             QSystemTrayIcon, QTabWidget, QToolButton,
-                             QVBoxLayout, QWidget)
+from PyQt6.QtCore import Qt, QUrl  # pylint: disable=E0611
+from PyQt6.QtGui import (QClipboard, QDesktopServices,  # pylint: disable=E0611
+                         QIcon)
+from PyQt6.QtWidgets import (QCheckBox, QComboBox,  # pylint: disable=E0611
+                             QGroupBox, QHBoxLayout, QLineEdit, QMainWindow,
+                             QPushButton, QStyle, QSystemTrayIcon, QTabWidget,
+                             QToolButton, QVBoxLayout, QWidget)
 
 from lfy.api import (get_server_names_o, get_server_names_t_sk, get_servers_o,
                      get_servers_t, get_servers_t_sk)
@@ -33,13 +34,26 @@ class PreferenceWindow(QMainWindow):
         self.setWindowFlags(self.windowFlags() |
                             Qt.WindowType.WindowStaysOnTopHint)
 
-        tw = QTabWidget(self)
         self.cb = clipboard
         self.tray = tray
 
-        self.tab_general = QWidget()
-        self.vl_general = QVBoxLayout(self.tab_general)
-        self.vl_general.setContentsMargins(8, 8, 8, 8)
+        tw = QTabWidget(self)
+        self.setCentralWidget(tw)
+        tw.addTab(self.get_ui_gen(), _("General"))
+        tw.addTab(self.get_ui_other(), _("Other"))
+        tw.setCurrentIndex(0)
+
+        self.load_data()
+
+    def get_ui_gen(self):
+        """第一页
+
+        Returns:
+            _type_: _description_
+        """
+        tab_general = QWidget()
+        vl_general = QVBoxLayout(tab_general)
+        vl_general.setContentsMargins(8, 8, 8, 8)
 
         gb_t = QGroupBox(_("Translation keys"))
 
@@ -66,7 +80,7 @@ class PreferenceWindow(QMainWindow):
         vl_t.addLayout(hl_t)
         gb_t.setLayout(vl_t)
 
-        self.vl_general.addWidget(gb_t)
+        vl_general.addWidget(gb_t)
 
         gb_o = QGroupBox(_("OCR server"))
         vl_o = QVBoxLayout()
@@ -93,12 +107,17 @@ class PreferenceWindow(QMainWindow):
         vl_o.addLayout(hl_o)
         gb_o.setLayout(vl_o)
 
-        self.vl_general.addWidget(gb_o)
+        vl_general.addWidget(gb_o)
+        return tab_general
 
-        tw.addTab(self.tab_general, _("General"))
+    def get_ui_other(self):
+        """第二页
 
-        self.tab_other = QWidget()
-        self.vl_normal = QVBoxLayout(self.tab_other)
+        Returns:
+            _type_: _description_
+        """
+        tab_other = QWidget()
+        vl_normal = QVBoxLayout(tab_other)
 
         cb_auto_check_update = QCheckBox(_("auto check update"))
         cb_auto_check_update.stateChanged.connect(
@@ -106,23 +125,23 @@ class PreferenceWindow(QMainWindow):
 
         cb_auto_check_update.setChecked(
             self.sg.g("auto-check-update", d=True, t=bool))
-        self.vl_normal.addWidget(cb_auto_check_update)
+        vl_normal.addWidget(cb_auto_check_update)
         cb_notify = QCheckBox(_("Notify translation results"))
         cb_notify.setChecked(
             self.sg.g("notify-translation-results", d=True, t=bool))
         cb_notify.stateChanged.connect(
             self._on_cb_notify)
-        self.vl_normal.addWidget(cb_notify)
+        vl_normal.addWidget(cb_notify)
 
         gb_c = QGroupBox(_("Compare model"))
         hl_c = QHBoxLayout()
         self.ccb = CheckableComboBox()
         self.ccb.lineEdit().textChanged.connect(
-            lambda: self._cm_servers(self.ccb.checkedItemsStr()))
+            lambda: self._cm_servers(self.ccb.checked_items_str()))
 
         hl_c.addWidget(self.ccb)
         gb_c.setLayout(hl_c)
-        self.vl_normal.addWidget(gb_c)
+        vl_normal.addWidget(gb_c)
 
         gb_vpn = QGroupBox(_("vpn addr and port"))
         hl_vpn = QHBoxLayout()
@@ -135,34 +154,28 @@ class PreferenceWindow(QMainWindow):
         hl_vpn.addWidget(btn_vpn_save)
 
         gb_vpn.setLayout(hl_vpn)
-        self.vl_normal.addWidget(gb_vpn)
+        vl_normal.addWidget(gb_vpn)
 
         gb_json = QGroupBox(_("Software settings backup and restore"))
 
         hl_json = QHBoxLayout()
         btn_backup = QPushButton(_("backup"))
-        btn_backup.setToolTip(
-            _("Read the JSON configuration of the clipboard, then import it, and some of the configurations will take effect after reopening the software"))
+        s = _("Read the JSON configuration of the clipboard, then import it, "
+              "and some of the configurations will take effect after reopening the software")
+        btn_backup.setToolTip(s)
         btn_backup.clicked.connect(self._export_config)
 
         hl_json.addWidget(btn_backup)
         btn_restore = QPushButton(_("restore"))
-        btn_restore.setToolTip(
-            _("Export the configuration to the clipboard, then you can paste it into any file and edit it"))
+        btn_restore.setToolTip(_("Export the configuration to the clipboard, "
+                                 "then you can paste it into any file and edit it"))
         btn_restore.clicked.connect(self._import_config)
 
         hl_json.addWidget(btn_restore)
 
         gb_json.setLayout(hl_json)
-        self.vl_normal.addWidget(gb_json)
-
-        tw.addTab(self.tab_other, _("Other"))
-
-        self.setCentralWidget(tw)
-
-        tw.setCurrentIndex(0)
-
-        self.load_data()
+        vl_normal.addWidget(gb_json)
+        return tab_other
 
     def load_data(self):
         """初始化数据
@@ -178,7 +191,7 @@ class PreferenceWindow(QMainWindow):
         for se in sts:
             cs.append(se.key in keys_s)
             names.append(se.name)
-        self.ccb.addCheckableItems(names, cs)
+        self.ccb.add_checkable_items(names, cs)
 
         self.cb_t.addItems(get_server_names_t_sk())
         self.cb_o.addItems(get_server_names_o())

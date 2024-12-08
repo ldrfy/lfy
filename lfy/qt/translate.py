@@ -1,6 +1,7 @@
 '翻译主窗口'
 from gettext import gettext as _
 
+# pylint: disable=E0611
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QKeySequence, QShortcut
 from PyQt6.QtWidgets import (QApplication, QCheckBox, QComboBox, QHBoxLayout,
@@ -135,8 +136,8 @@ class TranslateWindow(QMainWindow):
 
         self.cb_del_wrapping.setChecked(True)
 
-        tt = _("Select text and use the shortcut key '{}' to copy, the copied text will not be automatically translated") \
-            .format("Ctrl+Shift+C")
+        tt = _("Select text and use the shortcut key '{}' to copy, "
+               "the copied text will not be automatically translated").format("Ctrl+Shift+C")
         self.te_from.setToolTip(tt)
         self.te_to.setToolTip(tt)
 

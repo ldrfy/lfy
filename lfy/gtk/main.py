@@ -28,12 +28,10 @@ if PROXY_ADDRESS:
 class LfyApplication(Adw.Application):
     """The main application singleton class."""
 
-    def __init__(self, app_id, version):
-        super().__init__(application_id=app_id,
+    def __init__(self):
+        super().__init__(application_id=APP_ID,
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
 
-        self._version = version
-        self._application_id = app_id
         self.sg = Settings()
         self.win: TranslateWindow = None
         self.cb = Gdk.Display().get_default().get_clipboard()
@@ -82,7 +80,7 @@ class LfyApplication(Adw.Application):
             widget (_type_): _description_
             w (_type_): _description_
         """
-        path = f'{RES_PATH}/{self._application_id}.appdata.xml'
+        path = f'{RES_PATH}/{APP_ID}.appdata.xml'
         year = datetime.now().year
 
         ad = Adw.AboutDialog.new_from_appdata(path, VERSION)
@@ -260,4 +258,4 @@ def main():
         print(s)
         return
 
-    sys.exit(LfyApplication(APP_ID, VERSION).run(sys.argv))
+    sys.exit(LfyApplication().run(sys.argv))

@@ -1,3 +1,4 @@
+'主题'
 # Copyright 2020 Manuel Genovés
 # Copyright 2022 Mufeed Ali
 # Copyright 2022 Rafael Mardojai CM
@@ -35,7 +36,7 @@ class ThemeSwitcher(Gtk.Box):
     dark = Gtk.Template.Child()
 
     @GObject.Property(type=str)
-    def selected_color_scheme(self):
+    def selected_color_scheme(self):  # pylint: disable=E0202
         """选择的主题
 
         Returns:

@@ -77,7 +77,6 @@ class Server:
         Args:
             key (str): _description_
             name (str, optional): 翻译服务名字，需要可以翻译_(). Defaults to "".
-            lang_key_ns (dict): 支持哪些翻译语言
         """
 
         self.session = None
@@ -88,13 +87,33 @@ class Server:
         self.key = key
         self.name = name
 
+    def main(self, fun_main, *args):
+        """_summary_
+
+        Args:
+            fun_main (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        try:
+            return fun_main(self, args)
+        except Exception as e:  # pylint: disable=W0718
+            text = _("something error: {}")\
+                .format(f"{self.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
+            get_logger().error(text)
+            print(text)
+        return False, text
+
     def set_data(self, lang_key_ns: dict,
                  sk_placeholder_text: str = None,
                  session: requests.Session = None):
         """_summary_
 
         Args:
-            session (requests.Session): _description_
+            lang_key_ns (dict): _description_
+            sk_placeholder_text (str, optional): 密钥提示语言，有密钥的tra或需要参数的ocr的必须设置. Defaults to None.
+            session (requests.Session, optional): _description_. Defaults to None.
         """
         if session is None:
             session = requests.Session()

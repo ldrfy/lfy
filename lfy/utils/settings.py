@@ -24,11 +24,11 @@ class Settings:
         if self.ss is not None:
             return
         if not self.qt:
-            from gi.repository import Gio
+            from gi.repository import Gio  # pylint: disable=C0415
             self.ss = Gio.Settings.new(APP_ID)
             return
 
-        from PyQt6.QtCore import QSettings
+        from PyQt6.QtCore import QSettings  # pylint: disable=E0611|C0415
         self.ss = QSettings(APP_ID, APP_NAME)
 
     def g(self, key, d=None, t=None):
@@ -84,7 +84,7 @@ class Settings:
             self.ss.setValue(key, value)
             return
 
-        from gi.repository import GLib
+        from gi.repository import GLib  # pylint: disable=C0415
 
         if isinstance(value, str):
             self.ss.set_string(key, value)
