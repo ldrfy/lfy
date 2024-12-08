@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- Created with Cambalache 0.90.4 -->
+<!-- Created with Cambalache 0.94.0 -->
 <interface>
   <requires lib="gtk" version="4.12"/>
-  <requires lib="libadwaita" version="1.5"/>
+  <requires lib="libadwaita" version="1.6"/>
   <template class="PreferencesDialog" parent="AdwPreferencesDialog">
     <child>
       <object class="AdwPreferencesPage" id="app_general">
-        <property name="icon-name">applications-system-symbolic</property>
+        <property name="icon-name">dialog-password-symbolic</property>
         <property name="title" translatable="yes">General</property>
         <child>
           <object class="AdwPreferencesGroup" id="apg_translate">
