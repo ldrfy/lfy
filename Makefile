@@ -1,6 +1,6 @@
 TO_LANG=zh_CN
 VERSION=0.0.7
-BUILD_TYPE=qt
+BUILD_TYPE=gtk
 DISK = ../../../dist/
 BUILD_PKG=build/pkg
 DESTDIR = "/"
@@ -126,10 +126,10 @@ test-rpm: clear test-zip
 
 
 release:
-	make test-aur
-	make test-deb
-	make test-rpm
-	make test-pip
+	make BUILD_TYPE=qt test-aur
+	make BUILD_TYPE=qt test-deb
+	make BUILD_TYPE=qt test-rpm
+	make BUILD_TYPE=qt test-pip
 	make BUILD_TYPE=gtk test-aur
 	make BUILD_TYPE=gtk test-deb
 	make BUILD_TYPE=gtk test-rpm
