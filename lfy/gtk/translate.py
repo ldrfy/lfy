@@ -39,12 +39,17 @@ class TranslateWindow(Adw.ApplicationWindow):
     gp_translate: Gtk.Paned = Gtk.Template.Child()
     header_bar: Adw.HeaderBar = Gtk.Template.Child()
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, application):
 
-        self.app = self.get_application()
+        self.app = application
 
         self.sg = Settings()
+
+        super().__init__(
+            application=application,
+            default_width=self.sg.g("window-width"),
+            default_height=self.sg.g("window-height")
+        )
 
         # 翻译的key
         self.lang_t = None
@@ -101,6 +106,10 @@ class TranslateWindow(Adw.ApplicationWindow):
         Args:
             _a (TranslateWindow): _description_
         """
+        if not self.is_maximized():
+            size = self.get_default_size()
+            self.sg.s("window-width", size.width)
+            self.sg.s("window-height", size.height)
 
         self.sg.s("server-selected-key", self.tra_server.key)
         self.sg.s("lang-selected-n", self.lang_t.n)

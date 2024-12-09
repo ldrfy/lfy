@@ -34,6 +34,14 @@
 			<default>3</default>
 			<description>The currently selected translation language</description>
 		</key>
+		<key type="i" name="window-width">
+			<default>500</default>
+			<description>Translation windows width</description>
+		</key>
+		<key type="i" name="window-height">
+			<default>400</default>
+			<description>Translation windows height</description>
+		</key>
 		<key type="s" name="server-sk-baidu">
 			<default>""</default>
 			<description>Baidu app_id and secret_key, used in the middle | split</description>
