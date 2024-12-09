@@ -1,17 +1,21 @@
 # 兰译 lfy <img src="data/resources/icons/hicolor/scalable/apps/cool.ldr.lfy.svg" width = "36" height = "36" alt="兰译" align=center />
 
 <center>
+
 gtk 版本
+
 <div style="display: flex;">
-    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/main.png" alt="首页" style="width: 35%;">
-    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/preference.png" alt="设置1" style="width: 31%;">
-    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/server-preference.png" alt="设置2" style="width: 31%;">
+    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/main.png" alt="首页" style="width: 32%;">
+    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/preference.png" alt="设置" style="width: 32%;">
+    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/preference1.png" alt="设置1" style="width: 32%;">
 </div>
+
 qt 版本
-<div style="display: flex;">
-    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/qt/main.png" alt="首页" style="width: 36%;">
-    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/qt/preference.png" alt="设置1" style="width: 35%;">
-    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/qt/tray.png" alt="托盘" style="width: 25%;">
+
+<div style="display: flex; justify-content: space-between;">
+    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/qt/main.png" alt="首页" style="width: 32%;">
+    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/qt/preference.png" alt="设置" style="width: 32%;">
+    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/qt/preference1.png" alt="设置1" style="width: 32%;">
 </div>
 </center>
 
