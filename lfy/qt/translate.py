@@ -86,7 +86,6 @@ class TranslateWindow(QMainWindow):
         splitter.addWidget(bottom_widget)
 
         main_layout.addWidget(splitter)
-        splitter.setSizes([1, 2])
 
         middle_layout.setContentsMargins(1, 5, 1, 5)
         bottom_layout.setContentsMargins(0, 0, 0, 0)
@@ -105,6 +104,7 @@ class TranslateWindow(QMainWindow):
         self.translate_next = True
 
         self.set_data()
+        splitter.setSizes([100, 300])
 
     def set_data(self):
         """_summary_
