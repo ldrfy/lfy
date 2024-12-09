@@ -70,7 +70,7 @@ class TranslateWindow(QMainWindow):
 
         btn_translate = QPushButton(_("Translate"), self)
         btn_translate.clicked.connect(self.update_translate)
-        btn_translate.setToolTip(_("Translate") + ": `Ctrl+T`")
+        btn_translate.setToolTip(_("Translate") + ": `Ctrl+T` or `Ctrl+Enter`")
 
         middle_layout.addWidget(self.cb_server)
         middle_layout.addWidget(self.cb_lang)
@@ -157,11 +157,12 @@ class TranslateWindow(QMainWindow):
         self.te_from.setToolTip(tt)
         self.te_to.setToolTip(tt)
 
-        self.sts(["Ctrl+Shift+C", "Alt+D", "Alt+C", "Ctrl+T",
+        self.sts(["Ctrl+Shift+C", "Alt+D", "Alt+C",
+                  "Ctrl+T", "Ctrl+Return",
                   "Ctrl+,", "Ctrl+Q", "Ctrl+H"],
                  [self._copy_text, self._del_wrapping, self._add_old,
-                  self.update_translate, self._open_prf, self._quit_app,
-                  self.hide])
+                  self.update_translate, self.update_translate,
+                  self._open_prf, self._quit_app, self.hide])
 
     def _copy_text(self):
         """复制，但是不进行翻译

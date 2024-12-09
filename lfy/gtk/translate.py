@@ -82,7 +82,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         # 将控制器添加到文本视图中
         self.tv_from.add_controller(controller)
 
-    def on_key_pressed(self, _, keyval, _keycode, _state):
+    def on_key_pressed(self, _, keyval, _keycode, state):
         """文本回车，直接翻译
 
         Args:
@@ -94,9 +94,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         Returns:
             bool: 继续执行默认行为
         """
-        if keyval == Gdk.KEY_Return:
-            # 加上下面的 可以是ctrl return
-            #  and (state & Gdk.ModifierType.CONTROL_MASK)
+        if keyval == Gdk.KEY_Return and (state & Gdk.ModifierType.CONTROL_MASK):
             self.translate_text("reload", True)
         return False  # 返回 False 以继续执行默认行为
 
