@@ -33,8 +33,10 @@ class TranslateWindow(QMainWindow):
 
         self.setWindowFlags(self.windowFlags() |
                             Qt.WindowType.WindowStaysOnTopHint)
+        self.sg = Settings()
 
-        self.setGeometry(100, 100, 600, 400)
+        self.resize(self.sg.g("window-width", 500, int),
+                    self.sg.g("window-height", 400, int))
         # 创建中心部件
         central_widget = QWidget(self)
         self.setCentralWidget(central_widget)
@@ -106,11 +108,26 @@ class TranslateWindow(QMainWindow):
         self.set_data()
         splitter.setSizes([100, 300])
 
+    def closeEvent(self, event):  # pylint: disable=C0103
+        """关闭与保存
+
+        Args:
+            event (_type_): _description_
+        """
+        # 获取当前窗口的宽度和高度
+        width = self.width()
+        height = self.height()
+
+        self.sg.s("window-width", width)
+        self.sg.s("window-height", height)
+
+        # 接受关闭事件，默认行为是关闭窗口
+        event.accept()
+
     def set_data(self):
         """_summary_
         """
 
-        self.sg = Settings()
         self.cb_server.setEditable(True)
         self.cb_lang.setEditable(True)
 
