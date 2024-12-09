@@ -31,4 +31,5 @@ class ServerTra(Server):
                             "private information and is not translated")
         if len(args) != 2:
             raise ValueError("args: text, lang_to")
-        return super().main(*args, **kwargs)
+        ok, text = super().main(*args, **kwargs)
+        return ok, text.strip()
