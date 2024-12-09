@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-12-09 10:41+0800\n"
+"POT-Creation-Date: 2024-12-09 16:17+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,50 +53,58 @@ msgid "The currently selected translation language"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:39
-msgid "Baidu app_id and secret_key, used in the middle | split"
+msgid "Translation windows width"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:43
-msgid "Baidu API Key and Secret Key for ocr, used in the middle | split"
+msgid "Translation windows height"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:47
+msgid "Baidu app_id and secret_key, used in the middle | split"
+msgstr ""
+
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:51
+msgid "Baidu API Key and Secret Key for ocr, used in the middle | split"
+msgstr ""
+
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:55
 msgid ""
 "The lang parameters of the pytesseract module, such as Chinese and English "
 "by default"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:51
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:59
 msgid ""
 "The lang parameters of the easyocr module, such as Chinese and English by "
 "default, split by +"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:55
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:63
 msgid "Baidu OCR access_token"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:59
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:67
 msgid "Baidu OCR access_token expires date"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:63
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:71
 msgid "aliyun AccessKey ID and AccessKey Secret, used in the middle | split"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:67
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:75
 msgid "huoshan Access Key ID and Secret Access Key, used in the middle | split"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:71
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:79
 msgid "Tencent secret_id and secret_key, used in the middle | split"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:75
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:83
 msgid "VPN address and port"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:79 data/gtk/preference.ui:90
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:87 data/gtk/preference.ui:90
 msgid "Which services are available in compare model"
 msgstr ""
 
@@ -202,6 +210,11 @@ msgstr ""
 msgid "Basic functions completed"
 msgstr ""
 
+#: lfy/api/server/tra/__init__.py:30
+msgid ""
+"This time the content contains private information and is not translated"
+msgstr ""
+
 #: lfy/gtk/main.py:90
 msgid "translator_credits"
 msgstr ""
@@ -257,15 +270,15 @@ msgstr ""
 msgid "Using {} for text recognition"
 msgstr ""
 
-#: lfy/gtk/translate.py:198 lfy/qt/translate.py:299
+#: lfy/gtk/translate.py:207 lfy/qt/translate.py:316
 msgid "Translating..."
 msgstr ""
 
-#: lfy/gtk/translate.py:203 lfy/qt/translate.py:257
+#: lfy/gtk/translate.py:212 lfy/qt/translate.py:274
 msgid "Translation completed"
 msgstr ""
 
-#: lfy/gtk/translate.py:220 lfy/qt/translate.py:239
+#: lfy/gtk/translate.py:229 lfy/qt/translate.py:256
 msgid "{} OCRing..."
 msgstr ""
 
@@ -374,38 +387,38 @@ msgstr ""
 msgid "Configuration data has been exported to the clipboard."
 msgstr ""
 
-#: lfy/qt/translate.py:61 data/gtk/translate.ui:71 data/gtk/help-overlay.ui:39
+#: lfy/qt/translate.py:63 data/gtk/translate.ui:71 data/gtk/help-overlay.ui:39
 msgid "Remove line breaks"
 msgstr ""
 
-#: lfy/qt/translate.py:63 data/gtk/translate.ui:72
+#: lfy/qt/translate.py:65 data/gtk/translate.ui:72
 msgid "Alt + D: Remove symbols such as line breaks"
 msgstr ""
 
-#: lfy/qt/translate.py:65 data/gtk/translate.ui:79 data/gtk/help-overlay.ui:32
+#: lfy/qt/translate.py:67 data/gtk/translate.ui:79 data/gtk/help-overlay.ui:32
 msgid "Splice Text"
 msgstr ""
 
-#: lfy/qt/translate.py:67 data/gtk/translate.ui:80
+#: lfy/qt/translate.py:69 data/gtk/translate.ui:80
 msgid "Alt + C: Splice the next copied text with the previous text"
 msgstr ""
 
-#: lfy/qt/translate.py:69 lfy/qt/translate.py:71 data/gtk/translate.ui:87
+#: lfy/qt/translate.py:71 lfy/qt/translate.py:73 data/gtk/translate.ui:87
 #: data/gtk/help-overlay.ui:19
 msgid "Translate"
 msgstr ""
 
-#: lfy/qt/translate.py:138
+#: lfy/qt/translate.py:155
 msgid ""
 "Select text and use the shortcut key '{}' to copy, the copied text will not "
 "be automatically translated"
 msgstr ""
 
-#: lfy/qt/translate.py:171
+#: lfy/qt/translate.py:188
 msgid "warn"
 msgstr ""
 
-#: lfy/qt/translate.py:171
+#: lfy/qt/translate.py:188
 msgid "quit?"
 msgstr ""
 
