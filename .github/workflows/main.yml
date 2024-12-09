@@ -50,7 +50,7 @@ jobs:
       uses: ldrfy/arch-makepkg-action@master
       with:
         scripts: |
-            make test-aur && make BUILD_TYPE=gtk test-aur
+            make BUILD_TYPE=qt test-aur && make BUILD_TYPE=gtk test-aur
 
     - name: Release
       uses: softprops/action-gh-release@v2
