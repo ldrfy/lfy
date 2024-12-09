@@ -8,7 +8,7 @@
 	<launchable type="desktop-id">@APP_ID@.desktop</launchable>
 
 	<name>lfy</name>
-	<summary>Translation software for read paper</summary>
+	<summary>Translation software designed for reading scientific research literature</summary>
 	<description>
 		<p>
 			An easy and pleasant way to translate.

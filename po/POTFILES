@@ -2,6 +2,7 @@ data/cool.ldr.lfy.in.in.desktop
 data/gtk/cool.ldr.lfy.in.gschema.xml
 data/gtk/cool.ldr.lfy.in.appdata.xml
 
+lfy/__init__.py
 
 lfy/gtk/main.py
 lfy/gtk/notify.py

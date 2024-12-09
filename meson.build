@@ -25,6 +25,8 @@ i18n = import('i18n')
 python = import('python')
 
 APP_ID = 'cool.ldr.' + meson.project_name()
+APP_DES = 'Translation software designed for reading scientific research literature.'
+
 SCHEMAS_DIR = join_paths(get_option('prefix'), get_option('datadir'))
 PKGDATA_DIR = join_paths(SCHEMAS_DIR, APP_ID)
 LOCALE_DIR = join_paths(SCHEMAS_DIR, 'locale')
@@ -39,6 +41,7 @@ conf = configuration_data()
 conf.set('LOCAL_BUILD', 'False')
 
 conf.set('APP_ID', APP_ID)
+conf.set('APP_DES', APP_DES)
 conf.set('APP_NAME', meson.project_name())
 conf.set('VERSION', meson.project_version())
 conf.set('PYTHON', py_installation.full_path())

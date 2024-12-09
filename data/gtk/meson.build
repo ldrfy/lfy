@@ -31,6 +31,7 @@ endif
 appdata_conf = configuration_data()
 appdata_conf.set('APP_ID', APP_ID)
 appdata_conf.set('APP_NAME', meson.project_name())
+appdata_conf.set('APP_DES', APP_DES)
 appdata_conf.set('PACKAGE_URL', PACKAGE_URL)
 appdata_conf.set('PACKAGE_URL_BUG', PACKAGE_URL_BUG)
 appdata = i18n.merge_file(

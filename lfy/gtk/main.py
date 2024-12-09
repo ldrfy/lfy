@@ -8,7 +8,7 @@ from gettext import gettext as _
 
 from gi.repository import Adw, Gdk, Gio, GLib
 
-from lfy import APP_ID, PACKAGE_URL, RES_PATH, VERSION
+from lfy import APP_DES, APP_ID, PACKAGE_URL, RES_PATH, VERSION
 from lfy.gtk import get_gtk_msg
 from lfy.gtk.preference import PreferencesDialog
 from lfy.gtk.translate import TranslateWindow
@@ -84,11 +84,11 @@ class LfyApplication(Adw.Application):
         year = datetime.now().year
 
         ad = Adw.AboutDialog.new_from_appdata(path, VERSION)
-        ad.set_developers(['yuh <yuhldr@qq.com>, 2023-{year}'])
-        ad.set_designers(['yuh <yuhldr@qq.com>, 2023-{year}'])
-        ad.set_documenters(['yuh <yuhldr@qq.com>, 2023-{year}'])
+        ad.set_developers([f'yuh <yuhldr@qq.com>, 2023-{year}'])
+        ad.set_designers([f'yuh <yuhldr@qq.com>, 2023-{year}'])
+        ad.set_documenters([f'yuh <yuhldr@qq.com>, 2023-{year}'])
         ad.set_translator_credits(_('translator_credits'))
-        ad.set_comments(_('A translation app for GNOME.'))
+        ad.set_comments(APP_DES)
         ad.set_copyright(f'© 2023-{year} yuh')
 
         ad.set_debug_info(get_gtk_msg(VERSION))

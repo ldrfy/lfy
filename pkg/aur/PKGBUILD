@@ -2,7 +2,7 @@
 pkgname=@APP_NAME@
 pkgver=@VERSION@
 pkgrel=1
-pkgdesc="A translation app by gtk4 and adwaita."
+pkgdesc="@APP_DES@"
 arch=('any')
 url="@PACKAGE_URL@"
 license=('GPL3')

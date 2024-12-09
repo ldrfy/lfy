@@ -3,7 +3,7 @@
 Name: %{Name}
 Version: @VERSION@
 Release: 1
-Summary: Translation software for read paper
+Summary: @APP_DES@
 Summary(zh_CN): 一个非常好用的翻译软件，看文献的好帮手
 License:  GPLv3+
 URL:      https://github.com/yuhldr/%{Name}

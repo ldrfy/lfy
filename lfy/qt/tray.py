@@ -6,7 +6,7 @@ from PyQt6.QtGui import QAction, QClipboard, QIcon  # pylint: disable=E0611
 from PyQt6.QtWidgets import (QApplication, QMenu,  # pylint: disable=E0611
                              QMessageBox, QSystemTrayIcon)
 
-from lfy import APP_NAME, PACKAGE_URL, PACKAGE_URL_BUG, VERSION
+from lfy import APP_DES, APP_NAME, PACKAGE_URL, PACKAGE_URL_BUG, VERSION
 from lfy.qt import MyThread
 from lfy.qt.preference import PreferenceWindow
 from lfy.qt.translate import TranslateWindow
@@ -125,7 +125,7 @@ class TrayIcon(QSystemTrayIcon):
             <p><a href="{PACKAGE_URL_BUG}">Bug Report</a></p>
             <p>&copy; 2024 yuhldr</p>
             <p>'''
-        s += _("Translation software for read paper")
+        s += APP_DES
         s += "</p>"
         QMessageBox.about(
             self.w,
