@@ -90,6 +90,7 @@ test-pip: clear
 test-flatpak:clear
 	meson setup build -Dbuild_type=${BUILD_TYPE}
 	cd ${BUILD_PKG}/flatpak && \
+	flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest cool.ldr.lfy.yaml && \
 	flatpak-builder --repo=repo build-dir cool.ldr.lfy.yaml && \
 	flatpak build-bundle repo cool.ldr.lfy-${VERSION}.flatpak cool.ldr.lfy && \
 	flatpak install -y --user cool.ldr.lfy-${VERSION}.flatpak && \
