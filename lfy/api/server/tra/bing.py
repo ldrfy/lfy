@@ -65,7 +65,10 @@ def g_url(host, hs):
     return f'https://{host}/ttranslatev3?isVertical=1&&IG={hs["IG"]}&IID={hs["my_iid"]}'
 
 
-def _get_data(st: ServerTra, text, lang_to, n=0):
+def _translate(st: ServerTra, text, lang_to, n=0):
+
+    if st.session is None:
+        st.session = _init_session()
 
     if n > 5:
         return False, _("something error, try other translate engine?")
@@ -89,15 +92,6 @@ def _get_data(st: ServerTra, text, lang_to, n=0):
     data = {'': '', 'text': text, "fromLang": "auto-detect",
             'to': lang_to, 'token': hs['token'], 'key': hs['key'],
             'tryFetchingGenderDebiasedTranslations': True}
-    return host, data, hs
-
-
-def _translate(st: ServerTra, text, lang_to, n=0):
-
-    if st.session is None:
-        st.session = _init_session()
-
-    host, data, hs = _get_data(st, text, lang_to, n)
 
     try:
         url = g_url(host, hs)
