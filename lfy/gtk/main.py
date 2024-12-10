@@ -41,14 +41,6 @@ class LfyApplication(Adw.Application):
 
         self.create_actions()
 
-        if self.sg.g("copy-auto-translate"):
-            self.copy_id = self.cb.connect("changed", self._get_copy)
-            self._get_copy(self.cb)
-        else:
-            self.update_tr("Copy to translate? Try `<Alt>+T`")
-
-        self.find_update()
-
         self.connect('activate', self.on_activate)
 
     def on_activate(self, _app):
@@ -59,6 +51,14 @@ class LfyApplication(Adw.Application):
         """
         self.win = TranslateWindow(application=self)
         self.win.present()
+
+        if self.sg.g("copy-auto-translate"):
+            self.copy_id = self.cb.connect("changed", self._get_copy)
+            self._get_copy(self.cb)
+        else:
+            self.update_tr("Copy to translate? Try `<Alt>+T`")
+
+        self.find_update()
 
     def update_tr(self, s="", ocr=False):
         """翻译
@@ -111,7 +111,7 @@ class LfyApplication(Adw.Application):
             action (_type_): _description_
             value (_type_): _description_
         """
-
+        print("-------", value)
         if value:
             text = _("Copy detected, translate immediately")
             self.copy_id = self.cb.connect("changed", self._get_copy)
@@ -142,7 +142,7 @@ class LfyApplication(Adw.Application):
 
         for name, fun, shortcut, state in zip(names, callbacks, shortcuts, states):
             action = Gio.SimpleAction(name=name, state=state)
-            if state:
+            if state is not None:
                 action.connect('change-state', fun)
             else:
                 action.connect("activate", fun)
