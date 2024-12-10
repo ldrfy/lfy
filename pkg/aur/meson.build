@@ -1,7 +1,7 @@
 deps = '"python-requests" "python-pillow"'
 build_deps = '"meson"'
 if bt == 'gtk'
-    deps += ' "libadwaita" "gobject-introspection"'
+    deps += ' "libadwaita" "python-gobject"'
 else
     deps += ' "python-pyqt6" "qt6-svg"'
 endif
