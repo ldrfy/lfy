@@ -224,7 +224,7 @@ class LfyApplication(Adw.Application):
         # pylint: disable=E1101
         self.win.tv_from.get_buffer().set_text(update_msg)
 
-    def find_update(self, _widget=None, _w=None):
+    def find_update(self, widget=None, _w=None):
         """查找更新
         """
 
@@ -235,7 +235,7 @@ class LfyApplication(Adw.Application):
             if update_msg is not None:
                 time.sleep(2)
                 GLib.idle_add(self.update_app, update_msg)
-            elif _widget is not None:
+            elif widget is not None:
                 # 手动更新
                 s = _("There is no new version.\
                       \nThe current version is {}.\
@@ -243,7 +243,7 @@ class LfyApplication(Adw.Application):
                     .format(VERSION, PACKAGE_URL)
                 GLib.idle_add(self.update_app, s)
 
-        if self.sg.g("auto-check-update"):
+        if widget or self.sg.g("auto-check-update"):
             threading.Thread(target=fu, daemon=True).start()
 
 
