@@ -4,6 +4,7 @@ runtime-version: "47"
 sdk: "org.gnome.Sdk"
 command: "@APP_NAME@"
 finish-args:
+  - "--share=ipc"
   - "--share=network"
   - "--socket=fallback-x11"
   - "--device=dri"

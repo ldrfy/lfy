@@ -1,5 +1,5 @@
 TO_LANG=zh_CN
-VERSION=0.0.7
+VERSION=0.1.0
 BUILD_TYPE=gtk
 DISK = ../../../dist/
 BUILD_PKG=build/pkg

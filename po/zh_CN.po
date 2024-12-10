@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-12-09 16:17+0800\n"
+"POT-Creation-Date: 2024-12-10 23:08+0800\n"
 "PO-Revision-Date: 2023-11-12 21:02+0800\n"
 "Last-Translator:  <yuhldr@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -145,68 +145,76 @@ msgid "About"
 msgstr "关于"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:60
-msgid "Add local OCR recognition through pytesseract"
-msgstr "通过pytesseract添加本地OCR识别"
+msgid "The native qt version of plasma can be installed by `pip install lfy`"
+msgstr "可通过 `pip install lfy` 安装plasma原生的qt版本"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:61
+msgid "Add local OCR recognition: easyocr, pytesseract"
+msgstr "添加本地OCR识别：easyocr/pytesseract "
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:62
 msgid "Add import and export settings"
 msgstr "添加导入和导出设置"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:62
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:63
 msgid "Add translate or OCR in terminal, like `lfy -h`"
 msgstr "在终端中添加翻译或OCR，如`lfy-h`"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:63
-msgid "Add debug in About Page"
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:64
+msgid "Add debug in about page"
 msgstr "在“关于”页面中添加调试"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:64
-msgid "The dividing line in the middle of the translation page can be moved"
-msgstr "翻译页面中间的分界线可以移动"
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:65
+msgid "Add the dividing line in the middle of the translation page"
+msgstr "在翻译页面中间添加分割线"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:71
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:66
+msgid "Refactor settings page"
+msgstr "优化设置页面"
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:73
 msgid "Add aliyun/huoshan Translate for free"
 msgstr "添加阿里云/火山翻译（需密钥、但免费）"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:72
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:74
 msgid "Support notification after translation"
 msgstr "支持通知翻译内容"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:73
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:75
 msgid "Supports comparing multiple translations at the same time"
 msgstr "支持同时比较多个翻译"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:80
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:82
 msgid "Add Bing Translate for free"
 msgstr "添加必应翻译（无需密钥）"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:87
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:89
 msgid "Fix Google Translate"
 msgstr "修复谷歌翻译"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:88
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:90
 msgid "Improve translation performance"
 msgstr "提高翻译性能"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:89
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:91
 msgid "Add Italian language and support Italian translation"
 msgstr "添加意大利语言，支持意大利语翻译"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:90
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:92
 msgid ""
 "Optimize the structure of translation services and make it more convenient "
 "to create third-party translation services"
 msgstr "优化翻译服务结构，打造第三方翻译服务更便捷"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:97
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:99
 msgid "add shortcut"
 msgstr "添加快捷键"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:98
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:100
 msgid "Automatically check for updates"
 msgstr "软件打开时，自动检查更新"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:104
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:106
 msgid "Basic functions completed"
 msgstr "基础功能完成"
 
@@ -273,15 +281,15 @@ msgstr "配置数据已导出到剪贴板"
 msgid "Using {} for text recognition"
 msgstr "使用 {} 进行文本识别"
 
-#: lfy/gtk/translate.py:207 lfy/qt/translate.py:316
+#: lfy/gtk/translate.py:205 lfy/qt/translate.py:317
 msgid "Translating..."
 msgstr "翻译中……"
 
-#: lfy/gtk/translate.py:212 lfy/qt/translate.py:274
+#: lfy/gtk/translate.py:210 lfy/qt/translate.py:275
 msgid "Translation completed"
 msgstr "翻译完成"
 
-#: lfy/gtk/translate.py:229 lfy/qt/translate.py:256
+#: lfy/gtk/translate.py:227 lfy/qt/translate.py:257
 msgid "{} OCRing..."
 msgstr "{} OCR识别中.."
 
@@ -417,11 +425,11 @@ msgid ""
 "be automatically translated"
 msgstr "选择文字并用快捷键 '{}' 复制，复制的文字将不会自动翻译"
 
-#: lfy/qt/translate.py:188
+#: lfy/qt/translate.py:189
 msgid "warn"
 msgstr "警告"
 
-#: lfy/qt/translate.py:188
+#: lfy/qt/translate.py:189
 msgid "quit?"
 msgstr "退出？"
 

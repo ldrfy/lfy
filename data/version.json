@@ -1,5 +1,5 @@
 {
-    "version": "0.0.7",
+    "version": "0.1.0",
     "url": "https://github.com/ldrfy/lfy",
-    "msg": "Update notes:\n- Add aliyun/huoshan Translate for free\n- Support notification after translation\n- Supports comparing multiple translations at the same time"
+    "msg": "Update notes:\n- The native qt version of plasma can be installed by `pip install lfy`\n- Add local OCR recognition: easyocr, pytesseract\n- Add import and export settings\n- Add translate or OCR in terminal, like `lfy -h`\n- Add debug in about page\n- Add the dividing line in the middle of the translation page\n- Refactor settings page"
 }

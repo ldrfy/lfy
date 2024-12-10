@@ -26,26 +26,26 @@
 
 	<screenshots>
 		<screenshot type="default">
-			<image type="source">https://raw.githubusercontent.com/ldrfy/docs/main/images/main.png</image>
+			<image type="source">https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/main.png</image>
 			<caption>Translation homepage</caption>
 		</screenshot>
 		<screenshot>
 			<image type="source">
-				https://raw.githubusercontent.com/ldrfy/docs/main/images/preference.png</image>
+				https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/preference.png</image>
 			<caption>Preferences page</caption>
 		</screenshot>
 		<screenshot>
 			<image type="source">
-				https://raw.githubusercontent.com/ldrfy/docs/main/images/server-preference.png</image>
+				https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/preference1.png</image>
 			<caption>Set Api Key</caption>
 		</screenshot>
 		<screenshot>
 			<image type="source">
-				https://raw.githubusercontent.com/ldrfy/docs/main/images/shortcuts.png</image>
+				https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/shortcuts.png</image>
 			<caption>Shortcuts</caption>
 		</screenshot>
 		<screenshot>
-			<image type="source">https://raw.githubusercontent.com/ldrfy/docs/main/images/about.png</image>
+			<image type="source">https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/about.png</image>
 			<caption>About</caption>
 		</screenshot>
 	</screenshots>
@@ -54,14 +54,16 @@
 
 
 	<releases>
-		<release version="0.0.8" date="2024-11-17">
+		<release version="0.1.0" date="2024-12-10">
 			<description>
 				<ul>
-					<li>Add local OCR recognition through pytesseract</li>
+					<li>The native qt version of plasma can be installed by `pip install lfy`</li>
+					<li>Add local OCR recognition: easyocr, pytesseract</li>
 					<li>Add import and export settings</li>
 					<li>Add translate or OCR in terminal, like `lfy -h` </li>
-					<li>Add debug in About Page</li>
-					<li>The dividing line in the middle of the translation page can be moved</li>
+					<li>Add debug in about page</li>
+					<li>Add the dividing line in the middle of the translation page</li>
+					<li>Refactor settings page</li>
 				</ul>
 			</description>
 		</release>

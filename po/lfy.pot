@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-12-09 16:17+0800\n"
+"POT-Creation-Date: 2024-12-10 23:11+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -145,68 +145,76 @@ msgid "About"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:60
-msgid "Add local OCR recognition through pytesseract"
+msgid "The native qt version of plasma can be installed by `pip install lfy`"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:61
-msgid "Add import and export settings"
+msgid "Add local OCR recognition: easyocr, pytesseract"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:62
-msgid "Add translate or OCR in terminal, like `lfy -h`"
+msgid "Add import and export settings"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:63
-msgid "Add debug in About Page"
+msgid "Add translate or OCR in terminal, like `lfy -h`"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:64
-msgid "The dividing line in the middle of the translation page can be moved"
+msgid "Add debug in about page"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:71
-msgid "Add aliyun/huoshan Translate for free"
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:65
+msgid "Add the dividing line in the middle of the translation page"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:72
-msgid "Support notification after translation"
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:66
+msgid "Refactor settings page"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:73
+msgid "Add aliyun/huoshan Translate for free"
+msgstr ""
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:74
+msgid "Support notification after translation"
+msgstr ""
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:75
 msgid "Supports comparing multiple translations at the same time"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:80
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:82
 msgid "Add Bing Translate for free"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:87
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:89
 msgid "Fix Google Translate"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:88
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:90
 msgid "Improve translation performance"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:89
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:91
 msgid "Add Italian language and support Italian translation"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:90
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:92
 msgid ""
 "Optimize the structure of translation services and make it more convenient "
 "to create third-party translation services"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:97
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:99
 msgid "add shortcut"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:98
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:100
 msgid "Automatically check for updates"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:104
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:106
 msgid "Basic functions completed"
 msgstr ""
 
@@ -270,15 +278,15 @@ msgstr ""
 msgid "Using {} for text recognition"
 msgstr ""
 
-#: lfy/gtk/translate.py:207 lfy/qt/translate.py:316
+#: lfy/gtk/translate.py:205 lfy/qt/translate.py:317
 msgid "Translating..."
 msgstr ""
 
-#: lfy/gtk/translate.py:212 lfy/qt/translate.py:274
+#: lfy/gtk/translate.py:210 lfy/qt/translate.py:275
 msgid "Translation completed"
 msgstr ""
 
-#: lfy/gtk/translate.py:229 lfy/qt/translate.py:256
+#: lfy/gtk/translate.py:227 lfy/qt/translate.py:257
 msgid "{} OCRing..."
 msgstr ""
 
@@ -414,11 +422,11 @@ msgid ""
 "be automatically translated"
 msgstr ""
 
-#: lfy/qt/translate.py:188
+#: lfy/qt/translate.py:189
 msgid "warn"
 msgstr ""
 
-#: lfy/qt/translate.py:188
+#: lfy/qt/translate.py:189
 msgid "quit?"
 msgstr ""
 
