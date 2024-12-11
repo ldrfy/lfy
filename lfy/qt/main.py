@@ -9,15 +9,9 @@ from PyQt6.QtWidgets import QApplication  # pylint: disable=E0611
 from lfy import APP_ID, APP_NAME
 from lfy.qt.translate import TranslateWindow
 from lfy.qt.tray import TrayIcon
-from lfy.utils.code import parse_lfy
-from lfy.utils.settings import Settings
+from lfy.utils.code import parse_lfy, set_vpn
 
-# 设置代理地址和端口号
-PROXY_ADDRESS = Settings().g("vpn-addr-port")
-if PROXY_ADDRESS:
-    # 设置环境变量
-    os.environ['http_proxy'] = PROXY_ADDRESS
-    os.environ['https_proxy'] = PROXY_ADDRESS
+set_vpn()
 
 
 def main():

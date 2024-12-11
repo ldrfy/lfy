@@ -14,15 +14,11 @@ from lfy.gtk.preference import PreferencesDialog
 from lfy.gtk.translate import TranslateWindow
 from lfy.utils import cal_md5, get_cache_img_path, is_text
 from lfy.utils.check_update import main as check_update
-from lfy.utils.code import parse_lfy
+from lfy.utils.code import parse_lfy, set_vpn
 from lfy.utils.settings import Settings
 
 # 设置代理地址和端口号
-PROXY_ADDRESS = Settings().g("vpn-addr-port")
-if PROXY_ADDRESS:
-    # 设置环境变量
-    os.environ['http_proxy'] = PROXY_ADDRESS
-    os.environ['https_proxy'] = PROXY_ADDRESS
+set_vpn()
 
 
 class LfyApplication(Adw.Application):

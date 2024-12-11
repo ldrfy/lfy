@@ -46,7 +46,7 @@ def set_vpn():
 
     # 设置代理地址和端口号
     proxy_address = Settings().g("vpn-addr-port")
-    if len(proxy_address) > 0:
+    if proxy_address:
         # 设置环境变量
         os.environ['http_proxy'] = proxy_address
         os.environ['https_proxy'] = proxy_address
