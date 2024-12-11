@@ -5,6 +5,8 @@ import re
 import sys
 from gettext import gettext as _
 
+from requests.exceptions import ConnectTimeout, ProxyError
+
 from lfy import APP_ID, APP_NAME
 from lfy.utils.debug import get_logger
 
@@ -216,3 +218,25 @@ def check_libs(py_libs):
         get_logger().error(s)
         return s
     return None
+
+
+def handle_connection_error(e, name):
+    """错误处理
+
+    Args:
+        e (_type_): _description_
+        name (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    if isinstance(e, ConnectTimeout):
+        return _("The connection times out: {}. "
+                 "Probably there is a problem with the network, "
+                 "or there is a problem with the VPN proxy settings {}")\
+            .format(name, str(e))
+    if isinstance(e, ProxyError):
+        return _("Maybe there is probably a problem with the VPN proxy settings: {}")\
+            .format(f"\n\n{name}\n{str(e)}")
+
+    return _("something error: {}").format(f"{name}\n\n{str(e)}")

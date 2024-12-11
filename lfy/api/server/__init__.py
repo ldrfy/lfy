@@ -1,10 +1,9 @@
 '翻译服务的基础类'
-import traceback
 from gettext import gettext as _
 
 import requests
 
-from lfy.utils import check_libs, clear_key
+from lfy.utils import check_libs, clear_key, handle_connection_error
 from lfy.utils.debug import get_logger
 from lfy.utils.settings import Settings
 
@@ -93,22 +92,21 @@ class Server:
         Returns:
             _type_: _description_
         """
+
+        if self.sk_placeholder_text and not self.get_conf():
+            return False, _("please input `{sk}` for `{server}` in preference")\
+                .format(sk=self.sk_placeholder_text, server=self.name)
+
+        if "py_libs" in kwargs:
+            s = check_libs(kwargs.get("py_libs"))
+            if s:
+                return False, s
         try:
-
-            if self.sk_placeholder_text and not self.get_conf():
-                return False, _("please input `{sk}` for `{server}` in preference")\
-                    .format(sk=self.sk_placeholder_text, server=self.name)
-            if "py_libs" in kwargs:
-                s = check_libs(kwargs.get("py_libs"))
-                if s:
-                    return False, s
-
             return kwargs["fun_main"](self, *args)
         except Exception as e:  # pylint: disable=W0718
-            text = _("something error: {}")\
-                .format(f"{self.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
-            get_logger().error(text)
-        return False, text
+            s = handle_connection_error(e, self.name)
+            get_logger().error(s)
+            return False, s
 
     def set_data(self, lang_key_ns: dict,
                  sk_placeholder_text: str = None,
@@ -198,9 +196,9 @@ class Server:
 
             return ok, text
         except Exception as e:  # pylint: disable=W0718
-            get_logger().error(_("something error: {}")
-                               .format(f"{self.name}\n\n{str(e)}\n\n{traceback.format_exc()}"))
-        return False, text
+            s = handle_connection_error(e, self.name)
+            get_logger().error(s)
+            return False, s
 
     def set_conf(self):
         """设置配置

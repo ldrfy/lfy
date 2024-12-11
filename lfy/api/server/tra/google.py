@@ -5,11 +5,9 @@ import random
 from gettext import gettext as _
 
 import requests
-from requests import ConnectTimeout, RequestException
 
 from lfy.api.server import TIME_OUT
 from lfy.api.server.tra import ServerTra
-from lfy.utils.debug import get_logger
 
 
 def _get_session():
@@ -27,10 +25,7 @@ def _get_session():
     return session
 
 
-def _translate(st: ServerTra, text, lang_to, n=0):
-
-    if n > 3:
-        return False, _("something error, try other translate engine?")
+def _translate(st: ServerTra, text:str, lang_to):
 
     text = text.replace("#", "")
     url = 'https://translate.google.com/translate_a/t'
@@ -38,15 +33,9 @@ def _translate(st: ServerTra, text, lang_to, n=0):
               'oe': 'UTF-8', 'client': 'at', 'dj': '1',
               'format': "html", 'v': "1.0"}
 
-    try:
-        response = st.session.post(url, params=params, data={
-            'q': text}, timeout=TIME_OUT)
-    except ConnectTimeout as e0:
-        get_logger().error(e0)
-        return False, _("The connection timed out. Maybe there is a network problem")
-    except RequestException as e:
-        get_logger().error(e)
-        return _translate(st, text, lang_to, n=n + 1)
+    response = st.session.post(url, params=params,
+                               data={'q': text},
+                               timeout=TIME_OUT)
 
     s = ""
     for res in response.json():

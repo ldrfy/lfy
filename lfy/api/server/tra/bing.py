@@ -6,7 +6,6 @@ from gettext import gettext as _
 from urllib.parse import urlparse
 
 import requests
-from requests import RequestException
 
 from lfy.api.server import TIME_OUT
 from lfy.api.server.tra import ServerTra
@@ -65,23 +64,19 @@ def g_url(host, hs):
     return f'https://{host}/ttranslatev3?isVertical=1&&IG={hs["IG"]}&IID={hs["my_iid"]}'
 
 
-def _translate(st: ServerTra, text, lang_to, n=0):
+def _translate(st: ServerTra, text, lang_to, n=0, s=""):
 
     if st.session is None:
         st.session = _init_session()
 
     if n > 5:
-        return False, _("something error, try other translate engine?")
+        return False, _("something error: {}").format(s)
 
     hs = st.session.headers
     if "IG" not in hs:
-        try:
-            st.session = _init_session()
-            hs = st.session.headers
-            print(hs["my_host"])
-        except RequestException as e:
-            get_logger().error(e)
-            return _translate(st, text, lang_to, n=n + 1)
+        st.session = _init_session()
+        hs = st.session.headers
+        get_logger().debug(hs)
 
     # 自动重定向的新url，注意辨别
     host = hs["my_host"]
@@ -93,16 +88,8 @@ def _translate(st: ServerTra, text, lang_to, n=0):
             'to': lang_to, 'token': hs['token'], 'key': hs['key'],
             'tryFetchingGenderDebiasedTranslations': True}
 
-    try:
-        url = g_url(host, hs)
-        response = st.session.post(url, data=data, timeout=TIME_OUT)
-    except RequestException as e:
-        get_logger().error(e)
-        return _translate(st, text, lang_to, n=n + 1)
-
-    # 没有代理时，中国区出现这个
-    if len(response.text.strip()) == 0:
-        return _translate(st, text, lang_to, n=n + 1)
+    url = g_url(host, hs)
+    response = st.session.post(url, data=data, timeout=TIME_OUT)
 
     res = response.json()
 
@@ -112,7 +99,8 @@ def _translate(st: ServerTra, text, lang_to, n=0):
     if isinstance(res, dict):
         if 'ShowCaptcha' in res.keys():
             st.session = _init_session()
-            return _translate(st, text, lang_to, n=n + 1)
+            return _translate(st, text, lang_to, n=n+1,
+                              s=_("please contact the developer: {}").format("bing show captcha"))
 
         if 'statusCode' in res.keys():
             if res['statusCode'] == 400:

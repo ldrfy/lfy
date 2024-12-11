@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-12-10 23:11+0800\n"
+"POT-Creation-Date: 2024-12-11 14:09+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,7 +149,7 @@ msgid "The native qt version of plasma can be installed by `pip install lfy`"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:61
-msgid "Add local OCR recognition: easyocr, pytesseract"
+msgid "Add local OCR recognition: easyocr, pytesseract (not support flatpak)"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:62
@@ -463,76 +463,68 @@ msgstr ""
 msgid "No new version!"
 msgstr ""
 
-#: lfy/api/server/__init__.py:17
+#: lfy/api/server/__init__.py:16
 msgid "Automatic"
 msgstr ""
 
-#: lfy/api/server/__init__.py:19
+#: lfy/api/server/__init__.py:18
 msgid "Chinese"
 msgstr ""
 
-#: lfy/api/server/__init__.py:21
+#: lfy/api/server/__init__.py:20
 msgid "Classical Chinese"
 msgstr ""
 
-#: lfy/api/server/__init__.py:23
+#: lfy/api/server/__init__.py:22
 msgid "English"
 msgstr ""
 
-#: lfy/api/server/__init__.py:25
+#: lfy/api/server/__init__.py:24
 msgid "Japanese"
 msgstr ""
 
-#: lfy/api/server/__init__.py:27
+#: lfy/api/server/__init__.py:26
 msgid "Korean"
 msgstr ""
 
-#: lfy/api/server/__init__.py:29
+#: lfy/api/server/__init__.py:28
 msgid "German"
 msgstr ""
 
-#: lfy/api/server/__init__.py:31
+#: lfy/api/server/__init__.py:30
 msgid "French"
 msgstr ""
 
-#: lfy/api/server/__init__.py:33
+#: lfy/api/server/__init__.py:32
 msgid "Italian"
 msgstr ""
 
-#: lfy/api/server/__init__.py:35
+#: lfy/api/server/__init__.py:34
 msgid "Spanish"
 msgstr ""
 
-#: lfy/api/server/__init__.py:99 lfy/api/server/__init__.py:189
+#: lfy/api/server/__init__.py:97 lfy/api/server/__init__.py:187
 #, python-brace-format
 msgid "please input `{sk}` for `{server}` in preference"
 msgstr ""
 
-#: lfy/api/server/__init__.py:108 lfy/api/server/__init__.py:201
-#: lfy/api/server/tra/baidu.py:43 lfy/api/server/tra/tencent.py:81
-#: lfy/api/server/tra/aliyun.py:90 lfy/api/server/tra/com.py:29
-#: lfy/api/server/tra/huoshan.py:137 lfy/api/server/ocr/baidu.py:101
-#: lfy/utils/code.py:85 lfy/utils/code.py:118
-msgid "something error: {}"
+#: lfy/api/server/__init__.py:177
+msgid "Developers, please set sk_placeholder_text"
 msgstr ""
 
-#: lfy/api/server/__init__.py:179
-msgid "Developers, please set sk_placeholder_text"
+#: lfy/api/server/tra/baidu.py:43 lfy/api/server/tra/tencent.py:81
+#: lfy/api/server/tra/bing.py:73 lfy/api/server/tra/aliyun.py:90
+#: lfy/api/server/tra/com.py:29 lfy/api/server/tra/huoshan.py:137
+#: lfy/api/server/ocr/baidu.py:101 lfy/utils/__init__.py:242
+#: lfy/utils/code.py:85 lfy/utils/code.py:118
+msgid "something error: {}"
 msgstr ""
 
 #: lfy/api/server/tra/baidu.py:66 lfy/api/server/ocr/baidu.py:133
 msgid "baidu"
 msgstr ""
 
-#: lfy/api/server/tra/google.py:33 lfy/api/server/tra/bing.py:71
-msgid "something error, try other translate engine?"
-msgstr ""
-
-#: lfy/api/server/tra/google.py:46
-msgid "The connection timed out. Maybe there is a network problem"
-msgstr ""
-
-#: lfy/api/server/tra/google.py:74
+#: lfy/api/server/tra/google.py:63
 msgid "google"
 msgstr ""
 
@@ -540,12 +532,16 @@ msgstr ""
 msgid "tencent"
 msgstr ""
 
-#: lfy/api/server/tra/bing.py:126
+#: lfy/api/server/tra/bing.py:103
+msgid "please contact the developer: {}"
+msgstr ""
+
+#: lfy/api/server/tra/bing.py:108
 #, python-brace-format
 msgid "1000 characters limit! You send {len_text} characters."
 msgstr ""
 
-#: lfy/api/server/tra/bing.py:149
+#: lfy/api/server/tra/bing.py:131
 msgid "bing"
 msgstr ""
 
@@ -557,8 +553,18 @@ msgstr ""
 msgid "huoshan"
 msgstr ""
 
-#: lfy/utils/__init__.py:214
-msgid "please install python whl: {}"
+#: lfy/utils/__init__.py:216
+msgid "please install python whl (not support flatpak): {}"
+msgstr ""
+
+#: lfy/utils/__init__.py:234
+msgid ""
+"The connection times out: {}. Probably there is a problem with the network, "
+"or there is a problem with the VPN proxy settings {}"
+msgstr ""
+
+#: lfy/utils/__init__.py:239
+msgid "Maybe there is probably a problem with the VPN proxy settings: {}"
 msgstr ""
 
 #: lfy/utils/bak.py:58
@@ -626,7 +632,7 @@ msgid "Automatically check for updates when opening software"
 msgstr ""
 
 #: data/gtk/preference.ui:128
-msgid "vpn addr and port, like http://127.0.0.1:7890"
+msgid "proxy addr and port(vpn), like http://127.0.0.1:7890"
 msgstr ""
 
 #: data/gtk/preference.ui:138

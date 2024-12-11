@@ -125,7 +125,7 @@
               <object class="AdwEntryRow" id="entry_vpn_addr">
                 <property name="input-purpose">url</property>
                 <property name="show-apply-button">True</property>
-                <property name="title" translatable="yes">vpn addr and port, like http://127.0.0.1:7890</property>
+                <property name="title" translatable="yes">proxy addr and port(vpn), like http://127.0.0.1:7890</property>
                 <signal name="apply" handler="_on_vpn_apply"/>
               </object>
             </child>
