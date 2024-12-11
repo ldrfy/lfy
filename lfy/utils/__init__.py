@@ -211,7 +211,7 @@ def check_libs(py_libs):
     no_libs = [py_lib for py_lib in py_libs
                if not check_lib_installed(py_lib)]
     if no_libs:
-        s = _("please install python whl: {}")\
+        s = _("please install python whl (not support flatpak): {}")\
             .format(",".join(no_libs))
         get_logger().error(s)
         return s

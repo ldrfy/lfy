@@ -58,7 +58,7 @@
 			<description>
 				<ul>
 					<li>The native qt version of plasma can be installed by `pip install lfy`</li>
-					<li>Add local OCR recognition: easyocr, pytesseract</li>
+					<li>Add local OCR recognition: easyocr, pytesseract (not support flatpak)</li>
 					<li>Add import and export settings</li>
 					<li>Add translate or OCR in terminal, like `lfy -h` </li>
 					<li>Add debug in about page</li>
