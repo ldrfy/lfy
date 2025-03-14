@@ -126,7 +126,7 @@ class LfyApplication(Adw.Application):
         names = ['preferences', 'quit', 'about',
                  'find_update', 'del_wrapping', 'splice_text',
                  'translate', 'copy2translate']
-        callbacks = [self.on_preferences_action, self.quit, self.on_about_action,
+        callbacks = [self.on_preferences_action, self.quit_app, self.on_about_action,
                      self.find_update, self.on_del_wrapping_action, self.on_splice_text_action,
                      self.set_translate_action, self.on_action_trans_now]
         shortcuts = ['<Ctrl>comma', '<primary>q', None,
@@ -153,6 +153,11 @@ class LfyApplication(Adw.Application):
         self.win.notice_action(self.win.cbtn_del_wrapping,
                                _("Next translation not remove line breaks"),
                                _("Next translation remove line breaks"))
+
+    def quit_app(self, _widget, _w):
+        """退出
+        """
+        self.quit()
 
     def on_splice_text_action(self, _widget, _w):
         """拼接文本
