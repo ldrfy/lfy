@@ -8,18 +8,17 @@ msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
 "POT-Creation-Date: 2024-09-24 13:36+0800\n"
-"PO-Revision-Date: 2024-11-10 22:23-0300\n"
-"Last-Translator: <johnpetersa@outlook.pt>\n"
+"PO-Revision-Date: 2025-05-03 21:36-0300\n"
+"Last-Translator: John peter sa <johnppetersa@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <ldpbr-translation@lists.sourceforge.net>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n" 
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.6\n"
 
-#: data/cool.ldr.lfy.in.in.desktop:3
-#: data/resources/cool.ldr.lfy.in.appdata.xml:10
-#: data/resources/translate.ui:130
+#: data/cool.ldr.lfy.in.in.desktop:3 data/resources/cool.ldr.lfy.in.appdata.xml:10 data/resources/translate.ui:130
 msgid "lfy"
 msgstr "lfy"
 
@@ -68,8 +67,7 @@ msgid "The lang parameters of the pytesseract module, such as Chinese and Englis
 msgstr "Os parâmetros lang do módulo pytesseract, como chinês e inglês por padrão"
 
 #: data/cool.ldr.lfy.in.gschema.xml:55
-msgid "The lang parameters of the easyocr module, such as Chinese and English by "
-"default, split by +"
+msgid "The lang parameters of the easyocr module, such as Chinese and English by default, split by +"
 msgstr "Os parâmetros de idioma do módulo easyocr, como chinês e inglês por padrão, são separados por +"
 
 #: data/cool.ldr.lfy.in.gschema.xml:59
@@ -105,10 +103,9 @@ msgid "Translation software for read paper"
 msgstr "Software de tradução para leitura de artigos"
 
 #: data/resources/cool.ldr.lfy.in.appdata.xml:13
-msgid ""
-"An easy and pleasant way to translate. Support many translation services. "
-"Especially suitable for document translation."
+msgid "An easy and pleasant way to translate. Support many translation services. Especially suitable for document translation."
 msgstr ""
+"Uma maneira fácil e agradável de traduzir. Apoie muitos serviços de tradução. Especialmente adequado para tradução de documentos."
 
 #: data/resources/cool.ldr.lfy.in.appdata.xml:19
 msgid "yuh"
@@ -163,10 +160,8 @@ msgid "Add Italian language and support Italian translation"
 msgstr "Adicione o idioma italiano e suporte à tradução para italiano"
 
 #: data/resources/cool.ldr.lfy.in.appdata.xml:79
-msgid ""
-"Optimize the structure of translation services and make it more convenient "
-"to create third-party translation services"
-msgstr ""
+msgid "Optimize the structure of translation services and make it more convenient to create third-party translation services"
+msgstr "Otimizar a estrutura dos serviços de tradução e tornar mais conveniente criar serviços de tradução de terceiros"
 
 #: data/resources/cool.ldr.lfy.in.appdata.xml:86
 msgid "add shortcut"
@@ -188,8 +183,7 @@ msgstr "tradutor_créditos"
 msgid "A translation app for GNOME."
 msgstr "Um aplicativo de tradução para GNOME."
 
-#: lfy/main.py:162 data/resources/help-overlay.ui:20
-#: data/resources/help-overlay.ui:27 data/resources/help-overlay.ui:34
+#: lfy/main.py:162 data/resources/help-overlay.ui:20 data/resources/help-overlay.ui:27 data/resources/help-overlay.ui:34
 #: data/resources/help-overlay.ui:53
 msgid "Copy detected, translate immediately"
 msgstr "Cópia detectada, traduza imediatamente"
@@ -246,8 +240,7 @@ msgstr "Usando {} para reconhecimento de texto"
 msgid "This time the content contains private information and is not translated"
 msgstr "Desta vez, o conteúdo contém informações privadas e não é traduzido"
 
-#: lfy/translate.py:288 lfy/translate.py:321 lfy/api/server/baidu.py:40
-#: lfy/api/server/tencent.py:150 lfy/api/server/aliyun.py:98
+#: lfy/translate.py:288 lfy/translate.py:321 lfy/api/server/baidu.py:40 lfy/api/server/tencent.py:150 lfy/api/server/aliyun.py:98
 #: lfy/api/server/com.py:29 lfy/api/server/huoshan.py:136
 msgid "something error:"
 msgstr "algo erro:"
@@ -434,7 +427,7 @@ msgstr "Romeno"
 
 #: lfy/api/base.py:90
 msgid "Greek"
-msgstr ""
+msgstr "Grego"
 
 #: lfy/api/base.py:92
 msgid "Swahili"
@@ -472,8 +465,7 @@ msgstr "Catalão"
 msgid "Tagalog"
 msgstr "Tagalo"
 
-#: lfy/api/server/baidu.py:28 lfy/api/server/tencent.py:127
-#: lfy/api/server/aliyun.py:68 lfy/api/server/huoshan.py:67
+#: lfy/api/server/baidu.py:28 lfy/api/server/tencent.py:127 lfy/api/server/aliyun.py:68 lfy/api/server/huoshan.py:67
 msgid "please input API Key in preference"
 msgstr "insira a chave API de preferência"
 
@@ -587,8 +579,7 @@ msgid "Translate Server"
 msgstr "Servidor de tradução"
 
 #: data/resources/server-preferences.ui:26
-msgid ""
-"API Key for Translate,Pay attention to whether there are dividing lines |"
+msgid "API Key for Translate,Pay attention to whether there are dividing lines |"
 msgstr "Chave de API para tradução, preste atenção se há linhas divisórias"
 
 #: data/resources/server-preferences.ui:27
@@ -656,8 +647,7 @@ msgid "backup"
 msgstr "backup"
 
 #: data/resources/preference.ui:144
-msgid "Export the configuration to the clipboard, then you can paste it into any "
-"file and edit it"
+msgid "Export the configuration to the clipboard, then you can paste it into any file and edit it"
 msgstr "Exporte a configuração para a área de transferência, então você poderá colá-la em qualquer arquivo e editá-la."
 
 #: data/resources/preference.ui:151
@@ -665,8 +655,9 @@ msgid "restore"
 msgstr "restaurar"
 
 #: data/resources/preference.ui:153
-msgid "Read the JSON configuration of the clipboard, then import it, and some of "
-"the configurations will take effect after reopening the software"
+msgid ""
+"Read the JSON configuration of the clipboard, then import it, and some of the configurations will take effect after reopening the "
+"software"
 msgstr "Leia a configuração JSON da área de transferência, importe-a e algumas das configurações terão efeito após reabrir o software."
 
 #: data/resources/help-overlay.ui:19
