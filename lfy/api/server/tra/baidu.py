@@ -61,7 +61,10 @@ class BaiduServer(ServerTra):
             "kor": 5,
             "de": 6,
             "fra": 7,
-            "it": 8
+            "it": 8,
+            "spa": 9,
+            "pt": 10,
+            "pot": 11,
         }
         super().__init__("baidu", _("baidu"))
         self.set_data(lang_key_ns, "APP ID | secret key")

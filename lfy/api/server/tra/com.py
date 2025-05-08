@@ -90,6 +90,8 @@ class AllServer(ServerTra):
             "6": 6,
             "7": 7,
             "8": 8,
+            "9": 9,
+            "10": 10,
         }
 
         self.set_data(lang_key_ns)

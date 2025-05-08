@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2024-12-11 14:09+0800\n"
+"POT-Creation-Date: 2025-05-08 14:35+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/cool.ldr.lfy.in.in.desktop:3 data/gtk/cool.ldr.lfy.in.appdata.xml:10
+#: data/cool.ldr.lfy.in.in.desktop:2 data/gtk/cool.ldr.lfy.in.appdata.xml:10
 #: data/gtk/translate.ui:132
 msgid "lfy"
 msgstr ""
@@ -223,35 +223,35 @@ msgid ""
 "This time the content contains private information and is not translated"
 msgstr ""
 
-#: lfy/gtk/main.py:90
+#: lfy/gtk/main.py:86
 msgid "translator_credits"
 msgstr ""
 
-#: lfy/gtk/main.py:116 lfy/qt/tray.py:143 data/gtk/help-overlay.ui:26
+#: lfy/gtk/main.py:112 lfy/qt/tray.py:143 data/gtk/help-overlay.ui:26
 msgid "Copy detected, translate immediately"
 msgstr ""
 
-#: lfy/gtk/main.py:119 lfy/qt/tray.py:149
+#: lfy/gtk/main.py:115 lfy/qt/tray.py:149
 msgid "Copy detected, not automatically translated"
 msgstr ""
 
-#: lfy/gtk/main.py:158
+#: lfy/gtk/main.py:154
 msgid "Next translation not remove line breaks"
 msgstr ""
 
-#: lfy/gtk/main.py:159
+#: lfy/gtk/main.py:155
 msgid "Next translation remove line breaks"
 msgstr ""
 
-#: lfy/gtk/main.py:168
+#: lfy/gtk/main.py:169
 msgid "Next translation without splicing text"
 msgstr ""
 
-#: lfy/gtk/main.py:169
+#: lfy/gtk/main.py:170
 msgid "Next translation splicing text"
 msgstr ""
 
-#: lfy/gtk/main.py:240 lfy/qt/tray.py:183
+#: lfy/gtk/main.py:241 lfy/qt/tray.py:183
 msgid ""
 "There is no new version.                      \n"
 "The current version is {}.                      \n"
@@ -503,12 +503,20 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
-#: lfy/api/server/__init__.py:97 lfy/api/server/__init__.py:187
+#: lfy/api/server/__init__.py:36
+msgid "Portuguese"
+msgstr ""
+
+#: lfy/api/server/__init__.py:38
+msgid "Portuguese(Brazilian)"
+msgstr ""
+
+#: lfy/api/server/__init__.py:101 lfy/api/server/__init__.py:191
 #, python-brace-format
 msgid "please input `{sk}` for `{server}` in preference"
 msgstr ""
 
-#: lfy/api/server/__init__.py:177
+#: lfy/api/server/__init__.py:181
 msgid "Developers, please set sk_placeholder_text"
 msgstr ""
 
@@ -520,15 +528,15 @@ msgstr ""
 msgid "something error: {}"
 msgstr ""
 
-#: lfy/api/server/tra/baidu.py:66 lfy/api/server/ocr/baidu.py:133
+#: lfy/api/server/tra/baidu.py:69 lfy/api/server/ocr/baidu.py:133
 msgid "baidu"
 msgstr ""
 
-#: lfy/api/server/tra/google.py:63
+#: lfy/api/server/tra/google.py:66
 msgid "google"
 msgstr ""
 
-#: lfy/api/server/tra/tencent.py:103
+#: lfy/api/server/tra/tencent.py:105
 msgid "tencent"
 msgstr ""
 
@@ -541,15 +549,15 @@ msgstr ""
 msgid "1000 characters limit! You send {len_text} characters."
 msgstr ""
 
-#: lfy/api/server/tra/bing.py:131
+#: lfy/api/server/tra/bing.py:134
 msgid "bing"
 msgstr ""
 
-#: lfy/api/server/tra/aliyun.py:111
+#: lfy/api/server/tra/aliyun.py:113
 msgid "aliyun"
 msgstr ""
 
-#: lfy/api/server/tra/huoshan.py:163
+#: lfy/api/server/tra/huoshan.py:165
 msgid "huoshan"
 msgstr ""
 
