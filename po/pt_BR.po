@@ -561,7 +561,7 @@ msgstr "algo erro: {}"
 
 #: lfy/api/server/tra/baidu.py:69 lfy/api/server/ocr/baidu.py:133
 msgid "baidu"
-msgstr "baidu"
+msgstr "Baidu"
 
 #: lfy/api/server/tra/google.py:66
 msgid "google"
