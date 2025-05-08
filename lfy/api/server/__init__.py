@@ -32,6 +32,10 @@ LANGUAGE_NAMES = [
     _("Italian"),
     # 9
     _("Spanish"),
+    # 10
+    _("Portuguese"),
+    # 11
+    _("Portuguese(Brazilian)"),
 ]
 
 

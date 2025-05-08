@@ -59,6 +59,9 @@ class GoogleServer(ServerTra):
             "de": 6,
             "fr": 7,
             "it": 8,
+            "es": 9,
+            "pt-pt": 10,
+            "pt": 11,
         }
         super().__init__("google", _("google"))
         self.set_data(lang_key_ns, session=_get_session())

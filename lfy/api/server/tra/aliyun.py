@@ -106,7 +106,9 @@ class AliYunServer(ServerTra):
             "ko": 5,
             "de": 6,
             "fr": 7,
-            "it": 8
+            "it": 8,
+            "es": 9,
+            "pt": 10,
         }
         super().__init__("aliyun", _("aliyun"))
         self.set_data(lang_key_ns, "AccessKey ID | AccessKey Secret")

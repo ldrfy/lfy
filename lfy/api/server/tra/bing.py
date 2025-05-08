@@ -127,6 +127,9 @@ class BingServer(ServerTra):
             "de": 6,
             "fr": 7,
             "it": 8,
+            "es": 9,
+            "pt": 10,
+            "pt-BR": 11,
         }
         super().__init__("bing", _("bing"))
         self.set_data(lang_key_ns)

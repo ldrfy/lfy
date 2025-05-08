@@ -158,7 +158,9 @@ class HuoShanServer(ServerTra):
             "ko": 5,
             "de": 6,
             "fr": 7,
-            "it": 8
+            "it": 8,
+            "es": 9,
+            "pt": 10,
         }
         super().__init__("huoshan", _("huoshan"))
         # https://www.volcengine.com/docs/4640/127684
