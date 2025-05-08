@@ -246,7 +246,7 @@ msgstr "Desta vez, o conteúdo contém informações privadas e não é traduzid
 
 #: lfy/gtk/main.py:86
 msgid "translator_credits"
-msgstr "tradutor_créditos"
+msgstr "John peter sa <johnppetersa@gmail.com>"
 
 #: lfy/gtk/main.py:112 lfy/qt/tray.py:143 data/gtk/help-overlay.ui:26
 msgid "Copy detected, translate immediately"
