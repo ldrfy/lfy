@@ -1,48 +1,68 @@
-# 兰译 lfy <img src="data/resources/icons/hicolor/scalable/apps/cool.ldr.lfy.svg" width = "36" height = "36" alt="兰译" align=center />
+# 兰译 lfy <img src="data/resources/icons/hicolor/scalable/apps/cool.ldr.lfy.svg" width="36" height="36" alt="兰译" style="vertical-align: middle;" />
 
-<center>
+<div align="center">
 
-gtk 版本
+### 🖥️ GTK 版本
 
-<div style="display: flex;">
-    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/main.png" alt="首页" style="width: 32%;">
-    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/preference.png" alt="设置" style="width: 32%;">
-    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/preference1.png" alt="设置1" style="width: 32%;">
+<table>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/main.png" alt="首页" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/preference.png" alt="设置" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/preference1.png" alt="设置1" width="100%"></td>
+  </tr>
+</table>
+
+### 🧩 Qt 版本
+
+<table>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/qt/main.png" alt="首页" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/qt/preference.png" alt="设置" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/qt/preference1.png" alt="设置1" width="100%"></td>
+  </tr>
+</table>
+
 </div>
 
-qt 版本
+---
 
-<div style="display: flex; justify-content: space-between;">
-    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/qt/main.png" alt="首页" style="width: 32%;">
-    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/qt/preference.png" alt="设置" style="width: 32%;">
-    <img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/qt/preference1.png" alt="设置1" style="width: 32%;">
-</div>
-</center>
+## 🚀 安装方式
 
-> 如果有python以及pip，qt版本可以直接通过终端安装
+> 如果你已安装 Python 和 pip，可以通过终端快速安装 Qt 版本：
 
 ```bash
 pip install lfy
 ```
 
-支持全平台，包括windows11，mac应该也可以，终端即可运行
+运行：
+
 ```bash
 lfy
 ```
 
-或者
+---
 
-- [自动编译，这里下载](https://github.com/ldrfy/lfy/releases/tag/auto)，包含`rpm`、`deb`、`flatpak`、`archlinux`、`whl`
-- `archlinux最新版`、`ubuntu24.04`、`openSUSE Tumbleweed`、`Fedora41`
-- 使用flatpak可以支持全平台
+### 📦 也可使用自动编译版本：
 
-    <a href='https://flathub.org/apps/details/cool.ldr.lfy'><img width='120' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+🔗 [点击此处下载](https://github.com/ldrfy/lfy/releases/tag/auto)：  
+包含 `rpm`、`deb`、`flatpak`、`archlinux`、`whl`
 
+✅ 已适配系统：
 
-[软件文档](https://github.com/ldrfy/docs)
+- Arch Linux（最新版）
+- Ubuntu 24.04
+- openSUSE Tumbleweed
+- Fedora 41
 
-- [贡献说明](https://github.com/ldrfy/docs/blob/main/CONTRIBUTE.md)
+🔁 使用 **Flatpak** 可实现全平台支持：
 
-- [翻译说明](https://github.com/ldrfy/docs/blob/main/TRANSLATE.md)
+[![Download on Flathub](https://flathub.org/assets/badges/flathub-badge-en.png)](https://flathub.org/apps/details/cool.ldr.lfy)
 
-- [更新说明](https://github.com/ldrfy/docs/blob/main/CHANGELOG.md)
+---
+
+## 📚 文档与社区
+
+- 📘 [软件文档](https://github.com/ldrfy/docs)
+- 🛠️ [贡献说明](https://github.com/ldrfy/docs/blob/main/CONTRIBUTE.md)
+- 🌐 [翻译说明](https://github.com/ldrfy/docs/blob/main/TRANSLATE.md)
+- 📝 [更新日志](https://github.com/ldrfy/docs/blob/main/CHANGELOG.md)

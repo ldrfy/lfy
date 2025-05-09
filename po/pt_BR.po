@@ -95,7 +95,7 @@ msgstr "Token de acesso OCR do Baidu"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:67
 msgid "Baidu OCR access_token expires date"
-msgstr "Token de acesso OCR do Baidu"
+msgstr "Data de expiração do access_token do Baidu OCR"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:71
 msgid "aliyun AccessKey ID and AccessKey Secret, used in the middle | split"
