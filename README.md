@@ -2,8 +2,13 @@
 
 <div align="center">
 
-### 🖥️ GTK 版本
+[![CHI](https://img.shields.io/badge/CHI-中文-red?style=for-the-badge)](README.md) [![ENG](https://img.shields.io/badge/ENG-English-blue?style=for-the-badge)](README_EN.md)
 
+</div>
+
+<div align="center">
+
+### 🖥️ GTK 版本
 <table>
   <tr>
     <td><img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/main.png" alt="首页" width="100%"></td>
@@ -13,7 +18,6 @@
 </table>
 
 ### 🧩 Qt 版本
-
 <table>
   <tr>
     <td><img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/qt/main.png" alt="首页" width="100%"></td>
@@ -35,7 +39,6 @@ pip install lfy
 ```
 
 运行：
-
 ```bash
 lfy
 ```
@@ -48,7 +51,6 @@ lfy
 包含 `rpm`、`deb`、`flatpak`、`archlinux`、`whl`
 
 ✅ 已适配系统：
-
 - Arch Linux（最新版）
 - Ubuntu 24.04
 - openSUSE Tumbleweed
@@ -57,6 +59,27 @@ lfy
 🔁 使用 **Flatpak** 可实现全平台支持：
 
 [![Download on Flathub](https://flathub.org/assets/badges/flathub-badge-en.png)](https://flathub.org/apps/details/cool.ldr.lfy)
+
+---
+
+### 🏗️ 手动编译
+
+确保已安装必要的依赖项，然后执行：
+
+**方法 1 - Python:**
+```bash
+git clone https://github.com/ldrfy/lfy.git
+cd lfy
+python -m build
+pip install dist/*.whl
+```
+
+**方法 2 - Meson:**
+```bash
+meson setup builddir
+meson compile -C builddir
+sudo meson install -C builddir
+```
 
 ---
 
