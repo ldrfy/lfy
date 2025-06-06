@@ -66,16 +66,18 @@ lfy
 
 确保已安装必要的依赖项，然后执行：
 
-**方法 1 - Python:**
-```bash
+**方法一 - Python:**
+```
 git clone https://github.com/ldrfy/lfy.git
 cd lfy
 python -m build
 pip install dist/*.whl
 ```
 
-**方法 2 - Meson:**
-```bash
+**方法二 - Meson:**
+```
+git clone https://github.com/ldrfy/lfy.git
+cd lfy
 meson setup builddir
 meson compile -C builddir
 sudo meson install -C builddir
