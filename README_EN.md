@@ -76,6 +76,8 @@ pip install dist/*.whl
 
 **Method 2 - Meson:**
 ```bash
+git clone https://github.com/ldrfy/lfy.git
+cd lfy
 meson setup builddir
 meson compile -C builddir
 sudo meson install -C builddir
