@@ -9,6 +9,7 @@
 <div align="center">
 
 ### 🖥️ GTK Version
+
 <table>
   <tr>
     <td><img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/main.png" alt="Home" width="100%"></td>
@@ -18,6 +19,7 @@
 </table>
 
 ### 🧩 Qt Version
+
 <table>
   <tr>
     <td><img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/qt/main.png" alt="Home" width="100%"></td>
@@ -39,6 +41,7 @@ pip install lfy
 ```
 
 Run:
+
 ```bash
 lfy
 ```
@@ -51,6 +54,7 @@ lfy
 Includes `rpm`, `deb`, `flatpak`, `archlinux`, `whl`
 
 ✅ Supported systems:
+
 - Arch Linux (latest)
 - Ubuntu 24.04
 - openSUSE Tumbleweed
@@ -66,21 +70,17 @@ Includes `rpm`, `deb`, `flatpak`, `archlinux`, `whl`
 
 Ensure you have the necessary dependencies installed, then execute:
 
-**Method 1 - Python:**
 ```bash
 git clone https://github.com/ldrfy/lfy.git
 cd lfy
-python -m build
-pip install dist/*.whl
-```
 
-**Method 2 - Meson:**
-```bash
-git clone https://github.com/ldrfy/lfy.git
-cd lfy
-meson setup builddir
-meson compile -C builddir
-sudo meson install -C builddir
+# Build all supported package formats: aur, deb, rpm, flatpak, pip
+make release
+
+# Or build a specific format; see the `release` section in the Makefile
+
+# The generated packages will be located in the `dist` directory
+ls -l dist
 ```
 
 ---

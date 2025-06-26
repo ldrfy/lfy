@@ -9,6 +9,7 @@
 <div align="center">
 
 ### 🖥️ GTK 版本
+
 <table>
   <tr>
     <td><img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/gtk/main.png" alt="首页" width="100%"></td>
@@ -18,6 +19,7 @@
 </table>
 
 ### 🧩 Qt 版本
+
 <table>
   <tr>
     <td><img src="https://raw.githubusercontent.com/ldrfy/docs/main/images/qt/main.png" alt="首页" width="100%"></td>
@@ -39,6 +41,7 @@ pip install lfy
 ```
 
 运行：
+
 ```bash
 lfy
 ```
@@ -51,6 +54,7 @@ lfy
 包含 `rpm`、`deb`、`flatpak`、`archlinux`、`whl`
 
 ✅ 已适配系统：
+
 - Arch Linux（最新版）
 - Ubuntu 24.04
 - openSUSE Tumbleweed
@@ -66,21 +70,17 @@ lfy
 
 确保已安装必要的依赖项，然后执行：
 
-**方法一 - Python:**
-```
+```bash
 git clone https://github.com/ldrfy/lfy.git
 cd lfy
-python -m build
-pip install dist/*.whl
-```
 
-**方法二 - Meson:**
-```
-git clone https://github.com/ldrfy/lfy.git
-cd lfy
-meson setup builddir
-meson compile -C builddir
-sudo meson install -C builddir
+# 构建所有支持的格式（aur、deb、rpm、flatpak、pip）
+make release
+
+# 或者只构建特定格式，具体命令请参考 Makefile 中的 `release`
+
+# 打包结果将在 dist 文件夹中生成
+ls -l dist
 ```
 
 ---
