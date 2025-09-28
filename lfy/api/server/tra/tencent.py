@@ -100,7 +100,7 @@ class TencentServer(ServerTra):
             "fr": 7,
             "it": 8,
             "es": 9,
-            "pt": 9,
+            "pt": 10,
         }
         super().__init__("tencent", _("tencent"))
         # https://cloud.tencent.com/document/product/551/104415
