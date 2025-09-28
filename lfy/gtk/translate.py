@@ -66,6 +66,9 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.tra_server = create_server_t(server_key_t)
         self.ocr_server = create_server_o(self.sg.g("server-ocr-selected-key"))
 
+        self.dd_server.set_expression(Gtk.PropertyExpression.new(Gtk.StringObject, None, "string"))
+        self.dd_lang.set_expression(Gtk.PropertyExpression.new(Gtk.StringObject, None, "string"))
+
         # 0的再设置也无效
         self.jn = i == 0
         self.dd_server.set_model(Gtk.StringList.new(get_server_names_t()))
