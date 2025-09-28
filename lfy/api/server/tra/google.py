@@ -25,9 +25,7 @@ def _get_session():
     return session
 
 
-def _translate(st: ServerTra, text:str, lang_to):
-
-    text = text.replace("#", "")
+def _translate(st: ServerTra, text: str, lang_to):
     url = 'https://translate.google.com/translate_a/t'
     params = {'tl': lang_to, 'sl': "auto", 'ie': 'UTF-8',
               'oe': 'UTF-8', 'client': 'at', 'dj': '1',
@@ -49,7 +47,6 @@ class GoogleServer(ServerTra):
     """
 
     def __init__(self):
-
         # https://cloud.google.com/translate/docs/languages
         lang_key_ns = {
             "zh": 1,

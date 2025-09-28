@@ -1,11 +1,23 @@
 '翻译'
 from gettext import gettext as _
-
+import html
 from lfy.api.server import Server
 
 NO_TRANSLATED_TXTS = [
     "\"server-sk-",
 ]
+
+
+def normalize_translation_text(s: str) -> str:
+    s = s.strip()
+    # 1. 确保是字符串
+    if not isinstance(s, str):
+        s = str(s)
+
+    # 2. 把 HTML 实体解码一次（避免重复解码）
+    s = html.unescape(s)
+
+    return s
 
 
 class ServerTra(Server):
@@ -32,4 +44,6 @@ class ServerTra(Server):
         if len(args) != 2:
             raise ValueError("args: text, lang_to")
         ok, text = super().main(*args, **kwargs)
-        return ok, text.strip()
+        text = normalize_translation_text(text.strip())
+
+        return ok, text
