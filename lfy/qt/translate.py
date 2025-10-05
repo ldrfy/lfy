@@ -58,6 +58,8 @@ class TranslateWindow(QMainWindow):
 
         self.cb_lang = QComboBox(self)
         self.cb_lang.currentIndexChanged.connect(self._on_lang_changed)
+        self.cb_lang_from = QComboBox(self)
+        self.cb_lang_from.currentIndexChanged.connect(self._on_lang_changed)
 
         # 右边的两个选择按钮
         self.cb_del_wrapping = QCheckBox(_("Remove line breaks"), self)
@@ -73,6 +75,7 @@ class TranslateWindow(QMainWindow):
         btn_translate.setToolTip(_("Translate") + ": `Ctrl+T` or `Ctrl+Enter`")
 
         middle_layout.addWidget(self.cb_server)
+        middle_layout.addWidget(self.cb_lang_from)
         middle_layout.addWidget(self.cb_lang)
         middle_layout.addStretch(1)  # 用来拉伸中间部分
         middle_layout.addWidget(self.cb_del_wrapping)
@@ -100,6 +103,7 @@ class TranslateWindow(QMainWindow):
         # OCR服务
         self.server_o: ServerOCR = None
         self.lang_t = None
+        self.lang_from = None
         self.my_thread = None
         self.tray: QSystemTrayIcon = None
         self.text_last = ""
@@ -129,6 +133,7 @@ class TranslateWindow(QMainWindow):
         """
 
         self.cb_server.setEditable(True)
+        self.cb_lang_from.setEditable(True)
         self.cb_lang.setEditable(True)
 
         # 加速启动
@@ -141,7 +146,9 @@ class TranslateWindow(QMainWindow):
 
         i = server_key2i(server_key_t)
         j = lang_n2j(i, self.sg.g("lang-selected-n", 0, int))
+        j_from = lang_n2j(i, self.sg.g("lang-from-selected-n", 0, int))
         self.lang_t = get_lang(i, j)
+        self.lang_from = get_lang(i, j_from)
 
         self.jn = i == 0
         self.cb_server.addItems(get_server_names_t())
@@ -149,6 +156,7 @@ class TranslateWindow(QMainWindow):
         self.cb_server.setCurrentIndex(i)
 
         self.cb_lang.setCurrentIndex(j)
+        self.cb_lang_from.setCurrentIndex(j_from)
 
         self.cb_del_wrapping.setChecked(True)
 
@@ -208,14 +216,18 @@ class TranslateWindow(QMainWindow):
             return
         i = self.cb_server.currentIndex()
         j = lang_n2j(i, self.sg.g("lang-selected-n", 0, int))
+        j_from = lang_n2j(i, self.sg.g("lang-from-selected-n", 0, int))
 
-        self.jn = j == 0
+        self.jn = False
         self.cb_lang.clear()
         self.cb_lang.addItems(get_lang_names(i))
+        self.cb_lang.setCurrentIndex(j)
+        self.cb_lang_from.clear()
+        self.cb_lang_from.addItems(get_lang_names(i))
+        self.cb_lang_from.setCurrentIndex(j_from)
+
         self.jn = True
-        if j != 0:
-            # 新设置会是0，无需再设置
-            self.cb_lang.setCurrentIndex(j)
+        self._on_lang_changed()
 
         self.sg.s("server-selected-key", get_server_t(i).key)
 
@@ -223,8 +235,11 @@ class TranslateWindow(QMainWindow):
         if not self.jn:
             return
         j = self.cb_lang.currentIndex()
+        j_from = self.cb_lang_from.currentIndex()
 
         if j < 0:
+            return
+        if j_from < 0:
             return
         i = self.cb_server.currentIndex()
 
@@ -232,7 +247,9 @@ class TranslateWindow(QMainWindow):
         if server.key != self.server_t.key:
             self.server_t = server
         self.lang_t = get_lang(i, j)
+        self.lang_from = get_lang(i, j_from)
         self.sg.s("lang-selected-n", self.lang_t.n)
+        self.sg.s("lang-from-selected-n", self.lang_from.n)
 
         self.update_translate()
 
@@ -310,9 +327,9 @@ class TranslateWindow(QMainWindow):
             return
 
         def tt(_p=None):
-            _ok, text_to = self.server_t.main(text_from, self.lang_t.key)
+            _ok, text_to = self.server_t.main(text_from, self.lang_t.key, self.lang_from.key)
 
-            return (text_from, text_to)
+            return text_from, text_to
 
         self.set_text_from_to((text_from, _("Translating...")), True)
 
