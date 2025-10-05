@@ -1,4 +1,4 @@
-'gtk版本入口'
+"""gtk版本入口"""
 import os
 import sys
 import threading
@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 from gettext import gettext as _
 
-from gi.repository import Adw, Gdk, Gio, GLib
+from gi.repository import Adw, Gdk, Gio, GLib # type: ignore
 
 from lfy import APP_DES, APP_ID, PACKAGE_URL, RES_PATH, VERSION
 from lfy.gtk import get_gtk_msg
@@ -82,7 +82,7 @@ class LfyApplication(Adw.Application):
         ad = Adw.AboutDialog.new_from_appdata(path, VERSION)
         ad.set_developers([f'yuh <yuhldr@qq.com>, 2023-{year}'])
         ad.set_designers([f'yuh <yuhldr@qq.com>, 2023-{year}'])
-        ad.set_documenters([f'yuh <yuhldr@qq.com>, 2023-{year}'])
+        ad.set_documenters([f'yuh <yuhldr@qq.com>, 2023-{year}', f'John Peter Sa, 2025-{year}'])
         ad.set_translator_credits(_('translator_credits'))
         ad.set_comments(APP_DES)
         ad.set_copyright(f'© 2023-{year} yuh')

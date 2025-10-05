@@ -1,10 +1,10 @@
-'设置'
+"""设置"""
 # pylint: disable=E1101
 
 import time
 from gettext import gettext as _
 
-from gi.repository import Adw, Gdk, Gio, Gtk
+from gi.repository import Adw, Gdk, Gio, Gtk # type: ignore
 
 from lfy import APP_ID
 from lfy.api import (get_server_names_o, get_server_names_t_sk, get_servers_o,

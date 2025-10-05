@@ -1,4 +1,4 @@
-'gtk启动'
+"""gtk启动"""
 import json
 import os
 import platform
@@ -16,7 +16,7 @@ gi.require_version('Gio', '2.0')
 gi.require_version('Gtk', '4.0')
 gi.require_version('Gdk', '4.0')
 
-from gi.repository import Adw, Gio, Gtk  # pylint: disable=C0413,C0411
+from gi.repository import Adw, Gio, Gtk   # type: ignore
 
 try:
     if "/usr/share/" in SCHEMAS_DIR:
