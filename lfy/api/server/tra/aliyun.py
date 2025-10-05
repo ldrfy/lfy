@@ -44,7 +44,7 @@ def _get_iso_8061_date():
     return datetime.now(timezone.utc).isoformat()
 
 
-def _translate(p: ServerTra, s, lang_to="en"):
+def _translate(p: ServerTra, s, lang_to="en", lang_from="auto"):
     """翻译
 
     Args:
@@ -66,7 +66,7 @@ def _translate(p: ServerTra, s, lang_to="en"):
         "SignatureMethod": "HMAC-SHA1",
         "SignatureNonce": quote(_random_string(12)),
         "SignatureVersion": "1.0",
-        "SourceLanguage": "auto",
+        "SourceLanguage": lang_from,
         "SourceText": _encode_rfc3986_uri_component(s),
         "TargetLanguage": lang_to,
         "Timestamp": _get_iso_8061_date(),
@@ -100,6 +100,7 @@ class AliYunServer(ServerTra):
         # Development documentation
         # https://help.aliyun.com/zh/machine-translation/developer-reference/machine-translation-language-code-list
         lang_key_ns = {
+            "auto": 0,
             "zh": 1,
             "en": 3,
             "ja": 4,

@@ -10,7 +10,7 @@ from lfy.api.server.tra import ServerTra
 from lfy.utils import s2ks
 
 
-def _translate(p: ServerTra, s, lang_to="auto"):
+def _translate(p: ServerTra, s, lang_to="auto", lang_from="auto"):
     """翻译
 
     Args:
@@ -25,7 +25,7 @@ def _translate(p: ServerTra, s, lang_to="auto"):
     app_id, secret_key = s2ks(p.get_conf())
 
     url = "https://api.fanyi.baidu.com/api/trans/vip/translate"
-    url = f"{url}?from=auto&to={lang_to}&appid={app_id}&q={quote(s)}"
+    url = f"{url}?from={lang_from}&to={lang_to}&appid={app_id}&q={quote(s)}"
 
     salt = random.randint(32768, 65536)
     sign = app_id + s + str(salt) + secret_key

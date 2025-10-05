@@ -1,18 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- Created with Cambalache 0.90.4 -->
+<!-- Created with Cambalache 0.96.1 -->
 <interface>
-  <requires lib="gtk" version="4.12"/>
+  <!-- interface-name theme-switcher.ui -->
+  <requires lib="gtk" version="4.18"/>
   <template class="ThemeSwitcher" parent="GtkBox">
     <property name="hexpand">true</property>
     <child>
       <object class="GtkBox" id="box">
         <property name="hexpand">true</property>
-        <property name="orientation">0</property>
+        <property name="orientation">horizontal</property>
         <property name="spacing">12</property>
         <child>
           <object class="GtkCheckButton" id="system">
             <property name="focus-on-click">false</property>
-            <property name="halign">3</property>
+            <property name="halign">center</property>
             <property name="hexpand">true</property>
             <property name="tooltip-text" translatable="yes">Follow System Style</property>
             <property name="visible" bind-source="ThemeSwitcher" bind-property="show-system" bind-flags="sync-create"/>
@@ -27,7 +28,7 @@
           <object class="GtkCheckButton" id="light">
             <property name="focus-on-click">false</property>
             <property name="group">system</property>
-            <property name="halign">3</property>
+            <property name="halign">center</property>
             <property name="hexpand">true</property>
             <property name="tooltip-text" translatable="yes">Light Style</property>
             <signal name="notify::active" handler="_on_color_scheme_changed"/>
@@ -41,7 +42,7 @@
           <object class="GtkCheckButton" id="dark">
             <property name="focus-on-click">false</property>
             <property name="group">system</property>
-            <property name="halign">3</property>
+            <property name="halign">center</property>
             <property name="hexpand">true</property>
             <property name="tooltip-text" translatable="yes">Dark Style</property>
             <signal name="notify::active" handler="_on_color_scheme_changed"/>

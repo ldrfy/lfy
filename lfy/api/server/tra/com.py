@@ -20,10 +20,10 @@ def _translate0(args):
         _type_: _description_
     """
     st = time.time()
-    server, text, lang_to = args
+    server, text, lang_to, lang_from = args
     server: ServerTra
     try:
-        a, b = server.main(text, lang_to)
+        a, b = server.main(text, lang_to, lang_from)
         return a, b, server, time.time()-st
     except Exception as e:  # pylint: disable=W0718
         em = _("something error: {}")\
@@ -32,7 +32,7 @@ def _translate0(args):
         return False, em, server, time.time()-st
 
 
-def get_args(text, lang_to):
+def get_args(text, lang_to, lang_from):
     """_summary_
 
     Args:
@@ -50,12 +50,17 @@ def get_args(text, lang_to):
             if lang.n == int(lang_to):
                 lang_to_ = lang.key
                 break
-        args.append((server, text, lang_to_))
+        lang_from_ = "en"
+        for lang in server.langs:
+            if lang.n == int(lang_from):
+                lang_from_ = lang.key
+                break
+        args.append((server, text, lang_to_, lang_from_))
     return args
 
 
-def _translate(_st: ServerTra, text, lang_to):
-    args = get_args(text, lang_to)
+def _translate(_st: ServerTra, text, lang_to, lang_from):
+    args = get_args(text, lang_to, lang_from)
 
     with Pool(len(args)) as p:
         s_ok = ""
@@ -83,6 +88,7 @@ class AllServer(ServerTra):
 
         # https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support
         lang_key_ns = {
+            "0": 0,
             "1": 1,
             "3": 3,
             "4": 4,

@@ -93,7 +93,6 @@ class PreferencesDialog(Adw.PreferencesDialog):
 
         def on_active_copy(cb2, res):
             s = cb2.read_text_finish(res)
-            print(s)
             s = restore_gsettings(s)
             if len(s) == 0:
                 s = _("It takes effect when you restart lfy")

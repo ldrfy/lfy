@@ -106,7 +106,7 @@ def _get_data(request_body, sk, ak):
     return header
 
 
-def _translate(p: ServerTra, s, lang_to="en"):
+def _translate(p: ServerTra, s, lang_to="en", lang_from="auto"):
     """翻译
 
     Args:
@@ -121,7 +121,7 @@ def _translate(p: ServerTra, s, lang_to="en"):
     ak, sk = s2ks(p.get_conf())
 
     request_body = {
-        # "SourceLanguage": "auto",
+        "SourceLanguage": lang_from,
         "TargetLanguage": lang_to,
         "TextList": [s]
     }
@@ -152,6 +152,7 @@ class HuoShanServer(ServerTra):
         # Development documentation
         # https://www.volcengine.com/docs/4640/35107
         lang_key_ns = {
+            "auto": 0,
             "zh": 1,
             "en": 3,
             "ja": 4,

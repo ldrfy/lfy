@@ -41,8 +41,9 @@ class ServerTra(Server):
         if ss_ntt:
             return False, _("This time the content contains "
                             "private information and is not translated")
-        if len(args) != 2:
-            raise ValueError("args: text, lang_to")
+        if len(args) != 3:
+            raise ValueError("args: text, lang_to, lang_from")
+        print(args)
         ok, text = super().main(*args, **kwargs)
         text = normalize_translation_text(text.strip())
 

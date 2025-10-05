@@ -32,7 +32,11 @@
 		</key>
 		<key type="i" name="lang-selected-n">
 			<default>3</default>
-			<description>The currently selected translation language</description>
+			<description>The currently selected translation language to</description>
+		</key>
+		<key type="i" name="lang-from-selected-n">
+			<default>3</default>
+			<description>The currently selected translation language from</description>
 		</key>
 		<key type="i" name="window-width">
 			<default>500</default>

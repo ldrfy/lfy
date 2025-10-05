@@ -150,7 +150,7 @@ class LfyApplication(Adw.Application):
         """删除换行
         """
         # pylint: disable=E1101
-        self.win.notice_action(self.win.cbtn_del_wrapping,
+        self.win.notice_action(self.win.cb_del_wrapping,
                                _("Next translation not remove line breaks"),
                                _("Next translation remove line breaks"))
 
@@ -165,7 +165,7 @@ class LfyApplication(Adw.Application):
         Args:
             f (_type_): _description_
         """
-        self.win.notice_action(self.win.cbtn_add_old,
+        self.win.notice_action(self.win.cb_add_old,
                                _("Next translation without splicing text"),
                                _("Next translation splicing text"))
 

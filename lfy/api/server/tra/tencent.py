@@ -43,7 +43,7 @@ def _sign_str(key, s, method):
     return base64.b64encode(hmac_str)
 
 
-def _translate(p: ServerTra, query_text, lang_to="en"):
+def _translate(p: ServerTra, query_text, lang_to="en", lang_from="auto"):
     """腾讯翻译接口
 
     Args:
@@ -65,7 +65,7 @@ def _translate(p: ServerTra, query_text, lang_to="en"):
         "Nonce": random.randint(1, int(1e6)),
         "Version": "2018-03-21",
         "ProjectId": 0,
-        "Source": "auto",
+        "Source": lang_from,
         "SourceText": query_text,
         "Target": lang_to
     }
@@ -92,6 +92,7 @@ class TencentServer(ServerTra):
         # Development documentation
         # https://cloud.tencent.com/document/product/551/15619
         lang_key_ns = {
+            "auto": 0,
             "zh": 1,
             "en": 3,
             "jp": 4,

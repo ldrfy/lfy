@@ -1,4 +1,4 @@
-"""谷歌翻译接口
+"""bing翻译接口
 """
 import random
 import re
@@ -64,7 +64,7 @@ def g_url(host, hs):
     return f'https://{host}/ttranslatev3?isVertical=1&&IG={hs["IG"]}&IID={hs["my_iid"]}'
 
 
-def _translate(st: ServerTra, text, lang_to, n=0, s=""):
+def _translate(st: ServerTra, text, lang_to, lang_from="auto-detect", n=0, s=""):
 
     if st.session is None:
         st.session = _init_session()
@@ -84,7 +84,7 @@ def _translate(st: ServerTra, text, lang_to, n=0, s=""):
         st.session.headers.update({'my_iid': g_iid()})
         hs = st.session.headers
 
-    data = {'': '', 'text': text, "fromLang": "auto-detect",
+    data = {'': '', 'text': text, "fromLang": lang_from,
             'to': lang_to, 'token': hs['token'], 'key': hs['key'],
             'tryFetchingGenderDebiasedTranslations': True}
 
@@ -120,6 +120,7 @@ class BingServer(ServerTra):
 
         # https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support
         lang_key_ns = {
+            "auto-detect": 0,
             "zh-Hans": 1,
             "en": 3,
             "ja": 4,

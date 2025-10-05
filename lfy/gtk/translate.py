@@ -1,14 +1,13 @@
-'''翻译主窗口'''
-# pylint: disable=E1101
+"""翻译主窗口"""
 import threading
 from gettext import gettext as _
 
-from gi.repository import Adw, Gdk, GLib, Gtk
+from gi.repository import Adw, Gdk, GLib, Gtk # type: ignore
 
 from lfy.api import (create_server_o, create_server_t, get_lang,
                      get_lang_names, get_server_names_t, get_server_t,
                      lang_n2j, server_key2i)
-from lfy.api.server import Server
+from lfy.api.server import Server, Lang
 from lfy.gtk.notify import nf_t
 from lfy.gtk.widgets.theme_switcher import ThemeSwitcher
 from lfy.utils import process_text
@@ -17,13 +16,8 @@ from lfy.utils.settings import Settings
 
 @Gtk.Template(resource_path='/cool/ldr/lfy/translate.ui')
 class TranslateWindow(Adw.ApplicationWindow):
-    """翻译窗口
-
-    Args:
-        Adw (_type_): _description_
-
-    Returns:
-        _type_: _description_
+    """
+    翻译窗口
     """
     __gtype_name__ = 'TranslateWindow'
 
@@ -31,8 +25,9 @@ class TranslateWindow(Adw.ApplicationWindow):
     tv_to: Gtk.TextView = Gtk.Template.Child()
     dd_server: Gtk.DropDown = Gtk.Template.Child()
     dd_lang: Gtk.DropDown = Gtk.Template.Child()
-    cbtn_add_old: Gtk.CheckButton = Gtk.Template.Child()
-    cbtn_del_wrapping: Gtk.CheckButton = Gtk.Template.Child()
+    dd_lang_from: Gtk.DropDown = Gtk.Template.Child()
+    cb_add_old: Gtk.CheckButton = Gtk.Template.Child()
+    cb_del_wrapping: Gtk.CheckButton = Gtk.Template.Child()
     sp_translate: Gtk.Spinner = Gtk.Template.Child()
     menu_btn: Gtk.MenuButton = Gtk.Template.Child()
     ato_translate: Adw.ToastOverlay = Gtk.Template.Child()
@@ -52,7 +47,8 @@ class TranslateWindow(Adw.ApplicationWindow):
         )
 
         # 翻译的key
-        self.lang_t = None
+        self.lang_t:Lang = None
+        self.lang_from_t:Lang = None
 
         self.jn = False
         # 可能包含上次的追加内容
@@ -68,6 +64,7 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         self.dd_server.set_expression(Gtk.PropertyExpression.new(Gtk.StringObject, None, "string"))
         self.dd_lang.set_expression(Gtk.PropertyExpression.new(Gtk.StringObject, None, "string"))
+        self.dd_lang_from.set_expression(Gtk.PropertyExpression.new(Gtk.StringObject, None, "string"))
 
         # 0的再设置也无效
         self.jn = i == 0
@@ -77,7 +74,7 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         self.menu_btn.props.popover.add_child(ThemeSwitcher(), 'theme')
 
-        self.connect('unrealize', self.save_settings)
+        self.connect('unrealize', self._save_settings)
 
         # 创建键盘事件控制器
         controller = Gtk.EventControllerKey()
@@ -92,7 +89,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             _ (controller): _description_
             keyval (keyval): _description_
             _keycode (keycode): _description_
-            _state (state): _description_
+            state (state): _description_
 
         Returns:
             bool: 继续执行默认行为
@@ -101,11 +98,8 @@ class TranslateWindow(Adw.ApplicationWindow):
             self.translate_text("reload", True)
         return False  # 返回 False 以继续执行默认行为
 
-    def save_settings(self, _a):
+    def _save_settings(self, _a):
         """保存设置
-
-        Args:
-            _a (TranslateWindow): _description_
         """
         if not self.is_maximized():
             size = self.get_default_size()
@@ -114,21 +108,35 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         self.sg.s("server-selected-key", self.tra_server.key)
         self.sg.s("lang-selected-n", self.lang_t.n)
+        self.sg.s("lang-from-selected-n", self.lang_from_t.n)
 
     @Gtk.Template.Callback()
     def _on_server_changed(self, drop_down, _a):
+        """
+        翻译服务选择
+        Args:
+            drop_down:
+            _a:
 
+        Returns:
+
+        """
         if not self.jn:
             return
 
         i = drop_down.get_selected()
 
         j = lang_n2j(i, self.sg.g("lang-selected-n"))
-        # 0的再设置也无效
-        self.jn = j == 0
+        j_from = lang_n2j(i, self.sg.g("lang-from-selected-n"))
+
+        self.jn = False
+        # 手动调用 _on_lang_changed
         self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
-        self.jn = True
+        self.dd_lang_from.set_model(Gtk.StringList.new(get_lang_names(i)))
         self.dd_lang.set_selected(j)
+        self.dd_lang_from.set_selected(j_from)
+        self.jn = True
+        self._on_lang_changed(None, None)
 
     @Gtk.Template.Callback()
     def _on_lang_changed(self, _drop_down, _a):
@@ -137,25 +145,31 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         i = self.dd_server.get_selected()
         j = self.dd_lang.get_selected()
+        j_from = self.dd_lang_from.get_selected()
 
         server: Server = get_server_t(i)
         if server.key != self.tra_server.key:
             self.tra_server = server
         self.lang_t = get_lang(i, j)
+        self.lang_from_t = get_lang(i, j_from)
 
-        self.save_settings("")
+        self._save_settings(None)
         self.translate_text(self.last_text, True)
 
     @Gtk.Template.Callback()
     def _set_tv_copy(self, _a):
+        """
+        快捷键复制剪贴时触发，防止翻译
+        Args:
+            _a:
+
+        Returns:
+
+        """
         self.is_tv_copy = True
 
-    def ocr_image(self, path):
-        """执行ocr文本识别
+    def ocr_image(self, path: str):
 
-        Args:
-            path (str): _description_
-        """
 
         _k = self.sg.g("server-ocr-selected-key")
         if _k != self.ocr_server.key:
@@ -170,6 +184,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         Args:
             text (str): _description_
             reload (bool, optional): _description_. Defaults to False.
+            del_wrapping (bool, optional): _description_. Defaults to True.
         """
 
         if not text:
@@ -182,9 +197,9 @@ class TranslateWindow(Adw.ApplicationWindow):
                 self.is_tv_copy = False
                 return
 
-            if self.cbtn_add_old.get_active():
+            if self.cb_add_old.get_active():
                 text = f"{self.last_text} {text}"
-            if self.cbtn_del_wrapping.get_active() and del_wrapping:
+            if self.cb_del_wrapping.get_active() and del_wrapping:
                 text = process_text(text)
             self.last_text = text
             buffer_from.set_text(text)
@@ -200,21 +215,20 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         Args:
             s (str): _description_
-            server (Server): _description_
         """
 
         def _ing():
             self.sp_translate.start()
             self.tv_to.get_buffer().set_text(_("Translating..."))
 
-        def _ed(s):
-            self.tv_to.get_buffer().set_text(s)
+        def _ed(s2):
+            self.tv_to.get_buffer().set_text(s2)
             nf_t(self.app, f"{self.tra_server.name} " +
-                 _("Translation completed"), s)
+                 _("Translation completed"), s2)
             self.sp_translate.stop()
 
         GLib.idle_add(_ing)
-        _ok, text = self.tra_server.main(s, self.lang_t.key)
+        _ok, text = self.tra_server.main(s, self.lang_t.key, self.lang_from_t.key)
         GLib.idle_add(_ed, text)
 
     def req_ocr(self, s):
@@ -222,35 +236,34 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         Args:
             s (str): _description_
-            server (Server): _description_
         """
 
         def _ing(name):
             self.sp_translate.start()
             self.tv_from.get_buffer().set_text(_("{} OCRing...").format(name))
 
-        def _ed(s):
-            self.tv_from.get_buffer().set_text(s)
-            self.translate_text(s)
+        def _ed(s2):
+            self.tv_from.get_buffer().set_text(s2)
+            self.translate_text(s2)
 
         GLib.idle_add(_ing, self.ocr_server.name)
 
         _ok, text = self.ocr_server.main(s)
-        if _ok and self.cbtn_del_wrapping.get_active():
+        if _ok and self.cb_del_wrapping.get_active():
             text = process_text(text)
         GLib.idle_add(_ed, text)
 
-    def notice_action(self, cbtn: Gtk.CheckButton, text_ok, text_no):
+    def notice_action(self, cb: Gtk.CheckButton, text_ok, text_no):
         """在 main.py 中的通知
 
         Args:
-            ok (_type_): _description_
+            cb (Gtk.CheckButton): _description_:
             text_ok (_type_): _description_
             text_no (_type_): _description_
         """
 
-        cbtn.set_active(not cbtn.get_active())
-        if not cbtn.get_active():
+        cb.set_active(not cb.get_active())
+        if not cb.get_active():
             self.toast_msg(text_ok)
         else:
             self.toast_msg(text_no)
