@@ -6,7 +6,7 @@
   <ui template-class="PreferencesDialog" filename="preference.ui" sha256="b1016e05834f279026537791acce51c9e0444f6a626ec749edf9f19678553318"/>
   <ui filename="test.ui" sha256="b245c85bb7bd2f4e2da9dfb80626f3d87cf857a1c98f56d98c7946207bd68872"/>
   <ui filename="appindicator.ui" sha256="64ea60c788220f055560d7051cf61e40be0fe1dac84826e556ee3574fc84b9cd"/>
-  <ui filename="help-overlay.ui" sha256="dbe1bdcf0f9a80febdd34b58081921d8fdb6178d68b2a0ca69d39a2669d955f0"/>
+  <ui filename="help-overlay.ui" sha256="2c00debb1a3bb0a1a17a9608093d94bdc3a0a08114aca2bd8b0281f479a395f6"/>
   <ui template-class="ServerPreferencesPage" filename="server-preferences.ui" sha256="698edcb8790bc4ac10d311b19338e84207063190594a2299a7196dd02731dd2a"/>
   <ui template-class="ThemeSwitcher" filename="theme-switcher.ui" sha256="22027ffc13ce449515450d18f1b982e3b3edb3ae79e24fcd446bcf5af28171ea"/>
 </cambalache-project>

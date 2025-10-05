@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 from gettext import gettext as _
 
-from gi.repository import Adw, Gdk, Gio, GLib # type: ignore
+from gi.repository import Adw, Gdk, Gio, GLib, Gtk # type: ignore
 
 from lfy import APP_DES, APP_ID, PACKAGE_URL, RES_PATH, VERSION
 from lfy.gtk import get_gtk_msg
@@ -119,22 +119,26 @@ class LfyApplication(Adw.Application):
         action.set_state(value)
         self.win.toast_msg(text)
 
+    def on_action_copy_text(self, _action: Gio.SimpleAction, _value: GLib.Variant):
+        self.win.copy_to_text(self.cb)
+
+
     def create_actions(self):
         """创建菜单
         """
 
         names = ['preferences', 'quit', 'about',
                  'find_update', 'del_wrapping', 'splice_text',
-                 'translate', 'copy2translate']
+                 'translate', 'copy2translate', "copy_text"]
         callbacks = [self.on_preferences_action, self.quit_app, self.on_about_action,
                      self.find_update, self.on_del_wrapping_action, self.on_splice_text_action,
-                     self.set_translate_action, self.on_action_trans_now]
-        shortcuts = ['<Ctrl>comma', '<primary>q', None,
+                     self.set_translate_action, self.on_action_trans_now, self.on_action_copy_text]
+        shortcuts = ['<primary>comma', '<primary>q', None,
                      None, '<alt>d', '<alt>c',
-                     '<primary>t', '<alt>t']
+                     '<primary>t', '<alt>t', '<primary><shift>c']
         states = [None, None, None,
                   None, None, None,
-                  None, GLib.Variant.new_boolean(self.sg.g("copy-auto-translate"))]
+                  None, GLib.Variant.new_boolean(self.sg.g("copy-auto-translate")), None]
 
         for name, fun, shortcut, state in zip(names, callbacks, shortcuts, states):
             action = Gio.SimpleAction(name=name, state=state)

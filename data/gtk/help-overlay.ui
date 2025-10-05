@@ -7,12 +7,12 @@
     <property name="modal">True</property>
     <child>
       <object class="GtkShortcutsSection">
-        <property name="max-height">10</property>
+        <property name="max-height">0</property>
+        <property name="orientation">horizontal</property>
         <property name="section-name">shortcuts</property>
         <child>
           <object class="GtkShortcutsGroup" id="general">
-            <property name="baseline-child">0</property>
-            <property name="title" translatable="yes" context="shortcut window">General</property>
+            <property name="title" translatable="yes">General</property>
             <child>
               <object class="GtkShortcutsShortcut" id="app_translate">
                 <property name="action-name">app.translate</property>
@@ -20,10 +20,9 @@
               </object>
             </child>
             <child>
-              <object class="GtkShortcutsShortcut" id="app_copy2translate">
-                <property name="action-name">app.copy2translate</property>
-                <property name="title" translatable="yes">Copy to translate</property>
-                <property name="tooltip-text" translatable="yes">Copy detected, translate immediately</property>
+              <object class="GtkShortcutsShortcut" id="app_copy_text">
+                <property name="action-name">app.copy_text</property>
+                <property name="title" translatable="yes">Copy Translation Results</property>
               </object>
             </child>
             <child>
@@ -38,6 +37,19 @@
                 <property name="action-name">app.del_wrapping</property>
                 <property name="title" translatable="yes">Remove line breaks</property>
                 <property name="tooltip-text" translatable="yes">Splice the next copied text with the previous text</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkShortcutsGroup" id="other">
+            <property name="baseline-child">0</property>
+            <property name="title" translatable="yes" context="shortcut window">Other</property>
+            <child>
+              <object class="GtkShortcutsShortcut" id="app_copy2translate">
+                <property name="action-name">app.copy2translate</property>
+                <property name="title" translatable="yes">Copy to translate</property>
+                <property name="tooltip-text" translatable="yes">Copy detected, translate immediately</property>
               </object>
             </child>
             <child>

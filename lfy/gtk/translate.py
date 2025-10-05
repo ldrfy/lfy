@@ -253,17 +253,17 @@ class TranslateWindow(Adw.ApplicationWindow):
             text = process_text(text)
         GLib.idle_add(_ed, text)
 
-    def notice_action(self, cb: Gtk.CheckButton, text_ok, text_no):
+    def notice_action(self, gcb: Gtk.CheckButton, text_ok, text_no):
         """在 main.py 中的通知
 
         Args:
-            cb (Gtk.CheckButton): _description_:
+            gcb (Gtk.CheckButton): _description_:
             text_ok (_type_): _description_
             text_no (_type_): _description_
         """
 
-        cb.set_active(not cb.get_active())
-        if not cb.get_active():
+        gcb.set_active(not gcb.get_active())
+        if not gcb.get_active():
             self.toast_msg(text_ok)
         else:
             self.toast_msg(text_no)
@@ -280,3 +280,18 @@ class TranslateWindow(Adw.ApplicationWindow):
         toast.dismiss()
         toast.set_title(toast_msg)
         self.ato_translate.add_toast(toast)
+
+    def copy_to_text(self, cb: Gdk.Clipboard):
+        """
+        快捷键复制到剪贴板
+        Returns:
+
+        """
+        # 临时不响应剪贴板变化
+        self.is_tv_copy = True
+
+        buf = self.tv_to.get_buffer()
+        start_iter, end_iter = buf.get_bounds()
+        text = buf.get_text(start_iter, end_iter, False)
+        cb.set(text)
+        self.toast_msg(_("Translation results have been copied: {}").format(text))
