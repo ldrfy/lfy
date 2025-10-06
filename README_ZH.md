@@ -85,9 +85,14 @@ ls -l dist
 
 ---
 
+## 🌐 翻译
+
+> [翻译说明](https://github.com/ldrfy/docs/blob/main/TRANSLATE.md)
+
+[![翻译状态](https://hosted.weblate.org/widget/lfy/lfy/multi-auto.svg)](https://hosted.weblate.org/engage/lfy/)
+
 ## 📚 文档与社区
 
 - 📘 [软件文档](https://github.com/ldrfy/docs)
 - 🛠️ [贡献说明](https://github.com/ldrfy/docs/blob/main/CONTRIBUTE.md)
-- 🌐 [翻译说明](https://github.com/ldrfy/docs/blob/main/TRANSLATE.md)
 - 📝 [更新日志](https://github.com/ldrfy/docs/blob/main/CHANGELOG.md)
