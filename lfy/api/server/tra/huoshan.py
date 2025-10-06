@@ -49,7 +49,6 @@ def _get_signed_headers(header):
 
 
 def _get_data(request_body, sk, ak):
-
     # 签名算法
     # https://www.volcengine.com/docs/6369/67269
     # 文档
@@ -111,8 +110,8 @@ def _translate(p: ServerTra, s, lang_to="en", lang_from="auto"):
 
     Args:
         s (str): 待翻译字符串
-        api_key_s (str): 密钥
         lang_to (str, optional): 字符串翻译为xx语言. Defaults to "auto".
+        lang_from (str): 待翻译文本为xx语言。 Defaults to "auto".
 
     Returns:
         _type_: _description_
@@ -121,10 +120,12 @@ def _translate(p: ServerTra, s, lang_to="en", lang_from="auto"):
     ak, sk = s2ks(p.get_conf())
 
     request_body = {
-        "SourceLanguage": lang_from,
         "TargetLanguage": lang_to,
         "TextList": [s]
     }
+    if lang_from != "auto":
+        request_body["SourceLanguage"] = lang_from
+
     header = _get_data(request_body, sk, ak)
 
     res: dict = p.session.post(
@@ -148,7 +149,6 @@ class HuoShanServer(ServerTra):
     """
 
     def __init__(self):
-
         # Development documentation
         # https://www.volcengine.com/docs/4640/35107
         lang_key_ns = {
