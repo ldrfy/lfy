@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 from gettext import gettext as _
 
-from gi.repository import Adw, Gdk, Gio, GLib, Gtk # type: ignore
+from gi.repository import Adw, Gdk, Gio, GLib, Gtk  # type: ignore
 
 from lfy import APP_DES, APP_ID, PACKAGE_URL, RES_PATH, VERSION
 from lfy.gtk import get_gtk_msg
@@ -29,11 +29,12 @@ class LfyApplication(Adw.Application):
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
 
         self.sg = Settings()
-        self.win: TranslateWindow = None
+        self.win: TranslateWindow
         self.cb = Gdk.Display().get_default().get_clipboard()
         self.img_md5 = ""
         self.text_last = ""
         self.copy_id = None
+        self.win = None
 
         self.create_actions()
 
@@ -73,8 +74,8 @@ class LfyApplication(Adw.Application):
         """_summary_
 
         Args:
-            widget (_type_): _description_
-            w (_type_): _description_
+            _widget (_type_): _description_
+            _w (_type_): _description_
         """
         path = f'{RES_PATH}/{APP_ID}.appdata.xml'
         year = datetime.now().year
@@ -95,8 +96,8 @@ class LfyApplication(Adw.Application):
         """打开设置
 
         Args:
-            widget (_type_): _description_
-            w (_type_): _description_
+            _widget (_type_): _description_
+            _w (_type_): _description_
         """
         PreferencesDialog().present(self.win)
 
@@ -107,7 +108,6 @@ class LfyApplication(Adw.Application):
             action (_type_): _description_
             value (_type_): _description_
         """
-        print("-------", value)
         if value:
             text = _("Copy detected, translate immediately")
             self.copy_id = self.cb.connect("changed", self._get_copy)
@@ -121,7 +121,6 @@ class LfyApplication(Adw.Application):
 
     def on_action_copy_text(self, _action: Gio.SimpleAction, _value: GLib.Variant):
         self.win.copy_to_text(self.cb)
-
 
     def create_actions(self):
         """创建菜单
@@ -167,7 +166,8 @@ class LfyApplication(Adw.Application):
         """拼接文本
 
         Args:
-            f (_type_): _description_
+            _widget (_type_): _description_
+            _w (_type_): _description_
         """
         self.win.notice_action(self.win.cb_add_old,
                                _("Next translation without splicing text"),
@@ -177,7 +177,8 @@ class LfyApplication(Adw.Application):
         """快捷键翻译
 
         Args:
-            f (_type_): _description_
+            _widget (_type_): _description_
+            _w (_type_): _description_
         """
         self.win.translate_text("reload", True)
 
@@ -187,6 +188,7 @@ class LfyApplication(Adw.Application):
         Args:
             cb (Gdk.Clipboard): _description_
         """
+
         def on_active_copy(cb2: Gdk.Clipboard, res):
             text = cb2.read_text_finish(res)
             if text == self.text_last:
@@ -195,11 +197,18 @@ class LfyApplication(Adw.Application):
             self.update_tr(text)
 
         def save_img(cb2: Gdk.Clipboard, res):
-            texture = cb2.read_texture_finish(res)
-            pixbuf = Gdk.pixbuf_get_from_texture(texture)
+            """
+            保存剪贴板图
+            Args:
+                cb2:
+                res:
+
+            Returns:
+
+            """
 
             path = get_cache_img_path()
-            pixbuf.savev(path, "png", (), ())
+            Gdk.pixbuf_get_from_texture(cb2.read_texture_finish(res)).savev(path, "png", (), ())
 
             md5_hash = cal_md5(path)
             # 防止wayland多次识别
@@ -244,7 +253,7 @@ class LfyApplication(Adw.Application):
                 # 手动更新
                 s = _("There is no new version.\
                       \nThe current version is {}.\
-                      \nYou can go to {} to view the beta version.")\
+                      \nYou can go to {} to view the beta version.") \
                     .format(VERSION, PACKAGE_URL)
                 GLib.idle_add(self.update_app, s)
 

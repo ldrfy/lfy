@@ -1,6 +1,4 @@
-'easyocr'
-from gettext import gettext as _
-
+"""easyocr"""
 from lfy.api.server.ocr import ServerOCR
 from lfy.utils import gen_img
 
@@ -10,7 +8,6 @@ def _fun_check(so: ServerOCR, p):
 
 
 def _fun_ocr(so: ServerOCR, img_path, ocr_p=""):
-
     import easyocr  # pylint: disable=C0415
 
     if not ocr_p:

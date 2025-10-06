@@ -3,11 +3,11 @@ from gettext import gettext as _
 
 # pylint: disable=E0611
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QKeySequence, QShortcut, QClipboard
+from PyQt6.QtGui import QKeySequence, QShortcut, QClipboard, QIcon
 from PyQt6.QtWidgets import (QApplication, QCheckBox, QComboBox, QHBoxLayout,
                              QMainWindow, QMessageBox, QPlainTextEdit,
                              QPushButton, QSplitter, QSystemTrayIcon,
-                             QVBoxLayout, QWidget)
+                             QVBoxLayout, QWidget, QLabel)
 
 from lfy.api import (create_server_o, create_server_t, get_lang,
                      get_lang_names, get_server_names_t, get_server_t,
@@ -59,6 +59,8 @@ class TranslateWindow(QMainWindow):
 
         self.cb_lang = QComboBox(self)
         self.cb_lang.currentIndexChanged.connect(self._on_lang_changed)
+        label = QLabel("▶")
+        label.setPixmap(QIcon.fromTheme("go-next").pixmap(16, 16))
         self.cb_lang_from = QComboBox(self)
         self.cb_lang_from.currentIndexChanged.connect(self._on_lang_changed)
 
@@ -77,6 +79,7 @@ class TranslateWindow(QMainWindow):
 
         middle_layout.addWidget(self.cb_server)
         middle_layout.addWidget(self.cb_lang_from)
+        middle_layout.addWidget(label)
         middle_layout.addWidget(self.cb_lang)
         middle_layout.addStretch(1)  # 用来拉伸中间部分
         middle_layout.addWidget(self.cb_del_wrapping)
@@ -182,7 +185,6 @@ class TranslateWindow(QMainWindow):
         self.translate_next = False
         self.cb.setText(self.te_from.toPlainText())
 
-
     def _copy_text(self):
         """复制，但是不进行翻译
         """
@@ -273,10 +275,11 @@ class TranslateWindow(QMainWindow):
         Returns:
             _type_: _description_
         """
+
         def oo(_p=None):
             _ok, text_from = self.server_o.main(img_path)
 
-            return (_ok, text_from)
+            return _ok, text_from
 
         def next_(param):
             _ok, s = param
@@ -298,13 +301,15 @@ class TranslateWindow(QMainWindow):
         self.te_from.setPlainText(text_from)
         self.te_to.setPlainText(text_to)
 
-        if not loading:
-            if self.tray and self.sg.g("notify-translation-results", d=True, t=bool):
-                self.tray.showMessage(_("Translation completed"), text_to,
-                                      QSystemTrayIcon.MessageIcon.Information, 2000)
+        if loading:
+            return
 
-            self.text_last = text_from
-            self.my_thread.clean_up()
+        if self.tray and self.sg.g("notify-translation-results", d=True, t=bool):
+            self.tray.showMessage(_("Translation completed"), text_to,
+                                  QSystemTrayIcon.MessageIcon.Information, 2000)
+
+        self.text_last = text_from
+        self.my_thread.clean_up()
 
     def update_translate(self):
         """无参数翻译

@@ -9,5 +9,4 @@ sys.path.append(PYTHON_DIR)
 from lfy.qt.main import main  # pylint: disable=C0413
 
 if __name__ == "__main__":
-
     main()

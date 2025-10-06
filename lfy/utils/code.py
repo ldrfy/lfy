@@ -82,7 +82,7 @@ def req_text(s, key_server="", key_lang_n=-1):
 
     except Exception as e:  # pylint: disable=W0718
         get_logger().error(e)
-        return _("something error: {}")\
+        return _("something error: {}") \
             .format(f"{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
 
 
@@ -115,14 +115,14 @@ def req_ocr(s=None, key_server=None, key_lang_n=-1):
 
     except Exception as e:  # pylint: disable=W0718
         get_logger().error(e)
-        return _("something error: {}")\
+        return _("something error: {}") \
             .format(f"{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
 
 
 def parse_lfy():
     """设置
     """
-    des = _('Command line translation or text recognition, such as {} or {}')\
+    des = _('Command line translation or text recognition, such as {} or {}') \
         .format('lfy -t "who am i" -s bing -l 1', 'lfy -o "/tmp/xxx.png" -s baidu -l 1')
     parser = argparse.ArgumentParser(description=des)
 

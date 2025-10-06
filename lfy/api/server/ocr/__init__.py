@@ -1,6 +1,5 @@
-'OCR'
+"""OCR"""
 import os
-from gettext import gettext as _
 
 from lfy.api.server import Server
 

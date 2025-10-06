@@ -23,7 +23,7 @@ def backup_gsettings(qt=None):
         keys = sg.ss.allKeys()
     else:
         from gi.repository import Gio  # pylint: disable=C0415
-        keys = Gio.SettingsSchemaSource.get_default()\
+        keys = Gio.SettingsSchemaSource.get_default() \
             .lookup(APP_ID, True).list_keys()
 
     backup_data = {key: sg.g(key) for key in keys}
@@ -48,7 +48,7 @@ def restore_gsettings(s, qt=None):
 
         if not qt:
             from gi.repository import Gio  # pylint: disable=C0415
-            keys = Gio.SettingsSchemaSource.get_default()\
+            keys = Gio.SettingsSchemaSource.get_default() \
                 .lookup(APP_ID, True).list_keys()
             error_keys = ""
             for key in backup_data.keys():

@@ -1,4 +1,4 @@
-'常量，尽可能不引用其他文件'
+"""常量，尽可能不引用其他文件"""
 from lfy.api.server.ocr import ServerOCR
 from lfy.api.server.ocr.baidu import BaiduServer as BaiduOCRServer
 from lfy.api.server.ocr.easyocr import EasyOcrServer

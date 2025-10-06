@@ -1,6 +1,7 @@
-'翻译'
-from gettext import gettext as _
+"""翻译"""
 import html
+from gettext import gettext as _
+
 from lfy.api.server import Server
 
 NO_TRANSLATED_TXTS = [

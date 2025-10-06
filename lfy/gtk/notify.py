@@ -1,5 +1,5 @@
 """提示"""
-from gi.repository import Adw, Gio # type: ignore
+from gi.repository import Adw, Gio  # type: ignore
 
 from lfy import APP_ID
 from lfy.utils.settings import Settings

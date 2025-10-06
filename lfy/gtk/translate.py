@@ -2,7 +2,7 @@
 import threading
 from gettext import gettext as _
 
-from gi.repository import Adw, Gdk, GLib, Gtk # type: ignore
+from gi.repository import Adw, Gdk, GLib, Gtk  # type: ignore
 
 from lfy.api import (create_server_o, create_server_t, get_lang,
                      get_lang_names, get_server_names_t, get_server_t,
@@ -47,8 +47,8 @@ class TranslateWindow(Adw.ApplicationWindow):
         )
 
         # 翻译的key
-        self.lang_t:Lang = None
-        self.lang_from_t:Lang = None
+        self.lang_t: Lang
+        self.lang_from_t: Lang
 
         self.jn = False
         # 可能包含上次的追加内容
@@ -126,15 +126,12 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         i = drop_down.get_selected()
 
-        j = lang_n2j(i, self.sg.g("lang-selected-n"))
-        j_from = lang_n2j(i, self.sg.g("lang-from-selected-n"))
-
         self.jn = False
         # 手动调用 _on_lang_changed
         self.dd_lang.set_model(Gtk.StringList.new(get_lang_names(i)))
         self.dd_lang_from.set_model(Gtk.StringList.new(get_lang_names(i)))
-        self.dd_lang.set_selected(j)
-        self.dd_lang_from.set_selected(j_from)
+        self.dd_lang.set_selected(lang_n2j(i, self.sg.g("lang-selected-n")))
+        self.dd_lang_from.set_selected(lang_n2j(i, self.sg.g("lang-from-selected-n")))
         self.jn = True
         self._on_lang_changed(None, None)
 
@@ -169,7 +166,6 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.is_tv_copy = True
 
     def ocr_image(self, path: str):
-
 
         _k = self.sg.g("server-ocr-selected-key")
         if _k != self.ocr_server.key:

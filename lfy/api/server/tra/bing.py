@@ -65,7 +65,6 @@ def g_url(host, hs):
 
 
 def _translate(st: ServerTra, text, lang_to, lang_from="auto-detect", n=0, s=""):
-
     if st.session is None:
         st.session = _init_session()
 
@@ -99,7 +98,7 @@ def _translate(st: ServerTra, text, lang_to, lang_from="auto-detect", n=0, s="")
     if isinstance(res, dict):
         if 'ShowCaptcha' in res.keys():
             st.session = _init_session()
-            return _translate(st, text, lang_to, n=n+1,
+            return _translate(st, text, lang_to, n=n + 1,
                               s=_("please contact the developer: {}").format("bing show captcha"))
 
         if 'statusCode' in res.keys():
@@ -117,7 +116,6 @@ class BingServer(ServerTra):
     """
 
     def __init__(self):
-
         # https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support
         lang_key_ns = {
             "auto-detect": 0,

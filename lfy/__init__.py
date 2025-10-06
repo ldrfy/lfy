@@ -15,7 +15,6 @@ SCHEMAS_DIR = '@SCHEMAS_DIR@'
 PYTHON_DIR = '@PYTHON_DIR@'
 LOCALE_DIR = '@LOCALE_DIR@'
 
-
 if not os.path.exists(f"{LOCALE_DIR}/zh_CN/LC_MESSAGES/{APP_ID}.mo"):
     LOCALE_DIR = os.path.join(os.path.dirname(__file__),
                               "resources/locale/")

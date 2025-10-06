@@ -80,6 +80,7 @@ def get_server(i: int, ss) -> Server:
 
     Args:
         i (int): _description_
+        ss:
 
     Returns:
         _type_: _description_

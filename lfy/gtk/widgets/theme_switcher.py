@@ -1,4 +1,4 @@
-'主题'
+"""主题"""
 # Copyright 2020 Manuel Genovés
 # Copyright 2022 Mufeed Ali
 # Copyright 2022 Rafael Mardojai CM
@@ -7,7 +7,7 @@
 # Code modified from Apostrophe
 # https://gitlab.gnome.org/World/apostrophe/-/blob/main/apostrophe/theme_switcher.py
 
-from gi.repository import Adw, Gio, GObject, Gtk
+from gi.repository import Adw, Gio, GObject, Gtk  # type: ignore
 
 from lfy import RES_PATH  # pylint: disable=E0611
 from lfy import APP_ID

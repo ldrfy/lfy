@@ -47,9 +47,10 @@ def _translate(p: ServerTra, query_text, lang_to="en", lang_from="auto"):
     """腾讯翻译接口
 
     Args:
+        p (ServerTra): _description_
         query_text (str): _description_
-        api_key_s (str): secret_id|secret_key
         lang_to (str, optional): _description_. Defaults to "zh".
+        lang_from (str, optional): _description_. Defaults to "auto".
 
     Returns:
         _type_: _description_
@@ -78,7 +79,7 @@ def _translate(p: ServerTra, query_text, lang_to="en", lang_from="auto"):
 
     result = request.json()["Response"]
     if "Error" in result:
-        return False, _("something error: {}")\
+        return False, _("something error: {}") \
             .format(f'\n\n{result["Error"]["Code"]}: {result["Error"]["Message"]}')
 
     return True, result["TargetText"]

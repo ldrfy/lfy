@@ -1,4 +1,4 @@
-'托盘图标'
+"""托盘图标"""
 import time
 from gettext import gettext as _
 
@@ -23,10 +23,10 @@ class TrayIcon(QSystemTrayIcon):
     """
 
     def __init__(
-        self,
-        parent: TranslateWindow,
-        app: QApplication,
-        icon: QIcon
+            self,
+            parent: TranslateWindow,
+            app: QApplication,
+            icon: QIcon
     ) -> None:
         QSystemTrayIcon.__init__(self, icon, parent)
         self.w = parent
@@ -78,30 +78,34 @@ class TrayIcon(QSystemTrayIcon):
             self.find_update()
 
     def _tray_icon_clicked(self, reason):
-        if reason == QSystemTrayIcon.ActivationReason.Trigger:
-            if not self.w.isVisible():
-                self.w.show()
-            else:
-                self.w.hide()
+        if reason != QSystemTrayIcon.ActivationReason.Trigger:
+            return
+        if self.w.isVisible():
+            self.w.hide()
+            return
+        self.w.show()
 
     def _on_clipboard_data_changed(self):
 
         if self.cb.mimeData().hasImage():
             # 如果是图片，处理图片
             image = self.cb.image()
-            if not image.isNull():
-                file_path = get_cache_img_path()
-                image.save(file_path, "PNG")
+            if image.isNull():
+                return
 
-                md5_hash = cal_md5(file_path)
-                if self.img_md5 == md5_hash:
-                    return
-                self.img_md5 = md5_hash
+            file_path = get_cache_img_path()
+            image.save(file_path, "PNG")
 
-                if not self.w.isVisible():
-                    self.w.show()
-                self.w.ocr_image(file_path)
-        elif self.cb.mimeData().hasText():
+            md5_hash = cal_md5(file_path)
+            if self.img_md5 == md5_hash:
+                return
+            self.img_md5 = md5_hash
+
+            if not self.w.isVisible():
+                self.w.show()
+            self.w.ocr_image(file_path)
+
+        if self.cb.mimeData().hasText():
             text = self.cb.text()
             if text == self.text_last:
                 return
@@ -155,7 +159,7 @@ class TrayIcon(QSystemTrayIcon):
         """显示更新信息
 
         Args:
-            update_msg (_type_): _description_
+            p (str): _description_
         """
         t, update_msg, n = p
         if update_msg is None:
@@ -182,11 +186,11 @@ class TrayIcon(QSystemTrayIcon):
                 # 手动更新
                 s = _("There is no new version.\
                       \nThe current version is {}.\
-                      \nYou can go to {} to view the beta version.")\
+                      \nYou can go to {} to view the beta version.") \
                     .format(VERSION, PACKAGE_URL)
                 return (_("No new version!"), s,
                         QSystemTrayIcon.MessageIcon.Critical)
-            return (None, None, None)
+            return None, None, None
 
         self.my_thread = MyThread(fu)
         self.my_thread.signal.connect(self.update_app)

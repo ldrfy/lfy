@@ -1,4 +1,4 @@
-'翻译服务的基础类'
+"""翻译服务的基础类"""
 from gettext import gettext as _
 
 import requests
@@ -8,7 +8,6 @@ from lfy.utils.debug import get_logger
 from lfy.utils.settings import Settings
 
 TIME_OUT = 3
-
 
 # select language name
 LANGUAGE_NAMES = [
@@ -54,18 +53,21 @@ class Lang:
         self.n = n
 
     def get_name(self):
-        """_summary_
+        """
+        语言名字
+        Returns:
 
-        Args:
-            t (str): _description_
         """
         return LANGUAGE_NAMES[self.n]
 
     def test(self, t):
-        """_summary_
-
+        """
+        测试
         Args:
-            t (_type_): _description_
+            t:
+
+        Returns:
+
         """
         print(t)
 
@@ -98,7 +100,7 @@ class Server:
         """
 
         if self.sk_placeholder_text and not self.get_conf():
-            return False, _("please input `{sk}` for `{server}` in preference")\
+            return False, _("please input `{sk}` for `{server}` in preference") \
                 .format(sk=self.sk_placeholder_text, server=self.name)
 
         if "py_libs" in kwargs:
@@ -161,11 +163,13 @@ class Server:
             return self.langs[0]
         return self.langs[j]
 
-    def check_conf(self, conf_str: str, fun_check, py_libs=None):
+    def check_conf(self, conf_str: str, fun_check=None, py_libs=None):
         """保存前核对配置
 
         Args:
             conf_str (str): _description_
+            fun_check (fun): _description_
+            py_libs (list): _description_
 
         Returns:
             _type_: _description_
@@ -181,14 +185,14 @@ class Server:
             return False, _("Developers, please set sk_placeholder_text")
 
         sk_no = not self.get_conf() \
-            or (self.sk_placeholder_text.count("|") == 1
-                and self.get_conf().count("|") != 1) \
-            or self.get_conf()[0] == "|" \
-            or self.get_conf()[-1] == "|"
+                or (self.sk_placeholder_text.count("|") == 1
+                    and self.get_conf().count("|") != 1) \
+                or self.get_conf()[0] == "|" \
+                or self.get_conf()[-1] == "|"
 
         if sk_no:
             self._conf_str = None
-            return False, _("please input `{sk}` for `{server}` in preference")\
+            return False, _("please input `{sk}` for `{server}` in preference") \
                 .format(sk=self.sk_placeholder_text, server=self.name)
 
         try:
@@ -206,9 +210,6 @@ class Server:
 
     def set_conf(self):
         """设置配置
-
-        Args:
-            conf_str (_type_): _description_
 
         Returns:
             _type_: _description_
@@ -230,10 +231,13 @@ class Server:
         return sk
 
     def get_conf(self, add=""):
-        """图片识别的字符串apikey
+        """
+        图片识别的字符串apikey
+        Args:
+            add:
 
         Returns:
-            _type_: _description_
+
         """
         if self._conf_str is None:
             self._conf_str = Settings().g(self.get_conf_key(add))

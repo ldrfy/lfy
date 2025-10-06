@@ -38,8 +38,7 @@ def _get_token_by_url(so: ServerOCR):
     """获取token
 
     Args:
-        api_key (_type_): _description_
-        secret_key (_type_): _description_
+        so (ServerOCR): _description_
 
     Returns:
         _type_: _description_
@@ -98,7 +97,7 @@ def _fun_ocr(so: ServerOCR, img_path, ocr_p=""):
     if "error_code" in res:
         if 110 == res["error_code"]:
             Settings().s("ocr-baidu-token", "")
-        return False, _("something error: {}")\
+        return False, _("something error: {}") \
             .format(f'\n\n{res["error_code"]}: {res["error_msg"]}')
 
     s = ""
@@ -116,7 +115,6 @@ class BaiduServer(ServerOCR):
     """
 
     def __init__(self):
-
         # Development documentation
         # https://ai.baidu.com/ai-doc/OCR/zk3h7xz52
         lang_key_ns = {

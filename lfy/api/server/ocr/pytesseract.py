@@ -1,7 +1,4 @@
-'ocr本地'
-
-from gettext import gettext as _
-
+"""ocr本地: pytesseract"""
 from lfy.api.server.ocr import ServerOCR
 from lfy.utils import gen_img
 
@@ -11,7 +8,6 @@ def _fun_check(so: ServerOCR, p):
 
 
 def _fun_ocr(so: ServerOCR, img_path, ocr_p=""):
-
     import pytesseract  # pylint: disable=C0415
 
     if not ocr_p:
@@ -25,7 +21,6 @@ class PytesseractServer(ServerOCR):
     """
 
     def __init__(self):
-
         # 获取系统默认语言，英语添加
         lang_key_ns = {
             "chi_sim": 1,

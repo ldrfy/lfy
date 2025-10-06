@@ -1,4 +1,4 @@
-'自定义部件'
+"""自定义部件"""
 import os
 import time
 
@@ -11,10 +11,8 @@ os.environ[f'{APP_ID}.ui'] = 'qt'
 
 
 class MyThread(QThread):
-    """异步线程
-
-    Args:
-        QThread (_type_): _description_
+    """
+    异步线程
     """
     signal = pyqtSignal(tuple)
 
@@ -38,16 +36,15 @@ class MyThread(QThread):
         """放置内存泄漏
         """
         self.quit()  # 确保线程正常退出
-        self.wait()   # 等待线程结束
+        self.wait()  # 等待线程结束
         self.deleteLater()  # 删除线程，释放资源
 
 
 class CheckableComboBox(QComboBox):
-    """多选下拉框
-
-    Args:
-        QComboBox (_type_): _description_
     """
+    多选下拉框
+    """
+
     def __init__(self, parent=None):
         super().__init__(parent)
 

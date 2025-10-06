@@ -1,8 +1,8 @@
-'设置api key'
+"""设置api key"""
 import threading
 from gettext import gettext as _
 
-from gi.repository import Adw, GLib, Gtk
+from gi.repository import Adw, GLib, Gtk  # type: ignore
 
 from lfy.api.server import Server
 from lfy.utils import clear_key
@@ -62,7 +62,9 @@ class ServerPreferences(Adw.NavigationPage):
         """更新
 
         Args:
-            valid (_type_): _description_
+            ok (bool): _description_
+            text (str): _description_
+            api_key (str): _description_
         """
 
         self.api_key_entry.set_sensitive(True)
@@ -77,18 +79,17 @@ class ServerPreferences(Adw.NavigationPage):
 
             dialog = Adw.AlertDialog.new(_("error message"))
             dialog.set_body(text)
-            dialog.add_response("confirm",  _("Confirm"))
+            dialog.add_response("confirm", _("Confirm"))
             dialog.present(self.get_root())
 
     def request_text(self, fun, api_key):
         """验证服务api是否靠谱
 
         Args:
-            server (_type_): _description_
+            fun (_type_): _description_
             api_key (_type_): _description_
         """
         ok = False
-        text = ""
         try:
             ok, text = fun(api_key)
         except Exception as exc:  # pylint: disable=W0718

@@ -71,7 +71,7 @@ def is_text(cf):
         _type_: _description_
     """
     if cf.contain_mime_type("text/plain") \
-        or cf.contain_mime_type("text/html") \
+            or cf.contain_mime_type("text/html") \
             or cf.contain_mime_type("text/plain;charset=utf-8"):
         return True
     return False
@@ -203,7 +203,7 @@ def check_libs(py_libs):
     """_summary_
 
     Args:
-        py_libs (_type_): _description_
+        py_libs (list): _description_
 
     Returns:
         _type_: _description_
@@ -213,7 +213,7 @@ def check_libs(py_libs):
     no_libs = [py_lib for py_lib in py_libs
                if not check_lib_installed(py_lib)]
     if no_libs:
-        s = _("please install python whl (not support flatpak): {}")\
+        s = _("please install python whl (not support flatpak): {}") \
             .format(",".join(no_libs))
         get_logger().error(s)
         return s
@@ -233,10 +233,10 @@ def handle_connection_error(e, name):
     if isinstance(e, ConnectTimeout):
         return _("The connection times out: {}. "
                  "Probably there is a problem with the network, "
-                 "or there is a problem with the VPN proxy settings {}")\
+                 "or there is a problem with the VPN proxy settings {}") \
             .format(name, str(e))
     if isinstance(e, ProxyError):
-        return _("Maybe there is probably a problem with the VPN proxy settings: {}")\
+        return _("Maybe there is probably a problem with the VPN proxy settings: {}") \
             .format(f"\n\n{name}\n{str(e)}")
 
     return _("something error: {}").format(f"{name}\n\n{str(e)}")

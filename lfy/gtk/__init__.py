@@ -16,17 +16,16 @@ gi.require_version('Gio', '2.0')
 gi.require_version('Gtk', '4.0')
 gi.require_version('Gdk', '4.0')
 
-from gi.repository import Adw, Gio, Gtk   # type: ignore
+from gi.repository import Adw, Gio, Gtk  # type: ignore
 
 try:
     if "/usr/share/" in SCHEMAS_DIR:
         subprocess.run(["glib-compile-schemas",
                         f"{SCHEMAS_DIR}/glib-2.0/schemas"], check=True)
         os.environ["XDG_DATA_DIRS"] = f'{SCHEMAS_DIR}:' + \
-            os.environ.get("XDG_DATA_DIRS", "")
+                                      os.environ.get("XDG_DATA_DIRS", "")
 except subprocess.CalledProcessError as e:
     print(e)
-
 
 path_res = os.path.join(PKGDATA_DIR, f'{APP_ID}.gresource')
 Gio.Resource._register(Gio.resource_load(path_res))  # pylint: disable=w0212

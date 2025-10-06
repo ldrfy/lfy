@@ -81,13 +81,13 @@ def _translate(p: ServerTra, s, lang_to="en", lang_from="auto"):
 
     response = p.session.post("https://mt.aliyuncs.com/",
                               headers={"Content-Type":
-                                       "application/x-www-form-urlencoded"},
+                                           "application/x-www-form-urlencoded"},
                               data=encoded_body, timeout=TIME_OUT)
     result = response.json()
     if result["Code"] == "200":
         return True, result["Data"]["Translated"]
 
-    return False, _("something error: {}")\
+    return False, _("something error: {}") \
         .format(f'{result["Code"]}: {result["Message"]}')
 
 
@@ -96,7 +96,6 @@ class AliYunServer(ServerTra):
     """
 
     def __init__(self):
-
         # Development documentation
         # https://help.aliyun.com/zh/machine-translation/developer-reference/machine-translation-language-code-list
         lang_key_ns = {

@@ -24,20 +24,21 @@ def _translate0(args):
     server: ServerTra
     try:
         a, b = server.main(text, lang_to, lang_from)
-        return a, b, server, time.time()-st
+        return a, b, server, time.time() - st
     except Exception as e:  # pylint: disable=W0718
-        em = _("something error: {}")\
+        em = _("something error: {}") \
             .format(f"{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
         get_logger().error(e)
-        return False, em, server, time.time()-st
+        return False, em, server, time.time() - st
 
 
 def get_args(text, lang_to, lang_from):
     """_summary_
 
     Args:
-        text (_type_): _description_
-        lang_to (_type_): _description_
+        text (str): _description_
+        lang_to (str): _description_
+        lang_from (str): _description_
 
     Returns:
         _type_: _description_
@@ -83,7 +84,6 @@ class AllServer(ServerTra):
     """
 
     def __init__(self):
-
         super().__init__("compare", _("compare"))
 
         # https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support

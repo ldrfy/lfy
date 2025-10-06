@@ -1,4 +1,4 @@
-'qt入口'
+"""qt入口"""
 import os
 import sys
 from gettext import gettext as _

@@ -15,8 +15,8 @@ def _translate(p: ServerTra, s, lang_to="auto", lang_from="auto"):
 
     Args:
         s (str): 待翻译字符串
-        api_key_s (str): 输入的原始字符串
         lang_to (str, optional): 字符串翻译为xx语言. Defaults to "auto".
+        lang_from (str): 输入的原始字符串
 
     Returns:
         _type_: _description_
@@ -40,7 +40,7 @@ def _translate(p: ServerTra, s, lang_to="auto", lang_from="auto"):
             s1 += f'{trans_result["dst"]}\n'
         return True, s1.strip()
 
-    return False, _("something error: {}")\
+    return False, _("something error: {}") \
         .format(f'\n\n{result["error_code"]}: {result["error_msg"]}')
 
 
@@ -49,7 +49,6 @@ class BaiduServer(ServerTra):
     """
 
     def __init__(self):
-
         # Development documentation
         # https://fanyi-api.baidu.com/doc/21
         lang_key_ns = {

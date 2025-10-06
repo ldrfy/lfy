@@ -1,4 +1,4 @@
-'设置'
+"""设置"""
 from gettext import gettext as _
 
 from PyQt6.QtCore import Qt, QUrl  # pylint: disable=E0611
@@ -20,10 +20,8 @@ from lfy.utils.settings import Settings
 
 
 class PreferenceWindow(QMainWindow):
-    """设置
-
-    Args:
-        QMainWindow (_type_): _description_
+    """
+    设置
     """
 
     def __init__(self, clipboard: QClipboard, tray: QSystemTrayIcon):
@@ -120,24 +118,19 @@ class PreferenceWindow(QMainWindow):
         vl_normal = QVBoxLayout(tab_other)
 
         cb_auto_check_update = QCheckBox(_("auto check update"))
-        cb_auto_check_update.stateChanged.connect(
-            self._on_auto_check_update)
+        cb_auto_check_update.stateChanged.connect(self._on_auto_check_update)
 
-        cb_auto_check_update.setChecked(
-            self.sg.g("auto-check-update", d=True, t=bool))
+        cb_auto_check_update.setChecked(self.sg.g("auto-check-update", d=True, t=bool))
         vl_normal.addWidget(cb_auto_check_update)
         cb_notify = QCheckBox(_("Notify translation results"))
-        cb_notify.setChecked(
-            self.sg.g("notify-translation-results", d=True, t=bool))
-        cb_notify.stateChanged.connect(
-            self._on_cb_notify)
+        cb_notify.setChecked(self.sg.g("notify-translation-results", d=True, t=bool))
+        cb_notify.stateChanged.connect(self._on_cb_notify)
         vl_normal.addWidget(cb_notify)
 
         gb_c = QGroupBox(_("Compare model"))
         hl_c = QHBoxLayout()
         self.ccb = CheckableComboBox()
-        self.ccb.lineEdit().textChanged.connect(
-            lambda: self._cm_servers(self.ccb.checked_items_str()))
+        self.ccb.lineEdit().textChanged.connect(lambda: self._cm_servers(self.ccb.checked_items_str()))
 
         hl_c.addWidget(self.ccb)
         gb_c.setLayout(hl_c)
@@ -150,7 +143,7 @@ class PreferenceWindow(QMainWindow):
         self.le_vpn.setToolTip("http://127.0.0.1:7890")
         hl_vpn.addWidget(self.le_vpn)
         btn_vpn_save = QPushButton(_("Save"))
-        btn_vpn_save.clicked.connect(self._on_vpn_save)
+        btn_vpn_save.clicked.connect(lambda: self._on_vpn_save(btn_vpn_save))
         hl_vpn.addWidget(btn_vpn_save)
 
         gb_vpn.setLayout(hl_vpn)
@@ -163,13 +156,13 @@ class PreferenceWindow(QMainWindow):
         s = _("Read the JSON configuration of the clipboard, then import it, "
               "and some of the configurations will take effect after reopening the software")
         btn_backup.setToolTip(s)
-        btn_backup.clicked.connect(self._export_config)
+        btn_backup.clicked.connect(lambda: self._export_config(btn_backup))
 
         hl_json.addWidget(btn_backup)
         btn_restore = QPushButton(_("restore"))
         btn_restore.setToolTip(_("Export the configuration to the clipboard, "
                                  "then you can paste it into any file and edit it"))
-        btn_restore.clicked.connect(self._import_config)
+        btn_restore.clicked.connect(lambda: self._import_config(btn_restore))
 
         hl_json.addWidget(btn_restore)
 
@@ -234,24 +227,27 @@ class PreferenceWindow(QMainWindow):
                               QSystemTrayIcon.MessageIcon.Information, 3000)
         self.btn_o_save.setIcon(QIcon())
 
-    def _import_config(self):
+    def _import_config(self, button: QPushButton):
         if self.cb.mimeData().hasText():
             s = restore_gsettings(self.cb.text())
             if len(s) == 0:
                 self.tray.showMessage(_("Import successful!"),
                                       _("It takes effect when you restart lfy."),
                                       QSystemTrayIcon.MessageIcon.Information, 2000)
+                button.setIcon(self.style().standardIcon(QStyle.StandardPixmap.SP_DialogApplyButton))
                 return
 
         self.tray.showMessage(_("Import failed!"),
                               _("No configuration data in the clipboard."),
                               QSystemTrayIcon.MessageIcon.Critical, 3000)
+        button.setIcon(self.style().standardIcon(QStyle.StandardPixmap.SP_DialogCancelButton))
 
-    def _export_config(self):
+    def _export_config(self, button: QPushButton):
         self.cb.setText(backup_gsettings())
         self.tray.showMessage(_("Export successful!"),
                               _("Configuration data has been exported to the clipboard."),
                               QSystemTrayIcon.MessageIcon.Information, 3000)
+        button.setIcon(self.style().standardIcon(QStyle.StandardPixmap.SP_DialogApplyButton))
 
     def _on_cb_notify(self, state):
         self.sg.s("notify-translation-results", state != 0)
@@ -259,28 +255,29 @@ class PreferenceWindow(QMainWindow):
     def _on_auto_check_update(self, state):
         self.sg.s("auto-check-update", state != 0)
 
-    def _on_vpn_save(self):
+    def _on_vpn_save(self, button: QPushButton):
         self.sg.s("vpn-addr-port", self.le_vpn.text())
+        button.setIcon(self.style().standardIcon(QStyle.StandardPixmap.SP_DialogApplyButton))
 
     def _on_btn_to_save(self, ocr=False):
 
         def notice_s(p):
-            t, ok, m, le, api_key, btn_save = p
-            btn_save: QPushButton = btn_save
-            le: QLineEdit = le
+            t, ok, m, le_, api_key, btn_save_ = p
+            btn_save_: QPushButton = btn_save_
+            le_: QLineEdit = le_
             n = QSystemTrayIcon.MessageIcon.Information
             icon_id = QStyle.StandardPixmap.SP_DialogApplyButton
             if not ok:
                 n = QSystemTrayIcon.MessageIcon.Critical
                 icon_id = QStyle.StandardPixmap.SP_DialogCancelButton
             self.tray.showMessage(t, m, n, 3000)
-            btn_save.setIcon(self.style().standardIcon(icon_id))
+            btn_save_.setIcon(self.style().standardIcon(icon_id))
             my_thread.clean_up()
             # 保存时，去掉空格，但是显示时，保留
-            le.setText(clear_key(api_key, "  |  "))
+            le_.setText(clear_key(api_key, "  |  "))
 
         def tt(p=None):
-            le, api_key, btn_save = p
+            le_, api_key, btn_save_ = p
             if ocr:
                 st: ServerOCR = get_servers_o()[self.cb_o.currentIndex()]
                 _ok, _s = st.check_conf(api_key)
@@ -290,7 +287,7 @@ class PreferenceWindow(QMainWindow):
                 st: ServerTra = get_servers_t_sk()[self.cb_t.currentIndex()]
                 _ok, _s = st.check_conf(api_key)
 
-            return (st.name, _ok, _s, le, api_key, btn_save)
+            return st.name, _ok, _s, le_, api_key, btn_save_
 
         le: QLineEdit = self.le_t if not ocr else self.le_o
         btn_save: QPushButton = self.btn_t_save if not ocr else self.btn_o_save
