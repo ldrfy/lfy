@@ -37,7 +37,10 @@ def _translate(st: ServerTra, text: str, lang_to, lang_from="auto"):
 
     s = ""
     for res in response.json():
-        s += res[0]
+        if isinstance(res, list):
+            s += res[0]
+        else:
+            s += res
 
     return True, s
 
