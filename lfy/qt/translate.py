@@ -3,7 +3,7 @@ from gettext import gettext as _
 
 # pylint: disable=E0611
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QKeySequence, QShortcut
+from PyQt6.QtGui import QKeySequence, QShortcut, QClipboard
 from PyQt6.QtWidgets import (QApplication, QCheckBox, QComboBox, QHBoxLayout,
                              QMainWindow, QMessageBox, QPlainTextEdit,
                              QPushButton, QSplitter, QSystemTrayIcon,
@@ -34,6 +34,7 @@ class TranslateWindow(QMainWindow):
         self.setWindowFlags(self.windowFlags() |
                             Qt.WindowType.WindowStaysOnTopHint)
         self.sg = Settings()
+        self.cb: QClipboard = app.clipboard()
 
         self.resize(self.sg.g("window-width", 500, int),
                     self.sg.g("window-height", 400, int))
@@ -161,16 +162,26 @@ class TranslateWindow(QMainWindow):
         self.cb_del_wrapping.setChecked(True)
 
         tt = _("Select text and use the shortcut key '{}' to copy, "
-               "the copied text will not be automatically translated").format("Ctrl+Shift+C")
+               "the copied text will not be automatically translated").format("Ctrl+Alt+C")
         self.te_from.setToolTip(tt)
         self.te_to.setToolTip(tt)
 
-        self.sts(["Ctrl+Shift+C", "Alt+D", "Alt+C",
-                  "Ctrl+T", "Ctrl+Return",
+        self.sts(["Ctrl+Alt+C", "Alt+D", "Alt+C",
+                  "Ctrl+T", "Ctrl+Return", "Ctrl+Shift+C",
                   "Ctrl+,", "Ctrl+Q", "Ctrl+H"],
                  [self._copy_text, self._del_wrapping, self._add_old,
-                  self.update_translate, self.update_translate,
+                  self.update_translate, self.update_translate, self._copy_tra_text,
                   self._open_prf, self._quit_app, self.hide])
+
+    def _copy_tra_text(self):
+        """
+        快捷键复制翻译结果
+        Returns:
+
+        """
+        self.translate_next = False
+        self.cb.setText(self.te_from.toPlainText())
+
 
     def _copy_text(self):
         """复制，但是不进行翻译
