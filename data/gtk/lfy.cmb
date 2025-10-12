@@ -3,8 +3,7 @@
 <!-- Created with Cambalache 0.96.1 -->
 <cambalache-project version="0.96.0" target_tk="gtk-4.0">
   <ui template-class="TranslateWindow" filename="translate.ui" sha256="b4520d6c600711023d0e6990833cd89bfc270a976c6062313409d1a1d29af286"/>
-  <ui template-class="PreferencesDialog" filename="preference.ui" sha256="b1016e05834f279026537791acce51c9e0444f6a626ec749edf9f19678553318"/>
-  <ui filename="test.ui" sha256="b245c85bb7bd2f4e2da9dfb80626f3d87cf857a1c98f56d98c7946207bd68872"/>
+  <ui template-class="PreferencesDialog" filename="preference.ui" sha256="27feec89777bf9d95038ef16a87dbd48995cd6257ea406eb16f257ff1e33512b"/>
   <ui filename="appindicator.ui" sha256="64ea60c788220f055560d7051cf61e40be0fe1dac84826e556ee3574fc84b9cd"/>
   <ui filename="help-overlay.ui" sha256="2c00debb1a3bb0a1a17a9608093d94bdc3a0a08114aca2bd8b0281f479a395f6"/>
   <ui template-class="ServerPreferencesPage" filename="server-preferences.ui" sha256="698edcb8790bc4ac10d311b19338e84207063190594a2299a7196dd02731dd2a"/>

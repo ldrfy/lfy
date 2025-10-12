@@ -55,7 +55,8 @@ class PreferencesDialog(Adw.PreferencesDialog):
                 self.server_ocr = so
                 break
 
-        self.entry_vpn_addr.props.text = self.sg.g("vpn-addr-port")
+        self.entry_vpn_addr.set_text(self.sg.g("vpn-addr-port"))
+        self.entry_vpn_addr.set_title(_("vpn addr and port, like {url}").format(url="http://127.0.0.1:7890"))
         self.sg0 = Gio.Settings(APP_ID)
         self.sg0.bind('auto-check-update', self.auto_check_update,
                       'active', Gio.SettingsBindFlags.DEFAULT)

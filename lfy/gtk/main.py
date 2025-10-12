@@ -134,25 +134,31 @@ class LfyApplication(Adw.Application):
                      self.set_translate_action, self.on_action_trans_now, self.on_action_copy_text]
         shortcuts = ['<primary>comma', '<primary>q', None,
                      None, '<alt>d', '<alt>c',
-                     '<primary>t', '<alt>t', '<primary><shift>c']
+                     '<primary>t,<primary>Return', '<alt>t', '<primary><shift>c']
         states = [None, None, None,
                   None, None, None,
                   None, GLib.Variant.new_boolean(self.sg.g("copy-auto-translate")), None]
 
         for name, fun, shortcut, state in zip(names, callbacks, shortcuts, states):
+            if shortcut:
+                # 快捷键显示
+                if "," in shortcut:
+                    shortcuts = shortcut.split(",")
+                else:
+                    shortcuts = [shortcut]
+                self.set_accels_for_action(f"app.{name}", shortcuts)
+            if not fun:
+                continue
             action = Gio.SimpleAction(name=name, state=state)
             if state is not None:
                 action.connect('change-state', fun)
             else:
                 action.connect("activate", fun)
             self.add_action(action)
-            if shortcut:
-                self.set_accels_for_action(f"app.{name}", [shortcut])
 
     def on_del_wrapping_action(self, _widget, _w):
         """删除换行
         """
-        # pylint: disable=E1101
         self.win.notice_action(self.win.cb_del_wrapping,
                                _("Next translation not remove line breaks"),
                                _("Next translation remove line breaks"))
@@ -251,10 +257,12 @@ class LfyApplication(Adw.Application):
                 GLib.idle_add(self.update_app, update_msg)
             elif widget is not None:
                 # 手动更新
-                s = _("There is no new version.\
-                      \nThe current version is {}.\
-                      \nYou can go to {} to view the beta version.") \
+                s = (
+                    _("There is no new version.\n"
+                      "The current version is {}.\n"
+                      "You can go to {} to view the beta version.")
                     .format(VERSION, PACKAGE_URL)
+                )
                 GLib.idle_add(self.update_app, s)
 
         if widget or self.sg.g("auto-check-update"):

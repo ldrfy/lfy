@@ -184,10 +184,12 @@ class TrayIcon(QSystemTrayIcon):
 
             if not auto:
                 # 手动更新
-                s = _("There is no new version.\
-                      \nThe current version is {}.\
-                      \nYou can go to {} to view the beta version.") \
+                s = (
+                    _("There is no new version.\n"
+                      "The current version is {}.\n"
+                      "You can go to {} to view the beta version.")
                     .format(VERSION, PACKAGE_URL)
+                )
                 return (_("No new version!"), s,
                         QSystemTrayIcon.MessageIcon.Critical)
             return None, None, None
