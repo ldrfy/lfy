@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
 "POT-Creation-Date: 2025-10-06 17:29+0800\n"
-"PO-Revision-Date: 2025-10-12 06:47+0000\n"
+"PO-Revision-Date: 2025-10-12 07:33+0000\n"
 "Last-Translator: yuh <yuhldr@qq.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/lfy/lfy/zh_Hans/>\n"
@@ -412,7 +412,7 @@ msgstr "导出成功！"
 
 #: lfy/qt/preference.py:248
 msgid "Configuration data has been exported to the clipboard."
-msgstr "配置数据已导出到剪贴板"
+msgstr "配置数据已导出到剪贴板。"
 
 #: lfy/qt/translate.py:68 data/gtk/translate.ui:83 data/gtk/help-overlay.ui:38
 msgid "Remove line breaks"
