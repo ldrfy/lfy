@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
 "POT-Creation-Date: 2025-10-12 16:14+0800\n"
-"PO-Revision-Date: 2025-10-12 07:33+0000\n"
+"PO-Revision-Date: 2025-10-12 09:14+0000\n"
 "Last-Translator: yuh <yuhldr@qq.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/lfy/lfy/zh_Hans/>\n"
@@ -272,7 +272,7 @@ msgid "Next translation splicing text"
 msgstr "下次翻译拼接文本"
 
 #: lfy/gtk/main.py:261 lfy/qt/tray.py:188
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid ""
 "There is no new version.\n"
 "The current version is {}.\n"
@@ -280,12 +280,12 @@ msgid ""
 msgstr ""
 "没有新版本\n"
 "当前版本为 {}。\n"
-"可前往 {} 查看测试版"
+"可前往 {} 查看测试版。"
 
 #: lfy/gtk/preference.py:59 data/gtk/preference.ui:129
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "vpn addr and port, like {url}"
-msgstr "VPN地址和端口，比如 {}"
+msgstr "VPN地址和端口，比如 {url}"
 
 #: lfy/gtk/preference.py:73 lfy/api/server/tra/com.py:87
 msgid "compare"
