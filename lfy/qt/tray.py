@@ -186,9 +186,9 @@ class TrayIcon(QSystemTrayIcon):
                 # 手动更新
                 s = (
                     _("There is no new version.\n"
-                      "The current version is {}.\n"
-                      "You can go to {} to view the beta version.")
-                    .format(VERSION, PACKAGE_URL)
+                      "The current version is {version_code}.\n"
+                      "You can go to {url} to view the beta version.")
+                    .format(version_code=VERSION, url=PACKAGE_URL)
                 )
                 return (_("No new version!"), s,
                         QSystemTrayIcon.MessageIcon.Critical)
@@ -199,4 +199,4 @@ class TrayIcon(QSystemTrayIcon):
         self.my_thread.start()
 
         if not auto:
-            self.w.te_from.setPlainText(_("Check for updates") + "...")
+            self.w.te_from.setPlainText(_("Check for updates…"))

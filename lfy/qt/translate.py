@@ -1,7 +1,6 @@
-'翻译主窗口'
+"""翻译主窗口"""
 from gettext import gettext as _
 
-# pylint: disable=E0611
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QKeySequence, QShortcut, QClipboard, QIcon
 from PyQt6.QtWidgets import (QApplication, QCheckBox, QComboBox, QHBoxLayout,
@@ -103,13 +102,13 @@ class TranslateWindow(QMainWindow):
         # 不响应选择tra服务
         self.jn = False
         # 翻译服务
-        self.server_t: ServerTra = None
+        self.server_t: ServerTra | None = None
         # OCR服务
-        self.server_o: ServerOCR = None
+        self.server_o: ServerOCR | None = None
         self.lang_t = None
         self.lang_from = None
         self.my_thread = None
-        self.tray: QSystemTrayIcon = None
+        self.tray: QSystemTrayIcon | None = None
         self.text_last = ""
         self.translate_next = True
 
@@ -285,19 +284,20 @@ class TranslateWindow(QMainWindow):
             _ok, s = param
             self.translate_text(s)
 
-        _s = _("{} OCRing...").format(self.server_o.name)
+        _s = _("{} OCRing…").format(self.server_o.name)
         self.set_text_from_to((_s, _s), True)
         self.my_thread = MyThread(oo)
         self.my_thread.signal.connect(next_)
         self.my_thread.start()
 
-    def set_text_from_to(self, text, loading=False):
+    def set_text_from_to(self, text_from_to, loading=False):
         """_summary_
 
         Args:
-            text (_type_): _description_
+            text_from_to (_type_): _description_
+            loading (bool): 载入
         """
-        text_from, text_to = text
+        text_from, text_to = text_from_to
         self.te_from.setPlainText(text_from)
         self.te_to.setPlainText(text_to)
 
@@ -305,7 +305,7 @@ class TranslateWindow(QMainWindow):
             return
 
         if self.tray and self.sg.g("notify-translation-results", d=True, t=bool):
-            self.tray.showMessage(_("Translation completed"), text_to,
+            self.tray.showMessage(_("{} Translation completed.").format(self.server_t.name), text_to,
                                   QSystemTrayIcon.MessageIcon.Information, 2000)
 
         self.text_last = text_from
@@ -347,7 +347,7 @@ class TranslateWindow(QMainWindow):
 
             return text_from, text_to
 
-        self.set_text_from_to((text_from, _("Translating...")), True)
+        self.set_text_from_to((text_from, _("{} Translating…").format(self.server_t.name)), True)
 
         self.my_thread = MyThread(tt)
         self.my_thread.signal.connect(self.set_text_from_to)

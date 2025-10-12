@@ -259,9 +259,9 @@ class LfyApplication(Adw.Application):
                 # 手动更新
                 s = (
                     _("There is no new version.\n"
-                      "The current version is {}.\n"
-                      "You can go to {} to view the beta version.")
-                    .format(VERSION, PACKAGE_URL)
+                      "The current version is {version_code}.\n"
+                      "You can go to {url} to view the beta version.")
+                    .format(version_code=VERSION, url=PACKAGE_URL)
                 )
                 GLib.idle_add(self.update_app, s)
 

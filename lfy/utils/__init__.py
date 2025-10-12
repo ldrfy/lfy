@@ -231,10 +231,11 @@ def handle_connection_error(e, name):
         _type_: _description_
     """
     if isinstance(e, ConnectTimeout):
-        return _("The connection times out: {}. "
+        return _("The connection times out: {server_name}. "
                  "Probably there is a problem with the network, "
-                 "or there is a problem with the VPN proxy settings {}") \
-            .format(name, str(e))
+                 "or there is a problem with the VPN proxy settings. "
+                 "The details of the error are as follows: {str_error}") \
+            .format(server_name=name, str_error=str(e))
     if isinstance(e, ProxyError):
         return _("Maybe there is probably a problem with the VPN proxy settings: {}") \
             .format(f"\n\n{name}\n{str(e)}")

@@ -1,12 +1,13 @@
-'终端翻译'
+"""终端翻译"""
 import argparse
 import os
 import traceback
 from gettext import gettext as _
 
 from lfy.api import (create_server_o, create_server_t, get_servers_o,
-                     get_servers_t, lang_n2key)
+                     get_servers_t, lang_n2key, ServerOCR)
 from lfy.api.server import Server
+from lfy.api.server.tra import ServerTra
 from lfy.utils.debug import get_logger
 from lfy.utils.settings import Settings
 
@@ -60,11 +61,11 @@ def req_text(s, key_server="", key_lang_n=-1):
         key_server (str): _description_
         key_lang_n (int): _description_
     """
-
+    server: ServerTra | None = None
     try:
         if not key_server:
             return get_help_server(False)
-        server: Server = create_server_t(key_server)
+        server = create_server_t(key_server)
 
         lang_selected = lang_n2key(server, key_lang_n)
 
@@ -82,8 +83,10 @@ def req_text(s, key_server="", key_lang_n=-1):
 
     except Exception as e:  # pylint: disable=W0718
         get_logger().error(e)
-        return _("something error: {}") \
-            .format(f"{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
+        sn = getattr(server, "name", "None")
+        tb = traceback.format_exc()
+
+        return _("something error: {}").format(f"{sn}\n\n{str(e)}\n\n{tb}")
 
 
 def req_ocr(s=None, key_server=None, key_lang_n=-1):
@@ -95,6 +98,7 @@ def req_ocr(s=None, key_server=None, key_lang_n=-1):
         key_lang_n (int): _description_
     """
 
+    server: ServerOCR | None = None
     try:
         if not key_server:
             return get_help_server(True)
@@ -115,15 +119,17 @@ def req_ocr(s=None, key_server=None, key_lang_n=-1):
 
     except Exception as e:  # pylint: disable=W0718
         get_logger().error(e)
-        return _("something error: {}") \
-            .format(f"{server.name}\n\n{str(e)}\n\n{traceback.format_exc()}")
+        sn = getattr(server, "name", "None")
+        tb = traceback.format_exc()
+
+        return _("something error: {}").format(f"{sn}\n\n{str(e)}\n\n{tb}")
 
 
 def parse_lfy():
     """设置
     """
-    des = _('Command line translation or text recognition, such as {} or {}') \
-        .format('lfy -t "who am i" -s bing -l 1', 'lfy -o "/tmp/xxx.png" -s baidu -l 1')
+    des = _('Command line translation or text recognition, such as {code_translate} or {code_ocr}') \
+        .format(code_translate='lfy -t "who am i" -s bing -l 1', code_ocr='lfy -o "/tmp/xxx.png" -s baidu -l 1')
     parser = argparse.ArgumentParser(description=des)
 
     parser.add_argument('-t', type=str,

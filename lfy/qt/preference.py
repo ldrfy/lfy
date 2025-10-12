@@ -34,6 +34,14 @@ class PreferenceWindow(QMainWindow):
 
         self.cb = clipboard
         self.tray = tray
+        self.cb_t = None
+        self.btn_t_save = None
+        self.le_t = None
+        self.le_o = None
+        self.cb_o = None
+        self.btn_o_save = None
+        self.ccb = None
+        self.le_vpn = None
 
         tw = QTabWidget(self)
         self.setCentralWidget(tw)
@@ -139,8 +147,9 @@ class PreferenceWindow(QMainWindow):
         gb_vpn = QGroupBox(_("vpn addr and port"))
         hl_vpn = QHBoxLayout()
         self.le_vpn = QLineEdit()
-        self.le_vpn.setPlaceholderText("http://127.0.0.1:7890")
-        self.le_vpn.setToolTip("http://127.0.0.1:7890")
+        vpn_s = _("vpn addr and port, like {url}").format(url="http://127.0.0.1:7890")
+        self.le_vpn.setPlaceholderText(vpn_s)
+        self.le_vpn.setToolTip(vpn_s)
         hl_vpn.addWidget(self.le_vpn)
         btn_vpn_save = QPushButton(_("Save"))
         btn_vpn_save.clicked.connect(lambda: self._on_vpn_save(btn_vpn_save))

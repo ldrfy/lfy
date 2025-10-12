@@ -215,12 +215,11 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         def _ing():
             self.sp_translate.start()
-            self.tv_to.get_buffer().set_text(_("Translating..."))
+            self.tv_to.get_buffer().set_text(_("{} Translating…").format(self.server_t.name))
 
         def _ed(s2):
             self.tv_to.get_buffer().set_text(s2)
-            nf_t(self.app, f"{self.tra_server.name} " +
-                 _("Translation completed"), s2)
+            nf_t(self.app, _("{} Translation completed.").format(self.server_t.name), s2)
             self.sp_translate.stop()
 
         GLib.idle_add(_ing)
@@ -236,7 +235,7 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         def _ing(name):
             self.sp_translate.start()
-            self.tv_from.get_buffer().set_text(_("{} OCRing...").format(name))
+            self.tv_from.get_buffer().set_text(_("{ocr_server_name} OCRing…").format(ocr_server_name=name))
 
         def _ed(s2):
             self.tv_from.get_buffer().set_text(s2)

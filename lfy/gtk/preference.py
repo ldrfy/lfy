@@ -1,5 +1,4 @@
 """设置"""
-# pylint: disable=E1101
 
 import time
 from gettext import gettext as _
@@ -166,5 +165,4 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.sg.s("vpn-addr-port", vpn_addr)
         self.entry_vpn_addr.props.sensitive = True
 
-        self.add_toast(Adw.Toast.new(
-            _("It takes effect when you restart lfy")))
+        self.add_toast(Adw.Toast.new(_("It takes effect when you restart lfy")))

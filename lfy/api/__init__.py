@@ -4,6 +4,8 @@
 
 from lfy.api.constant import SERVERS_OCR, SERVERS_TRA
 from lfy.api.server import Lang, Server
+from lfy.api.server.ocr import ServerOCR
+from lfy.api.server.tra import ServerTra
 from lfy.api.server.tra.com import AllServer
 
 
@@ -114,7 +116,7 @@ def get_server_o(i: int) -> Server:
     return get_server(i, get_servers_o())
 
 
-def create_server_t(key) -> Server:
+def create_server_t(key) -> ServerTra:
     """引擎字典
 
     Returns:
@@ -128,7 +130,7 @@ def create_server_t(key) -> Server:
     return get_servers_t()[0]
 
 
-def create_server_o(key) -> Server:
+def create_server_o(key) -> ServerOCR:
     """引擎字典
 
     Returns:
