@@ -59,8 +59,8 @@ class TranslateWindow(Adw.ApplicationWindow):
         server_key_t = self.sg.g("server-selected-key")
         i = server_key2i(server_key_t)
 
-        self.tra_server = create_server_t(server_key_t)
-        self.ocr_server = create_server_o(self.sg.g("server-ocr-selected-key"))
+        self.server_t = create_server_t(server_key_t)
+        self.server_o = create_server_o(self.sg.g("server-ocr-selected-key"))
 
         self.dd_server.set_expression(Gtk.PropertyExpression.new(Gtk.StringObject, None, "string"))
         self.dd_lang.set_expression(Gtk.PropertyExpression.new(Gtk.StringObject, None, "string"))
@@ -106,7 +106,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             self.sg.s("window-width", size.width)
             self.sg.s("window-height", size.height)
 
-        self.sg.s("server-selected-key", self.tra_server.key)
+        self.sg.s("server-selected-key", self.server_t.key)
         self.sg.s("lang-selected-n", self.lang_t.n)
         self.sg.s("lang-from-selected-n", self.lang_from_t.n)
 
@@ -145,8 +145,8 @@ class TranslateWindow(Adw.ApplicationWindow):
         j_from = self.dd_lang_from.get_selected()
 
         server: Server = get_server_t(i)
-        if server.key != self.tra_server.key:
-            self.tra_server = server
+        if server.key != self.server_t.key:
+            self.server_t = server
         self.lang_t = get_lang(i, j)
         self.lang_from_t = get_lang(i, j_from)
 
@@ -168,8 +168,8 @@ class TranslateWindow(Adw.ApplicationWindow):
     def ocr_image(self, path: str):
 
         _k = self.sg.g("server-ocr-selected-key")
-        if _k != self.ocr_server.key:
-            self.ocr_server = create_server_o(_k)
+        if _k != self.server_o.key:
+            self.server_o = create_server_o(_k)
 
         threading.Thread(target=self.req_ocr, daemon=True,
                          args=(path,)).start()
@@ -223,7 +223,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             self.sp_translate.stop()
 
         GLib.idle_add(_ing)
-        _ok, text = self.tra_server.main(s, self.lang_t.key, self.lang_from_t.key)
+        _ok, text = self.server_t.main(s, self.lang_t.key, self.lang_from_t.key)
         GLib.idle_add(_ed, text)
 
     def req_ocr(self, s):
@@ -241,9 +241,9 @@ class TranslateWindow(Adw.ApplicationWindow):
             self.tv_from.get_buffer().set_text(s2)
             self.translate_text(s2)
 
-        GLib.idle_add(_ing, self.ocr_server.name)
+        GLib.idle_add(_ing, self.server_o.name)
 
-        _ok, text = self.ocr_server.main(s)
+        _ok, text = self.server_o.main(s)
         if _ok and self.cb_del_wrapping.get_active():
             text = process_text(text)
         GLib.idle_add(_ed, text)
