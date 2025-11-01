@@ -141,7 +141,7 @@ pkg_rpm_:
 pkg_rpm: clear build build_zip pkg_rpm_
 
 
-pkg_all: clear build build_zip pkg_aur_ pkg_deb_ pkg_rpm_ pkg_flatpak_
+pkg_all: clear build build_zip pkg_aur_ pkg_deb_ pkg_rpm_
 	#cp dist/* ${HOME}/data/my/vmware/files
 
 
@@ -166,9 +166,11 @@ pkg_pip: clear build pkg_pip_
 
 release:
 	$(MAKE) pkg_all BUILD_TYPE=qt
-	$(MAKE) pkg_all BUILD_TYPE=gtk
+	$(MAKE) pkg_pip_ BUILD_TYPE=qt
 
-	$(MAKE) pkg_pip BUILD_TYPE=qt
+	$(MAKE) pkg_all BUILD_TYPE=gtk
+	$(MAKE) pkg_flatpak_ BUILD_TYPE=gtk
+
 
 GTK_FILES = \
     ${NAME}-$(VERSION)-1-any-gtk.pkg.tar.zst \
