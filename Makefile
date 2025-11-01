@@ -77,7 +77,7 @@ pkg_aur_:
 	cd build/pkg/aur/ && \
 	makepkg -sf
 
-	cp ${PATH_AUR}/${NAME}-${VERSION}-1-any.pkg.tar.zst dist/
+	cp ${PATH_AUR}/${NAME}-${VERSION}-1-any.pkg.tar.zst dist/${NAME}-${VERSION}-1-any-${BUILD_TYPE}.pkg.tar.zst
 
 
 pkg_aur: clear build build_zip pkg_aur_
@@ -108,9 +108,9 @@ pkg_deb_:
 	DESTDIR=../${PATH_DEB} meson install -C build
 
 	cd "${PWD}/${PATH_DEB}/../" && \
-	dpkg -b deb ./deb/${NAME}-${VERSION}-x86_64.deb
+	dpkg -b deb ./deb/${NAME}-${VERSION}-x86_64-${BUILD_TYPE}.deb
 
-	cp ${PATH_DEB}/${NAME}-${VERSION}-x86_64.deb dist/
+	cp ${PATH_DEB}/${NAME}-${VERSION}-x86_64-${BUILD_TYPE}.deb dist/
 
 pkg_deb: clear build pkg_deb_
 
@@ -128,7 +128,7 @@ pkg_rpm_:
 		  --define "debug_package %{nil}" \
 		  --define "_debugsource_packages 0"
 
-	cp ${PATH_RPM}/RPMS/x86_64/${NAME}-${VERSION}-1.x86_64.rpm dist/${NAME}-${VERSION}-1.x86_64.rpm
+	cp ${PATH_RPM}/RPMS/x86_64/${NAME}-${VERSION}-1.x86_64.rpm dist/${NAME}-${VERSION}-1.x86_64-${BUILD_TYPE}.rpm
 
 	rpmbuild -bb ${PWD}/${PATH_RPM}/SPECS/${NAME}-suse.spec \
 		--define "_topdir ${PWD}/${PATH_RPM}/"\
@@ -136,7 +136,7 @@ pkg_rpm_:
 		  --define "debug_package %{nil}" \
 		  --define "_debugsource_packages 0"
 
-	cp ${PATH_RPM}/RPMS/x86_64/${NAME}-${VERSION}-1.x86_64.rpm dist/${NAME}-${VERSION}-1.x86_64-suse.rpm
+	cp ${PATH_RPM}/RPMS/x86_64/${NAME}-${VERSION}-1.x86_64.rpm dist/${NAME}-${VERSION}-1.x86_64-${BUILD_TYPE}-suse.rpm
 
 pkg_rpm: clear build build_zip pkg_rpm_
 
@@ -165,10 +165,10 @@ pkg_pip: clear build pkg_pip_
 
 
 release:
-	make BUILD_TYPE=qt pkg_all
-	make BUILD_TYPE=gtk pkg_all
+	$(MAKE) pkg_all BUILD_TYPE=qt
+	$(MAKE) pkg_all BUILD_TYPE=gtk
 
-	make BUILD_TYPE=qt pkg_pip
+	$(MAKE) pkg_pip BUILD_TYPE=qt
 
 GTK_FILES = \
     ${NAME}-$(VERSION)-1-any-gtk.pkg.tar.zst \

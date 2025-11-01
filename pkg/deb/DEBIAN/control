@@ -2,7 +2,7 @@ package: @APP_NAME@
 Section: net
 version: @VERSION@
 Depends: @DEPS@
-architecture: any
+architecture: amd64
 Maintainer: yuhldr <yuhldr@qq.com>
 Homepage: @PACKAGE_URL@
 description: @APP_DES@
