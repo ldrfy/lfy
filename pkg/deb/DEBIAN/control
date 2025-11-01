@@ -4,6 +4,6 @@ version: @VERSION@
 Depends: @DEPS@
 architecture: any
 Maintainer: yuhldr <yuhldr@qq.com>
-Homepage: https://github.com/ldrfy/@APP_NAME@
+Homepage: @PACKAGE_URL@
 description: @APP_DES@
 Installed-Size: 18

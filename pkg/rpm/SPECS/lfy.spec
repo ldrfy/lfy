@@ -6,8 +6,8 @@ Release: 1
 Summary: @APP_DES@
 Summary(zh_CN): 一个非常好用的翻译软件，看文献的好帮手
 License:  GPLv3+
-URL:      https://github.com/yuhldr/%{Name}
-Source0:  v%{version}.zip
+URL:      @PACKAGE_URL@
+Source0:  %{Name}-%{version}.zip
 Requires: @DEPS@
 
 %description

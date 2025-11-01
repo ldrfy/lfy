@@ -1,30 +1,37 @@
-app-id: "@APP_ID@"
-runtime: "org.gnome.Platform"
-runtime-version: "47"
-sdk: "org.gnome.Sdk"
-command: "@APP_NAME@"
+id: @APP_ID@
+runtime: org.gnome.Platform
+runtime-version: "49"
+sdk: org.gnome.Sdk
+command: @APP_NAME@
+
+
 finish-args:
-  - "--share=ipc"
-  - "--share=network"
-  - "--socket=fallback-x11"
-  - "--device=dri"
-  - "--socket=wayland"
+  - --share=network
+  - --share=ipc
+  - --socket=fallback-x11
+  - --device=dri
+  - --socket=wayland
+
 cleanup:
-  - "/include"
-  - "/lib/pkgconfig"
-  - "/man"
-  - "/share/doc"
-  - "/share/gtk-doc"
-  - "/share/man"
-  - "/share/pkgconfig"
+  - /include
+  - /lib/pkgconfig
+  - /man
+  - /share/doc
+  - /share/gtk-doc
+  - /share/man
+  - /share/pkgconfig
   - "*.la"
   - "*.a"
   - "*.pyc"
+
 modules:
   - "python3-requests.yaml"
-  - name: "@APP_NAME@"
+  - name: @APP_NAME@
     builddir: true
-    buildsystem: "meson"
+    buildsystem: meson
     sources:
-      - type: "dir"
-        path: "../../../"
+      - type: dir
+        path: ./@APP_NAME@/
+
+build-options:
+  env: {}

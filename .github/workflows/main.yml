@@ -28,29 +28,29 @@ jobs:
 
     - name: Build deb package
       run: |
-        make BUILD_TYPE=gtk test-deb
-        make BUILD_TYPE=qt test-deb
+        make BUILD_TYPE=gtk pkg_deb
+        make BUILD_TYPE=qt pkg_deb
 
     - name: Build flatpak package
       run: |
         sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-        sudo flatpak install flathub org.flatpak.Builder org.gnome.Platform//47 org.gnome.Sdk//47 -y
-        make BUILD_TYPE=gtk test-flatpak
+        sudo flatpak install flathub org.flatpak.Builder org.gnome.Platform//49 org.gnome.Sdk//49 -y
+        make BUILD_TYPE=gtk pkg_flatpak
 
     - name: Build rpm package
       run: |
-        make BUILD_TYPE=gtk test-rpm
-        make BUILD_TYPE=qt test-rpm
+        make BUILD_TYPE=gtk pkg_rpm
+        make BUILD_TYPE=qt pkg_rpm
 
     - name: Build whl package
       run: |
-        make BUILD_TYPE=qt test-pip
+        make BUILD_TYPE=qt pkg_pip
 
     - name: Build archlinux package
       uses: ldrfy/arch-makepkg-action@master
       with:
         scripts: |
-            make BUILD_TYPE=qt test-aur && make BUILD_TYPE=gtk test-aur
+            make BUILD_TYPE=qt pkg_aur && make BUILD_TYPE=gtk pkg_aur
 
     - name: Release
       uses: softprops/action-gh-release@v2

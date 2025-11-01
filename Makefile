@@ -1,12 +1,10 @@
+NAME=lfy
+APP_ID=cool.ldr.${NAME}
 TO_LANG=zh_CN
-VERSION=0.1.0
+VERSION=0.2.0
+PREFIX = "/usr/"
+BASE_URL = https://github.com/ldrfy/${NAME}/releases/download/auto
 BUILD_TYPE=gtk
-DISK = ../../../dist/
-BUILD_PKG=build/pkg
-DESTDIR = "/"
-# PREFIX = "${HOME}/.local/"
-PREFIX = "${PWD}/test/"
-BASE_URL = https://github.com/ldrfy/lfy/releases/download/auto
 
 
 clear:
@@ -15,145 +13,177 @@ clear:
 	rm -rf {HOME}/.local/share/glib-2.0/schemas/gschemas.compiled
 	rm -rf {HOME}/.local/lib/lfy
 	rm -rf /tmp/v${VERSION}.zip
-	rm -rf /tmp/lfy-${VERSION}
+	rm -rf /tmp/${NAME}-${VERSION}
 
-
-test:clear
+build:
 	meson setup build --prefix=${PREFIX} -Dbuild_type=${BUILD_TYPE}
 	meson compile -C build
 	meson test -C build
 	# meson dist -C build --allow-dirty
-	DESTDIR=${DESTDIR} meson install -C build
 
+install: build
+	$(MAKE) build PREFIX=${HOME}/.local/
+# 	安装位置与PREFIX不一致时使用DESTDIR
+# 	DESTDIR=${HOME}/.local/ meson install -C build
+	meson install -C build
+	${HOME}/.local/bin/${NAME}
+
+
+uninstall: install
+	cd build && ninja uninstall
 
 # Generate .pot file
 update-pot:
-	xgettext -d "lfy" \
-			--output=./po/lfy.pot \
+	xgettext -d "${NAME}" \
+			--output=./po/${NAME}.pot \
 			--copyright-holder="yuhldr" \
-			--package-name="cool.ldr.lfy" \
+			--package-name="${APP_ID}" \
 			--msgid-bugs-address="yuhldr@gmail.com" \
 			--add-comments=TRANSLATORS \
 			--files-from=./po/POTFILES
 
 
 po-init:
-	msginit -i ./po/lfy.pot -o ./po/${TO_LANG}.po
+	msginit -i ./po/${NAME}.pot -o ./po/${TO_LANG}.po
 
 
 update-po:
-	msgmerge -U ./po/${TO_LANG}.po ./po/lfy.pot
+	msgmerge -U ./po/${TO_LANG}.po ./po/${NAME}.pot
 
 
 .PHONY: build other update-pot update-po po-init test whl rename
 
+FILE_NAME_ZIP = ${NAME}-${VERSION}
+PATH_ZIP = test/zip/${FILE_NAME_ZIP}/
+build_zip:
+	mkdir -p ${PATH_ZIP}
 
-test-zip:
-	mkdir /tmp/lfy-${VERSION} && \
-	cp -r lfy /tmp/lfy-${VERSION}/ && \
-	cp -r data /tmp/lfy-${VERSION}/ && \
-	cp -r po /tmp/lfy-${VERSION}/ && \
-	cp -r pkg /tmp/lfy-${VERSION}/ && \
-	cp -r meson.build /tmp/lfy-${VERSION}/ && \
-	cp -r meson_options.txt /tmp/lfy-${VERSION}/ && \
-	cd /tmp/ && \
-	zip -r v${VERSION}.zip lfy-${VERSION} && \
-	rm -r lfy-${VERSION}
+	cp -r ${NAME} ${PATH_ZIP}
+	cp -r data ${PATH_ZIP}
+	cp -r pkg ${PATH_ZIP}
+	cp -r po ${PATH_ZIP}
+	cp -r meson.build ${PATH_ZIP}
 
+	cp -r meson_options.txt ${PATH_ZIP}
 
-test-deb: clear
-	make PREFIX="/usr" DESTDIR="${PWD}/${BUILD_PKG}/deb" test
-
-	cd "${PWD}/${BUILD_PKG}/" && \
-	mv deb/DEBIAN/control ./ && \
-	sed 's/any/amd64/g' ./control > ./deb/DEBIAN/control && \
-	dpkg -b deb ./deb/lfy-${VERSION}-x86_64.deb && \
-	cd deb && \
-	mv lfy-${VERSION}-x86_64.deb ${DISK}/lfy-${VERSION}-x86_64-${BUILD_TYPE}.deb
+	cd ${PATH_ZIP}/../ && \
+	zip -r ${FILE_NAME_ZIP}.zip ${FILE_NAME_ZIP}
 
 
-# python-build
-test-pip: clear
-	make PREFIX="/usr" DESTDIR="${PWD}/${BUILD_PKG}/pip" test
-	cp README.md ${BUILD_PKG}/pip/
-	cp LICENSE ${BUILD_PKG}/pip/
+PATH_AUR = build/pkg/aur/
+pkg_aur_:
+	cp ${PATH_ZIP}/../${FILE_NAME_ZIP}.zip ${PATH_AUR}
 
-	cd ${BUILD_PKG}/pip && \
-	mv usr/lib/lfy ./ && \
-	mv usr/share/icons/hicolor/scalable/apps ./lfy/resources/ && \
-	mv usr/share/locale ./lfy/resources/ && \
-	python -m build && \
-	cp dist/lfy-${VERSION}-py3-none-any.whl ${DISK}/
+	cd build/pkg/aur/ && \
+	makepkg -sf
+
+	cp ${PATH_AUR}/${NAME}-${VERSION}-1-any.pkg.tar.zst dist/
 
 
-
-test-flatpak:clear
-	meson setup build -Dbuild_type=${BUILD_TYPE}
-	cd ${BUILD_PKG}/flatpak && \
-	flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest cool.ldr.lfy.yaml && \
-	flatpak-builder --repo=repo build-dir cool.ldr.lfy.yaml && \
-	flatpak build-bundle repo cool.ldr.lfy-${VERSION}.flatpak cool.ldr.lfy && \
-	flatpak install -y --user cool.ldr.lfy-${VERSION}.flatpak && \
-	mv cool.ldr.lfy-${VERSION}.flatpak ${DISK}/cool.ldr.lfy-${VERSION}-${BUILD_TYPE}.flatpak
+pkg_aur: clear build build_zip pkg_aur_
+# sudo pacman -U dist/${NAME}-${VERSION}-1-any.pkg.tar.zst
 
 
-test-aur: clear test-zip
-	meson setup build -Dbuild_type=${BUILD_TYPE}
+PATH_FLATPAK = build/pkg/flatpak/
+pkg_flatpak_:
+	mkdir -p ${PATH_FLATPAK}
+	cp ${PATH_ZIP}/../${FILE_NAME_ZIP}.zip ${PATH_FLATPAK}
 
-	cd ${BUILD_PKG}/aur && \
-	cp /tmp/v${VERSION}.zip ./ && \
-	makepkg -sf && \
-	mv lfy-${VERSION}-1-any.pkg.tar.zst ${DISK}/lfy-${VERSION}-1-any-${BUILD_TYPE}.pkg.tar.zst
+	cd ${PATH_FLATPAK} && \
+	unzip ${FILE_NAME_ZIP}.zip && \
+	mv ${FILE_NAME_ZIP} ${NAME} && \
+	flatpak-builder --repo=repo build-dir ${APP_ID}.yaml && \
+	flatpak build-bundle repo ${APP_ID}.flatpak ${APP_ID}
+
+	cp ${PATH_FLATPAK}/${APP_ID}.flatpak dist/${APP_ID}-${VERSION}.flatpak
 
 
-test-rpm: clear test-zip
-	meson setup build -Dbuild_type=${BUILD_TYPE}
+pkg_flatpak: clear build build_zip pkg_flatpak_
+# flatpak install --user dist/${APP_ID}-${VERSION}.flatpak
 
-	mkdir -p ${PWD}/${BUILD_PKG}/rpm/SOURCES/lfy-${VERSION} && \
-	cd ${PWD}/${BUILD_PKG}/rpm/SOURCES/ && \
-	cp /tmp/v${VERSION}.zip ./
 
-	rpmbuild -bb ${PWD}/${BUILD_PKG}/rpm/SPECS/lfy.spec \
-		--define "_topdir ${PWD}/${BUILD_PKG}/rpm/"
-	cd ${BUILD_PKG}/rpm/ && \
-	mv RPMS/x86_64/lfy-${VERSION}-1.x86_64.rpm \
-		${DISK}/lfy-${VERSION}-1.x86_64-${BUILD_TYPE}.rpm
+PATH_DEB = build/pkg/deb/
 
-	rpmbuild -bb ${PWD}/${BUILD_PKG}/rpm/SPECS/lfy-suse.spec \
-		--define "_topdir ${PWD}/${BUILD_PKG}/rpm/"
-	cd ${BUILD_PKG}/rpm/ && \
-	mv RPMS/x86_64/lfy-${VERSION}-1.x86_64.rpm \
-		${DISK}/lfy-${VERSION}-1.x86_64-${BUILD_TYPE}-suse.rpm
+pkg_deb_:
+	DESTDIR=../${PATH_DEB} meson install -C build
+
+	cd "${PWD}/${PATH_DEB}/../" && \
+	dpkg -b deb ./deb/${NAME}-${VERSION}-x86_64.deb
+
+	cp ${PATH_DEB}/${NAME}-${VERSION}-x86_64.deb dist/
+
+pkg_deb: clear build pkg_deb_
+
+
+PATH_RPM = build/pkg/rpm/
+pkg_rpm_:
+
+	mkdir -p ${PWD}/${PATH_RPM}/SOURCES/${NAME}-${VERSION} && \
+	cp ${PATH_ZIP}/../${FILE_NAME_ZIP}.zip ${PATH_RPM}/SOURCES/
+
+	cd ${PATH_RPM} && \
+	rpmbuild -bb ${PWD}/${PATH_RPM}/SPECS/${NAME}.spec \
+		--define "_topdir ${PWD}/${PATH_RPM}/" \
+		  --define "_enable_debug_packages 0" \
+		  --define "debug_package %{nil}" \
+		  --define "_debugsource_packages 0"
+
+	cp ${PATH_RPM}/RPMS/x86_64/${NAME}-${VERSION}-1.x86_64.rpm dist/${NAME}-${VERSION}-1.x86_64.rpm
+
+	rpmbuild -bb ${PWD}/${PATH_RPM}/SPECS/${NAME}-suse.spec \
+		--define "_topdir ${PWD}/${PATH_RPM}/"\
+		  --define "_enable_debug_packages 0" \
+		  --define "debug_package %{nil}" \
+		  --define "_debugsource_packages 0"
+
+	cp ${PATH_RPM}/RPMS/x86_64/${NAME}-${VERSION}-1.x86_64.rpm dist/${NAME}-${VERSION}-1.x86_64-suse.rpm
+
+pkg_rpm: clear build build_zip pkg_rpm_
+
+
+pkg_all: clear build build_zip pkg_aur_ pkg_deb_ pkg_rpm_ pkg_flatpak_
+	#cp dist/* ${HOME}/data/my/vmware/files
+
+
+
+PATH_PIP = build/pkg/pip/
+pkg_pip_:
+	DESTDIR=../${PATH_PIP} meson install -C build
+
+	cp README.md ${PATH_PIP}
+	cp LICENSE ${PATH_PIP}
+
+	cd ${PATH_PIP} && \
+	mv usr/lib/${NAME} ./ && \
+	mv usr/share/icons/hicolor/scalable/apps ./${NAME}/resources/ && \
+	mv usr/share/locale ./${NAME}/resources/ && \
+	python -m build
+
+	cp ${PATH_PIP}/dist/${NAME}-${VERSION}-py3-none-any.whl dist/
+
+pkg_pip: clear build pkg_pip_
 
 
 release:
-	make BUILD_TYPE=qt test-aur
-	make BUILD_TYPE=qt test-deb
-	make BUILD_TYPE=qt test-rpm
-	make BUILD_TYPE=qt test-pip
-	make BUILD_TYPE=gtk test-aur
-	make BUILD_TYPE=gtk test-deb
-	make BUILD_TYPE=gtk test-rpm
-	make BUILD_TYPE=gtk test-flatpak
+	make BUILD_TYPE=qt pkg_all
+	make BUILD_TYPE=gtk pkg_all
 
-uninstall:
-	cd build && ninja uninstall
-
+	make BUILD_TYPE=qt pkg_pip
 
 GTK_FILES = \
-    lfy-$(VERSION)-1-any-gtk.pkg.tar.zst \
-    lfy-$(VERSION)-x86_64-gtk.deb \
-    lfy-$(VERSION)-1.x86_64-gtk.rpm \
-    lfy-$(VERSION)-1.x86_64-gtk-suse.rpm \
-    cool.ldr.lfy-$(VERSION)-gtk.flatpak
+    ${NAME}-$(VERSION)-1-any-gtk.pkg.tar.zst \
+    ${NAME}-$(VERSION)-x86_64-gtk.deb \
+    ${NAME}-$(VERSION)-1.x86_64-gtk.rpm \
+    ${NAME}-$(VERSION)-1.x86_64-gtk-suse.rpm \
+    ${APP_ID}-$(VERSION)-gtk.flatpak
 
 QT_FILES = \
-    lfy-$(VERSION)-1-any-qt.pkg.tar.zst \
-    lfy-$(VERSION)-x86_64-qt.deb \
-    lfy-$(VERSION)-1.x86_64-qt.rpm \
-    lfy-$(VERSION)-1.x86_64-qt-suse.rpm \
+    ${NAME}-$(VERSION)-1-any-qt.pkg.tar.zst \
+    ${NAME}-$(VERSION)-x86_64-qt.deb \
+    ${NAME}-$(VERSION)-1.x86_64-qt.rpm \
+    ${NAME}-$(VERSION)-1.x86_64-qt-suse.rpm \
     x \
-	lfy-$(VERSION)-py3-none-any.whl
+	${NAME}-$(VERSION)-py3-none-any.whl
 
 generate:
 	@echo -n "gtk|"

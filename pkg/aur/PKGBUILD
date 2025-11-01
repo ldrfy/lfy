@@ -10,7 +10,7 @@ depends=(@DEPS@)
 makedepends=(@BUILD_DEPS@)
 optdepends=('python-pytesseract: for tesseract ocr support', 'tesseract-data-eng: for tesseract ocr support by en', 'tesseract-data-chi_sim: for tesseract ocr support by chi_sim')
 checkdepends=('appstream-glib')
-source=(${url}/archive/refs/tags/v${pkgver}.zip)
+source=(${pkgname}-${pkgver}.zip)
 sha256sums=("SKIP")
 
 

@@ -54,6 +54,15 @@
 
 
 	<releases>
+		<release version="0.2.0" date="2025-10-08">
+			<description>
+				<ul>
+					<li>Google and Bing Translate encounter abnormal HTML encoding issues</li>
+                    <li>Shortcut key ctrl-shift-c to copy translation results</li>
+                    <li>Can set the language type of the text to be translated</li>
+				</ul>
+			</description>
+		</release>
 		<release version="0.1.0" date="2024-12-10">
 			<description>
 				<ul>
