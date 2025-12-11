@@ -1,5 +1,5 @@
 {
-    "version": "0.1.0",
+    "version": "0.2.0",
     "url": "https://github.com/ldrfy/lfy",
-    "msg": "Update notes:\n- The native qt version of plasma can be installed by `pip install lfy`\n- Add local OCR recognition: easyocr, pytesseract\n- Add import and export settings\n- Add translate or OCR in terminal, like `lfy -h`\n- Add debug in about page\n- Add the dividing line in the middle of the translation page\n- Refactor settings page"
+    "msg": "Update notes:\n- Google and Bing Translate encounter abnormal HTML encoding issues\n- Shortcut key ctrl-shift-c to copy translation results\n- Can set the language type of the text to be translated\n- More translation support"
 }

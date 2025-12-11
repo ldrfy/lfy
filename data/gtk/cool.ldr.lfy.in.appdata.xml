@@ -54,12 +54,13 @@
 
 
 	<releases>
-		<release version="0.2.0" date="2025-10-08">
+		<release version="0.2.0" date="2025-12-12">
 			<description>
 				<ul>
 					<li>Google and Bing Translate encounter abnormal HTML encoding issues</li>
                     <li>Shortcut key ctrl-shift-c to copy translation results</li>
                     <li>Can set the language type of the text to be translated</li>
+                    <li>More translation support</li>
 				</ul>
 			</description>
 		</release>
