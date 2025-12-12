@@ -50,6 +50,11 @@ po-init:
 update-po:
 	msgmerge -U ./po/${TO_LANG}.po ./po/${NAME}.pot
 
+update-po-all:
+	make update-po
+	make update-po TO_LANG=pt_BR
+	make update-po TO_LANG=it
+
 
 .PHONY: build other update-pot update-po po-init test whl rename
 

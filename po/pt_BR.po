@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2025-05-08 14:35+0800\n"
+"POT-Creation-Date: 2025-12-12 12:09+0800\n"
 "PO-Revision-Date: 2025-05-08 20:06-0300\n"
 "Last-Translator: John peter sa <johnppetersa@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <ldpbr-"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Poedit 3.6\n"
 
 #: data/cool.ldr.lfy.in.in.desktop:2 data/gtk/cool.ldr.lfy.in.appdata.xml:10
-#: data/gtk/translate.ui:132
+#: data/gtk/translate.ui:144
 msgid "lfy"
 msgstr "lfy"
 
@@ -32,7 +32,7 @@ msgstr "Verifique automaticamente a nova versão do software na inicialização"
 msgid "Copy to Translate"
 msgstr "Copiar para traduzir"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:14 data/gtk/preference.ui:116
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:14 data/gtk/preference.ui:117
 msgid ""
 "After the translation is completed, a system notification is automatically "
 "sent"
@@ -53,35 +53,41 @@ msgid "The currently selected translation service"
 msgstr "O serviço de tradução atualmente selecionado"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:35
-msgid "The currently selected translation language"
+#, fuzzy
+msgid "The currently selected translation language to"
 msgstr "O idioma de tradução atualmente selecionado"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:39
+#, fuzzy
+msgid "The currently selected translation language from"
+msgstr "O idioma de tradução atualmente selecionado"
+
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:43
 msgid "Translation windows width"
 msgstr "Largura das janelas de tradução"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:43
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:47
 msgid "Translation windows height"
 msgstr "Altura das janelas de tradução"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:47
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:51
 msgid "Baidu app_id and secret_key, used in the middle | split"
 msgstr "Baidu app_id e secret_key, usados ​​na divisão intermediária"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:51
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:55
 msgid "Baidu API Key and Secret Key for ocr, used in the middle | split"
 msgstr ""
 "Chave de API do Baidu e chave secreta para ocr, usadas na divisão "
 "intermediária"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:55
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:59
 msgid ""
 "The lang parameters of the pytesseract module, such as Chinese and English "
 "by default"
 msgstr ""
 "Os parâmetros lang do módulo pytesseract, como chinês e inglês por padrão"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:59
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:63
 msgid ""
 "The lang parameters of the easyocr module, such as Chinese and English by "
 "default, split by +"
@@ -89,39 +95,39 @@ msgstr ""
 "Os parâmetros de idioma do módulo easyocr, como chinês e inglês por padrão, "
 "são separados por +"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:63
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:67
 msgid "Baidu OCR access_token"
 msgstr "Token de acesso OCR do Baidu"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:67
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:71
 msgid "Baidu OCR access_token expires date"
 msgstr "Data de expiração do access_token do Baidu OCR"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:71
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:75
 msgid "aliyun AccessKey ID and AccessKey Secret, used in the middle | split"
 msgstr ""
 "ID da Chave de Acesso e Segredo da Chave de Acesso do Aliyun, usados no meio "
 "| dividir"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:75
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:79
 msgid "huoshan Access Key ID and Secret Access Key, used in the middle | split"
 msgstr ""
 "ID da Chave de Acesso e Chave de Acesso Secreta do Huoshan, usados no meio | "
 "dividir"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:79
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:83
 msgid "Tencent secret_id and secret_key, used in the middle | split"
 msgstr "secret_id e secret_key da Tencent, usados no meio | dividir"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:83
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:87
 msgid "VPN address and port"
 msgstr "Endereço e porta VPN"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:87 data/gtk/preference.ui:90
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:91 data/gtk/preference.ui:91
 msgid "Which services are available in compare model"
 msgstr "Quais serviços estão disponíveis no modelo de comparação"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:11 lfy/__init__.py:37
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:11 lfy/__init__.py:36
 msgid ""
 "Translation software designed for reading scientific research literature"
 msgstr ""
@@ -156,70 +162,88 @@ msgstr "Definir chave API"
 msgid "Shortcuts"
 msgstr "Atalhos"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:58 lfy/qt/tray.py:132
-#: data/gtk/translate.ui:159
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:49 lfy/qt/tray.py:58 lfy/qt/tray.py:136
+#: data/gtk/translate.ui:171
 msgid "About"
 msgstr "Sobre"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:60
+msgid "Google and Bing Translate encounter abnormal HTML encoding issues"
+msgstr ""
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:61
+#, fuzzy
+msgid "Shortcut key ctrl-shift-c to copy translation results"
+msgstr "Notificar resultados de tradução"
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:62
+msgid "Can set the language type of the text to be translated"
+msgstr ""
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:63
+#, fuzzy
+msgid "More translation support"
+msgstr "Notificar resultados de tradução"
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:70
 msgid "The native qt version of plasma can be installed by `pip install lfy`"
 msgstr "A versão qt nativa do plasma pode ser instalada por `pip install lfy`"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:61
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:71
 msgid "Add local OCR recognition: easyocr, pytesseract (not support flatpak)"
 msgstr ""
 "Adicione o reconhecimento local do OCR: Easyocr, Pytesseract (não suporta "
 "Flatpak)"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:62
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:72
 msgid "Add import and export settings"
 msgstr "Adicionar configurações de importação e exportação"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:63
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:73
 msgid "Add translate or OCR in terminal, like `lfy -h`"
 msgstr "Adicione tradução ou OCR no terminal, como `lfy -h`"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:64
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:74
 msgid "Add debug in about page"
 msgstr "Adicionar depuração na página sobre"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:65
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:75
 msgid "Add the dividing line in the middle of the translation page"
 msgstr "Adicione a linha divisória no meio da página de tradução"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:66
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:76
 msgid "Refactor settings page"
 msgstr "Página de configurações de refatoração"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:73
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:83
 msgid "Add aliyun/huoshan Translate for free"
 msgstr "Adicione informações adicionais Traduza gratuitamente"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:74
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:84
 msgid "Support notification after translation"
 msgstr "Notificação de suporte após tradução"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:75
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:85
 msgid "Supports comparing multiple translations at the same time"
 msgstr "Suporta comparação de múltiplas traduções ao mesmo tempo"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:82
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:92
 msgid "Add Bing Translate for free"
 msgstr "Adicione o Bing Translate gratuitamente"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:89
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:99
 msgid "Fix Google Translate"
 msgstr "Corrigir o Google Tradutor"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:90
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:100
 msgid "Improve translation performance"
 msgstr "Melhore o desempenho da tradução"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:91
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:101
 msgid "Add Italian language and support Italian translation"
 msgstr "Adicione o idioma italiano e suporte à tradução para italiano"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:92
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:102
 msgid ""
 "Optimize the structure of translation services and make it more convenient "
 "to create third-party translation services"
@@ -227,92 +251,107 @@ msgstr ""
 "Otimizar a estrutura dos serviços de tradução e tornar mais conveniente "
 "criar serviços de tradução de terceiros"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:99
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:109
 msgid "add shortcut"
 msgstr "adicionar atalho"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:100
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:110
 msgid "Automatically check for updates"
 msgstr "Verifique automaticamente se há atualizações"
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:106
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:116
 msgid "Basic functions completed"
 msgstr "Funções básicas concluídas"
 
-#: lfy/api/server/tra/__init__.py:30
+#: lfy/api/server/tra/__init__.py:43
 msgid ""
 "This time the content contains private information and is not translated"
 msgstr "Desta vez, o conteúdo contém informações privadas e não é traduzido"
 
-#: lfy/gtk/main.py:86
+#: lfy/gtk/main.py:87
 msgid "translator_credits"
 msgstr "John peter sa <johnppetersa@gmail.com>"
 
-#: lfy/gtk/main.py:112 lfy/qt/tray.py:143 data/gtk/help-overlay.ui:26
+#: lfy/gtk/main.py:112 lfy/qt/tray.py:147 data/gtk/help-overlay.ui:52
 msgid "Copy detected, translate immediately"
 msgstr "Cópia detectada, traduza imediatamente"
 
-#: lfy/gtk/main.py:115 lfy/qt/tray.py:149
+#: lfy/gtk/main.py:115 lfy/qt/tray.py:153
 msgid "Copy detected, not automatically translated"
 msgstr "Cópia detectada, não traduzida automaticamente"
 
-#: lfy/gtk/main.py:154
+#: lfy/gtk/main.py:163
 msgid "Next translation not remove line breaks"
 msgstr "Próxima tradução não remove quebras de linha"
 
-#: lfy/gtk/main.py:155
+#: lfy/gtk/main.py:164
 msgid "Next translation remove line breaks"
 msgstr "Próxima tradução remover quebras de linha"
 
-#: lfy/gtk/main.py:169
+#: lfy/gtk/main.py:179
 msgid "Next translation without splicing text"
 msgstr "Próxima tradução sem emendar texto"
 
-#: lfy/gtk/main.py:170
+#: lfy/gtk/main.py:180
 msgid "Next translation splicing text"
 msgstr "Próxima tradução emendando texto"
 
-#: lfy/gtk/main.py:241 lfy/qt/tray.py:183
+#: lfy/gtk/main.py:260 lfy/qt/tray.py:188
+#, fuzzy, python-brace-format
 msgid ""
-"There is no new version.                      \n"
-"The current version is {}.                      \n"
-"You can go to {} to view the beta version."
+"There is no new version.\n"
+"The current version is {version_code}.\n"
+"You can go to {url} to view the beta version."
 msgstr ""
 "Não há uma nova versão.                      \n"
 "A versão atual é {}.                      \n"
 "Você pode acessar {} para visualizar a versão beta."
 
-#: lfy/gtk/preference.py:72 lfy/api/server/tra/com.py:82
+#: lfy/gtk/preference.py:58 lfy/qt/preference.py:150
+#, fuzzy, python-brace-format
+msgid "vpn addr and port, like {url}"
+msgstr "endereço e porta VPN"
+
+#: lfy/gtk/preference.py:72 lfy/api/server/tra/com.py:87
 msgid "compare"
 msgstr "comparar"
 
-#: lfy/gtk/preference.py:99 lfy/gtk/preference.py:136 lfy/gtk/preference.py:170
+#: lfy/gtk/preference.py:98 lfy/gtk/preference.py:135 lfy/gtk/preference.py:168
 msgid "It takes effect when you restart lfy"
 msgstr "Entra em vigor quando você reinicia o lfy"
 
-#: lfy/gtk/preference.py:107
+#: lfy/gtk/preference.py:106
 msgid "The clipboard format is incorrect"
 msgstr "O formato da área de transferência está incorreto"
 
-#: lfy/gtk/preference.py:114
+#: lfy/gtk/preference.py:113
 msgid "Configuration data has been exported to the clipboard"
 msgstr "Os dados de configuração foram exportados para a área de transferência"
 
-#: lfy/gtk/preference.py:153 lfy/qt/preference.py:233
+#: lfy/gtk/preference.py:152 lfy/qt/preference.py:235
+#, python-brace-format
 msgid "Using {} for text recognition"
 msgstr "Usando {} para reconhecimento de texto"
 
-#: lfy/gtk/translate.py:205 lfy/qt/translate.py:317
-msgid "Translating..."
+#: lfy/gtk/translate.py:218 lfy/qt/translate.py:350
+#, fuzzy, python-brace-format
+msgid "{} Translating…"
 msgstr "Traduzindo..."
 
-#: lfy/gtk/translate.py:210 lfy/qt/translate.py:275
-msgid "Translation completed"
+#: lfy/gtk/translate.py:222 lfy/qt/translate.py:308
+#, fuzzy, python-brace-format
+msgid "{} Translation completed."
 msgstr "Tradução concluída"
 
-#: lfy/gtk/translate.py:227 lfy/qt/translate.py:257
-msgid "{} OCRing..."
-msgstr "{} Fazendo OCR..."
+#: lfy/gtk/translate.py:238
+#, python-brace-format
+msgid "{ocr_server_name} OCRing…"
+msgstr ""
+
+#: lfy/gtk/translate.py:292
+#, python-brace-format
+msgid "Translation results have been copied: {}"
+msgstr ""
 
 #: lfy/gtk/widgets/server_preferences.py:36
 msgid "Text translate"
@@ -322,64 +361,65 @@ msgstr "Tradução de texto"
 msgid "Text recognition"
 msgstr "Reconhecimento de texto"
 
-#: lfy/gtk/widgets/server_preferences.py:78
+#: lfy/gtk/widgets/server_preferences.py:80
 msgid "error message"
 msgstr "mensagem de erro"
 
-#: lfy/gtk/widgets/server_preferences.py:80
+#: lfy/gtk/widgets/server_preferences.py:82
 msgid "Confirm"
 msgstr "Confirmar"
 
-#: lfy/qt/preference.py:42 data/gtk/preference.ui:10
+#: lfy/qt/preference.py:48 data/gtk/preference.ui:11
+#: data/gtk/help-overlay.ui:15
 msgid "General"
 msgstr "Em geral"
 
-#: lfy/qt/preference.py:43 data/gtk/preference.ui:103
+#: lfy/qt/preference.py:49 data/gtk/preference.ui:104
 msgid "Other"
 msgstr "Outro"
 
-#: lfy/qt/preference.py:58 data/gtk/preference.ui:17
+#: lfy/qt/preference.py:64 data/gtk/preference.ui:18
 msgid "Translation keys"
 msgstr "Chaves de tradução"
 
-#: lfy/qt/preference.py:70 lfy/qt/preference.py:99
-#: data/gtk/server-preferences.ui:45
+#: lfy/qt/preference.py:76 lfy/qt/preference.py:105
+#: data/gtk/server-preferences.ui:46
 msgid "how to get API Key"
 msgstr "como obter a chave API"
 
-#: lfy/qt/preference.py:74 lfy/qt/preference.py:103 lfy/qt/preference.py:152
+#: lfy/qt/preference.py:80 lfy/qt/preference.py:109 lfy/qt/preference.py:154
 msgid "Save"
 msgstr "Salvar"
 
-#: lfy/qt/preference.py:85 lfy/qt/preference.py:232 data/gtk/preference.ui:47
+#: lfy/qt/preference.py:91 lfy/qt/preference.py:234 data/gtk/preference.ui:48
 msgid "OCR server"
 msgstr "Servidor OCR"
 
-#: lfy/qt/preference.py:122 data/gtk/preference.ui:110
+#: lfy/qt/preference.py:128 data/gtk/preference.ui:111
 msgid "auto check update"
 msgstr "atualização de verificação automática"
 
-#: lfy/qt/preference.py:129 data/gtk/preference.ui:117
+#: lfy/qt/preference.py:133 data/gtk/preference.ui:118
 msgid "Notify translation results"
 msgstr "Notificar resultados de tradução"
 
-#: lfy/qt/preference.py:136 data/gtk/preference.ui:76
+#: lfy/qt/preference.py:138 data/gtk/preference.ui:77
 msgid "Compare model"
 msgstr "Comparar modelo"
 
-#: lfy/qt/preference.py:146
+#: lfy/qt/preference.py:147
 msgid "vpn addr and port"
 msgstr "endereço e porta VPN"
 
-#: lfy/qt/preference.py:159 data/gtk/preference.ui:139
+#: lfy/qt/preference.py:161 data/gtk/preference.ui:139
 msgid "Software settings backup and restore"
 msgstr "Backup e restauração de configurações de software"
 
-#: lfy/qt/preference.py:162 data/gtk/preference.ui:142
+#: lfy/qt/preference.py:164 data/gtk/preference.ui:142
 msgid "backup"
 msgstr "backup"
 
-#: lfy/qt/preference.py:163 data/gtk/preference.ui:153
+#: lfy/qt/preference.py:165 data/gtk/preference.ui:153
 msgid ""
 "Read the JSON configuration of the clipboard, then import it, and some of "
 "the configurations will take effect after reopening the software"
@@ -387,11 +427,11 @@ msgstr ""
 "Leia a configuração JSON da área de transferência, importe-a e algumas das "
 "configurações terão efeito após reabrir o software"
 
-#: lfy/qt/preference.py:169 data/gtk/preference.ui:151
+#: lfy/qt/preference.py:171 data/gtk/preference.ui:151
 msgid "restore"
 msgstr "restaurar"
 
-#: lfy/qt/preference.py:170 data/gtk/preference.ui:144
+#: lfy/qt/preference.py:172 data/gtk/preference.ui:144
 msgid ""
 "Export the configuration to the clipboard, then you can paste it into any "
 "file and edit it"
@@ -399,53 +439,54 @@ msgstr ""
 "Exporte a configuração para a área de transferência, então você poderá colá-"
 "la em qualquer arquivo e editá-la"
 
-#: lfy/qt/preference.py:241
+#: lfy/qt/preference.py:243
 msgid "Import successful!"
 msgstr "Importação bem-sucedida!"
 
-#: lfy/qt/preference.py:242
+#: lfy/qt/preference.py:244
 msgid "It takes effect when you restart lfy."
 msgstr "Ele entra em vigor quando você reinicia o lfy."
 
-#: lfy/qt/preference.py:246
+#: lfy/qt/preference.py:249
 msgid "Import failed!"
 msgstr "Falha na importação!"
 
-#: lfy/qt/preference.py:247
+#: lfy/qt/preference.py:250
 msgid "No configuration data in the clipboard."
 msgstr "Nenhum dado de configuração na área de transferência."
 
-#: lfy/qt/preference.py:252
+#: lfy/qt/preference.py:256
 msgid "Export successful!"
 msgstr "Exportação bem-sucedida!"
 
-#: lfy/qt/preference.py:253
+#: lfy/qt/preference.py:257
 msgid "Configuration data has been exported to the clipboard."
 msgstr ""
 "Os dados de configuração foram exportados para a área de transferência."
 
-#: lfy/qt/translate.py:63 data/gtk/translate.ui:71 data/gtk/help-overlay.ui:39
+#: lfy/qt/translate.py:67 data/gtk/translate.ui:83 data/gtk/help-overlay.ui:38
 msgid "Remove line breaks"
 msgstr "Remover quebras de linha"
 
-#: lfy/qt/translate.py:65 data/gtk/translate.ui:72
+#: lfy/qt/translate.py:69 data/gtk/translate.ui:84
 msgid "Alt + D: Remove symbols such as line breaks"
 msgstr "Alt + D: Remova símbolos como quebras de linha"
 
-#: lfy/qt/translate.py:67 data/gtk/translate.ui:79 data/gtk/help-overlay.ui:32
+#: lfy/qt/translate.py:71 data/gtk/translate.ui:91 data/gtk/help-overlay.ui:31
 msgid "Splice Text"
 msgstr "Emendar texto"
 
-#: lfy/qt/translate.py:69 data/gtk/translate.ui:80
+#: lfy/qt/translate.py:73 data/gtk/translate.ui:92
 msgid "Alt + C: Splice the next copied text with the previous text"
 msgstr "Alt + C: Une o próximo texto copiado com o texto anterior"
 
-#: lfy/qt/translate.py:71 lfy/qt/translate.py:73 data/gtk/translate.ui:87
+#: lfy/qt/translate.py:75 lfy/qt/translate.py:77 data/gtk/translate.ui:99
 #: data/gtk/help-overlay.ui:19
 msgid "Translate"
 msgstr "Traduzir"
 
-#: lfy/qt/translate.py:155
+#: lfy/qt/translate.py:166
+#, python-brace-format
 msgid ""
 "Select text and use the shortcut key '{}' to copy, the copied text will not "
 "be automatically translated"
@@ -453,28 +494,33 @@ msgstr ""
 "Selecione o texto e use a tecla de atalho '{}' para copiar, o texto copiado "
 "não será traduzido automaticamente"
 
-#: lfy/qt/translate.py:189
+#: lfy/qt/translate.py:209
 msgid "warn"
 msgstr "avisar"
 
-#: lfy/qt/translate.py:189
+#: lfy/qt/translate.py:209
 msgid "quit?"
 msgstr "desistir?"
+
+#: lfy/qt/translate.py:287
+#, fuzzy, python-brace-format
+msgid "{} OCRing…"
+msgstr "{} Fazendo OCR..."
 
 #: lfy/qt/tray.py:38
 msgid "Open"
 msgstr "Abrir"
 
-#: lfy/qt/tray.py:42 lfy/qt/tray.py:196 data/gtk/translate.ui:155
+#: lfy/qt/tray.py:42 data/gtk/translate.ui:167
 msgid "Check for updates"
 msgstr "Verificar atualizações"
 
-#: lfy/qt/tray.py:46 lfy/qt/tray.py:142 data/gtk/translate.ui:143
-#: data/gtk/help-overlay.ui:25
+#: lfy/qt/tray.py:46 lfy/qt/tray.py:146 data/gtk/translate.ui:155
+#: data/gtk/help-overlay.ui:51
 msgid "Copy to translate"
 msgstr "Copiar para traduzir"
 
-#: lfy/qt/tray.py:54 data/gtk/translate.ui:147
+#: lfy/qt/tray.py:54 data/gtk/translate.ui:159
 msgid "Preferences"
 msgstr "Preferências"
 
@@ -482,105 +528,112 @@ msgstr "Preferências"
 msgid "Quit"
 msgstr "Desistir"
 
-#: lfy/qt/tray.py:148
+#: lfy/qt/tray.py:152
 msgid "Stop copy to translate"
 msgstr "Pare de copiar para traduzir"
 
-#: lfy/qt/tray.py:178
+#: lfy/qt/tray.py:182
 msgid "New version available!"
 msgstr "Nova versão disponível!"
 
-#: lfy/qt/tray.py:187
+#: lfy/qt/tray.py:193
 msgid "No new version!"
 msgstr "Nenhuma nova versão!"
 
-#: lfy/api/server/__init__.py:16
+#: lfy/qt/tray.py:202
+#, fuzzy
+msgid "Check for updates…"
+msgstr "Verificar atualizações"
+
+#: lfy/api/server/__init__.py:15
 msgid "Automatic"
 msgstr "Automático"
 
-#: lfy/api/server/__init__.py:18
+#: lfy/api/server/__init__.py:17
 msgid "Chinese"
 msgstr "Chinês"
 
-#: lfy/api/server/__init__.py:20
+#: lfy/api/server/__init__.py:19
 msgid "Classical Chinese"
 msgstr "Chinês Clássico"
 
-#: lfy/api/server/__init__.py:22
+#: lfy/api/server/__init__.py:21
 msgid "English"
 msgstr "Inglês"
 
-#: lfy/api/server/__init__.py:24
+#: lfy/api/server/__init__.py:23
 msgid "Japanese"
 msgstr "Japonês"
 
-#: lfy/api/server/__init__.py:26
+#: lfy/api/server/__init__.py:25
 msgid "Korean"
 msgstr "Coreano"
 
-#: lfy/api/server/__init__.py:28
+#: lfy/api/server/__init__.py:27
 msgid "German"
 msgstr "Alemão"
 
-#: lfy/api/server/__init__.py:30
+#: lfy/api/server/__init__.py:29
 msgid "French"
 msgstr "Francês"
 
-#: lfy/api/server/__init__.py:32
+#: lfy/api/server/__init__.py:31
 msgid "Italian"
 msgstr "Italiano"
 
-#: lfy/api/server/__init__.py:34
+#: lfy/api/server/__init__.py:33
 msgid "Spanish"
 msgstr "Espanhol"
 
-#: lfy/api/server/__init__.py:36
+#: lfy/api/server/__init__.py:35
 msgid "Portuguese"
 msgstr "Portuguese"
 
-#: lfy/api/server/__init__.py:38
+#: lfy/api/server/__init__.py:37
 msgid "Portuguese(Brazilian)"
 msgstr "Português (Brasileiro)"
 
-#: lfy/api/server/__init__.py:101 lfy/api/server/__init__.py:191
+#: lfy/api/server/__init__.py:103 lfy/api/server/__init__.py:195
 #, python-brace-format
 msgid "please input `{sk}` for `{server}` in preference"
 msgstr "por favor insira `{sk}` para `{server}` na preferência"
 
-#: lfy/api/server/__init__.py:181
+#: lfy/api/server/__init__.py:185
 msgid "Developers, please set sk_placeholder_text"
 msgstr "Desenvolvedores, por favor definam o texto do espaço reservado"
 
-#: lfy/api/server/tra/baidu.py:43 lfy/api/server/tra/tencent.py:81
-#: lfy/api/server/tra/bing.py:73 lfy/api/server/tra/aliyun.py:90
-#: lfy/api/server/tra/com.py:29 lfy/api/server/tra/huoshan.py:137
-#: lfy/api/server/ocr/baidu.py:101 lfy/utils/__init__.py:242
-#: lfy/utils/code.py:85 lfy/utils/code.py:118
+#: lfy/api/server/tra/baidu.py:43 lfy/api/server/tra/tencent.py:82
+#: lfy/api/server/tra/bing.py:72 lfy/api/server/tra/aliyun.py:90
+#: lfy/api/server/tra/com.py:29 lfy/api/server/tra/huoshan.py:138
+#: lfy/api/server/ocr/baidu.py:100 lfy/utils/__init__.py:243
+#: lfy/utils/code.py:89 lfy/utils/code.py:125
+#, python-brace-format
 msgid "something error: {}"
 msgstr "algo erro: {}"
 
-#: lfy/api/server/tra/baidu.py:69 lfy/api/server/ocr/baidu.py:133
+#: lfy/api/server/tra/baidu.py:68 lfy/api/server/ocr/baidu.py:131
 msgid "baidu"
 msgstr "Baidu"
 
-#: lfy/api/server/tra/google.py:66
+#: lfy/api/server/tra/google.py:67
 msgid "google"
 msgstr "Google"
 
-#: lfy/api/server/tra/tencent.py:105
+#: lfy/api/server/tra/tencent.py:107
 msgid "tencent"
 msgstr "Tencent"
 
-#: lfy/api/server/tra/bing.py:103
+#: lfy/api/server/tra/bing.py:102
+#, python-brace-format
 msgid "please contact the developer: {}"
 msgstr "entre em contato com o desenvolvedor: {}"
 
-#: lfy/api/server/tra/bing.py:108
+#: lfy/api/server/tra/bing.py:107
 #, python-brace-format
 msgid "1000 characters limit! You send {len_text} characters."
 msgstr "Limite de 1000 caracteres! Você envia {len_text} caracteres."
 
-#: lfy/api/server/tra/bing.py:134
+#: lfy/api/server/tra/bing.py:133
 msgid "bing"
 msgstr "Bing"
 
@@ -588,55 +641,64 @@ msgstr "Bing"
 msgid "aliyun"
 msgstr "Aliyu"
 
-#: lfy/api/server/tra/huoshan.py:165
+#: lfy/api/server/tra/huoshan.py:166
 msgid "huoshan"
 msgstr "Huoshan"
 
 #: lfy/utils/__init__.py:216
+#, python-brace-format
 msgid "please install python whl (not support flatpak): {}"
 msgstr "por favor instale python whl (não suporta flatpak): {}"
 
 #: lfy/utils/__init__.py:234
+#, fuzzy, python-brace-format
 msgid ""
-"The connection times out: {}. Probably there is a problem with the network, "
-"or there is a problem with the VPN proxy settings {}"
+"The connection times out: {server_name}. Probably there is a problem with "
+"the network, or there is a problem with the VPN proxy settings. The details "
+"of the error are as follows: {str_error}"
 msgstr ""
 "Tempo limite de conexão expirou: {}. Provavelmente há um problema com a rede "
 "ou com as configurações de proxy da VPN {}"
 
-#: lfy/utils/__init__.py:239
+#: lfy/utils/__init__.py:240
+#, python-brace-format
 msgid "Maybe there is probably a problem with the VPN proxy settings: {}"
 msgstr "Talvez haja um problema com as configurações de proxy da VPN: {}"
 
 #: lfy/utils/bak.py:58
-msgid "error with keys: "
+#, fuzzy, python-brace-format
+msgid "error with keys: {}"
 msgstr "erro com chaves: "
 
 #: lfy/utils/bak.py:66
 msgid "Please copy the configuration data in json format first"
 msgstr "Copie primeiro os dados de configuração no formato JSON"
 
-#: lfy/utils/code.py:76
+#: lfy/utils/code.py:77
 msgid "no text"
 msgstr "sem texto"
 
-#: lfy/utils/code.py:109
+#: lfy/utils/code.py:113
+#, python-brace-format
 msgid "the file does not exist: {}"
 msgstr "o arquivo não existe: {}"
 
-#: lfy/utils/code.py:125
-msgid "Command line translation or text recognition, such as {} or {}"
+#: lfy/utils/code.py:131
+#, fuzzy, python-brace-format
+msgid ""
+"Command line translation or text recognition, such as {code_translate} or "
+"{code_ocr}"
 msgstr "Tradução de linha de comando ou reconhecimento de texto, como {} ou {}"
 
-#: lfy/utils/code.py:130
+#: lfy/utils/code.py:136
 msgid "Translate, followed by text"
 msgstr "Traduzir, seguido de texto"
 
-#: lfy/utils/code.py:132
+#: lfy/utils/code.py:138
 msgid "Recognize image, followed by file path"
 msgstr "Reconhecer imagem, seguida do caminho do arquivo"
 
-#: lfy/utils/code.py:135
+#: lfy/utils/code.py:141
 msgid ""
 "Which service engine to use, if -s is not entered, help will be provided "
 "based on -t or -o"
@@ -644,7 +706,7 @@ msgstr ""
 "Qual mecanismo de serviço usar, se -s não for inserido, a ajuda será "
 "fornecida com base em -t ou -o"
 
-#: lfy/utils/code.py:138
+#: lfy/utils/code.py:144
 msgid ""
 "The language to be translated/recognized, if -l is not entered, "
 "corresponding help will be provided based on the input of -s"
@@ -652,35 +714,31 @@ msgstr ""
 "O idioma a ser traduzido/reconhecido, se -l não for inserido, a ajuda "
 "correspondente será fornecida com base na entrada de -s"
 
-#: data/gtk/translate.ui:119
+#: data/gtk/translate.ui:131
 msgid "Menu"
 msgstr "Menu"
 
-#: data/gtk/translate.ui:151
+#: data/gtk/translate.ui:163
 msgid "_Keyboard Shortcuts"
 msgstr "Atalhos de teclado"
 
-#: data/gtk/server-preferences.ui:14
+#: data/gtk/server-preferences.ui:15
 msgid "Translate Server"
 msgstr "Servidor de tradução"
 
-#: data/gtk/preference.ui:15
+#: data/gtk/preference.ui:16
 msgid "setup API Key for translation Server, click on the right to the details"
 msgstr ""
 "configure a chave API para o servidor de tradução, clique à direita para os "
 "detalhes"
 
-#: data/gtk/preference.ui:46
+#: data/gtk/preference.ui:47
 msgid "local or cloud, text recognition"
 msgstr "local ou nuvem, reconhecimento de texto"
 
-#: data/gtk/preference.ui:109
+#: data/gtk/preference.ui:110
 msgid "Automatically check for updates when opening software"
 msgstr "Verifique automaticamente se há atualizações ao abrir o software"
-
-#: data/gtk/preference.ui:128
-msgid "proxy addr and port(vpn), like http://127.0.0.1:7890"
-msgstr "endereço proxy e porta (vpn), como http://127.0.0.1:7890"
 
 #: data/gtk/preference.ui:138
 msgid "backup/restore the settings to/from the clipboard, edit or backup it"
@@ -688,24 +746,37 @@ msgstr ""
 "fazer backup/restaurar as configurações de/para a área de transferência, "
 "editar ou fazer backup"
 
-#: data/gtk/help-overlay.ui:15
-msgctxt "shortcut window"
-msgid "General"
-msgstr "Em geral"
+#: data/gtk/help-overlay.ui:25
+#, fuzzy
+msgid "Copy Translation Results"
+msgstr "Notificar resultados de tradução"
 
-#: data/gtk/help-overlay.ui:33 data/gtk/help-overlay.ui:40
+#: data/gtk/help-overlay.ui:32 data/gtk/help-overlay.ui:39
 msgid "Splice the next copied text with the previous text"
 msgstr "Divida o próximo texto copiado com o texto anterior"
 
-#: data/gtk/help-overlay.ui:46
+#: data/gtk/help-overlay.ui:47
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Other"
+msgstr "Outro"
+
+#: data/gtk/help-overlay.ui:58
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Desistir"
 
-#: data/gtk/help-overlay.ui:52
+#: data/gtk/help-overlay.ui:64
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "Mostrar atalhos"
+
+#~ msgid "proxy addr and port(vpn), like http://127.0.0.1:7890"
+#~ msgstr "endereço proxy e porta (vpn), como http://127.0.0.1:7890"
+
+#~ msgctxt "shortcut window"
+#~ msgid "General"
+#~ msgstr "Em geral"
 
 #~ msgid "Window size"
 #~ msgstr "Tamanho da janela"
