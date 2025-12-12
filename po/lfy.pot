@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2025-10-12 17:16+0800\n"
+"POT-Creation-Date: 2025-12-12 12:09+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,76 +149,92 @@ msgid "About"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:60
-msgid "The native qt version of plasma can be installed by `pip install lfy`"
+msgid "Google and Bing Translate encounter abnormal HTML encoding issues"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:61
-msgid "Add local OCR recognition: easyocr, pytesseract (not support flatpak)"
+msgid "Shortcut key ctrl-shift-c to copy translation results"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:62
-msgid "Add import and export settings"
+msgid "Can set the language type of the text to be translated"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:63
-msgid "Add translate or OCR in terminal, like `lfy -h`"
+msgid "More translation support"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:64
-msgid "Add debug in about page"
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:70
+msgid "The native qt version of plasma can be installed by `pip install lfy`"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:65
-msgid "Add the dividing line in the middle of the translation page"
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:71
+msgid "Add local OCR recognition: easyocr, pytesseract (not support flatpak)"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:66
-msgid "Refactor settings page"
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:72
+msgid "Add import and export settings"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:73
-msgid "Add aliyun/huoshan Translate for free"
+msgid "Add translate or OCR in terminal, like `lfy -h`"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:74
-msgid "Support notification after translation"
+msgid "Add debug in about page"
 msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:75
+msgid "Add the dividing line in the middle of the translation page"
+msgstr ""
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:76
+msgid "Refactor settings page"
+msgstr ""
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:83
+msgid "Add aliyun/huoshan Translate for free"
+msgstr ""
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:84
+msgid "Support notification after translation"
+msgstr ""
+
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:85
 msgid "Supports comparing multiple translations at the same time"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:82
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:92
 msgid "Add Bing Translate for free"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:89
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:99
 msgid "Fix Google Translate"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:90
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:100
 msgid "Improve translation performance"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:91
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:101
 msgid "Add Italian language and support Italian translation"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:92
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:102
 msgid ""
 "Optimize the structure of translation services and make it more convenient "
 "to create third-party translation services"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:99
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:109
 msgid "add shortcut"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:100
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:110
 msgid "Automatically check for updates"
 msgstr ""
 
-#: data/gtk/cool.ldr.lfy.in.appdata.xml:106
+#: data/gtk/cool.ldr.lfy.in.appdata.xml:116
 msgid "Basic functions completed"
 msgstr ""
 
@@ -255,7 +271,7 @@ msgstr ""
 msgid "Next translation splicing text"
 msgstr ""
 
-#: lfy/gtk/main.py:261 lfy/qt/tray.py:188
+#: lfy/gtk/main.py:260 lfy/qt/tray.py:188
 #, python-brace-format
 msgid ""
 "There is no new version.\n"
@@ -263,7 +279,7 @@ msgid ""
 "You can go to {url} to view the beta version."
 msgstr ""
 
-#: lfy/gtk/preference.py:58 lfy/qt/preference.py:150 data/gtk/preference.ui:129
+#: lfy/gtk/preference.py:58 lfy/qt/preference.py:150
 #, python-brace-format
 msgid "vpn addr and port, like {url}"
 msgstr ""
@@ -367,25 +383,25 @@ msgstr ""
 msgid "vpn addr and port"
 msgstr ""
 
-#: lfy/qt/preference.py:161 data/gtk/preference.ui:140
+#: lfy/qt/preference.py:161 data/gtk/preference.ui:139
 msgid "Software settings backup and restore"
 msgstr ""
 
-#: lfy/qt/preference.py:164 data/gtk/preference.ui:143
+#: lfy/qt/preference.py:164 data/gtk/preference.ui:142
 msgid "backup"
 msgstr ""
 
-#: lfy/qt/preference.py:165 data/gtk/preference.ui:154
+#: lfy/qt/preference.py:165 data/gtk/preference.ui:153
 msgid ""
 "Read the JSON configuration of the clipboard, then import it, and some of "
 "the configurations will take effect after reopening the software"
 msgstr ""
 
-#: lfy/qt/preference.py:171 data/gtk/preference.ui:152
+#: lfy/qt/preference.py:171 data/gtk/preference.ui:151
 msgid "restore"
 msgstr ""
 
-#: lfy/qt/preference.py:172 data/gtk/preference.ui:145
+#: lfy/qt/preference.py:172 data/gtk/preference.ui:144
 msgid ""
 "Export the configuration to the clipboard, then you can paste it into any "
 "file and edit it"
@@ -612,7 +628,8 @@ msgid "Maybe there is probably a problem with the VPN proxy settings: {}"
 msgstr ""
 
 #: lfy/utils/bak.py:58
-msgid "error with keys: "
+#, python-brace-format
+msgid "error with keys: {}"
 msgstr ""
 
 #: lfy/utils/bak.py:66
@@ -679,7 +696,7 @@ msgstr ""
 msgid "Automatically check for updates when opening software"
 msgstr ""
 
-#: data/gtk/preference.ui:139
+#: data/gtk/preference.ui:138
 msgid "backup/restore the settings to/from the clipboard, edit or backup it"
 msgstr ""
 

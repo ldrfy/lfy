@@ -55,7 +55,7 @@ def restore_gsettings(s, qt=None):
                 if key not in keys:
                     error_keys += key + " "
             if len(error_keys) > 0:
-                return _("error with keys: ") + error_keys
+                return _("error with keys: {}").format(error_keys)
 
         for key, value in backup_data.items():
             ss.s(key, value)
