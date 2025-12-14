@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
 "POT-Creation-Date: 2025-12-12 12:09+0800\n"
-"PO-Revision-Date: 2025-05-08 20:06-0300\n"
-"Last-Translator: John peter sa <johnppetersa@gmail.com>\n"
-"Language-Team: Brazilian Portuguese <ldpbr-"
-"translation@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2025-12-15 03:00+0000\n"
+"Last-Translator: John Peter Sa <johnppetersa@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/lfy/"
+"lfy/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.6\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #: data/cool.ldr.lfy.in.in.desktop:2 data/gtk/cool.ldr.lfy.in.appdata.xml:10
 #: data/gtk/translate.ui:144
@@ -53,14 +53,12 @@ msgid "The currently selected translation service"
 msgstr "O serviço de tradução atualmente selecionado"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:35
-#, fuzzy
 msgid "The currently selected translation language to"
-msgstr "O idioma de tradução atualmente selecionado"
+msgstr "O idioma de tradução atualmente selecionado é"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:39
-#, fuzzy
 msgid "The currently selected translation language from"
-msgstr "O idioma de tradução atualmente selecionado"
+msgstr "O idioma de tradução atualmente selecionado é"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:43
 msgid "Translation windows width"
@@ -170,20 +168,20 @@ msgstr "Sobre"
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:60
 msgid "Google and Bing Translate encounter abnormal HTML encoding issues"
 msgstr ""
+"O Google e o Bing Translate estão enfrentando problemas anormais de "
+"codificação HTML"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:61
-#, fuzzy
 msgid "Shortcut key ctrl-shift-c to copy translation results"
-msgstr "Notificar resultados de tradução"
+msgstr "Atalho Ctrl+Shift+C para copiar os resultados da tradução"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:62
 msgid "Can set the language type of the text to be translated"
-msgstr ""
+msgstr "É possível definir o idioma do texto a ser traduzido"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:63
-#, fuzzy
 msgid "More translation support"
-msgstr "Notificar resultados de tradução"
+msgstr "Mais suporte para tradução"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:70
 msgid "The native qt version of plasma can be installed by `pip install lfy`"
@@ -297,20 +295,20 @@ msgid "Next translation splicing text"
 msgstr "Próxima tradução emendando texto"
 
 #: lfy/gtk/main.py:260 lfy/qt/tray.py:188
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid ""
 "There is no new version.\n"
 "The current version is {version_code}.\n"
 "You can go to {url} to view the beta version."
 msgstr ""
-"Não há uma nova versão.                      \n"
-"A versão atual é {}.                      \n"
-"Você pode acessar {} para visualizar a versão beta."
+"Não há nova versão.\n"
+"A versão atual é {version_code}.\n"
+"Você pode acessar {url} para visualizar a versão beta."
 
 #: lfy/gtk/preference.py:58 lfy/qt/preference.py:150
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "vpn addr and port, like {url}"
-msgstr "endereço e porta VPN"
+msgstr "Endereço e porta da VPN, como {url}"
 
 #: lfy/gtk/preference.py:72 lfy/api/server/tra/com.py:87
 msgid "compare"
@@ -334,24 +332,24 @@ msgid "Using {} for text recognition"
 msgstr "Usando {} para reconhecimento de texto"
 
 #: lfy/gtk/translate.py:218 lfy/qt/translate.py:350
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "{} Translating…"
-msgstr "Traduzindo..."
+msgstr "{}  Traduzindo…"
 
 #: lfy/gtk/translate.py:222 lfy/qt/translate.py:308
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "{} Translation completed."
-msgstr "Tradução concluída"
+msgstr "{} Tradução concluída"
 
 #: lfy/gtk/translate.py:238
 #, python-brace-format
 msgid "{ocr_server_name} OCRing…"
-msgstr ""
+msgstr "{ocr_server_name} realizando OCR…"
 
 #: lfy/gtk/translate.py:292
 #, python-brace-format
 msgid "Translation results have been copied: {}"
-msgstr ""
+msgstr "Os resultados da tradução foram copiados: {}"
 
 #: lfy/gtk/widgets/server_preferences.py:36
 msgid "Text translate"
@@ -503,9 +501,9 @@ msgid "quit?"
 msgstr "desistir?"
 
 #: lfy/qt/translate.py:287
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "{} OCRing…"
-msgstr "{} Fazendo OCR..."
+msgstr "{} realizando OCR…"
 
 #: lfy/qt/tray.py:38
 msgid "Open"
@@ -541,9 +539,8 @@ msgid "No new version!"
 msgstr "Nenhuma nova versão!"
 
 #: lfy/qt/tray.py:202
-#, fuzzy
 msgid "Check for updates…"
-msgstr "Verificar atualizações"
+msgstr "Verifique se há atualizações…"
 
 #: lfy/api/server/__init__.py:15
 msgid "Automatic"
@@ -651,14 +648,15 @@ msgid "please install python whl (not support flatpak): {}"
 msgstr "por favor instale python whl (não suporta flatpak): {}"
 
 #: lfy/utils/__init__.py:234
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid ""
 "The connection times out: {server_name}. Probably there is a problem with "
 "the network, or there is a problem with the VPN proxy settings. The details "
 "of the error are as follows: {str_error}"
 msgstr ""
-"Tempo limite de conexão expirou: {}. Provavelmente há um problema com a rede "
-"ou com as configurações de proxy da VPN {}"
+"A conexão expirou: {server_name}. Provavelmente há um problema com a rede ou "
+"com as configurações de proxy da VPN. Os detalhes do erro são os seguintes: "
+"{str_error}"
 
 #: lfy/utils/__init__.py:240
 #, python-brace-format
@@ -666,9 +664,9 @@ msgid "Maybe there is probably a problem with the VPN proxy settings: {}"
 msgstr "Talvez haja um problema com as configurações de proxy da VPN: {}"
 
 #: lfy/utils/bak.py:58
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "error with keys: {}"
-msgstr "erro com chaves: "
+msgstr "erro com as chaves: {}"
 
 #: lfy/utils/bak.py:66
 msgid "Please copy the configuration data in json format first"
@@ -684,11 +682,13 @@ msgid "the file does not exist: {}"
 msgstr "o arquivo não existe: {}"
 
 #: lfy/utils/code.py:131
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid ""
 "Command line translation or text recognition, such as {code_translate} or "
 "{code_ocr}"
-msgstr "Tradução de linha de comando ou reconhecimento de texto, como {} ou {}"
+msgstr ""
+"Tradução de linha de comando ou reconhecimento de texto, como "
+"{code_translate} ou {code_ocr}"
 
 #: lfy/utils/code.py:136
 msgid "Translate, followed by text"
@@ -747,16 +747,14 @@ msgstr ""
 "editar ou fazer backup"
 
 #: data/gtk/help-overlay.ui:25
-#, fuzzy
 msgid "Copy Translation Results"
-msgstr "Notificar resultados de tradução"
+msgstr "Copiar resultados da tradução"
 
 #: data/gtk/help-overlay.ui:32 data/gtk/help-overlay.ui:39
 msgid "Splice the next copied text with the previous text"
 msgstr "Divida o próximo texto copiado com o texto anterior"
 
 #: data/gtk/help-overlay.ui:47
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Other"
 msgstr "Outro"
