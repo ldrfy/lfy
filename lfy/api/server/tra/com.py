@@ -5,7 +5,7 @@ import traceback
 from gettext import gettext as _
 from multiprocessing import Pool
 
-from lfy.api.constant import ALL_SELECT_SERVERS as ALL_SERVERS
+from lfy.api.constant import get_ass
 from lfy.api.server.tra import ServerTra
 from lfy.utils.debug import get_logger
 
@@ -43,8 +43,9 @@ def get_args(text, lang_to, lang_from):
     Returns:
         _type_: _description_
     """
+    servers = get_ass()
     args = []
-    for server in ALL_SERVERS:
+    for server in servers:
         server: ServerTra
         lang_to_ = "en"
         for lang in server.langs:
@@ -57,24 +58,22 @@ def get_args(text, lang_to, lang_from):
                 lang_from_ = lang.key
                 break
         args.append((server, text, lang_to_, lang_from_))
-    return args
+    return args, servers
 
 
 def _translate(_st: ServerTra, text, lang_to, lang_from):
-    args = get_args(text, lang_to, lang_from)
+    args, servers = get_args(text, lang_to, lang_from)
 
     with Pool(len(args)) as p:
         s_ok = ""
         s_error = ""
         for i, tt in enumerate(p.map(_translate0, args)):
             ok, text_, se, user_time = tt
-            # 防止session每次刷新
-            ALL_SERVERS[i] = se
             if ok:
-                s_ok += f"***** {ALL_SERVERS[i].name}"
+                s_ok += f"***** {servers[i].name}"
                 s_ok += f":{user_time:.2f}s *****\n{text_}\n\n"
             else:
-                s_error += f"***** {ALL_SERVERS[i].name}"
+                s_error += f"***** {servers[i].name}"
                 s_error += f":{user_time:.2f}s *****\n{text_}\n\n"
         return True, s_ok + s_error
 
@@ -88,7 +87,7 @@ class AllServer(ServerTra):
 
         # https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support
         lang_key_ns = {
-            "0": 0,
+            # "0": 0,
             "1": 1,
             "3": 3,
             "4": 4,

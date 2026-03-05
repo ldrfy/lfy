@@ -90,6 +90,10 @@
 			<default>""</default>
 			<description>huoshan Access Key ID and Secret Access Key, used in the middle | split</description>
 		</key>
+		<key type="s" name="server-sk-ollama">
+			<default>"http://127.0.0.1:11434|llama3:latest|You are a translation engine. Only output the translated text.|Translate the following text from {from_lang} to {to_lang}:\n{text}|temperature=0.2;top_p=0.9;timeout=60"</default>
+			<description>Ollama config: url|model|system|prompt|options</description>
+		</key>
 		<key type="s" name="server-sk-tencent">
 			<default>""</default>
 			<description>Tencent secret_id and secret_key, used in the middle | split</description>

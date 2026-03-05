@@ -9,10 +9,12 @@ from lfy.api.server.tra.baidu import BaiduServer
 from lfy.api.server.tra.bing import BingServer
 from lfy.api.server.tra.google import GoogleServer
 from lfy.api.server.tra.huoshan import HuoShanServer
+from lfy.api.server.tra.ollama import OllamaServer
 from lfy.api.server.tra.tencent import TencentServer
 from lfy.utils.settings import Settings
 
 SERVERS_TRA: list[ServerTra] = [
+    OllamaServer(),
     GoogleServer(),
     BingServer(),
     BaiduServer(),
