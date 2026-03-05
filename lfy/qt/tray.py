@@ -118,7 +118,7 @@ class TrayIcon(QSystemTrayIcon):
     def open_prf(self):
         """_summary_
         """
-        PreferenceWindow(self.cb, self).show()
+        PreferenceWindow(self.cb, self, self.w).show()
 
     def show_about_window(self):
         """关于窗口

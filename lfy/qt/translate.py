@@ -87,6 +87,8 @@ class TranslateWindow(QMainWindow):
         # 下面的文本编辑框
         self.te_to = QPlainTextEdit(self)
 
+        self.apply_font_sizes()
+
         bottom_layout.addWidget(middle_widget)
         bottom_layout.addWidget(self.te_to)
 
@@ -299,6 +301,8 @@ class TranslateWindow(QMainWindow):
         """
         text_from, text_to = text_from_to
         self.te_from.setPlainText(text_from)
+        if not loading:
+            text_to = self._format_custom_translate(text_to, text_from)
         self.te_to.setPlainText(text_to)
 
         if loading:
@@ -330,6 +334,8 @@ class TranslateWindow(QMainWindow):
             return
         self.translate_next = True
 
+        self.apply_font_sizes()
+
         if not text_from:
             return
 
@@ -352,3 +358,26 @@ class TranslateWindow(QMainWindow):
         self.my_thread = MyThread(tt)
         self.my_thread.signal.connect(self.set_text_from_to)
         self.my_thread.start()
+
+    def apply_font_sizes(self):
+        font_from = self.te_from.font()
+        font_from.setPointSize(self.sg.g("font-size-from", 14, int))
+        self.te_from.setFont(font_from)
+        font_to = self.te_to.font()
+        font_to.setPointSize(self.sg.g("font-size-to", 14, int))
+        self.te_to.setFont(font_to)
+
+    def _format_custom_translate(self, text_to: str, text_from: str) -> str:
+        tmpl = self.sg.g("custom-translate", "", str)
+        if not tmpl:
+            return text_to
+        try:
+            return tmpl.format(
+                text=text_to,
+                source=text_from,
+                from_lang=self.lang_from.get_name(),
+                to_lang=self.lang_t.get_name(),
+                server=self.server_t.name,
+            )
+        except Exception:  # pylint: disable=W0718
+            return text_to

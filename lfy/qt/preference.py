@@ -6,8 +6,9 @@ from PyQt6.QtGui import (QClipboard, QDesktopServices,  # pylint: disable=E0611
                          QIcon)
 from PyQt6.QtWidgets import (QCheckBox, QComboBox,  # pylint: disable=E0611
                              QGroupBox, QHBoxLayout, QLineEdit, QMainWindow,
-                             QPushButton, QStyle, QSystemTrayIcon, QTabWidget,
-                             QToolButton, QVBoxLayout, QWidget)
+                             QPushButton, QSpinBox, QStyle, QSystemTrayIcon,
+                             QTabWidget, QToolButton, QVBoxLayout, QWidget,
+                             QLabel)
 
 from lfy.api import (get_server_names_o, get_server_names_t_sk, get_servers_o,
                      get_servers_t, get_servers_t_sk)
@@ -24,7 +25,7 @@ class PreferenceWindow(QMainWindow):
     设置
     """
 
-    def __init__(self, clipboard: QClipboard, tray: QSystemTrayIcon):
+    def __init__(self, clipboard: QClipboard, tray: QSystemTrayIcon, window=None):
         super().__init__()
         self.sg = Settings()
 
@@ -34,6 +35,7 @@ class PreferenceWindow(QMainWindow):
 
         self.cb = clipboard
         self.tray = tray
+        self.win = window
         self.cb_t = None
         self.btn_t_save = None
         self.le_t = None
@@ -42,6 +44,9 @@ class PreferenceWindow(QMainWindow):
         self.btn_o_save = None
         self.ccb = None
         self.le_vpn = None
+        self.le_custom_translate = None
+        self.sb_font_from = None
+        self.sb_font_to = None
 
         tw = QTabWidget(self)
         self.setCentralWidget(tw)
@@ -158,6 +163,36 @@ class PreferenceWindow(QMainWindow):
         gb_vpn.setLayout(hl_vpn)
         vl_normal.addWidget(gb_vpn)
 
+        gb_custom = QGroupBox(_("Custom translation"))
+        hl_custom = QHBoxLayout()
+        self.le_custom_translate = QLineEdit()
+        self.le_custom_translate.setToolTip(
+            _("Use {text} {source} {from_lang} {to_lang} {server}"))
+        self.le_custom_translate.setPlaceholderText(
+            "{text} {source} {from_lang} {to_lang} {server}")
+        btn_custom_save = QPushButton(_("Save"))
+        btn_custom_save.clicked.connect(self._on_custom_translate_save)
+        hl_custom.addWidget(self.le_custom_translate)
+        hl_custom.addWidget(btn_custom_save)
+        gb_custom.setLayout(hl_custom)
+        vl_normal.addWidget(gb_custom)
+
+        gb_font = QGroupBox(_("Font size"))
+        hl_font = QHBoxLayout()
+        self.sb_font_from = QSpinBox()
+        self.sb_font_from.setRange(8, 40)
+        self.sb_font_to = QSpinBox()
+        self.sb_font_to.setRange(8, 40)
+        hl_font.addWidget(QLabel(_("Source")))
+        hl_font.addWidget(self.sb_font_from)
+        hl_font.addWidget(QLabel(_("Translated")))
+        hl_font.addWidget(self.sb_font_to)
+        btn_font_save = QPushButton(_("Save"))
+        btn_font_save.clicked.connect(self._on_font_size_save)
+        hl_font.addWidget(btn_font_save)
+        gb_font.setLayout(hl_font)
+        vl_normal.addWidget(gb_font)
+
         gb_json = QGroupBox(_("Software settings backup and restore"))
 
         hl_json = QHBoxLayout()
@@ -206,6 +241,20 @@ class PreferenceWindow(QMainWindow):
                 break
 
         self.le_vpn.setText(self.sg.g("vpn-addr-port"))
+        self.le_custom_translate.setText(self.sg.g("custom-translate", "", str))
+        self.sb_font_from.setValue(self.sg.g("font-size-from", 14, int))
+        self.sb_font_to.setValue(self.sg.g("font-size-to", 14, int))
+
+    def _on_custom_translate_save(self):
+        custom_translate = self.le_custom_translate.text().strip()
+        self.le_custom_translate.setText(custom_translate)
+        self.sg.s("custom-translate", custom_translate)
+
+    def _on_font_size_save(self):
+        self.sg.s("font-size-from", self.sb_font_from.value())
+        self.sg.s("font-size-to", self.sb_font_to.value())
+        if self.win is not None:
+            self.win.apply_font_sizes()
 
     def _on_changed_t(self, i):
         if i < 0:
