@@ -32,6 +32,11 @@
 
 ---
 
+
+## 🎨 feature
+
+✅ 支持使用 **[ollama](https://github.com/ldrfy/docs/blob/main/servers/t/ollama.md)** !<img src="https://ollama.com/public/hello.png" width="48" height="48" alt="兰译" style="vertical-align: middle;" /> 翻译
+
 ## 🚀 安装方式
 
 > 如果你已安装 Python 和 pip，可以通过终端快速安装 Qt 版本：
