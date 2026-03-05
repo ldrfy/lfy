@@ -8,12 +8,10 @@
 	<launchable type="desktop-id">@APP_ID@.desktop</launchable>
 
 	<name>lfy</name>
-	<summary>Translation software designed for reading scientific research literature</summary>
+	<summary>Translation software designed for reading scientific research literature, supporting mainstream online engines and Ollama for local LLM workflows.</summary>
 	<description>
-		<p>
-			An easy and pleasant way to translate.
-			Support many translation services. Especially suitable for document translation.
-		</p>
+		<p>A translation tool built for reading scientific research papers. </p>
+        <p>It supports multiple mainstream engines (e.g., Google, Baidu, Bing, Tencent, ...) and also integrates Ollama for optional local LLM workflows, enabling offline or privacy‑focused translation and summarization.</p>
 	</description>
 
 	<developer_name>yuh</developer_name>
@@ -58,7 +56,7 @@
 			<description>
 				<ul>
 					<li>Support Ollama</li>
-                    <li>Font size adjustment</li>
+                    <li>Font size adjustable</li>
 				</ul>
 			</description>
 		</release>
