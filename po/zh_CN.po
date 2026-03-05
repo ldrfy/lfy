@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2026-03-05 13:40+0800\n"
+"POT-Creation-Date: 2026-03-05 16:19+0800\n"
 "PO-Revision-Date: 2026-03-05 08:20+0000\n"
 "Last-Translator: yuh <yuhldr@qq.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -116,14 +116,18 @@ msgid "huoshan Access Key ID and Secret Access Key, used in the middle | split"
 msgstr "火山 AccessKey Key ID 和 Secret Access Key，中间使用 | 分割"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:95
+msgid "Ollama config: url|model|system|prompt|options"
+msgstr ""
+
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:99
 msgid "Tencent secret_id and secret_key, used in the middle | split"
 msgstr "请输入 app_id 和 secret_key，类似："
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:99
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:103
 msgid "VPN address and port"
 msgstr "VPN地址"
 
-#: data/gtk/cool.ldr.lfy.in.gschema.xml:103 data/gtk/preference.ui:128
+#: data/gtk/cool.ldr.lfy.in.gschema.xml:107 data/gtk/preference.ui:128
 msgid "Which services are available in compare model"
 msgstr "在比较模式下哪些服务被选中"
 
@@ -297,53 +301,52 @@ msgstr ""
 "当前版本为 {version_code}。\n"
 "可前往 {url} 查看测试版。"
 
-#: lfy/gtk/preference.py:61 lfy/qt/preference.py:150
+#: lfy/gtk/preference.py:61 lfy/qt/preference.py:155
 #, python-brace-format
 msgid "vpn addr and port, like {url}"
 msgstr "VPN地址和端口，比如 {url}"
 
-#: lfy/gtk/preference.py:74
+#: lfy/gtk/preference.py:74 lfy/qt/preference.py:170
 #, python-brace-format
-msgid "Use {text} as the translated text"
-msgstr "使用 {text} 作为翻译后的文本"
+msgid "Use {text} {source} {from_lang} {to_lang} {server}"
+msgstr ""
 
-#: lfy/gtk/preference.py:76
-#, python-brace-format
-msgid "Custom translation ({placeholders})"
-msgstr "定制翻译 ({placeholders})"
+#: lfy/gtk/preference.py:75 lfy/qt/preference.py:166 data/gtk/preference.ui:44
+msgid "Custom translation"
+msgstr "定制翻译"
 
-#: lfy/gtk/preference.py:87 lfy/api/server/tra/com.py:87
+#: lfy/gtk/preference.py:83 lfy/api/server/tra/com.py:86
 msgid "compare"
 msgstr "对比"
 
-#: lfy/gtk/preference.py:113 lfy/gtk/preference.py:159
-#: lfy/gtk/preference.py:192
+#: lfy/gtk/preference.py:109 lfy/gtk/preference.py:155
+#: lfy/gtk/preference.py:188
 msgid "It takes effect when you restart lfy"
 msgstr "重新打开lfy时生效"
 
-#: lfy/gtk/preference.py:121
+#: lfy/gtk/preference.py:117
 msgid "The clipboard format is incorrect"
 msgstr "剪贴板文本格式不正确"
 
-#: lfy/gtk/preference.py:128
+#: lfy/gtk/preference.py:124
 msgid "Configuration data has been exported to the clipboard"
 msgstr "配置数据已导出到剪贴板"
 
-#: lfy/gtk/preference.py:137
+#: lfy/gtk/preference.py:133
 msgid "Applied"
 msgstr "应用"
 
-#: lfy/gtk/preference.py:176 lfy/qt/preference.py:235
+#: lfy/gtk/preference.py:172 lfy/qt/preference.py:284
 #, python-brace-format
 msgid "Using {} for text recognition"
 msgstr "使用 {} 进行文本识别"
 
-#: lfy/gtk/translate.py:234 lfy/qt/translate.py:350
+#: lfy/gtk/translate.py:234 lfy/qt/translate.py:356
 #, python-brace-format
 msgid "{} Translating…"
 msgstr "{} 翻译中…"
 
-#: lfy/gtk/translate.py:239 lfy/qt/translate.py:308
+#: lfy/gtk/translate.py:239 lfy/qt/translate.py:312
 #, python-brace-format
 msgid "{} Translation completed."
 msgstr "{} 翻译完成。"
@@ -374,93 +377,107 @@ msgstr "错误信息"
 msgid "Confirm"
 msgstr "确认"
 
-#: lfy/qt/preference.py:48 data/gtk/preference.ui:11
+#: lfy/qt/preference.py:53 data/gtk/preference.ui:11
 #: data/gtk/help-overlay.ui:15
 msgid "General"
 msgstr "通用"
 
-#: lfy/qt/preference.py:49 data/gtk/preference.ui:141
+#: lfy/qt/preference.py:54 data/gtk/preference.ui:141
 msgid "Other"
 msgstr "其他"
 
-#: lfy/qt/preference.py:64 data/gtk/preference.ui:18
+#: lfy/qt/preference.py:69 data/gtk/preference.ui:18
 msgid "Translation keys"
 msgstr "翻译密钥"
 
-#: lfy/qt/preference.py:76 lfy/qt/preference.py:105
+#: lfy/qt/preference.py:81 lfy/qt/preference.py:110
 #: data/gtk/server-preferences.ui:46
 msgid "how to get API Key"
 msgstr "怎么获取密钥"
 
-#: lfy/qt/preference.py:80 lfy/qt/preference.py:109 lfy/qt/preference.py:154
+#: lfy/qt/preference.py:85 lfy/qt/preference.py:114 lfy/qt/preference.py:159
+#: lfy/qt/preference.py:173 lfy/qt/preference.py:190
 msgid "Save"
 msgstr "保存"
 
-#: lfy/qt/preference.py:91 lfy/qt/preference.py:234 data/gtk/preference.ui:85
+#: lfy/qt/preference.py:96 lfy/qt/preference.py:283 data/gtk/preference.ui:85
 msgid "OCR server"
 msgstr "OCR服务"
 
-#: lfy/qt/preference.py:128 data/gtk/preference.ui:148
+#: lfy/qt/preference.py:133 data/gtk/preference.ui:148
 msgid "auto check update"
 msgstr "自动检查更新"
 
-#: lfy/qt/preference.py:133 data/gtk/preference.ui:155
+#: lfy/qt/preference.py:138 data/gtk/preference.ui:155
 msgid "Notify translation results"
 msgstr "通知翻译结果"
 
-#: lfy/qt/preference.py:138 data/gtk/preference.ui:114
+#: lfy/qt/preference.py:143 data/gtk/preference.ui:114
 msgid "Compare model"
 msgstr "对比模式"
 
-#: lfy/qt/preference.py:147
+#: lfy/qt/preference.py:152
 msgid "vpn addr and port"
 msgstr "VPN地址和端口"
 
-#: lfy/qt/preference.py:161 data/gtk/preference.ui:176
+#: lfy/qt/preference.py:180
+#, fuzzy
+msgid "Font size"
+msgstr "源字体大小"
+
+#: lfy/qt/preference.py:186 data/gtk/preference.ui:50
+msgid "Source font size"
+msgstr "源字体大小"
+
+#: lfy/qt/preference.py:188 data/gtk/preference.ui:65
+msgid "Translated font size"
+msgstr "翻译后的字体大小"
+
+#: lfy/qt/preference.py:196 data/gtk/preference.ui:176
 msgid "Software settings backup and restore"
 msgstr "软件设置备份和恢复"
 
-#: lfy/qt/preference.py:164 data/gtk/preference.ui:179
+#: lfy/qt/preference.py:199 data/gtk/preference.ui:179
 msgid "backup"
 msgstr "备份"
 
-#: lfy/qt/preference.py:165 data/gtk/preference.ui:190
+#: lfy/qt/preference.py:200 data/gtk/preference.ui:190
 msgid ""
 "Read the JSON configuration of the clipboard, then import it, and some of "
 "the configurations will take effect after reopening the software"
 msgstr "读取剪贴板的json配置，然后导入，部分配置重新打开软件以后生效"
 
-#: lfy/qt/preference.py:171 data/gtk/preference.ui:188
+#: lfy/qt/preference.py:206 data/gtk/preference.ui:188
 msgid "restore"
 msgstr "恢复"
 
-#: lfy/qt/preference.py:172 data/gtk/preference.ui:181
+#: lfy/qt/preference.py:207 data/gtk/preference.ui:181
 msgid ""
 "Export the configuration to the clipboard, then you can paste it into any "
 "file and edit it"
 msgstr "将配置导出到剪贴板，然后您可以将其粘贴到任何文件中并编辑"
 
-#: lfy/qt/preference.py:243
+#: lfy/qt/preference.py:292
 msgid "Import successful!"
 msgstr "导入成功！"
 
-#: lfy/qt/preference.py:244
+#: lfy/qt/preference.py:293
 msgid "It takes effect when you restart lfy."
 msgstr "重新打开lfy时生效。"
 
-#: lfy/qt/preference.py:249
+#: lfy/qt/preference.py:298
 msgid "Import failed!"
 msgstr "导入失败！"
 
-#: lfy/qt/preference.py:250
+#: lfy/qt/preference.py:299
 msgid "No configuration data in the clipboard."
 msgstr "剪贴板中没有配置数据。"
 
-#: lfy/qt/preference.py:256
+#: lfy/qt/preference.py:305
 msgid "Export successful!"
 msgstr "导出成功！"
 
-#: lfy/qt/preference.py:257
+#: lfy/qt/preference.py:306
 msgid "Configuration data has been exported to the clipboard."
 msgstr "配置数据已导出到剪贴板。"
 
@@ -485,22 +502,22 @@ msgstr "Alt + C: 将下一个复制的文本与上一个文本拼接"
 msgid "Translate"
 msgstr "翻译"
 
-#: lfy/qt/translate.py:166
+#: lfy/qt/translate.py:168
 #, python-brace-format
 msgid ""
 "Select text and use the shortcut key '{}' to copy, the copied text will not "
 "be automatically translated"
 msgstr "选择文字并用快捷键 '{}' 复制，复制的文字将不会自动翻译"
 
-#: lfy/qt/translate.py:209
+#: lfy/qt/translate.py:211
 msgid "warn"
 msgstr "警告"
 
-#: lfy/qt/translate.py:209
+#: lfy/qt/translate.py:211
 msgid "quit?"
 msgstr "退出？"
 
-#: lfy/qt/translate.py:287
+#: lfy/qt/translate.py:289
 #, python-brace-format
 msgid "{} OCRing…"
 msgstr "{} OCR识别中…"
@@ -662,12 +679,12 @@ msgstr ""
 msgid "Maybe there is probably a problem with the VPN proxy settings: {}"
 msgstr "大概vpn代理设置有问题：{}"
 
-#: lfy/utils/bak.py:58
+#: lfy/utils/bak.py:63
 #, python-brace-format
 msgid "error with keys: {}"
 msgstr "如下key错误: {}"
 
-#: lfy/utils/bak.py:66
+#: lfy/utils/bak.py:73
 msgid "Please copy the configuration data in json format first"
 msgstr "请先复制json格式的配置数据"
 
@@ -723,21 +740,9 @@ msgstr "翻译服务"
 msgid "setup API Key for translation Server, click on the right to the details"
 msgstr "为翻译服务设置密钥，点右侧查看细节"
 
-#: data/gtk/preference.ui:44
-msgid "Custom translation"
-msgstr "定制翻译"
-
-#: data/gtk/preference.ui:50
-msgid "Source font size"
-msgstr "源字体大小"
-
 #: data/gtk/preference.ui:51
 msgid "Original text font size"
 msgstr "源字体大小"
-
-#: data/gtk/preference.ui:65
-msgid "Translated font size"
-msgstr "翻译后的字体大小"
 
 #: data/gtk/preference.ui:66
 msgid "Translation text font size"
@@ -777,3 +782,11 @@ msgstr "退出"
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "显示快捷键"
+
+#, python-brace-format
+#~ msgid "Use {text} as the translated text"
+#~ msgstr "使用 {text} 作为翻译后的文本"
+
+#, python-brace-format
+#~ msgid "Custom translation ({placeholders})"
+#~ msgstr "定制翻译 ({placeholders})"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2026-03-05 16:10+0800\n"
+"POT-Creation-Date: 2026-03-05 16:19+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -670,12 +670,12 @@ msgstr ""
 msgid "Maybe there is probably a problem with the VPN proxy settings: {}"
 msgstr ""
 
-#: lfy/utils/bak.py:58
+#: lfy/utils/bak.py:63
 #, python-brace-format
 msgid "error with keys: {}"
 msgstr ""
 
-#: lfy/utils/bak.py:66
+#: lfy/utils/bak.py:73
 msgid "Please copy the configuration data in json format first"
 msgstr ""
 
