@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
 "POT-Creation-Date: 2026-03-05 13:40+0800\n"
-"PO-Revision-Date: 2026-03-05 07:29+0000\n"
+"PO-Revision-Date: 2026-03-05 08:20+0000\n"
 "Last-Translator: yuh <yuhldr@qq.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/lfy/lfy/zh_Hans/>\n"
@@ -68,17 +68,16 @@ msgid "Translation windows height"
 msgstr "翻译窗口高度"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:51
-#, fuzzy
 msgid "Custom translation template"
-msgstr "复制翻译结果"
+msgstr "自定义翻译模板"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:55
 msgid "Font size for original text"
-msgstr ""
+msgstr "原始文本的字体大小"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:59
 msgid "Font size for translated text"
-msgstr ""
+msgstr "翻译文本的字体大小"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:63
 msgid "Baidu app_id and secret_key, used in the middle | split"
@@ -306,12 +305,12 @@ msgstr "VPN地址和端口，比如 {url}"
 #: lfy/gtk/preference.py:74
 #, python-brace-format
 msgid "Use {text} as the translated text"
-msgstr ""
+msgstr "使用 {text} 作为翻译后的文本"
 
 #: lfy/gtk/preference.py:76
 #, python-brace-format
 msgid "Custom translation ({placeholders})"
-msgstr ""
+msgstr "定制翻译 ({placeholders})"
 
 #: lfy/gtk/preference.py:87 lfy/api/server/tra/com.py:87
 msgid "compare"
@@ -332,7 +331,7 @@ msgstr "配置数据已导出到剪贴板"
 
 #: lfy/gtk/preference.py:137
 msgid "Applied"
-msgstr ""
+msgstr "应用"
 
 #: lfy/gtk/preference.py:176 lfy/qt/preference.py:235
 #, python-brace-format
@@ -725,27 +724,24 @@ msgid "setup API Key for translation Server, click on the right to the details"
 msgstr "为翻译服务设置密钥，点右侧查看细节"
 
 #: data/gtk/preference.ui:44
-#, fuzzy
 msgid "Custom translation"
-msgstr "复制即翻译"
+msgstr "定制翻译"
 
 #: data/gtk/preference.ui:50
 msgid "Source font size"
-msgstr ""
+msgstr "源字体大小"
 
 #: data/gtk/preference.ui:51
 msgid "Original text font size"
-msgstr ""
+msgstr "源字体大小"
 
 #: data/gtk/preference.ui:65
-#, fuzzy
 msgid "Translated font size"
-msgstr "翻译密钥"
+msgstr "翻译后的字体大小"
 
 #: data/gtk/preference.ui:66
-#, fuzzy
 msgid "Translation text font size"
-msgstr "翻译密钥"
+msgstr "翻译文本字体大小"
 
 #: data/gtk/preference.ui:84
 msgid "local or cloud, text recognition"
