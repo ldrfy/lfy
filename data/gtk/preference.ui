@@ -38,6 +38,43 @@
                 </child>
               </object>
             </child>
+            <child>
+              <object class="AdwEntryRow" id="entry_custom_translate">
+                <property name="show-apply-button">True</property>
+                <property name="title" translatable="yes">Custom translation</property>
+                <signal name="apply" handler="_on_custom_translate_apply"/>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="sr_font_from">
+                <property name="title" translatable="yes">Source font size</property>
+                <property name="subtitle" translatable="yes">Original text font size</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">8</property>
+                    <property name="upper">40</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">2</property>
+                    <property name="value">14</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="sr_font_to">
+                <property name="title" translatable="yes">Translated font size</property>
+                <property name="subtitle" translatable="yes">Translation text font size</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">8</property>
+                    <property name="upper">40</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">2</property>
+                    <property name="value">14</property>
+                  </object>
+                </property>
+              </object>
+            </child>
           </object>
         </child>
         <child>

@@ -26,9 +26,12 @@ class PreferencesDialog(Adw.PreferencesDialog):
 
     acr_server: Adw.ComboRow = Gtk.Template.Child()
     acr_server_ocr: Adw.ComboRow = Gtk.Template.Child()
+    entry_custom_translate: Adw.EntryRow = Gtk.Template.Child()
     entry_vpn_addr: Adw.EntryRow = Gtk.Template.Child()
     auto_check_update: Adw.SwitchRow = Gtk.Template.Child()
     notify_translation_results: Adw.SwitchRow = Gtk.Template.Child()
+    sr_font_from: Adw.SpinRow = Gtk.Template.Child()
+    sr_font_to: Adw.SpinRow = Gtk.Template.Child()
 
     gbtn_compare: Gtk.MenuButton = Gtk.Template.Child()
     aar_compare: Adw.ActionRow = Gtk.Template.Child()
@@ -62,6 +65,18 @@ class PreferencesDialog(Adw.PreferencesDialog):
 
         self.sg0.bind('notify-translation-results', self.notify_translation_results,
                       'active', Gio.SettingsBindFlags.DEFAULT)
+        self.sr_font_from.set_value(self.sg.g("font-size-from"))
+        self.sr_font_to.set_value(self.sg.g("font-size-to"))
+        self.sr_font_from.connect("notify::value", self._on_font_from_changed)
+        self.sr_font_to.connect("notify::value", self._on_font_to_changed)
+        self.entry_custom_translate.set_text(self.sg.g("custom-translate"))
+        self.entry_custom_translate.set_tooltip_text(
+            _("Use {text} as the translated text"))
+        self.entry_custom_translate.set_title(
+            _("Custom translation ({placeholders})").format(
+                placeholders="{text} {source} {from_lang} {to_lang} {server}"
+            )
+        )
         self._init_pop_compare()
         self.cb = Gdk.Display.get_default().get_clipboard()
 
@@ -111,6 +126,15 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.cb.set(backup_gsettings())
         self.add_toast(Adw.Toast.new(
             _("Configuration data has been exported to the clipboard")))
+
+    @Gtk.Template.Callback()
+    def _on_custom_translate_apply(self, _row):
+        self.entry_custom_translate.props.sensitive = False
+        custom_translate = self.entry_custom_translate.get_text().strip()
+        self.entry_custom_translate.props.text = custom_translate
+        self.sg.s("custom-translate", custom_translate)
+        self.entry_custom_translate.props.sensitive = True
+        self.add_toast(Adw.Toast.new(_("Applied")))
 
     @Gtk.Template.Callback()
     def _on_popover_closed(self, _popover):
@@ -166,3 +190,9 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.entry_vpn_addr.props.sensitive = True
 
         self.add_toast(Adw.Toast.new(_("It takes effect when you restart lfy")))
+
+    def _on_font_from_changed(self, row, _pspec):
+        self.sg.s("font-size-from", int(row.get_value()))
+
+    def _on_font_to_changed(self, row, _pspec):
+        self.sg.s("font-size-to", int(row.get_value()))

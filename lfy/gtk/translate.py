@@ -2,8 +2,9 @@
 import threading
 from gettext import gettext as _
 
-from gi.repository import Adw, Gdk, GLib, Gtk  # type: ignore
+from gi.repository import Adw, Gdk, Gio, GLib, Gtk  # type: ignore
 
+from lfy import APP_ID
 from lfy.api import (create_server_o, create_server_t, get_lang,
                      get_lang_names, get_server_names_t, get_server_t,
                      lang_n2j, server_key2i)
@@ -39,6 +40,7 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.app = application
 
         self.sg = Settings()
+        self.sg0 = Gio.Settings(APP_ID)
 
         super().__init__(
             application=application,
@@ -75,6 +77,20 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.menu_btn.props.popover.add_child(ThemeSwitcher(), 'theme')
 
         self.connect('unrealize', self._save_settings)
+
+        self.custom_translate_tmpl = self.sg0.get_string("custom-translate")
+        self._font_css_provider = Gtk.CssProvider()
+        display = Gdk.Display.get_default()
+        if display:
+            Gtk.StyleContext.add_provider_for_display(
+                display,
+                self._font_css_provider,
+                Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
+            )
+        self._apply_font_css()
+        self.sg0.connect("changed::font-size-from", self._on_font_setting_changed)
+        self.sg0.connect("changed::font-size-to", self._on_font_setting_changed)
+        self.sg0.connect("changed::custom-translate", self._on_custom_translate_changed)
 
         # 创建键盘事件控制器
         controller = Gtk.EventControllerKey()
@@ -218,6 +234,7 @@ class TranslateWindow(Adw.ApplicationWindow):
             self.tv_to.get_buffer().set_text(_("{} Translating…").format(self.server_t.name))
 
         def _ed(s2):
+            s2 = self._format_custom_translate(s2, s)
             self.tv_to.get_buffer().set_text(s2)
             nf_t(self.app, _("{} Translation completed.").format(self.server_t.name), s2)
             self.sp_translate.stop()
@@ -290,3 +307,33 @@ class TranslateWindow(Adw.ApplicationWindow):
         text = buf.get_text(start_iter, end_iter, False)
         cb.set(text)
         self.toast_msg(_("Translation results have been copied: {}").format(text))
+
+    def _on_font_setting_changed(self, _settings, _key):
+        self._apply_font_css()
+
+    def _on_custom_translate_changed(self, settings, _key):
+        self.custom_translate_tmpl = settings.get_string("custom-translate")
+
+    def _apply_font_css(self):
+        size_from = self.sg0.get_int("font-size-from")
+        size_to = self.sg0.get_int("font-size-to")
+        css = (
+            f".lfy-tv-from {{ font-size: {size_from}pt; }} "
+            f".lfy-tv-to {{ font-size: {size_to}pt; }}"
+        )
+        self._font_css_provider.load_from_data(css.encode("utf-8"))
+
+    def _format_custom_translate(self, translated_text: str, source_text: str) -> str:
+        tmpl = self.custom_translate_tmpl
+        if not tmpl:
+            return translated_text
+        try:
+            return tmpl.format(
+                text=translated_text,
+                source=source_text,
+                from_lang=self.lang_from_t.get_name(),
+                to_lang=self.lang_t.get_name(),
+                server=self.server_t.name,
+            )
+        except Exception:  # pylint: disable=W0718
+            return translated_text

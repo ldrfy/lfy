@@ -26,6 +26,9 @@
                         <property name="wrap-mode">char</property>
                         <signal name="copy-clipboard" handler="_set_tv_copy"/>
                         <signal name="cut-clipboard" handler="_set_tv_copy"/>
+                        <style>
+                          <class name="lfy-tv-from"/>
+                        </style>
                       </object>
                     </child>
                   </object>
@@ -107,13 +110,16 @@
                       <object class="GtkScrolledWindow">
                         <property name="vexpand">True</property>
                         <child>
-                          <object class="GtkTextView" id="tv_to">
-                            <property name="margin-top">5</property>
-                            <property name="right-margin">8</property>
-                            <property name="wrap-mode">char</property>
-                            <signal name="copy-clipboard" handler="_set_tv_copy"/>
-                            <signal name="cut-clipboard" handler="_set_tv_copy"/>
-                          </object>
+                      <object class="GtkTextView" id="tv_to">
+                        <property name="margin-top">5</property>
+                        <property name="right-margin">8</property>
+                        <property name="wrap-mode">char</property>
+                        <signal name="copy-clipboard" handler="_set_tv_copy"/>
+                        <signal name="cut-clipboard" handler="_set_tv_copy"/>
+                        <style>
+                          <class name="lfy-tv-to"/>
+                        </style>
+                      </object>
                         </child>
                       </object>
                     </child>

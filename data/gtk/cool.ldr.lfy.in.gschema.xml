@@ -46,6 +46,18 @@
 			<default>400</default>
 			<description>Translation windows height</description>
 		</key>
+		<key type="s" name="custom-translate">
+			<default>""</default>
+			<description>Custom translation template</description>
+		</key>
+		<key type="i" name="font-size-from">
+			<default>14</default>
+			<description>Font size for original text</description>
+		</key>
+		<key type="i" name="font-size-to">
+			<default>14</default>
+			<description>Font size for translated text</description>
+		</key>
 		<key type="s" name="server-sk-baidu">
 			<default>""</default>
 			<description>Baidu app_id and secret_key, used in the middle | split</description>
