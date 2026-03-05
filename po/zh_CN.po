@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
 "POT-Creation-Date: 2026-03-05 18:33+0800\n"
-"PO-Revision-Date: 2026-03-05 08:55+0000\n"
+"PO-Revision-Date: 2026-03-05 10:41+0000\n"
 "Last-Translator: yuh <yuhldr@qq.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/lfy/lfy/zh_Hans/>\n"
@@ -132,16 +132,16 @@ msgid "Which services are available in compare model"
 msgstr "在比较模式下哪些服务被选中"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:11
-#, fuzzy
 msgid ""
 "Translation software designed for reading scientific research literature, "
 "supporting mainstream online engines and Ollama for local LLM workflows."
-msgstr "为阅读科研文献而设计的翻译软件"
+msgstr ""
+"专为阅读科学研究文献而设计的翻译软件，支持主流在线引擎以及 Ollama，用于本地 "
+"LLM 工作流程。"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:13
-#, fuzzy
 msgid "A translation tool built for reading scientific research papers."
-msgstr "为阅读科研文献而设计的翻译软件"
+msgstr "一款专为阅读科学研究论文而设计的翻译工具。"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:14
 msgid ""
@@ -149,6 +149,8 @@ msgid ""
 "Tencent, ...) and also integrates Ollama for optional local LLM workflows, "
 "enabling offline or privacy‑focused translation and summarization."
 msgstr ""
+"它支持多个主流引擎（例如：Google、Baidu、Bing、腾讯等），并且还集成了 Ollama"
+"，以便进行可选的本地 LLM 工作流程，从而实现离线或注重隐私的翻译和摘要功能。"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:17
 msgid "yuh"
@@ -177,12 +179,11 @@ msgstr "关于"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:58
 msgid "Support Ollama"
-msgstr ""
+msgstr "支持 Ollama"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:59
-#, fuzzy
 msgid "Font size adjustable"
-msgstr "字体大小"
+msgstr "字体大小可调整"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:66
 msgid "Google and Bing Translate encounter abnormal HTML encoding issues"
