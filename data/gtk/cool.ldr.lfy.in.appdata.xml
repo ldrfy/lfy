@@ -54,6 +54,14 @@
 
 
 	<releases>
+		<release version="0.3.0" date="2026-03-05">
+			<description>
+				<ul>
+					<li>Support Ollama</li>
+                    <li>Font size adjustment</li>
+				</ul>
+			</description>
+		</release>
 		<release version="0.2.0" date="2025-12-12">
 			<description>
 				<ul>

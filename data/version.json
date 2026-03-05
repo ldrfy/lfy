@@ -1,5 +1,5 @@
 {
-    "version": "0.2.0",
+    "version": "0.3.0",
     "url": "https://github.com/ldrfy/lfy",
-    "msg": "Update notes:\n- Google and Bing Translate encounter abnormal HTML encoding issues\n- Shortcut key ctrl-shift-c to copy translation results\n- Can set the language type of the text to be translated\n- More translation support"
+    "msg": "Update notes:\n- Support Ollama\n- Font size adjustment"
 }

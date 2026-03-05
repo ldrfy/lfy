@@ -1,7 +1,7 @@
 NAME=lfy
 APP_ID=cool.ldr.${NAME}
 TO_LANG=zh_CN
-VERSION=0.2.0
+VERSION=0.3.0
 PREFIX = "/usr/"
 BASE_URL = https://github.com/ldrfy/${NAME}/releases/download/auto
 BUILD_TYPE=gtk
