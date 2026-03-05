@@ -143,7 +143,7 @@ class PreferenceWindow(QMainWindow):
         gb_c = QGroupBox(_("Compare model"))
         hl_c = QHBoxLayout()
         self.ccb = CheckableComboBox()
-        self.ccb.lineEdit().textChanged.connect(lambda: self._cm_servers(self.ccb.checked_items_str()))
+        self.ccb.lineEdit().textChanged.connect(self._cm_servers)
 
         hl_c.addWidget(self.ccb)
         gb_c.setLayout(hl_c)
@@ -183,9 +183,9 @@ class PreferenceWindow(QMainWindow):
         self.sb_font_from.setRange(8, 40)
         self.sb_font_to = QSpinBox()
         self.sb_font_to.setRange(8, 40)
-        hl_font.addWidget(QLabel(_("Source")))
+        hl_font.addWidget(QLabel(_("Source font size")))
         hl_font.addWidget(self.sb_font_from)
-        hl_font.addWidget(QLabel(_("Translated")))
+        hl_font.addWidget(QLabel(_("Translated font size")))
         hl_font.addWidget(self.sb_font_to)
         btn_font_save = QPushButton(_("Save"))
         btn_font_save.clicked.connect(self._on_font_size_save)
@@ -373,6 +373,10 @@ class PreferenceWindow(QMainWindow):
         url = get_servers_o()[self.cb_o.currentIndex()].get_doc_url()
         QDesktopServices.openUrl(QUrl(url))
 
-    def _cm_servers(self, ns):
-        self.sg.s("compare-servers",
-                  [s.key for s in list(get_servers_t())[1:] if s.name in ns])
+    def _cm_servers(self, _text=None):
+        sts = list(get_servers_t())[1:]
+        keys = []
+        for i, server in enumerate(sts):
+            if i < self.ccb.count() and self.ccb.if_checked(i):
+                keys.append(server.key)
+        self.sg.s("compare-servers", keys)

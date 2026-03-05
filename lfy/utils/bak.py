@@ -26,7 +26,12 @@ def backup_gsettings(qt=None):
         keys = Gio.SettingsSchemaSource.get_default() \
             .lookup(APP_ID, True).list_keys()
 
-    backup_data = {key: sg.g(key) for key in keys}
+    backup_data = {}
+    for key in keys:
+        if key == "compare-servers":
+            backup_data[key] = sg.g(key, [], t=list)
+        else:
+            backup_data[key] = sg.g(key)
 
     # indent自动格式化
     # ensure_ascii 中文显示没问题
@@ -58,6 +63,8 @@ def restore_gsettings(s, qt=None):
                 return _("error with keys: {}").format(error_keys)
 
         for key, value in backup_data.items():
+            if key == "compare-servers" and isinstance(value, str):
+                value = [i.strip() for i in value.split(",") if i.strip()]
             ss.s(key, value)
         return ""
 

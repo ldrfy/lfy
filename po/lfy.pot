@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2026-03-05 15:05+0800\n"
+"POT-Creation-Date: 2026-03-05 16:10+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -300,38 +300,37 @@ msgstr ""
 msgid "vpn addr and port, like {url}"
 msgstr ""
 
-#: lfy/gtk/preference.py:74
+#: lfy/gtk/preference.py:74 lfy/qt/preference.py:170
 #, python-brace-format
-msgid "Use {text} as the translated text"
+msgid "Use {text} {source} {from_lang} {to_lang} {server}"
 msgstr ""
 
-#: lfy/gtk/preference.py:76
-#, python-brace-format
-msgid "Custom translation ({placeholders})"
+#: lfy/gtk/preference.py:75 lfy/qt/preference.py:166 data/gtk/preference.ui:44
+msgid "Custom translation"
 msgstr ""
 
-#: lfy/gtk/preference.py:87 lfy/api/server/tra/com.py:86
+#: lfy/gtk/preference.py:83 lfy/api/server/tra/com.py:86
 msgid "compare"
 msgstr ""
 
-#: lfy/gtk/preference.py:113 lfy/gtk/preference.py:159
-#: lfy/gtk/preference.py:192
+#: lfy/gtk/preference.py:109 lfy/gtk/preference.py:155
+#: lfy/gtk/preference.py:188
 msgid "It takes effect when you restart lfy"
 msgstr ""
 
-#: lfy/gtk/preference.py:121
+#: lfy/gtk/preference.py:117
 msgid "The clipboard format is incorrect"
 msgstr ""
 
-#: lfy/gtk/preference.py:128
+#: lfy/gtk/preference.py:124
 msgid "Configuration data has been exported to the clipboard"
 msgstr ""
 
-#: lfy/gtk/preference.py:137
+#: lfy/gtk/preference.py:133
 msgid "Applied"
 msgstr ""
 
-#: lfy/gtk/preference.py:176 lfy/qt/preference.py:284
+#: lfy/gtk/preference.py:172 lfy/qt/preference.py:284
 #, python-brace-format
 msgid "Using {} for text recognition"
 msgstr ""
@@ -415,25 +414,16 @@ msgstr ""
 msgid "vpn addr and port"
 msgstr ""
 
-#: lfy/qt/preference.py:166 data/gtk/preference.ui:44
-msgid "Custom translation"
-msgstr ""
-
-#: lfy/qt/preference.py:170
-#, python-brace-format
-msgid "Use {text} {source} {from_lang} {to_lang} {server}"
-msgstr ""
-
 #: lfy/qt/preference.py:180
 msgid "Font size"
 msgstr ""
 
-#: lfy/qt/preference.py:186
-msgid "Source"
+#: lfy/qt/preference.py:186 data/gtk/preference.ui:50
+msgid "Source font size"
 msgstr ""
 
-#: lfy/qt/preference.py:188
-msgid "Translated"
+#: lfy/qt/preference.py:188 data/gtk/preference.ui:65
+msgid "Translated font size"
 msgstr ""
 
 #: lfy/qt/preference.py:196 data/gtk/preference.ui:176
@@ -741,16 +731,8 @@ msgstr ""
 msgid "setup API Key for translation Server, click on the right to the details"
 msgstr ""
 
-#: data/gtk/preference.ui:50
-msgid "Source font size"
-msgstr ""
-
 #: data/gtk/preference.ui:51
 msgid "Original text font size"
-msgstr ""
-
-#: data/gtk/preference.ui:65
-msgid "Translated font size"
 msgstr ""
 
 #: data/gtk/preference.ui:66

@@ -71,12 +71,8 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.sr_font_to.connect("notify::value", self._on_font_to_changed)
         self.entry_custom_translate.set_text(self.sg.g("custom-translate"))
         self.entry_custom_translate.set_tooltip_text(
-            _("Use {text} as the translated text"))
-        self.entry_custom_translate.set_title(
-            _("Custom translation ({placeholders})").format(
-                placeholders="{text} {source} {from_lang} {to_lang} {server}"
-            )
-        )
+            _("Use {text} {source} {from_lang} {to_lang} {server}"))
+        self.entry_custom_translate.set_title(_("Custom translation"))
         self._init_pop_compare()
         self.cb = Gdk.Display.get_default().get_clipboard()
 
@@ -87,7 +83,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.gbtn_compare.set_label(_("compare"))
         names = []
         ss = list(get_servers_t())[1:]
-        keys_s = self.sg.g("compare-servers")
+        keys_s = self.sg.g("compare-servers", [], t=list)
         if not keys_s:
             for se in ss:
                 keys_s.append(se.key)

@@ -39,7 +39,9 @@ def get_ass():
     all_servers = {}
     for server in SERVERS_TRA:
         all_servers[server.key] = server
-    keys = Settings().g("compare-servers")
+    keys = Settings().g("compare-servers", [], t=list)
+    if isinstance(keys, str):
+        keys = [k.strip() for k in keys.split(",") if k.strip()]
 
     # 初始化 self.servers
     if not keys:  # 如果 keys 为空，则选择所有服务器

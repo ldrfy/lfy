@@ -45,6 +45,21 @@ class Settings:
         self.init_sg()
         if not self.qt:
             return self.ss.get_value(key).unpack()
+        if t == list:
+            v = self.ss.value(key, d)
+            if v is None:
+                return [] if d is None else d
+            if isinstance(v, list):
+                return v
+            if isinstance(v, str):
+                s = v.strip()
+                if not s:
+                    return []
+                return [i.strip() for i in s.split(",") if i.strip()]
+            try:
+                return list(v)
+            except TypeError:
+                return [] if d is None else d
         if t is not None:
             return self.ss.value(key, d, type=t)
 
@@ -81,6 +96,10 @@ class Settings:
         self.init_sg()
 
         if self.qt:
+            if key == "compare-servers" and isinstance(value, list):
+                # Keep INI readable and avoid Qt single-item list @Variant serialization.
+                self.ss.setValue(key, ", ".join(value))
+                return
             self.ss.setValue(key, value)
             return
 
