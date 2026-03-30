@@ -11,7 +11,7 @@ from lfy.utils import clear_key
 DEFAULT_URL = "http://127.0.0.1:11434"
 DEFAULT_MODEL = "translategemma:12b"
 DEFAULT_SYSTEM = "You are a professional {from_lang} to  {to_lang} translator. Your goal is to accurately convey the meaning and nuances of the original {from_lang} text while adhering to  {to_lang} grammar, vocabulary, and cultural sensitivities. Produce only the  {to_lang} translation, without any additional explanations or commentary."
-DEFAULT_PROMPT = "Please translate the following {from_lang} text into  {to_lang}: {text}"
+DEFAULT_PROMPT = "Please translate the following {from_lang} text into  {to_lang}:\n\n\n{text}"
 DEFAULT_OPTIONS = "temperature=0.2;top_p=0.9;timeout=60"
 
 
@@ -111,7 +111,7 @@ class OllamaServer(ServerTra):
 
     def __init__(self):
         lang_key_ns = {
-            "zh-CH": 1,
+            "zh-Hans": 1,
             "en": 3,
             "ja": 4,
             "ko": 5,
