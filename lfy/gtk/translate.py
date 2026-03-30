@@ -182,6 +182,15 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.is_tv_copy = True
 
     def ocr_image(self, path: str):
+        """处理图片输入，优先使用支持图片翻译的服务。
+
+        Args:
+            path (str): 图片路径
+        """
+        if self.server_t.supports_image:
+            threading.Thread(target=self.req_tra_image, daemon=True,
+                             args=(path,)).start()
+            return
 
         _k = self.sg.g("server-ocr-selected-key")
         if _k != self.server_o.key:
@@ -241,6 +250,32 @@ class TranslateWindow(Adw.ApplicationWindow):
 
         GLib.idle_add(_ing)
         _ok, text = self.server_t.main(s, self.lang_t.key, self.lang_from_t.key)
+        GLib.idle_add(_ed, text)
+
+    def req_tra_image(self, img_path: str):
+        """子线程翻译图片。
+
+        Args:
+            img_path (str): 图片路径
+        """
+
+        def _ing():
+            self.sp_translate.start()
+            self.tv_from.get_buffer().set_text(_("Image input"))
+            self.tv_to.get_buffer().set_text(
+                _("{} Translating image…").format(self.server_t.name)
+            )
+
+        def _ed(s2):
+            s2 = self._format_custom_translate(s2, _("Image"))
+            self.tv_to.get_buffer().set_text(s2)
+            nf_t(self.app, _("{} Translation completed.").format(self.server_t.name), s2)
+            self.sp_translate.stop()
+
+        GLib.idle_add(_ing)
+        _ok, text = self.server_t.main_image(
+            img_path, self.lang_t.key, self.lang_from_t.key
+        )
         GLib.idle_add(_ed, text)
 
     def req_ocr(self, s):

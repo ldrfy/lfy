@@ -1,5 +1,6 @@
 """Ollama 翻译接口
 """
+import base64
 from gettext import gettext as _
 
 import requests
@@ -45,21 +46,54 @@ def _parse_options(options_str: str) -> dict:
     return options
 
 
-def _parse_conf(st: ServerTra):
-    conf_str = st.get_conf() or ""
-    if conf_str:
-        conf_str = clear_key(conf_str)
-    parts = conf_str.split("|") if conf_str else []
-    parts += [""] * (5 - len(parts))
-    url = parts[0] or DEFAULT_URL
-    model = parts[1] or DEFAULT_MODEL
-    system_prompt = parts[2] or DEFAULT_SYSTEM
-    user_prompt = parts[3] or DEFAULT_PROMPT
-    options_str = parts[4] or DEFAULT_OPTIONS
-    return url, model, system_prompt, user_prompt, options_str
+def _encode_image(img_path: str) -> str:
+    """读取图片并编码为 base64 字符串。
+
+    Args:
+        img_path (str): 图片路径
+
+    Returns:
+        str: base64 字符串
+    """
+    with open(img_path, "rb") as img_f:
+        return base64.b64encode(img_f.read()).decode("utf-8")
 
 
-def _translate(st: ServerTra, text: str, lang_to="en", lang_from="auto"):
+def _build_timeout(options: dict) -> float:
+    """解析超时时间。
+
+    Args:
+        options (dict): 配置项
+
+    Returns:
+        float: 超时时间
+    """
+    timeout = TIME_OUT * 20
+    if "timeout" in options:
+        try:
+            timeout = float(options.pop("timeout"))
+        except (TypeError, ValueError):
+            timeout = TIME_OUT * 20
+    return timeout
+
+
+def _build_payload(st: ServerTra,
+                   text: str,
+                   lang_to: str,
+                   lang_from: str,
+                   images: list[str] | None = None):
+    """构建请求参数。
+
+    Args:
+        st (ServerTra): 翻译服务
+        text (str): 原文
+        lang_to (str): 目标语言
+        lang_from (str): 源语言
+        images (list[str] | None): 图片 base64 列表
+
+    Returns:
+        tuple: (payload, timeout, url)
+    """
     url, model, system_prompt, user_prompt, options_str = _parse_conf(st)
 
     prompt = user_prompt.format(
@@ -84,16 +118,29 @@ def _translate(st: ServerTra, text: str, lang_to="en", lang_from="auto"):
     }
     if system_prompt:
         payload["system"] = system_prompt
+    if images:
+        payload["images"] = images
+
     options = _parse_options(options_str)
-    timeout = TIME_OUT * 20
-    if "timeout" in options:
-        try:
-            timeout = float(options.pop("timeout"))
-        except (TypeError, ValueError):
-            timeout = TIME_OUT * 20
+    timeout = _build_timeout(options)
     if options:
         payload["options"] = options
 
+    return payload, timeout, url
+
+
+def _post_generate(st: ServerTra, payload: dict, timeout: float, url: str):
+    """发送请求并解析响应。
+
+    Args:
+        st (ServerTra): 翻译服务
+        payload (dict): 请求体
+        timeout (float): 超时时间
+        url (str): 服务地址
+
+    Returns:
+        tuple: (是否成功, 翻译结果或错误信息)
+    """
     resp = st.session.post(
         f"{url.rstrip('/')}/api/generate",
         json=payload,
@@ -103,6 +150,49 @@ def _translate(st: ServerTra, text: str, lang_to="en", lang_from="auto"):
         raise RuntimeError(resp.text.strip() or f"HTTP {resp.status_code}")
     data = resp.json()
     return True, data.get("response", "")
+
+
+def _parse_conf(st: ServerTra):
+    conf_str = st.get_conf() or ""
+    if conf_str:
+        conf_str = clear_key(conf_str)
+    parts = conf_str.split("|") if conf_str else []
+    parts += [""] * (5 - len(parts))
+    url = parts[0] or DEFAULT_URL
+    model = parts[1] or DEFAULT_MODEL
+    system_prompt = parts[2] or DEFAULT_SYSTEM
+    user_prompt = parts[3] or DEFAULT_PROMPT
+    options_str = parts[4] or DEFAULT_OPTIONS
+    return url, model, system_prompt, user_prompt, options_str
+
+
+def _translate(st: ServerTra, text: str, lang_to="en", lang_from="auto"):
+    payload, timeout, url = _build_payload(
+        st, text=text, lang_to=lang_to, lang_from=lang_from
+    )
+    return _post_generate(st, payload, timeout, url)
+
+
+def _translate_image(st: ServerTra, img_path: str, lang_to="en", lang_from="auto"):
+    """图片翻译。
+
+    Args:
+        st (ServerTra): 翻译服务
+        img_path (str): 图片路径
+        lang_to (str): 目标语言
+        lang_from (str): 源语言
+
+    Returns:
+        tuple: (是否成功, 翻译结果或错误信息)
+    """
+    payload, timeout, url = _build_payload(
+        st,
+        text="",
+        lang_to=lang_to,
+        lang_from=lang_from,
+        images=[_encode_image(img_path)],
+    )
+    return _post_generate(st, payload, timeout, url)
 
 
 class OllamaServer(ServerTra):
@@ -123,6 +213,7 @@ class OllamaServer(ServerTra):
             "pt": 11,
         }
         super().__init__("ollama", _("Ollama"))
+        self.supports_image = True
         self.set_data(
             lang_key_ns,
             "url|model|system|prompt|options",
@@ -179,3 +270,15 @@ class OllamaServer(ServerTra):
 
     def main(self, *args, **kwargs):
         return super().main(*args, fun_main=_translate)
+
+    def main_image(self, *args, **kwargs):
+        """图片翻译。
+
+        Args:
+            args (tuple): 图片路径、目标语言、源语言
+            kwargs (dict): 额外参数
+
+        Returns:
+            tuple: (是否成功, 翻译结果或错误信息)
+        """
+        return super().main_image(*args, fun_main=_translate_image)
