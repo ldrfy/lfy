@@ -75,6 +75,7 @@ class Lang:
 class Server:
     """翻译基础类
     """
+    requires_key = False
 
     def __init__(self, key: str, name: str):
         """初始化
@@ -88,6 +89,7 @@ class Server:
         self.sk_placeholder_text = None
         self._conf_str = None
         self.langs: list[Lang] = []
+        self.requires_key = False
 
         self.key = key
         self.name = name

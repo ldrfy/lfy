@@ -105,6 +105,7 @@ class TencentServer(ServerTra):
             "pt": 10,
         }
         super().__init__("tencent", _("tencent"))
+        self.requires_key = True
         # https://cloud.tencent.com/document/product/551/104415
         self.set_data(lang_key_ns, "Secretid | Secretkey")
 

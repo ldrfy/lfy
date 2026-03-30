@@ -111,6 +111,7 @@ class AliYunServer(ServerTra):
             "pt": 10,
         }
         super().__init__("aliyun", _("aliyun"))
+        self.requires_key = True
         self.set_data(lang_key_ns, "AccessKey ID | AccessKey Secret")
 
     def check_conf(self, conf_str, fun_check=_translate, py_libs=None):

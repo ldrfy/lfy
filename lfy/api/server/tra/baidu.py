@@ -66,6 +66,7 @@ class BaiduServer(ServerTra):
             "pot": 11,
         }
         super().__init__("baidu", _("baidu"))
+        self.requires_key = True
         self.set_data(lang_key_ns, "APP ID | secret key")
 
     def check_conf(self, conf_str, fun_check=_translate, py_libs=None):

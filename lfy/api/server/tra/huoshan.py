@@ -164,6 +164,7 @@ class HuoShanServer(ServerTra):
             "pt": 10,
         }
         super().__init__("huoshan", _("huoshan"))
+        self.requires_key = True
         # https://www.volcengine.com/docs/4640/127684
         self.set_data(lang_key_ns, "Access Key ID | Secret Access Key")
 

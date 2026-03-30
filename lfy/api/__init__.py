@@ -55,7 +55,18 @@ def get_server_names(ss):
     Returns:
         list: ["百度", "腾讯", ...]
     """
-    return [s.name for s in ss]
+    names = []
+    for s in ss:
+        markers = []
+        if getattr(s, "supports_image", False):
+            markers.append("🖼️")
+        if getattr(s, "requires_key", False):
+            markers.append("🔑")
+        if markers:
+            names.append(f"{s.name} {' '.join(markers)}")
+        else:
+            names.append(s.name)
+    return names
 
 
 def get_servers_t_sk():
