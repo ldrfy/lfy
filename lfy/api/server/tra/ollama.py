@@ -9,17 +9,10 @@ from lfy.api.server.tra import ServerTra
 from lfy.utils import clear_key
 
 DEFAULT_URL = "http://127.0.0.1:11434"
-DEFAULT_MODEL = "translategemma:4b"
-DEFAULT_SYSTEM = "You are a translation engine. Only output the translated text."
-DEFAULT_PROMPT = "Translate the following text from {from_lang} to {to_lang}:\n{text}"
+DEFAULT_MODEL = "translategemma:12b"
+DEFAULT_SYSTEM = "You are a professional {from_lang} to  {to_lang} translator. Your goal is to accurately convey the meaning and nuances of the original {from_lang} text while adhering to  {to_lang} grammar, vocabulary, and cultural sensitivities. Produce only the  {to_lang} translation, without any additional explanations or commentary."
+DEFAULT_PROMPT = "Please translate the following {from_lang} text into  {to_lang}: {text}"
 DEFAULT_OPTIONS = "temperature=0.2;top_p=0.9;timeout=60"
-
-
-def _lang_name_from_key(st: ServerTra, key: str) -> str:
-    for lang in st.langs:
-        if lang.key == key:
-            return lang.get_name()
-    return key
 
 
 def _parse_options(options_str: str) -> dict:
@@ -68,13 +61,19 @@ def _parse_conf(st: ServerTra):
 
 def _translate(st: ServerTra, text: str, lang_to="en", lang_from="auto"):
     url, model, system_prompt, user_prompt, options_str = _parse_conf(st)
-    lang_to_name = _lang_name_from_key(st, lang_to)
-    lang_from_name = _lang_name_from_key(st, lang_from)
+
     prompt = user_prompt.format(
         text=text,
         source=text,
-        from_lang=lang_from_name,
-        to_lang=lang_to_name,
+        from_lang=lang_from,
+        to_lang=lang_to,
+        server=st.name,
+    )
+    system_prompt = system_prompt.format(
+        text=text,
+        source=text,
+        from_lang=lang_from,
+        to_lang=lang_to,
         server=st.name,
     )
 
@@ -112,7 +111,7 @@ class OllamaServer(ServerTra):
 
     def __init__(self):
         lang_key_ns = {
-            "zh": 1,
+            "zh-CH": 1,
             "en": 3,
             "ja": 4,
             "ko": 5,
@@ -120,7 +119,7 @@ class OllamaServer(ServerTra):
             "fr": 7,
             "it": 8,
             "es": 9,
-            "pt-pt": 10,
+            "pt-PT": 10,
             "pt": 11,
         }
         super().__init__("ollama", _("Ollama"))
@@ -134,7 +133,8 @@ class OllamaServer(ServerTra):
         conf = super().get_conf(add)
         if not conf:
             conf = "|".join(
-                [DEFAULT_URL, DEFAULT_MODEL, DEFAULT_SYSTEM, DEFAULT_PROMPT, DEFAULT_OPTIONS]
+                [DEFAULT_URL, DEFAULT_MODEL, DEFAULT_SYSTEM,
+                    DEFAULT_PROMPT, DEFAULT_OPTIONS]
             )
             self._conf_str = conf
         return conf
@@ -143,10 +143,10 @@ class OllamaServer(ServerTra):
         # 快速校验，避免模型生成导致超时
         self._conf_str = clear_key(conf_str.strip())
         sk_no = not self.get_conf() \
-                or (self.sk_placeholder_text.count("|") == 1
-                    and self.get_conf().count("|") != 1) \
-                or self.get_conf()[0] == "|" \
-                or self.get_conf()[-1] == "|"
+            or (self.sk_placeholder_text.count("|") == 1
+                and self.get_conf().count("|") != 1) \
+            or self.get_conf()[0] == "|" \
+            or self.get_conf()[-1] == "|"
         if sk_no:
             self._conf_str = None
             return False, _("please input `{sk}` for `{server}` in preference") \
@@ -162,9 +162,11 @@ class OllamaServer(ServerTra):
                 timeout = TIME_OUT * 20
 
         try:
-            resp = self.session.get(f"{url.rstrip('/')}/api/tags", timeout=timeout)
+            resp = self.session.get(
+                f"{url.rstrip('/')}/api/tags", timeout=timeout)
             if resp.status_code != 200:
-                raise RuntimeError(resp.text.strip() or f"HTTP {resp.status_code}")
+                raise RuntimeError(
+                    resp.text.strip() or f"HTTP {resp.status_code}")
             data = resp.json()
             models = [m.get("name") for m in data.get("models", [])]
             if model and model not in models:
