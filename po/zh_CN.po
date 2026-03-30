@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2026-03-05 18:33+0800\n"
+"POT-Creation-Date: 2026-03-30 08:43+0800\n"
 "PO-Revision-Date: 2026-03-05 10:41+0000\n"
 "Last-Translator: yuh <yuhldr@qq.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -149,8 +149,9 @@ msgid ""
 "Tencent, ...) and also integrates Ollama for optional local LLM workflows, "
 "enabling offline or privacy‑focused translation and summarization."
 msgstr ""
-"它支持多个主流引擎（例如：Google、Baidu、Bing、腾讯等），并且还集成了 Ollama"
-"，以便进行可选的本地 LLM 工作流程，从而实现离线或注重隐私的翻译和摘要功能。"
+"它支持多个主流引擎（例如：Google、Baidu、Bing、腾讯等），并且还集成了 "
+"Ollama，以便进行可选的本地 LLM 工作流程，从而实现离线或注重隐私的翻译和摘要功"
+"能。"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:17
 msgid "yuh"
@@ -280,10 +281,14 @@ msgid ""
 "Translation software designed for reading scientific research literature"
 msgstr "为阅读科研文献而设计的翻译软件"
 
-#: lfy/api/server/tra/__init__.py:43
+#: lfy/api/server/tra/__init__.py:83
 msgid ""
 "This time the content contains private information and is not translated"
 msgstr "本次内容包含私人信息，不进行翻译"
+
+#: lfy/api/server/tra/__init__.py:98
+msgid "This server does not support image translation"
+msgstr ""
 
 #: lfy/gtk/main.py:87
 msgid "translator_credits"
@@ -364,22 +369,35 @@ msgstr "应用"
 msgid "Using {} for text recognition"
 msgstr "使用 {} 进行文本识别"
 
-#: lfy/gtk/translate.py:234 lfy/qt/translate.py:356
+#: lfy/gtk/translate.py:243 lfy/qt/translate.py:356
 #, python-brace-format
 msgid "{} Translating…"
 msgstr "{} 翻译中…"
 
-#: lfy/gtk/translate.py:239 lfy/qt/translate.py:312
+#: lfy/gtk/translate.py:248 lfy/gtk/translate.py:272 lfy/qt/translate.py:312
 #, python-brace-format
 msgid "{} Translation completed."
 msgstr "{} 翻译完成。"
 
-#: lfy/gtk/translate.py:255
+#: lfy/gtk/translate.py:264
+msgid "Image input"
+msgstr ""
+
+#: lfy/gtk/translate.py:266
+#, fuzzy, python-brace-format
+msgid "{} Translating image…"
+msgstr "{} 翻译中…"
+
+#: lfy/gtk/translate.py:270
+msgid "Image"
+msgstr ""
+
+#: lfy/gtk/translate.py:290
 #, python-brace-format
 msgid "{ocr_server_name} OCRing…"
 msgstr "{ocr_server_name} OCR识别中…"
 
-#: lfy/gtk/translate.py:309
+#: lfy/gtk/translate.py:344
 #, python-brace-format
 msgid "Translation results have been copied: {}"
 msgstr "翻译结果已被复制：{}"

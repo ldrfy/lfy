@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
-"POT-Creation-Date: 2026-03-05 18:33+0800\n"
+"POT-Creation-Date: 2026-03-30 08:43+0800\n"
 "PO-Revision-Date: 2026-03-05 07:28+0000\n"
 "Last-Translator: John Peter Sa <johnppetersa@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/lfy/"
@@ -304,10 +304,14 @@ msgstr ""
 "Software de tradução projetado para leitura de literatura de pesquisa "
 "científica"
 
-#: lfy/api/server/tra/__init__.py:43
+#: lfy/api/server/tra/__init__.py:83
 msgid ""
 "This time the content contains private information and is not translated"
 msgstr "Desta vez, o conteúdo contém informações privadas e não é traduzido"
+
+#: lfy/api/server/tra/__init__.py:98
+msgid "This server does not support image translation"
+msgstr ""
 
 #: lfy/gtk/main.py:87
 msgid "translator_credits"
@@ -389,22 +393,35 @@ msgstr ""
 msgid "Using {} for text recognition"
 msgstr "Usando {} para reconhecimento de texto"
 
-#: lfy/gtk/translate.py:234 lfy/qt/translate.py:356
+#: lfy/gtk/translate.py:243 lfy/qt/translate.py:356
 #, python-brace-format
 msgid "{} Translating…"
 msgstr "{}  Traduzindo…"
 
-#: lfy/gtk/translate.py:239 lfy/qt/translate.py:312
+#: lfy/gtk/translate.py:248 lfy/gtk/translate.py:272 lfy/qt/translate.py:312
 #, python-brace-format
 msgid "{} Translation completed."
 msgstr "{} Tradução concluída"
 
-#: lfy/gtk/translate.py:255
+#: lfy/gtk/translate.py:264
+msgid "Image input"
+msgstr ""
+
+#: lfy/gtk/translate.py:266
+#, fuzzy, python-brace-format
+msgid "{} Translating image…"
+msgstr "{}  Traduzindo…"
+
+#: lfy/gtk/translate.py:270
+msgid "Image"
+msgstr ""
+
+#: lfy/gtk/translate.py:290
 #, python-brace-format
 msgid "{ocr_server_name} OCRing…"
 msgstr "{ocr_server_name} realizando OCR…"
 
-#: lfy/gtk/translate.py:309
+#: lfy/gtk/translate.py:344
 #, python-brace-format
 msgid "Translation results have been copied: {}"
 msgstr "Os resultados da tradução foram copiados: {}"
