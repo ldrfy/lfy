@@ -55,6 +55,9 @@ class TranslateWindow(Adw.ApplicationWindow):
         self.jn = False
         # 可能包含上次的追加内容
         self.last_text = ""
+        # 记录上一次输入的类型与图片路径，避免图片翻译被当成文本重翻
+        self.last_input_type = "text"
+        self.last_image_path = ""
         # 是不是软件内复制的，这种可能是想粘贴到其他地方，不响应即可
         self.is_tv_copy = False
 
@@ -188,6 +191,8 @@ class TranslateWindow(Adw.ApplicationWindow):
             path (str): 图片路径
         """
         if self.server_t.supports_image:
+            self.last_input_type = "image"
+            self.last_image_path = path
             threading.Thread(target=self.req_tra_image, daemon=True,
                              args=(path,)).start()
             return
@@ -212,6 +217,24 @@ class TranslateWindow(Adw.ApplicationWindow):
             return
 
         buffer_from = self.tv_from.get_buffer()
+        start_iter, end_iter = buffer_from.get_bounds()
+        current_text = buffer_from.get_text(start_iter, end_iter, False)
+
+        if reload and current_text and current_text != _("Image input"):
+            # 用户已输入文本，优先按文本重新翻译
+            self.last_input_type = "text"
+            self.last_image_path = ""
+
+        if reload and self.last_input_type == "image" and self.last_image_path:
+            if self.server_t.supports_image:
+                threading.Thread(
+                    target=self.req_tra_image,
+                    daemon=True,
+                    args=(self.last_image_path,),
+                ).start()
+            else:
+                self.ocr_image(self.last_image_path)
+            return
 
         if not reload:
             if self.is_tv_copy:
@@ -223,6 +246,8 @@ class TranslateWindow(Adw.ApplicationWindow):
             if self.cb_del_wrapping.get_active() and del_wrapping:
                 text = process_text(text)
             self.last_text = text
+            self.last_input_type = "text"
+            self.last_image_path = ""
             buffer_from.set_text(text)
 
         start_iter, end_iter = buffer_from.get_bounds()

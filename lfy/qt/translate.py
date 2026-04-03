@@ -113,6 +113,8 @@ class TranslateWindow(QMainWindow):
         self.tray: QSystemTrayIcon | None = None
         self.text_last = ""
         self.translate_next = True
+        self.last_input_type = "text"
+        self.last_image_path = ""
 
         self.set_data()
         splitter.setSizes([100, 300])
@@ -277,6 +279,10 @@ class TranslateWindow(QMainWindow):
             _type_: _description_
         """
 
+        if self.server_t and self.server_t.supports_image:
+            self._translate_image(img_path)
+            return
+
         def oo(_p=None):
             _ok, text_from = self.server_o.main(img_path)
 
@@ -284,6 +290,8 @@ class TranslateWindow(QMainWindow):
 
         def next_(param):
             _ok, s = param
+            self.last_input_type = "text"
+            self.last_image_path = ""
             self.translate_text(s)
 
         _s = _("{} OCRing…").format(self.server_o.name)
@@ -291,6 +299,43 @@ class TranslateWindow(QMainWindow):
         self.my_thread = MyThread(oo)
         self.my_thread.signal.connect(next_)
         self.my_thread.start()
+
+    def _translate_image(self, img_path):
+        if not self.server_t:
+            return
+
+        self.last_input_type = "image"
+        self.last_image_path = img_path
+
+        def tt(_p=None):
+            _ok, text_to = self.server_t.main_image(
+                img_path, self.lang_t.key, self.lang_from.key
+            )
+            return _ok, text_to
+
+        def next_(param):
+            _ok, text_to = param
+            self._set_image_result(text_to)
+
+        self.set_text_from_to(
+            (_("Image input"), _("{} Translating image…").format(self.server_t.name)),
+            True,
+        )
+        self.my_thread = MyThread(tt)
+        self.my_thread.signal.connect(next_)
+        self.my_thread.start()
+
+    def _set_image_result(self, text_to):
+        text_from = _("Image")
+        text_to = self._format_custom_translate(text_to, text_from)
+        self.te_from.setPlainText(_("Image input"))
+        self.te_to.setPlainText(text_to)
+
+        if self.tray and self.sg.g("notify-translation-results", d=True, t=bool):
+            self.tray.showMessage(_("{} Translation completed.").format(self.server_t.name), text_to,
+                                  QSystemTrayIcon.MessageIcon.Information, 2000)
+
+        self.my_thread.clean_up()
 
     def set_text_from_to(self, text_from_to, loading=False):
         """_summary_
@@ -338,6 +383,16 @@ class TranslateWindow(QMainWindow):
 
         if not text_from:
             return
+
+        if text_from == _("Image input") and self.last_input_type == "image" and self.last_image_path:
+            if self.server_t and self.server_t.supports_image:
+                self._translate_image(self.last_image_path)
+            else:
+                self.ocr_image(self.last_image_path)
+            return
+
+        self.last_input_type = "text"
+        self.last_image_path = ""
 
         if self.cb_del_wrapping.isChecked():
             text_from = process_text(text_from)
