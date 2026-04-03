@@ -3,7 +3,7 @@
 <interface>
   <!-- interface-name lt.ui -->
   <requires lib="gio" version="2.0"/>
-  <requires lib="gtk" version="4.18"/>
+  <requires lib="gtk" version="4.5.0"/>
   <requires lib="libadwaita" version="1.7"/>
   <template class="TranslateWindow" parent="AdwApplicationWindow">
     <property name="content">

@@ -2,7 +2,7 @@
 <!-- Created with Cambalache 0.96.1 -->
 <interface>
   <!-- interface-name theme-switcher.ui -->
-  <requires lib="gtk" version="4.18"/>
+  <requires lib="gtk" version="4.5.0"/>
   <template class="ThemeSwitcher" parent="GtkBox">
     <property name="hexpand">true</property>
     <child>

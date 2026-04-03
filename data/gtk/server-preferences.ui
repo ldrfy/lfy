@@ -2,7 +2,7 @@
 <!-- Created with Cambalache 0.96.1 -->
 <interface>
   <!-- interface-name server-preferences.ui -->
-  <requires lib="gtk" version="4.18"/>
+  <requires lib="gtk" version="4.5.0"/>
   <requires lib="libadwaita" version="1.6"/>
   <template class="ServerPreferencesPage" parent="AdwNavigationPage">
     <property name="title">test</property>
