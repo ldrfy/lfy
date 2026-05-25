@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
 "POT-Creation-Date: 2026-03-30 08:43+0800\n"
-"PO-Revision-Date: 2026-03-05 07:28+0000\n"
+"PO-Revision-Date: 2026-05-26 01:11+0000\n"
 "Last-Translator: John Peter Sa <johnppetersa@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/lfy/"
 "lfy/pt_BR/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.6.dev0\n"
 
 #: data/cool.ldr.lfy.in.in.desktop:2 data/gtk/cool.ldr.lfy.in.appdata.xml:10
 #: data/gtk/translate.ui:150
@@ -130,7 +130,7 @@ msgstr ""
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:95
 msgid "Ollama config: url|model|system|prompt|options"
-msgstr ""
+msgstr "Configuração do Ollama: url|modelo|sistema|prompt|opções"
 
 #: data/gtk/cool.ldr.lfy.in.gschema.xml:99
 msgid "Tencent secret_id and secret_key, used in the middle | split"
@@ -166,6 +166,10 @@ msgid ""
 "Tencent, ...) and also integrates Ollama for optional local LLM workflows, "
 "enabling offline or privacy‑focused translation and summarization."
 msgstr ""
+"Ele oferece suporte a vários mecanismos de busca convencionais (por exemplo, "
+"Google, Baidu, Bing, Tencent, ...) e também integra o Ollama para fluxos de "
+"trabalho LLM locais opcionais, permitindo tradução e sumarização offline ou "
+"com foco na privacidade."
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:17
 msgid "yuh"
@@ -194,7 +198,7 @@ msgstr "Sobre"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:58
 msgid "Support Ollama"
-msgstr ""
+msgstr "Suporte Ollama"
 
 #: data/gtk/cool.ldr.lfy.in.appdata.xml:59
 #, fuzzy
@@ -311,7 +315,7 @@ msgstr "Desta vez, o conteúdo contém informações privadas e não é traduzid
 
 #: lfy/api/server/tra/__init__.py:98
 msgid "This server does not support image translation"
-msgstr ""
+msgstr "Este servidor não suporta tradução de imagens"
 
 #: lfy/gtk/main.py:87
 msgid "translator_credits"
@@ -360,7 +364,7 @@ msgstr "Endereço e porta da VPN, como {url}"
 #: lfy/gtk/preference.py:74 lfy/qt/preference.py:170
 #, python-brace-format
 msgid "Use {text} {source} {from_lang} {to_lang} {server}"
-msgstr ""
+msgstr "Use {text} {source} {from_lang} {to_lang} {server}"
 
 #: lfy/gtk/preference.py:75 lfy/qt/preference.py:166 data/gtk/preference.ui:44
 #, fuzzy
@@ -386,7 +390,7 @@ msgstr "Os dados de configuração foram exportados para a área de transferênc
 
 #: lfy/gtk/preference.py:133
 msgid "Applied"
-msgstr ""
+msgstr "Aplicado"
 
 #: lfy/gtk/preference.py:172 lfy/qt/preference.py:284
 #, python-brace-format
@@ -405,7 +409,7 @@ msgstr "{} Tradução concluída"
 
 #: lfy/gtk/translate.py:264
 msgid "Image input"
-msgstr ""
+msgstr "Entrada de imagem"
 
 #: lfy/gtk/translate.py:266
 #, fuzzy, python-brace-format
@@ -414,7 +418,7 @@ msgstr "{}  Traduzindo…"
 
 #: lfy/gtk/translate.py:270
 msgid "Image"
-msgstr ""
+msgstr "Imagem"
 
 #: lfy/gtk/translate.py:290
 #, python-brace-format
@@ -492,7 +496,7 @@ msgstr "Tamanho da janela"
 
 #: lfy/qt/preference.py:186 data/gtk/preference.ui:50
 msgid "Source font size"
-msgstr ""
+msgstr "Tamanho da fonte de origem"
 
 #: lfy/qt/preference.py:188 data/gtk/preference.ui:65
 #, fuzzy
@@ -824,7 +828,7 @@ msgstr ""
 
 #: data/gtk/preference.ui:51
 msgid "Original text font size"
-msgstr ""
+msgstr "Tamanho da fonte do texto original"
 
 #: data/gtk/preference.ui:66
 #, fuzzy
