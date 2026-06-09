@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: cool.ldr.lfy\n"
 "Report-Msgid-Bugs-To: yuhldr@gmail.com\n"
 "POT-Creation-Date: 2026-03-30 08:43+0800\n"
-"PO-Revision-Date: 2026-03-05 10:41+0000\n"
-"Last-Translator: yuh <yuhldr@qq.com>\n"
+"PO-Revision-Date: 2026-06-10 15:01+0000\n"
+"Last-Translator: reducedradius <feixiang512@outlook.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/lfy/lfy/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.6\n"
 
 #: data/cool.ldr.lfy.in.in.desktop:2 data/gtk/cool.ldr.lfy.in.appdata.xml:10
 #: data/gtk/translate.ui:150
@@ -288,7 +288,7 @@ msgstr "本次内容包含私人信息，不进行翻译"
 
 #: lfy/api/server/tra/__init__.py:98
 msgid "This server does not support image translation"
-msgstr ""
+msgstr "本服务器不支持图像翻译"
 
 #: lfy/gtk/main.py:87
 msgid "translator_credits"
